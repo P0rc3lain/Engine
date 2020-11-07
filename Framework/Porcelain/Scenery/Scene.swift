@@ -10,11 +10,11 @@ import Foundation
 
 public struct Scene {
     // MARK: - Properties
-    public let camera: Camera
-    public var meshes: [MTKMesh]
+    public var camera: Camera
+    public var omniLights = [OmniLight]()
+    public var meshes = [MTKMesh]()
     // MARK: - Initialization
-    public init(camera: Camera, meshes: [MTKMesh]) {
+    public init(camera: Camera) {
         self.camera = camera
-        self.meshes = meshes
     }
 }

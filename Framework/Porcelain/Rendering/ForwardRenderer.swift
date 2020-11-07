@@ -9,7 +9,7 @@ import MetalKit
 
 fileprivate struct Uniforms {
     let projectionMatrix: matrix_float4x4
-    let rotation: matrix_float4x4
+    let orientation: matrix_float4x4
     let translation: simd_float3
     let scale: simd_float3
 }
@@ -32,12 +32,12 @@ internal struct ForwardRenderer {
         encoder.setCullMode(.back)
         encoder.setFrontFacing(.counterClockwise)
         let uniforms = Uniforms(projectionMatrix: scene.camera.projectionMatrix,
-                                rotation: simd_matrix4x4(scene.camera.coordinateSpace.rotation),
+                                orientation: simd_matrix4x4(scene.camera.coordinateSpace.orientation),
                                 translation: scene.camera.coordinateSpace.translation,
                                 scale: scene.camera.coordinateSpace.scale)
         withUnsafePointer(to: uniforms) { ptr in
             encoder.setVertexBytes(ptr, length: MemoryLayout<Uniforms>.size, index: 1)
-        }  
+        }
         for mesh in scene.meshes {
             encoder.setVertexBuffer(mesh.vertexBuffers[0].buffer, offset: mesh.vertexBuffers[0].offset, index: 0)
             for submesh in mesh.submeshes {
@@ -59,11 +59,24 @@ internal struct ForwardRenderer {
         pipelineDescriptor.fragmentFunction = fragmentShader
         pipelineDescriptor.colorAttachments[0].pixelFormat = pixelFormat
         pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
+        let vertexDescriptor = MTLVertexDescriptor()
+        let layout = MTLVertexBufferLayoutDescriptor()
+        layout.stepFunction = .perVertex
+        layout.stride = MemoryLayout<Vertex>.stride
+        layout.stepRate = 1
+        vertexDescriptor.layouts[0] = layout
+        vertexDescriptor.attributes[0].format = .float3
+        vertexDescriptor.attributes[0].offset = MemoryLayout<Vertex>.offset(of: \Vertex.position)!
+        vertexDescriptor.attributes[0].bufferIndex = 0
+        vertexDescriptor.attributes[1].format = .float3
+        vertexDescriptor.attributes[1].offset = MemoryLayout<Vertex>.offset(of: \Vertex.normal)!
+        vertexDescriptor.attributes[1].bufferIndex = 0
+        pipelineDescriptor.vertexDescriptor = vertexDescriptor
         return try! device.makeRenderPipelineState(descriptor: pipelineDescriptor)
     }
     internal static func buildDepthStencilPipelineState(device: MTLDevice) -> MTLDepthStencilState {
         let depthStencilDescriptor = MTLDepthStencilDescriptor()
-        depthStencilDescriptor.depthCompareFunction = .less
+        depthStencilDescriptor.depthCompareFunction = .lessEqual
         depthStencilDescriptor.isDepthWriteEnabled = true
         return device.makeDepthStencilState(descriptor: depthStencilDescriptor)!
     }

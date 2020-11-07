@@ -21,24 +21,65 @@ class ViewController: NSViewController, MTKViewDelegate {
         setupMetalView()
         scene = buildScene()
         renderer = Renderer(view: metalView, drawableSize: metalView.drawableSize)
+        NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
+            self.keyDown(with: $0)
+            return $0
+        }
     }
-    override func viewDidAppear() {
-        super.viewDidAppear()
+    // MARK: - Overriden
+    override func keyDown(with event: NSEvent) {
+        let step: Float = 10
+        super.keyDown(with: event)
+        switch event.charactersIgnoringModifiers {
+        case "d":
+            scene.camera.coordinateSpace.translation += simd_float3(-step, 0, 0)
+        case "s":
+            scene.camera.coordinateSpace.translation += simd_float3(0, 0, -step)
+        case "a":
+            scene.camera.coordinateSpace.translation += simd_float3(step, 0, 0)
+        case "w":
+            scene.camera.coordinateSpace.translation += simd_float3(0, 0, step)
+        case "z":
+            scene.camera.coordinateSpace.translation += simd_float3(0, step, 0)
+        case "x":
+            scene.camera.coordinateSpace.translation += simd_float3(0, -step, 0)
+        case "q":
+            let q = scene.camera.coordinateSpace.orientation
+            let rot = simd_quatf(angle: -Float(20).radians, axis: simd_float3(0, 1, 0))
+            scene.camera.coordinateSpace.orientation = rot * q
+        case "e":
+            let q = scene.camera.coordinateSpace.orientation
+            let rot = simd_quatf(angle: Float(20).radians, axis: simd_float3(0, 1, 0))
+            scene.camera.coordinateSpace.orientation = rot * q
+        case "r":
+            let q = scene.camera.coordinateSpace.orientation
+            let rot = simd_quatf(angle: -Float(20).radians, axis: simd_float3(1, 0, 0))
+            scene.camera.coordinateSpace.orientation = rot * q
+        case "t":
+            let q = scene.camera.coordinateSpace.orientation
+            let rot = simd_quatf(angle: Float(20).radians, axis: simd_float3(1, 0, 0))
+            scene.camera.coordinateSpace.orientation = rot * q
+        default:
+            break
+        }
     }
     // MARK: - Private
     private func loadMeshes() -> [MTKMesh] {
-        let asset = ModelLoader(device: metalView.device!).loadAsset(name: "Temple", extension: "obj")!
-        asset.loadTextures()
-        return try! MTKMesh.newMeshes(asset: asset, device: metalView.device!).metalKitMeshes
+        let sphere = ModelLoader(device: metalView.device!).loadAsset(name: "Temple", extension: "obj")!
+        return try! MTKMesh.newMeshes(asset: sphere, device: metalView.device!).metalKitMeshes
     }
     private func buildScene() -> Scene! {
-        let cameraCoordinateSpace = CoordinateSpace(rotation: simd_quatf(), translation: simd_float3(), scale: simd_float3(2, 2, 2))
-        let camera = Camera(nearPlane: 0.0001,
+        let initialOrientation = simd_quatf(angle: 0, axis: simd_float3(0, 1, 0))
+        let cameraCoordinateSpace = CoordinateSpace(orientation: initialOrientation, translation: simd_float3(), scale: simd_float3(2, 2, 2))
+        let camera = Camera(nearPlane: 1,
                             farPlane: 10000,
                             fovRadians: Float.radians(120),
-                            aspectRation: 16/9, coordinateSpace: cameraCoordinateSpace)
+                            aspectRation: 16/10, coordinateSpace: cameraCoordinateSpace)
         let meshes = loadMeshes()
-        return Scene(camera: camera, meshes: meshes)
+        var scene = Scene(camera: camera)
+        scene.meshes.append(contentsOf: meshes)
+        scene.omniLights.append(OmniLight(color: simd_float3(1, 1, 0), intensity: 50, position: simd_float3(0, 20, 0)))
+        return scene
     }
     private func setupMetalView() {
         metalView = view as? MTKView

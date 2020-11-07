@@ -11,36 +11,31 @@
 #include <simd/simd.h>
 
 using namespace metal;
-
     
 struct Vertex {
-    vector_float3 position;
-    vector_float3 normal;
+    simd_float3 position [[attribute(0)]];
+    simd_float3 normal [[attribute(1)]];
 };
-    
 
 struct RasterizerData {
     float4 clipSpacePosition [[position]];
     float3 normal;
 };
-    
+
 struct Uniforms {
     matrix_float4x4 projection_matrix;
     matrix_float4x4 rotation;
     simd_float3 translation;
     simd_float3 scale;
 };
-    
-    
-    
 
-vertex RasterizerData vertexFunction(uint vertexID [[vertex_id]],
-                                     constant Vertex *vertices [[buffer(0)]],
+vertex RasterizerData vertexFunction(Vertex in [[stage_in]],
                                      constant Uniforms * uniforms [[buffer(1)]]) {
     RasterizerData out;
-    float4 pos = float4(vertices[vertexID].position, 1) + float4(0, 0, -1000, 0);
-    out.clipSpacePosition = uniforms->projection_matrix * translation(uniforms->translation) * uniforms->rotation * scale(uniforms->scale) * pos;
-    out.normal = vertices[vertexID].normal;
+    float4 position = float4(in.position, 1);
+    float4 clipSpacePosition = uniforms->projection_matrix * uniforms->rotation * translation(uniforms->translation) * scale(uniforms->scale) * position;
+    out.clipSpacePosition = clipSpacePosition;
+    out.normal = in.normal.xyz;
     return out;
 }
 
