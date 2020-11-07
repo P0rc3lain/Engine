@@ -19,9 +19,11 @@ public class Renderer {
     private var offscreenRenderPassDescriptor: MTLRenderPassDescriptor!
     private var forwardRenderer: ForwardRenderer!
     private var postProcessor: Postprocessor!
+    private let drawableSize: CGSize
     // MARK: - Initialization
-    public init(view metalView: MTKView) {
+    public init(view metalView: MTKView, drawableSize: CGSize) {
         view = metalView
+        self.drawableSize = drawableSize
         device = view.device!
         library = try! device.makeDefaultLibrary(bundle: Bundle(for: Renderer.self))
         commandQueue = self.device.makeCommandQueue()!
@@ -59,18 +61,18 @@ public class Renderer {
     private func prepareDepthTexture() -> MTLTexture? {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = .type2D
-        descriptor.width = Int(view.drawableSize.width)
-        descriptor.height = Int(view.drawableSize.height)
+        descriptor.width = Int(drawableSize.width)
+        descriptor.height = Int(drawableSize.height)
         descriptor.storageMode = .private
         descriptor.pixelFormat = .depth32Float
-        descriptor.usage = .unknown
+        descriptor.usage = .renderTarget
         return device.makeTexture(descriptor: descriptor)
     }
     private func prepareColorTexture() -> MTLTexture? {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = .type2D
-        descriptor.width = Int(view.drawableSize.width)
-        descriptor.height = Int(view.drawableSize.height)
+        descriptor.width = Int(drawableSize.width)
+        descriptor.height = Int(drawableSize.height)
         descriptor.storageMode = .private
         descriptor.pixelFormat = .bgra8Unorm
         descriptor.usage = [.shaderRead, .renderTarget]
