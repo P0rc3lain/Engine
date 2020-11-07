@@ -8,12 +8,36 @@
 
 /* Begin PBXBuildFile section */
 		56013971255457D100FC1C45 /* Porcelain.h in Headers */ = {isa = PBXBuildFile; fileRef = 5601396F255457D100FC1C45 /* Porcelain.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		563899E72554C6E600F324DA /* Postprocessing.metal in Sources */ = {isa = PBXBuildFile; fileRef = 563899E62554C6E600F324DA /* Postprocessing.metal */; };
+		563899EB2555D1AF00F324DA /* matrix_float4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563899EA2555D1AF00F324DA /* matrix_float4x4.swift */; };
+		5674FFB9255459E0001CF921 /* ForwardRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5674FFB8255459E0001CF921 /* ForwardRenderer.metal */; };
+		5674FFBC25545A00001CF921 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5674FFBB25545A00001CF921 /* Renderer.swift */; };
+		56F594462556094B00FBB639 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F594452556094B00FBB639 /* Camera.swift */; };
+		56F5944925560B7B00FBB639 /* CoordinateSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F5944825560B7B00FBB639 /* CoordinateSpace.swift */; };
+		56F5944C25560BCD00FBB639 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F5944B25560BCD00FBB639 /* Float.swift */; };
+		56F594502556152200FBB639 /* Math.h in Sources */ = {isa = PBXBuildFile; fileRef = 56F5944F2556152200FBB639 /* Math.h */; };
+		56F59455255625D200FBB639 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F59454255625D200FBB639 /* Scene.swift */; };
+		56F59458255627CB00FBB639 /* Postprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F59457255627CA00FBB639 /* Postprocessor.swift */; };
+		56F5945B25562A0600FBB639 /* ForwardRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F5945A25562A0600FBB639 /* ForwardRenderer.swift */; };
+		56F5945F2556A95900FBB639 /* ModelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F5945E2556A95900FBB639 /* ModelLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5601396C255457D100FC1C45 /* Porcelain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Porcelain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5601396F255457D100FC1C45 /* Porcelain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Porcelain.h; sourceTree = "<group>"; };
 		56013970255457D100FC1C45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		563899E62554C6E600F324DA /* Postprocessing.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Postprocessing.metal; sourceTree = "<group>"; };
+		563899EA2555D1AF00F324DA /* matrix_float4x4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = matrix_float4x4.swift; sourceTree = "<group>"; };
+		5674FFB8255459E0001CF921 /* ForwardRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ForwardRenderer.metal; sourceTree = "<group>"; };
+		5674FFBB25545A00001CF921 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		56F594452556094B00FBB639 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		56F5944825560B7B00FBB639 /* CoordinateSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateSpace.swift; sourceTree = "<group>"; };
+		56F5944B25560BCD00FBB639 /* Float.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
+		56F5944F2556152200FBB639 /* Math.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Math.h; sourceTree = "<group>"; };
+		56F59454255625D200FBB639 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		56F59457255627CA00FBB639 /* Postprocessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Postprocessor.swift; sourceTree = "<group>"; };
+		56F5945A25562A0600FBB639 /* ForwardRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardRenderer.swift; sourceTree = "<group>"; };
+		56F5945E2556A95900FBB639 /* ModelLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,10 +70,62 @@
 		5601396E255457D100FC1C45 /* Porcelain */ = {
 			isa = PBXGroup;
 			children = (
+				56F5945D2556A94900FBB639 /* Loaders */,
+				563899D62554A07100F324DA /* Math */,
+				5674FFC025545C05001CF921 /* Scenery */,
+				5674FFBE25545A08001CF921 /* Rendering */,
+				5674FFB7255459BD001CF921 /* Shaders */,
 				5601396F255457D100FC1C45 /* Porcelain.h */,
 				56013970255457D100FC1C45 /* Info.plist */,
 			);
 			path = Porcelain;
+			sourceTree = "<group>";
+		};
+		563899D62554A07100F324DA /* Math */ = {
+			isa = PBXGroup;
+			children = (
+				563899EA2555D1AF00F324DA /* matrix_float4x4.swift */,
+				56F5944B25560BCD00FBB639 /* Float.swift */,
+			);
+			path = Math;
+			sourceTree = "<group>";
+		};
+		5674FFB7255459BD001CF921 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				5674FFB8255459E0001CF921 /* ForwardRenderer.metal */,
+				563899E62554C6E600F324DA /* Postprocessing.metal */,
+				56F5944F2556152200FBB639 /* Math.h */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
+		5674FFBE25545A08001CF921 /* Rendering */ = {
+			isa = PBXGroup;
+			children = (
+				5674FFBB25545A00001CF921 /* Renderer.swift */,
+				56F59457255627CA00FBB639 /* Postprocessor.swift */,
+				56F5945A25562A0600FBB639 /* ForwardRenderer.swift */,
+			);
+			path = Rendering;
+			sourceTree = "<group>";
+		};
+		5674FFC025545C05001CF921 /* Scenery */ = {
+			isa = PBXGroup;
+			children = (
+				56F594452556094B00FBB639 /* Camera.swift */,
+				56F5944825560B7B00FBB639 /* CoordinateSpace.swift */,
+				56F59454255625D200FBB639 /* Scene.swift */,
+			);
+			path = Scenery;
+			sourceTree = "<group>";
+		};
+		56F5945D2556A94900FBB639 /* Loaders */ = {
+			isa = PBXGroup;
+			children = (
+				56F5945E2556A95900FBB639 /* ModelLoader.swift */,
+			);
+			path = Loaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,6 +206,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56F59458255627CB00FBB639 /* Postprocessor.swift in Sources */,
+				563899EB2555D1AF00F324DA /* matrix_float4x4.swift in Sources */,
+				56F5945F2556A95900FBB639 /* ModelLoader.swift in Sources */,
+				56F594462556094B00FBB639 /* Camera.swift in Sources */,
+				56F5944925560B7B00FBB639 /* CoordinateSpace.swift in Sources */,
+				56F5944C25560BCD00FBB639 /* Float.swift in Sources */,
+				5674FFBC25545A00001CF921 /* Renderer.swift in Sources */,
+				56F594502556152200FBB639 /* Math.h in Sources */,
+				5674FFB9255459E0001CF921 /* ForwardRenderer.metal in Sources */,
+				56F5945B25562A0600FBB639 /* ForwardRenderer.swift in Sources */,
+				563899E72554C6E600F324DA /* Postprocessing.metal in Sources */,
+				56F59455255625D200FBB639 /* Scene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
