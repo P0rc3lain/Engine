@@ -12,6 +12,8 @@
 		563899EB2555D1AF00F324DA /* matrix_float4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563899EA2555D1AF00F324DA /* matrix_float4x4.swift */; };
 		5674FFB9255459E0001CF921 /* ForwardRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5674FFB8255459E0001CF921 /* ForwardRenderer.metal */; };
 		5674FFBC25545A00001CF921 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5674FFBB25545A00001CF921 /* Renderer.swift */; };
+		56E786552556C85B000B6311 /* OmniLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E786542556C85B000B6311 /* OmniLight.swift */; };
+		56E786592556CA33000B6311 /* simd_float3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E786582556CA33000B6311 /* simd_float3.swift */; };
 		56F594462556094B00FBB639 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F594452556094B00FBB639 /* Camera.swift */; };
 		56F5944925560B7B00FBB639 /* CoordinateSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F5944825560B7B00FBB639 /* CoordinateSpace.swift */; };
 		56F5944C25560BCD00FBB639 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F5944B25560BCD00FBB639 /* Float.swift */; };
@@ -30,6 +32,8 @@
 		563899EA2555D1AF00F324DA /* matrix_float4x4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = matrix_float4x4.swift; sourceTree = "<group>"; };
 		5674FFB8255459E0001CF921 /* ForwardRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ForwardRenderer.metal; sourceTree = "<group>"; };
 		5674FFBB25545A00001CF921 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		56E786542556C85B000B6311 /* OmniLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniLight.swift; sourceTree = "<group>"; };
+		56E786582556CA33000B6311 /* simd_float3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = simd_float3.swift; sourceTree = "<group>"; };
 		56F594452556094B00FBB639 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		56F5944825560B7B00FBB639 /* CoordinateSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateSpace.swift; sourceTree = "<group>"; };
 		56F5944B25560BCD00FBB639 /* Float.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
@@ -86,6 +90,7 @@
 			children = (
 				563899EA2555D1AF00F324DA /* matrix_float4x4.swift */,
 				56F5944B25560BCD00FBB639 /* Float.swift */,
+				56E786582556CA33000B6311 /* simd_float3.swift */,
 			);
 			path = Math;
 			sourceTree = "<group>";
@@ -113,11 +118,20 @@
 		5674FFC025545C05001CF921 /* Scenery */ = {
 			isa = PBXGroup;
 			children = (
+				56E786532556C84D000B6311 /* Lights */,
 				56F594452556094B00FBB639 /* Camera.swift */,
 				56F5944825560B7B00FBB639 /* CoordinateSpace.swift */,
 				56F59454255625D200FBB639 /* Scene.swift */,
 			);
 			path = Scenery;
+			sourceTree = "<group>";
+		};
+		56E786532556C84D000B6311 /* Lights */ = {
+			isa = PBXGroup;
+			children = (
+				56E786542556C85B000B6311 /* OmniLight.swift */,
+			);
+			path = Lights;
 			sourceTree = "<group>";
 		};
 		56F5945D2556A94900FBB639 /* Loaders */ = {
@@ -170,6 +184,7 @@
 				TargetAttributes = {
 					5601396B255457D100FC1C45 = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 					};
 				};
 			};
@@ -206,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56E786552556C85B000B6311 /* OmniLight.swift in Sources */,
 				56F59458255627CB00FBB639 /* Postprocessor.swift in Sources */,
 				563899EB2555D1AF00F324DA /* matrix_float4x4.swift in Sources */,
 				56F5945F2556A95900FBB639 /* ModelLoader.swift in Sources */,
@@ -216,6 +232,7 @@
 				56F594502556152200FBB639 /* Math.h in Sources */,
 				5674FFB9255459E0001CF921 /* ForwardRenderer.metal in Sources */,
 				56F5945B25562A0600FBB639 /* ForwardRenderer.swift in Sources */,
+				56E786592556CA33000B6311 /* simd_float3.swift in Sources */,
 				563899E72554C6E600F324DA /* Postprocessing.metal in Sources */,
 				56F59455255625D200FBB639 /* Scene.swift in Sources */,
 			);
@@ -348,6 +365,7 @@
 		56013975255457D100FC1C45 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -365,6 +383,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.stompor.mateusz.porcelain;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -372,6 +391,7 @@
 		56013976255457D100FC1C45 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
