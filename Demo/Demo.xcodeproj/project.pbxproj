@@ -7,10 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		563899DC2554A2AD00F324DA /* sphere.obj in Resources */ = {isa = PBXBuildFile; fileRef = 563899DA2554A2AD00F324DA /* sphere.obj */; };
+		563899DD2554A2AD00F324DA /* sphere.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 563899DB2554A2AD00F324DA /* sphere.mtl */; };
+		563899E32554B09400F324DA /* Temple.obj in Resources */ = {isa = PBXBuildFile; fileRef = 563899E12554B09400F324DA /* Temple.obj */; };
+		563899E42554B09400F324DA /* Temple.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 563899E22554B09400F324DA /* Temple.mtl */; };
 		566EACDE2554583100B12952 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566EACDD2554583100B12952 /* AppDelegate.swift */; };
 		566EACE02554583100B12952 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566EACDF2554583100B12952 /* ViewController.swift */; };
-		566EACE22554583200B12952 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 566EACE12554583200B12952 /* Assets.xcassets */; };
+		566EACE22554583200B12952 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 566EACE12554583200B12952 /* Images.xcassets */; };
 		566EACE52554583200B12952 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 566EACE32554583200B12952 /* Main.storyboard */; };
+		56E7864B2556AD72000B6311 /* Catalog.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56E7864A2556AD72000B6311 /* Catalog.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,14 +36,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		563899DA2554A2AD00F324DA /* sphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sphere.obj; sourceTree = "<group>"; };
+		563899DB2554A2AD00F324DA /* sphere.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sphere.mtl; sourceTree = "<group>"; };
+		563899E12554B09400F324DA /* Temple.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Temple.obj; sourceTree = "<group>"; };
+		563899E22554B09400F324DA /* Temple.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Temple.mtl; sourceTree = "<group>"; };
 		566EACDA2554583100B12952 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		566EACDD2554583100B12952 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		566EACDF2554583100B12952 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		566EACE12554583200B12952 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		566EACE12554583200B12952 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		566EACE42554583200B12952 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		566EACE62554583200B12952 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		566EACE72554583200B12952 /* Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Demo.entitlements; sourceTree = "<group>"; };
 		5674FFAB255458D0001CF921 /* Porcelain.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Porcelain.xcodeproj; path = ../Framework/Porcelain.xcodeproj; sourceTree = "<group>"; };
+		56E7864A2556AD72000B6311 /* Catalog.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Catalog.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +62,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		563899D72554A28400F324DA /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				56E7864A2556AD72000B6311 /* Catalog.xcassets */,
+				566EACE12554583200B12952 /* Images.xcassets */,
+				563899D82554A2A600F324DA /* Models */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		563899D82554A2A600F324DA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				563899E02554B08C00F324DA /* temple */,
+				563899D92554A2AD00F324DA /* sphere */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		563899D92554A2AD00F324DA /* sphere */ = {
+			isa = PBXGroup;
+			children = (
+				563899DA2554A2AD00F324DA /* sphere.obj */,
+				563899DB2554A2AD00F324DA /* sphere.mtl */,
+			);
+			path = sphere;
+			sourceTree = "<group>";
+		};
+		563899E02554B08C00F324DA /* temple */ = {
+			isa = PBXGroup;
+			children = (
+				563899E22554B09400F324DA /* Temple.mtl */,
+				563899E12554B09400F324DA /* Temple.obj */,
+			);
+			path = temple;
+			sourceTree = "<group>";
+		};
 		566EACD12554583100B12952 = {
 			isa = PBXGroup;
 			children = (
@@ -72,9 +119,9 @@
 		566EACDC2554583100B12952 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				563899D72554A28400F324DA /* Assets */,
 				566EACDD2554583100B12952 /* AppDelegate.swift */,
 				566EACDF2554583100B12952 /* ViewController.swift */,
-				566EACE12554583200B12952 /* Assets.xcassets */,
 				566EACE32554583200B12952 /* Main.storyboard */,
 				566EACE62554583200B12952 /* Info.plist */,
 				566EACE72554583200B12952 /* Demo.entitlements */,
@@ -164,7 +211,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				566EACE22554583200B12952 /* Assets.xcassets in Resources */,
+				563899DD2554A2AD00F324DA /* sphere.mtl in Resources */,
+				566EACE22554583200B12952 /* Images.xcassets in Resources */,
+				56E7864B2556AD72000B6311 /* Catalog.xcassets in Resources */,
+				563899E42554B09400F324DA /* Temple.mtl in Resources */,
+				563899E32554B09400F324DA /* Temple.obj in Resources */,
+				563899DC2554A2AD00F324DA /* sphere.obj in Resources */,
 				566EACE52554583200B12952 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
