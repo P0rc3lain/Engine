@@ -7,19 +7,15 @@
 
 public extension Float {
     var radians: Float {
-        get {
-            return Float.radians(self)
-        }
+        Float.radians(self)
     }
     var degress: Float {
-        get {
-            return Float.degress(self)
-        }
+        Float.degress(self)
     }
     static func radians(_ degrees: Float) -> Float {
-        return degrees * .pi / 180
+        degrees * .pi / 180
     }
     static func degress(_ radians: Float) -> Float {
-        return radians * 180 / .pi
+        radians * 180 / .pi
     }
 }
