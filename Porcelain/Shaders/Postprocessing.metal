@@ -19,14 +19,16 @@ struct TexturePipelineRasterizerData {
     float2 texcoord;
 };
 
-vertex TexturePipelineRasterizerData  vertexPostprocess(uint vertexID [[vertex_id]], constant Sample *vertices [[buffer(0)]]) {
+vertex TexturePipelineRasterizerData  vertexPostprocess(uint vertexID [[vertex_id]],
+                                                        constant Sample *vertices [[buffer(0)]]) {
     TexturePipelineRasterizerData out;
     out.position = float4(vertices[vertexID].position.xy, 0, 1);
     out.texcoord = vertices[vertexID].uv_coordinate;
     return out;
 }
 
-fragment float4 fragmentPostprocess(TexturePipelineRasterizerData in [[stage_in]], texture2d<float> texture [[texture(0)]]) {
-    sampler simpleSampler;
+fragment float4 fragmentPostprocess(TexturePipelineRasterizerData in [[stage_in]],
+                                    texture2d<float> texture [[texture(0)]]) {
+    constexpr sampler simpleSampler(min_filter::nearest, mag_filter::nearest);
     return texture.sample(simpleSampler, in.texcoord);
 }

@@ -44,8 +44,8 @@ vertex RasterizerCubeData environmentVertexShader(CubeVertex in [[stage_in]],
 }
 
 fragment half4 environmentFragmentShader(RasterizerCubeData in [[stage_in]],
-                                          texturecube<half> cubeTexture [[texture(0)]]) {
-    sampler sam;
-    float3 texCoords = float3(in.viewPosition.x, in.viewPosition.y, -in.viewPosition.z);
-    return cubeTexture.sample(sam, texCoords);
+                                         texturecube<half> cubeTexture [[texture(0)]]) {
+    constexpr sampler cubeSampler(mag_filter::linear, min_filter::nearest);
+    float3 coordinates = float3(in.viewPosition.x, in.viewPosition.y, -in.viewPosition.z);
+    return cubeTexture.sample(cubeSampler, coordinates);
 }
