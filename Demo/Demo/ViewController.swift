@@ -68,15 +68,21 @@ class ViewController: NSViewController, MTKViewDelegate {
         let sphere = ModelLoader(device: metalView.device!).loadAsset(name: "Temple", extension: "obj")!
         return try! MTKMesh.newMeshes(asset: sphere, device: metalView.device!).metalKitMeshes
     }
+    private func loadEnvironmentMap() -> MTLTexture {
+        let loader = MTKTextureLoader(device: metalView.device!)
+        let texture = try! loader.newTexture(name: "SkyMap", scaleFactor: 1, bundle: Bundle.main, options: nil)
+        return texture
+    }
     private func buildScene() -> Scene! {
         let initialOrientation = simd_quatf(angle: 0, axis: simd_float3(0, 1, 0))
-        let cameraCoordinateSpace = CoordinateSpace(orientation: initialOrientation, translation: simd_float3(), scale: simd_float3(2, 2, 2))
-        let camera = Camera(nearPlane: 1,
+        let cameraCoordinateSpace = CoordinateSpace(orientation: initialOrientation, translation: simd_float3(), scale: simd_float3(1, 1, 1))
+        let camera = Camera(nearPlane: 0.01,
                             farPlane: 10000,
                             fovRadians: Float.radians(120),
                             aspectRation: 16/10, coordinateSpace: cameraCoordinateSpace)
         let meshes = loadMeshes()
-        var scene = Scene(camera: camera)
+        let environmentMap = loadEnvironmentMap()
+        var scene = Scene(camera: camera, environmentMap: environmentMap)
         scene.meshes.append(contentsOf: meshes)
         scene.omniLights.append(OmniLight(color: simd_float3(1, 1, 0), intensity: 50, position: simd_float3(0, 20, 0)))
         return scene
