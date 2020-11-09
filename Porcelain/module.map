@@ -1,0 +1,11 @@
+//
+//  module.map
+//  Porcelain
+//
+//  Created by Mateusz Stompór on 09/11/2020.
+//
+
+module PorcelainTypes {
+    header "SharedTypes/Types.h"
+    export *
+}

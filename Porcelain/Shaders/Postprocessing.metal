@@ -6,13 +6,9 @@
 //
 
 #include <metal_stdlib>
+#include "../SharedTypes/Types.h"
 
 using namespace metal;
-
-struct Sample {
-    vector_float2 position;
-    vector_float2 uv_coordinate;
-};
 
 struct TexturePipelineRasterizerData {
     float4 position [[position]];
@@ -20,7 +16,7 @@ struct TexturePipelineRasterizerData {
 };
 
 vertex TexturePipelineRasterizerData  vertexPostprocess(uint vertexID [[vertex_id]],
-                                                        constant Sample *vertices [[buffer(0)]]) {
+                                                        constant VertexP2T2 *vertices [[buffer(0)]]) {
     TexturePipelineRasterizerData out;
     out.position = float4(vertices[vertexID].position.xy, 0, 1);
     out.texcoord = vertices[vertexID].uv_coordinate;

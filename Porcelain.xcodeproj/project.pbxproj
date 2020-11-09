@@ -38,6 +38,7 @@
 		563899EA2555D1AF00F324DA /* matrix_float4x4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = matrix_float4x4.swift; sourceTree = "<group>"; };
 		5674FFB8255459E0001CF921 /* ForwardRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ForwardRenderer.metal; sourceTree = "<group>"; };
 		5674FFBB25545A00001CF921 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		56B668A325594EF1008FC621 /* SharedTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SharedTypes.h; path = Porcelain/SharedTypes/SharedTypes.h; sourceTree = "<group>"; };
 		56E786542556C85B000B6311 /* OmniLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniLight.swift; sourceTree = "<group>"; };
 		56E786582556CA33000B6311 /* simd_float3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = simd_float3.swift; sourceTree = "<group>"; };
 		56F594452556094B00FBB639 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
@@ -64,6 +65,7 @@
 		56013962255457D100FC1C45 = {
 			isa = PBXGroup;
 			children = (
+				56B668A325594EF1008FC621 /* SharedTypes.h */,
 				5601396E255457D100FC1C45 /* Porcelain */,
 				5601396D255457D100FC1C45 /* Products */,
 			);
@@ -400,9 +402,11 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MTL_COMPILER_FLAGS = "-D__METAL__";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stompor.mateusz.porcelain;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Porcelain";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -426,9 +430,11 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MTL_COMPILER_FLAGS = "-D__METAL__";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stompor.mateusz.porcelain;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Porcelain";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

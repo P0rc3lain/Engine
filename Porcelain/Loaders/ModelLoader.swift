@@ -6,12 +6,7 @@
 //
 
 import MetalKit
-
-
-struct Vertex {
-    let position: simd_float3
-    let normal: simd_float3
-}
+import PorcelainTypes
 
 public struct ModelLoader {
     // MARK: - Properties
@@ -22,15 +17,15 @@ public struct ModelLoader {
     }
     public func loadAsset(name: String, extension: String) -> MDLAsset? {
         let vertexDescriptor = MDLVertexDescriptor()
-        vertexDescriptor.layouts = [MDLVertexBufferLayout(stride: MemoryLayout<Vertex>.stride)]
+        vertexDescriptor.layouts = [MDLVertexBufferLayout(stride: MemoryLayout<VertexP3N3>.stride)]
         vertexDescriptor.attributes = [
             MDLVertexAttribute(name: MDLVertexAttributePosition,
                                format: .float3,
-                               offset: MemoryLayout<Vertex>.offset(of: \Vertex.position)!,
+                               offset: MemoryLayout<VertexP3N3>.offset(of: \VertexP3N3.position)!,
                                bufferIndex: 0),
             MDLVertexAttribute(name: MDLVertexAttributeNormal,
                                format: .float3,
-                               offset: MemoryLayout<Vertex>.offset(of: \Vertex.normal)!,
+                               offset: MemoryLayout<VertexP3N3>.offset(of: \VertexP3N3.normal)!,
                                bufferIndex: 0)
         ]
         guard let url = Bundle.main.url(forResource: name, withExtension: `extension`) else {

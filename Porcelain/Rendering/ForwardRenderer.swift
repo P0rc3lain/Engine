@@ -6,6 +6,7 @@
 //
 
 import MetalKit
+import PorcelainTypes
 
 fileprivate struct Uniforms {
     let projectionMatrix: matrix_float4x4
@@ -62,14 +63,14 @@ internal struct ForwardRenderer {
         let vertexDescriptor = MTLVertexDescriptor()
         let layout = MTLVertexBufferLayoutDescriptor()
         layout.stepFunction = .perVertex
-        layout.stride = MemoryLayout<Vertex>.stride
+        layout.stride = MemoryLayout<VertexP3N3>.stride
         layout.stepRate = 1
         vertexDescriptor.layouts[0] = layout
         vertexDescriptor.attributes[0].format = .float3
-        vertexDescriptor.attributes[0].offset = MemoryLayout<Vertex>.offset(of: \Vertex.position)!
+        vertexDescriptor.attributes[0].offset = MemoryLayout<VertexP3N3>.offset(of: \VertexP3N3.position)!
         vertexDescriptor.attributes[0].bufferIndex = 0
         vertexDescriptor.attributes[1].format = .float3
-        vertexDescriptor.attributes[1].offset = MemoryLayout<Vertex>.offset(of: \Vertex.normal)!
+        vertexDescriptor.attributes[1].offset = MemoryLayout<VertexP3N3>.offset(of: \VertexP3N3.normal)!
         vertexDescriptor.attributes[1].bufferIndex = 0
         pipelineDescriptor.vertexDescriptor = vertexDescriptor
         return try! device.makeRenderPipelineState(descriptor: pipelineDescriptor)
