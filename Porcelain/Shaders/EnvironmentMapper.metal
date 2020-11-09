@@ -10,11 +10,6 @@
 
 using namespace metal;
 
-struct CubeVertex {
-    simd_float4 position [[attribute(0)]];
-    simd_float4 normal [[attribute(1)]];
-};
-
 struct RasterizerCubeData {
     float4 ndcPosition [[position]];
     float4 viewPosition;
@@ -34,12 +29,12 @@ matrix_float4x4 translationn(metal::float3 translation) {
                            translation.x,           translation.y,          translation.z,      1);
 }
 
-vertex RasterizerCubeData environmentVertexShader(CubeVertex in [[stage_in]],
+vertex RasterizerCubeData environmentVertexShader(simd_float4 in [[stage_in attribute(0)]],
                                                   constant Uniforms * uniforms [[buffer(1)]]) {
     RasterizerCubeData out;
-    float4 clipSpacePosition = uniforms->rotation * in.position;
+    float4 clipSpacePosition = uniforms->rotation * in;
     out.ndcPosition = uniforms->projection_matrix * clipSpacePosition;
-    out.viewPosition = in.position;
+    out.viewPosition = in;
     return out;
 }
 

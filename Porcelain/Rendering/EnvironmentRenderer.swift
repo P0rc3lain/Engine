@@ -55,15 +55,12 @@ internal struct EnvironmentRenderer {
         let vertexDescriptor = MTLVertexDescriptor()
         let layout = MTLVertexBufferLayoutDescriptor()
         layout.stepFunction = .perVertex
-        layout.stride = MemoryLayout<SIMD4<Float>>.stride * 2
+        layout.stride = MemoryLayout<SIMD4<Float>>.stride
         layout.stepRate = 1
         vertexDescriptor.layouts[0] = layout
         vertexDescriptor.attributes[0].format = .float4
         vertexDescriptor.attributes[0].offset = 0
         vertexDescriptor.attributes[0].bufferIndex = 0
-        vertexDescriptor.attributes[1].format = .float4
-        vertexDescriptor.attributes[1].offset = 16
-        vertexDescriptor.attributes[1].bufferIndex = 0
         pipelineDescriptor.vertexDescriptor = vertexDescriptor
         return try! device.makeRenderPipelineState(descriptor: pipelineDescriptor)
     }
