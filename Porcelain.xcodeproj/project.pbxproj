@@ -11,8 +11,17 @@
 		5609FE7E255724DB0090CC0F /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609FE7D255724DB0090CC0F /* Cube.swift */; };
 		5609FE8625572C370090CC0F /* EnvironmentMapper.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5609FE8525572C370090CC0F /* EnvironmentMapper.metal */; };
 		5609FE8D25572E6D0090CC0F /* EnvironmentRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609FE8C25572E6D0090CC0F /* EnvironmentRenderer.swift */; };
+		563161F0255AC8F300CADA42 /* DataBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563161EF255AC8F300CADA42 /* DataBuffer.swift */; };
+		563161F4255AC99900CADA42 /* Mesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563161F3255AC99900CADA42 /* Mesh.swift */; };
+		563161F9255ACAFD00CADA42 /* IndexBasedDraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563161F8255ACAFD00CADA42 /* IndexBasedDraw.swift */; };
+		563161FF255AD0A400CADA42 /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563161FE255AD0A400CADA42 /* Geometry.swift */; };
 		563899E72554C6E600F324DA /* Postprocessing.metal in Sources */ = {isa = PBXBuildFile; fileRef = 563899E62554C6E600F324DA /* Postprocessing.metal */; };
 		563899EB2555D1AF00F324DA /* matrix_float4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563899EA2555D1AF00F324DA /* matrix_float4x4.swift */; };
+		5651F588255AB39700D51220 /* Compatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 5651F586255AB39700D51220 /* Compatibility.h */; };
+		5651F589255AB39700D51220 /* Types.h in Headers */ = {isa = PBXBuildFile; fileRef = 5651F587255AB39700D51220 /* Types.h */; };
+		5651F58E255AB3A900D51220 /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5651F58C255AB3A900D51220 /* Material.swift */; };
+		5651F58F255AB3A900D51220 /* Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5651F58D255AB3A900D51220 /* Texture.swift */; };
+		5653CE5E255AD46E00AC9C62 /* ModelPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5653CE5D255AD46E00AC9C62 /* ModelPiece.swift */; };
 		5674FFB9255459E0001CF921 /* ForwardRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5674FFB8255459E0001CF921 /* ForwardRenderer.metal */; };
 		5674FFBC25545A00001CF921 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5674FFBB25545A00001CF921 /* Renderer.swift */; };
 		56E786552556C85B000B6311 /* OmniLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E786542556C85B000B6311 /* OmniLight.swift */; };
@@ -34,11 +43,19 @@
 		5609FE7D255724DB0090CC0F /* Cube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
 		5609FE8525572C370090CC0F /* EnvironmentMapper.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = EnvironmentMapper.metal; sourceTree = "<group>"; };
 		5609FE8C25572E6D0090CC0F /* EnvironmentRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentRenderer.swift; sourceTree = "<group>"; };
+		563161EF255AC8F300CADA42 /* DataBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBuffer.swift; sourceTree = "<group>"; };
+		563161F3255AC99900CADA42 /* Mesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mesh.swift; sourceTree = "<group>"; };
+		563161F8255ACAFD00CADA42 /* IndexBasedDraw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexBasedDraw.swift; sourceTree = "<group>"; };
+		563161FE255AD0A400CADA42 /* Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
 		563899E62554C6E600F324DA /* Postprocessing.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Postprocessing.metal; sourceTree = "<group>"; };
 		563899EA2555D1AF00F324DA /* matrix_float4x4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = matrix_float4x4.swift; sourceTree = "<group>"; };
+		5651F586255AB39700D51220 /* Compatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compatibility.h; sourceTree = "<group>"; };
+		5651F587255AB39700D51220 /* Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
+		5651F58C255AB3A900D51220 /* Material.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Material.swift; sourceTree = "<group>"; };
+		5651F58D255AB3A900D51220 /* Texture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Texture.swift; sourceTree = "<group>"; };
+		5653CE5D255AD46E00AC9C62 /* ModelPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelPiece.swift; sourceTree = "<group>"; };
 		5674FFB8255459E0001CF921 /* ForwardRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ForwardRenderer.metal; sourceTree = "<group>"; };
 		5674FFBB25545A00001CF921 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
-		56B668A325594EF1008FC621 /* SharedTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SharedTypes.h; path = Porcelain/SharedTypes/SharedTypes.h; sourceTree = "<group>"; };
 		56E786542556C85B000B6311 /* OmniLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniLight.swift; sourceTree = "<group>"; };
 		56E786582556CA33000B6311 /* simd_float3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = simd_float3.swift; sourceTree = "<group>"; };
 		56F594452556094B00FBB639 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
@@ -65,7 +82,6 @@
 		56013962255457D100FC1C45 = {
 			isa = PBXGroup;
 			children = (
-				56B668A325594EF1008FC621 /* SharedTypes.h */,
 				5601396E255457D100FC1C45 /* Porcelain */,
 				5601396D255457D100FC1C45 /* Products */,
 			);
@@ -82,6 +98,7 @@
 		5601396E255457D100FC1C45 /* Porcelain */ = {
 			isa = PBXGroup;
 			children = (
+				5651F585255AB39700D51220 /* SharedTypes */,
 				5609FE7C255722F00090CC0F /* Geometry */,
 				56F5945D2556A94900FBB639 /* Loaders */,
 				563899D62554A07100F324DA /* Math */,
@@ -97,9 +114,21 @@
 		5609FE7C255722F00090CC0F /* Geometry */ = {
 			isa = PBXGroup;
 			children = (
+				563161F7255ACAEA00CADA42 /* Mesh */,
 				5609FE7D255724DB0090CC0F /* Cube.swift */,
+				563161EF255AC8F300CADA42 /* DataBuffer.swift */,
 			);
 			path = Geometry;
+			sourceTree = "<group>";
+		};
+		563161F7255ACAEA00CADA42 /* Mesh */ = {
+			isa = PBXGroup;
+			children = (
+				563161F3255AC99900CADA42 /* Mesh.swift */,
+				563161FE255AD0A400CADA42 /* Geometry.swift */,
+				563161F8255ACAFD00CADA42 /* IndexBasedDraw.swift */,
+			);
+			path = Mesh;
 			sourceTree = "<group>";
 		};
 		563899D62554A07100F324DA /* Math */ = {
@@ -110,6 +139,25 @@
 				56E786582556CA33000B6311 /* simd_float3.swift */,
 			);
 			path = Math;
+			sourceTree = "<group>";
+		};
+		5651F585255AB39700D51220 /* SharedTypes */ = {
+			isa = PBXGroup;
+			children = (
+				5651F586255AB39700D51220 /* Compatibility.h */,
+				5651F587255AB39700D51220 /* Types.h */,
+			);
+			path = SharedTypes;
+			sourceTree = "<group>";
+		};
+		5651F58B255AB3A900D51220 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5653CE5D255AD46E00AC9C62 /* ModelPiece.swift */,
+				5651F58C255AB3A900D51220 /* Material.swift */,
+				5651F58D255AB3A900D51220 /* Texture.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		5674FFB7255459BD001CF921 /* Shaders */ = {
@@ -137,6 +185,7 @@
 		5674FFC025545C05001CF921 /* Scenery */ = {
 			isa = PBXGroup;
 			children = (
+				5651F58B255AB3A900D51220 /* Models */,
 				56E786532556C84D000B6311 /* Lights */,
 				56F594452556094B00FBB639 /* Camera.swift */,
 				56F5944825560B7B00FBB639 /* CoordinateSpace.swift */,
@@ -168,7 +217,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5651F589255AB39700D51220 /* Types.h in Headers */,
 				56013971255457D100FC1C45 /* Porcelain.h in Headers */,
+				5651F588255AB39700D51220 /* Compatibility.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,7 +292,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				56E786552556C85B000B6311 /* OmniLight.swift in Sources */,
+				5651F58F255AB3A900D51220 /* Texture.swift in Sources */,
 				56F59458255627CB00FBB639 /* Postprocessor.swift in Sources */,
+				563161F0255AC8F300CADA42 /* DataBuffer.swift in Sources */,
 				563899EB2555D1AF00F324DA /* matrix_float4x4.swift in Sources */,
 				5609FE8625572C370090CC0F /* EnvironmentMapper.metal in Sources */,
 				56F5945F2556A95900FBB639 /* ModelLoader.swift in Sources */,
@@ -249,9 +302,14 @@
 				5609FE7E255724DB0090CC0F /* Cube.swift in Sources */,
 				56F594462556094B00FBB639 /* Camera.swift in Sources */,
 				56F5944925560B7B00FBB639 /* CoordinateSpace.swift in Sources */,
+				563161F9255ACAFD00CADA42 /* IndexBasedDraw.swift in Sources */,
+				563161FF255AD0A400CADA42 /* Geometry.swift in Sources */,
 				56F5944C25560BCD00FBB639 /* Float.swift in Sources */,
+				5651F58E255AB3A900D51220 /* Material.swift in Sources */,
+				5653CE5E255AD46E00AC9C62 /* ModelPiece.swift in Sources */,
 				5674FFBC25545A00001CF921 /* Renderer.swift in Sources */,
 				56F594502556152200FBB639 /* Math.h in Sources */,
+				563161F4255AC99900CADA42 /* Mesh.swift in Sources */,
 				5674FFB9255459E0001CF921 /* ForwardRenderer.metal in Sources */,
 				56F5945B25562A0600FBB639 /* ForwardRenderer.swift in Sources */,
 				56E786592556CA33000B6311 /* simd_float3.swift in Sources */,

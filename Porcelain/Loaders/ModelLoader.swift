@@ -37,7 +37,26 @@ public struct ModelLoader {
         }
         let allocator = MTKMeshBufferAllocator(device: device)
         let asset = MDLAsset(url: url, vertexDescriptor: vertexDescriptor, bufferAllocator: allocator)
-        asset.loadTextures()
         return asset
+    }
+    public func loadGeometries(asset: MDLAsset) -> [Geometry]? {
+        guard let meshes = try? MTKMesh.newMeshes(asset: asset, device: device).metalKitMeshes else {
+            return nil
+        }
+        return meshes.map { mesh in
+            let buffer = DataBuffer(buffer: mesh.vertexBuffers[0].buffer,
+                                    length: mesh.vertexBuffers[0].length,
+                                    offset: mesh.vertexBuffers[0].offset)
+            let drawDescriptions = mesh.submeshes.map { submesh -> IndexBasedDraw in
+                let indexBuffer = DataBuffer(buffer: submesh.indexBuffer.buffer,
+                                             length: submesh.indexBuffer.length,
+                                             offset: submesh.indexBuffer.offset)
+                return IndexBasedDraw(indexBuffer: indexBuffer,
+                                      indexCount: submesh.indexCount,
+                                      indexType: submesh.indexType,
+                                      primitiveType: submesh.primitiveType)
+            }
+            return Geometry(vertexBuffer: buffer, drawDescription: drawDescriptions)
+        }
     }
 }

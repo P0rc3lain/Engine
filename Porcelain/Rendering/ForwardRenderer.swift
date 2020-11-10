@@ -39,15 +39,15 @@ internal struct ForwardRenderer {
         withUnsafePointer(to: uniforms) { ptr in
             encoder.setVertexBytes(ptr, length: MemoryLayout<Uniforms>.size, index: 1)
         }
-        for (meshIndex, mesh) in scene.meshes.enumerated() {
-            encoder.setVertexBuffer(mesh.vertexBuffers[0].buffer, offset: mesh.vertexBuffers[0].offset, index: 0)
-            for (submeshIndex, submesh) in mesh.submeshes.enumerated() {
-                let model = scene.meshesModel[meshIndex].submeshes![submeshIndex]
-                encoder.drawIndexedPrimitives(type: submesh.primitiveType,
-                                              indexCount: submesh.indexCount,
-                                              indexType: submesh.indexType,
-                                              indexBuffer: submesh.indexBuffer.buffer,
-                                              indexBufferOffset: submesh.indexBuffer.offset)
+        for piece in scene.models {
+            encoder.setVertexBuffer(piece.geometry.vertexBuffer.buffer,
+                                    offset: piece.geometry.vertexBuffer.offset, index: 0)
+            for description in piece.geometry.drawDescription {
+                encoder.drawIndexedPrimitives(type: description.primitiveType,
+                                              indexCount: description.indexCount,
+                                              indexType: description.indexType,
+                                              indexBuffer: description.indexBuffer.buffer,
+                                              indexBufferOffset: description.indexBuffer.offset)
             }
         }
     }
