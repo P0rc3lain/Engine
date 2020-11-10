@@ -6,7 +6,7 @@
 //
 
 import MetalKit
-import PorcelainTypes
+import ShaderTypes
 
 fileprivate struct Uniforms {
     let projectionMatrix: matrix_float4x4
@@ -39,9 +39,10 @@ internal struct ForwardRenderer {
         withUnsafePointer(to: uniforms) { ptr in
             encoder.setVertexBytes(ptr, length: MemoryLayout<Uniforms>.size, index: 1)
         }
-        for mesh in scene.meshes {
+        for (meshIndex, mesh) in scene.meshes.enumerated() {
             encoder.setVertexBuffer(mesh.vertexBuffers[0].buffer, offset: mesh.vertexBuffers[0].offset, index: 0)
-            for submesh in mesh.submeshes {
+            for (submeshIndex, submesh) in mesh.submeshes.enumerated() {
+                let model = scene.meshesModel[meshIndex].submeshes![submeshIndex]
                 encoder.drawIndexedPrimitives(type: submesh.primitiveType,
                                               indexCount: submesh.indexCount,
                                               indexType: submesh.indexType,
@@ -63,14 +64,17 @@ internal struct ForwardRenderer {
         let vertexDescriptor = MTLVertexDescriptor()
         let layout = MTLVertexBufferLayoutDescriptor()
         layout.stepFunction = .perVertex
-        layout.stride = MemoryLayout<VertexP3N3>.stride
+        layout.stride = MemoryLayout<VertexP3N3T2>.stride
         layout.stepRate = 1
         vertexDescriptor.layouts[0] = layout
         vertexDescriptor.attributes[0].format = .float3
-        vertexDescriptor.attributes[0].offset = MemoryLayout<VertexP3N3>.offset(of: \VertexP3N3.position)!
+        vertexDescriptor.attributes[0].offset = MemoryLayout<VertexP3N3T2>.offset(of: \VertexP3N3T2.position)!
         vertexDescriptor.attributes[0].bufferIndex = 0
         vertexDescriptor.attributes[1].format = .float3
-        vertexDescriptor.attributes[1].offset = MemoryLayout<VertexP3N3>.offset(of: \VertexP3N3.normal)!
+        vertexDescriptor.attributes[1].offset = MemoryLayout<VertexP3N3T2>.offset(of: \VertexP3N3T2.normal)!
+        vertexDescriptor.attributes[1].bufferIndex = 0
+        vertexDescriptor.attributes[2].format = .float3
+        vertexDescriptor.attributes[2].offset = MemoryLayout<VertexP3N3T2>.offset(of: \VertexP3N3T2.textureUV)!
         vertexDescriptor.attributes[1].bufferIndex = 0
         pipelineDescriptor.vertexDescriptor = vertexDescriptor
         return try! device.makeRenderPipelineState(descriptor: pipelineDescriptor)

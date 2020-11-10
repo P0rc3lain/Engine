@@ -6,7 +6,7 @@
 //
 
 import MetalKit
-import PorcelainTypes
+import ShaderTypes
 
 public struct ModelLoader {
     // MARK: - Properties
@@ -17,21 +17,27 @@ public struct ModelLoader {
     }
     public func loadAsset(name: String, extension: String) -> MDLAsset? {
         let vertexDescriptor = MDLVertexDescriptor()
-        vertexDescriptor.layouts = [MDLVertexBufferLayout(stride: MemoryLayout<VertexP3N3>.stride)]
+        vertexDescriptor.layouts = [MDLVertexBufferLayout(stride: MemoryLayout<VertexP3N3T2>.stride)]
         vertexDescriptor.attributes = [
             MDLVertexAttribute(name: MDLVertexAttributePosition,
                                format: .float3,
-                               offset: MemoryLayout<VertexP3N3>.offset(of: \VertexP3N3.position)!,
+                               offset: MemoryLayout<VertexP3N3T2>.offset(of: \VertexP3N3T2.position)!,
                                bufferIndex: 0),
             MDLVertexAttribute(name: MDLVertexAttributeNormal,
                                format: .float3,
-                               offset: MemoryLayout<VertexP3N3>.offset(of: \VertexP3N3.normal)!,
+                               offset: MemoryLayout<VertexP3N3T2>.offset(of: \VertexP3N3T2.normal)!,
+                               bufferIndex: 0),
+            MDLVertexAttribute(name: MDLVertexAttributeTextureCoordinate,
+                               format: .float2,
+                               offset: MemoryLayout<VertexP3N3T2>.offset(of: \VertexP3N3T2.textureUV)!,
                                bufferIndex: 0)
         ]
         guard let url = Bundle.main.url(forResource: name, withExtension: `extension`) else {
             return nil
         }
         let allocator = MTKMeshBufferAllocator(device: device)
-        return MDLAsset(url: url, vertexDescriptor: vertexDescriptor, bufferAllocator: allocator)
+        let asset = MDLAsset(url: url, vertexDescriptor: vertexDescriptor, bufferAllocator: allocator)
+        asset.loadTextures()
+        return asset
     }
 }

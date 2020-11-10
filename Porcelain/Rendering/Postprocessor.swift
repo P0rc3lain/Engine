@@ -7,7 +7,7 @@
 
 import simd
 import Metal
-import PorcelainTypes
+import ShaderTypes
 
 fileprivate let coordinates = [VertexP2T2(position: vector_float2(-1, -1), uv_coordinate: vector_float2(0, 1)),
                                VertexP2T2(position: vector_float2(-1, 1), uv_coordinate: vector_float2(0, 0)),
