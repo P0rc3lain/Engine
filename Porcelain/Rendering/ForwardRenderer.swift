@@ -30,7 +30,7 @@ internal struct ForwardRenderer {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStencilState)
-        encoder.setCullMode(.none)
+        encoder.setCullMode(.back)
         encoder.setFrontFacing(.counterClockwise)
         let uniforms = Uniforms(projectionMatrix: scene.camera.projectionMatrix,
                                 orientation: simd_matrix4x4(scene.camera.coordinateSpace.orientation),
