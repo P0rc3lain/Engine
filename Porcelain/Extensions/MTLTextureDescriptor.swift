@@ -11,8 +11,8 @@ import Metal
 extension MTLTextureDescriptor {
     static func singlePixel2D(pixelFormat: MTLPixelFormat = .bgra8Unorm) -> MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
-        descriptor.width = 1
-        descriptor.height = 1
+        descriptor.width = 8
+        descriptor.height = 8
         descriptor.mipmapLevelCount = 1
         descriptor.storageMode = .managed
         descriptor.arrayLength = 1
