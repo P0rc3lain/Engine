@@ -15,7 +15,8 @@ public class Material {
     let normals: MTLTexture
     let metallic: MTLTexture
     // MARK: - Initialization
-    public init(albedo: MTLTexture, roughness: MTLTexture, emission: MTLTexture, normals: MTLTexture, metallic: MTLTexture) {
+    public init(albedo: MTLTexture, roughness: MTLTexture,
+                emission: MTLTexture, normals: MTLTexture, metallic: MTLTexture) {
         self.albedo = albedo
         self.roughness = roughness
         self.emission = emission
