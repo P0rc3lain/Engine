@@ -50,17 +50,16 @@ public class Renderer {
     }
     public func draw(scene: inout Scene) {
         let commandBuffer = commandQueue.makeCommandBuffer()!
-        commandBuffer.pushDebugGroup("Environment mapping")
         
+        commandBuffer.pushDebugGroup("Environment mapping")
         let environmentEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor)!
         environmentRenderer.draw(encoder: environmentEncoder, camera: scene.camera, vertexBuffer: vertices, indicesBuffer: indices, environmentMap: scene.environmentMap)
-        
         commandBuffer.popDebugGroup()
+        
         commandBuffer.pushDebugGroup("Forward Renderer Pass")
         forwardRenderer.draw(encoder: environmentEncoder, scene: &scene)
         environmentEncoder.endEncoding()
         commandBuffer.popDebugGroup()
-        
         
         commandBuffer.pushDebugGroup("Post Processing Pass")
         let texturePass = commandBuffer.makeRenderCommandEncoder(descriptor: view.currentRenderPassDescriptor!)!
