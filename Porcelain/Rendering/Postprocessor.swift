@@ -9,12 +9,12 @@ import simd
 import Metal
 import ShaderTypes
 
-fileprivate let coordinates = [VertexP2T2(position: vector_float2(-1, -1), uv_coordinate: vector_float2(0, 1)),
-                               VertexP2T2(position: vector_float2(-1, 1), uv_coordinate: vector_float2(0, 0)),
-                               VertexP2T2(position: vector_float2(1, 1), uv_coordinate: vector_float2(1, 0)),
-                               VertexP2T2(position: vector_float2(-1, -1), uv_coordinate: vector_float2(0, 1)),
-                               VertexP2T2(position: vector_float2(1, 1), uv_coordinate: vector_float2(1, 0)),
-                               VertexP2T2(position: vector_float2(1, -1), uv_coordinate: vector_float2(1, 1))]
+fileprivate let coordinates = [VertexP2T2(position: simd_float2(-1, -1), textureUV: simd_float2(0, 1)),
+                               VertexP2T2(position: simd_float2(-1, 1), textureUV: simd_float2(0, 0)),
+                               VertexP2T2(position: simd_float2(1, 1), textureUV: simd_float2(1, 0)),
+                               VertexP2T2(position: simd_float2(-1, -1), textureUV: simd_float2(0, 1)),
+                               VertexP2T2(position: simd_float2(1, 1), textureUV: simd_float2(1, 0)),
+                               VertexP2T2(position: simd_float2(1, -1), textureUV: simd_float2(1, 1))]
 
 
 internal struct Postprocessor {

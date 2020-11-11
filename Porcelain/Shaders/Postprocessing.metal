@@ -19,7 +19,7 @@ vertex TexturePipelineRasterizerData  vertexPostprocess(uint vertexID [[vertex_i
                                                         constant VertexP2T2 *vertices [[buffer(0)]]) {
     TexturePipelineRasterizerData out;
     out.position = float4(vertices[vertexID].position.xy, 0, 1);
-    out.texcoord = vertices[vertexID].uv_coordinate;
+    out.texcoord = vertices[vertexID].textureUV;
     return out;
 }
 

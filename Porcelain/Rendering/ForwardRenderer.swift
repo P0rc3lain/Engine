@@ -30,7 +30,7 @@ internal struct ForwardRenderer {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStencilState)
-        encoder.setCullMode(.back)
+        encoder.setCullMode(.none)
         encoder.setFrontFacing(.counterClockwise)
         let uniforms = Uniforms(projectionMatrix: scene.camera.projectionMatrix,
                                 orientation: simd_matrix4x4(scene.camera.coordinateSpace.orientation),
@@ -42,6 +42,11 @@ internal struct ForwardRenderer {
         for piece in scene.models {
             encoder.setVertexBuffer(piece.geometry.vertexBuffer.buffer,
                                     offset: piece.geometry.vertexBuffer.offset, index: 0)
+            encoder.setFragmentTexture(piece.material.albedo, index: 0)
+            encoder.setFragmentTexture(piece.material.roughness, index: 1)
+            encoder.setFragmentTexture(piece.material.emission, index: 2)
+            encoder.setFragmentTexture(piece.material.normals, index: 3)
+            encoder.setFragmentTexture(piece.material.metallic, index: 4)
             for description in piece.geometry.drawDescription {
                 encoder.drawIndexedPrimitives(type: description.primitiveType,
                                               indexCount: description.indexCount,
@@ -64,18 +69,25 @@ internal struct ForwardRenderer {
         let vertexDescriptor = MTLVertexDescriptor()
         let layout = MTLVertexBufferLayoutDescriptor()
         layout.stepFunction = .perVertex
-        layout.stride = MemoryLayout<VertexP3N3T2>.stride
+        layout.stride = MemoryLayout<VertexP3N3T3Tx2>.stride
         layout.stepRate = 1
         vertexDescriptor.layouts[0] = layout
         vertexDescriptor.attributes[0].format = .float3
-        vertexDescriptor.attributes[0].offset = MemoryLayout<VertexP3N3T2>.offset(of: \VertexP3N3T2.position)!
+        vertexDescriptor.attributes[0].offset = MemoryLayout<VertexP3N3T3Tx2>
+                                                .offset(of: \VertexP3N3T3Tx2.position)!
         vertexDescriptor.attributes[0].bufferIndex = 0
         vertexDescriptor.attributes[1].format = .float3
-        vertexDescriptor.attributes[1].offset = MemoryLayout<VertexP3N3T2>.offset(of: \VertexP3N3T2.normal)!
+        vertexDescriptor.attributes[1].offset = MemoryLayout<VertexP3N3T3Tx2>
+                                                .offset(of: \VertexP3N3T3Tx2.normal)!
         vertexDescriptor.attributes[1].bufferIndex = 0
         vertexDescriptor.attributes[2].format = .float3
-        vertexDescriptor.attributes[2].offset = MemoryLayout<VertexP3N3T2>.offset(of: \VertexP3N3T2.textureUV)!
-        vertexDescriptor.attributes[1].bufferIndex = 0
+        vertexDescriptor.attributes[2].offset = MemoryLayout<VertexP3N3T3Tx2>
+                                                .offset(of: \VertexP3N3T3Tx2.tangent)!
+        vertexDescriptor.attributes[2].bufferIndex = 0
+        vertexDescriptor.attributes[3].format = .float2
+        vertexDescriptor.attributes[3].offset = MemoryLayout<VertexP3N3T3Tx2>
+                                                .offset(of: \VertexP3N3T3Tx2.textureUV)!
+        vertexDescriptor.attributes[3].bufferIndex = 0
         pipelineDescriptor.vertexDescriptor = vertexDescriptor
         return try! device.makeRenderPipelineState(descriptor: pipelineDescriptor)
     }

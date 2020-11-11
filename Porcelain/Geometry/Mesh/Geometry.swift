@@ -7,7 +7,13 @@
 
 import Foundation
 
-public struct Geometry {
+public class Geometry {
+    // MARK: - Properties
     let vertexBuffer: DataBuffer
     let drawDescription: [IndexBasedDraw]
+    // MARK: - Initialization
+    init(vertexBuffer: DataBuffer, drawDescription: [IndexBasedDraw]) {
+        self.vertexBuffer = vertexBuffer
+        self.drawDescription = drawDescription
+    }
 }

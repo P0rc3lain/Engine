@@ -10,7 +10,6 @@ import simd
 public struct Camera {
     // MARK: - Properties
     internal let projectionMatrix: matrix_float4x4
-    // Radians
     public var coordinateSpace: CoordinateSpace
     // MARK: - Initialization
     public init(nearPlane: Float, farPlane: Float, fovRadians: Float, aspectRation: Float, coordinateSpace: CoordinateSpace) {

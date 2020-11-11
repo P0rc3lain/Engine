@@ -12,7 +12,6 @@ import Foundation
 public struct Scene {
     // MARK: - Properties
     public var materials = [Material]()
-    public var textures = [Texture]()
     public var environmentMap: MTLTexture
     public var camera: Camera
     public var omniLights = [OmniLight]()

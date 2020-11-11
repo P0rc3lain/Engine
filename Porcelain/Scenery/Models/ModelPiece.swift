@@ -8,11 +8,10 @@
 import Foundation
 
 public struct ModelPiece {
-    public let coordinateSpace: CoordinateSpace
-    public let material: Material? = nil
+    public let material: Material
     public let geometry: Geometry
-    public init(coordinateSpace: CoordinateSpace, geometry: Geometry) {
-        self.coordinateSpace = coordinateSpace
+    public init(material: Material, geometry: Geometry) {
+        self.material = material
         self.geometry = geometry
     }
 }

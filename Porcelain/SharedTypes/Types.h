@@ -14,13 +14,14 @@
 
 struct VertexP2T2 {
     simd_float2 position;
-    simd_float2 uv_coordinate;
+    simd_float2 textureUV;
 };
 
-struct VertexP3N3T2 {
+struct VertexP3N3T3Tx2 {
     simd_float3 position    metal_only([[attribute(0)]]);
     simd_float3 normal      metal_only([[attribute(1)]]);
-    simd_float2 textureUV   metal_only([[attribute(2)]]);
+    simd_float3 tangent     metal_only([[attribute(2)]]);
+    simd_float2 textureUV   metal_only([[attribute(3)]]);
 };
 
 #endif /* TYPES_H */
