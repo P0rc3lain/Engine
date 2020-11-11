@@ -66,29 +66,7 @@ internal struct ForwardRenderer {
         pipelineDescriptor.fragmentFunction = fragmentShader
         pipelineDescriptor.colorAttachments[0].pixelFormat = pixelFormat
         pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
-        let vertexDescriptor = MTLVertexDescriptor()
-        let layout = MTLVertexBufferLayoutDescriptor()
-        layout.stepFunction = .perVertex
-        layout.stride = MemoryLayout<VertexP3N3T3Tx2>.stride
-        layout.stepRate = 1
-        vertexDescriptor.layouts[0] = layout
-        vertexDescriptor.attributes[0].format = .float3
-        vertexDescriptor.attributes[0].offset = MemoryLayout<VertexP3N3T3Tx2>
-                                                .offset(of: \VertexP3N3T3Tx2.position)!
-        vertexDescriptor.attributes[0].bufferIndex = 0
-        vertexDescriptor.attributes[1].format = .float3
-        vertexDescriptor.attributes[1].offset = MemoryLayout<VertexP3N3T3Tx2>
-                                                .offset(of: \VertexP3N3T3Tx2.normal)!
-        vertexDescriptor.attributes[1].bufferIndex = 0
-        vertexDescriptor.attributes[2].format = .float3
-        vertexDescriptor.attributes[2].offset = MemoryLayout<VertexP3N3T3Tx2>
-                                                .offset(of: \VertexP3N3T3Tx2.tangent)!
-        vertexDescriptor.attributes[2].bufferIndex = 0
-        vertexDescriptor.attributes[3].format = .float2
-        vertexDescriptor.attributes[3].offset = MemoryLayout<VertexP3N3T3Tx2>
-                                                .offset(of: \VertexP3N3T3Tx2.textureUV)!
-        vertexDescriptor.attributes[3].bufferIndex = 0
-        pipelineDescriptor.vertexDescriptor = vertexDescriptor
+        pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(MDLVertexDescriptor.porcelainMeshVertexDescriptor)
         return try! device.makeRenderPipelineState(descriptor: pipelineDescriptor)
     }
     internal static func buildDepthStencilPipelineState(device: MTLDevice) -> MTLDepthStencilState {
