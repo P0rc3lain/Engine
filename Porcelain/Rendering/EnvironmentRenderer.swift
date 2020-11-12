@@ -15,16 +15,16 @@ fileprivate struct Uniforms {
     let scale: simd_float3
 }
 
-internal struct EnvironmentRenderer {
+struct EnvironmentRenderer {
     private let pipelineState: MTLRenderPipelineState
     private let viewPort: MTLViewport
-    internal init(pipelineState: MTLRenderPipelineState, drawableSize: CGSize) {
+    init(pipelineState: MTLRenderPipelineState, drawableSize: CGSize) {
         self.pipelineState = pipelineState
         self.viewPort = MTLViewport(originX: 0, originY: 0,
                                     width: Double(drawableSize.width), height: Double(drawableSize.height),
                                     znear: 0, zfar: 1)
     }
-    internal func draw(encoder: MTLRenderCommandEncoder, camera: Camera, vertexBuffer: MTLBuffer, indicesBuffer: MTLBuffer, environmentMap: MTLTexture) {
+    func draw(encoder: MTLRenderCommandEncoder, camera: Camera, vertexBuffer: MTLBuffer, indicesBuffer: MTLBuffer, environmentMap: MTLTexture) {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
@@ -42,9 +42,9 @@ internal struct EnvironmentRenderer {
                                       indexBuffer: indicesBuffer,
                                       indexBufferOffset: 0)
     }
-    internal static func buildEnvironmentRenderPipelineState(device: MTLDevice,
-                                                               library: MTLLibrary,
-                                                               pixelFormat: MTLPixelFormat) -> MTLRenderPipelineState {
+    static func buildEnvironmentRenderPipelineState(device: MTLDevice,
+                                                    library: MTLLibrary,
+                                                    pixelFormat: MTLPixelFormat) -> MTLRenderPipelineState {
         let vertexShader = library.makeFunction(name: "environmentVertexShader")
         let fragmentShader = library.makeFunction(name: "environmentFragmentShader")
         let pipelineDescriptor = MTLRenderPipelineDescriptor()

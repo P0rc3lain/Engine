@@ -17,18 +17,18 @@ fileprivate let coordinates = [VertexP2T2(position: simd_float2(-1, -1), texture
                                VertexP2T2(position: simd_float2(1, -1), textureUV: simd_float2(1, 1))]
 
 
-internal struct Postprocessor {
+struct Postprocessor {
     private let pipelineState: MTLRenderPipelineState
     private let texture: MTLTexture
     private let viewPort: MTLViewport
-    internal init(pipelineState: MTLRenderPipelineState, texture: MTLTexture) {
+    init(pipelineState: MTLRenderPipelineState, texture: MTLTexture) {
         self.texture = texture
         self.pipelineState = pipelineState
         self.viewPort = MTLViewport(originX: 0, originY: 0,
                                     width: Double(texture.width), height: Double(texture.height),
                                     znear: 0, zfar: 1)
     }
-    internal func draw(encoder: MTLRenderCommandEncoder) {
+    func draw(encoder: MTLRenderCommandEncoder) {
         encoder.setFragmentTexture(texture, index: 0)
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
@@ -37,7 +37,7 @@ internal struct Postprocessor {
         }
         encoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 6)
     }
-    internal static func buildPostprocessingRenderPipelineState(device: MTLDevice,
+    static func buildPostprocessingRenderPipelineState(device: MTLDevice,
                                                                library: MTLLibrary,
                                                                pixelFormat: MTLPixelFormat) -> MTLRenderPipelineState {
         let vertexShader = library.makeFunction(name: "vertexPostprocess")

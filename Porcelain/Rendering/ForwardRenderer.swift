@@ -15,18 +15,18 @@ fileprivate struct Uniforms {
     let scale: simd_float3
 }
 
-internal struct ForwardRenderer {
+struct ForwardRenderer {
     private let pipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport
-    internal init(pipelineState: MTLRenderPipelineState, depthStencilState: MTLDepthStencilState, drawableSize: CGSize) {
+    init(pipelineState: MTLRenderPipelineState, depthStencilState: MTLDepthStencilState, drawableSize: CGSize) {
         self.pipelineState = pipelineState
         self.depthStencilState = depthStencilState
         self.viewPort = MTLViewport(originX: 0, originY: 0,
                                     width: Double(drawableSize.width), height: Double(drawableSize.height),
                                     znear: 0, zfar: 1)
     }
-    internal func draw(encoder: MTLRenderCommandEncoder, scene: inout Scene) {
+    func draw(encoder: MTLRenderCommandEncoder, scene: inout Scene, lightsBuffer: inout MTLBuffer) {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStencilState)
@@ -56,7 +56,7 @@ internal struct ForwardRenderer {
             }
         }
     }
-    internal static func buildForwardRendererPipelineState(device: MTLDevice,
+    static func buildForwardRendererPipelineState(device: MTLDevice,
                                                            library: MTLLibrary,
                                                            pixelFormat: MTLPixelFormat) -> MTLRenderPipelineState {
         let vertexShader = library.makeFunction(name: "vertexFunction")
@@ -69,7 +69,7 @@ internal struct ForwardRenderer {
         pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(MDLVertexDescriptor.porcelainMeshVertexDescriptor)
         return try! device.makeRenderPipelineState(descriptor: pipelineDescriptor)
     }
-    internal static func buildDepthStencilPipelineState(device: MTLDevice) -> MTLDepthStencilState {
+    static func buildDepthStencilPipelineState(device: MTLDevice) -> MTLDepthStencilState {
         let depthStencilDescriptor = MTLDepthStencilDescriptor()
         depthStencilDescriptor.depthCompareFunction = .lessEqual
         depthStencilDescriptor.isDepthWriteEnabled = true
