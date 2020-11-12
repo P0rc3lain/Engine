@@ -38,7 +38,7 @@ public struct SharedBuffer<T> {
         return buffer.allocatedSize >= Self.bytesCount(elementsCount)
     }
     private var bufferName: String {
-        "\(Self.self)<\(T.self)>"
+        "\(Self.self)"
     }
     private static var storageOptions: MTLResourceOptions {
         [.storageModeShared]
