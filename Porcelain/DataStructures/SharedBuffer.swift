@@ -13,7 +13,7 @@ public struct SharedBuffer<T> {
     var buffer: MTLBuffer
     // MARK: - Initialization
     init?(device: MTLDevice, initialCapacity: Int) {
-        guard let buffer = device.makeBuffer(length: initialCapacity * MemoryLayout<T>.stride, options: [.storageModeShared]) else {
+        guard let buffer = device.makeBuffer(length: Self.bytesCount(initialCapacity), options: Self.storageOptions) else {
             return nil
         }
         self.device = device
@@ -21,22 +21,26 @@ public struct SharedBuffer<T> {
         self.buffer.label = bufferName
     }
     // MARK: - Internal
-    func upload(data: inout  [T]) {
+    mutating func upload(data: inout  [T]) {
         if !willFit(elementsCount: data.count) {
-            fatalError("Not implemented")
+            let newSize = 2 * Self.bytesCount(data.capacity)
+            buffer = device.makeBuffer(length: newSize, options: Self.storageOptions)!
         }
         data.withUnsafeBytes { ptr in
             buffer.contents().copyMemory(from: ptr.baseAddress!, byteCount: ptr.count)
         }
     }
     // MARK: - Private
-    private func bytesCount(_ elementsCount: Int) -> Int {
+    private static func bytesCount(_ elementsCount: Int) -> Int {
         return elementsCount * MemoryLayout<T>.stride
     }
     private func willFit(elementsCount: Int) -> Bool {
-        return buffer.length >= bytesCount(elementsCount)
+        return buffer.allocatedSize >= Self.bytesCount(elementsCount)
     }
     private var bufferName: String {
         "\(Self.self)<\(T.self)>"
+    }
+    private static var storageOptions: MTLResourceOptions {
+        [.storageModeShared]
     }
 }
