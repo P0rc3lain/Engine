@@ -8,7 +8,7 @@
 import Metal
 import MetalKit
 
-public class Renderer {
+public struct Renderer {
     // MARK: - Private
     private let view: MTKView
     private let device: MTLDevice
@@ -21,17 +21,19 @@ public class Renderer {
     private var postProcessor: Postprocessor!
     private var environmentRenderer: EnvironmentRenderer!
     private var indices: MTLBuffer!
+    private var lights: SharedBuffer<OmniLight>
     private var vertices: MTLBuffer!
     private let drawableSize: CGSize
     // MARK: - Initialization
-    public init(view metalView: MTKView, drawableSize: CGSize) {
+    init(view metalView: MTKView, drawableSize: CGSize) {
         view = metalView
         self.drawableSize = drawableSize
         device = view.device!
         vertices = Cube.verticesBuffer(device: device)
         indices = Cube.indicesBuffer(device: device)
-        library = try! device.makeDefaultLibrary(bundle: Bundle(for: Renderer.self))
+        library = try! device.makeDefaultLibrary(bundle: Bundle(for: Engine.self))
         commandQueue = self.device.makeCommandQueue()!
+        lights = SharedBuffer<OmniLight>(device: device, initialCapacity: 2)!
         depthTexture = prepareDepthTexture()
         colorTexture = prepareColorTexture()
         offscreenRenderPassDescriptor = prepareOffscreenRenderPassDescriptor(colorTexture: colorTexture, depthTexture: depthTexture)
@@ -48,7 +50,8 @@ public class Renderer {
         let environmentPipelineState = EnvironmentRenderer.buildEnvironmentRenderPipelineState(device: device, library: library, pixelFormat: view.colorPixelFormat)
         environmentRenderer = EnvironmentRenderer(pipelineState: environmentPipelineState, drawableSize: drawableSize)
     }
-    public func draw(scene: inout Scene) {
+    public mutating func draw(scene: inout Scene) {
+        lights.upload(data: &scene.omniLights)
         let commandBuffer = commandQueue.makeCommandBuffer()!
         
         commandBuffer.pushDebugGroup("Environment mapping")
@@ -57,7 +60,7 @@ public class Renderer {
         commandBuffer.popDebugGroup()
         
         commandBuffer.pushDebugGroup("Forward Renderer Pass")
-        forwardRenderer.draw(encoder: environmentEncoder, scene: &scene)
+        forwardRenderer.draw(encoder: environmentEncoder, scene: &scene, lightsBuffer: &lights.buffer)
         environmentEncoder.endEncoding()
         commandBuffer.popDebugGroup()
         

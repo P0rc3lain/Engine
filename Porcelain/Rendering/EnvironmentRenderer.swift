@@ -11,8 +11,6 @@ import Metal
 fileprivate struct Uniforms {
     let projectionMatrix: matrix_float4x4
     let orientation: matrix_float4x4
-    let translation: simd_float3
-    let scale: simd_float3
 }
 
 struct EnvironmentRenderer {
@@ -30,9 +28,7 @@ struct EnvironmentRenderer {
         encoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
         encoder.setFragmentTexture(environmentMap, index: 0)
         let uniforms = Uniforms(projectionMatrix: camera.projectionMatrix,
-                                orientation: simd_matrix4x4(camera.coordinateSpace.orientation),
-                                translation: camera.coordinateSpace.translation,
-                                scale: camera.coordinateSpace.scale)
+                                orientation: simd_matrix4x4(camera.coordinateSpace.orientation))
         withUnsafePointer(to: uniforms) { ptr in
             encoder.setVertexBytes(ptr, length: MemoryLayout<Uniforms>.size, index: 1)
         }

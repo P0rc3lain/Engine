@@ -15,12 +15,8 @@ public class GeometryLoader {
     public init(device: MTLDevice) {
         self.device = device
     }
-    public func loadGeometries(asset: MDLAsset) -> [Geometry]? {
-        guard let meshes = try? MTKMesh.newMeshes(asset: asset, device: device).metalKitMeshes else {
-            return nil
-        }
-        var geometries = [Geometry]()
-        for mesh in meshes {
+    public func loadGeometries(meshes: [MTKMesh]) -> [Geometry] {
+        return meshes.map { mesh in
             let buffer = DataBuffer(buffer: mesh.vertexBuffers[0].buffer,
                                     length: mesh.vertexBuffers[0].length,
                                     offset: mesh.vertexBuffers[0].offset)
@@ -33,8 +29,7 @@ public class GeometryLoader {
                                       indexType: submesh.indexType,
                                       primitiveType: submesh.primitiveType)
             }
-            geometries.append(Geometry(vertexBuffer: buffer, drawDescription: drawDescriptions))
+            return Geometry(vertexBuffer: buffer, drawDescription: drawDescriptions)
         }
-        return geometries
     }
 }

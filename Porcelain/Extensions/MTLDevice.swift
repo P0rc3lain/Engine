@@ -9,11 +9,11 @@ import simd
 import Metal
 
 extension MTLDevice {
-    func makeSolid2DTexture(device: MTLDevice,
-                            color: simd_float4,
+    func makeSolid2DTexture(color: simd_float4,
                             pixelFormat: MTLPixelFormat = .bgra8Unorm) -> MTLTexture? {
-        let descriptor = MTLTextureDescriptor.singlePixel2D(pixelFormat: pixelFormat)
-        guard let texture = device.makeTexture(descriptor: descriptor) else {
+        assert(length(color) <= 2.001, "Color values must be in [0.0, 1.0] range")
+        let descriptor = MTLTextureDescriptor.minimalSolidColor2D(pixelFormat: pixelFormat)
+        guard let texture = self.makeTexture(descriptor: descriptor) else {
             return nil
         }
         let origin = MTLOrigin(x: 0, y: 0, z: 0)

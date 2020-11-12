@@ -12,17 +12,14 @@ import Foundation
 public class MaterialLoader {
     // MARK: - Properties
     private let device: MTLDevice
+    private let loader: MTKTextureLoader
     // MARK: - Initialization
     public init(device: MTLDevice) {
         self.device = device
+        self.loader = MTKTextureLoader(device: device)
     }
     // MARK: - Public
-    public func loadMaterials(asset: MDLAsset) -> [String: Material]? {
-        asset.loadTextures()
-        let loader = MTKTextureLoader(device: device)
-        guard let meshes = try? MTKMesh.newMeshes(asset: asset, device: device).modelIOMeshes else {
-            return nil
-        }
+    public func loadMaterials(meshes: [MDLMesh]) -> [String: Material]? {
         var materials = [String: Material]()
         for mesh in meshes {
             guard let submeshes = mesh.submeshes as? [MDLSubmesh] else {
@@ -32,36 +29,49 @@ public class MaterialLoader {
                 guard let material = submesh.material else {
                     continue
                 }
-                materials[material.name] = convert(loader: loader, material: material)
+                materials[material.name] = convert(material: material)
             }
         }
         return materials
     }
     // MARK: - Private
-    private func texture(for semantic: MDLMaterialSemantic, in material: MDLMaterial, loader: MTKTextureLoader) -> MTLTexture? {
+    private func storedTexture(for semantic: MDLMaterialSemantic, in material: MDLMaterial) -> MTLTexture? {
         guard let materialProperty = material.property(with: semantic) else { return nil }
         guard let sourceTexture = materialProperty.textureSamplerValue?.texture else { return nil }
         let wantsMips = materialProperty.semantic != .tangentSpaceNormal
         let options: [MTKTextureLoader.Option : Any] = [.generateMipmaps : wantsMips]
         return try? loader.newTexture(texture: sourceTexture, options: options)
     }
-    private func convert(loader: MTKTextureLoader, material: MDLMaterial) -> Material {
-        let albedo = texture(for: .baseColor,
-                             in: material,
-                             loader: loader)!
-        let roughness = texture(for: .roughness,
-                             in: material,
-                             loader: loader)!
-        let normals = texture(for: .tangentSpaceNormal,
-                             in: material,
-                             loader: loader)!
-        let metallic = texture(for: .metallic,
-                             in: material,
-                             loader: loader)!
-        let emission = texture(for: .emission,
-                               in: material,
-                               loader: loader) ?? device.makeSolidTexture(device: device,
-                                                                          color: simd_float4(0, 0, 0, 1))!
+    private func defaultColor(for semantic: MDLMaterialSemantic) -> simd_float4 {
+        switch semantic {
+        case .baseColor:
+            return simd_float4.deafultBaseColor
+        case .tangentSpaceNormal:
+            return simd_float4.deafultNormalsColor
+        case .roughness:
+            return simd_float4.deafultRoughnessColor
+        case .emission:
+            return simd_float4.defaultEmissionColor
+        case .metallic:
+            return simd_float4.defaultMetallicColor
+        default:
+            fatalError("Default for \(semantic) not provided")
+        }
+    }
+    private func singleColorTexture(for semantic: MDLMaterialSemantic) -> MTLTexture? {
+        device.makeSolid2DTexture(color: defaultColor(for: semantic))
+    }
+    private func defaultTexture(for semantic: MDLMaterialSemantic, material: MDLMaterial) -> MTLTexture {
+        let texture = storedTexture(for: semantic, in: material) ?? singleColorTexture(for: semantic)!
+        texture.label = semantic.label
+        return texture
+    }
+    private func convert(material: MDLMaterial) -> Material {
+        let albedo = defaultTexture(for: .baseColor, material: material)
+        let roughness = defaultTexture(for: .roughness, material: material)
+        let emission = defaultTexture(for: .emission, material: material)
+        let normals = defaultTexture(for: .tangentSpaceNormal, material: material)
+        let metallic = defaultTexture(for: .metallic, material: material)
         return Material(albedo: albedo, roughness: roughness,
                         emission: emission, normals: normals, metallic: metallic)
     }
