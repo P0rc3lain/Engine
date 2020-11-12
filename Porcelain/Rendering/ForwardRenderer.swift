@@ -5,14 +5,15 @@
 //  Created by Mateusz Stompór on 07/11/2020.
 //
 
+import simd
 import MetalKit
 import ShaderTypes
 
 fileprivate struct Uniforms {
-    let projectionMatrix: matrix_float4x4
-    let orientation: matrix_float4x4
-    let translation: simd_float3
-    let scale: simd_float3
+    let projectionMatrix: simd_float4x4
+    let viewMatrix: simd_float4x4
+    let viewMatrixInverse: simd_float4x4
+    let lightsCount: Int32
 }
 
 struct ForwardRenderer {
@@ -32,12 +33,17 @@ struct ForwardRenderer {
         encoder.setDepthStencilState(depthStencilState)
         encoder.setCullMode(.back)
         encoder.setFrontFacing(.counterClockwise)
+        let lightsCount = Int32(scene.omniLights.count)
+        let viewMatrix = simd_float4x4(scene.camera.coordinateSpace.orientation) * simd_float4x4.translation(vector: scene.camera.coordinateSpace.translation);
         let uniforms = Uniforms(projectionMatrix: scene.camera.projectionMatrix,
-                                orientation: simd_matrix4x4(scene.camera.coordinateSpace.orientation),
-                                translation: scene.camera.coordinateSpace.translation,
-                                scale: scene.camera.coordinateSpace.scale)
+                                viewMatrix: viewMatrix,
+                                viewMatrixInverse: simd_inverse(viewMatrix),
+                                lightsCount: lightsCount)
         withUnsafePointer(to: uniforms) { ptr in
-            encoder.setVertexBytes(ptr, length: MemoryLayout<Uniforms>.size, index: 1)
+            encoder.setVertexBytes(ptr, length: MemoryLayout<Uniforms>.stride, index: 1)
+        }
+        withUnsafePointer(to: uniforms) { ptr in
+            encoder.setFragmentBytes(ptr, length: MemoryLayout<Uniforms>.stride, index: 1)
         }
         encoder.setFragmentBuffer(lightsBuffer, offset: 0, index: 10)
         for piece in scene.models {
