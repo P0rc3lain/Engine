@@ -9,7 +9,7 @@ import simd
 import Metal
 
 extension MTLTextureDescriptor {
-    static func minimalSolidColor2D(pixelFormat: MTLPixelFormat = .bgra8Unorm) -> MTLTextureDescriptor {
+    static var minimalSolidColor2D: MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.width = 8
         descriptor.height = 8
@@ -19,7 +19,7 @@ extension MTLTextureDescriptor {
         descriptor.sampleCount = 1
         descriptor.cpuCacheMode = .writeCombined
         descriptor.allowGPUOptimizedContents = false
-        descriptor.pixelFormat = pixelFormat
+        descriptor.pixelFormat = .bgra8Unorm
         descriptor.textureType = .type2D
         descriptor.usage = .shaderRead
         return descriptor
