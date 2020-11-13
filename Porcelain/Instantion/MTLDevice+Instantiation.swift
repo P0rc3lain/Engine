@@ -1,5 +1,5 @@
 //
-//  MTLDevice.swift
+//  MTLDevice+Instantiation.swift
 //  Porcelain
 //
 //  Created by Mateusz Stompór on 13/11/2020.
@@ -18,6 +18,10 @@ extension MTLDevice {
     func makeRenderPipelineStatePostprocessor(library: MTLLibrary,
                                               format: MTLPixelFormat) -> MTLRenderPipelineState {
         let descriptor = MTLRenderPipelineDescriptor.postProcessor(library: library, format: format)
+        return try! makeRenderPipelineState(descriptor: descriptor)
+    }
+    func makeRenderPipelineStateEnvironmentRenderer(library: MTLLibrary) -> MTLRenderPipelineState {
+        let descriptor = MTLRenderPipelineDescriptor.environmentRenderer(library: library)
         return try! makeRenderPipelineState(descriptor: descriptor)
     }
 }

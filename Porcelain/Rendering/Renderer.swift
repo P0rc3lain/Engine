@@ -41,7 +41,7 @@ public struct Renderer {
                                           depthStencilState: depthStencilState,
                                           drawableSize: CGSize(width: colorTexture.width, height: colorTexture.height))
         
-        let environmentPipelineState = EnvironmentRenderer.buildEnvironmentRenderPipelineState(device: device, library: library, pixelFormat: view.colorPixelFormat)
+        let environmentPipelineState = device.makeRenderPipelineStateEnvironmentRenderer(library: library)
         environmentRenderer = EnvironmentRenderer(pipelineState: environmentPipelineState, drawableSize: drawableSize, cube: Geometry.cube(device: device))
     }
     public mutating func draw(scene: inout Scene) {

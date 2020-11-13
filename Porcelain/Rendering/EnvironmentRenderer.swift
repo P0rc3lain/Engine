@@ -14,9 +14,11 @@ fileprivate struct Uniforms {
 }
 
 struct EnvironmentRenderer {
+    // MARK: - Properties
     private let pipelineState: MTLRenderPipelineState
     private let viewPort: MTLViewport
     private let cube: Geometry
+    // MARK: - Initialization
     init(pipelineState: MTLRenderPipelineState, drawableSize: CGSize, cube: Geometry) {
         self.pipelineState = pipelineState
         self.cube = cube
@@ -24,6 +26,7 @@ struct EnvironmentRenderer {
                                     width: Double(drawableSize.width), height: Double(drawableSize.height),
                                     znear: 0, zfar: 1)
     }
+    // MARK: - Internal
     func draw(encoder: MTLRenderCommandEncoder, camera: inout Camera, environmentMap: inout MTLTexture) {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
@@ -39,27 +42,5 @@ struct EnvironmentRenderer {
                                       indexType: .uint16,
                                       indexBuffer: cube.drawDescription[0].indexBuffer.buffer,
                                       indexBufferOffset: 0)
-    }
-    static func buildEnvironmentRenderPipelineState(device: MTLDevice,
-                                                    library: MTLLibrary,
-                                                    pixelFormat: MTLPixelFormat) -> MTLRenderPipelineState {
-        let vertexShader = library.makeFunction(name: "environmentVertexShader")
-        let fragmentShader = library.makeFunction(name: "environmentFragmentShader")
-        let pipelineDescriptor = MTLRenderPipelineDescriptor()
-        pipelineDescriptor.vertexFunction = vertexShader
-        pipelineDescriptor.fragmentFunction = fragmentShader
-        pipelineDescriptor.colorAttachments[0].pixelFormat = .rgba32Float
-        pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
-        let vertexDescriptor = MTLVertexDescriptor()
-        let layout = MTLVertexBufferLayoutDescriptor()
-        layout.stepFunction = .perVertex
-        layout.stride = MemoryLayout<SIMD4<Float>>.stride
-        layout.stepRate = 1
-        vertexDescriptor.layouts[0] = layout
-        vertexDescriptor.attributes[0].format = .float4
-        vertexDescriptor.attributes[0].offset = 0
-        vertexDescriptor.attributes[0].bufferIndex = 0
-        pipelineDescriptor.vertexDescriptor = vertexDescriptor
-        return try! device.makeRenderPipelineState(descriptor: pipelineDescriptor)
     }
 }

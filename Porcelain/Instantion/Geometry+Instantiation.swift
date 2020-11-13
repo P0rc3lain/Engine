@@ -1,5 +1,5 @@
 //
-//  Geometry+Instantion.swift
+//  Geometry+Instantiation.swift
 //  Porcelain
 //
 //  Created by Mateusz Stompór on 13/11/2020.
