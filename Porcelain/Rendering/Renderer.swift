@@ -20,35 +20,29 @@ public struct Renderer {
     private var forwardRenderer: ForwardRenderer!
     private var postProcessor: Postprocessor!
     private var environmentRenderer: EnvironmentRenderer!
-    private var indices: MTLBuffer!
     private var lights: SharedBuffer<OmniLight>
-    private var vertices: MTLBuffer!
     private let drawableSize: CGSize
     // MARK: - Initialization
     init(view metalView: MTKView, drawableSize: CGSize) {
         view = metalView
         self.drawableSize = drawableSize
         device = view.device!
-        vertices = Cube.verticesBuffer(device: device)
-        indices = Cube.indicesBuffer(device: device)
         library = try! device.makeDefaultLibrary(bundle: Bundle(for: Engine.self))
         commandQueue = self.device.makeCommandQueue()!
         lights = SharedBuffer<OmniLight>(device: device, initialCapacity: 2)!
         depthTexture = prepareDepthTexture()
         colorTexture = prepareColorTexture()
         offscreenRenderPassDescriptor = prepareOffscreenRenderPassDescriptor(colorTexture: colorTexture, depthTexture: depthTexture)
-        let pipelinePostprocessingState = Postprocessor.buildPostprocessingRenderPipelineState(device: device,
-                                                                                               library: library,
-                                                                                               pixelFormat: view.colorPixelFormat)
+        let pipelinePostprocessingState = device.makeRenderPipelineStatePostprocessor(library: library, format: view.colorPixelFormat)
         postProcessor = Postprocessor(pipelineState: pipelinePostprocessingState, texture: colorTexture)
-        let forwardRendererState = ForwardRenderer.buildForwardRendererPipelineState(device: device, library: library, pixelFormat: view.colorPixelFormat)
-        let depthStencilState = ForwardRenderer.buildDepthStencilPipelineState(device: device)
+        let forwardRendererState = device.makeRenderPipelineStateForwardRenderer(library: library)
+        let depthStencilState = device.makeDepthStencilStateForwardRenderer()
         forwardRenderer = ForwardRenderer(pipelineState: forwardRendererState,
                                           depthStencilState: depthStencilState,
                                           drawableSize: CGSize(width: colorTexture.width, height: colorTexture.height))
         
         let environmentPipelineState = EnvironmentRenderer.buildEnvironmentRenderPipelineState(device: device, library: library, pixelFormat: view.colorPixelFormat)
-        environmentRenderer = EnvironmentRenderer(pipelineState: environmentPipelineState, drawableSize: drawableSize)
+        environmentRenderer = EnvironmentRenderer(pipelineState: environmentPipelineState, drawableSize: drawableSize, cube: Geometry.cube(device: device))
     }
     public mutating func draw(scene: inout Scene) {
         lights.upload(data: &scene.omniLights)
@@ -56,7 +50,7 @@ public struct Renderer {
         
         commandBuffer.pushDebugGroup("Environment mapping")
         var environmentEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor)!
-        environmentRenderer.draw(encoder: environmentEncoder, camera: scene.camera, vertexBuffer: vertices, indicesBuffer: indices, environmentMap: scene.environmentMap)
+        environmentRenderer.draw(encoder: environmentEncoder, camera: &scene.camera, environmentMap: &scene.environmentMap)
         commandBuffer.popDebugGroup()
         
         commandBuffer.pushDebugGroup("Forward Renderer Pass")

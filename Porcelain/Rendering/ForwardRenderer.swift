@@ -31,9 +31,10 @@ struct ForwardRenderer {
         encoder.setFrontFacing(.counterClockwise)
         encoder.setFragmentBuffer(lightsBuffer, offset: 0, index: 2)
         for piece in scene.models {
+            var transformation = piece.coordinateSpace.transformationTRS
             setupUniforms(encoder: &encoder,
                           scene: &scene,
-                          transformation: piece.coordinateSpace.transformationTRS)
+                          transformation: &transformation)
             encoder.setVertexBuffer(piece.modelPiece.geometry.vertexBuffer.buffer,
                                     offset: piece.modelPiece.geometry.vertexBuffer.offset, index: 0)
             encoder.setFragmentTexture(piece.modelPiece.material.albedo, index: 0)
@@ -52,7 +53,7 @@ struct ForwardRenderer {
     }
     func setupUniforms(encoder: inout MTLRenderCommandEncoder,
                        scene: inout Scene,
-                       transformation: simd_float4x4) {
+                       transformation: inout simd_float4x4) {
         let lightsCount = Int32(scene.omniLights.count)
         let viewTransformation = scene.camera.coordinateSpace.transformationRTS
         let uniforms = FRUniforms(projectionMatrix: scene.camera.projectionMatrix,
@@ -67,24 +68,5 @@ struct ForwardRenderer {
         withUnsafePointer(to: uniforms) { ptr in
             encoder.setFragmentBytes(ptr, length: MemoryLayout<FRUniforms>.stride, index: 1)
         }
-    }
-    static func buildForwardRendererPipelineState(device: MTLDevice,
-                                                  library: MTLLibrary,
-                                                  pixelFormat: MTLPixelFormat) -> MTLRenderPipelineState {
-        let vertexShader = library.makeFunction(name: "vertexFunction")
-        let fragmentShader = library.makeFunction(name: "fragmentFunction")
-        let pipelineDescriptor = MTLRenderPipelineDescriptor()
-        pipelineDescriptor.vertexFunction = vertexShader
-        pipelineDescriptor.fragmentFunction = fragmentShader
-        pipelineDescriptor.colorAttachments[0].pixelFormat = .rgba32Float
-        pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
-        pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(MDLVertexDescriptor.porcelainMeshVertexDescriptor)
-        return try! device.makeRenderPipelineState(descriptor: pipelineDescriptor)
-    }
-    static func buildDepthStencilPipelineState(device: MTLDevice) -> MTLDepthStencilState {
-        let depthStencilDescriptor = MTLDepthStencilDescriptor()
-        depthStencilDescriptor.depthCompareFunction = .lessEqual
-        depthStencilDescriptor.isDepthWriteEnabled = true
-        return device.makeDepthStencilState(descriptor: depthStencilDescriptor)!
     }
 }

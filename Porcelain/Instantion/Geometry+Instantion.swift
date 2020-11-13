@@ -1,13 +1,25 @@
 //
-//  Geometry.swift
+//  Geometry+Instantion.swift
 //  Porcelain
 //
-//  Created by Mateusz Stompór on 07/11/2020.
+//  Created by Mateusz Stompór on 13/11/2020.
 //
 
-import MetalKit
+import Metal
+import Foundation
 
-struct Cube {
+extension Geometry {
+    static func cube(device: MTLDevice) -> Geometry {
+        let vertices = verticesBuffer(device: device)
+        let verticesBuffer = DataBuffer(buffer: vertices, length: vertices.length, offset: 0)
+        let indices = indicesBuffer(device: device)
+        let indicesBuffer = DataBuffer(buffer: indices, length: indices.length, offset: 0)
+        let drawDescription = IndexBasedDraw(indexBuffer: indicesBuffer,
+                                             indexCount: indices.length,
+                                             indexType: .uint16,
+                                             primitiveType: .triangle)
+        return Geometry(vertexBuffer: verticesBuffer, drawDescription: [drawDescription])
+    }
     private static var indices: [UInt16] = [
         0,  3,  2,  2,  1,  0,
         4,  7,  6,  6,  5,  4,
@@ -49,19 +61,13 @@ struct Cube {
          0.5,  0.5,  0.5, 1.0,
     ]
     static func verticesBuffer(device: MTLDevice) -> MTLBuffer {
-        Cube.vertices.withUnsafeBytes { ptr in
-            let verticesBuffer = device.makeBuffer(bytes: ptr.baseAddress!,
-                                                   length: ptr.count,
-                                                   options: [.storageModeShared])
-            return verticesBuffer!
+        vertices.withUnsafeBytes { ptr in
+            device.makeBuffer(bytes: ptr.baseAddress!, length: ptr.count, options: [.storageModeShared])!
         }
     }
     static func indicesBuffer(device: MTLDevice) -> MTLBuffer {
-        Cube.indices.withUnsafeBytes { ptr in
-            let indicesBuffer = device.makeBuffer(bytes: ptr.baseAddress!,
-                                                  length: ptr.count,
-                                                  options: [.storageModeShared])
-            return indicesBuffer!
+        indices.withUnsafeBytes { ptr in
+            device.makeBuffer(bytes: ptr.baseAddress!, length: ptr.count, options: [.storageModeShared])!
         }
     }
 }

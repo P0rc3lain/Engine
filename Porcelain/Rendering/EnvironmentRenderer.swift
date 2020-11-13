@@ -16,16 +16,18 @@ fileprivate struct Uniforms {
 struct EnvironmentRenderer {
     private let pipelineState: MTLRenderPipelineState
     private let viewPort: MTLViewport
-    init(pipelineState: MTLRenderPipelineState, drawableSize: CGSize) {
+    private let cube: Geometry
+    init(pipelineState: MTLRenderPipelineState, drawableSize: CGSize, cube: Geometry) {
         self.pipelineState = pipelineState
+        self.cube = cube
         self.viewPort = MTLViewport(originX: 0, originY: 0,
                                     width: Double(drawableSize.width), height: Double(drawableSize.height),
                                     znear: 0, zfar: 1)
     }
-    func draw(encoder: MTLRenderCommandEncoder, camera: Camera, vertexBuffer: MTLBuffer, indicesBuffer: MTLBuffer, environmentMap: MTLTexture) {
+    func draw(encoder: MTLRenderCommandEncoder, camera: inout Camera, environmentMap: inout MTLTexture) {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
-        encoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
+        encoder.setVertexBuffer(cube.vertexBuffer.buffer, offset: 0, index: 0)
         encoder.setFragmentTexture(environmentMap, index: 0)
         let uniforms = Uniforms(projectionMatrix: camera.projectionMatrix,
                                 orientation: simd_matrix4x4(camera.coordinateSpace.orientation))
@@ -33,9 +35,9 @@ struct EnvironmentRenderer {
             encoder.setVertexBytes(ptr, length: MemoryLayout<Uniforms>.size, index: 1)
         }
         encoder.drawIndexedPrimitives(type: .triangle,
-                                      indexCount: indicesBuffer.length / MemoryLayout<UInt16>.size,
+                                      indexCount: cube.drawDescription[0].indexBuffer.length / MemoryLayout<UInt16>.size,
                                       indexType: .uint16,
-                                      indexBuffer: indicesBuffer,
+                                      indexBuffer: cube.drawDescription[0].indexBuffer.buffer,
                                       indexBufferOffset: 0)
     }
     static func buildEnvironmentRenderPipelineState(device: MTLDevice,

@@ -37,16 +37,4 @@ struct Postprocessor {
         }
         encoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 6)
     }
-    static func buildPostprocessingRenderPipelineState(device: MTLDevice,
-                                                               library: MTLLibrary,
-                                                               pixelFormat: MTLPixelFormat) -> MTLRenderPipelineState {
-        let vertexShader = library.makeFunction(name: "vertexPostprocess")
-        let fragmentShader = library.makeFunction(name: "fragmentPostprocess")
-        let pipelineDescriptor = MTLRenderPipelineDescriptor()
-        pipelineDescriptor.vertexFunction = vertexShader
-        pipelineDescriptor.fragmentFunction = fragmentShader
-        pipelineDescriptor.colorAttachments[0].pixelFormat = pixelFormat
-        pipelineDescriptor.vertexBuffers[0].mutability = .immutable
-        return try! device.makeRenderPipelineState(descriptor: pipelineDescriptor)
-    }
 }
