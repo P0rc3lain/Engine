@@ -30,7 +30,7 @@ struct OmniLight {
     simd_float3 position;
 };
 
-vertex RasterizerData vertexFunction(VertexP3N3T3Tx2        in          [[stage_in]],
+vertex RasterizerData vertexFunction(Vertex                 in          [[stage_in]],
                                      constant FRUniforms &  uniforms    [[buffer(1)]]) {
     RasterizerData out;
     out.t = normalize(in.tangent);

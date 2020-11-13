@@ -7,23 +7,16 @@
 
 import simd
 import Metal
-import ShaderTypes
-
-fileprivate let coordinates = [VertexP2T2(position: simd_float2(-1, -1), textureUV: simd_float2(0, 1)),
-                               VertexP2T2(position: simd_float2(-1, 1), textureUV: simd_float2(0, 0)),
-                               VertexP2T2(position: simd_float2(1, 1), textureUV: simd_float2(1, 0)),
-                               VertexP2T2(position: simd_float2(-1, -1), textureUV: simd_float2(0, 1)),
-                               VertexP2T2(position: simd_float2(1, 1), textureUV: simd_float2(1, 0)),
-                               VertexP2T2(position: simd_float2(1, -1), textureUV: simd_float2(1, 1))]
-
 
 struct Postprocessor {
     private let pipelineState: MTLRenderPipelineState
     private let texture: MTLTexture
     private let viewPort: MTLViewport
-    init(pipelineState: MTLRenderPipelineState, texture: MTLTexture) {
+    private let plane: Geometry
+    init(pipelineState: MTLRenderPipelineState, texture: MTLTexture, plane: Geometry) {
         self.texture = texture
         self.pipelineState = pipelineState
+        self.plane = plane
         self.viewPort = MTLViewport(originX: 0, originY: 0,
                                     width: Double(texture.width), height: Double(texture.height),
                                     znear: 0, zfar: 1)
@@ -32,9 +25,11 @@ struct Postprocessor {
         encoder.setFragmentTexture(texture, index: 0)
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
-        coordinates.withUnsafeBytes { pointer in
-            encoder.setVertexBytes(pointer.baseAddress!, length: pointer.count, index: 0)
-        }
-        encoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 6)
+        encoder.setVertexBuffer(plane.vertexBuffer.buffer, offset: 0, index: 0)
+        encoder.drawIndexedPrimitives(type: .triangle,
+                                      indexCount: plane.drawDescription[0].indexCount,
+                                      indexType: plane.drawDescription[0].indexType,
+                                      indexBuffer: plane.drawDescription[0].indexBuffer.buffer,
+                                      indexBufferOffset: plane.drawDescription[0].indexBuffer.offset)
     }
 }

@@ -17,11 +17,10 @@ struct TexturePipelineRasterizerData {
     float2 texcoord;
 };
 
-vertex TexturePipelineRasterizerData  vertexPostprocess(uint vertexID                   [[vertex_id]],
-                                                        constant VertexP2T2 *vertices   [[buffer(0)]]) {
+vertex TexturePipelineRasterizerData  vertexPostprocess(Vertex in [[stage_in]]) {
     TexturePipelineRasterizerData out;
-    out.position = float4(vertices[vertexID].position.xy, 0, 1);
-    out.texcoord = vertices[vertexID].textureUV;
+    out.position = float4(in.position, 1);
+    out.texcoord = in.textureUV;
     return out;
 }
 

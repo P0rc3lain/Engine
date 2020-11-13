@@ -34,7 +34,7 @@ public struct Renderer {
         colorTexture = prepareColorTexture()
         offscreenRenderPassDescriptor = prepareOffscreenRenderPassDescriptor(colorTexture: colorTexture, depthTexture: depthTexture)
         let pipelinePostprocessingState = device.makeRenderPipelineStatePostprocessor(library: library, format: view.colorPixelFormat)
-        postProcessor = Postprocessor(pipelineState: pipelinePostprocessingState, texture: colorTexture)
+        postProcessor = Postprocessor(pipelineState: pipelinePostprocessingState, texture: colorTexture, plane: Geometry.screenSpacePlane(device: device))
         let forwardRendererState = device.makeRenderPipelineStateForwardRenderer(library: library)
         let depthStencilState = device.makeDepthStencilStateForwardRenderer()
         forwardRenderer = ForwardRenderer(pipelineState: forwardRendererState,

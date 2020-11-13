@@ -9,9 +9,9 @@ import Metal
 
 extension MTLDepthStencilDescriptor {
     static var forwardRenderer: MTLDepthStencilDescriptor {
-        let depthStencilDescriptor = MTLDepthStencilDescriptor()
-        depthStencilDescriptor.depthCompareFunction = .lessEqual
-        depthStencilDescriptor.isDepthWriteEnabled = true
-        return depthStencilDescriptor
+        let descriptor = MTLDepthStencilDescriptor()
+        descriptor.depthCompareFunction = .lessEqual
+        descriptor.isDepthWriteEnabled = true
+        return descriptor
     }
 }

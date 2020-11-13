@@ -12,12 +12,7 @@
 
 #include "Compatibility.h"
 
-struct VertexP2T2 {
-    simd_float2 position;
-    simd_float2 textureUV;
-};
-
-struct VertexP3N3T3Tx2 {
+struct Vertex {
     simd_float3 position    metal_only([[attribute(0)]]);
     simd_float3 normal      metal_only([[attribute(1)]]);
     simd_float3 tangent     metal_only([[attribute(2)]]);

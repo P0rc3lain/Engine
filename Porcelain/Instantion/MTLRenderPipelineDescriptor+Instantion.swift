@@ -20,13 +20,12 @@ extension MTLRenderPipelineDescriptor {
         return descriptor
     }
     static func postProcessor(library: MTLLibrary, format: MTLPixelFormat) -> MTLRenderPipelineDescriptor {
-        let vertexShader = library.makeFunction(name: "vertexPostprocess")
-        let fragmentShader = library.makeFunction(name: "fragmentPostprocess")
         let descriptor = MTLRenderPipelineDescriptor()
-        descriptor.vertexFunction = vertexShader
-        descriptor.fragmentFunction = fragmentShader
+        descriptor.vertexFunction = library.makeFunction(name: "vertexPostprocess")
+        descriptor.fragmentFunction = library.makeFunction(name: "fragmentPostprocess")
         descriptor.colorAttachments[0].pixelFormat = format
         descriptor.vertexBuffers[0].mutability = .immutable
+        descriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(MDLVertexDescriptor.porcelainMeshVertexDescriptor)
         return descriptor
     }
 }
