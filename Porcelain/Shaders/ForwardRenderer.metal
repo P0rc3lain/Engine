@@ -61,7 +61,7 @@ fragment float4 fragmentFunction(RasterizerData         in          [[stage_in]]
                                  texture2d<float>       normals     [[texture(3)]],
                                  texture2d<float>       metallic    [[texture(4)]],
                                  constant Uniforms &    uniforms    [[buffer(1)]],
-                                 constant OmniLight *   omniLights  [[buffer(10)]]) {
+                                 constant OmniLight *   omniLights  [[buffer(2)]]) {
     constexpr sampler textureSampler(mag_filter::linear, min_filter::nearest);
     simd_float3x3 TBN(in.t, in.b, in.n);
     simd_float3x3 inversedTBN(transpose(TBN));

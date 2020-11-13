@@ -45,7 +45,7 @@ struct ForwardRenderer {
         withUnsafePointer(to: uniforms) { ptr in
             encoder.setFragmentBytes(ptr, length: MemoryLayout<Uniforms>.stride, index: 1)
         }
-        encoder.setFragmentBuffer(lightsBuffer, offset: 0, index: 10)
+        encoder.setFragmentBuffer(lightsBuffer, offset: 0, index: 2)
         for piece in scene.models {
             encoder.setVertexBuffer(piece.geometry.vertexBuffer.buffer,
                                     offset: piece.geometry.vertexBuffer.offset, index: 0)
