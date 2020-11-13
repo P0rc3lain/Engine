@@ -9,7 +9,7 @@ import simd
 import Metal
 
 extension MTLDevice {
-    func makeSolid2DTexture(color: simd_float4) -> MTLTexture? {
+    public func makeSolid2DTexture(color: simd_float4) -> MTLTexture? {
         assert(length(color) <= 2.001, "Color values must be in [0.0, 1.0] range")
         let descriptor = MTLTextureDescriptor.minimalSolidColor2D
         guard let texture = self.makeTexture(descriptor: descriptor) else {
@@ -24,7 +24,7 @@ extension MTLDevice {
         }
         return texture
     }
-    func makeSolidCubeTexture(color: simd_float4) -> MTLTexture? {
+    public func makeSolidCubeTexture(color: simd_float4) -> MTLTexture? {
         assert(length(color) <= 2.001, "Color values must be in [0.0, 1.0] range")
         let descriptor = MTLTextureDescriptor.minimalSolidColorCube
         guard let texture = self.makeTexture(descriptor: descriptor) else {
