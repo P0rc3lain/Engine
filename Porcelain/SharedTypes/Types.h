@@ -24,4 +24,13 @@ struct VertexP3N3T3Tx2 {
     simd_float2 textureUV   metal_only([[attribute(3)]]);
 };
 
+struct FRUniforms {
+    simd_float4x4 projectionMatrix;
+    simd_float4x4 viewMatrix;
+    simd_float4x4 viewMatrixInverse;
+    simd_float4x4 modelMatrix;
+    simd_float4x4 modelMatrixInverse;
+    int32_t omniLightsCount;
+};
+
 #endif /* TYPES_H */
