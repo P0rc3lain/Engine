@@ -76,9 +76,12 @@ fragment float4 fragmentFunction(RasterizerData         in          [[stage_in]]
         float3 lightTangentPosition = inversedTBN * lightWorldPosition.xyz;
         float3 l = normalize(lightTangentPosition - in.tangentSpacePosition);
         float3 halfway = normalize(l + eye);
-        float3 diffuse = 1 / M_PI_F;
-        float3 specular = brdf(normal, eye, halfway, l, roughnessFactor, metallicFactor);
-        float3 color =  baseColor * diffuse + baseColor * specular;
+        // dielectricsCommonReflectance
+        float reflectance = 0.04;
+        float3 f0 = 0.16 * reflectance * reflectance * (1 - metallicFactor) + metallicFactor * baseColor;
+        float3 specular = cookTorrance(normal, eye, halfway, l, roughnessFactor, f0);
+        float3 diffuseColor = (1 - metallicFactor) * baseColor;
+        float3 color =  diffuseColor / M_PI_F + metallicFactor * specular;
         outputColor += color * omniLights[i].color * dot(normal, l) * omniLights[i].intensity;
     }
     float ambient = 0.1;
