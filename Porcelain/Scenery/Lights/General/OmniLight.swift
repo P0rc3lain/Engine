@@ -10,7 +10,13 @@ import simd
 public struct OmniLight {
     // MARK: - Properties
     public var color: simd_float3
-    public var intensity: Float
+    public var intensity: Float {
+        didSet {
+            if intensity < 0 {
+                intensity = 0
+            }
+        }
+    }
     public var position: simd_float3
     // MARK: - Initialization
     public init(color: simd_float3, intensity: Float, position: simd_float3) {

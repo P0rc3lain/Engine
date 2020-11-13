@@ -55,12 +55,12 @@ public struct Renderer {
         let commandBuffer = commandQueue.makeCommandBuffer()!
         
         commandBuffer.pushDebugGroup("Environment mapping")
-        let environmentEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor)!
+        var environmentEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor)!
         environmentRenderer.draw(encoder: environmentEncoder, camera: scene.camera, vertexBuffer: vertices, indicesBuffer: indices, environmentMap: scene.environmentMap)
         commandBuffer.popDebugGroup()
         
         commandBuffer.pushDebugGroup("Forward Renderer Pass")
-        forwardRenderer.draw(encoder: environmentEncoder, scene: &scene, lightsBuffer: &lights.buffer)
+        forwardRenderer.draw(encoder: &environmentEncoder, scene: &scene, lightsBuffer: &lights.buffer)
         environmentEncoder.endEncoding()
         commandBuffer.popDebugGroup()
         

@@ -30,15 +30,8 @@ struct OmniLight {
     simd_float3 position;
 };
 
-struct Uniforms {
-    matrix_float4x4 projectionMatrix;
-    matrix_float4x4 viewMatrix;
-    matrix_float4x4 viewMatrixInverse;
-    int32_t omniLightsCount;
-};
-
 vertex RasterizerData vertexFunction(VertexP3N3T3Tx2        in          [[stage_in]],
-                                     constant Uniforms &    uniforms    [[buffer(1)]]) {
+                                     constant FRUniforms &  uniforms    [[buffer(1)]]) {
     RasterizerData out;
     out.t = normalize(in.tangent);
     out.b = normalize(cross(in.tangent, in.normal));
@@ -46,8 +39,8 @@ vertex RasterizerData vertexFunction(VertexP3N3T3Tx2        in          [[stage_
     simd_float3x3 TBN(out.t, out.b, out.n);
     simd_float3x3 inversedTBN(transpose(TBN));
     simd_float4 cameraWorldPosition = uniforms.viewMatrixInverse * simd_float4(0, 0, 0, 1);
-    out.tangentCameraPosition = inversedTBN * cameraWorldPosition.xyz;
-    float4 viewPosition = uniforms.viewMatrix * float4(in.position, 1);
+    out.tangentCameraPosition = inversedTBN * (uniforms.modelMatrixInverse * cameraWorldPosition).xyz;
+    float4 viewPosition = uniforms.viewMatrix * uniforms.modelMatrix * float4(in.position, 1);
     out.clipSpacePosition = uniforms.projectionMatrix * viewPosition;;
     out.tangentSpacePosition = inversedTBN * in.position;
     out.uv = in.textureUV;
@@ -60,7 +53,7 @@ fragment float4 fragmentFunction(RasterizerData         in          [[stage_in]]
                                  texture2d<float>       emission    [[texture(2)]],
                                  texture2d<float>       normals     [[texture(3)]],
                                  texture2d<float>       metallic    [[texture(4)]],
-                                 constant Uniforms &    uniforms    [[buffer(1)]],
+                                 constant FRUniforms &  uniforms    [[buffer(1)]],
                                  constant OmniLight *   omniLights  [[buffer(2)]]) {
     constexpr sampler textureSampler(mag_filter::linear, min_filter::nearest);
     simd_float3x3 TBN(in.t, in.b, in.n);

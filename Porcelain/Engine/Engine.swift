@@ -28,11 +28,11 @@ public class Engine {
     // MARK: - Private
     private static func buildDefaultScene(view: MTKView) -> Scene {
         let initialOrientation = simd_quatf(angle: 0, axis: simd_float3(0, 1, 0))
-        let cameraCoordinateSpace = CoordinateSpace(orientation: initialOrientation, translation: simd_float3(), scale: simd_float3(1, 1, 1))
+        let cameraCoordinateSpace = CoordinateSpace(translation: simd_float3(), orientation: initialOrientation, scale: simd_float3(1, 1, 1))
         let camera = Camera(nearPlane: 0.01,
                             farPlane: 10000,
                             fovRadians: Float.radians(80),
                             aspectRation: Float(view.drawableSize.width/view.drawableSize.height), coordinateSpace: cameraCoordinateSpace)
-        return Scene(camera: camera, environmentMap: view.device!.makeSolid2DTexture(color: simd_float4())!)
+        return Scene(camera: camera, environmentMap: view.device!.makeSolidCubeTexture(color: simd_float4(1, 1, 1, 1))!)
     }
 }

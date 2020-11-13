@@ -9,17 +9,12 @@ import simd
 import MetalKit
 import ShaderTypes
 
-fileprivate struct Uniforms {
-    let projectionMatrix: simd_float4x4
-    let viewMatrix: simd_float4x4
-    let viewMatrixInverse: simd_float4x4
-    let lightsCount: Int32
-}
-
 struct ForwardRenderer {
+    // MARK: - Properties
     private let pipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport
+    // MARK: - Initialization
     init(pipelineState: MTLRenderPipelineState, depthStencilState: MTLDepthStencilState, drawableSize: CGSize) {
         self.pipelineState = pipelineState
         self.depthStencilState = depthStencilState
@@ -27,34 +22,26 @@ struct ForwardRenderer {
                                     width: Double(drawableSize.width), height: Double(drawableSize.height),
                                     znear: 0, zfar: 1)
     }
-    func draw(encoder: MTLRenderCommandEncoder, scene: inout Scene, lightsBuffer: inout MTLBuffer) {
+    // MARK: - Internal
+    func draw(encoder: inout MTLRenderCommandEncoder, scene: inout Scene, lightsBuffer: inout MTLBuffer) {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setCullMode(.back)
         encoder.setFrontFacing(.counterClockwise)
-        let lightsCount = Int32(scene.omniLights.count)
-        let viewMatrix = simd_float4x4(scene.camera.coordinateSpace.orientation) * simd_float4x4.translation(vector: scene.camera.coordinateSpace.translation);
-        let uniforms = Uniforms(projectionMatrix: scene.camera.projectionMatrix,
-                                viewMatrix: viewMatrix,
-                                viewMatrixInverse: simd_inverse(viewMatrix),
-                                lightsCount: lightsCount)
-        withUnsafePointer(to: uniforms) { ptr in
-            encoder.setVertexBytes(ptr, length: MemoryLayout<Uniforms>.stride, index: 1)
-        }
-        withUnsafePointer(to: uniforms) { ptr in
-            encoder.setFragmentBytes(ptr, length: MemoryLayout<Uniforms>.stride, index: 1)
-        }
         encoder.setFragmentBuffer(lightsBuffer, offset: 0, index: 2)
         for piece in scene.models {
-            encoder.setVertexBuffer(piece.geometry.vertexBuffer.buffer,
-                                    offset: piece.geometry.vertexBuffer.offset, index: 0)
-            encoder.setFragmentTexture(piece.material.albedo, index: 0)
-            encoder.setFragmentTexture(piece.material.roughness, index: 1)
-            encoder.setFragmentTexture(piece.material.emission, index: 2)
-            encoder.setFragmentTexture(piece.material.normals, index: 3)
-            encoder.setFragmentTexture(piece.material.metallic, index: 4)
-            for description in piece.geometry.drawDescription {
+            setupUniforms(encoder: &encoder,
+                          scene: &scene,
+                          transformation: piece.coordinateSpace.transformationTRS)
+            encoder.setVertexBuffer(piece.modelPiece.geometry.vertexBuffer.buffer,
+                                    offset: piece.modelPiece.geometry.vertexBuffer.offset, index: 0)
+            encoder.setFragmentTexture(piece.modelPiece.material.albedo, index: 0)
+            encoder.setFragmentTexture(piece.modelPiece.material.roughness, index: 1)
+            encoder.setFragmentTexture(piece.modelPiece.material.emission, index: 2)
+            encoder.setFragmentTexture(piece.modelPiece.material.normals, index: 3)
+            encoder.setFragmentTexture(piece.modelPiece.material.metallic, index: 4)
+            for description in piece.modelPiece.geometry.drawDescription {
                 encoder.drawIndexedPrimitives(type: description.primitiveType,
                                               indexCount: description.indexCount,
                                               indexType: description.indexType,
@@ -63,9 +50,27 @@ struct ForwardRenderer {
             }
         }
     }
+    func setupUniforms(encoder: inout MTLRenderCommandEncoder,
+                       scene: inout Scene,
+                       transformation: simd_float4x4) {
+        let lightsCount = Int32(scene.omniLights.count)
+        let viewTransformation = scene.camera.coordinateSpace.transformationRTS
+        let uniforms = FRUniforms(projectionMatrix: scene.camera.projectionMatrix,
+                                  viewMatrix: viewTransformation,
+                                  viewMatrixInverse: viewTransformation.inverse,
+                                  modelMatrix: transformation,
+                                  modelMatrixInverse: transformation.inverse,
+                                  omniLightsCount: lightsCount)
+        withUnsafePointer(to: uniforms) { ptr in
+            encoder.setVertexBytes(ptr, length: MemoryLayout<FRUniforms>.stride, index: 1)
+        }
+        withUnsafePointer(to: uniforms) { ptr in
+            encoder.setFragmentBytes(ptr, length: MemoryLayout<FRUniforms>.stride, index: 1)
+        }
+    }
     static func buildForwardRendererPipelineState(device: MTLDevice,
-                                                           library: MTLLibrary,
-                                                           pixelFormat: MTLPixelFormat) -> MTLRenderPipelineState {
+                                                  library: MTLLibrary,
+                                                  pixelFormat: MTLPixelFormat) -> MTLRenderPipelineState {
         let vertexShader = library.makeFunction(name: "vertexFunction")
         let fragmentShader = library.makeFunction(name: "fragmentFunction")
         let pipelineDescriptor = MTLRenderPipelineDescriptor()

@@ -14,7 +14,7 @@ public struct Scene {
     public var materials = [Material]()
     public var camera: Camera
     public var omniLights = [OmniLight]()
-    public var models = [ModelPiece]()
+    public var models = [PositionedPiece]()
     public var environmentMap: MTLTexture
     // MARK: - Initialization
     init(camera: Camera, environmentMap: MTLTexture) {
