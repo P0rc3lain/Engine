@@ -76,7 +76,7 @@ struct ForwardRenderer {
         let pipelineDescriptor = MTLRenderPipelineDescriptor()
         pipelineDescriptor.vertexFunction = vertexShader
         pipelineDescriptor.fragmentFunction = fragmentShader
-        pipelineDescriptor.colorAttachments[0].pixelFormat = pixelFormat
+        pipelineDescriptor.colorAttachments[0].pixelFormat = .rgba32Float
         pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
         pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(MDLVertexDescriptor.porcelainMeshVertexDescriptor)
         return try! device.makeRenderPipelineState(descriptor: pipelineDescriptor)

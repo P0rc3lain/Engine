@@ -6,6 +6,8 @@
 //
 
 #include <metal_stdlib>
+
+#include "AdaptiveToneMapping.h"
 #include "../SharedTypes/Types.h"
 
 using namespace metal;
@@ -15,8 +17,8 @@ struct TexturePipelineRasterizerData {
     float2 texcoord;
 };
 
-vertex TexturePipelineRasterizerData  vertexPostprocess(uint vertexID [[vertex_id]],
-                                                        constant VertexP2T2 *vertices [[buffer(0)]]) {
+vertex TexturePipelineRasterizerData  vertexPostprocess(uint vertexID                   [[vertex_id]],
+                                                        constant VertexP2T2 *vertices   [[buffer(0)]]) {
     TexturePipelineRasterizerData out;
     out.position = float4(vertices[vertexID].position.xy, 0, 1);
     out.texcoord = vertices[vertexID].textureUV;
@@ -25,6 +27,8 @@ vertex TexturePipelineRasterizerData  vertexPostprocess(uint vertexID [[vertex_i
 
 fragment float4 fragmentPostprocess(TexturePipelineRasterizerData in [[stage_in]],
                                     texture2d<float> texture [[texture(0)]]) {
-    constexpr sampler simpleSampler(min_filter::nearest, mag_filter::nearest);
-    return texture.sample(simpleSampler, in.texcoord);
+    constexpr sampler textureSampler(min_filter::nearest, mag_filter::nearest);
+    float3 color = texture.sample(textureSampler, in.texcoord).xyz;
+    float exposure = adaptiveExposure(texture, textureSampler, in.texcoord);
+    return float4(colorExposured(color, exposure), 1);
 }

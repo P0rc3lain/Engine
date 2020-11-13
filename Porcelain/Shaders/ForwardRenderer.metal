@@ -9,7 +9,7 @@
 #include <metal_stdlib>
 
 #include "PBR.h"
-#include "Math.h"
+#include "Transformation.h"
 #include "../SharedTypes/Types.h"
 
 using namespace metal;

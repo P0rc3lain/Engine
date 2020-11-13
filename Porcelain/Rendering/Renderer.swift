@@ -89,7 +89,7 @@ public struct Renderer {
         descriptor.width = Int(drawableSize.width)
         descriptor.height = Int(drawableSize.height)
         descriptor.storageMode = .private
-        descriptor.pixelFormat = .bgra8Unorm
+        descriptor.pixelFormat = .rgba32Float
         descriptor.usage = [.shaderRead, .renderTarget]
         return device.makeTexture(descriptor: descriptor)
     }

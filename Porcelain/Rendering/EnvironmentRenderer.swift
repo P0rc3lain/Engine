@@ -46,7 +46,7 @@ struct EnvironmentRenderer {
         let pipelineDescriptor = MTLRenderPipelineDescriptor()
         pipelineDescriptor.vertexFunction = vertexShader
         pipelineDescriptor.fragmentFunction = fragmentShader
-        pipelineDescriptor.colorAttachments[0].pixelFormat = pixelFormat
+        pipelineDescriptor.colorAttachments[0].pixelFormat = .rgba32Float
         pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
         let vertexDescriptor = MTLVertexDescriptor()
         let layout = MTLVertexBufferLayoutDescriptor()
