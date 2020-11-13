@@ -16,37 +16,35 @@ float normalDistributionGGX(float3 normal, float3 halfway, float roughness) {
     float alpha = roughness * roughness;
     float alphaSquared = alpha * alpha;
     float numerator = alphaSquared;
-    float ndh = dot(normal, halfway);
-    float influence = ndh * ndh * (alphaSquared - 1) + 1;
+    float nh = dot(normal, halfway);
+    float influence = nh * nh * (alphaSquared - 1) + 1;
     float denominator = M_PI_F * influence * influence;
     return numerator / denominator;
 }
 
-float schlick_f(float3 n, float3 v, float k) {
-    float ndv = saturate(dot(n, v));
-    float denominator = max(ndv * (1 - k) + k, 0.001f);
-    return ndv / denominator;
+float geometricAttenuationSmith(float3 n, float3 v, float k) {
+    float nv = saturate(dot(n, v));
+    float denominator = max(nv * (1 - k) + k, 0.001f); // 0.001f is bias
+    return nv / denominator;
 }
 
 float schlick(float3  normal, float3 view, float3 light, float roughness) {
-    float k = pow((roughness + 1), 2)/8;
-    return schlick_f(normal, light, k) * schlick_f(normal, light, k);
+    float k = (roughness + 1) * (roughness + 1) / 8;
+    return geometricAttenuationSmith(normal, view, k) * geometricAttenuationSmith(normal, light, k);
 }
 
 float3 fresnel(float3 h, float3 v, float3 f0) {
-    float vdh = dot(v, h);
-    float power = (-5.55473 * vdh - 6.98316) * vdh;
+    float vh = dot(v, h);
+    float power = (-5.55473 * vh - 6.98316) * vh;
     return f0 + (1 - f0) * pow(2, power);
 }
 
 float3 cookTorrance(float3 n, float3 v, float3 h, float3 l, float roughness, float3 f0) {
     float3 numerator = schlick(n, v, l, roughness) * fresnel(h, v, f0) * normalDistributionGGX(n, h, roughness);
-    float ndl = saturate(dot(n, l));
-    float ndh = saturate(dot(n, h));
-    float denominator = 4 * ndl * ndh;
-    return numerator / max(denominator, 0.001f);
+    float nl = saturate(dot(n, l));
+    float nh = saturate(dot(n, h));
+    float denominator = 4 * nl * nh;
+    return numerator / max(denominator, 0.001f); // 0.001f is bias
 }
-
-
 
 #endif /* PBR_H */
