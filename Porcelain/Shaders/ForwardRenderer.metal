@@ -81,7 +81,7 @@ fragment float4 fragmentFunction(RasterizerData         in          [[stage_in]]
         float3 f0 = 0.16 * reflectance * reflectance * (1 - metallicFactor) + metallicFactor * baseColor;
         float3 specular = cookTorrance(normal, eye, halfway, l, roughnessFactor, f0);
         float3 diffuseColor = (1 - metallicFactor) * baseColor;
-        float3 color =  diffuseColor / M_PI_F + metallicFactor * specular;
+        float3 color =  diffuseColor / M_PI_F + specular;
         outputColor += color * omniLights[i].color * dot(normal, l) * omniLights[i].intensity;
     }
     float ambient = 0.1;
