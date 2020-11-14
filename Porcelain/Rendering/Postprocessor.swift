@@ -9,10 +9,12 @@ import simd
 import Metal
 
 struct Postprocessor {
+    // MARK: - Properties
     private let pipelineState: MTLRenderPipelineState
     private let texture: MTLTexture
     private let viewPort: MTLViewport
     private let plane: Geometry
+    // MARK: - Initialization
     init(pipelineState: MTLRenderPipelineState, texture: MTLTexture, plane: Geometry) {
         self.texture = texture
         self.pipelineState = pipelineState
@@ -21,6 +23,7 @@ struct Postprocessor {
                                     width: Double(texture.width), height: Double(texture.height),
                                     znear: 0, zfar: 1)
     }
+    // MARK: - Internal
     func draw(encoder: MTLRenderCommandEncoder) {
         encoder.setFragmentTexture(texture, index: 0)
         encoder.setViewport(viewPort)

@@ -24,4 +24,10 @@ extension MTLDevice {
         let descriptor = MTLRenderPipelineDescriptor.environmentRenderer(library: library)
         return try! makeRenderPipelineState(descriptor: descriptor)
     }
+    func makeTextureLightenSceneDepth(size: CGSize) -> MTLTexture {
+        makeTexture(descriptor: MTLTextureDescriptor.lightenSceneDepth(size: size))!
+    }
+    func makeTextureLightenSceneColor(size: CGSize) -> MTLTexture {
+        makeTexture(descriptor: MTLTextureDescriptor.lightenSceneColor(size: size))!
+    }
 }

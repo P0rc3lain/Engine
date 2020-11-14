@@ -32,7 +32,6 @@ extension Geometry {
                                              primitiveType: .triangle)
         return Geometry(vertexBuffer: verticesBuffer, drawDescription: [drawDescription])
     }
-    
     private static var planeVertices: [Vertex] = [
         Vertex(position: simd_float3(-1, -1, 0), normal: simd_float3(0, 0, 1), tangent: simd_float3(0, 1, 0), textureUV: simd_float2(0, 1)),
         Vertex(position: simd_float3(1, -1, 0), normal: simd_float3(0, 0, 1), tangent: simd_float3(0, 1, 0), textureUV: simd_float2(1, 1)),

@@ -37,6 +37,8 @@
 		56792788255ED66E009E9638 /* PositionedPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56792787255ED66D009E9638 /* PositionedPiece.swift */; };
 		568EC03A255F50E00054999E /* MTLVertexBufferLayoutDescriptor+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EC039255F50E00054999E /* MTLVertexBufferLayoutDescriptor+Instantiation.swift */; };
 		568EC043255F51690054999E /* MTLVertexDescriptor+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EC042255F51690054999E /* MTLVertexDescriptor+Instantiation.swift */; };
+		568EC04A255FEE8D0054999E /* MTLTextureDescriptor+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EC049255FEE8D0054999E /* MTLTextureDescriptor+Instantiation.swift */; };
+		568EC04D255FF0960054999E /* MTLRenderPassDescriptor+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EC04C255FF0960054999E /* MTLRenderPassDescriptor+Instantiation.swift */; };
 		56988382255F3536004AAD6E /* Geometry+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56988381255F3536004AAD6E /* Geometry+Instantiation.swift */; };
 		56E786552556C85B000B6311 /* OmniLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E786542556C85B000B6311 /* OmniLight.swift */; };
 		56E786592556CA33000B6311 /* simd_float3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E786582556CA33000B6311 /* simd_float3.swift */; };
@@ -85,6 +87,8 @@
 		56792787255ED66D009E9638 /* PositionedPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionedPiece.swift; sourceTree = "<group>"; };
 		568EC039255F50E00054999E /* MTLVertexBufferLayoutDescriptor+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLVertexBufferLayoutDescriptor+Instantiation.swift"; sourceTree = "<group>"; };
 		568EC042255F51690054999E /* MTLVertexDescriptor+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLVertexDescriptor+Instantiation.swift"; sourceTree = "<group>"; };
+		568EC049255FEE8D0054999E /* MTLTextureDescriptor+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLTextureDescriptor+Instantiation.swift"; sourceTree = "<group>"; };
+		568EC04C255FF0960054999E /* MTLRenderPassDescriptor+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLRenderPassDescriptor+Instantiation.swift"; sourceTree = "<group>"; };
 		56988381255F3536004AAD6E /* Geometry+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Geometry+Instantiation.swift"; sourceTree = "<group>"; };
 		56E786542556C85B000B6311 /* OmniLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniLight.swift; sourceTree = "<group>"; };
 		56E786582556CA33000B6311 /* simd_float3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = simd_float3.swift; sourceTree = "<group>"; };
@@ -128,7 +132,7 @@
 		5601396E255457D100FC1C45 /* Porcelain */ = {
 			isa = PBXGroup;
 			children = (
-				56261D69255F27CB0031C048 /* Instantion */,
+				56261D69255F27CB0031C048 /* Instantiation */,
 				5663D852255C493A00D6D122 /* DataStructures */,
 				5663D84C255C3E9100D6D122 /* Engine */,
 				563899D62554A07100F324DA /* Extensions */,
@@ -154,7 +158,7 @@
 			path = Mesh;
 			sourceTree = "<group>";
 		};
-		56261D69255F27CB0031C048 /* Instantion */ = {
+		56261D69255F27CB0031C048 /* Instantiation */ = {
 			isa = PBXGroup;
 			children = (
 				56261D6A255F27DD0031C048 /* MTLDepthStencilDescriptor+Instantiation.swift */,
@@ -163,8 +167,10 @@
 				56988381255F3536004AAD6E /* Geometry+Instantiation.swift */,
 				568EC039255F50E00054999E /* MTLVertexBufferLayoutDescriptor+Instantiation.swift */,
 				568EC042255F51690054999E /* MTLVertexDescriptor+Instantiation.swift */,
+				568EC049255FEE8D0054999E /* MTLTextureDescriptor+Instantiation.swift */,
+				568EC04C255FF0960054999E /* MTLRenderPassDescriptor+Instantiation.swift */,
 			);
-			path = Instantion;
+			path = Instantiation;
 			sourceTree = "<group>";
 		};
 		563899D62554A07100F324DA /* Extensions */ = {
@@ -361,6 +367,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				568EC04A255FEE8D0054999E /* MTLTextureDescriptor+Instantiation.swift in Sources */,
 				56E786552556C85B000B6311 /* OmniLight.swift in Sources */,
 				56F59458255627CB00FBB639 /* Postprocessor.swift in Sources */,
 				5663D84E255C3EA000D6D122 /* Engine.swift in Sources */,
@@ -369,6 +376,7 @@
 				5609FE8625572C370090CC0F /* EnvironmentMapper.metal in Sources */,
 				56F5945F2556A95900FBB639 /* GeometryLoader.swift in Sources */,
 				5609FE8D25572E6D0090CC0F /* EnvironmentRenderer.swift in Sources */,
+				568EC04D255FF0960054999E /* MTLRenderPassDescriptor+Instantiation.swift in Sources */,
 				56F594462556094B00FBB639 /* Camera.swift in Sources */,
 				56F5944925560B7B00FBB639 /* CoordinateSpace.swift in Sources */,
 				563161F9255ACAFD00CADA42 /* IndexBasedDraw.swift in Sources */,
