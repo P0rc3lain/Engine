@@ -12,11 +12,11 @@
 
 using namespace metal;
 
-float normalDistributionGGX(float3 normal, float3 halfway, float roughness) {
+float normalDistributionGGX(float3 n, float3 h, float roughness) {
     float alpha = roughness * roughness;
     float alphaSquared = alpha * alpha;
     float numerator = alphaSquared;
-    float nh = dot(normal, halfway);
+    float nh = dot(n, h);
     float influence = nh * nh * (alphaSquared - 1) + 1;
     float denominator = M_PI_F * influence * influence;
     return numerator / denominator;
@@ -28,9 +28,9 @@ float geometricAttenuationSmith(float3 n, float3 v, float k) {
     return nv / denominator;
 }
 
-float schlick(float3  normal, float3 view, float3 light, float roughness) {
+float schlick(float3  n, float3 v, float3 l, float roughness) {
     float k = (roughness + 1) * (roughness + 1) / 8;
-    return geometricAttenuationSmith(normal, view, k) * geometricAttenuationSmith(normal, light, k);
+    return geometricAttenuationSmith(n, v, k) * geometricAttenuationSmith(n, l, k);
 }
 
 float3 fresnel(float3 h, float3 v, float3 f0) {
