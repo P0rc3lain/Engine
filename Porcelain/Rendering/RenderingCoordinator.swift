@@ -7,6 +7,7 @@
 
 import Metal
 import MetalKit
+import ShaderTypes
 
 public struct RenderingCoordinator {
     // MARK: - Private
@@ -16,7 +17,8 @@ public struct RenderingCoordinator {
     private var forwardRenderer: ForwardRenderer
     private var postProcessor: Postprocessor
     private var environmentRenderer: EnvironmentRenderer
-    private var lights: SharedBuffer<OmniLight>
+    private var lights: DynamicBuffer<OmniLight>
+    private var drawUniforms: StaticBuffer<FRDrawUniforms>
     let canvasSize: CGSize
     let renderingSize: CGSize
     // MARK: - Initialization
@@ -25,7 +27,8 @@ public struct RenderingCoordinator {
         self.canvasSize = canvasSize
         self.renderingSize = renderingSize
         commandQueue = view.device!.makeCommandQueue()!
-        lights = SharedBuffer<OmniLight>(device: view.device!, initialCapacity: 2)!
+        lights = DynamicBuffer<OmniLight>(device: view.device!, initialCapacity: 2)!
+        drawUniforms = StaticBuffer<FRDrawUniforms>(device: view.device!, capacity: 1)!
         forwardRenderer = ForwardRenderer.make(device: view.device!, drawableSize: view.drawableSize)
         offscreenRenderPassDescriptor = MTLRenderPassDescriptor.lightenScene(device: view.device!, size: view.drawableSize)
         postProcessor = Postprocessor.make(device: view.device!,
@@ -36,6 +39,11 @@ public struct RenderingCoordinator {
     }
     public mutating func draw(scene: inout Scene) {
         lights.upload(data: &scene.omniLights)
+        var uniforms = [FRDrawUniforms(projectionMatrix: scene.camera.projectionMatrix,
+                                       viewMatrix: scene.camera.coordinateSpace.transformationRTS,
+                                       viewMatrixInverse: scene.camera.coordinateSpace.transformationRTS.inverse,
+                                       omniLightsCount: Int32(scene.omniLights.count))]
+        drawUniforms.upload(data: &uniforms)
         let commandBuffer = commandQueue.makeCommandBuffer()!
 
         commandBuffer.pushDebugGroup("Environment mapping")
@@ -44,7 +52,7 @@ public struct RenderingCoordinator {
         commandBuffer.popDebugGroup()
 
         commandBuffer.pushDebugGroup("Forward Renderer Pass")
-        forwardRenderer.draw(encoder: &environmentEncoder, scene: &scene, lightsBuffer: &lights.buffer)
+        forwardRenderer.draw(encoder: &environmentEncoder, scene: &scene, lightsBuffer: &lights.buffer, drawUniformsBuffer: &drawUniforms.buffer)
         environmentEncoder.endEncoding()
         commandBuffer.popDebugGroup()
 

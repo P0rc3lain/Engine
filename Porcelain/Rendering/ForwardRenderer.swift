@@ -23,18 +23,18 @@ struct ForwardRenderer {
                                     znear: 0, zfar: 1)
     }
     // MARK: - Internal
-    func draw(encoder: inout MTLRenderCommandEncoder, scene: inout Scene, lightsBuffer: inout MTLBuffer) {
+    func draw(encoder: inout MTLRenderCommandEncoder, scene: inout Scene, lightsBuffer: inout MTLBuffer, drawUniformsBuffer: inout MTLBuffer) {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setCullMode(.back)
         encoder.setFrontFacing(.counterClockwise)
-        encoder.setFragmentBuffer(lightsBuffer, offset: 0, index: 2)
+        encoder.setFragmentBuffer(lightsBuffer, offset: 0, index: 3)
+        encoder.setVertexBuffer(drawUniformsBuffer, offset: 0, index: 1)
+        encoder.setFragmentBuffer(drawUniformsBuffer, offset: 0, index: 1)
         for piece in scene.models {
             var transformation = piece.coordinateSpace.transformationTRS
-            setupUniforms(encoder: &encoder,
-                          scene: &scene,
-                          transformation: &transformation)
+            setupUniforms(encoder: &encoder, transformation: &transformation)
             encoder.setVertexBuffer(piece.modelPiece.geometry.vertexBuffer.buffer,
                                     offset: piece.modelPiece.geometry.vertexBuffer.offset, index: 0)
             encoder.setFragmentTexture(piece.modelPiece.material.albedo, index: 0)
@@ -50,22 +50,10 @@ struct ForwardRenderer {
             }
         }
     }
-    func setupUniforms(encoder: inout MTLRenderCommandEncoder,
-                       scene: inout Scene,
-                       transformation: inout simd_float4x4) {
-        let lightsCount = Int32(scene.omniLights.count)
-        let viewTransformation = scene.camera.coordinateSpace.transformationRTS
-        let uniforms = FRUniforms(projectionMatrix: scene.camera.projectionMatrix,
-                                  viewMatrix: viewTransformation,
-                                  viewMatrixInverse: viewTransformation.inverse,
-                                  modelMatrix: transformation,
-                                  modelMatrixInverse: transformation.inverse,
-                                  omniLightsCount: lightsCount)
+    func setupUniforms(encoder: inout MTLRenderCommandEncoder, transformation: inout simd_float4x4) {
+        let uniforms = FRModelUniforms(modelMatrix: transformation, modelMatrixInverse: transformation.inverse)
         withUnsafePointer(to: uniforms) { ptr in
-            encoder.setVertexBytes(ptr, length: MemoryLayout<FRUniforms>.stride, index: 1)
-        }
-        withUnsafePointer(to: uniforms) { ptr in
-            encoder.setFragmentBytes(ptr, length: MemoryLayout<FRUniforms>.stride, index: 1)
+            encoder.setVertexBytes(ptr, length: MemoryLayout<FRModelUniforms>.stride, index: 2)
         }
     }
 }

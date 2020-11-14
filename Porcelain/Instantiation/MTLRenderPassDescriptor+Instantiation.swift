@@ -18,7 +18,7 @@ extension MTLRenderPassDescriptor {
         descriptor.colorAttachments[0].storeAction = .store
         descriptor.depthAttachment.clearDepth = 1
         descriptor.depthAttachment.texture = depthTexture
-        descriptor.depthAttachment.storeAction = .store
+        descriptor.depthAttachment.storeAction = .dontCare
         return descriptor
     }
 }

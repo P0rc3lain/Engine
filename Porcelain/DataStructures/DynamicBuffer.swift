@@ -1,5 +1,5 @@
 //
-//  SharedBuffer.swift
+//  DynamicBuffer.swift
 //  Porcelain
 //
 //  Created by Mateusz Stompór on 11/11/2020.
@@ -7,7 +7,7 @@
 
 import Metal
 
-public struct SharedBuffer<T> {
+public struct DynamicBuffer<T> {
     // MARK: - Properties
     private let device: MTLDevice
     var buffer: MTLBuffer

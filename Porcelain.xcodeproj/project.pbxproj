@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		56013971255457D100FC1C45 /* Porcelain.h in Headers */ = {isa = PBXBuildFile; fileRef = 5601396F255457D100FC1C45 /* Porcelain.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		560665C02560403600057B4D /* StaticBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560665BF2560403600057B4D /* StaticBuffer.swift */; };
 		5609FE8625572C370090CC0F /* EnvironmentMapper.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5609FE8525572C370090CC0F /* EnvironmentMapper.metal */; };
 		5609FE8D25572E6D0090CC0F /* EnvironmentRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609FE8C25572E6D0090CC0F /* EnvironmentRenderer.swift */; };
 		56261D6B255F27DD0031C048 /* MTLDepthStencilDescriptor+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56261D6A255F27DD0031C048 /* MTLDepthStencilDescriptor+Instantiation.swift */; };
@@ -29,7 +30,7 @@
 		5651F58E255AB3A900D51220 /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5651F58C255AB3A900D51220 /* Material.swift */; };
 		5653CE5E255AD46E00AC9C62 /* ModelPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5653CE5D255AD46E00AC9C62 /* ModelPiece.swift */; };
 		5663D84E255C3EA000D6D122 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5663D84D255C3EA000D6D122 /* Engine.swift */; };
-		5663D854255C495200D6D122 /* SharedBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5663D853255C495200D6D122 /* SharedBuffer.swift */; };
+		5663D854255C495200D6D122 /* DynamicBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5663D853255C495200D6D122 /* DynamicBuffer.swift */; };
 		5674FFB9255459E0001CF921 /* ForwardRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5674FFB8255459E0001CF921 /* ForwardRenderer.metal */; };
 		5674FFBC25545A00001CF921 /* RenderingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5674FFBB25545A00001CF921 /* RenderingCoordinator.swift */; };
 		5679277C255D4131009E9638 /* simd_float4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5679277B255D4131009E9638 /* simd_float4.swift */; };
@@ -61,6 +62,7 @@
 		5601396C255457D100FC1C45 /* Porcelain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Porcelain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5601396F255457D100FC1C45 /* Porcelain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Porcelain.h; sourceTree = "<group>"; };
 		56013970255457D100FC1C45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		560665BF2560403600057B4D /* StaticBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticBuffer.swift; sourceTree = "<group>"; };
 		5609FE8525572C370090CC0F /* EnvironmentMapper.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = EnvironmentMapper.metal; sourceTree = "<group>"; };
 		5609FE8C25572E6D0090CC0F /* EnvironmentRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentRenderer.swift; sourceTree = "<group>"; };
 		560CF1E1255EFD09002511EF /* AdaptiveToneMapping.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdaptiveToneMapping.h; sourceTree = "<group>"; };
@@ -83,7 +85,7 @@
 		5651F58C255AB3A900D51220 /* Material.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Material.swift; sourceTree = "<group>"; };
 		5653CE5D255AD46E00AC9C62 /* ModelPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelPiece.swift; sourceTree = "<group>"; };
 		5663D84D255C3EA000D6D122 /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
-		5663D853255C495200D6D122 /* SharedBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedBuffer.swift; sourceTree = "<group>"; };
+		5663D853255C495200D6D122 /* DynamicBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicBuffer.swift; sourceTree = "<group>"; };
 		5666DC53255C629100F00955 /* PBR.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PBR.h; sourceTree = "<group>"; };
 		5674FFB8255459E0001CF921 /* ForwardRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ForwardRenderer.metal; sourceTree = "<group>"; };
 		5674FFBB25545A00001CF921 /* RenderingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderingCoordinator.swift; sourceTree = "<group>"; };
@@ -233,7 +235,8 @@
 		5663D852255C493A00D6D122 /* DataStructures */ = {
 			isa = PBXGroup;
 			children = (
-				5663D853255C495200D6D122 /* SharedBuffer.swift */,
+				5663D853255C495200D6D122 /* DynamicBuffer.swift */,
+				560665BF2560403600057B4D /* StaticBuffer.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -423,10 +426,11 @@
 				568EC03A255F50E00054999E /* MTLVertexBufferLayoutDescriptor+Instantiation.swift in Sources */,
 				5679277C255D4131009E9638 /* simd_float4.swift in Sources */,
 				563899E72554C6E600F324DA /* Postprocessing.metal in Sources */,
-				5663D854255C495200D6D122 /* SharedBuffer.swift in Sources */,
+				5663D854255C495200D6D122 /* DynamicBuffer.swift in Sources */,
 				56261D6B255F27DD0031C048 /* MTLDepthStencilDescriptor+Instantiation.swift in Sources */,
 				568EC043255F51690054999E /* MTLVertexDescriptor+Instantiation.swift in Sources */,
 				56F59455255625D200FBB639 /* Scene.swift in Sources */,
+				560665C02560403600057B4D /* StaticBuffer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

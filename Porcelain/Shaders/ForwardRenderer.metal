@@ -30,30 +30,32 @@ struct OmniLight {
     simd_float3 position;
 };
 
-vertex RasterizerData vertexFunction(Vertex                 in          [[stage_in]],
-                                     constant FRUniforms &  uniforms    [[buffer(1)]]) {
+vertex RasterizerData vertexFunction(Vertex                     in              [[stage_in]],
+                                     constant FRDrawUniforms &  drawUniforms    [[buffer(1)]],
+                                     constant FRModelUniforms & modelUniforms   [[buffer(2)]]) {
     RasterizerData out;
     out.t = normalize(in.tangent);
     out.b = normalize(cross(in.tangent, in.normal));
     out.n = normalize(in.normal);
     simd_float3x3 TBN(out.t, out.b, out.n);
     simd_float3x3 inversedTBN(transpose(TBN));
-    simd_float4 cameraWorldPosition = uniforms.viewMatrixInverse * simd_float4(0, 0, 0, 1);
-    out.tangentCameraPosition = inversedTBN * (uniforms.modelMatrixInverse * cameraWorldPosition).xyz;
-    float4 viewPosition = uniforms.viewMatrix * uniforms.modelMatrix * float4(in.position, 1);
-    out.clipSpacePosition = uniforms.projectionMatrix * viewPosition;;
+    simd_float4 cameraWorldPosition = drawUniforms.viewMatrixInverse * simd_float4(0, 0, 0, 1);
+    out.tangentCameraPosition = inversedTBN * (modelUniforms.modelMatrixInverse * cameraWorldPosition).xyz;
+    float4 viewPosition = drawUniforms.viewMatrix * modelUniforms.modelMatrix * float4(in.position, 1);
+    out.clipSpacePosition = drawUniforms.projectionMatrix * viewPosition;
     out.tangentSpacePosition = inversedTBN * in.position;
     out.uv = in.textureUV;
     return out;
 }
 
-fragment float4 fragmentFunction(RasterizerData         in          [[stage_in]],
-                                 texture2d<float>       albedo      [[texture(0)]],
-                                 texture2d<float>       roughness   [[texture(1)]],
-                                 texture2d<float>       normals     [[texture(2)]],
-                                 texture2d<float>       metallic    [[texture(3)]],
-                                 constant FRUniforms &  uniforms    [[buffer(1)]],
-                                 constant OmniLight *   omniLights  [[buffer(2)]]) {
+fragment float4 fragmentFunction(RasterizerData             in              [[stage_in]],
+                                 texture2d<float>           albedo          [[texture(0)]],
+                                 texture2d<float>           roughness       [[texture(1)]],
+                                 texture2d<float>           normals         [[texture(2)]],
+                                 texture2d<float>           metallic        [[texture(3)]],
+                                 constant FRDrawUniforms &  drawUniforms    [[buffer(1)]],
+                                 constant FRModelUniforms & modelUniforms   [[buffer(2)]],
+                                 constant OmniLight *       omniLights      [[buffer(3)]]) {
     constexpr sampler textureSampler(mag_filter::linear, min_filter::nearest);
     simd_float3x3 TBN(in.t, in.b, in.n);
     simd_float3x3 inversedTBN(transpose(TBN));
@@ -63,7 +65,7 @@ fragment float4 fragmentFunction(RasterizerData         in          [[stage_in]]
     float metallicFactor = metallic.sample(textureSampler, in.uv).x;
     float roughnessFactor = roughness.sample(textureSampler, in.uv).x;
     float3 outputColor(0, 0, 0);
-    for (int i=0; i<uniforms.omniLightsCount; ++i) {
+    for (int i=0; i<drawUniforms.omniLightsCount; ++i) {
         float4 lightWorldPosition = float4(omniLights[i].position, 1);
         float3 lightTangentPosition = inversedTBN * lightWorldPosition.xyz;
         float3 l = normalize(lightTangentPosition - in.tangentSpacePosition);
