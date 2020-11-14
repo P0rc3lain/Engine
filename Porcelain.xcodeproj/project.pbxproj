@@ -39,6 +39,9 @@
 		568EC043255F51690054999E /* MTLVertexDescriptor+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EC042255F51690054999E /* MTLVertexDescriptor+Instantiation.swift */; };
 		568EC04A255FEE8D0054999E /* MTLTextureDescriptor+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EC049255FEE8D0054999E /* MTLTextureDescriptor+Instantiation.swift */; };
 		568EC04D255FF0960054999E /* MTLRenderPassDescriptor+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EC04C255FF0960054999E /* MTLRenderPassDescriptor+Instantiation.swift */; };
+		568EC051255FF86B0054999E /* ForwardRenderer+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EC050255FF86B0054999E /* ForwardRenderer+Instantiation.swift */; };
+		568EC054255FF9920054999E /* EnvironmentRenderer+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EC053255FF9920054999E /* EnvironmentRenderer+Instantiation.swift */; };
+		568EC057255FFAC50054999E /* Postprocessor+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EC056255FFAC50054999E /* Postprocessor+Instantiation.swift */; };
 		56988382255F3536004AAD6E /* Geometry+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56988381255F3536004AAD6E /* Geometry+Instantiation.swift */; };
 		56E786552556C85B000B6311 /* OmniLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E786542556C85B000B6311 /* OmniLight.swift */; };
 		56E786592556CA33000B6311 /* simd_float3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E786582556CA33000B6311 /* simd_float3.swift */; };
@@ -89,6 +92,9 @@
 		568EC042255F51690054999E /* MTLVertexDescriptor+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLVertexDescriptor+Instantiation.swift"; sourceTree = "<group>"; };
 		568EC049255FEE8D0054999E /* MTLTextureDescriptor+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLTextureDescriptor+Instantiation.swift"; sourceTree = "<group>"; };
 		568EC04C255FF0960054999E /* MTLRenderPassDescriptor+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLRenderPassDescriptor+Instantiation.swift"; sourceTree = "<group>"; };
+		568EC050255FF86B0054999E /* ForwardRenderer+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ForwardRenderer+Instantiation.swift"; sourceTree = "<group>"; };
+		568EC053255FF9920054999E /* EnvironmentRenderer+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentRenderer+Instantiation.swift"; sourceTree = "<group>"; };
+		568EC056255FFAC50054999E /* Postprocessor+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Postprocessor+Instantiation.swift"; sourceTree = "<group>"; };
 		56988381255F3536004AAD6E /* Geometry+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Geometry+Instantiation.swift"; sourceTree = "<group>"; };
 		56E786542556C85B000B6311 /* OmniLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniLight.swift; sourceTree = "<group>"; };
 		56E786582556CA33000B6311 /* simd_float3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = simd_float3.swift; sourceTree = "<group>"; };
@@ -169,6 +175,9 @@
 				568EC042255F51690054999E /* MTLVertexDescriptor+Instantiation.swift */,
 				568EC049255FEE8D0054999E /* MTLTextureDescriptor+Instantiation.swift */,
 				568EC04C255FF0960054999E /* MTLRenderPassDescriptor+Instantiation.swift */,
+				568EC050255FF86B0054999E /* ForwardRenderer+Instantiation.swift */,
+				568EC053255FF9920054999E /* EnvironmentRenderer+Instantiation.swift */,
+				568EC056255FFAC50054999E /* Postprocessor+Instantiation.swift */,
 			);
 			path = Instantiation;
 			sourceTree = "<group>";
@@ -372,6 +381,7 @@
 				56F59458255627CB00FBB639 /* Postprocessor.swift in Sources */,
 				5663D84E255C3EA000D6D122 /* Engine.swift in Sources */,
 				563161F0255AC8F300CADA42 /* DataBuffer.swift in Sources */,
+				568EC051255FF86B0054999E /* ForwardRenderer+Instantiation.swift in Sources */,
 				563899EB2555D1AF00F324DA /* matrix_float4x4.swift in Sources */,
 				5609FE8625572C370090CC0F /* EnvironmentMapper.metal in Sources */,
 				56F5945F2556A95900FBB639 /* GeometryLoader.swift in Sources */,
@@ -379,6 +389,7 @@
 				568EC04D255FF0960054999E /* MTLRenderPassDescriptor+Instantiation.swift in Sources */,
 				56F594462556094B00FBB639 /* Camera.swift in Sources */,
 				56F5944925560B7B00FBB639 /* CoordinateSpace.swift in Sources */,
+				568EC057255FFAC50054999E /* Postprocessor+Instantiation.swift in Sources */,
 				563161F9255ACAFD00CADA42 /* IndexBasedDraw.swift in Sources */,
 				563161FF255AD0A400CADA42 /* Geometry.swift in Sources */,
 				56F5944C25560BCD00FBB639 /* Float.swift in Sources */,
@@ -386,6 +397,7 @@
 				56261D74255F29FF0031C048 /* MTLDevice+Instantiation.swift in Sources */,
 				56286AC6255B76D000197B77 /* MDLVertexDescriptor.swift in Sources */,
 				56261D70255F29050031C048 /* MTLRenderPipelineDescriptor+Instantiation.swift in Sources */,
+				568EC054255FF9920054999E /* EnvironmentRenderer+Instantiation.swift in Sources */,
 				56792788255ED66E009E9638 /* PositionedPiece.swift in Sources */,
 				5653CE5E255AD46E00AC9C62 /* ModelPiece.swift in Sources */,
 				5674FFBC25545A00001CF921 /* Renderer.swift in Sources */,

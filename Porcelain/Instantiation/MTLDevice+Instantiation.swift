@@ -30,4 +30,7 @@ extension MTLDevice {
     func makeTextureLightenSceneColor(size: CGSize) -> MTLTexture {
         makeTexture(descriptor: MTLTextureDescriptor.lightenSceneColor(size: size))!
     }
+    func makePorcelainLibrary() -> MTLLibrary {
+        try! makeDefaultLibrary(bundle: Bundle(for: Engine.self))
+    }
 }

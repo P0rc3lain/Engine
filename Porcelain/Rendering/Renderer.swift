@@ -11,11 +11,10 @@ import MetalKit
 public struct Renderer {
     // MARK: - Private
     private let view: MTKView
-    private let library: MTLLibrary
     private let commandQueue: MTLCommandQueue
     private var offscreenRenderPassDescriptor: MTLRenderPassDescriptor
     private var forwardRenderer: ForwardRenderer
-    private var postProcessor: Postprocessor!
+    private var postProcessor: Postprocessor
     private var environmentRenderer: EnvironmentRenderer
     private var lights: SharedBuffer<OmniLight>
     private let drawableSize: CGSize
@@ -23,17 +22,12 @@ public struct Renderer {
     init(view metalView: MTKView, drawableSize: CGSize) {
         self.view = metalView
         self.drawableSize = drawableSize
-        library = try! view.device!.makeDefaultLibrary(bundle: Bundle(for: Engine.self))
         commandQueue = view.device!.makeCommandQueue()!
         lights = SharedBuffer<OmniLight>(device: view.device!, initialCapacity: 2)!
+        forwardRenderer = ForwardRenderer.make(device: view.device!, drawableSize: drawableSize)
         offscreenRenderPassDescriptor = MTLRenderPassDescriptor.lightenScene(device: view.device!, size: drawableSize)
-        let pipelinePostprocessingState = view.device!.makeRenderPipelineStatePostprocessor(library: library, format: view.colorPixelFormat)
-        postProcessor = Postprocessor(pipelineState: pipelinePostprocessingState, texture: offscreenRenderPassDescriptor.colorAttachments[0].texture!, plane: Geometry.screenSpacePlane(device: view.device!))
-        let forwardRendererState = view.device!.makeRenderPipelineStateForwardRenderer(library: library)
-        let depthStencilState = view.device!.makeDepthStencilStateForwardRenderer()
-        forwardRenderer = ForwardRenderer(pipelineState: forwardRendererState, depthStencilState: depthStencilState, drawableSize: drawableSize)
-        let environmentPipelineState = view.device!.makeRenderPipelineStateEnvironmentRenderer(library: library)
-        environmentRenderer = EnvironmentRenderer(pipelineState: environmentPipelineState, drawableSize: drawableSize, cube: Geometry.cube(device: view.device!))
+        postProcessor = Postprocessor.make(device: view.device!, inputTexture: offscreenRenderPassDescriptor.colorAttachments[0].texture!, outputFormat: view.colorPixelFormat)
+        environmentRenderer = EnvironmentRenderer.make(device: view.device!, drawableSize: drawableSize)
     }
     public mutating func draw(scene: inout Scene) {
         lights.upload(data: &scene.omniLights)
