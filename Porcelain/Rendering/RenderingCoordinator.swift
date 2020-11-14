@@ -1,5 +1,5 @@
 //
-//  Renderer.swift
+//  RenderingCoordinator.swift
 //  Porcelain
 //
 //  Created by Mateusz Stompór on 05/11/2020.
@@ -8,7 +8,7 @@
 import Metal
 import MetalKit
 
-public struct Renderer {
+public struct RenderingCoordinator {
     // MARK: - Private
     private let view: MTKView
     private let commandQueue: MTLCommandQueue
