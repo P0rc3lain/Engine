@@ -19,7 +19,7 @@ float3 colorExposured(float3 color, float exposure) {
     return 1.0f - metal::exp2(-color * exposure);
 }
 
-float adaptiveExposure(metal::texture2d<float> texture, metal::sampler textureSampler, float2 coordinate) {
+float adaptiveExposure(metal::texture2d<float> const texture, metal::sampler textureSampler, float2 coordinate) {
     float2 texelSize = float2(1) / float2(texture.get_width(), texture.get_height());
     float bf[25];
     for (int i=0; i < 25; ++i) {

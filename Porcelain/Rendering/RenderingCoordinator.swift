@@ -17,17 +17,22 @@ public struct RenderingCoordinator {
     private var postProcessor: Postprocessor
     private var environmentRenderer: EnvironmentRenderer
     private var lights: SharedBuffer<OmniLight>
-    private let drawableSize: CGSize
+    let canvasSize: CGSize
+    let renderingSize: CGSize
     // MARK: - Initialization
-    init(view metalView: MTKView, drawableSize: CGSize) {
+    init(view metalView: MTKView, canvasSize: CGSize, renderingSize: CGSize) {
         self.view = metalView
-        self.drawableSize = drawableSize
+        self.canvasSize = canvasSize
+        self.renderingSize = renderingSize
         commandQueue = view.device!.makeCommandQueue()!
         lights = SharedBuffer<OmniLight>(device: view.device!, initialCapacity: 2)!
-        forwardRenderer = ForwardRenderer.make(device: view.device!, drawableSize: drawableSize)
-        offscreenRenderPassDescriptor = MTLRenderPassDescriptor.lightenScene(device: view.device!, size: drawableSize)
-        postProcessor = Postprocessor.make(device: view.device!, inputTexture: offscreenRenderPassDescriptor.colorAttachments[0].texture!, outputFormat: view.colorPixelFormat)
-        environmentRenderer = EnvironmentRenderer.make(device: view.device!, drawableSize: drawableSize)
+        forwardRenderer = ForwardRenderer.make(device: view.device!, drawableSize: view.drawableSize)
+        offscreenRenderPassDescriptor = MTLRenderPassDescriptor.lightenScene(device: view.device!, size: view.drawableSize)
+        postProcessor = Postprocessor.make(device: view.device!,
+                                           inputTexture: offscreenRenderPassDescriptor.colorAttachments[0].texture!,
+                                           outputFormat: view.colorPixelFormat,
+                                           canvasSize: canvasSize)
+        environmentRenderer = EnvironmentRenderer.make(device: view.device!, drawableSize: view.drawableSize)
     }
     public mutating func draw(scene: inout Scene) {
         lights.upload(data: &scene.omniLights)

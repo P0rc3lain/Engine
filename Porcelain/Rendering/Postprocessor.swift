@@ -15,12 +15,12 @@ struct Postprocessor {
     private let viewPort: MTLViewport
     private let plane: Geometry
     // MARK: - Initialization
-    init(pipelineState: MTLRenderPipelineState, texture: MTLTexture, plane: Geometry) {
+    init(pipelineState: MTLRenderPipelineState, texture: MTLTexture, plane: Geometry, canvasSize: CGSize) {
         self.texture = texture
         self.pipelineState = pipelineState
         self.plane = plane
         self.viewPort = MTLViewport(originX: 0, originY: 0,
-                                    width: Double(texture.width), height: Double(texture.height),
+                                    width: Double(canvasSize.width), height: Double(canvasSize.height),
                                     znear: 0, zfar: 1)
     }
     // MARK: - Internal
