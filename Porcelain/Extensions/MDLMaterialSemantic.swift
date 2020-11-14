@@ -14,8 +14,6 @@ extension MDLMaterialSemantic {
             return "albedo"
         case .tangentSpaceNormal:
             return "normal"
-        case .emission:
-            return "emission"
         case .metallic:
             return "metallic"
         case .roughness:

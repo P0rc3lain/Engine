@@ -50,8 +50,6 @@ public class MaterialLoader {
             return simd_float4.deafultNormalsColor
         case .roughness:
             return simd_float4.deafultRoughnessColor
-        case .emission:
-            return simd_float4.defaultEmissionColor
         case .metallic:
             return simd_float4.defaultMetallicColor
         default:
@@ -69,10 +67,8 @@ public class MaterialLoader {
     private func convert(material: MDLMaterial) -> Material {
         let albedo = defaultTexture(for: .baseColor, material: material)
         let roughness = defaultTexture(for: .roughness, material: material)
-        let emission = defaultTexture(for: .emission, material: material)
         let normals = defaultTexture(for: .tangentSpaceNormal, material: material)
         let metallic = defaultTexture(for: .metallic, material: material)
-        return Material(albedo: albedo, roughness: roughness,
-                        emission: emission, normals: normals, metallic: metallic)
+        return Material(albedo: albedo, roughness: roughness, normals: normals, metallic: metallic)
     }
 }

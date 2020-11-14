@@ -50,9 +50,8 @@ vertex RasterizerData vertexFunction(Vertex                 in          [[stage_
 fragment float4 fragmentFunction(RasterizerData         in          [[stage_in]],
                                  texture2d<float>       albedo      [[texture(0)]],
                                  texture2d<float>       roughness   [[texture(1)]],
-                                 texture2d<float>       emission    [[texture(2)]],
-                                 texture2d<float>       normals     [[texture(3)]],
-                                 texture2d<float>       metallic    [[texture(4)]],
+                                 texture2d<float>       normals     [[texture(2)]],
+                                 texture2d<float>       metallic    [[texture(3)]],
                                  constant FRUniforms &  uniforms    [[buffer(1)]],
                                  constant OmniLight *   omniLights  [[buffer(2)]]) {
     constexpr sampler textureSampler(mag_filter::linear, min_filter::nearest);

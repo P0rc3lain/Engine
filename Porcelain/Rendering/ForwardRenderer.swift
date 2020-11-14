@@ -39,9 +39,8 @@ struct ForwardRenderer {
                                     offset: piece.modelPiece.geometry.vertexBuffer.offset, index: 0)
             encoder.setFragmentTexture(piece.modelPiece.material.albedo, index: 0)
             encoder.setFragmentTexture(piece.modelPiece.material.roughness, index: 1)
-            encoder.setFragmentTexture(piece.modelPiece.material.emission, index: 2)
-            encoder.setFragmentTexture(piece.modelPiece.material.normals, index: 3)
-            encoder.setFragmentTexture(piece.modelPiece.material.metallic, index: 4)
+            encoder.setFragmentTexture(piece.modelPiece.material.normals, index: 2)
+            encoder.setFragmentTexture(piece.modelPiece.material.metallic, index: 3)
             for description in piece.modelPiece.geometry.drawDescription {
                 encoder.drawIndexedPrimitives(type: description.primitiveType,
                                               indexCount: description.indexCount,
