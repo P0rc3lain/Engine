@@ -16,11 +16,13 @@ fileprivate struct Uniforms {
 struct EnvironmentRenderer {
     // MARK: - Properties
     private let pipelineState: MTLRenderPipelineState
+    private let depthStentilState: MTLDepthStencilState
     private let viewPort: MTLViewport
     private let cube: Geometry
     // MARK: - Initialization
-    init(pipelineState: MTLRenderPipelineState, drawableSize: CGSize, cube: Geometry) {
+    init(pipelineState: MTLRenderPipelineState, depthStentilState: MTLDepthStencilState, drawableSize: CGSize, cube: Geometry) {
         self.pipelineState = pipelineState
+        self.depthStentilState = depthStentilState
         self.cube = cube
         self.viewPort = MTLViewport(originX: 0, originY: 0,
                                     width: Double(drawableSize.width), height: Double(drawableSize.height),
@@ -31,6 +33,8 @@ struct EnvironmentRenderer {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(cube.vertexBuffer.buffer, offset: 0, index: 0)
+        encoder.setDepthStencilState(depthStentilState)
+        encoder.setStencilReferenceValue(0)
         encoder.setFragmentTexture(environmentMap, index: 0)
         let uniforms = Uniforms(projectionMatrix: camera.projectionMatrix,
                                 orientation: simd_matrix4x4(camera.coordinateSpace.orientation))

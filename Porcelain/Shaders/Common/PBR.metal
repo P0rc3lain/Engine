@@ -1,14 +1,13 @@
 //
-//  PBR.h
+//  PBR.metal
 //  Porcelain
 //
-//  Created by Mateusz Stompór on 11/11/2020.
+//  Created by Mateusz Stompór on 14/11/2020.
 //
 
-#ifndef PBR_H
-#define PBR_H
+#include "PBR.h"
 
-#include <simd/simd.h>
+#include <metal_stdlib>
 
 using namespace metal;
 
@@ -46,5 +45,3 @@ float3 cookTorrance(float3 n, float3 v, float3 h, float3 l, float roughness, flo
     float denominator = 4 * nl * nh;
     return numerator / max(denominator, 0.001f); // 0.001f is bias
 }
-
-#endif /* PBR_H */

@@ -1,11 +1,13 @@
 //
-//  Math.h
+//  Transformation.metal
 //  Porcelain
 //
-//  Created by Mateusz Stompór on 07/11/2020.
+//  Created by Mateusz Stompór on 14/11/2020.
 //
 
-#include <simd/simd.h>
+#include "Transformation.h"
+
+using namespace metal;
 
 matrix_float4x4 scale(metal::float3 scale) {
     return matrix_float4x4(scale.x,     0,          0,          0,
@@ -20,3 +22,4 @@ matrix_float4x4 translation(metal::float3 translation) {
                            0,                       0,                      1,                  0,
                            translation.x,           translation.y,          translation.z,      1);
 }
+

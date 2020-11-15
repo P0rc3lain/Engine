@@ -8,8 +8,7 @@
 #include <simd/simd.h>
 #include <metal_stdlib>
 
-#include "PBR.h"
-#include "Transformation.h"
+#include "Common/PBR.h"
 #include "../SharedTypes/Types.h"
 
 using namespace metal;
@@ -54,7 +53,6 @@ fragment float4 fragmentFunction(RasterizerData             in              [[st
                                  texture2d<float>           normals         [[texture(2)]],
                                  texture2d<float>           metallic        [[texture(3)]],
                                  constant FRDrawUniforms &  drawUniforms    [[buffer(1)]],
-                                 constant FRModelUniforms & modelUniforms   [[buffer(2)]],
                                  constant OmniLight *       omniLights      [[buffer(3)]]) {
     constexpr sampler textureSampler(mag_filter::linear, min_filter::nearest);
     simd_float3x3 TBN(in.t, in.b, in.n);

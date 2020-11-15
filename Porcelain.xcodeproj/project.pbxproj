@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		56013971255457D100FC1C45 /* Porcelain.h in Headers */ = {isa = PBXBuildFile; fileRef = 5601396F255457D100FC1C45 /* Porcelain.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		560665C02560403600057B4D /* StaticBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560665BF2560403600057B4D /* StaticBuffer.swift */; };
+		560665C6256057A200057B4D /* GBufferRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560665C5256057A200057B4D /* GBufferRenderer.swift */; };
+		560665CC25605A0F00057B4D /* GBufferRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 560665CB25605A0F00057B4D /* GBufferRenderer.metal */; };
+		560665D425605BB500057B4D /* PBR.metal in Sources */ = {isa = PBXBuildFile; fileRef = 560665D325605BB500057B4D /* PBR.metal */; };
+		560665D725605D0500057B4D /* Transformation.metal in Sources */ = {isa = PBXBuildFile; fileRef = 560665D625605D0500057B4D /* Transformation.metal */; };
+		560665DB2560617100057B4D /* GBufferRenderer+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560665DA2560617100057B4D /* GBufferRenderer+Instantiation.swift */; };
+		560665DE256088E100057B4D /* LightPassRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560665DD256088E100057B4D /* LightPassRenderer.swift */; };
+		560665E3256093E600057B4D /* LightRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 560665E2256093E600057B4D /* LightRenderer.metal */; };
 		5609FE8625572C370090CC0F /* EnvironmentMapper.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5609FE8525572C370090CC0F /* EnvironmentMapper.metal */; };
 		5609FE8D25572E6D0090CC0F /* EnvironmentRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609FE8C25572E6D0090CC0F /* EnvironmentRenderer.swift */; };
 		56261D6B255F27DD0031C048 /* MTLDepthStencilDescriptor+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56261D6A255F27DD0031C048 /* MTLDepthStencilDescriptor+Instantiation.swift */; };
@@ -36,6 +43,9 @@
 		5679277C255D4131009E9638 /* simd_float4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5679277B255D4131009E9638 /* simd_float4.swift */; };
 		56792785255D57D4009E9638 /* MDLMaterialSemantic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56792784255D57D4009E9638 /* MDLMaterialSemantic.swift */; };
 		56792788255ED66E009E9638 /* PositionedPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56792787255ED66D009E9638 /* PositionedPiece.swift */; };
+		568A0367256192DC000D234C /* LightPassRenderer+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568A0366256192DC000D234C /* LightPassRenderer+Instantiation.swift */; };
+		568A036A256194FA000D234C /* RenderingCoordinator+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568A0369256194FA000D234C /* RenderingCoordinator+Instantiation.swift */; };
+		568A036D25619C31000D234C /* MTLStencilDescriptor+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568A036C25619C31000D234C /* MTLStencilDescriptor+Instantiation.swift */; };
 		568EC03A255F50E00054999E /* MTLVertexBufferLayoutDescriptor+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EC039255F50E00054999E /* MTLVertexBufferLayoutDescriptor+Instantiation.swift */; };
 		568EC043255F51690054999E /* MTLVertexDescriptor+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EC042255F51690054999E /* MTLVertexDescriptor+Instantiation.swift */; };
 		568EC04A255FEE8D0054999E /* MTLTextureDescriptor+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EC049255FEE8D0054999E /* MTLTextureDescriptor+Instantiation.swift */; };
@@ -63,6 +73,13 @@
 		5601396F255457D100FC1C45 /* Porcelain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Porcelain.h; sourceTree = "<group>"; };
 		56013970255457D100FC1C45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		560665BF2560403600057B4D /* StaticBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticBuffer.swift; sourceTree = "<group>"; };
+		560665C5256057A200057B4D /* GBufferRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBufferRenderer.swift; sourceTree = "<group>"; };
+		560665CB25605A0F00057B4D /* GBufferRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = GBufferRenderer.metal; sourceTree = "<group>"; };
+		560665D325605BB500057B4D /* PBR.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PBR.metal; sourceTree = "<group>"; };
+		560665D625605D0500057B4D /* Transformation.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Transformation.metal; sourceTree = "<group>"; };
+		560665DA2560617100057B4D /* GBufferRenderer+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GBufferRenderer+Instantiation.swift"; sourceTree = "<group>"; };
+		560665DD256088E100057B4D /* LightPassRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightPassRenderer.swift; sourceTree = "<group>"; };
+		560665E2256093E600057B4D /* LightRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = LightRenderer.metal; sourceTree = "<group>"; };
 		5609FE8525572C370090CC0F /* EnvironmentMapper.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = EnvironmentMapper.metal; sourceTree = "<group>"; };
 		5609FE8C25572E6D0090CC0F /* EnvironmentRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentRenderer.swift; sourceTree = "<group>"; };
 		560CF1E1255EFD09002511EF /* AdaptiveToneMapping.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdaptiveToneMapping.h; sourceTree = "<group>"; };
@@ -92,6 +109,9 @@
 		5679277B255D4131009E9638 /* simd_float4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = simd_float4.swift; sourceTree = "<group>"; };
 		56792784255D57D4009E9638 /* MDLMaterialSemantic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLMaterialSemantic.swift; sourceTree = "<group>"; };
 		56792787255ED66D009E9638 /* PositionedPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionedPiece.swift; sourceTree = "<group>"; };
+		568A0366256192DC000D234C /* LightPassRenderer+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LightPassRenderer+Instantiation.swift"; sourceTree = "<group>"; };
+		568A0369256194FA000D234C /* RenderingCoordinator+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RenderingCoordinator+Instantiation.swift"; sourceTree = "<group>"; };
+		568A036C25619C31000D234C /* MTLStencilDescriptor+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLStencilDescriptor+Instantiation.swift"; sourceTree = "<group>"; };
 		568EC039255F50E00054999E /* MTLVertexBufferLayoutDescriptor+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLVertexBufferLayoutDescriptor+Instantiation.swift"; sourceTree = "<group>"; };
 		568EC042255F51690054999E /* MTLVertexDescriptor+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLVertexDescriptor+Instantiation.swift"; sourceTree = "<group>"; };
 		568EC049255FEE8D0054999E /* MTLTextureDescriptor+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLTextureDescriptor+Instantiation.swift"; sourceTree = "<group>"; };
@@ -160,6 +180,35 @@
 			path = Porcelain;
 			sourceTree = "<group>";
 		};
+		560665CA25605A0100057B4D /* DeferredRendering */ = {
+			isa = PBXGroup;
+			children = (
+				560665CB25605A0F00057B4D /* GBufferRenderer.metal */,
+				560665E2256093E600057B4D /* LightRenderer.metal */,
+			);
+			path = DeferredRendering;
+			sourceTree = "<group>";
+		};
+		560665D225605BA200057B4D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				5666DC53255C629100F00955 /* PBR.h */,
+				56F5944F2556152200FBB639 /* Transformation.h */,
+				560665D325605BB500057B4D /* PBR.metal */,
+				560665D625605D0500057B4D /* Transformation.metal */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		560665E0256088E400057B4D /* DeferredRendering */ = {
+			isa = PBXGroup;
+			children = (
+				560665C5256057A200057B4D /* GBufferRenderer.swift */,
+				560665DD256088E100057B4D /* LightPassRenderer.swift */,
+			);
+			path = DeferredRendering;
+			sourceTree = "<group>";
+		};
 		5609FE7C255722F00090CC0F /* Mesh */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +234,10 @@
 				568EC053255FF9920054999E /* EnvironmentRenderer+Instantiation.swift */,
 				568EC056255FFAC50054999E /* Postprocessor+Instantiation.swift */,
 				568EC05A2560038B0054999E /* Scene+Instantiation.swift */,
+				560665DA2560617100057B4D /* GBufferRenderer+Instantiation.swift */,
+				568A0366256192DC000D234C /* LightPassRenderer+Instantiation.swift */,
+				568A0369256194FA000D234C /* RenderingCoordinator+Instantiation.swift */,
+				568A036C25619C31000D234C /* MTLStencilDescriptor+Instantiation.swift */,
 			);
 			path = Instantiation;
 			sourceTree = "<group>";
@@ -244,11 +297,11 @@
 		5674FFB7255459BD001CF921 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				560665D225605BA200057B4D /* Common */,
+				560665CA25605A0100057B4D /* DeferredRendering */,
 				5674FFB8255459E0001CF921 /* ForwardRenderer.metal */,
 				563899E62554C6E600F324DA /* Postprocessing.metal */,
 				5609FE8525572C370090CC0F /* EnvironmentMapper.metal */,
-				56F5944F2556152200FBB639 /* Transformation.h */,
-				5666DC53255C629100F00955 /* PBR.h */,
 				560CF1E1255EFD09002511EF /* AdaptiveToneMapping.h */,
 			);
 			path = Shaders;
@@ -257,6 +310,7 @@
 		5674FFBE25545A08001CF921 /* Rendering */ = {
 			isa = PBXGroup;
 			children = (
+				560665E0256088E400057B4D /* DeferredRendering */,
 				5674FFBB25545A00001CF921 /* RenderingCoordinator.swift */,
 				56F59457255627CA00FBB639 /* Postprocessor.swift */,
 				56F5945A25562A0600FBB639 /* ForwardRenderer.swift */,
@@ -403,33 +457,43 @@
 				568EC057255FFAC50054999E /* Postprocessor+Instantiation.swift in Sources */,
 				563161F9255ACAFD00CADA42 /* IndexBasedDraw.swift in Sources */,
 				563161FF255AD0A400CADA42 /* Geometry.swift in Sources */,
+				560665D725605D0500057B4D /* Transformation.metal in Sources */,
 				56F5944C25560BCD00FBB639 /* Float.swift in Sources */,
 				5651F58E255AB3A900D51220 /* Material.swift in Sources */,
+				560665D425605BB500057B4D /* PBR.metal in Sources */,
 				56261D74255F29FF0031C048 /* MTLDevice+Instantiation.swift in Sources */,
 				56286AC6255B76D000197B77 /* MDLVertexDescriptor.swift in Sources */,
 				56261D70255F29050031C048 /* MTLRenderPipelineDescriptor+Instantiation.swift in Sources */,
+				560665E3256093E600057B4D /* LightRenderer.metal in Sources */,
 				568EC054255FF9920054999E /* EnvironmentRenderer+Instantiation.swift in Sources */,
 				56792788255ED66E009E9638 /* PositionedPiece.swift in Sources */,
+				560665DB2560617100057B4D /* GBufferRenderer+Instantiation.swift in Sources */,
 				5653CE5E255AD46E00AC9C62 /* ModelPiece.swift in Sources */,
 				5674FFBC25545A00001CF921 /* RenderingCoordinator.swift in Sources */,
 				56F594502556152200FBB639 /* Transformation.h in Sources */,
 				56286ABD255B31B600197B77 /* MTLDevice.swift in Sources */,
 				56792785255D57D4009E9638 /* MDLMaterialSemantic.swift in Sources */,
+				568A0367256192DC000D234C /* LightPassRenderer+Instantiation.swift in Sources */,
 				56286ACA255B7AFC00197B77 /* AssetLoader.swift in Sources */,
 				56988382255F3536004AAD6E /* Geometry+Instantiation.swift in Sources */,
 				5674FFB9255459E0001CF921 /* ForwardRenderer.metal in Sources */,
 				56F5945B25562A0600FBB639 /* ForwardRenderer.swift in Sources */,
 				56286ACE255B7D1300197B77 /* ModelBinder.swift in Sources */,
+				560665C6256057A200057B4D /* GBufferRenderer.swift in Sources */,
+				568A036D25619C31000D234C /* MTLStencilDescriptor+Instantiation.swift in Sources */,
 				56286AC3255B6F0E00197B77 /* MaterialLoader.swift in Sources */,
 				56E786592556CA33000B6311 /* simd_float3.swift in Sources */,
 				56286AC0255B324800197B77 /* MTLTextureDescriptor.swift in Sources */,
+				568A036A256194FA000D234C /* RenderingCoordinator+Instantiation.swift in Sources */,
 				568EC03A255F50E00054999E /* MTLVertexBufferLayoutDescriptor+Instantiation.swift in Sources */,
 				5679277C255D4131009E9638 /* simd_float4.swift in Sources */,
+				560665DE256088E100057B4D /* LightPassRenderer.swift in Sources */,
 				563899E72554C6E600F324DA /* Postprocessing.metal in Sources */,
 				5663D854255C495200D6D122 /* DynamicBuffer.swift in Sources */,
 				56261D6B255F27DD0031C048 /* MTLDepthStencilDescriptor+Instantiation.swift in Sources */,
 				568EC043255F51690054999E /* MTLVertexDescriptor+Instantiation.swift in Sources */,
 				56F59455255625D200FBB639 /* Scene.swift in Sources */,
+				560665CC25605A0F00057B4D /* GBufferRenderer.metal in Sources */,
 				560665C02560403600057B4D /* StaticBuffer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
