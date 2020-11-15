@@ -27,14 +27,14 @@ struct LightPassRenderer {
                                     znear: 0, zfar: 1)
     }
     // MARK: - Internal
-    func draw(encoder: inout MTLRenderCommandEncoder, lightsBuffer: inout MTLBuffer, drawUniformsBuffer: inout MTLBuffer, lightsCount: Int) {
+    func draw(encoder: inout MTLRenderCommandEncoder, bufferStore: inout BufferStore, lightsCount: Int) {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer, offset: 0, index: 0)
         
-        encoder.setFragmentBuffer(lightsBuffer, offset: 0, index: 3)
-        encoder.setFragmentBuffer(drawUniformsBuffer, offset: 0, index: 1)
+        encoder.setFragmentBuffer(bufferStore.omniLights.buffer, offset: 0, index: 3)
+        encoder.setFragmentBuffer(bufferStore.cameras.buffer, offset: 0, index: 1)
         
         encoder.setFragmentTexture(gbufferRenderPass.colorAttachments[0].texture!, index: 0)
         encoder.setFragmentTexture(gbufferRenderPass.colorAttachments[1].texture!, index: 1)

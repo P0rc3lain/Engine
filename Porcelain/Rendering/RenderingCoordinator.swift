@@ -19,8 +19,7 @@ public struct RenderingCoordinator {
     private var gBufferRenderer: GBufferRenderer
     private var environmentRenderer: EnvironmentRenderer
     private var lightRenderer: LightPassRenderer
-    private var lights: DynamicBuffer<OmniLight>
-    private var drawUniforms: StaticBuffer<FRDrawUniforms>
+    private var bufferStore: BufferStore
     let canvasSize: CGSize
     let renderingSize: CGSize
     // MARK: - Initialization
@@ -29,8 +28,7 @@ public struct RenderingCoordinator {
         self.canvasSize = canvasSize
         self.renderingSize = renderingSize
         commandQueue = view.device!.makeCommandQueue()!
-        lights = DynamicBuffer<OmniLight>(device: view.device!, initialCapacity: 2)!
-        drawUniforms = StaticBuffer<FRDrawUniforms>(device: view.device!, capacity: 1)!
+        bufferStore = BufferStore(device: view.device!)
         gBufferRenderPassDescriptor = MTLRenderPassDescriptor.gBuffer(device: view.device!, size: renderingSize)
         offscreenRenderPassDescriptor = MTLRenderPassDescriptor.lightenScene(device: view.device!,
                                                                              depthStencil: gBufferRenderPassDescriptor.stencilAttachment.texture!,
@@ -44,33 +42,31 @@ public struct RenderingCoordinator {
         lightRenderer = LightPassRenderer.make(device: view.device!, gBufferRenderPassDescriptor: gBufferRenderPassDescriptor, drawableSize: renderingSize)
     }
     public mutating func draw(scene: inout Scene) {
-        lights.upload(data: &scene.omniLights)
-        var uniforms = [FRDrawUniforms(projectionMatrix: scene.camera.projectionMatrix,
-                                       viewMatrix: scene.camera.coordinateSpace.transformationRTS,
-                                       viewMatrixInverse: scene.camera.coordinateSpace.transformationRTS.inverse,
-                                       omniLightsCount: Int32(scene.omniLights.count))]
-        drawUniforms.upload(data: &uniforms)
+        bufferStore.omniLights.upload(data: &scene.omniLights)
+        bufferStore.upload(camera: &scene.camera)
+        bufferStore.upload(models: &scene.models)
+
         let commandBuffer = commandQueue.makeCommandBuffer()!
         commandBuffer.pushDebugGroup("G-Buffer Renderer Pass")
         var gBufferEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: gBufferRenderPassDescriptor)!
         
-        gBufferRenderer.draw(encoder: &gBufferEncoder, scene: &scene, lightsBuffer: &lights.buffer, drawUniformsBuffer: &drawUniforms.buffer)
+        gBufferRenderer.draw(encoder: &gBufferEncoder, scene: &scene, dataStore: &bufferStore)
         gBufferEncoder.endEncoding()
         commandBuffer.popDebugGroup()
-        
+
         var lightEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor)!
-        
+
         commandBuffer.pushDebugGroup("Light Pass")
-        lightRenderer.draw(encoder: &lightEncoder, lightsBuffer: &lights.buffer, drawUniformsBuffer: &drawUniforms.buffer, lightsCount: scene.omniLights.count)
+        lightRenderer.draw(encoder: &lightEncoder, bufferStore: &bufferStore, lightsCount: scene.omniLights.count)
         commandBuffer.popDebugGroup()
-        
+
         commandBuffer.pushDebugGroup("Environment Map")
         environmentRenderer.draw(encoder: lightEncoder, camera: &scene.camera, environmentMap: &scene.environmentMap)
         commandBuffer.popDebugGroup()
-        
+
         lightEncoder.endEncoding()
-        
-        
+
+
         commandBuffer.pushDebugGroup("Post Processing Pass")
         let texturePass = commandBuffer.makeRenderCommandEncoder(descriptor: view.currentRenderPassDescriptor!)!
         postProcessor.draw(encoder: texturePass)

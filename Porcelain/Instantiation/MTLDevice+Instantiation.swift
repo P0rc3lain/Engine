@@ -8,21 +8,14 @@
 import Metal
 
 extension MTLDevice {
-    func makeDepthStencilStateForwardRenderer() -> MTLDepthStencilState {
-        makeDepthStencilState(descriptor: MTLDepthStencilDescriptor.forwardRenderer)!
-    }
     func makeDepthStencilStateGBufferRenderer() -> MTLDepthStencilState {
-        makeDepthStencilState(descriptor: MTLDepthStencilDescriptor.forwardRenderer)!
+        makeDepthStencilState(descriptor: MTLDepthStencilDescriptor.gBufferRenderer)!
     }
     func makeDepthStencilStateEnvironmentRenderer() -> MTLDepthStencilState {
         makeDepthStencilState(descriptor: MTLDepthStencilDescriptor.environmentRenderer)!
     }
     func makeDepthStencilStateLightPass() -> MTLDepthStencilState {
         makeDepthStencilState(descriptor: MTLDepthStencilDescriptor.lightPassRenderer)!
-    }
-    func makeRenderPipelineStateForwardRenderer(library: MTLLibrary) -> MTLRenderPipelineState {
-        let description = MTLRenderPipelineDescriptor.forwardRenderer(library: library)
-        return try! makeRenderPipelineState(descriptor: description)
     }
     func makeRenderPipelineStatePostprocessor(library: MTLLibrary,
                                               format: MTLPixelFormat) -> MTLRenderPipelineState {

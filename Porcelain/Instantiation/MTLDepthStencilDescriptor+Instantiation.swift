@@ -8,8 +8,8 @@
 import Metal
 
 extension MTLDepthStencilDescriptor {
-    static var forwardRenderer: MTLDepthStencilDescriptor {
-        let stencil = MTLStencilDescriptor.forwardRenderer
+    static var gBufferRenderer: MTLDepthStencilDescriptor {
+        let stencil = MTLStencilDescriptor.gBufferRenderer
         let descriptor = MTLDepthStencilDescriptor()
         descriptor.depthCompareFunction = .lessEqual
         descriptor.isDepthWriteEnabled = true

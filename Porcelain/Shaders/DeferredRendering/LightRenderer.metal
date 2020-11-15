@@ -38,7 +38,7 @@ fragment float4 fragmentDeferredLight(TexturePipelineRasterizerData in          
                                       texture2d<float>              ar              [[texture(0)]],
                                       texture2d<float>              nm              [[texture(1)]],
                                       texture2d<float>              pr              [[texture(2)]],
-                                      constant FRDrawUniforms &     drawUniforms    [[buffer(1)]],
+                                      constant CameraUniforms &     camera          [[buffer(1)]],
                                       constant OmniLight *          omniLights      [[buffer(3)]]) {
     constexpr sampler textureSampler(mag_filter::nearest, min_filter::nearest);
     float4 arV = ar.sample(textureSampler, in.texcoord);
@@ -54,7 +54,7 @@ fragment float4 fragmentDeferredLight(TexturePipelineRasterizerData in          
     float3 baseColor = arV.xyz;
     float roughnessFactor = arV.w;
 
-    float3 cameraWorld = (drawUniforms.viewMatrixInverse * float4(0, 0, 0, 1)).xyz;
+    float3 cameraWorld = (camera.viewMatrixInverse * float4(0, 0, 0, 1)).xyz;
     float3 eye = normalize(cameraWorld - worldPosition);
     
     float3 outputColor(0, 0, 0);

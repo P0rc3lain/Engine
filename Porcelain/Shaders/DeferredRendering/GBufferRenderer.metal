@@ -28,27 +28,26 @@ struct GBufferData {
 };
 
 vertex RasterizerData gBufferVertex(Vertex                      in              [[stage_in]],
-                                    constant FRDrawUniforms &   drawUniforms    [[buffer(1)]],
-                                    constant FRModelUniforms &  modelUniforms   [[buffer(2)]]) {
+                                    constant CameraUniforms &   cameraUniforms  [[buffer(1)]],
+                                    constant ModelUniforms &    modelUniforms   [[buffer(2)]]) {
     float4 worldPosition = modelUniforms.modelMatrix * float4(in.position, 1);
     
     RasterizerData out;
     out.t = normalize(in.tangent);
     out.b = normalize(cross(in.tangent, in.normal));
     out.n = normalize(in.normal);
-    out.clipSpacePosition = drawUniforms.projectionMatrix * drawUniforms.viewMatrix * worldPosition;
+    out.clipSpacePosition = cameraUniforms.projectionMatrix * cameraUniforms.viewMatrix * worldPosition;
     out.worldSpacePosition = worldPosition.xyz;
     out.uv = in.textureUV;
     return out;
 }
 
-fragment GBufferData gBufferFragment(RasterizerData         in              [[stage_in]],
-                                 texture2d<float>           albedo          [[texture(0)]],
-                                 texture2d<float>           roughness       [[texture(1)]],
-                                 texture2d<float>           normals         [[texture(2)]],
-                                 texture2d<float>           metallic        [[texture(3)]],
-                                 constant FRDrawUniforms &  drawUniforms    [[buffer(1)]],
-                                 constant FRModelUniforms & modelUniforms   [[buffer(2)]]) {
+fragment GBufferData gBufferFragment(RasterizerData             in              [[stage_in]],
+                                     texture2d<float>           albedo          [[texture(0)]],
+                                     texture2d<float>           roughness       [[texture(1)]],
+                                     texture2d<float>           normals         [[texture(2)]],
+                                     texture2d<float>           metallic        [[texture(3)]],
+                                     constant ModelUniforms &   modelUniforms   [[buffer(2)]]) {
     constexpr sampler textureSampler(mag_filter::linear, min_filter::nearest);
     simd_float3x3 TBN(in.t, in.b, in.n);
     GBufferData out;
