@@ -36,6 +36,7 @@
 		5651F589255AB39700D51220 /* Types.h in Headers */ = {isa = PBXBuildFile; fileRef = 5651F587255AB39700D51220 /* Types.h */; };
 		5651F58E255AB3A900D51220 /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5651F58C255AB3A900D51220 /* Material.swift */; };
 		5653CE5E255AD46E00AC9C62 /* ModelPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5653CE5D255AD46E00AC9C62 /* ModelPiece.swift */; };
+		565BEE5F2561C9AF00D1D3C4 /* MTLPixelFormat+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BEE5E2561C9AF00D1D3C4 /* MTLPixelFormat+Instantiation.swift */; };
 		5663D84E255C3EA000D6D122 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5663D84D255C3EA000D6D122 /* Engine.swift */; };
 		5663D854255C495200D6D122 /* DynamicBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5663D853255C495200D6D122 /* DynamicBuffer.swift */; };
 		5674FFBC25545A00001CF921 /* RenderingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5674FFBB25545A00001CF921 /* RenderingCoordinator.swift */; };
@@ -99,6 +100,7 @@
 		5651F587255AB39700D51220 /* Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
 		5651F58C255AB3A900D51220 /* Material.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Material.swift; sourceTree = "<group>"; };
 		5653CE5D255AD46E00AC9C62 /* ModelPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelPiece.swift; sourceTree = "<group>"; };
+		565BEE5E2561C9AF00D1D3C4 /* MTLPixelFormat+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLPixelFormat+Instantiation.swift"; sourceTree = "<group>"; };
 		5663D84D255C3EA000D6D122 /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		5663D853255C495200D6D122 /* DynamicBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicBuffer.swift; sourceTree = "<group>"; };
 		5666DC53255C629100F00955 /* PBR.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PBR.h; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				568A0366256192DC000D234C /* LightPassRenderer+Instantiation.swift */,
 				568A0369256194FA000D234C /* RenderingCoordinator+Instantiation.swift */,
 				568A036C25619C31000D234C /* MTLStencilDescriptor+Instantiation.swift */,
+				565BEE5E2561C9AF00D1D3C4 /* MTLPixelFormat+Instantiation.swift */,
 			);
 			path = Instantiation;
 			sourceTree = "<group>";
@@ -468,6 +471,7 @@
 				56261D70255F29050031C048 /* MTLRenderPipelineDescriptor+Instantiation.swift in Sources */,
 				560665E3256093E600057B4D /* LightRenderer.metal in Sources */,
 				568EC054255FF9920054999E /* EnvironmentRenderer+Instantiation.swift in Sources */,
+				565BEE5F2561C9AF00D1D3C4 /* MTLPixelFormat+Instantiation.swift in Sources */,
 				56792788255ED66E009E9638 /* PositionedPiece.swift in Sources */,
 				560665DB2560617100057B4D /* GBufferRenderer+Instantiation.swift in Sources */,
 				5653CE5E255AD46E00AC9C62 /* ModelPiece.swift in Sources */,

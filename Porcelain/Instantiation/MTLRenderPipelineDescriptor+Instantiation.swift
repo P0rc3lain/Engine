@@ -23,9 +23,9 @@ extension MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.vertexFunction = library.makeFunction(name: "environmentVertexShader")
         descriptor.fragmentFunction = library.makeFunction(name: "environmentFragmentShader")
-        descriptor.colorAttachments[0].pixelFormat = .rgba32Float
-        descriptor.depthAttachmentPixelFormat = .depth32Float_stencil8
-        descriptor.stencilAttachmentPixelFormat = .depth32Float_stencil8
+        descriptor.colorAttachments[0].pixelFormat = .environmentRendererColor
+        descriptor.depthAttachmentPixelFormat = .environmentRendererDepthStencil
+        descriptor.stencilAttachmentPixelFormat = .environmentRendererDepthStencil
         descriptor.vertexDescriptor = MTLVertexDescriptor.environmentRenderer
         return descriptor
     }
@@ -33,11 +33,11 @@ extension MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.vertexFunction = library.makeFunction(name: "gBufferVertex")
         descriptor.fragmentFunction = library.makeFunction(name: "gBufferFragment")
-        descriptor.colorAttachments[0].pixelFormat = .rgba32Float
-        descriptor.colorAttachments[1].pixelFormat = .rgba32Float
-        descriptor.colorAttachments[2].pixelFormat = .rgba32Float
-        descriptor.depthAttachmentPixelFormat = .depth32Float_stencil8
-        descriptor.stencilAttachmentPixelFormat = .depth32Float_stencil8
+        descriptor.colorAttachments[0].pixelFormat = .gBufferAR
+        descriptor.colorAttachments[1].pixelFormat = .gBufferNM
+        descriptor.colorAttachments[2].pixelFormat = .gBufferPR
+        descriptor.depthAttachmentPixelFormat = .gBufferDepthStencil
+        descriptor.stencilAttachmentPixelFormat = .gBufferDepthStencil
         descriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(MDLVertexDescriptor.porcelainMeshVertexDescriptor)
         return descriptor
     }
@@ -45,14 +45,14 @@ extension MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.vertexFunction = library.makeFunction(name: "vertexDeferredLight")
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentDeferredLight")
-        descriptor.colorAttachments[0].pixelFormat = .rgba32Float
+        descriptor.colorAttachments[0].pixelFormat = .lightenSceneColor
         descriptor.colorAttachments[0].rgbBlendOperation = .add
         descriptor.colorAttachments[0].sourceAlphaBlendFactor = .one
         descriptor.colorAttachments[0].destinationRGBBlendFactor = .one
         descriptor.colorAttachments[0].isBlendingEnabled = true
         descriptor.colorAttachments[0].alphaBlendOperation = .max
-        descriptor.depthAttachmentPixelFormat = .depth32Float_stencil8
-        descriptor.stencilAttachmentPixelFormat = .depth32Float_stencil8
+        descriptor.depthAttachmentPixelFormat = .lightenSceneDepthStencil
+        descriptor.stencilAttachmentPixelFormat = .lightenSceneDepthStencil
         descriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(MDLVertexDescriptor.porcelainMeshVertexDescriptor)
         return descriptor
     }
