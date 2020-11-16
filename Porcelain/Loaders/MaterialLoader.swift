@@ -19,17 +19,17 @@ public class MaterialLoader {
         self.loader = MTKTextureLoader(device: device)
     }
     // MARK: - Public
-    public func loadMaterials(meshes: [MDLMesh]) -> [String: Material]? {
-        var materials = [String: Material]()
+    public func loadMaterials(meshes: [MDLMesh]) -> [(name: String, material: Material)]? {
+        var materials = [(String, Material)]()
         for mesh in meshes {
             guard let submeshes = mesh.submeshes as? [MDLSubmesh] else {
                 continue
             }
             for submesh in submeshes {
-                guard let material = submesh.material else {
+                guard let material = submesh.material, !materials.contains(where: { $0.0 == material.name }) else {
                     continue
                 }
-                materials[material.name] = convert(material: material)
+                materials.append((material.name, convert(material: material)))
             }
         }
         return materials

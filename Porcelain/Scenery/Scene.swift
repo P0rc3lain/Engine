@@ -11,14 +11,13 @@ import Foundation
 
 public struct Scene {
     // MARK: - Properties
-    public var materials = [Material]()
+    let sceneAsset: SceneAsset
     public var camera: Camera
     public var omniLights = [OmniLight]()
-    public var models = [PositionedPiece]()
-    public var environmentMap: MTLTexture
+    public var objects = [PositionedPiece]()
     // MARK: - Initialization
-    init(camera: Camera, environmentMap: MTLTexture) {
+    init(camera: Camera, sceneAsset: SceneAsset) {
         self.camera = camera
-        self.environmentMap = environmentMap
+        self.sceneAsset = sceneAsset
     }
 }

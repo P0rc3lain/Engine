@@ -29,15 +29,15 @@ struct EnvironmentRenderer {
                                     znear: 0, zfar: 1)
     }
     // MARK: - Internal
-    func draw(encoder: MTLRenderCommandEncoder, camera: inout Camera, environmentMap: inout MTLTexture) {
+    func draw(encoder: MTLRenderCommandEncoder, scene: inout Scene) {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(cube.vertexBuffer.buffer, offset: 0, index: 0)
         encoder.setDepthStencilState(depthStentilState)
         encoder.setStencilReferenceValue(0)
-        encoder.setFragmentTexture(environmentMap, index: 0)
-        let uniforms = Uniforms(projectionMatrix: camera.projectionMatrix,
-                                orientation: simd_matrix4x4(camera.coordinateSpace.orientation))
+        encoder.setFragmentTexture(scene.sceneAsset.environment, index: 0)
+        let uniforms = Uniforms(projectionMatrix: scene.camera.projectionMatrix,
+                                orientation: simd_matrix4x4(scene.camera.coordinateSpace.orientation))
         withUnsafePointer(to: uniforms) { ptr in
             encoder.setVertexBytes(ptr, length: MemoryLayout<Uniforms>.size, index: 1)
         }

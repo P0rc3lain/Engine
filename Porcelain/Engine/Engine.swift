@@ -13,10 +13,14 @@ public class Engine {
     public var scene: Scene
     private var coordinator: RenderingCoordinator
     // MARK: - Initialization
-    public init(view: MTKView, renderingSize: CGSize) {
+    public init(view: MTKView, renderingSize: CGSize, sceneAsset: SceneAsset) {
         self.view = view
-        self.coordinator = RenderingCoordinator(view: view, canvasSize: view.drawableSize, renderingSize: renderingSize)
-        self.scene = Scene.make(device: view.device!, cameraAspectRation: view.drawableSize.aspectRatio)
+        self.coordinator = RenderingCoordinator(view: view,
+                                                canvasSize: view.drawableSize,
+                                                renderingSize: renderingSize)
+        let aspectRatio = Float(renderingSize.width/renderingSize.height)
+        self.scene = Scene.make(cameraAspectRation: aspectRatio,
+                                sceneAsset: sceneAsset)
     }
     // MARK: - Public
     public func updateDrawableSize(drawableSize: CGSize) {

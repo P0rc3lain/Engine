@@ -9,11 +9,11 @@ import Foundation
 
 public struct PositionedPiece {
     // MARK: - Properties
-    var modelPiece: ModelPiece
+    let pieceDescriptor: ModelPieceDescriptor
     public var coordinateSpace: CoordinateSpace
     // MARK: - Initialization
-    public init(modelPiece: ModelPiece, coordinateSpace: CoordinateSpace) {
-        self.modelPiece = modelPiece
+    public init(pieceDescriptor: ModelPieceDescriptor, coordinateSpace: CoordinateSpace) {
+        self.pieceDescriptor = pieceDescriptor
         self.coordinateSpace = coordinateSpace
     }
 }

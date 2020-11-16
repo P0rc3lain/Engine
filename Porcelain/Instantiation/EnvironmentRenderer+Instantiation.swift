@@ -13,6 +13,8 @@ extension EnvironmentRenderer {
         let environmentPipelineState = device.makeRenderPipelineStateEnvironmentRenderer(library: library)
         let depthStencilState = device.makeDepthStencilStateEnvironmentRenderer()
         let cube = Geometry.cube(device: device)
-        return EnvironmentRenderer(pipelineState: environmentPipelineState, depthStentilState: depthStencilState, drawableSize: drawableSize, cube: cube)
+        return EnvironmentRenderer(pipelineState: environmentPipelineState,
+                                   depthStentilState: depthStencilState,
+                                   drawableSize: drawableSize, cube: cube)
     }
 }

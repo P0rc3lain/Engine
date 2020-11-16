@@ -16,6 +16,7 @@
 		560665DB2560617100057B4D /* GBufferRenderer+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560665DA2560617100057B4D /* GBufferRenderer+Instantiation.swift */; };
 		560665DE256088E100057B4D /* LightPassRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560665DD256088E100057B4D /* LightPassRenderer.swift */; };
 		560665E3256093E600057B4D /* LightRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 560665E2256093E600057B4D /* LightRenderer.metal */; };
+		5607421F2562FCA600CE3A84 /* SceneAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5607421E2562FCA600CE3A84 /* SceneAsset.swift */; };
 		5609FE8625572C370090CC0F /* EnvironmentMapper.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5609FE8525572C370090CC0F /* EnvironmentMapper.metal */; };
 		5609FE8D25572E6D0090CC0F /* EnvironmentRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5609FE8C25572E6D0090CC0F /* EnvironmentRenderer.swift */; };
 		56261D6B255F27DD0031C048 /* MTLDepthStencilDescriptor+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56261D6A255F27DD0031C048 /* MTLDepthStencilDescriptor+Instantiation.swift */; };
@@ -35,7 +36,7 @@
 		5651F588255AB39700D51220 /* Compatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 5651F586255AB39700D51220 /* Compatibility.h */; };
 		5651F589255AB39700D51220 /* Types.h in Headers */ = {isa = PBXBuildFile; fileRef = 5651F587255AB39700D51220 /* Types.h */; };
 		5651F58E255AB3A900D51220 /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5651F58C255AB3A900D51220 /* Material.swift */; };
-		5653CE5E255AD46E00AC9C62 /* ModelPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5653CE5D255AD46E00AC9C62 /* ModelPiece.swift */; };
+		5653CE5E255AD46E00AC9C62 /* ModelPieceDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5653CE5D255AD46E00AC9C62 /* ModelPieceDescriptor.swift */; };
 		565BEE5F2561C9AF00D1D3C4 /* MTLPixelFormat+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565BEE5E2561C9AF00D1D3C4 /* MTLPixelFormat+Instantiation.swift */; };
 		5663D84E255C3EA000D6D122 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5663D84D255C3EA000D6D122 /* Engine.swift */; };
 		5663D854255C495200D6D122 /* DynamicBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5663D853255C495200D6D122 /* DynamicBuffer.swift */; };
@@ -44,7 +45,6 @@
 		56792785255D57D4009E9638 /* MDLMaterialSemantic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56792784255D57D4009E9638 /* MDLMaterialSemantic.swift */; };
 		56792788255ED66E009E9638 /* PositionedPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56792787255ED66D009E9638 /* PositionedPiece.swift */; };
 		568A0367256192DC000D234C /* LightPassRenderer+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568A0366256192DC000D234C /* LightPassRenderer+Instantiation.swift */; };
-		568A036A256194FA000D234C /* RenderingCoordinator+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568A0369256194FA000D234C /* RenderingCoordinator+Instantiation.swift */; };
 		568A036D25619C31000D234C /* MTLStencilDescriptor+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568A036C25619C31000D234C /* MTLStencilDescriptor+Instantiation.swift */; };
 		568EC03A255F50E00054999E /* MTLVertexBufferLayoutDescriptor+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EC039255F50E00054999E /* MTLVertexBufferLayoutDescriptor+Instantiation.swift */; };
 		568EC043255F51690054999E /* MTLVertexDescriptor+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EC042255F51690054999E /* MTLVertexDescriptor+Instantiation.swift */; };
@@ -79,6 +79,7 @@
 		560665DA2560617100057B4D /* GBufferRenderer+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GBufferRenderer+Instantiation.swift"; sourceTree = "<group>"; };
 		560665DD256088E100057B4D /* LightPassRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightPassRenderer.swift; sourceTree = "<group>"; };
 		560665E2256093E600057B4D /* LightRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = LightRenderer.metal; sourceTree = "<group>"; };
+		5607421E2562FCA600CE3A84 /* SceneAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneAsset.swift; sourceTree = "<group>"; };
 		5609FE8525572C370090CC0F /* EnvironmentMapper.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = EnvironmentMapper.metal; sourceTree = "<group>"; };
 		5609FE8C25572E6D0090CC0F /* EnvironmentRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentRenderer.swift; sourceTree = "<group>"; };
 		560CF1E1255EFD09002511EF /* AdaptiveToneMapping.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdaptiveToneMapping.h; sourceTree = "<group>"; };
@@ -99,7 +100,7 @@
 		5651F586255AB39700D51220 /* Compatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compatibility.h; sourceTree = "<group>"; };
 		5651F587255AB39700D51220 /* Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
 		5651F58C255AB3A900D51220 /* Material.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Material.swift; sourceTree = "<group>"; };
-		5653CE5D255AD46E00AC9C62 /* ModelPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelPiece.swift; sourceTree = "<group>"; };
+		5653CE5D255AD46E00AC9C62 /* ModelPieceDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelPieceDescriptor.swift; sourceTree = "<group>"; };
 		565BEE5E2561C9AF00D1D3C4 /* MTLPixelFormat+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLPixelFormat+Instantiation.swift"; sourceTree = "<group>"; };
 		5663D84D255C3EA000D6D122 /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		5663D853255C495200D6D122 /* DynamicBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicBuffer.swift; sourceTree = "<group>"; };
@@ -109,7 +110,6 @@
 		56792784255D57D4009E9638 /* MDLMaterialSemantic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDLMaterialSemantic.swift; sourceTree = "<group>"; };
 		56792787255ED66D009E9638 /* PositionedPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionedPiece.swift; sourceTree = "<group>"; };
 		568A0366256192DC000D234C /* LightPassRenderer+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LightPassRenderer+Instantiation.swift"; sourceTree = "<group>"; };
-		568A0369256194FA000D234C /* RenderingCoordinator+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RenderingCoordinator+Instantiation.swift"; sourceTree = "<group>"; };
 		568A036C25619C31000D234C /* MTLStencilDescriptor+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLStencilDescriptor+Instantiation.swift"; sourceTree = "<group>"; };
 		568EC039255F50E00054999E /* MTLVertexBufferLayoutDescriptor+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLVertexBufferLayoutDescriptor+Instantiation.swift"; sourceTree = "<group>"; };
 		568EC042255F51690054999E /* MTLVertexDescriptor+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLVertexDescriptor+Instantiation.swift"; sourceTree = "<group>"; };
@@ -234,7 +234,6 @@
 				568EC05A2560038B0054999E /* Scene+Instantiation.swift */,
 				560665DA2560617100057B4D /* GBufferRenderer+Instantiation.swift */,
 				568A0366256192DC000D234C /* LightPassRenderer+Instantiation.swift */,
-				568A0369256194FA000D234C /* RenderingCoordinator+Instantiation.swift */,
 				568A036C25619C31000D234C /* MTLStencilDescriptor+Instantiation.swift */,
 				565BEE5E2561C9AF00D1D3C4 /* MTLPixelFormat+Instantiation.swift */,
 			);
@@ -270,7 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				56792787255ED66D009E9638 /* PositionedPiece.swift */,
-				5653CE5D255AD46E00AC9C62 /* ModelPiece.swift */,
+				5653CE5D255AD46E00AC9C62 /* ModelPieceDescriptor.swift */,
 				5651F58C255AB3A900D51220 /* Material.swift */,
 			);
 			path = Models;
@@ -323,6 +322,7 @@
 				56E786532556C84D000B6311 /* Lights */,
 				56F594452556094B00FBB639 /* Camera.swift */,
 				56F5944825560B7B00FBB639 /* CoordinateSpace.swift */,
+				5607421E2562FCA600CE3A84 /* SceneAsset.swift */,
 				56F59454255625D200FBB639 /* Scene.swift */,
 			);
 			path = Scenery;
@@ -474,7 +474,7 @@
 				565BEE5F2561C9AF00D1D3C4 /* MTLPixelFormat+Instantiation.swift in Sources */,
 				56792788255ED66E009E9638 /* PositionedPiece.swift in Sources */,
 				560665DB2560617100057B4D /* GBufferRenderer+Instantiation.swift in Sources */,
-				5653CE5E255AD46E00AC9C62 /* ModelPiece.swift in Sources */,
+				5653CE5E255AD46E00AC9C62 /* ModelPieceDescriptor.swift in Sources */,
 				5674FFBC25545A00001CF921 /* RenderingCoordinator.swift in Sources */,
 				56F594502556152200FBB639 /* Transformation.h in Sources */,
 				56286ABD255B31B600197B77 /* MTLDevice.swift in Sources */,
@@ -488,7 +488,6 @@
 				56286AC3255B6F0E00197B77 /* MaterialLoader.swift in Sources */,
 				56E786592556CA33000B6311 /* simd_float3.swift in Sources */,
 				56286AC0255B324800197B77 /* MTLTextureDescriptor.swift in Sources */,
-				568A036A256194FA000D234C /* RenderingCoordinator+Instantiation.swift in Sources */,
 				568EC03A255F50E00054999E /* MTLVertexBufferLayoutDescriptor+Instantiation.swift in Sources */,
 				5679277C255D4131009E9638 /* simd_float4.swift in Sources */,
 				560665DE256088E100057B4D /* LightPassRenderer.swift in Sources */,
@@ -498,6 +497,7 @@
 				568EC043255F51690054999E /* MTLVertexDescriptor+Instantiation.swift in Sources */,
 				56F59455255625D200FBB639 /* Scene.swift in Sources */,
 				560665CC25605A0F00057B4D /* GBufferRenderer.metal in Sources */,
+				5607421F2562FCA600CE3A84 /* SceneAsset.swift in Sources */,
 				560665C02560403600057B4D /* StaticBuffer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

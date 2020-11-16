@@ -15,7 +15,7 @@ public class GeometryLoader {
     public init(device: MTLDevice) {
         self.device = device
     }
-    public func loadGeometries(meshes: [MTKMesh]) -> [Geometry] {
+    public func loadGeometries(meshes: [MTKMesh]) -> [(name: String, geometry: Geometry)] {
         return meshes.map { mesh in
             let buffer = DataBuffer(buffer: mesh.vertexBuffers[0].buffer,
                                     length: mesh.vertexBuffers[0].length,
@@ -29,7 +29,7 @@ public class GeometryLoader {
                                       indexType: submesh.indexType,
                                       primitiveType: submesh.primitiveType)
             }
-            return Geometry(vertexBuffer: buffer, drawDescription: drawDescriptions)
+            return (mesh.name, Geometry(vertexBuffer: buffer, drawDescription: drawDescriptions))
         }
     }
 }

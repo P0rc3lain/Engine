@@ -34,16 +34,17 @@ struct GBufferRenderer {
         encoder.setFrontFacing(.counterClockwise)
         encoder.setVertexBuffer(dataStore.cameras.buffer, offset: 0, index: 1)
         encoder.setStencilReferenceValue(1)
-        for i in 0..<scene.models.count {
+        for i in 0..<scene.objects.count {
             let offset = i * MemoryLayout<ModelUniforms>.stride
-            encoder.setVertexBuffer(scene.models[i].modelPiece.geometry.vertexBuffer.buffer, offset: 0, index: 0)
+            let descriptor = scene.objects[i].pieceDescriptor
+            encoder.setVertexBuffer(scene.sceneAsset.geometries[descriptor.geometry].vertexBuffer.buffer, offset: 0, index: 0)
             encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer, offset: offset, index: 2)
             encoder.setFragmentBuffer(dataStore.modelCoordinateSystems.buffer, offset: offset, index: 2)
-            encoder.setFragmentTexture(scene.models[i].modelPiece.material.albedo, index: 0)
-            encoder.setFragmentTexture(scene.models[i].modelPiece.material.roughness, index: 1)
-            encoder.setFragmentTexture(scene.models[i].modelPiece.material.normals, index: 2)
-            encoder.setFragmentTexture(scene.models[i].modelPiece.material.metallic, index: 3)
-            for description in scene.models[i].modelPiece.geometry.drawDescription {
+            encoder.setFragmentTexture(scene.sceneAsset.materials[descriptor.material].albedo, index: 0)
+            encoder.setFragmentTexture(scene.sceneAsset.materials[descriptor.material].roughness, index: 1)
+            encoder.setFragmentTexture(scene.sceneAsset.materials[descriptor.material].normals, index: 2)
+            encoder.setFragmentTexture(scene.sceneAsset.materials[descriptor.material].metallic, index: 3)
+            for description in scene.sceneAsset.geometries[descriptor.geometry].drawDescription {
                 encoder.drawIndexedPrimitives(type: description.primitiveType,
                                               indexCount: description.indexCount,
                                               indexType: description.indexType,

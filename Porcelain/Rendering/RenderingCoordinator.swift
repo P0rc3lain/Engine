@@ -44,7 +44,7 @@ public struct RenderingCoordinator {
     public mutating func draw(scene: inout Scene) {
         bufferStore.omniLights.upload(data: &scene.omniLights)
         bufferStore.upload(camera: &scene.camera)
-        bufferStore.upload(models: &scene.models)
+        bufferStore.upload(models: &scene.objects)
 
         let commandBuffer = commandQueue.makeCommandBuffer()!
         commandBuffer.pushDebugGroup("G-Buffer Renderer Pass")
@@ -61,7 +61,7 @@ public struct RenderingCoordinator {
         commandBuffer.popDebugGroup()
 
         commandBuffer.pushDebugGroup("Environment Map")
-        environmentRenderer.draw(encoder: lightEncoder, camera: &scene.camera, environmentMap: &scene.environmentMap)
+        environmentRenderer.draw(encoder: lightEncoder, scene: &scene)
         commandBuffer.popDebugGroup()
 
         lightEncoder.endEncoding()
