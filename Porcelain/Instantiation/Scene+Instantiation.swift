@@ -15,7 +15,7 @@ extension Scene {
         let cameraCoordinateSpace = CoordinateSpace(translation: simd_float3(),
                                                     orientation: initialOrientation,
                                                     scale: simd_float3(1, 1, 1))
-        let camera = Camera(nearPlane: 0.01, farPlane: 10000, fovRadians: Float.radians(80), aspectRation: cameraAspectRation, coordinateSpace: cameraCoordinateSpace)
+        let camera = Camera(nearPlane: 1, farPlane: 10000, fovRadians: Float.radians(80), aspectRation: cameraAspectRation, coordinateSpace: cameraCoordinateSpace)
         return Scene(camera: camera, sceneAsset: sceneAsset)
     }
 }
