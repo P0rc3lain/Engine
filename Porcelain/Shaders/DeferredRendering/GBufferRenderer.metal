@@ -48,7 +48,7 @@ fragment GBufferData gBufferFragment(RasterizerData             in              
                                      texture2d<float>           normals         [[texture(2)]],
                                      texture2d<float>           metallic        [[texture(3)]],
                                      constant ModelUniforms &   modelUniforms   [[buffer(2)]]) {
-    constexpr sampler textureSampler(mag_filter::linear, min_filter::nearest);
+    constexpr sampler textureSampler(mag_filter::linear, min_filter::nearest, address::mirrored_repeat);
     simd_float3x3 TBN(in.t, in.b, in.n);
     GBufferData out;
     // 0.04 is reflactance for common materials
