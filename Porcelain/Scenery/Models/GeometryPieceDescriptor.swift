@@ -8,6 +8,7 @@
 import Foundation
 
 public struct GeometryPieceDescriptor {
+    // MARK: - Properties
     public let geometry: Int
     public let drawDescriptor: Int
 }
