@@ -7,7 +7,6 @@
 
 #include <metal_stdlib>
 
-#include "AdaptiveToneMapping.h"
 #include "../SharedTypes/Types.h"
 
 using namespace metal;
@@ -27,7 +26,5 @@ vertex TexturePipelineRasterizerData  vertexPostprocess(Vertex in [[stage_in]]) 
 fragment float4 fragmentPostprocess(TexturePipelineRasterizerData in [[stage_in]],
                                     texture2d<float> texture [[texture(0)]]) {
     constexpr sampler textureSampler(min_filter::nearest, mag_filter::nearest);
-    float3 color = texture.sample(textureSampler, in.texcoord).xyz;
-    float exposure = adaptiveExposure(texture, textureSampler, in.texcoord);
-    return float4(colorExposured(color, exposure), 1);
+    return texture.sample(textureSampler, in.texcoord);
 }

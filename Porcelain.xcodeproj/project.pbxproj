@@ -83,7 +83,6 @@
 		5607421E2562FCA600CE3A84 /* SceneAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneAsset.swift; sourceTree = "<group>"; };
 		5609FE8525572C370090CC0F /* EnvironmentMapper.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = EnvironmentMapper.metal; sourceTree = "<group>"; };
 		5609FE8C25572E6D0090CC0F /* EnvironmentRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentRenderer.swift; sourceTree = "<group>"; };
-		560CF1E1255EFD09002511EF /* AdaptiveToneMapping.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdaptiveToneMapping.h; sourceTree = "<group>"; };
 		56261D6A255F27DD0031C048 /* MTLDepthStencilDescriptor+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLDepthStencilDescriptor+Instantiation.swift"; sourceTree = "<group>"; };
 		56261D6F255F29050031C048 /* MTLRenderPipelineDescriptor+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLRenderPipelineDescriptor+Instantiation.swift"; sourceTree = "<group>"; };
 		56261D73255F29FF0031C048 /* MTLDevice+Instantiation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLDevice+Instantiation.swift"; sourceTree = "<group>"; };
@@ -302,7 +301,6 @@
 				560665CA25605A0100057B4D /* DeferredRendering */,
 				563899E62554C6E600F324DA /* Postprocessing.metal */,
 				5609FE8525572C370090CC0F /* EnvironmentMapper.metal */,
-				560CF1E1255EFD09002511EF /* AdaptiveToneMapping.h */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
