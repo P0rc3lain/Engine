@@ -35,20 +35,30 @@ public class MaterialLoader {
         return materials
     }
     // MARK: - Private
+    private func loadTexture(property: MDLMaterialProperty) -> MDLTexture? {
+        if let sourceTexture = property.textureSamplerValue?.texture {
+            return sourceTexture
+        } else if let stringValue = property.stringValue, let filename = stringValue.split(separator: "/").last {
+            return MDLTexture(named: String(filename))
+        }
+        return nil
+    }
     private func storedTexture(for semantic: MDLMaterialSemantic, in material: MDLMaterial) -> MTLTexture? {
         guard let materialProperty = material.property(with: semantic) else { return nil }
-        guard let sourceTexture = materialProperty.textureSamplerValue?.texture else { return nil }
-        let wantsMips = materialProperty.semantic != .tangentSpaceNormal
-        let options: [MTKTextureLoader.Option : Any] = [.generateMipmaps : wantsMips]
-        return try? loader.newTexture(texture: sourceTexture, options: options)
+        if let sourceTexture = loadTexture(property: materialProperty) {
+            let generateMips = Self.shouldGenerateMipMaps(semantic: semantic)
+            let options: [MTKTextureLoader.Option : Any] = [.generateMipmaps : generateMips]
+            return try? loader.newTexture(texture: sourceTexture, options: options)
+        }
+        return nil
     }
     private func defaultColor(for semantic: MDLMaterialSemantic) -> simd_float4 {
         switch semantic {
         case .baseColor:
             return simd_float4.deafultBaseColor
-        case .tangentSpaceNormal:
+        case .tangentSpaceNormal, .bump:
             return simd_float4.deafultNormalsColor
-        case .roughness:
+        case .roughness, .specularExponent:
             return simd_float4.deafultRoughnessColor
         case .metallic:
             return simd_float4.defaultMetallicColor
@@ -60,7 +70,8 @@ public class MaterialLoader {
         device.makeSolid2DTexture(color: defaultColor(for: semantic))
     }
     private func defaultTexture(for semantic: MDLMaterialSemantic, material: MDLMaterial) -> MTLTexture {
-        let texture = storedTexture(for: semantic, in: material) ?? singleColorTexture(for: semantic)!
+        let associatedTexture = Self.aliases(semantic: semantic).map { storedTexture(for: $0, in: material) }.filter { $0 != nil }
+        let texture = (associatedTexture.count > 0 ? associatedTexture.first! : nil) ?? singleColorTexture(for: semantic)!
         texture.label = semantic.label
         return texture
     }
@@ -70,5 +81,16 @@ public class MaterialLoader {
         let normals = defaultTexture(for: .tangentSpaceNormal, material: material)
         let metallic = defaultTexture(for: .metallic, material: material)
         return Material(albedo: albedo, roughness: roughness, normals: normals, metallic: metallic)
+    }
+    static func aliases(semantic: MDLMaterialSemantic) -> [MDLMaterialSemantic] {
+        switch semantic {
+        case .roughness:
+            return [.roughness, .specularExponent]
+        default:
+            return [semantic]
+        }
+    }
+    static func shouldGenerateMipMaps(semantic: MDLMaterialSemantic) -> Bool {
+        semantic != .tangentSpaceNormal
     }
 }

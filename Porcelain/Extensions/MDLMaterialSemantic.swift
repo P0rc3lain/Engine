@@ -18,6 +18,10 @@ extension MDLMaterialSemantic {
             return "metallic"
         case .roughness:
             return "roughness"
+        case .specularExponent:
+            return "specularExponent"
+        case .bump:
+            return "bump"
         default:
             fatalError("Not implemented")
         }
