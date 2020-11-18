@@ -72,6 +72,7 @@ public struct RenderingCoordinator {
         postProcessor.draw(encoder: texturePass)
         texturePass.endEncoding()
         commandBuffer.popDebugGroup()
+    
 
         commandBuffer.present(view.currentDrawable!)
         commandBuffer.commit()
