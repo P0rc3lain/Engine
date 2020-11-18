@@ -36,21 +36,22 @@ struct GBufferRenderer {
         encoder.setStencilReferenceValue(1)
         for i in 0..<scene.objects.count {
             let offset = i * MemoryLayout<ModelUniforms>.stride
-            let descriptor = scene.objects[i].pieceDescriptor
-            encoder.setVertexBuffer(scene.sceneAsset.geometries[descriptor.geometry].vertexBuffer.buffer, offset: 0, index: 0)
+            let pieceDescriptor = scene.objects[i].pieceDescriptor
+            let drawIndex = pieceDescriptor.piece.drawDescriptor
+            let geometryIndex = pieceDescriptor.piece.geometry
+            let materialIndex = pieceDescriptor.material
+            encoder.setVertexBuffer(scene.sceneAsset.geometries[geometryIndex].vertexBuffer.buffer, offset: 0, index: 0)
             encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer, offset: offset, index: 2)
             encoder.setFragmentBuffer(dataStore.modelCoordinateSystems.buffer, offset: offset, index: 2)
-            encoder.setFragmentTexture(scene.sceneAsset.materials[descriptor.material].albedo, index: 0)
-            encoder.setFragmentTexture(scene.sceneAsset.materials[descriptor.material].roughness, index: 1)
-            encoder.setFragmentTexture(scene.sceneAsset.materials[descriptor.material].normals, index: 2)
-            encoder.setFragmentTexture(scene.sceneAsset.materials[descriptor.material].metallic, index: 3)
-            for description in scene.sceneAsset.geometries[descriptor.geometry].drawDescription {
-                encoder.drawIndexedPrimitives(type: description.primitiveType,
-                                              indexCount: description.indexCount,
-                                              indexType: description.indexType,
-                                              indexBuffer: description.indexBuffer.buffer,
-                                              indexBufferOffset: description.indexBuffer.offset)
-            }
+            encoder.setFragmentTexture(scene.sceneAsset.materials[materialIndex].albedo, index: 0)
+            encoder.setFragmentTexture(scene.sceneAsset.materials[materialIndex].roughness, index: 1)
+            encoder.setFragmentTexture(scene.sceneAsset.materials[materialIndex].normals, index: 2)
+            encoder.setFragmentTexture(scene.sceneAsset.materials[materialIndex].metallic, index: 3)
+            encoder.drawIndexedPrimitives(type: scene.sceneAsset.geometries[geometryIndex].drawDescription[drawIndex].primitiveType,
+                                          indexCount: scene.sceneAsset.geometries[geometryIndex].drawDescription[drawIndex].indexCount,
+                                          indexType: scene.sceneAsset.geometries[geometryIndex].drawDescription[drawIndex].indexType,
+                                          indexBuffer: scene.sceneAsset.geometries[geometryIndex].drawDescription[drawIndex].indexBuffer.buffer,
+                                          indexBufferOffset: scene.sceneAsset.geometries[geometryIndex].drawDescription[drawIndex].indexBuffer.offset)
         }
     }
 }

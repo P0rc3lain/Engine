@@ -16,16 +16,15 @@ public class ModelBinder {
                         materials: [(String, Material)],
                         geometries: [(String, Geometry)]) -> [ModelPieceDescriptor] {
         var pieces = [ModelPieceDescriptor]()
-        for (index, mesh) in meshes.enumerated() {
+        for (meshIndex, mesh) in meshes.enumerated() {
             guard let submeshes = mesh.submeshes as? [MDLSubmesh] else {
                 continue
             }
-            for submesh in submeshes {
+            for (submeshIndex, submesh) in submeshes.enumerated() {
                 let material = materials.first { $0.0 == submesh.material!.name }!.0
                 let materialIndex = materials.firstIndex { $0.0 == material }
-                let geometry = geometries[index].0
-                let geometryIndex = geometries.firstIndex { $0.0 == geometry }
-                let piece = ModelPieceDescriptor(material: materialIndex!, geometry: geometryIndex!)
+                let geometryPiece = GeometryPieceDescriptor(geometry: meshIndex, drawDescriptor: submeshIndex)
+                let piece = ModelPieceDescriptor(material: materialIndex!, piece: geometryPiece)
                 pieces.append(piece)
             }
         }

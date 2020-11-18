@@ -10,10 +10,10 @@ import Foundation
 public struct ModelPieceDescriptor {
     // MARK: - Properties
     public let material: Int
-    public let geometry: Int
+    public let piece: GeometryPieceDescriptor
     // MARK: - Initialization
-    public init(material: Int, geometry: Int) {
+    public init(material: Int, piece: GeometryPieceDescriptor) {
         self.material = material
-        self.geometry = geometry
+        self.piece = piece
     }
 }

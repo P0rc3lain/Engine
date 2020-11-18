@@ -58,6 +58,7 @@
 		56E3ABE22561A535002F931A /* BufferStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E3ABE12561A535002F931A /* BufferStore.swift */; };
 		56E786552556C85B000B6311 /* OmniLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E786542556C85B000B6311 /* OmniLight.swift */; };
 		56E786592556CA33000B6311 /* simd_float3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E786582556CA33000B6311 /* simd_float3.swift */; };
+		56EE2D742565BDD800072322 /* GeometryPieceDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EE2D732565BDD800072322 /* GeometryPieceDescriptor.swift */; };
 		56F594462556094B00FBB639 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F594452556094B00FBB639 /* Camera.swift */; };
 		56F5944925560B7B00FBB639 /* CoordinateSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F5944825560B7B00FBB639 /* CoordinateSpace.swift */; };
 		56F5944C25560BCD00FBB639 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F5944B25560BCD00FBB639 /* Float.swift */; };
@@ -123,6 +124,7 @@
 		56E3ABE12561A535002F931A /* BufferStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferStore.swift; sourceTree = "<group>"; };
 		56E786542556C85B000B6311 /* OmniLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniLight.swift; sourceTree = "<group>"; };
 		56E786582556CA33000B6311 /* simd_float3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = simd_float3.swift; sourceTree = "<group>"; };
+		56EE2D732565BDD800072322 /* GeometryPieceDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryPieceDescriptor.swift; sourceTree = "<group>"; };
 		56F594452556094B00FBB639 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		56F5944825560B7B00FBB639 /* CoordinateSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateSpace.swift; sourceTree = "<group>"; };
 		56F5944B25560BCD00FBB639 /* Float.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				56792787255ED66D009E9638 /* PositionedPiece.swift */,
 				5653CE5D255AD46E00AC9C62 /* ModelPieceDescriptor.swift */,
 				5651F58C255AB3A900D51220 /* Material.swift */,
+				56EE2D732565BDD800072322 /* GeometryPieceDescriptor.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 				56261D74255F29FF0031C048 /* MTLDevice+Instantiation.swift in Sources */,
 				56286AC6255B76D000197B77 /* MDLVertexDescriptor.swift in Sources */,
 				56261D70255F29050031C048 /* MTLRenderPipelineDescriptor+Instantiation.swift in Sources */,
+				56EE2D742565BDD800072322 /* GeometryPieceDescriptor.swift in Sources */,
 				560665E3256093E600057B4D /* LightRenderer.metal in Sources */,
 				568EC054255FF9920054999E /* EnvironmentRenderer+Instantiation.swift in Sources */,
 				565BEE5F2561C9AF00D1D3C4 /* MTLPixelFormat+Instantiation.swift in Sources */,
