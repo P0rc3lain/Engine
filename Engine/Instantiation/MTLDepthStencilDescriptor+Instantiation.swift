@@ -1,6 +1,6 @@
 //
 //  MTLDepthStencilDescriptor+Instantiation.swift
-//  Porcelain
+//  Engine
 //
 //  Created by Mateusz Stompór on 13/11/2020.
 //

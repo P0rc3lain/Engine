@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		56013971255457D100FC1C45 /* Porcelain.h in Headers */ = {isa = PBXBuildFile; fileRef = 5601396F255457D100FC1C45 /* Porcelain.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		56013971255457D100FC1C45 /* Engine.h in Headers */ = {isa = PBXBuildFile; fileRef = 5601396F255457D100FC1C45 /* Engine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		560665C02560403600057B4D /* StaticBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560665BF2560403600057B4D /* StaticBuffer.swift */; };
 		560665C6256057A200057B4D /* GBufferRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560665C5256057A200057B4D /* GBufferRenderer.swift */; };
 		560665CC25605A0F00057B4D /* GBufferRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 560665CB25605A0F00057B4D /* GBufferRenderer.metal */; };
@@ -70,7 +70,7 @@
 
 /* Begin PBXFileReference section */
 		5601396C255457D100FC1C45 /* Engine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Engine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5601396F255457D100FC1C45 /* Porcelain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Porcelain.h; sourceTree = "<group>"; };
+		5601396F255457D100FC1C45 /* Engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
 		56013970255457D100FC1C45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		560665BF2560403600057B4D /* StaticBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticBuffer.swift; sourceTree = "<group>"; };
 		560665C5256057A200057B4D /* GBufferRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBufferRenderer.swift; sourceTree = "<group>"; };
@@ -174,7 +174,7 @@
 				5674FFC025545C05001CF921 /* Scenery */,
 				5674FFBE25545A08001CF921 /* Rendering */,
 				5674FFB7255459BD001CF921 /* Shaders */,
-				5601396F255457D100FC1C45 /* Porcelain.h */,
+				5601396F255457D100FC1C45 /* Engine.h */,
 				56013970255457D100FC1C45 /* Info.plist */,
 			);
 			path = Engine;
@@ -372,7 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5651F589255AB39700D51220 /* Types.h in Headers */,
-				56013971255457D100FC1C45 /* Porcelain.h in Headers */,
+				56013971255457D100FC1C45 /* Engine.h in Headers */,
 				5651F588255AB39700D51220 /* Compatibility.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

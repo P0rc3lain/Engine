@@ -1,6 +1,6 @@
 //
 //  Compatibility.h
-//  Demo
+//  Engine
 //
 //  Created by Mateusz Stompór on 09/11/2020.
 //

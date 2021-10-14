@@ -1,6 +1,6 @@
 //
 //  MDLVertexDescriptor.swift
-//  Porcelain
+//  Engine
 //
 //  Created by Mateusz Stompór on 11/11/2020.
 //

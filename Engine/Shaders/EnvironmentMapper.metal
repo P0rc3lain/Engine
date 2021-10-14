@@ -1,6 +1,6 @@
 //
 //  EnvironmentMapper.metal
-//  Porcelain
+//  Engine
 //
 //  Created by Mateusz Stompór on 07/11/2020.
 //
