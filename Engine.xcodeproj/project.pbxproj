@@ -69,7 +69,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5601396C255457D100FC1C45 /* Porcelain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Porcelain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5601396C255457D100FC1C45 /* Engine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Engine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5601396F255457D100FC1C45 /* Porcelain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Porcelain.h; sourceTree = "<group>"; };
 		56013970255457D100FC1C45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		560665BF2560403600057B4D /* StaticBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticBuffer.swift; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 		56013962255457D100FC1C45 = {
 			isa = PBXGroup;
 			children = (
-				5601396E255457D100FC1C45 /* Porcelain */,
+				5601396E255457D100FC1C45 /* Engine */,
 				5601396D255457D100FC1C45 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -155,12 +155,12 @@
 		5601396D255457D100FC1C45 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5601396C255457D100FC1C45 /* Porcelain.framework */,
+				5601396C255457D100FC1C45 /* Engine.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5601396E255457D100FC1C45 /* Porcelain */ = {
+		5601396E255457D100FC1C45 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
 				56E3ABE02561A51F002F931A /* Storage */,
@@ -177,7 +177,7 @@
 				5601396F255457D100FC1C45 /* Porcelain.h */,
 				56013970255457D100FC1C45 /* Info.plist */,
 			);
-			path = Porcelain;
+			path = Engine;
 			sourceTree = "<group>";
 		};
 		560665CA25605A0100057B4D /* DeferredRendering */ = {
@@ -380,9 +380,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		5601396B255457D100FC1C45 /* Porcelain */ = {
+		5601396B255457D100FC1C45 /* Engine */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 56013974255457D100FC1C45 /* Build configuration list for PBXNativeTarget "Porcelain" */;
+			buildConfigurationList = 56013974255457D100FC1C45 /* Build configuration list for PBXNativeTarget "Engine" */;
 			buildPhases = (
 				56013967255457D100FC1C45 /* Headers */,
 				56013968255457D100FC1C45 /* Sources */,
@@ -393,9 +393,9 @@
 			);
 			dependencies = (
 			);
-			name = Porcelain;
+			name = Engine;
 			productName = Porcelain;
-			productReference = 5601396C255457D100FC1C45 /* Porcelain.framework */;
+			productReference = 5601396C255457D100FC1C45 /* Engine.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -412,7 +412,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 56013966255457D100FC1C45 /* Build configuration list for PBXProject "Porcelain" */;
+			buildConfigurationList = 56013966255457D100FC1C45 /* Build configuration list for PBXProject "Engine" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -425,7 +425,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5601396B255457D100FC1C45 /* Porcelain */,
+				5601396B255457D100FC1C45 /* Engine */,
 			);
 		};
 /* End PBXProject section */
@@ -639,7 +639,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Porcelain/Info.plist;
+				INFOPLIST_FILE = Engine/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -647,10 +647,10 @@
 					"@loader_path/Frameworks",
 				);
 				MTL_COMPILER_FLAGS = "-D__METAL__";
-				PRODUCT_BUNDLE_IDENTIFIER = com.stompor.mateusz.porcelain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stompor.mateusz.porcelain.engine;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Porcelain";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Engine";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -667,7 +667,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Porcelain/Info.plist;
+				INFOPLIST_FILE = Engine/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -675,10 +675,10 @@
 					"@loader_path/Frameworks",
 				);
 				MTL_COMPILER_FLAGS = "-D__METAL__";
-				PRODUCT_BUNDLE_IDENTIFIER = com.stompor.mateusz.porcelain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stompor.mateusz.porcelain.engine;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Porcelain";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Engine";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -686,7 +686,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		56013966255457D100FC1C45 /* Build configuration list for PBXProject "Porcelain" */ = {
+		56013966255457D100FC1C45 /* Build configuration list for PBXProject "Engine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				56013972255457D100FC1C45 /* Debug */,
@@ -695,7 +695,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		56013974255457D100FC1C45 /* Build configuration list for PBXNativeTarget "Porcelain" */ = {
+		56013974255457D100FC1C45 /* Build configuration list for PBXNativeTarget "Engine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				56013975255457D100FC1C45 /* Debug */,
