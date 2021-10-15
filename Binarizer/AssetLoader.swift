@@ -20,7 +20,7 @@ class AssetLoader {
         guard let url = bundle.url(forResource: name, withExtension: `extension`) else {
             return nil
         }
-        return self.retrieve(url: url)
+        return self.resource(from: url)
     }
     // MARK: - Private
     private func retrieve(url: URL) -> MDLAsset? {

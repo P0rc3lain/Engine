@@ -8,7 +8,7 @@
 public struct Node<T> {
     // MARK: - Properties
     public let parentIdx: Int
-    public let data: T
+    public var data: T
     // MARK: - Initialization
     fileprivate init(parentIdx: Int, data: T) {
         self.parentIdx = parentIdx
@@ -18,7 +18,7 @@ public struct Node<T> {
 
 public struct FlatTree<T> {
     // MARK: - Properties
-    private var objects = [Node<T>]()
+    var objects = [Node<T>]()
     public var count: Int {
         return objects.count
     }

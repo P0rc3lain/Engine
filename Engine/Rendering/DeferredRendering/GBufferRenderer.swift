@@ -41,6 +41,9 @@ struct GBufferRenderer {
                 let mesh = scene.meshes[object.referenceIdx]
                 encoder.setVertexBuffer(mesh.vertexBuffer.buffer, offset: mesh.vertexBuffer.offset, index: 0)
                 for description in mesh.pieceDescriptions {
+                    let offset = i * MemoryLayout<ModelUniforms>.stride
+                    encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer, offset: offset, index: 2)
+                    encoder.setFragmentBuffer(dataStore.modelCoordinateSystems.buffer, offset: offset, index: 2)
                     let material = scene.materials[description.materialIdx]
                     encoder.setFragmentTexture(material.albedo, index: 0)
                     encoder.setFragmentTexture(material.roughness, index: 1)
@@ -52,10 +55,8 @@ struct GBufferRenderer {
                                                   indexBuffer: description.drawDescription.indexBuffer.buffer,
                                                   indexBufferOffset: description.drawDescription.indexBuffer.offset)
                 }
+                
             }
-//            let offset = i * MemoryLayout<ModelUniforms>.stride
-//            encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer, offset: offset, index: 2)
-//            encoder.setFragmentBuffer(dataStore.modelCoordinateSystems.buffer, offset: offset, index: 2)
         }
     }
 }

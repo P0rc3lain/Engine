@@ -35,9 +35,12 @@ public class Translator {
                 (object.submeshes as! [MDLSubmesh]).forEach {
                     var materialIdx = Int.nil
                     if let material = $0.material {
-                        materialIdx = scene.materials.count
-                        scene.materialNames.append(material.name)
-//                        scene.materials.append(material.porcelain)
+                        materialIdx = scene.materialNames.firstIndex(of: material.name) ?? .nil
+                        if materialIdx == .nil {
+                            materialIdx = scene.materials.count
+                            scene.materialNames.append(material.name)
+                            scene.materials.append(material.porcelain)
+                        }
                     }
                     let description = PieceDescription(materialIdx: materialIdx,
                                                        drawDescription: $0.porcelainIndexBasedDraw)
@@ -78,7 +81,7 @@ public class Translator {
                 scene.skeletonReferences.append(Int.nil)
             }
         }
-        assert(Set(scene.objectNames).count == scene.objectNames.count, "Object names must be unique")
+//        assert(Set(scene.objectNames).count == scene.objectNames.count, "Object names must be unique")
         assert(Set(scene.cameraNames).count == scene.cameraNames.count, "Camera names must be unique")
         assert(Set(scene.meshNames).count == scene.meshNames.count, "Mesh names must be unique")
         assert(Set(scene.materialNames).count == scene.materialNames.count, "Mesh names must be unique")

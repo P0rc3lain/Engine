@@ -43,8 +43,9 @@ public struct RenderingCoordinator {
     }
     public mutating func draw(scene: inout GPUSceneDescription) {
 //        bufferStore.omniLights.upload(data: &scene.omniLights)
-//        bufferStore.upload(camera: &scene.camera)
-//        bufferStore.upload(models: &scene.objects)
+        var camera = scene.objects.objects.filter { $0.data.type == .camera }.first!
+        bufferStore.upload(camera: &scene.cameras[camera.data.referenceIdx], transform: &camera.data.transform)
+        bufferStore.upload(models: &scene.objects)
 //
         let commandBuffer = commandQueue.makeCommandBuffer()!
         commandBuffer.pushDebugGroup("G-Buffer Renderer Pass")

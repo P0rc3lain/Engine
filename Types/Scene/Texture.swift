@@ -6,9 +6,11 @@
 //
 
 import simd
+import ModelIO
 
 public struct Texture {
     // MARK: - Properties
+    public var texture: MDLTexture! = nil
     public let data: Data
     public let dimensions: vector_int2
     public let rowStride: Int

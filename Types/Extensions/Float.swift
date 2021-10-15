@@ -8,6 +8,6 @@
 extension Float {
     // MARK: - Properties
     public var radians: Float {
-        self / Float(180) * Float.pi
+        self / 180 * .pi
     }
 }

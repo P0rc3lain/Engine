@@ -9,8 +9,6 @@ import ModelIO
 
 extension MDLMeshBuffer {
     var rawData: Data {
-        let data = Data(count: length)
-        fill(data, offset: 0)
-        return data
+        return Data(bytes: map().bytes, count: length)
     }
 }

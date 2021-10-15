@@ -33,7 +33,7 @@ struct LightPassRenderer {
         encoder.setDepthStencilState(depthStencilState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer, offset: 0, index: 0)
         
-        encoder.setFragmentBuffer(bufferStore.omniLights.buffer, offset: 0, index: 3)
+//        encoder.setFragmentBuffer(bufferStore.omniLights.buffer, offset: 0, index: 3)
         encoder.setFragmentBuffer(bufferStore.cameras.buffer, offset: 0, index: 1)
         
         encoder.setFragmentTexture(gbufferRenderPass.colorAttachments[0].texture!, index: 0)

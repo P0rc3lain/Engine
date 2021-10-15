@@ -101,6 +101,7 @@
 		56BF08D12719B70F006053B2 /* Alias+PieceDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BF08A82719B70F006053B2 /* Alias+PieceDescription.swift */; };
 		56BF08D22719B70F006053B2 /* Compatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 56BF08AC2719B70F006053B2 /* Compatibility.h */; };
 		56BF08D32719B70F006053B2 /* Vertex.h in Headers */ = {isa = PBXBuildFile; fileRef = 56BF08AD2719B70F006053B2 /* Vertex.h */; };
+		56BF08FA2719BD89006053B2 /* Texture+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BF08F92719BD89006053B2 /* Texture+Extension.swift */; };
 		56E3ABE22561A535002F931A /* BufferStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E3ABE12561A535002F931A /* BufferStore.swift */; };
 		56F594502556152200FBB639 /* Transformation.h in Sources */ = {isa = PBXBuildFile; fileRef = 56F5944F2556152200FBB639 /* Transformation.h */; };
 		56F59458255627CB00FBB639 /* Postprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F59457255627CA00FBB639 /* Postprocessor.swift */; };
@@ -205,6 +206,7 @@
 		56BF08AA2719B70F006053B2 /* module.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
 		56BF08AC2719B70F006053B2 /* Compatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compatibility.h; sourceTree = "<group>"; };
 		56BF08AD2719B70F006053B2 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
+		56BF08F92719BD89006053B2 /* Texture+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Texture+Extension.swift"; sourceTree = "<group>"; };
 		56E3ABE12561A535002F931A /* BufferStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferStore.swift; sourceTree = "<group>"; };
 		56F5944F2556152200FBB639 /* Transformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Transformation.h; sourceTree = "<group>"; };
 		56F59457255627CA00FBB639 /* Postprocessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Postprocessor.swift; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 				56286AC5255B76D000197B77 /* MDLVertexDescriptor2.swift */,
 				56792784255D57D4009E9638 /* MDLMaterialSemantic2.swift */,
 				568EC05D2560041E0054999E /* CGSize.swift */,
+				56BF08F92719BD89006053B2 /* Texture+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -667,6 +670,7 @@
 				56BF08CF2719B70F006053B2 /* Alias+Geometry.swift in Sources */,
 				563161FF255AD0A400CADA42 /* Geometry2.swift in Sources */,
 				56BF08B62719B70F006053B2 /* Int.swift in Sources */,
+				56BF08FA2719BD89006053B2 /* Texture+Extension.swift in Sources */,
 				560665D725605D0500057B4D /* Transformation.metal in Sources */,
 				56BF08AF2719B70F006053B2 /* TransformAnimation.swift in Sources */,
 				560665D425605BB500057B4D /* PBR.metal in Sources */,

@@ -20,6 +20,13 @@ public enum IndexBitDepth: UInt {
     }
     // MARK: - Public
     public var metal: MTLIndexType {
-        MTLIndexType(rawValue: rawValue)!
+        switch self {
+        case .uInt16:
+            return .uint16
+        case .uInt32:
+            return .uint32
+        default:
+            fatalError("Not supported")
+        }
     }
 }
