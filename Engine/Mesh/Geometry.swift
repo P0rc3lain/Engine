@@ -5,14 +5,14 @@
 //  Created by Mateusz Stompór on 10/11/2020.
 //
 
-import Foundation
+import Types
 
 public struct Geometry {
     // MARK: - Properties
-    let vertexBuffer: DataBuffer
-    let drawDescription: [IndexBasedDraw]
+    let vertexBuffer: GPUDataBuffer
+    let drawDescription: [GPUIndexBasedDraw]
     // MARK: - Initialization
-    init(vertexBuffer: DataBuffer, drawDescription: [IndexBasedDraw]) {
+    init(vertexBuffer: GPUDataBuffer, drawDescription: [GPUIndexBasedDraw]) {
         self.vertexBuffer = vertexBuffer
         self.drawDescription = drawDescription
     }

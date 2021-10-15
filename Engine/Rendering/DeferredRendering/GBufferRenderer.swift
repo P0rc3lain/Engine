@@ -7,6 +7,7 @@
 
 import simd
 import MetalKit
+import Types
 import ShaderTypes
 
 struct GBufferRenderer {
@@ -27,7 +28,7 @@ struct GBufferRenderer {
                                     znear: 0, zfar: 1)
     }
     // MARK: - Internal
-    func draw(encoder: inout MTLRenderCommandEncoder, scene: inout Scene, dataStore: inout BufferStore) {
+    func draw(encoder: inout MTLRenderCommandEncoder, scene: inout GPUSceneDescription, dataStore: inout BufferStore) {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStencilState)
@@ -35,26 +36,27 @@ struct GBufferRenderer {
         encoder.setFrontFacing(.counterClockwise)
         encoder.setVertexBuffer(dataStore.cameras.buffer, offset: 0, index: 1)
         encoder.setStencilReferenceValue(1)
-        for i in 0..<scene.objects.count {
-            let offset = i * MemoryLayout<ModelUniforms>.stride
-            let pieceDescriptor = scene.objects[i].pieceDescriptor
-            let drawIndex = pieceDescriptor.piece.drawDescriptor
-            let geometryIndex = pieceDescriptor.piece.geometry
-            let materialIndex = pieceDescriptor.material
-            let material = scene.sceneAsset.materials[materialIndex]
-            let geometry = scene.sceneAsset.geometries[geometryIndex]
-            encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer, offset: offset, index: 2)
-            encoder.setFragmentBuffer(dataStore.modelCoordinateSystems.buffer, offset: offset, index: 2)
-            encoder.setFragmentTexture(material.albedo, index: 0)
-            encoder.setFragmentTexture(material.roughness, index: 1)
-            encoder.setFragmentTexture(material.normals, index: 2)
-            encoder.setFragmentTexture(material.metallic, index: 3)
-            encoder.setVertexBuffer(geometry.vertexBuffer.buffer, offset: geometry.vertexBuffer.offset, index: 0)
-            encoder.drawIndexedPrimitives(type: geometry.drawDescription[drawIndex].primitiveType,
-                                          indexCount: geometry.drawDescription[drawIndex].indexCount,
-                                          indexType: geometry.drawDescription[drawIndex].indexType,
-                                          indexBuffer: geometry.drawDescription[drawIndex].indexBuffer.buffer,
-                                          indexBufferOffset: geometry.drawDescription[drawIndex].indexBuffer.offset)
+        for i in 0 ..< scene.objects.count {
+            let object = scene.objects[i].data
+            if object.type == .mesh {
+                let mesh = scene.meshes[object.referenceIdx]
+                encoder.setVertexBuffer(mesh.vertexBuffer.buffer, offset: mesh.vertexBuffer.offset, index: 0)
+                for description in mesh.pieceDescriptions {
+                    let material = scene.materials[description.materialIdx]
+                    encoder.setFragmentTexture(material.albedo, index: 0)
+                    encoder.setFragmentTexture(material.roughness, index: 1)
+                    encoder.setFragmentTexture(material.normals, index: 2)
+                    encoder.setFragmentTexture(material.metallic, index: 3)
+                    encoder.drawIndexedPrimitives(type: description.drawDescription.primitiveType,
+                                                  indexCount: description.drawDescription.indexCount,
+                                                  indexType: description.drawDescription.indexType,
+                                                  indexBuffer: description.drawDescription.indexBuffer.buffer,
+                                                  indexBufferOffset: description.drawDescription.indexBuffer.offset)
+                }
+            }
+//            let offset = i * MemoryLayout<ModelUniforms>.stride
+//            encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer, offset: offset, index: 2)
+//            encoder.setFragmentBuffer(dataStore.modelCoordinateSystems.buffer, offset: offset, index: 2)
         }
     }
 }

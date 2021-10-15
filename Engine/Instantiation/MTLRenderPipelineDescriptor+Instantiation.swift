@@ -7,6 +7,7 @@
 
 import Metal
 import ModelIO
+import Types
 import MetalKit
 
 extension MTLRenderPipelineDescriptor {
@@ -16,7 +17,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentPostprocess")
         descriptor.colorAttachments[0].pixelFormat = format
         descriptor.vertexBuffers[0].mutability = .immutable
-        descriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(MDLVertexDescriptor.porcelainMeshVertexDescriptor)
+        descriptor.vertexDescriptor = .porcelain
         return descriptor
     }
     static func environmentRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -38,7 +39,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.colorAttachments[2].pixelFormat = .gBufferPR
         descriptor.depthAttachmentPixelFormat = .gBufferDepthStencil
         descriptor.stencilAttachmentPixelFormat = .gBufferDepthStencil
-        descriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(MDLVertexDescriptor.porcelainMeshVertexDescriptor)
+        descriptor.vertexDescriptor = .porcelain
         return descriptor
     }
     static func lightRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -53,7 +54,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.colorAttachments[0].alphaBlendOperation = .max
         descriptor.depthAttachmentPixelFormat = .lightenSceneDepthStencil
         descriptor.stencilAttachmentPixelFormat = .lightenSceneDepthStencil
-        descriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(MDLVertexDescriptor.porcelainMeshVertexDescriptor)
+        descriptor.vertexDescriptor = .porcelain
         return descriptor
     }
 }

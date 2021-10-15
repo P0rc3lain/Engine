@@ -7,15 +7,16 @@
 
 import Metal
 import ShaderTypes
+import Types
 import Foundation
 
 extension Geometry {
     static func cube(device: MTLDevice) -> Geometry {
         let vertices = cubeVerticesBuffer(device: device)
-        let verticesBuffer = DataBuffer(buffer: vertices, length: vertices.length, offset: 0)
+        let verticesBuffer = GPUDataBuffer(buffer: vertices, length: vertices.length, offset: 0)
         let indices = cubeIndicesBuffer(device: device)
-        let indicesBuffer = DataBuffer(buffer: indices, length: indices.length, offset: 0)
-        let drawDescription = IndexBasedDraw(indexBuffer: indicesBuffer,
+        let indicesBuffer = GPUDataBuffer(buffer: indices, length: indices.length, offset: 0)
+        let drawDescription = GPUIndexBasedDraw(indexBuffer: indicesBuffer,
                                              indexCount: indices.length,
                                              indexType: .uint16,
                                              primitiveType: .triangle)
@@ -23,10 +24,10 @@ extension Geometry {
     }
     static func screenSpacePlane(device: MTLDevice) -> Geometry {
         let indices = planeIndicesBuffer(device: device)
-        let indicesBuffer = DataBuffer(buffer: indices, length: indices.length, offset: indices.heapOffset)
+        let indicesBuffer = GPUDataBuffer(buffer: indices, length: indices.length, offset: indices.heapOffset)
         let vertices = planeVerticesBuffer(device: device)
-        let verticesBuffer = DataBuffer(buffer: vertices, length: vertices.length, offset: vertices.heapOffset)
-        let drawDescription = IndexBasedDraw(indexBuffer: indicesBuffer,
+        let verticesBuffer = GPUDataBuffer(buffer: vertices, length: vertices.length, offset: vertices.heapOffset)
+        let drawDescription = GPUIndexBasedDraw(indexBuffer: indicesBuffer,
                                              indexCount: indicesBuffer.length / MemoryLayout<UInt16>.stride,
                                              indexType: .uint16,
                                              primitiveType: .triangle)

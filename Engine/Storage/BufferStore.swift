@@ -6,6 +6,7 @@
 //
 
 import Metal
+import Types
 import ShaderTypes
 
 struct BufferStore {
@@ -19,12 +20,12 @@ struct BufferStore {
         cameras = DynamicBuffer<CameraUniforms>(device: device, initialCapacity: 1)!
         modelCoordinateSystems = DynamicBuffer<ModelUniforms>(device: device, initialCapacity: 10)!
     }
-    mutating func upload(camera: inout Camera) {
-        let viewMatrix = camera.coordinateSpace.transformationRTS
+    mutating func upload(camera: inout Camera, transform: inout Transform) {
+        let viewMatrix = transform.coordinateSpace.transformationRTS
         var uniforms = [CameraUniforms(projectionMatrix: camera.projectionMatrix, viewMatrix: viewMatrix, viewMatrixInverse: viewMatrix.inverse)]
         cameras.upload(data: &uniforms)
     }
-    mutating func upload(models: inout [PositionedPiece]) {
+    mutating func upload(models: inout [Transform]) {
         var allPieces = [ModelUniforms]()
         for i in 0..<models.count {
             let matrix = models[i].coordinateSpace.transformationTRS
