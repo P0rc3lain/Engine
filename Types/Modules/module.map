@@ -1,0 +1,4 @@
+module MetalBinding {
+    header "../MetalBinding/Vertex.h"
+    export *
+}

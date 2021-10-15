@@ -7,7 +7,6 @@
 
 import Metal
 import ModelIO
-import Types
 import MetalKit
 
 extension MTLRenderPipelineDescriptor {

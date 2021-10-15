@@ -18,9 +18,9 @@ struct EnvironmentRenderer {
     private let pipelineState: MTLRenderPipelineState
     private let depthStentilState: MTLDepthStencilState
     private let viewPort: MTLViewport
-    private let cube: Geometry
+    private let cube: Geometry2
     // MARK: - Initialization
-    init(pipelineState: MTLRenderPipelineState, depthStentilState: MTLDepthStencilState, drawableSize: CGSize, cube: Geometry) {
+    init(pipelineState: MTLRenderPipelineState, depthStentilState: MTLDepthStencilState, drawableSize: CGSize, cube: Geometry2) {
         self.pipelineState = pipelineState
         self.depthStentilState = depthStentilState
         self.cube = cube

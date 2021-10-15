@@ -5,7 +5,6 @@
 //  Created by Mateusz Stompór on 11/11/2020.
 //
 
-import Types
 import MetalKit
 
 public class Engine {

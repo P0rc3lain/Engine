@@ -15,13 +15,13 @@ struct LightPassRenderer {
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport
     private let gbufferRenderPass: MTLRenderPassDescriptor
-    private let plane: Geometry
+    private let plane: Geometry2
     // MARK: - Initialization
     init(pipelineState: MTLRenderPipelineState, gBufferRenderPass: MTLRenderPassDescriptor, device: MTLDevice, depthStencilState: MTLDepthStencilState, drawableSize: CGSize) {
         self.pipelineState = pipelineState
         self.depthStencilState = depthStencilState
         self.gbufferRenderPass = gBufferRenderPass
-        self.plane = Geometry.screenSpacePlane(device: device)
+        self.plane = Geometry2.screenSpacePlane(device: device)
         self.viewPort = MTLViewport(originX: 0, originY: 0,
                                     width: Double(drawableSize.width), height: Double(drawableSize.height),
                                     znear: 0, zfar: 1)

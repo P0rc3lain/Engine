@@ -13,9 +13,9 @@ struct Postprocessor {
     private let pipelineState: MTLRenderPipelineState
     private let texture: MTLTexture
     private let viewPort: MTLViewport
-    private let plane: Geometry
+    private let plane: Geometry2
     // MARK: - Initialization
-    init(pipelineState: MTLRenderPipelineState, texture: MTLTexture, plane: Geometry, canvasSize: CGSize) {
+    init(pipelineState: MTLRenderPipelineState, texture: MTLTexture, plane: Geometry2, canvasSize: CGSize) {
         self.texture = texture
         self.pipelineState = pipelineState
         self.plane = plane

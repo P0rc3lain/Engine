@@ -7,7 +7,6 @@
 
 import Metal
 import MetalKit
-import Types
 import ShaderTypes
 
 public struct RenderingCoordinator {

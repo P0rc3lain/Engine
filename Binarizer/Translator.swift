@@ -1,0 +1,97 @@
+//
+//  Translator.swift
+//  Binarizer
+//
+//  Created by Mateusz Stompór on 08/10/2021.
+//
+
+import simd
+import ModelIO
+
+public class Translator {
+    // MARK: - Initialization
+    public init() { }
+    // MARK: - Public
+    public func process(asset: MDLAsset) -> RamSceneDescription {
+        var scene = RamSceneDescription()
+        asset.walk { object in
+            scene.objectNames.append(object.name)
+            let parentIdx = object.parent != nil ? scene.objectNames.firstIndex(of: object.parent!.name)! : .nil
+            let transform = object.transform?.decompose ?? Transform()
+            if let object = object as? MDLCamera {
+                scene.cameraNames.append(object.name)
+                scene.cameras.append(object.porcelain)
+                let entity = Entity(transform: transform,
+                                    type: .camera,
+                                    referenceIdx: scene.cameras.count - 1)
+                scene.objects.add(parentIdx: parentIdx, data: entity)
+            } /* else if let object = object as? MDLLight {
+                fatalError("Not implemented")
+            } */ else if let object = object as? MDLMesh {
+                assert(object.vertexBuffers.count == 1)
+                let buffer = object.vertexBuffers[0].rawData
+                let dataBuffer = DataBuffer(buffer: buffer, length: buffer.count, offset: 0)
+                var pieceDescriptions = [RamPieceDescription]()
+                (object.submeshes as! [MDLSubmesh]).forEach {
+                    var materialIdx = Int.nil
+                    if let material = $0.material {
+                        materialIdx = scene.materials.count
+                        scene.materialNames.append(material.name)
+//                        scene.materials.append(material.porcelain)
+                    }
+                    let description = PieceDescription(materialIdx: materialIdx,
+                                                       drawDescription: $0.porcelainIndexBasedDraw)
+                    pieceDescriptions.append(description)
+                }
+                let geometry = Geometry(vertexBuffer: dataBuffer, pieceDescriptions: pieceDescriptions)
+                scene.meshNames.append(object.name)
+                scene.meshes.append(geometry)
+                let entity = Entity(transform: transform,
+                                    type: .mesh,
+                                    referenceIdx: scene.meshes.count - 1)
+                scene.objects.add(parentIdx: parentIdx, data: entity)
+            } else {
+                let entity = Entity(transform: transform,
+                                    type: .group,
+                                    referenceIdx: .nil)
+                scene.objects.add(parentIdx: parentIdx, data: entity)
+            }
+            if let animationBindComponent = object.componentConforming(to: MDLComponent.self) as?
+                MDLAnimationBindComponent {
+                guard let skeleton = animationBindComponent.skeleton, !(skeleton.jointPaths.isEmpty) else {
+                    fatalError("Animation Bind Component is missing a skeleton or the jointPaths is empty")
+                }
+                if let jointAnimation = animationBindComponent.jointAnimation as? MDLPackedJointAnimation {
+                    assert(skeleton.jointPaths == jointAnimation.jointPaths)
+                    scene.skeletalAnimations.append(SkeletalAnimation(translations: jointAnimation.translations,
+                                                                      rotations: jointAnimation.rotations))
+                    let skeleton = Skeleton(animationIdx: scene.skeletalAnimations.count - 1,
+                                            geometryBindTransform: float4x4(animationBindComponent.geometryBindTransform),
+                                            bindTransforms: animationBindComponent.skeleton!.jointBindTransforms.float4x4Array,
+                                            parentIndices: jointAnimation.jointPaths.map { parentIndex(jointPaths: jointAnimation.jointPaths, jointPath: $0) })
+                    scene.skeletons.append(skeleton)
+                    scene.skeletonReferences.append(scene.skeletons.count - 1)
+                } else {
+                    fatalError("Unhandled case")
+                }
+            } else {
+                scene.skeletonReferences.append(Int.nil)
+            }
+        }
+        assert(Set(scene.objectNames).count == scene.objectNames.count, "Object names must be unique")
+        assert(Set(scene.cameraNames).count == scene.cameraNames.count, "Camera names must be unique")
+        assert(Set(scene.meshNames).count == scene.meshNames.count, "Mesh names must be unique")
+        assert(Set(scene.materialNames).count == scene.materialNames.count, "Mesh names must be unique")
+        return scene
+    }
+    // MARK: - Private
+    private func parentIndex(jointPaths: [String], jointPath: String) -> Int {
+        let components = jointPath.components(separatedBy: "/")
+        if components.count > 1 {
+            let parentPath = components[0..<components.count-1].joined(separator: "/")
+            return jointPaths.firstIndex(of: parentPath)!
+        } else {
+            return .nil
+        }
+    }
+}

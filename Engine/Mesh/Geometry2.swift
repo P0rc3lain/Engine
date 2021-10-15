@@ -5,9 +5,8 @@
 //  Created by Mateusz Stompór on 10/11/2020.
 //
 
-import Types
 
-public struct Geometry {
+public struct Geometry2 {
     // MARK: - Properties
     let vertexBuffer: GPUDataBuffer
     let drawDescription: [GPUIndexBasedDraw]

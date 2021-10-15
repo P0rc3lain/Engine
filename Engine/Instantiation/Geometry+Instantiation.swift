@@ -7,11 +7,10 @@
 
 import Metal
 import ShaderTypes
-import Types
 import Foundation
 
-extension Geometry {
-    static func cube(device: MTLDevice) -> Geometry {
+extension Geometry2 {
+    static func cube(device: MTLDevice) -> Geometry2 {
         let vertices = cubeVerticesBuffer(device: device)
         let verticesBuffer = GPUDataBuffer(buffer: vertices, length: vertices.length, offset: 0)
         let indices = cubeIndicesBuffer(device: device)
@@ -20,9 +19,9 @@ extension Geometry {
                                              indexCount: indices.length,
                                              indexType: .uint16,
                                              primitiveType: .triangle)
-        return Geometry(vertexBuffer: verticesBuffer, drawDescription: [drawDescription])
+        return Geometry2(vertexBuffer: verticesBuffer, drawDescription: [drawDescription])
     }
-    static func screenSpacePlane(device: MTLDevice) -> Geometry {
+    static func screenSpacePlane(device: MTLDevice) -> Geometry2 {
         let indices = planeIndicesBuffer(device: device)
         let indicesBuffer = GPUDataBuffer(buffer: indices, length: indices.length, offset: indices.heapOffset)
         let vertices = planeVerticesBuffer(device: device)
@@ -31,7 +30,7 @@ extension Geometry {
                                              indexCount: indicesBuffer.length / MemoryLayout<UInt16>.stride,
                                              indexType: .uint16,
                                              primitiveType: .triangle)
-        return Geometry(vertexBuffer: verticesBuffer, drawDescription: [drawDescription])
+        return Geometry2(vertexBuffer: verticesBuffer, drawDescription: [drawDescription])
     }
     private static var planeVertices: [Vertex] = [
         Vertex(position: simd_float3(-1, -1, 0), normal: simd_float3(0, 0, 1), tangent: simd_float3(0, 1, 0), textureUV: simd_float2(0, 1)),

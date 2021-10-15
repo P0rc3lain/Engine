@@ -6,7 +6,6 @@
 //
 
 import Metal
-import Types
 import ShaderTypes
 
 struct BufferStore {

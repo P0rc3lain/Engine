@@ -7,7 +7,6 @@
 
 import simd
 import MetalKit
-import Types
 import ShaderTypes
 
 struct GBufferRenderer {
