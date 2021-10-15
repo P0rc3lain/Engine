@@ -8,7 +8,9 @@
 #include <metal_stdlib>
 
 #include "../Common/PBR.h"
+#include "../../MetalBinding/Model.h"
 #include "../../MetalBinding/Vertex.h"
+#include "../../MetalBinding/Camera.h"
 
 using namespace metal;
 

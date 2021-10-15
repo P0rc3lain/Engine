@@ -15,9 +15,9 @@ struct BufferStore {
     var modelCoordinateSystems: DynamicBuffer<ModelUniforms>
     // MARK: - Initialization
     init(device: MTLDevice) {
-        omniLights = DynamicBuffer<OmniLight>(device: device, initialCapacity: 10)!
+        omniLights = DynamicBuffer<OmniLight>(device: device, initialCapacity: 1)!
         cameras = DynamicBuffer<CameraUniforms>(device: device, initialCapacity: 1)!
-        modelCoordinateSystems = DynamicBuffer<ModelUniforms>(device: device, initialCapacity: 10)!
+        modelCoordinateSystems = DynamicBuffer<ModelUniforms>(device: device, initialCapacity: 1)!
     }
     mutating func upload(camera: inout Camera, transform: inout Transform) {
         let viewMatrix = transform.coordinateSpace.transformationRTS

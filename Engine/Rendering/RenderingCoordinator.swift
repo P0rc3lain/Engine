@@ -42,7 +42,7 @@ public struct RenderingCoordinator {
         lightRenderer = LightPassRenderer.make(device: view.device!, gBufferRenderPassDescriptor: gBufferRenderPassDescriptor, drawableSize: renderingSize)
     }
     public mutating func draw(scene: inout GPUSceneDescription) {
-//        bufferStore.omniLights.upload(data: &scene.omniLights)
+        bufferStore.omniLights.upload(data: &scene.lights)
         var camera = scene.objects.objects.filter { $0.data.type == .camera }.first!
         bufferStore.upload(camera: &scene.cameras[camera.data.referenceIdx], transform: &camera.data.transform)
         bufferStore.upload(models: &scene.objects)

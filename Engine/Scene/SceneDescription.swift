@@ -5,6 +5,8 @@
 //  Created by Mateusz Stompór on 11/10/2021.
 //
 
+import MetalBinding
+
 public struct SceneDescription<DataType, IndexType, GeometryType, TextureType> {
     // MARK: - Properties
     public var objectNames = [String]()

@@ -5,19 +5,16 @@
 //  Created by Mateusz Stompór on 14/11/2020.
 //
 
+#include <simd/simd.h>
 #include <metal_stdlib>
 
-#include <simd/simd.h>
 #include "../Common/PBR.h"
+#include "../../MetalBinding/Model.h"
 #include "../../MetalBinding/Vertex.h"
+#include "../../MetalBinding/Camera.h"
+#include "../../MetalBinding/OmniLight.h"
 
 using namespace metal;
-
-struct OmniLight {
-    simd_float3 color;
-    float intensity;
-    int idx;
-};
 
 struct TexturePipelineRasterizerData {
     float4 position [[position]];

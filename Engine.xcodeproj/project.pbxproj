@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		561666F72719E2CD000063B1 /* OmniLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5616667E2719E2CC000063B1 /* OmniLight.swift */; };
 		561666F82719E2CD000063B1 /* MTLVertexDescriptor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666802719E2CC000063B1 /* MTLVertexDescriptor+Extension.swift */; };
 		561666F92719E2CD000063B1 /* MDLMaterialProperty+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666812719E2CC000063B1 /* MDLMaterialProperty+Extension.swift */; };
 		561666FA2719E2CD000063B1 /* simd_float4+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666822719E2CC000063B1 /* simd_float4+Extension.swift */; };
@@ -101,11 +100,13 @@
 		561667562719E2CD000063B1 /* RenderingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666F12719E2CD000063B1 /* RenderingCoordinator.swift */; };
 		561667572719E2CD000063B1 /* BufferStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666F32719E2CD000063B1 /* BufferStore.swift */; };
 		561667582719E2CD000063B1 /* Engine.h in Headers */ = {isa = PBXBuildFile; fileRef = 561666F52719E2CD000063B1 /* Engine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		563D0A2A2719F77000F77B40 /* OmniLight.h in Headers */ = {isa = PBXBuildFile; fileRef = 563D0A292719F76600F77B40 /* OmniLight.h */; };
+		563D0A2D2719F7A700F77B40 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 563D0A2B2719F79D00F77B40 /* Camera.h */; };
+		563D0A2E2719F7A700F77B40 /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = 563D0A2C2719F7A400F77B40 /* Model.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5601396C255457D100FC1C45 /* Engine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Engine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5616667E2719E2CC000063B1 /* OmniLight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmniLight.swift; sourceTree = "<group>"; };
 		561666802719E2CC000063B1 /* MTLVertexDescriptor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MTLVertexDescriptor+Extension.swift"; sourceTree = "<group>"; };
 		561666812719E2CC000063B1 /* MDLMaterialProperty+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MDLMaterialProperty+Extension.swift"; sourceTree = "<group>"; };
 		561666822719E2CC000063B1 /* simd_float4+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "simd_float4+Extension.swift"; sourceTree = "<group>"; };
@@ -201,6 +202,9 @@
 		561666F32719E2CD000063B1 /* BufferStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferStore.swift; sourceTree = "<group>"; };
 		561666F52719E2CD000063B1 /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
 		561666F62719E2CD000063B1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		563D0A292719F76600F77B40 /* OmniLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OmniLight.h; sourceTree = "<group>"; };
+		563D0A2B2719F79D00F77B40 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		563D0A2C2719F7A400F77B40 /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,7 +243,6 @@
 				5616667F2719E2CC000063B1 /* Extensions */,
 				561666C62719E2CC000063B1 /* Geometry */,
 				561666A42719E2CC000063B1 /* Instantiation */,
-				5616667D2719E2CC000063B1 /* Light */,
 				561666B32719E2CC000063B1 /* Loading */,
 				561666BC2719E2CC000063B1 /* Mesh */,
 				561666E52719E2CD000063B1 /* MetalBinding */,
@@ -252,14 +255,6 @@
 				561666F42719E2CD000063B1 /* SupportingFiles */,
 			);
 			path = Engine;
-			sourceTree = "<group>";
-		};
-		5616667D2719E2CC000063B1 /* Light */ = {
-			isa = PBXGroup;
-			children = (
-				5616667E2719E2CC000063B1 /* OmniLight.swift */,
-			);
-			path = Light;
 			sourceTree = "<group>";
 		};
 		5616667F2719E2CC000063B1 /* Extensions */ = {
@@ -452,6 +447,9 @@
 			children = (
 				561666E62719E2CD000063B1 /* Compatibility.h */,
 				561666E72719E2CD000063B1 /* Vertex.h */,
+				563D0A292719F76600F77B40 /* OmniLight.h */,
+				563D0A2B2719F79D00F77B40 /* Camera.h */,
+				563D0A2C2719F7A400F77B40 /* Model.h */,
 			);
 			path = MetalBinding;
 			sourceTree = "<group>";
@@ -500,10 +498,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				563D0A2A2719F77000F77B40 /* OmniLight.h in Headers */,
 				5616674F2719E2CD000063B1 /* Vertex.h in Headers */,
 				561667472719E2CD000063B1 /* PBR.h in Headers */,
+				563D0A2D2719F7A700F77B40 /* Camera.h in Headers */,
 				561667582719E2CD000063B1 /* Engine.h in Headers */,
 				561667492719E2CD000063B1 /* Transformation.h in Headers */,
+				563D0A2E2719F7A700F77B40 /* Model.h in Headers */,
 				5616674E2719E2CD000063B1 /* Compatibility.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -655,7 +656,6 @@
 				561666FF2719E2CD000063B1 /* simd_float3+Extension.swift in Sources */,
 				561667192719E2CD000063B1 /* SkeletalAnimation.swift in Sources */,
 				561666F82719E2CD000063B1 /* MTLVertexDescriptor+Extension.swift in Sources */,
-				561666F72719E2CD000063B1 /* OmniLight.swift in Sources */,
 				561667322719E2CD000063B1 /* Alias+IndexBasedDraw.swift in Sources */,
 				561667122719E2CD000063B1 /* Float+Extension.swift in Sources */,
 				5616673C2719E2CD000063B1 /* IndexBitDepth.swift in Sources */,
