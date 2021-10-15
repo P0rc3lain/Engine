@@ -7,7 +7,7 @@
 
 #include <metal_stdlib>
 
-#include "../SharedTypes/Types.h"
+#include "../MetalBinding/Vertex.h"
 
 using namespace metal;
 
