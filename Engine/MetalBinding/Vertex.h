@@ -26,4 +26,23 @@ struct Vertex {
     simd_float2 textureUV   metal_only([[attribute(kVertexAttributeTextureUV)]]);
 };
 
+struct CameraUniforms {
+    simd_float4x4 projectionMatrix;
+    simd_float4x4 viewMatrix;
+    simd_float4x4 viewMatrixInverse;
+};
+
+struct OmniLightUniforms {
+    simd_float4x4 projectionMatrix;
+    simd_float4x4 viewMatrix;
+    simd_float4x4 viewMatrixInverse;
+};
+
+struct ModelUniforms {
+    simd_float4x4 modelMatrix;
+    simd_float4x4 modelMatrixInverse;
+    simd_float4x4 modelMatrixInverse2;
+    simd_float4x4 modelMatrixInverse3;
+};
+
 #endif /* VERTEX_H */

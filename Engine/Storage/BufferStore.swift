@@ -6,7 +6,7 @@
 //
 
 import Metal
-import ShaderTypes
+import MetalBinding
 
 struct BufferStore {
     // MARK: - Properties

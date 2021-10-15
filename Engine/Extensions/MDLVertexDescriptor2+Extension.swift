@@ -6,7 +6,7 @@
 //
 
 import ModelIO
-import ShaderTypes
+import MetalBinding
 
 //extension MDLVertexDescriptor {
 //    static var porcelainMeshVertexDescriptor: MDLVertexDescriptor {

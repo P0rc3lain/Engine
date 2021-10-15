@@ -8,7 +8,7 @@
 #include <metal_stdlib>
 
 #include "../Common/PBR.h"
-#include "../../SharedTypes/Types.h"
+#include "../../MetalBinding/Vertex.h"
 
 using namespace metal;
 

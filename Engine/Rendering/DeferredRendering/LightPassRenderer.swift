@@ -7,7 +7,7 @@
 
 import simd
 import MetalKit
-import ShaderTypes
+import MetalBinding
 
 struct LightPassRenderer {
     // MARK: - Properties

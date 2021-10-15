@@ -7,7 +7,7 @@
 
 import Metal
 import MetalKit
-import ShaderTypes
+import MetalBinding
 
 public struct RenderingCoordinator {
     // MARK: - Private

@@ -9,7 +9,7 @@
 
 #include <simd/simd.h>
 #include "../Common/PBR.h"
-#include "../../SharedTypes/Types.h"
+#include "../../MetalBinding/Vertex.h"
 
 using namespace metal;
 

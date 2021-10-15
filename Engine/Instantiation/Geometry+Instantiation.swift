@@ -6,7 +6,7 @@
 //
 
 import Metal
-import ShaderTypes
+import MetalBinding
 import Foundation
 
 extension Geometry2 {
