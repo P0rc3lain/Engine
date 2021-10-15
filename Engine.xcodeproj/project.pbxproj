@@ -721,6 +721,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				MTL_COMPILER_FLAGS = "-D__METAL__";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stompor.mateusz.porcelain.engine;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -749,6 +750,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				MTL_COMPILER_FLAGS = "-D__METAL__";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stompor.mateusz.porcelain.engine;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
