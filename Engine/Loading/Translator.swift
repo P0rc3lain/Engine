@@ -15,11 +15,11 @@ public class Translator {
     public func process(asset: MDLAsset) -> RamSceneDescription {
         var scene = RamSceneDescription()
         asset.walk { object in
-            scene.objectNames.append(object.name)
-            let parentIdx = object.parent != nil ? scene.objectNames.firstIndex(of: object.parent!.name)! : .nil
+            scene.objectNames.append(object.path)
+            let parentIdx = object.parent != nil ? scene.objectNames.firstIndex(of: object.parent!.path)! : .nil
             let transform = object.transform?.decompose ?? Transform()
             if let object = object as? MDLCamera {
-                scene.cameraNames.append(object.name)
+                scene.cameraNames.append(object.path)
                 scene.cameras.append(object.porcelain)
                 let entity = Entity(transform: transform,
                                     type: .camera,
@@ -47,7 +47,7 @@ public class Translator {
                     pieceDescriptions.append(description)
                 }
                 let geometry = Geometry(vertexBuffer: dataBuffer, pieceDescriptions: pieceDescriptions)
-                scene.meshNames.append(object.name)
+                scene.meshNames.append(object.path)
                 scene.meshes.append(geometry)
                 let entity = Entity(transform: transform,
                                     type: .mesh,
@@ -81,7 +81,7 @@ public class Translator {
                 scene.skeletonReferences.append(Int.nil)
             }
         }
-//        assert(Set(scene.objectNames).count == scene.objectNames.count, "Object names must be unique")
+        assert(Set(scene.objectNames).count == scene.objectNames.count, "Object names must be unique")
         assert(Set(scene.cameraNames).count == scene.cameraNames.count, "Camera names must be unique")
         assert(Set(scene.meshNames).count == scene.meshNames.count, "Mesh names must be unique")
         assert(Set(scene.materialNames).count == scene.materialNames.count, "Mesh names must be unique")
