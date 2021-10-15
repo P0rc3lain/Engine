@@ -20,7 +20,7 @@ public struct SceneDescription<DataType, IndexType, GeometryType, TextureType> {
     public var cameras = [Camera]()
     public var lightNames = [String]()
     public var lights = [OmniLight]()
-    
+    public var activeCameraIdx = Int.nil
     // MARK: - Initialization
     public init() { }
 }
