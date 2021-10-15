@@ -25,11 +25,7 @@ struct BufferStore {
         cameras.upload(data: &uniforms)
     }
     mutating func upload(models: inout EntityTree) {
-        var allPieces = [ModelUniforms]()
-        for i in 0 ..< models.objects.count {
-            let matrix = models.objects[i].data.transform.coordinateSpace.transformationTRS
-            allPieces.append(ModelUniforms(modelMatrix: matrix, modelMatrixInverse: matrix.inverse, modelMatrixInverse2: matrix, modelMatrixInverse3: matrix))
-        }
-        modelCoordinateSystems.upload(data: &allPieces)
+        var uniforms = models.modelUniforms
+        modelCoordinateSystems.upload(data: &uniforms)
     }
 }
