@@ -18,7 +18,7 @@ public struct Node<T> {
 
 public struct FlatTree<T> {
     // MARK: - Properties
-    var objects = [Node<T>]()
+    public var objects = [Node<T>]()
     public var count: Int {
         return objects.count
     }

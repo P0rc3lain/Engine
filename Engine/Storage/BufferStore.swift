@@ -10,12 +10,12 @@ import ShaderTypes
 
 struct BufferStore {
     // MARK: - Properties
-//    var omniLights: DynamicBuffer<OmniLight>
+    var omniLights: DynamicBuffer<OmniLight>
     var cameras: DynamicBuffer<CameraUniforms>
     var modelCoordinateSystems: DynamicBuffer<ModelUniforms>
     // MARK: - Initialization
     init(device: MTLDevice) {
-//        omniLights = DynamicBuffer<OmniLight>(device: device, initialCapacity: 10)!
+        omniLights = DynamicBuffer<OmniLight>(device: device, initialCapacity: 10)!
         cameras = DynamicBuffer<CameraUniforms>(device: device, initialCapacity: 1)!
         modelCoordinateSystems = DynamicBuffer<ModelUniforms>(device: device, initialCapacity: 10)!
     }

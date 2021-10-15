@@ -17,10 +17,12 @@ public struct OmniLight {
             }
         }
     }
+    public var idx: Int
     // MARK: - Initialization
-    public init(color: simd_float3, intensity: Float) {
+    public init(color: simd_float3, intensity: Float, idx: Int) {
         assert(color.norm <= 1.733, "Color values must be in [0.0, 1.0] range")
         self.color = color
         self.intensity = intensity
+        self.idx = idx
     }
 }

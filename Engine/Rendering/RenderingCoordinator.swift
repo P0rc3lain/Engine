@@ -15,10 +15,10 @@ public struct RenderingCoordinator {
     private let commandQueue: MTLCommandQueue
     private var offscreenRenderPassDescriptor: MTLRenderPassDescriptor
     private var gBufferRenderPassDescriptor: MTLRenderPassDescriptor
-//    private var postProcessor: Postprocessor
+    private var postProcessor: Postprocessor
     private var gBufferRenderer: GBufferRenderer
-//    private var environmentRenderer: EnvironmentRenderer
-//    private var lightRenderer: LightPassRenderer
+    private var environmentRenderer: EnvironmentRenderer
+    private var lightRenderer: LightPassRenderer
     private var bufferStore: BufferStore
     let canvasSize: CGSize
     let renderingSize: CGSize
@@ -33,13 +33,13 @@ public struct RenderingCoordinator {
         offscreenRenderPassDescriptor = MTLRenderPassDescriptor.lightenScene(device: view.device!,
                                                                              depthStencil: gBufferRenderPassDescriptor.stencilAttachment.texture!,
                                                                              size: renderingSize)
-//        postProcessor = Postprocessor.make(device: view.device!,
-//                                           inputTexture: offscreenRenderPassDescriptor.colorAttachments[0].texture!,
-//                                           outputFormat: view.colorPixelFormat,
-//                                           canvasSize: canvasSize)
-//        environmentRenderer = EnvironmentRenderer.make(device: view.device!, drawableSize: view.drawableSize)
+        postProcessor = Postprocessor.make(device: view.device!,
+                                           inputTexture: offscreenRenderPassDescriptor.colorAttachments[0].texture!,
+                                           outputFormat: view.colorPixelFormat,
+                                           canvasSize: canvasSize)
+        environmentRenderer = EnvironmentRenderer.make(device: view.device!, drawableSize: view.drawableSize)
         gBufferRenderer = GBufferRenderer.make(device: view.device!, drawableSize: renderingSize)
-//        lightRenderer = LightPassRenderer.make(device: view.device!, gBufferRenderPassDescriptor: gBufferRenderPassDescriptor, drawableSize: renderingSize)
+        lightRenderer = LightPassRenderer.make(device: view.device!, gBufferRenderPassDescriptor: gBufferRenderPassDescriptor, drawableSize: renderingSize)
     }
     public mutating func draw(scene: inout GPUSceneDescription) {
 //        bufferStore.omniLights.upload(data: &scene.omniLights)
@@ -55,26 +55,24 @@ public struct RenderingCoordinator {
         gBufferEncoder.endEncoding()
         commandBuffer.popDebugGroup()
 //
-//        var lightEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor)!
+        var lightEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor)!
 //
-//        commandBuffer.pushDebugGroup("Light Pass")
-//        lightRenderer.draw(encoder: &lightEncoder, bufferStore: &bufferStore, lightsCount: scene.omniLights.count)
-//        commandBuffer.popDebugGroup()
+        commandBuffer.pushDebugGroup("Light Pass")
+        lightRenderer.draw(encoder: &lightEncoder, bufferStore: &bufferStore, lightsCount: scene.lights.count)
+        commandBuffer.popDebugGroup()
 //
 //        commandBuffer.pushDebugGroup("Environment Map")
 //        environmentRenderer.draw(encoder: lightEncoder, scene: &scene)
 //        commandBuffer.popDebugGroup()
 //
-//        lightEncoder.endEncoding()
+        lightEncoder.endEncoding()
 //
 //
-//        commandBuffer.pushDebugGroup("Post Processing Pass")
-//        let texturePass = commandBuffer.makeRenderCommandEncoder(descriptor: view.currentRenderPassDescriptor!)!
-//        postProcessor.draw(encoder: texturePass)
-//        texturePass.endEncoding()
-//        commandBuffer.popDebugGroup()
-//    
-//
+        commandBuffer.pushDebugGroup("Post Processing Pass")
+        let texturePass = commandBuffer.makeRenderCommandEncoder(descriptor: view.currentRenderPassDescriptor!)!
+        postProcessor.draw(encoder: texturePass)
+        texturePass.endEncoding()
+        commandBuffer.popDebugGroup()
         commandBuffer.present(view.currentDrawable!)
         commandBuffer.commit()
     }

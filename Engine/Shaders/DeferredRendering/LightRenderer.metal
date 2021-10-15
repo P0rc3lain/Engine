@@ -16,7 +16,7 @@ using namespace metal;
 struct OmniLight {
     simd_float3 color;
     float intensity;
-    simd_float3 position;
+    int idx;
 };
 
 struct TexturePipelineRasterizerData {
@@ -39,7 +39,8 @@ fragment float4 fragmentDeferredLight(TexturePipelineRasterizerData in          
                                       texture2d<float>              nm              [[texture(1)]],
                                       texture2d<float>              pr              [[texture(2)]],
                                       constant CameraUniforms &     camera          [[buffer(1)]],
-                                      constant OmniLight *          omniLights      [[buffer(3)]]) {
+                                      constant OmniLight *          omniLights      [[buffer(3)]],
+                                      constant ModelUniforms *      lightUniforms   [[buffer(4)]]) {
     constexpr sampler textureSampler(mag_filter::nearest, min_filter::nearest);
     float4 arV = ar.sample(textureSampler, in.texcoord);
     float4 nmV = nm.sample(textureSampler, in.texcoord);
@@ -58,7 +59,9 @@ fragment float4 fragmentDeferredLight(TexturePipelineRasterizerData in          
     float3 eye = normalize(cameraWorld - worldPosition);
     
     float3 outputColor(0, 0, 0);
-    float3 l = normalize(omniLights[in.instanceId].position - worldPosition);
+    int id = omniLights[in.instanceId].idx;
+    float4 lightPosition = lightUniforms[id].modelMatrix * float4(0, 0, 0, 1);
+    float3 l = normalize(lightPosition.xyz - worldPosition);
     float3 halfway = normalize(l + eye);
     float3 f0 = 0.16 * reflectance * reflectance * (1 - metallicFactor) + metallicFactor * baseColor;
     float3 specular = cookTorrance(n, eye, halfway, l, roughnessFactor, f0);
