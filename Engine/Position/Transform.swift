@@ -8,11 +8,11 @@
 import simd
 
 public struct Transform {
-    // MARK: - Properties
+    // MARK: - Properties    
     public var coordinateSpace: CoordinateSpace
     public let animation: TransformAnimation
     public var finalTransfrom: simd_float4x4 {
-        return coordinateSpace.transformationTRS
+        return coordinateSpace.transformationTRS * animation.transformation(at: Date().timeIntervalSince1970)
     }
     // MARK: - Initialization
     public init(coordinateSpace: CoordinateSpace = CoordinateSpace(),
