@@ -13,9 +13,9 @@ struct Postprocessor {
     private let pipelineState: MTLRenderPipelineState
     private let texture: MTLTexture
     private let viewPort: MTLViewport
-    private let plane: Geometry2
+    private let plane: GPUGeometry
     // MARK: - Initialization
-    init(pipelineState: MTLRenderPipelineState, texture: MTLTexture, plane: Geometry2, canvasSize: CGSize) {
+    init(pipelineState: MTLRenderPipelineState, texture: MTLTexture, plane: GPUGeometry, canvasSize: CGSize) {
         self.texture = texture
         self.pipelineState = pipelineState
         self.plane = plane
@@ -30,9 +30,9 @@ struct Postprocessor {
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer, offset: 0, index: 0)
         encoder.drawIndexedPrimitives(type: .triangle,
-                                      indexCount: plane.drawDescription[0].indexCount,
-                                      indexType: plane.drawDescription[0].indexType,
-                                      indexBuffer: plane.drawDescription[0].indexBuffer.buffer,
-                                      indexBufferOffset: plane.drawDescription[0].indexBuffer.offset)
+                                      indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
+                                      indexType: plane.pieceDescriptions[0].drawDescription.indexType,
+                                      indexBuffer: plane.pieceDescriptions[0].drawDescription.indexBuffer.buffer,
+                                      indexBufferOffset: plane.pieceDescriptions[0].drawDescription.indexBuffer.offset)
     }
 }

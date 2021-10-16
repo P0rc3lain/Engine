@@ -15,13 +15,13 @@ struct LightPassRenderer {
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport
     private let gbufferRenderPass: MTLRenderPassDescriptor
-    private let plane: Geometry2
+    private let plane: GPUGeometry
     // MARK: - Initialization
     init(pipelineState: MTLRenderPipelineState, gBufferRenderPass: MTLRenderPassDescriptor, device: MTLDevice, depthStencilState: MTLDepthStencilState, drawableSize: CGSize) {
         self.pipelineState = pipelineState
         self.depthStencilState = depthStencilState
         self.gbufferRenderPass = gBufferRenderPass
-        self.plane = Geometry2.screenSpacePlane(device: device)
+        self.plane = GPUGeometry.screenSpacePlane(device: device)
         self.viewPort = MTLViewport(originX: 0, originY: 0,
                                     width: Double(drawableSize.width), height: Double(drawableSize.height),
                                     znear: 0, zfar: 1)
@@ -41,10 +41,10 @@ struct LightPassRenderer {
         encoder.setFragmentTexture(gbufferRenderPass.colorAttachments[2].texture!, index: 2)
         encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems.buffer, offset: 0, index: 4)
         encoder.drawIndexedPrimitives(type: .triangle,
-                                      indexCount: plane.drawDescription[0].indexCount,
-                                      indexType: plane.drawDescription[0].indexType,
-                                      indexBuffer: plane.drawDescription[0].indexBuffer.buffer,
-                                      indexBufferOffset: plane.drawDescription[0].indexBuffer.offset,
+                                      indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
+                                      indexType: plane.pieceDescriptions[0].drawDescription.indexType,
+                                      indexBuffer: plane.pieceDescriptions[0].drawDescription.indexBuffer.buffer,
+                                      indexBufferOffset: plane.pieceDescriptions[0].drawDescription.indexBuffer.offset,
                                       instanceCount: lightsCount)
     }
 }
