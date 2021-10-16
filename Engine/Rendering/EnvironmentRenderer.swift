@@ -18,9 +18,12 @@ struct EnvironmentRenderer {
     private let pipelineState: MTLRenderPipelineState
     private let depthStentilState: MTLDepthStencilState
     private let viewPort: MTLViewport
-    private let cube: Geometry2
+    private let cube: GPUGeometry
     // MARK: - Initialization
-    init(pipelineState: MTLRenderPipelineState, depthStentilState: MTLDepthStencilState, drawableSize: CGSize, cube: Geometry2) {
+    init(pipelineState: MTLRenderPipelineState,
+         depthStentilState: MTLDepthStencilState,
+         drawableSize: CGSize,
+         cube: GPUGeometry) {
         self.pipelineState = pipelineState
         self.depthStentilState = depthStentilState
         self.cube = cube
@@ -46,9 +49,9 @@ struct EnvironmentRenderer {
             encoder.setVertexBytes(ptr, length: MemoryLayout<Uniforms>.size, index: 1)
         }
         encoder.drawIndexedPrimitives(type: .triangle,
-                                      indexCount: cube.drawDescription[0].indexBuffer.length / MemoryLayout<UInt16>.size,
+                                      indexCount: cube.pieceDescriptions[0].drawDescription.indexBuffer.length / MemoryLayout<UInt16>.size,
                                       indexType: .uint16,
-                                      indexBuffer: cube.drawDescription[0].indexBuffer.buffer,
+                                      indexBuffer: cube.pieceDescriptions[0].drawDescription.indexBuffer.buffer,
                                       indexBufferOffset: 0)
     }
 }
