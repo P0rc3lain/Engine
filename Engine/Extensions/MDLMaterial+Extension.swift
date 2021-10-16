@@ -19,13 +19,10 @@ extension MDLMaterial {
         guard let materialProperty = property(with: semantic) else { return nil }
         return materialProperty.associatedTexture
     }
-    private func defaultTexture(for semantic: MDLMaterialSemantic) -> Texture {
-        let associatedTexture = semantic.aliases.map { storedTexture(for: $0) }.filter { $0 != nil }
-        guard associatedTexture.count > 0, let texture = associatedTexture.first else {
-            return Texture.solid2D(color: semantic.defaultColor)
+    private func defaultTexture(for semantic: MDLMaterialSemantic) -> MDLTexture {
+        if let associatedTexture = semantic.aliases.compactMap({ storedTexture(for: $0) }).first {
+            return associatedTexture
         }
-        var txt = texture!.porcelain!
-        txt.texture = texture
-        return txt
+        return MDLTexture.solid2D(color: semantic.defaultColor)
     }
 }

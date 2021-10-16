@@ -6,6 +6,7 @@
 //
 
 import Metal
+import ModelIO
 
-public typealias RamSceneDescription = SceneDescription<Data, IndexBitDepth, PrimitiveType, Texture>
+public typealias RamSceneDescription = SceneDescription<Data, IndexBitDepth, PrimitiveType, MDLTexture>
 public typealias GPUSceneDescription = SceneDescription<MTLBuffer, MTLIndexType, MTLPrimitiveType, MTLTexture>

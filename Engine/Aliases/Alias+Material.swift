@@ -6,6 +6,7 @@
 //
 
 import Metal
+import ModelIO
 
-public typealias RamMaterial = Material<Texture>
+public typealias RamMaterial = Material<MDLTexture>
 public typealias GPUMaterial = Material<MTLTexture>
