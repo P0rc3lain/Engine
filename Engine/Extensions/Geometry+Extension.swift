@@ -95,10 +95,22 @@ extension GPUGeometry {
         return GPUGeometry(vertexBuffer: verticesBuffer, pieceDescriptions: [pieceDescription])
     }
     private static var planeVertices: [Vertex] = [
-        Vertex(position: simd_float3(-1, -1, 0), normal: simd_float3(0, 0, 1), tangent: simd_float3(0, 1, 0), textureUV: simd_float2(0, 1)),
-        Vertex(position: simd_float3(1, -1, 0), normal: simd_float3(0, 0, 1), tangent: simd_float3(0, 1, 0), textureUV: simd_float2(1, 1)),
-        Vertex(position: simd_float3(-1, 1, 0), normal: simd_float3(0, 0, 1), tangent: simd_float3(0, 1, 0), textureUV: simd_float2(0, 0)),
-        Vertex(position: simd_float3(1, 1, 0), normal: simd_float3(0, 0, 1), tangent: simd_float3(0, 1, 0), textureUV: simd_float2(1, 0))
+        Vertex(position: simd_float3(-1, -1, 0),
+               normal: simd_float3(0, 0, 1),
+               tangent: simd_float3(0, 1, 0),
+               textureUV: simd_float2(0, 1)),
+        Vertex(position: simd_float3(1, -1, 0),
+               normal: simd_float3(0, 0, 1),
+               tangent: simd_float3(0, 1, 0),
+               textureUV: simd_float2(1, 1)),
+        Vertex(position: simd_float3(-1, 1, 0),
+               normal: simd_float3(0, 0, 1),
+               tangent: simd_float3(0, 1, 0),
+               textureUV: simd_float2(0, 0)),
+        Vertex(position: simd_float3(1, 1, 0),
+               normal: simd_float3(0, 0, 1),
+               tangent: simd_float3(0, 1, 0),
+               textureUV: simd_float2(1, 0))
     ]
     private static var planeIndices: [UInt16] = [
         0, 1, 2,
