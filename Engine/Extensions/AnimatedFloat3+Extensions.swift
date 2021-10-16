@@ -10,11 +10,7 @@ import simd
 extension AnimatedFloat3 {
     func interpolated(at time: TimeInterval) -> simd_float3 {
         let result = sample(at: time)
-        return result.current
-        if result.current != result.upcoming {
-            return mix(result.current, result.upcoming, t: 0.5)
-        }
-        return mix(result.current, result.upcoming, t: 0.5)
+        return mix(result.current, result.upcoming, t: result.ratio)
     }
     static public var defaultScale: AnimatedFloat3 {
         return .static(from: .one)

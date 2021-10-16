@@ -31,8 +31,8 @@ public struct AnimatedValue<T> {
         let current = next > 0 ? next - 1 : times.count - 1
         let timeRange = next > 0 ? times[next] - times[current] : maximumTime - times[current] + times[next]
         let timePosition = next > 0 ? time - times[current] : (time > times[current] ? time - times[current] : maximumTime - times[current] + time)
-        let ratio = Float(timePosition / timeRange)
-        return (current: keyFrames[current], upcoming: keyFrames[next], ratio: ratio)
+        let ratio = (timePosition / timeRange).clamp(min: 0.0, max: 1.0)
+        return (current: keyFrames[current], upcoming: keyFrames[next], ratio: Float(ratio))
     }
     static public func `static`(from value: T) -> AnimatedValue<T> {
         return AnimatedValue<T>(keyFrames: [value], times: [0], maximumTime: 1)
