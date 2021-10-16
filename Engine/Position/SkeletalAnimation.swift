@@ -1,6 +1,6 @@
 //
 //  SkeletalAnimation.swift
-//  Types
+//  Engine
 //
 //  Created by Mateusz Stompór on 13/10/2021.
 //

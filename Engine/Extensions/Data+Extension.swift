@@ -1,6 +1,6 @@
 //
 //  Data.swift
-//  Binarizer
+//  Engine
 //
 //  Created by Mateusz Stompór on 12/10/2021.
 //

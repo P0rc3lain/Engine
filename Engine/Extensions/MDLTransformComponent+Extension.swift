@@ -1,6 +1,6 @@
 //
 //  MDLTransformComponent.swift
-//  Binarizer
+//  Engine
 //
 //  Created by Mateusz Stompór on 11/10/2021.
 //

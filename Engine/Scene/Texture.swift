@@ -1,6 +1,6 @@
 //
 //  Texture.swift
-//  Types
+//  Engine
 //
 //  Created by Mateusz Stompór on 14/10/2021.
 //
