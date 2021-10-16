@@ -61,10 +61,10 @@ public struct RenderingCoordinator {
         lightRenderer.draw(encoder: &lightEncoder, bufferStore: &bufferStore, lightsCount: scene.lights.count)
         commandBuffer.popDebugGroup()
 
-//        commandBuffer.pushDebugGroup("Environment Map")
-//        environmentRenderer.draw(encoder: lightEncoder, scene: &scene)
-//        commandBuffer.popDebugGroup()
-//
+        commandBuffer.pushDebugGroup("Environment Map")
+        environmentRenderer.draw(encoder: &lightEncoder, scene: &scene)
+        commandBuffer.popDebugGroup()
+
         lightEncoder.endEncoding()
 
         commandBuffer.pushDebugGroup("Post Processing Pass")

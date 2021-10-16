@@ -29,22 +29,26 @@ struct EnvironmentRenderer {
                                     znear: 0, zfar: 1)
     }
     // MARK: - Internal
-//    func draw(encoder: MTLRenderCommandEncoder, scene: inout Scene) {
-//        encoder.setViewport(viewPort)
-//        encoder.setRenderPipelineState(pipelineState)
-//        encoder.setVertexBuffer(cube.vertexBuffer.buffer, offset: 0, index: 0)
-//        encoder.setDepthStencilState(depthStentilState)
-//        encoder.setStencilReferenceValue(0)
-//        encoder.setFragmentTexture(scene.sceneAsset.environment, index: 0)
-//        let uniforms = Uniforms(projectionMatrix: scene.camera.projectionMatrix,
-//                                orientation: simd_matrix4x4(scene.camera.coordinateSpace.orientation))
-//        withUnsafePointer(to: uniforms) { ptr in
-//            encoder.setVertexBytes(ptr, length: MemoryLayout<Uniforms>.size, index: 1)
-//        }
-//        encoder.drawIndexedPrimitives(type: .triangle,
-//                                      indexCount: cube.drawDescription[0].indexBuffer.length / MemoryLayout<UInt16>.size,
-//                                      indexType: .uint16,
-//                                      indexBuffer: cube.drawDescription[0].indexBuffer.buffer,
-//                                      indexBufferOffset: 0)
-//    }
+    func draw(encoder: inout MTLRenderCommandEncoder, scene: inout GPUSceneDescription) {
+        if scene.sky == .nil {
+            return
+        }
+        encoder.setViewport(viewPort)
+        encoder.setRenderPipelineState(pipelineState)
+        encoder.setVertexBuffer(cube.vertexBuffer.buffer, offset: 0, index: 0)
+        encoder.setDepthStencilState(depthStentilState)
+        encoder.setStencilReferenceValue(0)
+        encoder.setFragmentTexture(scene.skyMaps[scene.sky], index: 0)
+        let cameraIndex = scene.objects.objects[scene.activeCameraIdx].data.referenceIdx
+        let uniforms = Uniforms(projectionMatrix: scene.cameras[cameraIndex].projectionMatrix,
+                                orientation: simd_matrix4x4(scene.objects.objects[scene.activeCameraIdx].data.transform.orientation(at: 0)))
+        withUnsafePointer(to: uniforms) { ptr in
+            encoder.setVertexBytes(ptr, length: MemoryLayout<Uniforms>.size, index: 1)
+        }
+        encoder.drawIndexedPrimitives(type: .triangle,
+                                      indexCount: cube.drawDescription[0].indexBuffer.length / MemoryLayout<UInt16>.size,
+                                      indexType: .uint16,
+                                      indexBuffer: cube.drawDescription[0].indexBuffer.buffer,
+                                      indexBufferOffset: 0)
+    }
 }

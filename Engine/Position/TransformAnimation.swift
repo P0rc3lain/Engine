@@ -24,6 +24,9 @@ public struct TransformAnimation {
                simd_float4x4(rotation.interpolated(at: time)) *
                simd_float4x4.scale(scale.interpolated(at: time))
     }
+    func orientation(at time: TimeInterval) -> simd_quatf {
+        return rotation.interpolated(at: time)
+    }
     static public var `static`: TransformAnimation {
         return TransformAnimation(translation: .defaultTranslation,
                                   rotation: .defaultOrientation,
