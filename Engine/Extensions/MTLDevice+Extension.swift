@@ -9,6 +9,9 @@ import simd
 import Metal
 
 extension MTLDevice {
+    func makeSharedBuffer(length: Int) -> MTLBuffer? {
+        return makeBuffer(length: length, options: [.storageModeShared])
+    }
     public func makeSolid2DTexture(color: simd_float4) -> MTLTexture? {
         assert(length(color) <= 2.001, "Color values must be in [0.0, 1.0] range")
         let descriptor = MTLTextureDescriptor.minimalSolidColor2D

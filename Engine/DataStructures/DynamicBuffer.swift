@@ -13,7 +13,7 @@ public struct DynamicBuffer<T> {
     var buffer: MTLBuffer
     // MARK: - Initialization
     init?(device: MTLDevice, initialCapacity: Int) {
-        guard let buffer = device.makeBuffer(length: Self.bytesCount(initialCapacity), options: Self.storageOptions) else {
+        guard let buffer = device.makeSharedBuffer(length: initialCapacity * MemoryLayout<T>.stride) else {
             return nil
         }
         self.device = device
@@ -22,25 +22,17 @@ public struct DynamicBuffer<T> {
     }
     // MARK: - Internal
     mutating func upload(data: inout  [T]) {
-        if !willFit(elementsCount: data.count) {
-            let newSize = 2 * Self.bytesCount(data.capacity)
-            buffer = device.makeBuffer(length: newSize, options: Self.storageOptions)!
+        let requiredSpace = data.count * MemoryLayout<T>.stride
+        if buffer.length < requiredSpace {
+            let newSize = 2 * max(requiredSpace, buffer.length)
+            buffer = device.makeSharedBuffer(length: newSize)!
         }
         data.withUnsafeBytes { ptr in
             buffer.contents().copyMemory(from: ptr.baseAddress!, byteCount: ptr.count)
         }
     }
     // MARK: - Private
-    private static func bytesCount(_ elementsCount: Int) -> Int {
-        return elementsCount * MemoryLayout<T>.stride
-    }
-    private func willFit(elementsCount: Int) -> Bool {
-        return buffer.allocatedSize >= Self.bytesCount(elementsCount)
-    }
     private var bufferName: String {
         "\(Self.self)"
-    }
-    private static var storageOptions: MTLResourceOptions {
-        [.storageModeShared]
     }
 }
