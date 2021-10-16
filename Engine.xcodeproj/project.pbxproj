@@ -57,7 +57,6 @@
 		5616672C2719E2CD000063B1 /* SceneLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666B72719E2CC000063B1 /* SceneLoader.swift */; };
 		5616672D2719E2CD000063B1 /* FlatTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666B92719E2CC000063B1 /* FlatTree.swift */; };
 		5616672E2719E2CD000063B1 /* DynamicBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666BA2719E2CC000063B1 /* DynamicBuffer.swift */; };
-		5616672F2719E2CD000063B1 /* StaticBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666BB2719E2CC000063B1 /* StaticBuffer.swift */; };
 		561667312719E2CD000063B1 /* Alias+DataBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666BF2719E2CC000063B1 /* Alias+DataBuffer.swift */; };
 		561667322719E2CD000063B1 /* Alias+IndexBasedDraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666C02719E2CC000063B1 /* Alias+IndexBasedDraw.swift */; };
 		561667332719E2CD000063B1 /* Alias+Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666C12719E2CC000063B1 /* Alias+Material.swift */; };
@@ -170,7 +169,6 @@
 		561666B72719E2CC000063B1 /* SceneLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneLoader.swift; sourceTree = "<group>"; };
 		561666B92719E2CC000063B1 /* FlatTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatTree.swift; sourceTree = "<group>"; };
 		561666BA2719E2CC000063B1 /* DynamicBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicBuffer.swift; sourceTree = "<group>"; };
-		561666BB2719E2CC000063B1 /* StaticBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticBuffer.swift; sourceTree = "<group>"; };
 		561666BF2719E2CC000063B1 /* Alias+DataBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alias+DataBuffer.swift"; sourceTree = "<group>"; };
 		561666C02719E2CC000063B1 /* Alias+IndexBasedDraw.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alias+IndexBasedDraw.swift"; sourceTree = "<group>"; };
 		561666C12719E2CC000063B1 /* Alias+Material.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alias+Material.swift"; sourceTree = "<group>"; };
@@ -369,7 +367,6 @@
 			children = (
 				561666B92719E2CC000063B1 /* FlatTree.swift */,
 				561666BA2719E2CC000063B1 /* DynamicBuffer.swift */,
-				561666BB2719E2CC000063B1 /* StaticBuffer.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -675,7 +672,6 @@
 				561667312719E2CD000063B1 /* Alias+DataBuffer.swift in Sources */,
 				5616671C2719E2CD000063B1 /* MTLStencilDescriptor+Instantiation.swift in Sources */,
 				561667562719E2CD000063B1 /* RenderingCoordinator.swift in Sources */,
-				5616672F2719E2CD000063B1 /* StaticBuffer.swift in Sources */,
 				5616674D2719E2CD000063B1 /* Engine.swift in Sources */,
 				561667212719E2CD000063B1 /* Postprocessor+Instantiation.swift in Sources */,
 				5616672A2719E2CD000063B1 /* Uploader.swift in Sources */,
