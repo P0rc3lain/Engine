@@ -19,8 +19,8 @@ struct BufferStore {
         cameras = DynamicBuffer<CameraUniforms>(device: device, initialCapacity: 1)!
         modelCoordinateSystems = DynamicBuffer<ModelUniforms>(device: device, initialCapacity: 1)!
     }
-    mutating func upload(camera: inout Camera, transform: inout Transform) {
-        let viewMatrix = transform.coordinateSpace.transformationRTS
+    mutating func upload(camera: inout Camera, transform: inout TransformAnimation) {
+        let viewMatrix = transform.transformation(at: 0)
         var uniforms = [CameraUniforms(projectionMatrix: camera.projectionMatrix, viewMatrix: viewMatrix, viewMatrixInverse: viewMatrix.inverse)]
         cameras.upload(data: &uniforms)
     }

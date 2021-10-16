@@ -17,7 +17,7 @@ public class Translator {
         asset.walk { object in
             scene.objectNames.append(object.path)
             let parentIdx = object.parent != nil ? scene.objectNames.firstIndex(of: object.parent!.path)! : .nil
-            let transform = object.transform?.decompose ?? Transform()
+            let transform = object.transform?.decompose ?? .static
             if let object = object as? MDLCamera {
                 scene.cameraNames.append(object.path)
                 scene.cameras.append(object.porcelain)
@@ -81,10 +81,15 @@ public class Translator {
                 scene.skeletonReferences.append(Int.nil)
             }
         }
+        assert(scene.objectNames.count == scene.objects.count, "There must be the same number of names as objects")
+        assert(scene.cameraNames.count == scene.cameras.count, "There must be the same number of names as objects")
+        assert(scene.meshNames.count == scene.meshes.count, "There must be the same number of names as objects")
+        assert(scene.materialNames.count == scene.materials.count, "There must be the same number of names as objects")
         assert(Set(scene.objectNames).count == scene.objectNames.count, "Object names must be unique")
         assert(Set(scene.cameraNames).count == scene.cameraNames.count, "Camera names must be unique")
         assert(Set(scene.meshNames).count == scene.meshNames.count, "Mesh names must be unique")
         assert(Set(scene.materialNames).count == scene.materialNames.count, "Mesh names must be unique")
+        assert(scene.objects.count == scene.skeletonReferences.count, "Each object should have reference to a skeleton")
         return scene
     }
     // MARK: - Private

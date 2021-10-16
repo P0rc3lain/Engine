@@ -36,7 +36,6 @@
 		561667132719E2CD000063B1 /* Texture+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5616669B2719E2CC000063B1 /* Texture+Extension.swift */; };
 		561667142719E2CD000063B1 /* MDLAsset+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5616669C2719E2CC000063B1 /* MDLAsset+Extension.swift */; };
 		561667162719E2CD000063B1 /* TransformAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5616669F2719E2CC000063B1 /* TransformAnimation.swift */; };
-		561667172719E2CD000063B1 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666A02719E2CC000063B1 /* Transform.swift */; };
 		561667182719E2CD000063B1 /* Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666A12719E2CC000063B1 /* Skeleton.swift */; };
 		561667192719E2CD000063B1 /* SkeletalAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666A22719E2CC000063B1 /* SkeletalAnimation.swift */; };
 		5616671A2719E2CD000063B1 /* CoordinateSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666A32719E2CC000063B1 /* CoordinateSpace.swift */; };
@@ -153,7 +152,6 @@
 		5616669B2719E2CC000063B1 /* Texture+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Texture+Extension.swift"; sourceTree = "<group>"; };
 		5616669C2719E2CC000063B1 /* MDLAsset+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MDLAsset+Extension.swift"; sourceTree = "<group>"; };
 		5616669F2719E2CC000063B1 /* TransformAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformAnimation.swift; sourceTree = "<group>"; };
-		561666A02719E2CC000063B1 /* Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 		561666A12719E2CC000063B1 /* Skeleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skeleton.swift; sourceTree = "<group>"; };
 		561666A22719E2CC000063B1 /* SkeletalAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkeletalAnimation.swift; sourceTree = "<group>"; };
 		561666A32719E2CC000063B1 /* CoordinateSpace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinateSpace.swift; sourceTree = "<group>"; };
@@ -335,7 +333,6 @@
 			isa = PBXGroup;
 			children = (
 				5616669F2719E2CC000063B1 /* TransformAnimation.swift */,
-				561666A02719E2CC000063B1 /* Transform.swift */,
 				561666A12719E2CC000063B1 /* Skeleton.swift */,
 				561666A22719E2CC000063B1 /* SkeletalAnimation.swift */,
 				561666A32719E2CC000063B1 /* CoordinateSpace.swift */,
@@ -736,7 +733,6 @@
 				5616671E2719E2CD000063B1 /* MTLVertexBufferLayoutDescriptor+Instantiation.swift in Sources */,
 				561667012719E2CD000063B1 /* MDLObject+Extension.swift in Sources */,
 				5616674C2719E2CD000063B1 /* EnvironmentMapper.metal in Sources */,
-				561667172719E2CD000063B1 /* Transform.swift in Sources */,
 				5616670F2719E2CD000063B1 /* Data+Extension.swift in Sources */,
 				561667352719E2CD000063B1 /* Alias+Geometry.swift in Sources */,
 				561666F92719E2CD000063B1 /* MDLMaterialProperty+Extension.swift in Sources */,

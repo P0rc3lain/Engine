@@ -12,10 +12,16 @@ extension simd_float4x4 {
     public var translation: simd_float3 {
         columns.3.xyz
     }
+    public var rotation: simd_quatf {
+        simd_quatf(self)
+    }
     public var scale: simd_float3 {
         simd_float3(simd_length(columns.0.xyz),
                     simd_length(columns.1.xyz),
                     simd_length(columns.2.xyz))
+    }
+    public var decomposed: (translation: simd_float3, rotation: simd_quatf, scale: simd_float3) {
+        (translation: translation, rotation: rotation, scale: scale)
     }
     // MARK: - Initialization
     public init(_ matrix: simd_double4x4) {

@@ -46,7 +46,7 @@ public struct RenderingCoordinator {
         var camera = scene.objects.objects.filter { $0.data.type == .camera }.first!
         bufferStore.upload(camera: &scene.cameras[camera.data.referenceIdx], transform: &camera.data.transform)
         bufferStore.upload(models: &scene.objects)
-//
+
         let commandBuffer = commandQueue.makeCommandBuffer()!
         commandBuffer.pushDebugGroup("G-Buffer Renderer Pass")
         var gBufferEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: gBufferRenderPassDescriptor)!
@@ -54,20 +54,19 @@ public struct RenderingCoordinator {
         gBufferRenderer.draw(encoder: &gBufferEncoder, scene: &scene, dataStore: &bufferStore)
         gBufferEncoder.endEncoding()
         commandBuffer.popDebugGroup()
-//
+
         var lightEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor)!
-//
+
         commandBuffer.pushDebugGroup("Light Pass")
         lightRenderer.draw(encoder: &lightEncoder, bufferStore: &bufferStore, lightsCount: scene.lights.count)
         commandBuffer.popDebugGroup()
-//
+
 //        commandBuffer.pushDebugGroup("Environment Map")
 //        environmentRenderer.draw(encoder: lightEncoder, scene: &scene)
 //        commandBuffer.popDebugGroup()
 //
         lightEncoder.endEncoding()
-//
-//
+
         commandBuffer.pushDebugGroup("Post Processing Pass")
         let texturePass = commandBuffer.makeRenderCommandEncoder(descriptor: view.currentRenderPassDescriptor!)!
         postProcessor.draw(encoder: texturePass)

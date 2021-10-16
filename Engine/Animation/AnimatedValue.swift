@@ -8,10 +8,11 @@
 import Foundation
 
 public struct AnimatedValue<T> {
-    let keyFrames: [T]
-    let times: [TimeInterval]
-    let maximumTime: TimeInterval
-    
+    // MARK: - Properties
+    private let keyFrames: [T]
+    private let times: [TimeInterval]
+    private let maximumTime: TimeInterval
+    // MARK: - Initialization
     public init(keyFrames: [T], times: [TimeInterval], maximumTime: TimeInterval) {
         assert(times.count == keyFrames.count)
         assert(times.sorted() == times)
@@ -20,7 +21,7 @@ public struct AnimatedValue<T> {
         self.times = times
         self.maximumTime = maximumTime
     }
-    
+    // MARK: - Public
     public func sample(at time: TimeInterval) -> (current: T, upcoming: T, ratio: Float) {
         guard times.count > 1 else {
             return (current: keyFrames[0], upcoming: keyFrames[0], ratio: 0.5)
@@ -32,5 +33,8 @@ public struct AnimatedValue<T> {
         let timePosition = next > 0 ? time - times[current] : (time > times[current] ? time - times[current] : maximumTime - times[current] + time)
         let ratio = Float(timePosition / timeRange)
         return (current: keyFrames[current], upcoming: keyFrames[next], ratio: ratio)
+    }
+    static public func `static`(from value: T) -> AnimatedValue<T> {
+        return AnimatedValue<T>(keyFrames: [value], times: [0], maximumTime: 1)
     }
 }
