@@ -26,9 +26,9 @@ extension GPUGeometry {
         let indices = cubeIndicesBuffer(device: device)
         let indicesBuffer = GPUDataBuffer(buffer: indices, length: indices.length, offset: 0)
         let drawDescription = GPUIndexBasedDraw(indexBuffer: indicesBuffer,
-                                             indexCount: indices.length,
-                                             indexType: .uint16,
-                                             primitiveType: .triangle)
+                                                indexCount: indices.length,
+                                                indexType: .uint16,
+                                                primitiveType: .triangle)
         let pieceDescription = PieceDescription(materialIdx: .nil, drawDescription: drawDescription)
         return GPUGeometry(vertexBuffer: verticesBuffer, pieceDescriptions: [pieceDescription])
     }
