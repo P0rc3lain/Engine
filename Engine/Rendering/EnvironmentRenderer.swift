@@ -44,7 +44,7 @@ struct EnvironmentRenderer {
         encoder.setFragmentTexture(scene.skyMaps[scene.sky], index: 0)
         let cameraIndex = scene.objects.objects[scene.activeCameraIdx].data.referenceIdx
         let uniforms = Uniforms(projectionMatrix: scene.cameras[cameraIndex].projectionMatrix,
-                                orientation: simd_matrix4x4(scene.objects.objects[scene.activeCameraIdx].data.transform.orientation(at: 0)))
+                                orientation: simd_matrix4x4(scene.objects.objects[scene.activeCameraIdx].data.transform.rotation.interpolated(at: 0)))
         withUnsafePointer(to: uniforms) { ptr in
             encoder.setVertexBytes(ptr, length: MemoryLayout<Uniforms>.size, index: 1)
         }

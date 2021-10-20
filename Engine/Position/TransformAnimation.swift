@@ -20,12 +20,9 @@ public struct TransformAnimation {
         self.scale = scale
     }
     func transformation(at time: TimeInterval) -> simd_float4x4 {
-        return simd_float4x4.translation(vector: translation.interpolated(at: time)) *
-               simd_float4x4(rotation.interpolated(at: time)) *
-               simd_float4x4.scale(scale.interpolated(at: time))
-    }
-    func orientation(at time: TimeInterval) -> simd_quatf {
-        return rotation.interpolated(at: time)
+        simd_float4x4.compose(translation: translation.interpolated(at: time),
+                              rotation: rotation.interpolated(at: time),
+                              scale: scale.interpolated(at: time))
     }
     static public var `static`: TransformAnimation {
         return TransformAnimation(translation: .defaultTranslation,
