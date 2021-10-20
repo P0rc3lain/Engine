@@ -25,9 +25,9 @@ public struct TransformAnimation {
                               scale: scale.interpolated(at: time))
     }
     static public var `static`: TransformAnimation {
-        return TransformAnimation(translation: .defaultTranslation,
-                                  rotation: .defaultOrientation,
-                                  scale: .defaultScale)
+        TransformAnimation(translation: .defaultTranslation,
+                           rotation: .defaultOrientation,
+                           scale: .defaultScale)
     }
     static public func `static`(from transformation: simd_float4x4) -> TransformAnimation {
         let decomposed = transformation.decomposed

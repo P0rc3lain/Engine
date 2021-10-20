@@ -29,6 +29,14 @@ extension MDLVertexDescriptor {
             MDLVertexAttribute(name: MDLVertexAttributeTextureCoordinate,
                                format: .float2,
                                offset: MemoryLayout<Vertex>.offset(of: \Vertex.textureUV)!,
+                               bufferIndex: 0),
+            MDLVertexAttribute(name: MDLVertexAttributeJointIndices,
+                               format: .uShort4,
+                               offset: MemoryLayout<Vertex>.offset(of: \Vertex.jointIndices)!,
+                               bufferIndex: 0),
+            MDLVertexAttribute(name: MDLVertexAttributeJointWeights,
+                               format: .float4,
+                               offset: MemoryLayout<Vertex>.offset(of: \Vertex.jointWeights)!,
                                bufferIndex: 0)
         ]
         return descriptor
