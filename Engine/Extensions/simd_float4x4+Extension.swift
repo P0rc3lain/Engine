@@ -48,4 +48,7 @@ extension simd_float4x4 {
                                    simd_float4(0,  0, zs, nearZ * zs),
                                    simd_float4(0,  0, -1, 0 )])
     }
+    public static func compose(translation: simd_float3, rotation: simd_quatf, scale: simd_float3) -> simd_float4x4 {
+        .translation(vector: translation) * matrix_float4x4(rotation) * .scale(scale)
+    }
 }
