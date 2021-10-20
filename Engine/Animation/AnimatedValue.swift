@@ -9,9 +9,12 @@ import Foundation
 
 public struct AnimatedValue<T> {
     // MARK: - Properties
-    private let keyFrames: [T]
+    private var keyFrames: [T]
     private let times: [TimeInterval]
     private let maximumTime: TimeInterval
+    var keyTimes: [TimeInterval] {
+        times
+    }
     // MARK: - Initialization
     public init(keyFrames: [T], times: [TimeInterval], maximumTime: TimeInterval) {
         assert(times.count == keyFrames.count)
@@ -35,6 +38,9 @@ public struct AnimatedValue<T> {
         return (current: keyFrames[current], upcoming: keyFrames[next], ratio: Float(ratio))
     }
     static public func `static`(from value: T) -> AnimatedValue<T> {
-        return AnimatedValue<T>(keyFrames: [value], times: [0], maximumTime: 1)
+        AnimatedValue<T>(keyFrames: [value], times: [0], maximumTime: 1)
+    }
+    public mutating func map(transform: (T)->T) {
+        keyFrames.inplaceMap(transform: transform)
     }
 }
