@@ -12,6 +12,9 @@ extension simd_float4 {
     public var xyz: simd_float3 {
         simd_float3(x, y, z)
     }
+    var zyxw: simd_float4 {
+        simd_float4(z, y, x, w)
+    }
     static var deafultNormalsColor: simd_float4 {
         simd_float4(1, 0.5, 0.5, 1)
     }

@@ -11,10 +11,10 @@ import ModelIO
 import MetalKit
 
 extension MDLTexture {
-    static func solid2D(color: simd_float4) -> MDLTexture {
+    static func solid2D(color: simd_float4, name: String) -> MDLTexture {
         return MDLTexture(data: Data.solid2DTexture(color: color),
                           topLeftOrigin: true,
-                          name: "Solid Texture",
+                          name: name,
                           dimensions: simd_int2(8, 8),
                           rowStride: 8,
                           channelCount: 4,
@@ -23,6 +23,8 @@ extension MDLTexture {
     }
     func upload(device: MTLDevice) -> MTLTexture? {
         let loader = MTKTextureLoader.init(device: device)
-        return try? loader.newTexture(texture: self, options: nil)
+        let texture = try? loader.newTexture(texture: self, options: nil)
+        texture?.label = name
+        return texture
     }
 }

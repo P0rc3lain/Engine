@@ -21,8 +21,9 @@ extension MDLMaterial {
     }
     private func defaultTexture(for semantic: MDLMaterialSemantic) -> MDLTexture {
         if let associatedTexture = semantic.aliases.compactMap({ storedTexture(for: $0) }).first {
+            associatedTexture.name = "\(semantic.label) (Loaded)"
             return associatedTexture
         }
-        return MDLTexture.solid2D(color: semantic.defaultColor)
+        return MDLTexture.solid2D(color: semantic.defaultColor, name: "\(semantic.label) (Generated)")
     }
 }
