@@ -23,23 +23,26 @@ public struct RenderingCoordinator {
     let canvasSize: CGSize
     let renderingSize: CGSize
     // MARK: - Initialization
-    init(view metalView: MTKView, canvasSize: CGSize, renderingSize: CGSize) {
+    init?(view metalView: MTKView, canvasSize: CGSize, renderingSize: CGSize) {
+        guard let device = metalView.device, let bufferStore = BufferStore(device: device) else {
+            return nil
+        }
         self.view = metalView
         self.canvasSize = canvasSize
         self.renderingSize = renderingSize
-        commandQueue = view.device!.makeCommandQueue()!
-        bufferStore = BufferStore(device: view.device!)
-        gBufferRenderPassDescriptor = MTLRenderPassDescriptor.gBuffer(device: view.device!, size: renderingSize)
-        offscreenRenderPassDescriptor = MTLRenderPassDescriptor.lightenScene(device: view.device!,
+        self.bufferStore = bufferStore
+        commandQueue = device.makeCommandQueue()!
+        gBufferRenderPassDescriptor = MTLRenderPassDescriptor.gBuffer(device: device, size: renderingSize)
+        offscreenRenderPassDescriptor = MTLRenderPassDescriptor.lightenScene(device: device,
                                                                              depthStencil: gBufferRenderPassDescriptor.stencilAttachment.texture!,
                                                                              size: renderingSize)
-        postProcessor = Postprocessor.make(device: view.device!,
+        postProcessor = Postprocessor.make(device: device,
                                            inputTexture: offscreenRenderPassDescriptor.colorAttachments[0].texture!,
                                            outputFormat: view.colorPixelFormat,
                                            canvasSize: canvasSize)
-        environmentRenderer = EnvironmentRenderer.make(device: view.device!, drawableSize: view.drawableSize)
-        gBufferRenderer = GBufferRenderer.make(device: view.device!, drawableSize: renderingSize)
-        lightRenderer = LightPassRenderer.make(device: view.device!, gBufferRenderPassDescriptor: gBufferRenderPassDescriptor, drawableSize: renderingSize)
+        environmentRenderer = EnvironmentRenderer.make(device: device, drawableSize: view.drawableSize)
+        gBufferRenderer = GBufferRenderer.make(device: device, drawableSize: renderingSize)
+        lightRenderer = LightPassRenderer.make(device: device, gBufferRenderPassDescriptor: gBufferRenderPassDescriptor, drawableSize: renderingSize)
     }
     public mutating func draw(scene: inout GPUSceneDescription) {
         bufferStore.omniLights.upload(data: &scene.lights)

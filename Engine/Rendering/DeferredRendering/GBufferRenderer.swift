@@ -55,7 +55,6 @@ struct GBufferRenderer {
                                                   indexBuffer: description.drawDescription.indexBuffer.buffer,
                                                   indexBufferOffset: description.drawDescription.indexBuffer.offset)
                 }
-                
             }
         }
     }
