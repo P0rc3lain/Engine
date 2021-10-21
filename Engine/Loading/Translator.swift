@@ -67,7 +67,8 @@ public class Translator {
                 if let jointAnimation = animationBindComponent.jointAnimation as? MDLPackedJointAnimation {
                     assert(skeleton.jointPaths == jointAnimation.jointPaths)
                     scene.skeletalAnimations.append(SkeletalAnimation(translations: jointAnimation.translations,
-                                                                      rotations: jointAnimation.rotations))
+                                                                      rotations: jointAnimation.rotations,
+                                                                      scales: jointAnimation.scales))
                     let skeleton = Skeleton(animationIdx: scene.skeletalAnimations.count - 1,
                                             geometryBindTransform: float4x4(animationBindComponent.geometryBindTransform),
                                             bindTransforms: animationBindComponent.skeleton!.jointBindTransforms.float4x4Array,
