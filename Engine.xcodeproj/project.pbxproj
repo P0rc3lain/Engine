@@ -37,7 +37,6 @@
 		561667162719E2CD000063B1 /* TransformAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5616669F2719E2CC000063B1 /* TransformAnimation.swift */; };
 		561667182719E2CD000063B1 /* Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666A12719E2CC000063B1 /* Skeleton.swift */; };
 		561667192719E2CD000063B1 /* SkeletalAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666A22719E2CC000063B1 /* SkeletalAnimation.swift */; };
-		5616671A2719E2CD000063B1 /* CoordinateSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666A32719E2CC000063B1 /* CoordinateSpace.swift */; };
 		5616671B2719E2CD000063B1 /* LightPassRenderer+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666A52719E2CC000063B1 /* LightPassRenderer+Instantiation.swift */; };
 		5616671C2719E2CD000063B1 /* MTLStencilDescriptor+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666A62719E2CC000063B1 /* MTLStencilDescriptor+Instantiation.swift */; };
 		5616671D2719E2CD000063B1 /* MTLTextureDescriptor+Instantiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666A72719E2CC000063B1 /* MTLTextureDescriptor+Instantiation.swift */; };
@@ -151,7 +150,6 @@
 		5616669F2719E2CC000063B1 /* TransformAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformAnimation.swift; sourceTree = "<group>"; };
 		561666A12719E2CC000063B1 /* Skeleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skeleton.swift; sourceTree = "<group>"; };
 		561666A22719E2CC000063B1 /* SkeletalAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkeletalAnimation.swift; sourceTree = "<group>"; };
-		561666A32719E2CC000063B1 /* CoordinateSpace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinateSpace.swift; sourceTree = "<group>"; };
 		561666A52719E2CC000063B1 /* LightPassRenderer+Instantiation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LightPassRenderer+Instantiation.swift"; sourceTree = "<group>"; };
 		561666A62719E2CC000063B1 /* MTLStencilDescriptor+Instantiation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MTLStencilDescriptor+Instantiation.swift"; sourceTree = "<group>"; };
 		561666A72719E2CC000063B1 /* MTLTextureDescriptor+Instantiation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MTLTextureDescriptor+Instantiation.swift"; sourceTree = "<group>"; };
@@ -332,7 +330,6 @@
 				5616669F2719E2CC000063B1 /* TransformAnimation.swift */,
 				561666A12719E2CC000063B1 /* Skeleton.swift */,
 				561666A22719E2CC000063B1 /* SkeletalAnimation.swift */,
-				561666A32719E2CC000063B1 /* CoordinateSpace.swift */,
 			);
 			path = Position;
 			sourceTree = "<group>";
@@ -726,7 +723,6 @@
 				561667332719E2CD000063B1 /* Alias+Material.swift in Sources */,
 				56924AEA271A188700FF3E06 /* AnimatedQuatf+Extension.swift in Sources */,
 				5616670D2719E2CD000063B1 /* MDLMeshBuffer+Extension.swift in Sources */,
-				5616671A2719E2CD000063B1 /* CoordinateSpace.swift in Sources */,
 				5616674B2719E2CD000063B1 /* Postprocessing.metal in Sources */,
 				5616672E2719E2CD000063B1 /* DynamicBuffer.swift in Sources */,
 				56924ACE271A022900FF3E06 /* EntityTree+Extension.swift in Sources */,
