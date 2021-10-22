@@ -97,9 +97,9 @@ public struct RenderingCoordinator {
             let skeleton = scene.skeletons[skeletonIdx]
             var palette = [matrix_float4x4]()
             palette.reserveCapacity(skeleton.bindTransforms.count)
-            
+            let animationReference = scene.animationReferences[skeletonIdx]
             let date = Date().timeIntervalSince1970.truncatingRemainder(dividingBy: 2)/2
-            let animation = scene.skeletalAnimations[skeleton.animationIdx]
+            let animation = scene.skeletalAnimations[animationReference.lowerBound]
             
             let transformations = animation.localTransformation(at: date)
             let pose = skeleton.computeWorldBindTransforms(localBindTransform: transformations)

@@ -9,17 +9,14 @@ import simd
 
 public struct Skeleton {
     // MARK: - Properties
-    public var animationIdx: Int
     // World coordinates
     public var bindTransforms: [simd_float4x4]
     public var inverseBindTransforms: [simd_float4x4]
     public var parentIndices: [Int]
     // MARK: - Initialization
-    public init(animationIdx: Int,
-                localBindTransforms: [simd_float4x4],
+    public init(localBindTransforms: [simd_float4x4],
                 parentIndices: [Int]) {
         assert(parentIndices.count == localBindTransforms.count, "Each transform must have a reference to its parent")
-        self.animationIdx = animationIdx
         self.bindTransforms = Skeleton.computeWorldBindTransforms(localBindTransform: localBindTransforms,
                                                                   parentIndices: parentIndices)
         self.inverseBindTransforms = bindTransforms.map { $0.inverse }
