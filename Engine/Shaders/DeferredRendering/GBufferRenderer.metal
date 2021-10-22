@@ -8,6 +8,7 @@
 #include <metal_stdlib>
 
 #include "../Common/PBR.h"
+#include "../Common/Transformation.h"
 #include "../../MetalBinding/Model.h"
 #include "../../MetalBinding/Vertex.h"
 #include "../../MetalBinding/Camera.h"
@@ -32,12 +33,16 @@ struct GBufferData {
 vertex RasterizerData gBufferVertex(Vertex                      in              [[stage_in]],
                                     constant CameraUniforms &   cameraUniforms  [[buffer(1)]],
                                     constant ModelUniforms &    modelUniforms   [[buffer(2)]]) {
-    float4 worldPosition = modelUniforms.modelMatrix * float4(in.position, 1);
     
+    
+    matrix_float3x3 rotation = extract_rotation(modelUniforms.modelMatrix);
+    float4 worldPosition = modelUniforms.modelMatrix * float4(in.position, 1);
+    float3 rotatedNormal = rotation * in.normal;
+    float3 rotatedTangent = rotation * in.tangent;
     RasterizerData out;
-    out.t = normalize(in.tangent);
-    out.b = normalize(cross(in.tangent, in.normal));
-    out.n = normalize(in.normal);
+    out.t = normalize(rotatedTangent);
+    out.b = normalize(cross(rotatedTangent, rotatedNormal));
+    out.n = normalize(rotatedNormal);
     out.clipSpacePosition = cameraUniforms.projectionMatrix * cameraUniforms.viewMatrix * worldPosition;
     out.worldSpacePosition = worldPosition.xyz;
     out.uv = in.textureUV;
@@ -48,8 +53,7 @@ fragment GBufferData gBufferFragment(RasterizerData             in              
                                      texture2d<float>           albedo          [[texture(0)]],
                                      texture2d<float>           roughness       [[texture(1)]],
                                      texture2d<float>           normals         [[texture(2)]],
-                                     texture2d<float>           metallic        [[texture(3)]],
-                                     constant ModelUniforms &   modelUniforms   [[buffer(2)]]) {
+                                     texture2d<float>           metallic        [[texture(3)]]) {
     constexpr sampler textureSampler(mag_filter::linear, min_filter::nearest, address::mirrored_repeat);
     simd_float3x3 TBN(in.t, in.b, in.n);
     GBufferData out;
@@ -57,8 +61,7 @@ fragment GBufferData gBufferFragment(RasterizerData             in              
     // should be possible to configure it
     float3 normalEncoded = normals.sample(textureSampler, in.uv).xyz;
     float3 normalDecoded = (normalEncoded * 2) - 1;
-    float3 worldTranslation = (modelUniforms.modelMatrix * float4(0, 0, 0, 1)).xyz;
-    float3 normalWorldSpace = (modelUniforms.modelMatrix * float4(TBN * normalDecoded, 1)).xyz - worldTranslation;
+    float3 normalWorldSpace = TBN * normalDecoded;
     out.positionReflectance = float4(in.worldSpacePosition, 0.04);
     out.albedoRoughness = float4(albedo.sample(textureSampler, in.uv).xyz, roughness.sample(textureSampler, in.uv).x);
     out.normalMetallic = float4(normalWorldSpace, metallic.sample(textureSampler, in.uv).x);

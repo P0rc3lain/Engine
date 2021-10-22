@@ -43,7 +43,6 @@ struct GBufferRenderer {
                 for description in mesh.pieceDescriptions {
                     let offset = i * MemoryLayout<ModelUniforms>.stride
                     encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer, offset: offset, index: 2)
-                    encoder.setFragmentBuffer(dataStore.modelCoordinateSystems.buffer, offset: offset, index: 2)
                     let material = scene.materials[description.materialIdx]
                     encoder.setFragmentTexture(material.albedo, index: 0)
                     encoder.setFragmentTexture(material.roughness, index: 1)

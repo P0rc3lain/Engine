@@ -23,3 +23,6 @@ matrix_float4x4 translation(metal::float3 translation) {
                            translation.x,           translation.y,          translation.z,      1);
 }
 
+matrix_float3x3 extract_rotation(matrix_float4x4 transformation) {
+    return matrix_float3x3(transformation.columns[0].xyz, transformation.columns[1].xyz, transformation.columns[2].xyz);
+}

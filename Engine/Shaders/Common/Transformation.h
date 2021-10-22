@@ -12,5 +12,6 @@
 
 matrix_float4x4 scale(metal::float3 scale);
 matrix_float4x4 translation(metal::float3 translation);
+matrix_float3x3 extract_rotation(matrix_float4x4 transformation);
 
 #endif
