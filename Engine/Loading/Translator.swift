@@ -28,7 +28,7 @@ public class Translator {
             } /* else if let object = object as? MDLLight {
                 fatalError("Not implemented")
             } */ else if let object = object as? MDLMesh {
-                assert(object.vertexBuffers.count == 1)
+                assert(object.vertexBuffers.count == 1, "Only object that have a single buffer assigned are supported")
                 let buffer = object.vertexBuffers[0].rawData
                 let dataBuffer = DataBuffer(buffer: buffer, length: buffer.count, offset: 0)
                 var pieceDescriptions = [RamPieceDescription]()
@@ -61,17 +61,17 @@ public class Translator {
             }
             if let animationBindComponent = object.componentConforming(to: MDLComponent.self) as?
                 MDLAnimationBindComponent {
-                guard let skeleton = animationBindComponent.skeleton, !(skeleton.jointPaths.isEmpty) else {
+                guard let skeleton = animationBindComponent.skeleton, !skeleton.jointPaths.isEmpty else {
                     fatalError("Animation Bind Component is missing a skeleton or the jointPaths is empty")
                 }
                 if let jointAnimation = animationBindComponent.jointAnimation as? MDLPackedJointAnimation {
-                    assert(skeleton.jointPaths == jointAnimation.jointPaths)
+                    assert(skeleton.jointPaths == jointAnimation.jointPaths, "Skeleton and animation must describe exactu number of joints")
                     scene.skeletalAnimations.append(SkeletalAnimation(translations: jointAnimation.translations,
                                                                       rotations: jointAnimation.rotations,
                                                                       scales: jointAnimation.scales))
+                    // TODO use geometry bind transform
                     let skeleton = Skeleton(animationIdx: scene.skeletalAnimations.count - 1,
-                                            geometryBindTransform: float4x4(animationBindComponent.geometryBindTransform),
-                                            bindTransforms: animationBindComponent.skeleton!.jointBindTransforms.float4x4Array,
+                                            localBindTransforms: skeleton.jointBindTransforms.float4x4Array,
                                             parentIndices: jointAnimation.jointPaths.map { parentIndex(jointPaths: jointAnimation.jointPaths, jointPath: $0) })
                     scene.skeletons.append(skeleton)
                     scene.skeletonReferences.append(scene.skeletons.count - 1)
