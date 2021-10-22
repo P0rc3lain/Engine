@@ -45,6 +45,7 @@ public struct RenderingCoordinator {
         lightRenderer = LightPassRenderer.make(device: device, gBufferRenderPassDescriptor: gBufferRenderPassDescriptor, drawableSize: renderingSize)
     }
     public mutating func draw(scene: inout GPUSceneDescription) {
+        updatePalettes(scene: &scene)
         bufferStore.omniLights.upload(data: &scene.lights)
         var camera = scene.objects.objects.filter { $0.data.type == .camera }.first!
         bufferStore.upload(camera: &scene.cameras[camera.data.referenceIdx], transform: &camera.data.transform)
@@ -77,5 +78,37 @@ public struct RenderingCoordinator {
         commandBuffer.popDebugGroup()
         commandBuffer.present(view.currentDrawable!)
         commandBuffer.commit()
+    }
+    mutating func updatePalettes(scene: inout GPUSceneDescription) {
+        var continousPalette = [simd_float4x4]()
+        scene.paletteReferences = []
+        for i in 0 ..< scene.objects.count {
+            let palette = generatePalette(objectIdx: i, scene: &scene)
+            scene.paletteReferences.append(PaletteReference(idx: continousPalette.count, size: palette.count))
+            continousPalette += palette
+        }
+        bufferStore.upload(palettes: &continousPalette)
+    }
+    func generatePalette(objectIdx: Int, scene: inout GPUSceneDescription) -> [simd_float4x4] {
+        if scene.skeletonReferences[objectIdx] == .nil {
+            return []
+        } else {
+            let skeletonIdx = scene.skeletonReferences[objectIdx]
+            let skeleton = scene.skeletons[skeletonIdx]
+            var palette = [matrix_float4x4]()
+            palette.reserveCapacity(skeleton.bindTransforms.count)
+            
+            let date = Date().timeIntervalSince1970.truncatingRemainder(dividingBy: 2)/2
+            let animation = scene.skeletalAnimations[skeleton.animationIdx]
+            
+            let transformations = animation.localTransformation(at: date)
+            let pose = skeleton.computeWorldBindTransforms(localBindTransform: transformations)
+            
+            for i in 0 ..< skeleton.bindTransforms.count {
+                palette.append(pose[i] * skeleton.inverseBindTransforms[i])
+            }
+            
+            return palette
+        }
     }
 }

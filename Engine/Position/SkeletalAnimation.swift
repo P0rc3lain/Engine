@@ -21,7 +21,7 @@ public struct SkeletalAnimation {
         self.rotations = rotations
         self.scales = scales
     }
-    func transformation(at time: TimeInterval) -> [simd_float4x4] {
+    func localTransformation(at time: TimeInterval) -> [simd_float4x4] {
         var localTransformations = [simd_float4x4]()
         let translation = translations.float3Array(atTime: time)
         let rotation = rotations.floatQuaternionArray(atTime: time)

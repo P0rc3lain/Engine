@@ -25,11 +25,15 @@ public struct Skeleton {
         self.inverseBindTransforms = bindTransforms.map { $0.inverse }
         self.parentIndices = parentIndices
     }
+    func computeWorldBindTransforms(localBindTransform: [simd_float4x4]) -> [simd_float4x4] {
+        return Skeleton.computeWorldBindTransforms(localBindTransform: localBindTransform, parentIndices: parentIndices)
+    }
     static func computeWorldBindTransforms(localBindTransform: [simd_float4x4],
                                            parentIndices: [Int]) -> [simd_float4x4] {
+        assert(localBindTransform.count == parentIndices.count)
         var worldTransforms = [simd_float4x4]()
         for i in 0 ..< localBindTransform.count {
-            let parentTransform = parentIndices[i] == .nil ? matrix_identity_float4x4 : worldTransforms[i]
+            let parentTransform = parentIndices[i] == .nil ? matrix_identity_float4x4 : worldTransforms[parentIndices[i]]
             worldTransforms.append(parentTransform * localBindTransform[i])
         }
         return worldTransforms

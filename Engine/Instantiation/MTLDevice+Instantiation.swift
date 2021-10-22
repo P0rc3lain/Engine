@@ -30,6 +30,10 @@ extension MTLDevice {
         let descriptor = MTLRenderPipelineDescriptor.gBufferRenderer(library: library)
         return try! makeRenderPipelineState(descriptor: descriptor)
     }
+    func makeRenderPipelineStateGBufferAnimatedRenderer(library: MTLLibrary) -> MTLRenderPipelineState {
+        let descriptor = MTLRenderPipelineDescriptor.gBufferAnimatedRenderer(library: library)
+        return try! makeRenderPipelineState(descriptor: descriptor)
+    }
     func makeRenderPipelineStateLightRenderer(library: MTLLibrary) -> MTLRenderPipelineState {
         let descriptor = MTLRenderPipelineDescriptor.lightRenderer(library: library)
         return try! makeRenderPipelineState(descriptor: descriptor)

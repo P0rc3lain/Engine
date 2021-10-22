@@ -41,6 +41,11 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexDescriptor = .porcelain
         return descriptor
     }
+    static func gBufferAnimatedRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
+        let descriptor = MTLRenderPipelineDescriptor.gBufferRenderer(library: library)
+        descriptor.vertexFunction = library.makeFunction(name: "gBufferAnimatedVertex")
+        return descriptor
+    }
     static func lightRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.vertexFunction = library.makeFunction(name: "vertexDeferredLight")

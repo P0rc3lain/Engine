@@ -49,6 +49,41 @@ vertex RasterizerData gBufferVertex(Vertex                      in              
     return out;
 }
 
+vertex RasterizerData gBufferAnimatedVertex(Vertex                      in              [[stage_in]],
+                                            constant CameraUniforms &   cameraUniforms  [[buffer(1)]],
+                                            constant ModelUniforms &    modelUniforms   [[buffer(2)]],
+                                            constant simd_float4x4 *    matrixPalettes  [[buffer(3)]]) {
+    float4 totalPosition = float4(0);
+    float4 totalNormal = float4(0);
+    float4 totalTangent = float4(0);
+    for(int i=0; i<4; ++i) {
+        float4x4 transformMatrix = matrixPalettes[in.jointIndices[i]];
+        float4 weight = in.jointWeights[i];
+
+        float4 localPosition = transformMatrix * float4(in.position, 1);
+        totalPosition += weight * localPosition;
+
+        float4 localNormal = transformMatrix * float4(in.normal, 0);
+        totalNormal += weight * localNormal;
+
+        float4 localTangent = transformMatrix * float4(in.tangent, 0);
+        totalTangent += weight * localTangent;
+    }
+    
+    matrix_float3x3 rotation = extract_rotation(modelUniforms.modelMatrix);
+    float3 rotatedNormal = rotation * totalNormal.xyz;
+    float3 rotatedTangent = rotation * totalTangent.xyz;
+    float4 worldPosition = modelUniforms.modelMatrix * totalPosition;
+    RasterizerData out;
+    out.t = normalize(rotatedTangent);
+    out.b = normalize(cross(rotatedTangent, rotatedNormal));
+    out.n = normalize(rotatedNormal);
+    out.clipSpacePosition = cameraUniforms.projectionMatrix * cameraUniforms.viewMatrix * worldPosition;
+    out.worldSpacePosition = worldPosition.xyz;
+    out.uv = in.textureUV;
+    return out;
+}
+
 fragment GBufferData gBufferFragment(RasterizerData             in              [[stage_in]],
                                      texture2d<float>           albedo          [[texture(0)]],
                                      texture2d<float>           roughness       [[texture(1)]],
