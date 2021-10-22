@@ -84,7 +84,7 @@ public struct RenderingCoordinator {
         scene.paletteReferences = []
         for i in 0 ..< scene.objects.count {
             let palette = generatePalette(objectIdx: i, scene: &scene)
-            scene.paletteReferences.append(PaletteReference(idx: continousPalette.count, size: palette.count))
+            scene.paletteReferences.append(continousPalette.count ..< continousPalette.count + palette.count)
             continousPalette += palette
         }
         bufferStore.upload(palettes: &continousPalette)

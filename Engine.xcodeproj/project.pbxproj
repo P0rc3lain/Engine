@@ -98,7 +98,6 @@
 		563D0A2E2719F7A700F77B40 /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = 563D0A2C2719F7A400F77B40 /* Model.h */; };
 		56407B7B27204EEB00440CAC /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56407B7A27204EEB00440CAC /* Array+Extension.swift */; };
 		56407B7D27206F5D00440CAC /* Vertex+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56407B7C27206F5D00440CAC /* Vertex+Extension.swift */; };
-		568530B62721AA9B0038DAFC /* PaletteReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568530B52721AA9B0038DAFC /* PaletteReference.swift */; };
 		56924ACC271A00D900FF3E06 /* AnimatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACB271A00D900FF3E06 /* AnimatedValue.swift */; };
 		56924ACE271A022900FF3E06 /* EntityTree+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */; };
 		56924AD7271A07FD00FF3E06 /* AnimatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AD6271A07FD00FF3E06 /* AnimatedValue.swift */; };
@@ -214,7 +213,6 @@
 		563D0A2C2719F7A400F77B40 /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		56407B7A27204EEB00440CAC /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		56407B7C27206F5D00440CAC /* Vertex+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vertex+Extension.swift"; sourceTree = "<group>"; };
-		568530B52721AA9B0038DAFC /* PaletteReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteReference.swift; sourceTree = "<group>"; };
 		56924ACB271A00D900FF3E06 /* AnimatedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedValue.swift; sourceTree = "<group>"; };
 		56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityTree+Extension.swift"; sourceTree = "<group>"; };
 		56924AD4271A07FD00FF3E06 /* EngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -332,7 +330,6 @@
 				5616669F2719E2CC000063B1 /* TransformAnimation.swift */,
 				561666A12719E2CC000063B1 /* Skeleton.swift */,
 				561666A22719E2CC000063B1 /* SkeletalAnimation.swift */,
-				568530B52721AA9B0038DAFC /* PaletteReference.swift */,
 			);
 			path = Position;
 			sourceTree = "<group>";
@@ -735,7 +732,6 @@
 				561666FF2719E2CD000063B1 /* simd_float3+Extension.swift in Sources */,
 				561667192719E2CD000063B1 /* SkeletalAnimation.swift in Sources */,
 				561666F82719E2CD000063B1 /* MTLVertexDescriptor+Extension.swift in Sources */,
-				568530B62721AA9B0038DAFC /* PaletteReference.swift in Sources */,
 				561667322719E2CD000063B1 /* Alias+IndexBasedDraw.swift in Sources */,
 				561667122719E2CD000063B1 /* Float+Extension.swift in Sources */,
 				5616673C2719E2CD000063B1 /* IndexBitDepth.swift in Sources */,

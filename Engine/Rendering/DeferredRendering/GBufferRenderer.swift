@@ -46,7 +46,7 @@ struct GBufferRenderer {
                 for description in mesh.pieceDescriptions {
                     let offset = i * MemoryLayout<ModelUniforms>.stride
                     encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer, offset: offset, index: 2)
-                    encoder.setVertexBuffer(dataStore.matrixPalettes.buffer, offset: scene.paletteReferences[i].idx, index: 3)
+                    encoder.setVertexBuffer(dataStore.matrixPalettes.buffer, offset: scene.paletteReferences[i].lowerBound, index: 3)
                     let material = scene.materials[description.materialIdx]
                     encoder.setFragmentTextures([material.albedo, material.roughness, material.normals, material.metallic], range: 0 ..< 4)
                     encoder.drawIndexedPrimitives(type: description.drawDescription.primitiveType,
