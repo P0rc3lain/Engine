@@ -10,16 +10,8 @@
 
 #include <simd/simd.h>
 
+#include "Attribute.h"
 #include "Compatibility.h"
-
-enum VertexAttribute {
-    kVertexAttributePositionIndex = 0,
-    kVertexAttributeNormalIndex,
-    kVertexAttributeTangentIndex,
-    kVertexAttributeTextureUV,
-    kVertexAttributeJointIndices,
-    kVertexAttributeJointWeights
-};
 
 struct Vertex {
     simd_float3 position        metal_only([[attribute(kVertexAttributePositionIndex)]]);

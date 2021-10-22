@@ -31,8 +31,8 @@ struct GBufferData {
 };
 
 vertex RasterizerData gBufferVertex(Vertex                      in              [[stage_in]],
-                                    constant CameraUniforms &   cameraUniforms  [[buffer(1)]],
-                                    constant ModelUniforms &    modelUniforms   [[buffer(2)]]) {
+                                    constant CameraUniforms &   cameraUniforms  [[buffer(kAttributeGBufferVertexShaderBufferCameraUniforms)]],
+                                    constant ModelUniforms &    modelUniforms   [[buffer(kAttributeGBufferVertexShaderBufferModelUniforms)]]) {
     
     
     matrix_float3x3 rotation = extract_rotation(modelUniforms.modelMatrix);
@@ -50,9 +50,9 @@ vertex RasterizerData gBufferVertex(Vertex                      in              
 }
 
 vertex RasterizerData gBufferAnimatedVertex(Vertex                      in              [[stage_in]],
-                                            constant CameraUniforms &   cameraUniforms  [[buffer(1)]],
-                                            constant ModelUniforms &    modelUniforms   [[buffer(2)]],
-                                            constant simd_float4x4 *    matrixPalettes  [[buffer(3)]]) {
+                                            constant CameraUniforms &   cameraUniforms  [[buffer(kAttributeGBufferVertexShaderBufferCameraUniforms)]],
+                                            constant ModelUniforms &    modelUniforms   [[buffer(kAttributeGBufferVertexShaderBufferModelUniforms)]],
+                                            constant simd_float4x4 *    matrixPalettes  [[buffer(kAttributeGBufferVertexShaderBufferMatrixPalettes)]]) {
     float4 totalPosition = float4(0);
     float4 totalNormal = float4(0);
     float4 totalTangent = float4(0);
@@ -85,10 +85,10 @@ vertex RasterizerData gBufferAnimatedVertex(Vertex                      in      
 }
 
 fragment GBufferData gBufferFragment(RasterizerData             in              [[stage_in]],
-                                     texture2d<float>           albedo          [[texture(0)]],
-                                     texture2d<float>           roughness       [[texture(1)]],
-                                     texture2d<float>           normals         [[texture(2)]],
-                                     texture2d<float>           metallic        [[texture(3)]]) {
+                                     texture2d<float>           albedo          [[texture(kAttributeGBufferFragmentShaderTextureAlbedo)]],
+                                     texture2d<float>           roughness       [[texture(kAttributeGBufferFragmentShaderTextureRoughness)]],
+                                     texture2d<float>           normals         [[texture(kAttributeGBufferFragmentShaderTextureNormals)]],
+                                     texture2d<float>           metallic        [[texture(kAttributeGBufferFragmentShaderTextureMetallic)]]) {
     constexpr sampler textureSampler(mag_filter::linear, min_filter::nearest, address::mirrored_repeat);
     simd_float3x3 TBN(in.t, in.b, in.n);
     GBufferData out;
