@@ -22,9 +22,7 @@ struct LightPassRenderer {
         self.depthStencilState = depthStencilState
         self.gbufferRenderPass = gBufferRenderPass
         self.plane = GPUGeometry.screenSpacePlane(device: device)
-        self.viewPort = MTLViewport(originX: 0, originY: 0,
-                                    width: Double(drawableSize.width), height: Double(drawableSize.height),
-                                    znear: 0, zfar: 1)
+        self.viewPort = .porcelain(size: drawableSize)
     }
     // MARK: - Internal
     func draw(encoder: inout MTLRenderCommandEncoder, bufferStore: inout BufferStore, lightsCount: Int) {

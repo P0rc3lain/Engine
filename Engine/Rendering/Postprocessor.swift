@@ -20,10 +20,7 @@ struct Postprocessor {
         self.texture = texture
         self.pipelineState = pipelineState
         self.plane = plane
-        self.viewPort = MTLViewport(originX: 0, originY: 0,
-                                    width: Double(canvasSize.width),
-                                    height: Double(canvasSize.height),
-                                    znear: 0, zfar: 1)
+        self.viewPort = .porcelain(size: canvasSize)
     }
     // MARK: - Internal
     func draw(encoder: MTLRenderCommandEncoder) {

@@ -27,9 +27,7 @@ struct EnvironmentRenderer {
         self.pipelineState = pipelineState
         self.depthStentilState = depthStentilState
         self.cube = cube
-        self.viewPort = MTLViewport(originX: 0, originY: 0,
-                                    width: Double(drawableSize.width), height: Double(drawableSize.height),
-                                    znear: 0, zfar: 1)
+        self.viewPort = .porcelain(size: drawableSize)
     }
     // MARK: - Internal
     func draw(encoder: inout MTLRenderCommandEncoder, scene: inout GPUSceneDescription) {
