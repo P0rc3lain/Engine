@@ -8,6 +8,7 @@
 #include <metal_stdlib>
 
 #include "../MetalBinding/Vertex.h"
+#include "../MetalBinding/Attribute.h"
 
 using namespace metal;
 
@@ -24,7 +25,7 @@ vertex TexturePipelineRasterizerData  vertexPostprocess(Vertex in [[stage_in]]) 
 }
 
 fragment float4 fragmentPostprocess(TexturePipelineRasterizerData in [[stage_in]],
-                                    texture2d<float> texture [[texture(0)]]) {
+                                    texture2d<float> texture [[texture(kAttributePostprocessingFragmentShaderTexture)]]) {
     constexpr sampler textureSampler(min_filter::nearest, mag_filter::nearest);
     return texture.sample(textureSampler, in.texcoord);
 }

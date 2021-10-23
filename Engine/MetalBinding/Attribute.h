@@ -31,4 +31,12 @@ enum AttributeGBufferFragmentShaderTextureIndex {
     kAttributeGBufferFragmentShaderTextureMetallic
 };
 
+enum AttributePostprocessingVertexShaderBufferIndex {
+    kAttributePostprocessingVertexShaderBufferStageIn = 0
+};
+
+enum AttributePostprocessingFragmentShaderTextureIndex {
+    kAttributePostprocessingFragmentShaderTexture = 0
+};
+
 #endif /* ATTRIBUTE_H */

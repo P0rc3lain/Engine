@@ -7,6 +7,7 @@
 
 import simd
 import Metal
+import MetalBinding
 
 struct Postprocessor {
     // MARK: - Properties
@@ -20,15 +21,18 @@ struct Postprocessor {
         self.pipelineState = pipelineState
         self.plane = plane
         self.viewPort = MTLViewport(originX: 0, originY: 0,
-                                    width: Double(canvasSize.width), height: Double(canvasSize.height),
+                                    width: Double(canvasSize.width),
+                                    height: Double(canvasSize.height),
                                     znear: 0, zfar: 1)
     }
     // MARK: - Internal
     func draw(encoder: MTLRenderCommandEncoder) {
-        encoder.setFragmentTexture(texture, index: 0)
+        encoder.setFragmentTexture(texture, index: kAttributePostprocessingFragmentShaderTexture.int)
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
-        encoder.setVertexBuffer(plane.vertexBuffer.buffer, offset: 0, index: 0)
+        encoder.setVertexBuffer(plane.vertexBuffer.buffer,
+                                offset: 0,
+                                index: kAttributePostprocessingVertexShaderBufferStageIn.int)
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
                                       indexType: plane.pieceDescriptions[0].drawDescription.indexType,
