@@ -29,15 +29,24 @@ struct LightPassRenderer {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStencilState)
-        encoder.setVertexBuffer(plane.vertexBuffer.buffer, offset: 0, index: 0)
-        
-        encoder.setFragmentBuffer(bufferStore.omniLights.buffer, offset: 0, index: 3)
-        encoder.setFragmentBuffer(bufferStore.cameras.buffer, offset: 0, index: 1)
-        
-        encoder.setFragmentTexture(gbufferRenderPass.colorAttachments[0].texture!, index: 0)
-        encoder.setFragmentTexture(gbufferRenderPass.colorAttachments[1].texture!, index: 1)
-        encoder.setFragmentTexture(gbufferRenderPass.colorAttachments[2].texture!, index: 2)
-        encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems.buffer, offset: 0, index: 4)
+        encoder.setVertexBuffer(plane.vertexBuffer.buffer,
+                                offset: 0,
+                                index: kAttributeLightingVertexShaderBufferStageIn.int)
+        encoder.setFragmentBuffer(bufferStore.omniLights.buffer,
+                                  offset: 0,
+                                  index: kAttributeLightingFragmentShaderBufferOmniLights.int)
+        encoder.setFragmentBuffer(bufferStore.cameras.buffer,
+                                  offset: 0,
+                                  index: kAttributeLightingFragmentShaderBufferCamera.int)
+        encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems.buffer,
+                                  offset: 0,
+                                  index: kAttributeLightingFragmentShaderBufferLightUniforms.int)
+        encoder.setFragmentTexture(gbufferRenderPass.colorAttachments[0].texture!,
+                                   index: kAttributeLightingFragmentShaderTextureAR.int)
+        encoder.setFragmentTexture(gbufferRenderPass.colorAttachments[1].texture!,
+                                   index: kAttributeLightingFragmentShaderTextureNM.int)
+        encoder.setFragmentTexture(gbufferRenderPass.colorAttachments[2].texture!,
+                                   index: kAttributeLightingFragmentShaderTexturePR.int)
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
                                       indexType: plane.pieceDescriptions[0].drawDescription.indexType,

@@ -12,6 +12,7 @@
 #include "../../MetalBinding/Model.h"
 #include "../../MetalBinding/Vertex.h"
 #include "../../MetalBinding/Camera.h"
+#include "../../MetalBinding/Attribute.h"
 #include "../../MetalBinding/OmniLight.h"
 
 using namespace metal;
@@ -32,12 +33,12 @@ vertex TexturePipelineRasterizerData vertexDeferredLight(Vertex in          [[st
 }
 
 fragment float4 fragmentDeferredLight(TexturePipelineRasterizerData in              [[stage_in]],
-                                      texture2d<float>              ar              [[texture(0)]],
-                                      texture2d<float>              nm              [[texture(1)]],
-                                      texture2d<float>              pr              [[texture(2)]],
-                                      constant CameraUniforms &     camera          [[buffer(1)]],
-                                      constant OmniLight *          omniLights      [[buffer(3)]],
-                                      constant ModelUniforms *      lightUniforms   [[buffer(4)]]) {
+                                      texture2d<float>              ar              [[texture(kAttributeLightingFragmentShaderTextureAR)]],
+                                      texture2d<float>              nm              [[texture(kAttributeLightingFragmentShaderTextureNM)]],
+                                      texture2d<float>              pr              [[texture(kAttributeLightingFragmentShaderTexturePR)]],
+                                      constant CameraUniforms &     camera          [[buffer(kAttributeLightingFragmentShaderBufferCamera)]],
+                                      constant OmniLight *          omniLights      [[buffer(kAttributeLightingFragmentShaderBufferOmniLights)]],
+                                      constant ModelUniforms *      lightUniforms   [[buffer(kAttributeLightingFragmentShaderBufferLightUniforms)]]) {
     constexpr sampler textureSampler(mag_filter::nearest, min_filter::nearest);
     float4 arV = ar.sample(textureSampler, in.texcoord);
     float4 nmV = nm.sample(textureSampler, in.texcoord);
