@@ -8,6 +8,8 @@
 #include <simd/simd.h>
 #include <metal_stdlib>
 
+#include "../MetalBinding/Attribute.h"
+
 using namespace metal;
 
 struct Uniforms {
@@ -20,8 +22,8 @@ struct RasterizedData {
     simd_float4 viewPosition;
 };
 
-vertex RasterizedData environmentVertexShader(simd_float4 in [[stage_in attribute(0)]],
-                                              constant Uniforms & uniforms [[buffer(1)]]) {
+vertex RasterizedData environmentVertexShader(simd_float4 in [[stage_in attribute(kAttributeEnvironmentVertexShaderBufferStageIn)]],
+                                              constant Uniforms & uniforms [[buffer(kAttributeEnvironmentVertexShaderBufferUniforms)]]) {
     RasterizedData out;
     out.ndcPosition = uniforms.projection * uniforms.rotation * in;;
     out.viewPosition = in;
@@ -29,7 +31,7 @@ vertex RasterizedData environmentVertexShader(simd_float4 in [[stage_in attribut
 }
 
 fragment half4 environmentFragmentShader(RasterizedData in [[stage_in]],
-                                         texturecube<half> cubeTexture [[texture(0)]]) {
+                                         texturecube<half> cubeTexture [[texture(kAttributeEnvironmentFragmentShaderTextureCubeMap)]]) {
     constexpr sampler cubeSampler(mag_filter::linear, min_filter::nearest);
     float3 coordinates = float3(in.viewPosition.xy, -in.viewPosition.z);
     return cubeTexture.sample(cubeSampler, coordinates);

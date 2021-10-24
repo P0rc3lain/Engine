@@ -31,6 +31,15 @@ enum AttributeGBufferFragmentShaderTextureIndex {
     kAttributeGBufferFragmentShaderTextureMetallic
 };
 
+enum AttributeEnvironmentVertexShaderBufferIndex {
+    kAttributeEnvironmentVertexShaderBufferStageIn = 0,
+    kAttributeEnvironmentVertexShaderBufferUniforms
+};
+
+enum AttributeEnvironmentFragmentShaderTextureIndex {
+    kAttributeEnvironmentFragmentShaderTextureCubeMap = 0
+};
+
 enum AttributePostprocessingVertexShaderBufferIndex {
     kAttributePostprocessingVertexShaderBufferStageIn = 0
 };

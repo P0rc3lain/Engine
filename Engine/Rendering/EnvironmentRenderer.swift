@@ -7,6 +7,7 @@
 
 import simd
 import Metal
+import MetalBinding
 
 fileprivate struct Uniforms {
     let projectionMatrix: matrix_float4x4
@@ -36,15 +37,20 @@ struct EnvironmentRenderer {
         }
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
-        encoder.setVertexBuffer(cube.vertexBuffer.buffer, offset: 0, index: 0)
+        encoder.setVertexBuffer(cube.vertexBuffer.buffer,
+                                offset: 0,
+                                index: kAttributeEnvironmentVertexShaderBufferStageIn.int)
         encoder.setDepthStencilState(depthStentilState)
         encoder.setStencilReferenceValue(0)
-        encoder.setFragmentTexture(scene.skyMaps[scene.sky], index: 0)
+        encoder.setFragmentTexture(scene.skyMaps[scene.sky],
+                                   index: kAttributeEnvironmentFragmentShaderTextureCubeMap.int)
         let cameraIndex = scene.objects.objects[scene.activeCameraIdx].data.referenceIdx
         let uniforms = Uniforms(projectionMatrix: scene.cameras[cameraIndex].projectionMatrix,
                                 orientation: simd_matrix4x4(scene.objects.objects[scene.activeCameraIdx].data.transform.rotation.interpolated(at: 0)))
         withUnsafePointer(to: uniforms) { ptr in
-            encoder.setVertexBytes(ptr, length: MemoryLayout<Uniforms>.size, index: 1)
+            encoder.setVertexBytes(ptr,
+                                   length: MemoryLayout<Uniforms>.size,
+                                   index: kAttributeEnvironmentVertexShaderBufferUniforms.int)
         }
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: cube.pieceDescriptions[0].drawDescription.indexBuffer.length / MemoryLayout<UInt16>.size,
