@@ -294,42 +294,12 @@
 		5616667F2719E2CC000063B1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				561666802719E2CC000063B1 /* MTLVertexDescriptor+Extension.swift */,
-				561666812719E2CC000063B1 /* MDLMaterialProperty+Extension.swift */,
-				561666822719E2CC000063B1 /* simd_float4+Extension.swift */,
-				561666832719E2CC000063B1 /* MDLTransformComponent+Extension.swift */,
-				561666842719E2CC000063B1 /* Int+Extension.swift */,
-				561666852719E2CC000063B1 /* MTLTextureDescriptor+Extension.swift */,
-				561666862719E2CC000063B1 /* MDLMaterial+Extension.swift */,
-				561666872719E2CC000063B1 /* simd_float3+Extension.swift */,
-				561666882719E2CC000063B1 /* IndexBasedDraw+Extension.swift */,
-				561666892719E2CC000063B1 /* MDLObject+Extension.swift */,
-				5616668A2719E2CC000063B1 /* MDLCamera+Extension.swift */,
-				5616668B2719E2CC000063B1 /* SceneDescription+Extension.swift */,
-				5616668C2719E2CC000063B1 /* MDLTexture+Extension.swift */,
-				5616668D2719E2CC000063B1 /* simd_float4x4+Extension.swift */,
-				5616668E2719E2CC000063B1 /* MDLMaterialSemantic+Extension.swift */,
-				5616668F2719E2CC000063B1 /* Geometry+Extension.swift */,
-				561666902719E2CC000063B1 /* DataBuffer+Extension.swift */,
-				561666912719E2CC000063B1 /* MDLVertexDescriptor+Extension.swift */,
-				561666922719E2CC000063B1 /* MDLSubmesh+Extension.swift */,
-				561666932719E2CC000063B1 /* PieceDescription+Extension.swift */,
-				561666942719E2CC000063B1 /* MTLDevice+Extension.swift */,
-				561666952719E2CC000063B1 /* MDLMeshBuffer+Extension.swift */,
-				561666972719E2CC000063B1 /* Data+Extension.swift */,
-				561666982719E2CC000063B1 /* Material+Extension.swift */,
-				561666992719E2CC000063B1 /* CGSize+Extension.swift */,
-				5616669A2719E2CC000063B1 /* Float+Extension.swift */,
-				5616669C2719E2CC000063B1 /* MDLAsset+Extension.swift */,
-				56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */,
-				56924AE7271A187400FF3E06 /* AnimatedFloat3+Extensions.swift */,
-				56924AE9271A188700FF3E06 /* AnimatedQuatf+Extension.swift */,
-				56D34A53271B037900A87785 /* Double+Extension.swift */,
-				56407B7A27204EEB00440CAC /* Array+Extension.swift */,
-				56407B7C27206F5D00440CAC /* Vertex+Extension.swift */,
-				56D12ACF27231DAD00550530 /* RawRepresentable+Extension.swift */,
-				561DF41627246F1800D95ACC /* MTLViewport+Extension.swift */,
-				562B8F42272599FF00363CE8 /* MTLRenderCommandEncoder+Extension.swift */,
+				56D1ED5D2725F87400D68EA7 /* simd */,
+				56D1ED5C2725F86C00D68EA7 /* Porcelain */,
+				56D1ED5B2725F86800D68EA7 /* Swift */,
+				56D1ED5A2725F86100D68EA7 /* Foundation */,
+				56D1ED592725F84C00D68EA7 /* ModelIO */,
+				56D1ED582725F83A00D68EA7 /* Metal */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -545,6 +515,84 @@
 				56924AD6271A07FD00FF3E06 /* AnimatedValue.swift */,
 			);
 			path = Animation;
+			sourceTree = "<group>";
+		};
+		56D1ED582725F83A00D68EA7 /* Metal */ = {
+			isa = PBXGroup;
+			children = (
+				561666942719E2CC000063B1 /* MTLDevice+Extension.swift */,
+				561666802719E2CC000063B1 /* MTLVertexDescriptor+Extension.swift */,
+				561666852719E2CC000063B1 /* MTLTextureDescriptor+Extension.swift */,
+				561DF41627246F1800D95ACC /* MTLViewport+Extension.swift */,
+				562B8F42272599FF00363CE8 /* MTLRenderCommandEncoder+Extension.swift */,
+			);
+			path = Metal;
+			sourceTree = "<group>";
+		};
+		56D1ED592725F84C00D68EA7 /* ModelIO */ = {
+			isa = PBXGroup;
+			children = (
+				561666812719E2CC000063B1 /* MDLMaterialProperty+Extension.swift */,
+				561666832719E2CC000063B1 /* MDLTransformComponent+Extension.swift */,
+				561666862719E2CC000063B1 /* MDLMaterial+Extension.swift */,
+				561666892719E2CC000063B1 /* MDLObject+Extension.swift */,
+				5616668A2719E2CC000063B1 /* MDLCamera+Extension.swift */,
+				5616668C2719E2CC000063B1 /* MDLTexture+Extension.swift */,
+				5616668E2719E2CC000063B1 /* MDLMaterialSemantic+Extension.swift */,
+				561666912719E2CC000063B1 /* MDLVertexDescriptor+Extension.swift */,
+				561666922719E2CC000063B1 /* MDLSubmesh+Extension.swift */,
+				561666952719E2CC000063B1 /* MDLMeshBuffer+Extension.swift */,
+				5616669C2719E2CC000063B1 /* MDLAsset+Extension.swift */,
+			);
+			path = ModelIO;
+			sourceTree = "<group>";
+		};
+		56D1ED5A2725F86100D68EA7 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				561666992719E2CC000063B1 /* CGSize+Extension.swift */,
+				561666972719E2CC000063B1 /* Data+Extension.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		56D1ED5B2725F86800D68EA7 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				56D12ACF27231DAD00550530 /* RawRepresentable+Extension.swift */,
+				561666842719E2CC000063B1 /* Int+Extension.swift */,
+				5616669A2719E2CC000063B1 /* Float+Extension.swift */,
+				56D34A53271B037900A87785 /* Double+Extension.swift */,
+				56407B7A27204EEB00440CAC /* Array+Extension.swift */,
+			);
+			path = Swift;
+			sourceTree = "<group>";
+		};
+		56D1ED5C2725F86C00D68EA7 /* Porcelain */ = {
+			isa = PBXGroup;
+			children = (
+				561666882719E2CC000063B1 /* IndexBasedDraw+Extension.swift */,
+				561666902719E2CC000063B1 /* DataBuffer+Extension.swift */,
+				561666932719E2CC000063B1 /* PieceDescription+Extension.swift */,
+				56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */,
+				56924AE7271A187400FF3E06 /* AnimatedFloat3+Extensions.swift */,
+				56924AE9271A188700FF3E06 /* AnimatedQuatf+Extension.swift */,
+				56407B7C27206F5D00440CAC /* Vertex+Extension.swift */,
+				5616668B2719E2CC000063B1 /* SceneDescription+Extension.swift */,
+				5616668F2719E2CC000063B1 /* Geometry+Extension.swift */,
+				561666982719E2CC000063B1 /* Material+Extension.swift */,
+			);
+			path = Porcelain;
+			sourceTree = "<group>";
+		};
+		56D1ED5D2725F87400D68EA7 /* simd */ = {
+			isa = PBXGroup;
+			children = (
+				561666822719E2CC000063B1 /* simd_float4+Extension.swift */,
+				561666872719E2CC000063B1 /* simd_float3+Extension.swift */,
+				5616668D2719E2CC000063B1 /* simd_float4x4+Extension.swift */,
+			);
+			path = simd;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -905,7 +953,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = R78NEXF6E2;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -934,7 +982,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = R78NEXF6E2;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
