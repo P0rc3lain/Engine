@@ -30,13 +30,10 @@ struct LightPassRenderer {
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
-                                offset: 0,
                                 index: kAttributeLightingVertexShaderBufferStageIn.int)
         encoder.setFragmentBuffer(bufferStore.omniLights.buffer,
-                                  offset: 0,
                                   index: kAttributeLightingFragmentShaderBufferOmniLights.int)
         encoder.setFragmentBuffer(bufferStore.cameras.buffer,
-                                  offset: 0,
                                   index: kAttributeLightingFragmentShaderBufferCamera.int)
         encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems.buffer,
                                   offset: 0,

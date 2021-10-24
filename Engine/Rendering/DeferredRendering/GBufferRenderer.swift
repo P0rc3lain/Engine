@@ -33,7 +33,6 @@ struct GBufferRenderer {
         encoder.setCullMode(.back)
         encoder.setFrontFacing(.counterClockwise)
         encoder.setVertexBuffer(dataStore.cameras.buffer,
-                                offset: 0,
                                 index: kAttributeGBufferVertexShaderBufferCameraUniforms.int)
         encoder.setStencilReferenceValue(1)
         encoder.setRenderPipelineState(animatedPipelineState)
