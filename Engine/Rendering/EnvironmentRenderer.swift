@@ -38,7 +38,6 @@ struct EnvironmentRenderer {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(cube.vertexBuffer.buffer,
-                                offset: 0,
                                 index: kAttributeEnvironmentVertexShaderBufferStageIn.int)
         encoder.setDepthStencilState(depthStentilState)
         encoder.setStencilReferenceValue(0)

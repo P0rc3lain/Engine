@@ -28,7 +28,6 @@ struct Postprocessor {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
-                                offset: 0,
                                 index: kAttributePostprocessingVertexShaderBufferStageIn.int)
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
