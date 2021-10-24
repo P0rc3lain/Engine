@@ -36,7 +36,6 @@ struct LightPassRenderer {
         encoder.setFragmentBuffer(bufferStore.cameras.buffer,
                                   index: kAttributeLightingFragmentShaderBufferCamera.int)
         encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems.buffer,
-                                  offset: 0,
                                   index: kAttributeLightingFragmentShaderBufferLightUniforms.int)
         encoder.setFragmentTexture(gbufferRenderPass.colorAttachments[0].texture!,
                                    index: kAttributeLightingFragmentShaderTextureAR.int)
