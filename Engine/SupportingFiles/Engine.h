@@ -1,8 +1,5 @@
 //
-//  Engine.h
-//  Engine
-//
-//  Created by Mateusz Stompór on 05/11/2020.
+//  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

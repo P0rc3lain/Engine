@@ -1,8 +1,5 @@
 //
-//  Transformation.h
-//  Engine
-//
-//  Created by Mateusz Stompór on 07/11/2020.
+//  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
 #ifndef TRANSFORMATION_H

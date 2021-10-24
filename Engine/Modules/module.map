@@ -1,3 +1,7 @@
+//
+//  Copyright © 2021 Mateusz Stompór. All rights reserved.
+//
+
 module MetalBinding {
     header "../MetalBinding/Vertex.h"
     header "../MetalBinding/OmniLight.h"

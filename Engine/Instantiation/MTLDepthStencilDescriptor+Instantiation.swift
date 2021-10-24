@@ -1,8 +1,5 @@
 //
-//  MTLDepthStencilDescriptor+Instantiation.swift
-//  Engine
-//
-//  Created by Mateusz Stompór on 13/11/2020.
+//  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
 import Metal

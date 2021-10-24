@@ -1,8 +1,5 @@
 //
-//  GBufferRenderer.metal
-//  Engine
-//
-//  Created by Mateusz Stompór on 14/11/2020.
+//  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
 #include <metal_stdlib>

@@ -1,8 +1,5 @@
 //
-//  MTLPixelFormat+Instantiation.swift
-//  Engine
-//
-//  Created by Mateusz Stompór on 15/11/2020.
+//  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
 import Metal

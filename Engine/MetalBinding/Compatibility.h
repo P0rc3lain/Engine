@@ -1,8 +1,5 @@
 //
-//  Compatibility.h
-//  Engine
-//
-//  Created by Mateusz Stompór on 14/10/2021.
+//  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
 #ifndef COMPATIBILITY_H

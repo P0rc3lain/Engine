@@ -1,8 +1,5 @@
 //
-//  AnimatedFloat3+Extensions.swift
-//  Engine
-//
-//  Created by Mateusz Stompór on 15/10/2021.
+//  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
 import simd

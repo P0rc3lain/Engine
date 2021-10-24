@@ -1,8 +1,5 @@
 //
-//  Engine.swift
-//  Engine
-//
-//  Created by Mateusz Stompór on 11/11/2020.
+//  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
 import MetalKit
