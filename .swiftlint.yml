@@ -83,7 +83,7 @@ opt_in_rules:
 
 disabled_rules:
 - todo
+- force_unwrapping
 - private_over_fileprivate
 - let_var_whitespace
-- force_unwrapping
 
