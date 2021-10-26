@@ -1,8 +1,5 @@
 //
-//  RawRepresentable+Extension.swift
-//  RawRepresentable+Extension
-//
-//  Created by Mateusz Stompór on 22/10/2021.
+//  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
 import MetalBinding
