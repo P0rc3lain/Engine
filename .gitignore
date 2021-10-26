@@ -3,3 +3,6 @@
 
 # User data
 xcuserdata
+
+# Swap files
+*.swp

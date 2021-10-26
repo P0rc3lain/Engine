@@ -1,0 +1,88 @@
+line_length:
+    warning: 140
+    error: 160
+    ignores_function_declarations: true
+    ignores_comments: true
+    ignores_urls: true
+function_body_length:
+    warning: 150
+    error: 200
+function_parameter_count:
+    warning: 6
+    error: 8
+type_body_length:
+    warning: 200
+    error: 300
+file_length:
+    warning: 300
+    error: 500
+    ignore_comment_only_lines: true
+
+opt_in_rules:
+- unavailable_function
+- nesting
+- anyobject_protocol
+- array_init
+- closure_end_indentation
+- closure_spacing
+- attributes
+
+disabled_rules:
+- empty_count
+- empty_string
+- contains_over_first_not_nil
+- convenience_type
+- discouraged_object_literal
+- explicit_init
+- fallthrough
+- first_where
+- force_unwrapping
+- function_default_parameter_at_end
+- identical_operands
+- implicit_return
+- implicitly_unwrapped_optional
+- joined_default_parameter
+- let_var_whitespace
+- literal_expression_end_indentation
+- lower_acl_than_parent
+- multiline_arguments
+- multiline_function_chains
+- multiline_parameters
+- no_extension_access_modifier
+- number_separator
+- operator_usage_whitespace
+- override_in_extension
+- overridden_super_call
+- pattern_matching_keywords
+- private_action
+- private_outlet
+- private_over_fileprivate
+- prohibited_super_call
+- redundant_nil_coalescing
+- single_test_class
+- sorted_first_last
+- sorted_imports
+- todo
+- toggle_bool
+- unneeded_parentheses_in_closure_argument
+- yoda_condition
+- cyclomatic_complexity
+- type_name
+- weak_delegate
+- identifier_name
+- trailing_whitespace
+- discouraged_optional_boolean
+- discouraged_optional_collection
+- comma
+- switch_case_alignment
+- trailing_comma
+- opening_brace
+- large_tuple
+- trailing_semicolon
+- return_arrow_whitespace
+- syntactic_sugar
+- colon
+- force_try
+- force_cast
+- line_length
+- trailing_newline
