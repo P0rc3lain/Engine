@@ -52,6 +52,9 @@ opt_in_rules:
 - identical_operands
 - lower_acl_than_parent
 - multiline_arguments
+- number_separator
+- operator_usage_whitespace
+- pattern_matching_keywords
 
 disabled_rules:
 - function_default_parameter_at_end
@@ -62,9 +65,6 @@ disabled_rules:
 - implicitly_unwrapped_optional
 - literal_expression_end_indentation
 - no_extension_access_modifier
-- number_separator
-- operator_usage_whitespace
-- pattern_matching_keywords
 - private_over_fileprivate
 - prohibited_super_call
 - redundant_nil_coalescing
