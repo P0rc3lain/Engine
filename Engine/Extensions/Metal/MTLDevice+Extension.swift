@@ -24,6 +24,15 @@ extension MTLDevice {
         }
         return texture
     }
+    func makeBuffer(data: Data) -> MTLBuffer? {
+        guard let newBuffer = makeSharedBuffer(length: data.count) else {
+            return nil
+        }
+        data.withUnsafeBytes { pointer in
+            newBuffer.contents().copyBuffer(from: pointer)
+        }
+        return newBuffer
+    }
     public func makeSolidCubeTexture(color: simd_float4) -> MTLTexture? {
         assert(length(color) <= 2.001, "Color values must be in [0.0, 1.0] range")
         let descriptor = MTLTextureDescriptor.minimalSolidColorCube
