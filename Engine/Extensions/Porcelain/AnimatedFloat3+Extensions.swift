@@ -10,9 +10,9 @@ extension AnimatedFloat3 {
         return mix(result.current, result.upcoming, t: result.ratio)
     }
     static public var defaultScale: AnimatedFloat3 {
-        return .static(from: .one)
+        .static(from: .one)
     }
     static public var defaultTranslation: AnimatedFloat3 {
-        return .static(from: .zero)
+        .static(from: .zero)
     }
 }

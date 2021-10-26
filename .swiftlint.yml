@@ -1,6 +1,6 @@
 line_length:
-    warning: 140
-    error: 160
+    warning: 160
+    error: 180
     ignores_function_declarations: true
     ignores_comments: true
     ignores_urls: true
@@ -19,6 +19,13 @@ file_length:
     ignore_comment_only_lines: true
 
 opt_in_rules:
+- opening_brace
+- trailing_semicolon
+- toggle_bool
+- cyclomatic_complexity
+- type_name
+- unneeded_parentheses_in_closure_argument
+- yoda_condition
 - unavailable_function
 - nesting
 - anyobject_protocol
@@ -26,8 +33,6 @@ opt_in_rules:
 - closure_end_indentation
 - closure_spacing
 - attributes
-
-disabled_rules:
 - empty_count
 - empty_string
 - contains_over_first_not_nil
@@ -36,26 +41,30 @@ disabled_rules:
 - explicit_init
 - fallthrough
 - first_where
-- force_unwrapping
-- function_default_parameter_at_end
-- identical_operands
 - implicit_return
-- implicitly_unwrapped_optional
-- joined_default_parameter
-- let_var_whitespace
-- literal_expression_end_indentation
-- lower_acl_than_parent
-- multiline_arguments
+- private_action
+- private_outlet
 - multiline_function_chains
 - multiline_parameters
+- line_length
+- override_in_extension
+- overridden_super_call
+- identical_operands
+- lower_acl_than_parent
+- multiline_arguments
+
+disabled_rules:
+- function_default_parameter_at_end
+- large_tuple
+- let_var_whitespace
+- joined_default_parameter
+- force_unwrapping
+- implicitly_unwrapped_optional
+- literal_expression_end_indentation
 - no_extension_access_modifier
 - number_separator
 - operator_usage_whitespace
-- override_in_extension
-- overridden_super_call
 - pattern_matching_keywords
-- private_action
-- private_outlet
 - private_over_fileprivate
 - prohibited_super_call
 - redundant_nil_coalescing
@@ -63,11 +72,6 @@ disabled_rules:
 - sorted_first_last
 - sorted_imports
 - todo
-- toggle_bool
-- unneeded_parentheses_in_closure_argument
-- yoda_condition
-- cyclomatic_complexity
-- type_name
 - weak_delegate
 - identifier_name
 - trailing_whitespace
@@ -76,13 +80,9 @@ disabled_rules:
 - comma
 - switch_case_alignment
 - trailing_comma
-- opening_brace
-- large_tuple
-- trailing_semicolon
 - return_arrow_whitespace
 - syntactic_sugar
 - colon
 - force_try
 - force_cast
-- line_length
 - trailing_newline

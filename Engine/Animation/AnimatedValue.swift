@@ -16,7 +16,7 @@ public struct AnimatedValue<T> {
     public init(keyFrames: [T], times: [TimeInterval], maximumTime: TimeInterval) {
         assert(times.count == keyFrames.count)
         assert(times.sorted() == times)
-        assert(times.count > 0)
+        assert(!times.isEmpty)
         self.keyFrames = keyFrames
         self.times = times
         self.maximumTime = maximumTime

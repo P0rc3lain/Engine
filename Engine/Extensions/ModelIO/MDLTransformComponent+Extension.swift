@@ -6,7 +6,7 @@ import ModelIO
 
 extension MDLTransformComponent {
     var decompose: TransformAnimation {
-        if keyTimes.count > 0 {
+        if !keyTimes.isEmpty {
             let times = keyTimes.map { number in TimeInterval(truncating: number) }
             var translations = [simd_float3]()
             var scales = [simd_float3]()

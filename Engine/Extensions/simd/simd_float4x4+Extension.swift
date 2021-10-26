@@ -35,11 +35,13 @@ extension simd_float4x4 {
     public static func scale(_ factors: simd_float3) -> simd_float4x4 {
         simd_float4x4(diagonal: simd_float4(factors, 1))
     }
-    public static func perspectiveProjectionRightHand(fovyRadians: simd_float1, aspect: simd_float1,
-                                                      nearZ: simd_float1, farZ: simd_float1) -> simd_float4x4 {
+    public static func perspectiveProjectionRightHand(fovyRadians: simd_float1,
+                                                      aspect: simd_float1,
+                                                      nearZ: simd_float1,
+                                                      farZ: simd_float1) -> simd_float4x4 {
         let ys = 1 / tan(fovyRadians * 0.5)
         let xs = ys / aspect
-        let zs = farZ / (nearZ - farZ);
+        let zs = farZ / (nearZ - farZ)
         return simd_float4x4(rows:[simd_float4(xs, 0,  0, 0),
                                    simd_float4(0, ys, 0, 0),
                                    simd_float4(0,  0, zs, nearZ * zs),

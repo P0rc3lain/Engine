@@ -6,7 +6,7 @@ import MetalBinding
 
 extension EntityTree {
     var modelUniforms: [ModelUniforms] {
-        if objects.count == 0 {
+        if objects.isEmpty {
             return []
         }
         var uniforms = [ModelUniforms]()
@@ -16,8 +16,10 @@ extension EntityTree {
             let finalTransform = objects[i].data.transform.transformation(at: Date().timeIntervalSince1970)
             let transform = parentIdx != .nil ? uniforms[parentIdx].modelMatrix * finalTransform : finalTransform
             let transformInverse = transform.inverse
-            uniforms.append(ModelUniforms(modelMatrix: transform, modelMatrixInverse: transformInverse,
-                                          modelMatrixInverse2: transform, modelMatrixInverse3: transform))
+            uniforms.append(ModelUniforms(modelMatrix: transform,
+                                          modelMatrixInverse: transformInverse,
+                                          modelMatrixInverse2: transform,
+                                          modelMatrixInverse3: transform))
         }
         return uniforms
     }

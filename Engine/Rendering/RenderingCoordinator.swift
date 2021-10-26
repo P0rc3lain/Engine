@@ -44,7 +44,7 @@ public struct RenderingCoordinator {
     public mutating func draw(scene: inout GPUSceneDescription) {
         updatePalettes(scene: &scene)
         bufferStore.omniLights.upload(data: &scene.lights)
-        var camera = scene.objects.objects.filter { $0.data.type == .camera }.first!
+        var camera = scene.objects.objects.first(where: { $0.data.type == .camera })!
         bufferStore.upload(camera: &scene.cameras[camera.data.referenceIdx], transform: &camera.data.transform)
         bufferStore.upload(models: &scene.objects)
 

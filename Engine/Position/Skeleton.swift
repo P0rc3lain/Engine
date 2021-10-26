@@ -20,7 +20,7 @@ public struct Skeleton {
         self.parentIndices = parentIndices
     }
     func computeWorldBindTransforms(localBindTransform: [simd_float4x4]) -> [simd_float4x4] {
-        return Skeleton.computeWorldBindTransforms(localBindTransform: localBindTransform, parentIndices: parentIndices)
+        Skeleton.computeWorldBindTransforms(localBindTransform: localBindTransform, parentIndices: parentIndices)
     }
     static func computeWorldBindTransforms(localBindTransform: [simd_float4x4],
                                            parentIndices: [Int]) -> [simd_float4x4] {
