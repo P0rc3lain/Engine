@@ -2,10 +2,10 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import simd
 import Metal
-import ModelIO
 import MetalKit
+import ModelIO
+import simd
 
 extension MDLTexture {
     static func solid2D(color: simd_float4, name: String) -> MDLTexture {

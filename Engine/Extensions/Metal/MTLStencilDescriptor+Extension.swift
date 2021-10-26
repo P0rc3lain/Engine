@@ -34,4 +34,3 @@ extension MTLStencilDescriptor {
         return stencil
     }
 }
-

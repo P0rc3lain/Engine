@@ -2,9 +2,9 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import simd
-import MetalKit
 import MetalBinding
+import MetalKit
+import simd
 
 struct GBufferRenderer {
     // MARK: - Properties
@@ -34,20 +34,20 @@ struct GBufferRenderer {
         encoder.setStencilReferenceValue(1)
         encoder.setRenderPipelineState(animatedPipelineState)
         let texturesRange = kAttributeGBufferFragmentShaderTextureAlbedo.int ..< kAttributeGBufferFragmentShaderTextureMetallic.int + 1
-        for i in 0 ..< scene.objects.count {
-            let object = scene.objects[i].data
-            if object.type == .mesh && scene.skeletonReferences[i] != .nil {
+        for index in scene.objects.indices {
+            let object = scene.objects[index].data
+            if object.type == .mesh && scene.skeletonReferences[index] != .nil {
                 let mesh = scene.meshes[object.referenceIdx]
                 encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                         offset: mesh.vertexBuffer.offset,
                                         index: kAttributeGBufferVertexShaderBufferStageIn.int)
                 for description in mesh.pieceDescriptions {
-                    let offset = i * MemoryLayout<ModelUniforms>.stride
+                    let offset = index * MemoryLayout<ModelUniforms>.stride
                     encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer,
                                             offset: offset,
                                             index: kAttributeGBufferVertexShaderBufferModelUniforms.int)
                     encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
-                                            offset: scene.paletteReferences[i].lowerBound,
+                                            offset: scene.paletteReferences[index].lowerBound,
                                             index: kAttributeGBufferVertexShaderBufferMatrixPalettes.int)
                     let material = scene.materials[description.materialIdx]
                     encoder.setFragmentTextures([material.albedo, material.roughness, material.normals, material.metallic], range: texturesRange)
@@ -60,15 +60,15 @@ struct GBufferRenderer {
             }
         }
         encoder.setRenderPipelineState(pipelineState)
-        for i in 0 ..< scene.objects.count {
-            let object = scene.objects[i].data
-            if object.type == .mesh && scene.skeletonReferences[i] == .nil {
+        for index in scene.objects.indices {
+            let object = scene.objects[index].data
+            if object.type == .mesh && scene.skeletonReferences[index] == .nil {
                 let mesh = scene.meshes[object.referenceIdx]
                 encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                         offset: mesh.vertexBuffer.offset,
                                         index: kAttributeGBufferVertexShaderBufferStageIn.int)
                 for description in mesh.pieceDescriptions {
-                    let offset = i * MemoryLayout<ModelUniforms>.stride
+                    let offset = index * MemoryLayout<ModelUniforms>.stride
                     encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer,
                                             offset: offset,
                                             index: kAttributeGBufferVertexShaderBufferModelUniforms.int)

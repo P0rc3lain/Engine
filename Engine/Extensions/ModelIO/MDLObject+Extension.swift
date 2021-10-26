@@ -13,8 +13,8 @@ extension MDLObject {
     }
     func walk(handler: (MDLObject) -> Void) {
         handler(self)
-        for i in 0 ..< children.count {
-            children[i].walk(handler: handler)
+        for index in 0 ..< children.objects.count {
+            children[index].walk(handler: handler)
         }
     }
 }

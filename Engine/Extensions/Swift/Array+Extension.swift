@@ -4,8 +4,8 @@
 
 extension Array {
     public mutating func inplaceMap(transform: (Element) -> Element) {
-        for i in 0 ..< count {
-            self[i] = transform(self[i])
+        for index in indices {
+            self[index] = transform(self[index])
         }
     }
 }

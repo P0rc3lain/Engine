@@ -3,8 +3,8 @@
 //
 
 import Metal
-import MetalKit
 import MetalBinding
+import MetalKit
 
 public struct RenderingCoordinator {
     // MARK: - Private
@@ -47,27 +47,20 @@ public struct RenderingCoordinator {
         var camera = scene.objects.objects.first(where: { $0.data.type == .camera })!
         bufferStore.upload(camera: &scene.cameras[camera.data.referenceIdx], transform: &camera.data.transform)
         bufferStore.upload(models: &scene.objects)
-
         let commandBuffer = commandQueue.makeCommandBuffer()!
         commandBuffer.pushDebugGroup("G-Buffer Renderer Pass")
         var gBufferEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: gBufferRenderPassDescriptor)!
-        
         gBufferRenderer.draw(encoder: &gBufferEncoder, scene: &scene, dataStore: &bufferStore)
         gBufferEncoder.endEncoding()
         commandBuffer.popDebugGroup()
-
         var lightEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor)!
-
         commandBuffer.pushDebugGroup("Light Pass")
         lightRenderer.draw(encoder: &lightEncoder, bufferStore: &bufferStore, lightsCount: scene.lights.count)
         commandBuffer.popDebugGroup()
-
         commandBuffer.pushDebugGroup("Environment Map")
         environmentRenderer.draw(encoder: &lightEncoder, scene: &scene)
         commandBuffer.popDebugGroup()
-
         lightEncoder.endEncoding()
-
         commandBuffer.pushDebugGroup("Post Processing Pass")
         let texturePass = commandBuffer.makeRenderCommandEncoder(descriptor: view.currentRenderPassDescriptor!)!
         postProcessor.draw(encoder: texturePass)
@@ -79,8 +72,8 @@ public struct RenderingCoordinator {
     mutating func updatePalettes(scene: inout GPUSceneDescription) {
         var continousPalette = [simd_float4x4]()
         scene.paletteReferences = []
-        for i in 0 ..< scene.objects.count {
-            let palette = generatePalette(objectIdx: i, scene: &scene)
+        for index in scene.objects.indices {
+            let palette = generatePalette(objectIdx: index, scene: &scene)
             scene.paletteReferences.append(continousPalette.count ..< continousPalette.count + palette.count)
             continousPalette += palette
         }
@@ -97,14 +90,11 @@ public struct RenderingCoordinator {
             let animationReference = scene.animationReferences[skeletonIdx]
             let date = Date().timeIntervalSince1970.truncatingRemainder(dividingBy: 2) / 2
             let animation = scene.skeletalAnimations[animationReference.lowerBound]
-            
             let transformations = animation.localTransformation(at: date)
             let pose = skeleton.computeWorldBindTransforms(localBindTransform: transformations)
-            
-            for i in 0 ..< skeleton.bindTransforms.count {
-                palette.append(pose[i] * skeleton.inverseBindTransforms[i])
+            for index in skeleton.bindTransforms.indices {
+                palette.append(pose[index] * skeleton.inverseBindTransforms[index])
             }
-            
             return palette
         }
     }

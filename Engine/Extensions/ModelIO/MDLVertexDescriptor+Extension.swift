@@ -2,8 +2,8 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import ModelIO
 import MetalBinding
+import ModelIO
 
 extension MDLVertexDescriptor {
     // MARK: - Properties

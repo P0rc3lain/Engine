@@ -2,8 +2,8 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import simd
 import ModelIO
+import simd
 
 public struct SkeletalAnimation {
     // MARK: - Properties
@@ -23,10 +23,10 @@ public struct SkeletalAnimation {
         let translation = translations.float3Array(atTime: time)
         let rotation = rotations.floatQuaternionArray(atTime: time)
         let scale = scales.float3Array(atTime: time)
-        for i in 0 ..< translations.elementCount {
-            let composed = simd_float4x4.compose(translation: translation[i],
-                                                 rotation: rotation[i],
-                                                 scale: scale[i])
+        for index in 0 ..< translations.elementCount {
+            let composed = simd_float4x4.compose(translation: translation[index],
+                                                 rotation: rotation[index],
+                                                 scale: scale[index])
             localTransformations.append(composed)
         }
         return localTransformations

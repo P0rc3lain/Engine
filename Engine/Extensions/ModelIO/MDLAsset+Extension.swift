@@ -5,9 +5,12 @@
 import ModelIO
 
 extension MDLAsset {
+    var indices: Range<Int> {
+        0 ..< count
+    }
     func walk(handler: (MDLObject) -> Void) {
-        for i in 0 ..< count {
-            self[i]?.walk(handler: handler)
+        for index in indices {
+            self[index]?.walk(handler: handler)
         }
     }
 }

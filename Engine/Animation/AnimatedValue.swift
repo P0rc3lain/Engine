@@ -22,9 +22,11 @@ public struct AnimatedValue<T> {
         self.maximumTime = maximumTime
     }
     // MARK: - Public
-    public func sample(at time: TimeInterval) -> (current: T, upcoming: T, ratio: Float) {
+    public func sample(at time: TimeInterval) -> AnimationSample<T> {
         guard times.count > 1 else {
-            return (current: keyFrames[0], upcoming: keyFrames[0], ratio: 0.5)
+            return AnimationSample(currentKeyFrame: keyFrames[0],
+                                   upcomingKeyFrame: keyFrames[0],
+                                   ratio: 0.5)
         }
         let clipped = time.truncatingRemainder(dividingBy: maximumTime)
         let next = times.firstIndex { clipped < $0 } ?? 0
@@ -32,7 +34,9 @@ public struct AnimatedValue<T> {
         let timeRange = next > 0 ? times[next] - times[current] : maximumTime - times[current] + times[next]
         let timePosition = next > 0 ? time - times[current] : (time > times[current] ? time - times[current] : maximumTime - times[current] + time)
         let ratio = (timePosition / timeRange).clamp(min: 0.0, max: 1.0)
-        return (current: keyFrames[current], upcoming: keyFrames[next], ratio: Float(ratio))
+        return AnimationSample(currentKeyFrame: keyFrames[current],
+                               upcomingKeyFrame: keyFrames[next],
+                               ratio: Float(ratio))
     }
     static public func `static`(from value: T) -> AnimatedValue<T> {
         AnimatedValue<T>(keyFrames: [value], times: [0], maximumTime: 1)
