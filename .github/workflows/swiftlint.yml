@@ -1,0 +1,13 @@
+name: SwiftLint
+
+on: push
+
+jobs:
+  SwiftLint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out sources
+        uses: actions/checkout@v1
+      - name: Lint files
+        uses: norio-nomura/action-swiftlint@3.2.1
+
