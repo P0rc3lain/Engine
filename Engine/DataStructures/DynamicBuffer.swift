@@ -22,10 +22,16 @@ public struct DynamicBuffer<T> {
         let requiredSpace = data.count * MemoryLayout<T>.stride
         if buffer.length < requiredSpace {
             let newSize = 2 * max(requiredSpace, buffer.length)
-            buffer = device.makeSharedBuffer(length: newSize)!
+            guard let newBuffer = device.makeSharedBuffer(length: newSize) else {
+                fatalError("Cannot extend buffer size")
+            }
+            buffer = newBuffer
         }
-        data.withUnsafeBytes { ptr in
-            buffer.contents().copyMemory(from: ptr.baseAddress!, byteCount: ptr.count)
+        data.withUnsafeBytes { pointer in
+            guard let baseAddress = pointer.baseAddress else {
+                fatalError("Cannot upload data to the buffer")
+            }
+            buffer.contents().copyMemory(from: baseAddress, byteCount: pointer.count)
         }
     }
     // MARK: - Private

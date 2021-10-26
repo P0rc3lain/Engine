@@ -98,6 +98,7 @@
 		563575F42728486A00CE4988 /* AnimationSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563575F32728486A00CE4988 /* AnimationSample.swift */; };
 		563BFC81272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563BFC80272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift */; };
 		563BFC8527285F100003EDB7 /* MTLBuffer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563BFC8427285F100003EDB7 /* MTLBuffer+Extension.swift */; };
+		563BFC87272878180003EDB7 /* UnsafeMutableRawPointer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563BFC86272878180003EDB7 /* UnsafeMutableRawPointer+Extension.swift */; };
 		563D0A2A2719F77000F77B40 /* OmniLight.h in Headers */ = {isa = PBXBuildFile; fileRef = 563D0A292719F76600F77B40 /* OmniLight.h */; };
 		563D0A2D2719F7A700F77B40 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 563D0A2B2719F79D00F77B40 /* Camera.h */; };
 		563D0A2E2719F7A700F77B40 /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = 563D0A2C2719F7A400F77B40 /* Model.h */; };
@@ -221,6 +222,7 @@
 		563575F32728486A00CE4988 /* AnimationSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationSample.swift; sourceTree = "<group>"; };
 		563BFC80272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MDLObjectContainerComponent+Extension.swift"; sourceTree = "<group>"; };
 		563BFC8427285F100003EDB7 /* MTLBuffer+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MTLBuffer+Extension.swift"; sourceTree = "<group>"; };
+		563BFC86272878180003EDB7 /* UnsafeMutableRawPointer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnsafeMutableRawPointer+Extension.swift"; sourceTree = "<group>"; };
 		563D0A292719F76600F77B40 /* OmniLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OmniLight.h; sourceTree = "<group>"; };
 		563D0A2B2719F79D00F77B40 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		563D0A2C2719F7A400F77B40 /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
@@ -567,6 +569,7 @@
 				5616669A2719E2CC000063B1 /* Float+Extension.swift */,
 				56D34A53271B037900A87785 /* Double+Extension.swift */,
 				56407B7A27204EEB00440CAC /* Array+Extension.swift */,
+				563BFC86272878180003EDB7 /* UnsafeMutableRawPointer+Extension.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -745,6 +748,7 @@
 				563575F42728486A00CE4988 /* AnimationSample.swift in Sources */,
 				561667312719E2CD000063B1 /* Alias+DataBuffer.swift in Sources */,
 				5616671C2719E2CD000063B1 /* MTLStencilDescriptor+Extension.swift in Sources */,
+				563BFC87272878180003EDB7 /* UnsafeMutableRawPointer+Extension.swift in Sources */,
 				561667562719E2CD000063B1 /* RenderingCoordinator.swift in Sources */,
 				5616674D2719E2CD000063B1 /* Engine.swift in Sources */,
 				561667212719E2CD000063B1 /* Postprocessor+Extension.swift in Sources */,
