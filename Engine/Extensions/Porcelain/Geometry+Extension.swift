@@ -81,9 +81,9 @@ extension GPUGeometry {
     }
     static func screenSpacePlane(device: MTLDevice) -> GPUGeometry {
         let indices = planeIndicesBuffer(device: device)
-        let indicesBuffer = GPUDataBuffer(buffer: indices, length: indices.length, offset: indices.heapOffset)
+        let indicesBuffer = GPUDataBuffer(buffer: indices, length: indices.length, offset: indices.offset)
         let vertices = planeVerticesBuffer(device: device)
-        let verticesBuffer = GPUDataBuffer(buffer: vertices, length: vertices.length, offset: vertices.heapOffset)
+        let verticesBuffer = GPUDataBuffer(buffer: vertices, length: vertices.length, offset: vertices.offset)
         let drawDescription = GPUIndexBasedDraw(indexBuffer: indicesBuffer,
                                                 indexCount: indicesBuffer.length / MemoryLayout<UInt16>.stride,
                                                 indexType: .uint16,

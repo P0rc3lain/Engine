@@ -97,6 +97,7 @@
 		562B8F43272599FF00363CE8 /* MTLRenderCommandEncoder+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562B8F42272599FF00363CE8 /* MTLRenderCommandEncoder+Extension.swift */; };
 		563575F42728486A00CE4988 /* AnimationSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563575F32728486A00CE4988 /* AnimationSample.swift */; };
 		563BFC81272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563BFC80272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift */; };
+		563BFC8527285F100003EDB7 /* MTLBuffer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563BFC8427285F100003EDB7 /* MTLBuffer+Extension.swift */; };
 		563D0A2A2719F77000F77B40 /* OmniLight.h in Headers */ = {isa = PBXBuildFile; fileRef = 563D0A292719F76600F77B40 /* OmniLight.h */; };
 		563D0A2D2719F7A700F77B40 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 563D0A2B2719F79D00F77B40 /* Camera.h */; };
 		563D0A2E2719F7A700F77B40 /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = 563D0A2C2719F7A400F77B40 /* Model.h */; };
@@ -219,6 +220,7 @@
 		562B8F42272599FF00363CE8 /* MTLRenderCommandEncoder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLRenderCommandEncoder+Extension.swift"; sourceTree = "<group>"; };
 		563575F32728486A00CE4988 /* AnimationSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationSample.swift; sourceTree = "<group>"; };
 		563BFC80272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MDLObjectContainerComponent+Extension.swift"; sourceTree = "<group>"; };
+		563BFC8427285F100003EDB7 /* MTLBuffer+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MTLBuffer+Extension.swift"; sourceTree = "<group>"; };
 		563D0A292719F76600F77B40 /* OmniLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OmniLight.h; sourceTree = "<group>"; };
 		563D0A2B2719F79D00F77B40 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		563D0A2C2719F7A400F77B40 /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 		56D1ED582725F83A00D68EA7 /* Metal */ = {
 			isa = PBXGroup;
 			children = (
+				563BFC8427285F100003EDB7 /* MTLBuffer+Extension.swift */,
 				561666B02719E2CC000063B1 /* MTLDevice+Instantiation.swift */,
 				561666B12719E2CC000063B1 /* MTLRenderPassDescriptor+Extension.swift */,
 				561666AD2719E2CC000063B1 /* MTLPixelFormat+Extension.swift */,
@@ -718,6 +721,7 @@
 				561DF41727246F1800D95ACC /* MTLViewport+Extension.swift in Sources */,
 				561667342719E2CD000063B1 /* Alias+SceneDescription.swift in Sources */,
 				561667182719E2CD000063B1 /* Skeleton.swift in Sources */,
+				563BFC8527285F100003EDB7 /* MTLBuffer+Extension.swift in Sources */,
 				561666FD2719E2CD000063B1 /* MTLTextureDescriptor+Extension.swift in Sources */,
 				561667032719E2CD000063B1 /* SceneDescription+Extension.swift in Sources */,
 				561666FB2719E2CD000063B1 /* MDLTransformComponent+Extension.swift in Sources */,
@@ -973,7 +977,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_COMPILER_FLAGS = "-D__METAL__";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stompor.mateusz.porcelain.engine;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1003,7 +1007,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_COMPILER_FLAGS = "-D__METAL__";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stompor.mateusz.porcelain.engine;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
