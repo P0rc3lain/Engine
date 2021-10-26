@@ -1,8 +1,5 @@
 //
-//  Int.swift
-//  Engine
-//
-//  Created by Mateusz Stompór on 09/10/2021.
+//  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
 extension Int {
