@@ -29,7 +29,10 @@ public class Translator {
                 let buffer = object.vertexBuffers[0].rawData
                 let dataBuffer = DataBuffer(buffer: buffer, length: buffer.count, offset: 0)
                 var pieceDescriptions = [RamPieceDescription]()
-                (object.submeshes as! [MDLSubmesh]).forEach {
+                guard let submeshes = object.submeshes as? [MDLSubmesh] else {
+                    fatalError("Malformed object")
+                }
+                submeshes.forEach {
                     var materialIdx = Int.nil
                     if let material = $0.material {
                         materialIdx = scene.materialNames.firstIndex(of: material.name) ?? .nil

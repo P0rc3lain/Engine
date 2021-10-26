@@ -5,10 +5,12 @@
 import Metal
 
 extension GBufferRenderer {
-    static func make(device: MTLDevice, drawableSize: CGSize) -> GBufferRenderer {
-        let library = device.makePorcelainLibrary()
-        let pipelineState = device.makeRenderPipelineStateGBufferRenderer(library: library)
-        let animatedPipelineState = device.makeRenderPipelineStateGBufferAnimatedRenderer(library: library)
+    static func make(device: MTLDevice, drawableSize: CGSize) -> GBufferRenderer? {
+        guard let library = device.makePorcelainLibrary(),
+              let pipelineState = device.makeRenderPipelineStateGBufferRenderer(library: library),
+              let animatedPipelineState = device.makeRenderPipelineStateGBufferAnimatedRenderer(library: library) else {
+            return nil
+        }
         let depthStencilState = device.makeDepthStencilStateGBufferRenderer()
         let renderPassDescriptor = MTLRenderPassDescriptor.gBuffer(device: device, size: drawableSize)
         return GBufferRenderer(pipelineState: pipelineState,

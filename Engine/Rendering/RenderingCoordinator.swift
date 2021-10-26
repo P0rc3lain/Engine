@@ -21,14 +21,15 @@ public struct RenderingCoordinator {
     let renderingSize: CGSize
     // MARK: - Initialization
     init?(view metalView: MTKView, canvasSize: CGSize, renderingSize: CGSize) {
-        guard let device = metalView.device, let bufferStore = BufferStore(device: device) else {
+        guard let device = metalView.device, let bufferStore = BufferStore(device: device),
+              let commandQueue = device.makeCommandQueue() else {
             return nil
         }
         self.view = metalView
         self.canvasSize = canvasSize
         self.renderingSize = renderingSize
         self.bufferStore = bufferStore
-        commandQueue = device.makeCommandQueue()!
+        self.commandQueue = commandQueue
         gBufferRenderPassDescriptor = MTLRenderPassDescriptor.gBuffer(device: device, size: renderingSize)
         offscreenRenderPassDescriptor = MTLRenderPassDescriptor.lightenScene(device: device,
                                                                              depthStencil: gBufferRenderPassDescriptor.stencilAttachment.texture!,
@@ -36,10 +37,10 @@ public struct RenderingCoordinator {
         postProcessor = Postprocessor.make(device: device,
                                            inputTexture: offscreenRenderPassDescriptor.colorAttachments[0].texture!,
                                            outputFormat: view.colorPixelFormat,
-                                           canvasSize: canvasSize)
-        environmentRenderer = EnvironmentRenderer.make(device: device, drawableSize: view.drawableSize)
-        gBufferRenderer = GBufferRenderer.make(device: device, drawableSize: renderingSize)
-        lightRenderer = LightPassRenderer.make(device: device, gBufferRenderPassDescriptor: gBufferRenderPassDescriptor, drawableSize: renderingSize)
+                                           canvasSize: canvasSize)!
+        environmentRenderer = EnvironmentRenderer.make(device: device, drawableSize: view.drawableSize)!
+        gBufferRenderer = GBufferRenderer.make(device: device, drawableSize: renderingSize)!
+        lightRenderer = LightPassRenderer.make(device: device, gBufferRenderPassDescriptor: gBufferRenderPassDescriptor, drawableSize: renderingSize)!
     }
     public mutating func draw(scene: inout GPUSceneDescription) {
         updatePalettes(scene: &scene)
