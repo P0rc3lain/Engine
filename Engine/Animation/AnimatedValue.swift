@@ -37,7 +37,7 @@ public struct AnimatedValue<T> {
     static public func `static`(from value: T) -> AnimatedValue<T> {
         AnimatedValue<T>(keyFrames: [value], times: [0], maximumTime: 1)
     }
-    public mutating func map(transform: (T)->T) {
+    public mutating func map(transform: (T) -> T) {
         keyFrames.inplaceMap(transform: transform)
     }
 }

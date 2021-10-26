@@ -94,7 +94,7 @@ public class Translator {
     private func parentIndex(jointPaths: [String], jointPath: String) -> Int {
         let components = jointPath.components(separatedBy: "/")
         if components.count > 1 {
-            let parentPath = components[0..<components.count-1].joined(separator: "/")
+            let parentPath = components[0 ..< components.count - 1].joined(separator: "/")
             return jointPaths.firstIndex(of: parentPath)!
         } else {
             return .nil
