@@ -55,34 +55,35 @@ opt_in_rules:
 - number_separator
 - operator_usage_whitespace
 - pattern_matching_keywords
-
-disabled_rules:
-- function_default_parameter_at_end
-- large_tuple
-- let_var_whitespace
-- joined_default_parameter
-- force_unwrapping
-- implicitly_unwrapped_optional
-- literal_expression_end_indentation
-- no_extension_access_modifier
-- private_over_fileprivate
+- sorted_first_last
+- sorted_imports
 - prohibited_super_call
 - redundant_nil_coalescing
 - single_test_class
-- sorted_first_last
-- sorted_imports
-- todo
 - weak_delegate
-- identifier_name
-- trailing_whitespace
+- function_default_parameter_at_end
+- large_tuple
 - discouraged_optional_boolean
 - discouraged_optional_collection
-- comma
+- literal_expression_end_indentation
+- no_extension_access_modifier
+- identifier_name
+- trailing_whitespace
 - switch_case_alignment
 - trailing_comma
+- joined_default_parameter
+- trailing_newline
+- implicitly_unwrapped_optional
 - return_arrow_whitespace
 - syntactic_sugar
+- comma
+
+disabled_rules:
+- todo
+- private_over_fileprivate
+- let_var_whitespace
+
+- force_unwrapping
 - colon
 - force_try
 - force_cast
-- trailing_newline

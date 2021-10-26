@@ -2,9 +2,9 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import simd
-import MetalKit
 import MetalBinding
+import MetalKit
+import simd
 
 struct LightPassRenderer {
     // MARK: - Properties

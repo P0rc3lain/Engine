@@ -19,6 +19,9 @@ public struct FlatTree<T> {
     public var count: Int {
         objects.count
     }
+    public var indices: Range<Int> {
+        objects.indices
+    }
     // MARK: - Initialization
     public init() { }
     // MARK: - Public

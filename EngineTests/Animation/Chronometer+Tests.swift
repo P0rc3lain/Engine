@@ -2,8 +2,8 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import XCTest
 @testable import Engine
+import XCTest
 
 class ChronometerTests: XCTestCase {
     func testInitPaused() {

@@ -2,8 +2,8 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import simd
 import ModelIO
+import simd
 
 public class Translator {
     // MARK: - Initialization

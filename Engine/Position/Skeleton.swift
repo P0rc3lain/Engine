@@ -26,9 +26,9 @@ public struct Skeleton {
                                            parentIndices: [Int]) -> [simd_float4x4] {
         assert(localBindTransform.count == parentIndices.count)
         var worldTransforms = [simd_float4x4]()
-        for i in 0 ..< localBindTransform.count {
-            let parentTransform = parentIndices[i] == .nil ? matrix_identity_float4x4 : worldTransforms[parentIndices[i]]
-            worldTransforms.append(parentTransform * localBindTransform[i])
+        for index in localBindTransform.indices {
+            let parentTransform = parentIndices[index] == .nil ? matrix_identity_float4x4 : worldTransforms[parentIndices[index]]
+            worldTransforms.append(parentTransform * localBindTransform[index])
         }
         return worldTransforms
     }

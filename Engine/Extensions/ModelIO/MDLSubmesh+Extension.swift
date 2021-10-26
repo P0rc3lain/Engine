@@ -12,6 +12,5 @@ extension MDLSubmesh {
                               indexCount: indexCount,
                               indexType: IndexBitDepth(modelIO: indexType),
                               primitiveType: PrimitiveType(modelIO: geometryType))
-        
     }
 }

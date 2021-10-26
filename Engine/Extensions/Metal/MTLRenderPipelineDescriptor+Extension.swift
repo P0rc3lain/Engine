@@ -3,8 +3,8 @@
 //
 
 import Metal
-import ModelIO
 import MetalKit
+import ModelIO
 
 extension MTLRenderPipelineDescriptor {
     static func postProcessor(library: MTLLibrary, format: MTLPixelFormat) -> MTLRenderPipelineDescriptor {

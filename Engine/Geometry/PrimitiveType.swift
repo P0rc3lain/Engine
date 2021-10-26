@@ -20,10 +20,10 @@ public enum PrimitiveType: Int {
     // MARK: - Public
     public var metal: MTLPrimitiveType {
         switch self {
-            case .triangles:
-                return .triangle
-            default:
-                fatalError("Not implemented")
+        case .triangles:
+            return .triangle
+        default:
+            fatalError("Not implemented")
         }
     }
 }

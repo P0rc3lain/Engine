@@ -2,9 +2,9 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import simd
 import Metal
 import MetalBinding
+import simd
 
 fileprivate struct Uniforms {
     let projectionMatrix: matrix_float4x4
