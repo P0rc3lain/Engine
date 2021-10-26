@@ -9,8 +9,10 @@ public struct Material<DataType> {
     public let normals: DataType
     public let metallic: DataType
     // MARK: - Initialization
-    public init(albedo: DataType, roughness: DataType,
-                normals: DataType, metallic: DataType) {
+    public init(albedo: DataType,
+                roughness: DataType,
+                normals: DataType,
+                metallic: DataType) {
         self.albedo = albedo
         self.roughness = roughness
         self.normals = normals

@@ -17,7 +17,7 @@ public struct FlatTree<T> {
     // MARK: - Properties
     public var objects = [Node<T>]()
     public var count: Int {
-        return objects.count
+        objects.count
     }
     // MARK: - Initialization
     public init() { }
@@ -27,10 +27,10 @@ public struct FlatTree<T> {
         objects.append(Node<T>(parentIdx: parentIdx, data: data))
     }
     public subscript(index: Int) -> Node<T> {
-        return objects[index]
+        objects[index]
     }
     public func children(of idx: Int) -> [Int] {
-        return objects.filter { node in node.parentIdx == idx }
-                      .map { node in node.parentIdx }
+        objects.filter { node in node.parentIdx == idx }
+               .map { node in node.parentIdx }
     }
 }

@@ -13,6 +13,6 @@ public class Uploader {
     }
     // MARK: - Public
     public func upload(scene: RamSceneDescription) -> GPUSceneDescription? {
-        return scene.upload(device: device)
+        scene.upload(device: device)
     }
 }

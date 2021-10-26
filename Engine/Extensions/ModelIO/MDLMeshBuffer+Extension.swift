@@ -6,6 +6,6 @@ import ModelIO
 
 extension MDLMeshBuffer {
     var rawData: Data {
-        return Data(bytes: map().bytes, count: length)
+        Data(bytes: map().bytes, count: length)
     }
 }

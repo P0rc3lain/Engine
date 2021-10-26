@@ -13,10 +13,10 @@ extension RamSceneDescription {
         description.skeletonReferences = skeletonReferences
         // MARK: - Capacity B
         description.materialNames = materialNames
-        description.materials = materials.compactMap{ $0.upload(device: device) }
+        description.materials = materials.compactMap { $0.upload(device: device) }
         // MARK: - Capacity C
         description.meshNames = meshNames
-        description.meshes = meshes.compactMap{ $0.upload(device: device) }
+        description.meshes = meshes.compactMap { $0.upload(device: device) }
         // MARK: - Capacity D
         description.skeletons = skeletons
         description.paletteReferences = paletteReferences

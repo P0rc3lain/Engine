@@ -10,6 +10,8 @@ extension AnimatedQuatf {
         return simd_slerp(result.current, result.upcoming, result.ratio)
     }
     static public var defaultOrientation: AnimatedQuatf {
-        return AnimatedQuatf(keyFrames: [simd_quatf(angle: 0, axis: simd_float3(1, 0, 0))], times: [0], maximumTime: 0)
+        AnimatedQuatf(keyFrames: [simd_quatf(angle: 0, axis: simd_float3(1, 0, 0))],
+                      times: [0],
+                      maximumTime: 0)
     }
 }

@@ -5,6 +5,6 @@
 extension Int {
     // MARK: - Public
     public static var `nil`: Int {
-        return -1
+        -1
     }
 }

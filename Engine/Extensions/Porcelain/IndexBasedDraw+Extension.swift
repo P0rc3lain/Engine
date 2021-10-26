@@ -4,7 +4,7 @@
 
 import Metal
 
-extension RamIndexBasedDraw  {
+extension RamIndexBasedDraw {
     func upload(device: MTLDevice) -> GPUIndexBasedDraw? {
         guard let buffer = indexBuffer.upload(device: device) else {
             return nil
