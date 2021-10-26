@@ -29,12 +29,15 @@ class AssetLoader {
     }
     private func adjustAssetToEngineNeeds(asset: MDLAsset) {
         asset.loadTextures()
-        for sourceMesh in asset.childObjects(of: MDLMesh.self) as! [MDLMesh] {
-            try? sourceMesh.makeVerticesUniqueAndReturnError()
-            sourceMesh.flipTextureCoordinates(inAttributeNamed: MDLVertexAttributeTextureCoordinate)
-            sourceMesh.addTangentBasis(forTextureCoordinateAttributeNamed: MDLVertexAttributeTextureCoordinate,
-                                       normalAttributeNamed: MDLVertexAttributeNormal,
-                                       tangentAttributeNamed: MDLVertexAttributeTangent)
+        guard let meshes = asset.childObjects(of: MDLMesh.self) as? [MDLMesh] else {
+            return
+        }
+        for mesh in meshes {
+            try? mesh.makeVerticesUniqueAndReturnError()
+            mesh.flipTextureCoordinates(inAttributeNamed: MDLVertexAttributeTextureCoordinate)
+            mesh.addTangentBasis(forTextureCoordinateAttributeNamed: MDLVertexAttributeTextureCoordinate,
+                                 normalAttributeNamed: MDLVertexAttributeNormal,
+                                 tangentAttributeNamed: MDLVertexAttributeTangent)
         }
     }
 }

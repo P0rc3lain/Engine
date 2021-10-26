@@ -77,13 +77,13 @@ opt_in_rules:
 - return_arrow_whitespace
 - syntactic_sugar
 - comma
+- colon
+- force_cast
+- force_try
 
 disabled_rules:
 - todo
 - private_over_fileprivate
 - let_var_whitespace
-
 - force_unwrapping
-- colon
-- force_try
-- force_cast
+

@@ -27,10 +27,10 @@ extension simd_float4x4 {
     }
     // MARK: - Public
     public static func translation(vector: simd_float3) -> simd_float4x4 {
-        simd_float4x4(columns:(simd_float4(1, 0, 0, 0),
-                               simd_float4(0, 1, 0, 0),
-                               simd_float4(0, 0, 1, 0),
-                               simd_float4(vector, 1)))
+        simd_float4x4(columns: (simd_float4(1, 0, 0, 0),
+                                simd_float4(0, 1, 0, 0),
+                                simd_float4(0, 0, 1, 0),
+                                simd_float4(vector, 1)))
     }
     public static func scale(_ factors: simd_float3) -> simd_float4x4 {
         simd_float4x4(diagonal: simd_float4(factors, 1))
@@ -42,10 +42,10 @@ extension simd_float4x4 {
         let yScale = 1 / tan(fovyRadians * 0.5)
         let xScale = yScale / aspect
         let zScale = farZ / (nearZ - farZ)
-        return simd_float4x4(rows:[simd_float4(yScale, 0, 0, 0),
-                                   simd_float4(0, xScale, 0, 0),
-                                   simd_float4(0, 0, zScale, nearZ * zScale),
-                                   simd_float4(0, 0, -1, 0 )])
+        return simd_float4x4(rows: [simd_float4(yScale, 0, 0, 0),
+                                    simd_float4(0, xScale, 0, 0),
+                                    simd_float4(0, 0, zScale, nearZ * zScale),
+                                    simd_float4(0, 0, -1, 0 )])
     }
     public static func compose(translation: simd_float3, rotation: simd_quatf, scale: simd_float3) -> simd_float4x4 {
         .translation(vector: translation) * matrix_float4x4(rotation) * .scale(scale)
