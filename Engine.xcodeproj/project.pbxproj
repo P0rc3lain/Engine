@@ -99,6 +99,10 @@
 		563BFC81272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563BFC80272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift */; };
 		563BFC8527285F100003EDB7 /* MTLBuffer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563BFC8427285F100003EDB7 /* MTLBuffer+Extension.swift */; };
 		563BFC87272878180003EDB7 /* UnsafeMutableRawPointer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563BFC86272878180003EDB7 /* UnsafeMutableRawPointer+Extension.swift */; };
+		563BFC8F272897430003EDB7 /* AnimatedFloat3Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563BFC8E272897430003EDB7 /* AnimatedFloat3Array+Extension.swift */; };
+		563BFC91272898F20003EDB7 /* MDLAnimatedVector3Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563BFC90272898F20003EDB7 /* MDLAnimatedVector3Array+Extension.swift */; };
+		563BFC93272899FD0003EDB7 /* AnimatedQuatfArray+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563BFC92272899FD0003EDB7 /* AnimatedQuatfArray+Extension.swift */; };
+		563BFC9527289A3B0003EDB7 /* MDLAnimatedQuaternionArray+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563BFC9427289A3B0003EDB7 /* MDLAnimatedQuaternionArray+Extension.swift */; };
 		563D0A2A2719F77000F77B40 /* OmniLight.h in Headers */ = {isa = PBXBuildFile; fileRef = 563D0A292719F76600F77B40 /* OmniLight.h */; };
 		563D0A2D2719F7A700F77B40 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 563D0A2B2719F79D00F77B40 /* Camera.h */; };
 		563D0A2E2719F7A700F77B40 /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = 563D0A2C2719F7A400F77B40 /* Model.h */; };
@@ -223,6 +227,10 @@
 		563BFC80272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MDLObjectContainerComponent+Extension.swift"; sourceTree = "<group>"; };
 		563BFC8427285F100003EDB7 /* MTLBuffer+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MTLBuffer+Extension.swift"; sourceTree = "<group>"; };
 		563BFC86272878180003EDB7 /* UnsafeMutableRawPointer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnsafeMutableRawPointer+Extension.swift"; sourceTree = "<group>"; };
+		563BFC8E272897430003EDB7 /* AnimatedFloat3Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimatedFloat3Array+Extension.swift"; sourceTree = "<group>"; };
+		563BFC90272898F20003EDB7 /* MDLAnimatedVector3Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MDLAnimatedVector3Array+Extension.swift"; sourceTree = "<group>"; };
+		563BFC92272899FD0003EDB7 /* AnimatedQuatfArray+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimatedQuatfArray+Extension.swift"; sourceTree = "<group>"; };
+		563BFC9427289A3B0003EDB7 /* MDLAnimatedQuaternionArray+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MDLAnimatedQuaternionArray+Extension.swift"; sourceTree = "<group>"; };
 		563D0A292719F76600F77B40 /* OmniLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OmniLight.h; sourceTree = "<group>"; };
 		563D0A2B2719F79D00F77B40 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		563D0A2C2719F7A400F77B40 /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
@@ -547,6 +555,8 @@
 				561666952719E2CC000063B1 /* MDLMeshBuffer+Extension.swift */,
 				5616669C2719E2CC000063B1 /* MDLAsset+Extension.swift */,
 				563BFC80272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift */,
+				563BFC90272898F20003EDB7 /* MDLAnimatedVector3Array+Extension.swift */,
+				563BFC9427289A3B0003EDB7 /* MDLAnimatedQuaternionArray+Extension.swift */,
 			);
 			path = ModelIO;
 			sourceTree = "<group>";
@@ -591,6 +601,8 @@
 				5616668B2719E2CC000063B1 /* SceneDescription+Extension.swift */,
 				5616668F2719E2CC000063B1 /* Geometry+Extension.swift */,
 				561666982719E2CC000063B1 /* Material+Extension.swift */,
+				563BFC8E272897430003EDB7 /* AnimatedFloat3Array+Extension.swift */,
+				563BFC92272899FD0003EDB7 /* AnimatedQuatfArray+Extension.swift */,
 			);
 			path = Porcelain;
 			sourceTree = "<group>";
@@ -762,6 +774,8 @@
 				56407B7D27206F5D00440CAC /* Vertex+Extension.swift in Sources */,
 				561667272719E2CD000063B1 /* MTLRenderPassDescriptor+Extension.swift in Sources */,
 				561667382719E2CD000063B1 /* Geometry.swift in Sources */,
+				563BFC91272898F20003EDB7 /* MDLAnimatedVector3Array+Extension.swift in Sources */,
+				563BFC8F272897430003EDB7 /* AnimatedFloat3Array+Extension.swift in Sources */,
 				561667572719E2CD000063B1 /* BufferStore.swift in Sources */,
 				561667432719E2CD000063B1 /* Camera.swift in Sources */,
 				5616670C2719E2CD000063B1 /* MTLDevice+Extension.swift in Sources */,
@@ -791,6 +805,7 @@
 				561667012719E2CD000063B1 /* MDLObject+Extension.swift in Sources */,
 				5616674C2719E2CD000063B1 /* EnvironmentMapper.metal in Sources */,
 				5616670F2719E2CD000063B1 /* Data+Extension.swift in Sources */,
+				563BFC93272899FD0003EDB7 /* AnimatedQuatfArray+Extension.swift in Sources */,
 				561667352719E2CD000063B1 /* Alias+Geometry.swift in Sources */,
 				561666F92719E2CD000063B1 /* MDLMaterialProperty+Extension.swift in Sources */,
 				56E8209D27284664002D58C3 /* Position.swift in Sources */,
@@ -813,6 +828,7 @@
 				561667322719E2CD000063B1 /* Alias+IndexBasedDraw.swift in Sources */,
 				561667122719E2CD000063B1 /* Float+Extension.swift in Sources */,
 				5616673C2719E2CD000063B1 /* IndexBitDepth.swift in Sources */,
+				563BFC9527289A3B0003EDB7 /* MDLAnimatedQuaternionArray+Extension.swift in Sources */,
 				5616672C2719E2CD000063B1 /* SceneLoader.swift in Sources */,
 				561667522719E2CD000063B1 /* EnvironmentRenderer.swift in Sources */,
 				561667532719E2CD000063B1 /* LightPassRenderer.swift in Sources */,
