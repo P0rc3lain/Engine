@@ -105,10 +105,10 @@ public class Translator {
         let components = jointPath.components(separatedBy: "/")
         if components.count > 1 {
             let parentPath = components[0 ..< components.count - 1].joined(separator: "/")
-            guard let parentPath = jointPaths.firstIndex(of: parentPath) else {
+            guard let parentIndex = jointPaths.firstIndex(of: parentPath) else {
                 return .nil
             }
-            return parentPath
+            return parentIndex
         } else {
             return .nil
         }

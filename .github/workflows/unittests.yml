@@ -1,0 +1,17 @@
+name: Unit Tests
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  unittests:
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+      - name: Test Swift Framework
+        run: xcodebuild -project Engine.xcodeproj
+                        -scheme EngineTests test
+        
