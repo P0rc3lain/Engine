@@ -14,15 +14,27 @@ struct LightPassRenderer {
     private let gbufferRenderPass: MTLRenderPassDescriptor
     private let plane: GPUGeometry
     // MARK: - Initialization
-    init(pipelineState: MTLRenderPipelineState, gBufferRenderPass: MTLRenderPassDescriptor, device: MTLDevice, depthStencilState: MTLDepthStencilState, drawableSize: CGSize) {
+    init?(pipelineState: MTLRenderPipelineState,
+          gBufferRenderPass: MTLRenderPassDescriptor,
+          device: MTLDevice,
+          depthStencilState: MTLDepthStencilState,
+          drawableSize: CGSize) {
+        guard let plane = GPUGeometry.screenSpacePlane(device: device) else {
+            return nil
+        }
         self.pipelineState = pipelineState
         self.depthStencilState = depthStencilState
         self.gbufferRenderPass = gBufferRenderPass
-        self.plane = GPUGeometry.screenSpacePlane(device: device)
+        self.plane = plane
         self.viewPort = .porcelain(size: drawableSize)
     }
     // MARK: - Internal
     func draw(encoder: inout MTLRenderCommandEncoder, bufferStore: inout BufferStore, lightsCount: Int) {
+        guard let arTexture = gbufferRenderPass.colorAttachments[0].texture,
+              let nmTexture = gbufferRenderPass.colorAttachments[1].texture,
+              let prTexture = gbufferRenderPass.colorAttachments[2].texture else {
+            fatalError("Required textures not bound")
+        }
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStencilState)
@@ -34,12 +46,9 @@ struct LightPassRenderer {
                                   index: kAttributeLightingFragmentShaderBufferCamera.int)
         encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems.buffer,
                                   index: kAttributeLightingFragmentShaderBufferLightUniforms.int)
-        encoder.setFragmentTexture(gbufferRenderPass.colorAttachments[0].texture!,
-                                   index: kAttributeLightingFragmentShaderTextureAR.int)
-        encoder.setFragmentTexture(gbufferRenderPass.colorAttachments[1].texture!,
-                                   index: kAttributeLightingFragmentShaderTextureNM.int)
-        encoder.setFragmentTexture(gbufferRenderPass.colorAttachments[2].texture!,
-                                   index: kAttributeLightingFragmentShaderTexturePR.int)
+        let range = kAttributeLightingFragmentShaderTextureAR.int ... kAttributeLightingFragmentShaderTexturePR.int
+        encoder.setFragmentTextures([arTexture, nmTexture, prTexture],
+                                    range: Range(range))
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
                                       indexType: plane.pieceDescriptions[0].drawDescription.indexType,

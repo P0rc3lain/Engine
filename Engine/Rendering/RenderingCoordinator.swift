@@ -17,7 +17,7 @@ public struct RenderingCoordinator {
     private var environmentRenderer: EnvironmentRenderer
     private var lightRenderer: LightPassRenderer
     private var bufferStore: BufferStore
-    let canvasSize: CGSize
+    private let canvasSize: CGSize
     let renderingSize: CGSize
     // MARK: - Initialization
     init?(view metalView: MTKView, canvasSize: CGSize, renderingSize: CGSize) {
@@ -25,36 +25,56 @@ public struct RenderingCoordinator {
               let commandQueue = device.makeCommandQueue() else {
             return nil
         }
+        gBufferRenderPassDescriptor = .gBuffer(device: device, size: renderingSize)
+        guard let sharedDepthStencilTexture = gBufferRenderPassDescriptor.stencilAttachment.texture else {
+            return nil
+        }
+        offscreenRenderPassDescriptor = .lightenScene(device: device,
+                                                      depthStencil: sharedDepthStencilTexture,
+                                                      size: renderingSize)
+        guard let postProcessorInputTexture = offscreenRenderPassDescriptor.colorAttachments[0].texture,
+              let postProcessor = Postprocessor.make(device: device,
+                                                     inputTexture: postProcessorInputTexture,
+                                                     outputFormat: metalView.colorPixelFormat,
+                                                     canvasSize: canvasSize),
+              let environmentRenderer = EnvironmentRenderer.make(device: device, drawableSize: metalView.drawableSize),
+              let lightRenderer = LightPassRenderer.make(device: device,
+                                                         gBufferRenderPassDescriptor: gBufferRenderPassDescriptor,
+                                                         drawableSize: renderingSize),
+              let gBufferRenderer = GBufferRenderer.make(device: device, drawableSize: renderingSize) else {
+            return nil
+        }
         self.view = metalView
         self.canvasSize = canvasSize
         self.renderingSize = renderingSize
         self.bufferStore = bufferStore
         self.commandQueue = commandQueue
-        gBufferRenderPassDescriptor = MTLRenderPassDescriptor.gBuffer(device: device, size: renderingSize)
-        offscreenRenderPassDescriptor = MTLRenderPassDescriptor.lightenScene(device: device,
-                                                                             depthStencil: gBufferRenderPassDescriptor.stencilAttachment.texture!,
-                                                                             size: renderingSize)
-        postProcessor = Postprocessor.make(device: device,
-                                           inputTexture: offscreenRenderPassDescriptor.colorAttachments[0].texture!,
-                                           outputFormat: view.colorPixelFormat,
-                                           canvasSize: canvasSize)!
-        environmentRenderer = EnvironmentRenderer.make(device: device, drawableSize: view.drawableSize)!
-        gBufferRenderer = GBufferRenderer.make(device: device, drawableSize: renderingSize)!
-        lightRenderer = LightPassRenderer.make(device: device, gBufferRenderPassDescriptor: gBufferRenderPassDescriptor, drawableSize: renderingSize)!
+        self.postProcessor = postProcessor
+        self.environmentRenderer = environmentRenderer
+        self.gBufferRenderer = gBufferRenderer
+        self.lightRenderer = lightRenderer
     }
     public mutating func draw(scene: inout GPUSceneDescription) {
+        guard var camera = scene.objects.objects.first(where: { $0.data.type == .camera }),
+              let commandBuffer = commandQueue.makeCommandBuffer(),
+              let renderPassDescriptor = view.currentRenderPassDescriptor,
+              let drawable = view.currentDrawable else {
+            return
+        }
         updatePalettes(scene: &scene)
         bufferStore.omniLights.upload(data: &scene.lights)
-        var camera = scene.objects.objects.first(where: { $0.data.type == .camera })!
         bufferStore.upload(camera: &scene.cameras[camera.data.referenceIdx], transform: &camera.data.transform)
         bufferStore.upload(models: &scene.objects)
-        let commandBuffer = commandQueue.makeCommandBuffer()!
+        guard var gBufferEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: gBufferRenderPassDescriptor) else {
+            return
+        }
         commandBuffer.pushDebugGroup("G-Buffer Renderer Pass")
-        var gBufferEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: gBufferRenderPassDescriptor)!
         gBufferRenderer.draw(encoder: &gBufferEncoder, scene: &scene, dataStore: &bufferStore)
         gBufferEncoder.endEncoding()
         commandBuffer.popDebugGroup()
-        var lightEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor)!
+        guard var lightEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor) else {
+            return
+        }
         commandBuffer.pushDebugGroup("Light Pass")
         lightRenderer.draw(encoder: &lightEncoder, bufferStore: &bufferStore, lightsCount: scene.lights.count)
         commandBuffer.popDebugGroup()
@@ -62,12 +82,14 @@ public struct RenderingCoordinator {
         environmentRenderer.draw(encoder: &lightEncoder, scene: &scene)
         commandBuffer.popDebugGroup()
         lightEncoder.endEncoding()
+        guard let texturePass = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else {
+            return
+        }
         commandBuffer.pushDebugGroup("Post Processing Pass")
-        let texturePass = commandBuffer.makeRenderCommandEncoder(descriptor: view.currentRenderPassDescriptor!)!
         postProcessor.draw(encoder: texturePass)
         texturePass.endEncoding()
         commandBuffer.popDebugGroup()
-        commandBuffer.present(view.currentDrawable!)
+        commandBuffer.present(drawable)
         commandBuffer.commit()
     }
     mutating func updatePalettes(scene: inout GPUSceneDescription) {

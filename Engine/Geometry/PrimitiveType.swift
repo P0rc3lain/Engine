@@ -14,8 +14,11 @@ public enum PrimitiveType: Int {
     case quads = 4
     case variableTopology = 5
     // MARK: - Initialization
-    public init(modelIO: MDLGeometryType) {
-        self = PrimitiveType(rawValue: modelIO.rawValue)!
+    public init?(modelIO: MDLGeometryType) {
+        guard let primitiveType = PrimitiveType(rawValue: modelIO.rawValue) else {
+            return nil
+        }
+        self = primitiveType
     }
     // MARK: - Public
     public var metal: MTLPrimitiveType {

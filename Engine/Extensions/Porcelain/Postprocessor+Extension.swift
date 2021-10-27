@@ -10,10 +10,10 @@ extension Postprocessor {
                      outputFormat: MTLPixelFormat,
                      canvasSize: CGSize) -> Postprocessor? {
         guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRenderPipelineStatePostprocessor(library: library, format: outputFormat) else {
+              let pipelineState = device.makeRenderPipelineStatePostprocessor(library: library, format: outputFormat),
+              let plane = GPUGeometry.screenSpacePlane(device: device) else {
             return nil
         }
-        let plane = GPUGeometry.screenSpacePlane(device: device)
         return Postprocessor(pipelineState: pipelineState, texture: inputTexture, plane: plane, canvasSize: canvasSize)
     }
 }

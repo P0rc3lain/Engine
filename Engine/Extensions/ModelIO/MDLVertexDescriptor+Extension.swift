@@ -7,33 +7,41 @@ import ModelIO
 
 extension MDLVertexDescriptor {
     // MARK: - Properties
-    public static var porcelain: MDLVertexDescriptor {
+    public static var porcelain: MDLVertexDescriptor? {
+        guard let positionOffset = MemoryLayout<Vertex>.offset(of: \Vertex.position),
+              let normalOffset = MemoryLayout<Vertex>.offset(of: \Vertex.normal),
+              let tangentOffset = MemoryLayout<Vertex>.offset(of: \Vertex.tangent),
+              let textureUVOffset = MemoryLayout<Vertex>.offset(of: \Vertex.textureUV),
+              let jointIndices = MemoryLayout<Vertex>.offset(of: \Vertex.jointIndices),
+              let jointWeights = MemoryLayout<Vertex>.offset(of: \Vertex.jointWeights) else {
+            return nil
+        }
         let descriptor = MDLVertexDescriptor()
         descriptor.layouts = [MDLVertexBufferLayout(stride: MemoryLayout<Vertex>.size)]
         descriptor.attributes = [
             MDLVertexAttribute(name: MDLVertexAttributePosition,
                                format: .float3,
-                               offset: MemoryLayout<Vertex>.offset(of: \Vertex.position)!,
+                               offset: positionOffset,
                                bufferIndex: 0),
             MDLVertexAttribute(name: MDLVertexAttributeNormal,
                                format: .float3,
-                               offset: MemoryLayout<Vertex>.offset(of: \Vertex.normal)!,
+                               offset: normalOffset,
                                bufferIndex: 0),
             MDLVertexAttribute(name: MDLVertexAttributeTangent,
                                format: .float3,
-                               offset: MemoryLayout<Vertex>.offset(of: \Vertex.tangent)!,
+                               offset: tangentOffset,
                                bufferIndex: 0),
             MDLVertexAttribute(name: MDLVertexAttributeTextureCoordinate,
                                format: .float2,
-                               offset: MemoryLayout<Vertex>.offset(of: \Vertex.textureUV)!,
+                               offset: textureUVOffset,
                                bufferIndex: 0),
             MDLVertexAttribute(name: MDLVertexAttributeJointIndices,
                                format: .uShort4,
-                               offset: MemoryLayout<Vertex>.offset(of: \Vertex.jointIndices)!,
+                               offset: jointIndices,
                                bufferIndex: 0),
             MDLVertexAttribute(name: MDLVertexAttributeJointWeights,
                                format: .float4,
-                               offset: MemoryLayout<Vertex>.offset(of: \Vertex.jointWeights)!,
+                               offset: jointWeights,
                                bufferIndex: 0)
         ]
         return descriptor

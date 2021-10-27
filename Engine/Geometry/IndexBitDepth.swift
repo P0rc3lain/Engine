@@ -12,8 +12,11 @@ public enum IndexBitDepth: UInt {
     case uInt16 = 16
     case uInt32 = 32
     // MARK: - Initialization
-    public init(modelIO: MDLIndexBitDepth) {
-        self = IndexBitDepth(rawValue: modelIO.rawValue)!
+    public init?(modelIO: MDLIndexBitDepth) {
+        guard let indexBitDepth = IndexBitDepth(rawValue: modelIO.rawValue) else {
+            return nil
+        }
+        self = indexBitDepth
     }
     // MARK: - Public
     public var metal: MTLIndexType {

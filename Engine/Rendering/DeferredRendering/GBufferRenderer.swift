@@ -33,7 +33,7 @@ struct GBufferRenderer {
                                 index: kAttributeGBufferVertexShaderBufferCameraUniforms.int)
         encoder.setStencilReferenceValue(1)
         encoder.setRenderPipelineState(animatedPipelineState)
-        let texturesRange = kAttributeGBufferFragmentShaderTextureAlbedo.int ..< kAttributeGBufferFragmentShaderTextureMetallic.int + 1
+        let texturesRange = Range(kAttributeGBufferFragmentShaderTextureAlbedo.int ... kAttributeGBufferFragmentShaderTextureMetallic.int)
         for index in scene.objects.indices {
             let object = scene.objects[index].data
             if object.type == .mesh && scene.skeletonReferences[index] != .nil {
@@ -50,7 +50,8 @@ struct GBufferRenderer {
                                             offset: scene.paletteReferences[index].lowerBound,
                                             index: kAttributeGBufferVertexShaderBufferMatrixPalettes.int)
                     let material = scene.materials[description.materialIdx]
-                    encoder.setFragmentTextures([material.albedo, material.roughness, material.normals, material.metallic], range: texturesRange)
+                    encoder.setFragmentTextures([material.albedo, material.roughness, material.normals, material.metallic],
+                                                range: texturesRange)
                     encoder.drawIndexedPrimitives(type: description.drawDescription.primitiveType,
                                                   indexCount: description.drawDescription.indexCount,
                                                   indexType: description.drawDescription.indexType,
@@ -73,7 +74,8 @@ struct GBufferRenderer {
                                             offset: offset,
                                             index: kAttributeGBufferVertexShaderBufferModelUniforms.int)
                     let material = scene.materials[description.materialIdx]
-                    encoder.setFragmentTextures([material.albedo, material.roughness, material.normals, material.metallic], range: texturesRange)
+                    encoder.setFragmentTextures([material.albedo, material.roughness, material.normals, material.metallic],
+                                                range: texturesRange)
                     encoder.drawIndexedPrimitives(type: description.drawDescription.primitiveType,
                                                   indexCount: description.drawDescription.indexCount,
                                                   indexType: description.drawDescription.indexType,
