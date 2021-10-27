@@ -222,6 +222,7 @@
 		561666F52719E2CD000063B1 /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
 		561666F62719E2CD000063B1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		561DF41627246F1800D95ACC /* MTLViewport+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLViewport+Extension.swift"; sourceTree = "<group>"; };
+		56295A822729D7B7002FBABA /* .github */ = {isa = PBXFileReference; lastKnownFileType = folder; path = .github; sourceTree = "<group>"; };
 		562B8F42272599FF00363CE8 /* MTLRenderCommandEncoder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLRenderCommandEncoder+Extension.swift"; sourceTree = "<group>"; };
 		563575F32728486A00CE4988 /* AnimationSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationSample.swift; sourceTree = "<group>"; };
 		563BFC80272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MDLObjectContainerComponent+Extension.swift"; sourceTree = "<group>"; };
@@ -275,6 +276,7 @@
 		56013962255457D100FC1C45 = {
 			isa = PBXGroup;
 			children = (
+				56295A822729D7B7002FBABA /* .github */,
 				5601396E255457D100FC1C45 /* Engine */,
 				56924AD5271A07FD00FF3E06 /* EngineTests */,
 				5601396D255457D100FC1C45 /* Products */,

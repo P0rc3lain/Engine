@@ -3,14 +3,14 @@ name: SwiftLint
 on:
   pull_request:
     branches:
-      - master
+    - master
 
 jobs:
   swiftlint:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out sources
-        uses: actions/checkout@v1
-      - name: Lint files
-        uses: norio-nomura/action-swiftlint@3.2.1
+    - name: Check Out Sources
+      uses: actions/checkout@v1
+    - name: Lint Files
+      uses: norio-nomura/action-swiftlint@3.2.1
 

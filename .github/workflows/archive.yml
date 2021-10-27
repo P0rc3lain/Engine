@@ -1,0 +1,22 @@
+name: Archive
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  archive:
+    runs-on: macOS-latest
+    steps:
+    - name: Check Out Sources
+      uses: actions/checkout@v1
+    - name: Create Archive
+      run: xcodebuild -project Engine.xcodeproj 
+                      -scheme Engine archive 
+                      -archivePath archive
+    - name: Upload the document
+      uses: actions/upload-artifact@v2
+      with:
+        name: Engine.framework
+        path: archive.xcarchive/Products/Library/Frameworks/Engine.framework
