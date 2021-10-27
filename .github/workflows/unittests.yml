@@ -1,0 +1,12 @@
+name: Unit Tests
+on: push
+jobs:
+  unittests:
+    name: Testing Swift Framework
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+      - name: Run tests
+        run: xcodebuild -project Engine.xcodeproj -scheme EngineTests test
+        
