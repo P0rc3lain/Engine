@@ -13,7 +13,11 @@ public class Translator {
         var scene = RamSceneDescription()
         asset.walk { object in
             scene.objectNames.append(object.path)
-            let parentIdx = object.parent != nil ? scene.objectNames.firstIndex(of: object.parent!.path)! : .nil
+            var parentIdx = Int.nil
+            if let parent = object.parent,
+                let index = scene.objectNames.firstIndex(of: parent.path) {
+                parentIdx = index
+            }
             let transform = object.transform?.decompose ?? .static
             if let object = object as? MDLCamera {
                 scene.cameraNames.append(object.path)
@@ -27,7 +31,7 @@ public class Translator {
             } */ else if let object = object as? MDLMesh {
                 assert(object.vertexBuffers.count == 1, "Only object that have a single buffer assigned are supported")
                 let buffer = object.vertexBuffers[0].rawData
-                let dataBuffer = DataBuffer(buffer: buffer, length: buffer.count, offset: 0)
+                let dataBuffer = DataBuffer(buffer: buffer, length: buffer.count)
                 var pieceDescriptions = [RamPieceDescription]()
                 guard let submeshes = object.submeshes as? [MDLSubmesh] else {
                     fatalError("Malformed object")
@@ -42,8 +46,11 @@ public class Translator {
                             scene.materials.append(material.porcelain)
                         }
                     }
+                    guard let indexBasedDraw = $0.porcelainIndexBasedDraw else {
+                        fatalError("Cannot convert ModelIO type to internal type")
+                    }
                     let description = PieceDescription(materialIdx: materialIdx,
-                                                       drawDescription: $0.porcelainIndexBasedDraw)
+                                                       drawDescription: indexBasedDraw)
                     pieceDescriptions.append(description)
                 }
                 let geometry = Geometry(vertexBuffer: dataBuffer, pieceDescriptions: pieceDescriptions)

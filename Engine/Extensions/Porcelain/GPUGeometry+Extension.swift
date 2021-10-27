@@ -4,24 +4,16 @@
 
 import Metal
 import MetalBinding
-
-extension RamGeometry {
-    func upload(device: MTLDevice) -> GPUGeometry? {
-        let descriptions = pieceDescriptions.compactMap { $0.upload(device: device) }
-        guard descriptions.count == pieceDescriptions.count,
-              let buffer = vertexBuffer.upload(device: device) else {
-            return nil
-        }
-        return GPUGeometry(vertexBuffer: buffer, pieceDescriptions: descriptions)
-    }
-}
+import ModelIO
 
 extension GPUGeometry {
-    static func cube(device: MTLDevice) -> GPUGeometry {
-        let vertices = cubeVerticesBuffer(device: device)
-        let verticesBuffer = GPUDataBuffer(buffer: vertices, length: vertices.length, offset: 0)
-        let indices = cubeIndicesBuffer(device: device)
-        let indicesBuffer = GPUDataBuffer(buffer: indices, length: indices.length, offset: 0)
+    static func cube(device: MTLDevice) -> GPUGeometry? {
+        guard let vertices = device.makeBuffer(array: cubeVertices),
+              let indices = device.makeBuffer(array: cubeIndices) else {
+            return nil
+        }
+        let verticesBuffer = GPUDataBuffer(buffer: vertices, length: vertices.length)
+        let indicesBuffer = GPUDataBuffer(buffer: indices, length: indices.length)
         let drawDescription = GPUIndexBasedDraw(indexBuffer: indicesBuffer,
                                                 indexCount: indices.length,
                                                 indexType: .uint16,
@@ -69,20 +61,12 @@ extension GPUGeometry {
          0.5, 0.5, -0.5, 1.0,
          0.5, 0.5, 0.5, 1.0
     ]
-    private static func cubeVerticesBuffer(device: MTLDevice) -> MTLBuffer {
-        cubeVertices.withUnsafeBytes { ptr in
-            device.makeBuffer(bytes: ptr.baseAddress!, length: ptr.count, options: [.storageModeShared])!
+    static func screenSpacePlane(device: MTLDevice) -> GPUGeometry? {
+        guard let indices = device.makeBuffer(array: planeIndices),
+              let vertices = device.makeBuffer(array: planeVertices) else {
+            return nil
         }
-    }
-    private static func cubeIndicesBuffer(device: MTLDevice) -> MTLBuffer {
-        cubeIndices.withUnsafeBytes { ptr in
-            device.makeBuffer(bytes: ptr.baseAddress!, length: ptr.count, options: [.storageModeShared])!
-        }
-    }
-    static func screenSpacePlane(device: MTLDevice) -> GPUGeometry {
-        let indices = planeIndicesBuffer(device: device)
         let indicesBuffer = GPUDataBuffer(buffer: indices, length: indices.length, offset: indices.offset)
-        let vertices = planeVerticesBuffer(device: device)
         let verticesBuffer = GPUDataBuffer(buffer: vertices, length: vertices.length, offset: vertices.offset)
         let drawDescription = GPUIndexBasedDraw(indexBuffer: indicesBuffer,
                                                 indexCount: indicesBuffer.length / MemoryLayout<UInt16>.stride,
@@ -113,14 +97,4 @@ extension GPUGeometry {
         0, 1, 2,
         1, 3, 2
     ]
-    private static func planeVerticesBuffer(device: MTLDevice) -> MTLBuffer {
-        planeVertices.withUnsafeBytes { ptr in
-            device.makeBuffer(bytes: ptr.baseAddress!, length: ptr.count, options: [.storageModeShared])!
-        }
-    }
-    private static func planeIndicesBuffer(device: MTLDevice) -> MTLBuffer {
-        planeIndices.withUnsafeBytes { ptr in
-            device.makeBuffer(bytes: ptr.baseAddress!, length: ptr.count, options: [.storageModeShared])!
-        }
-    }
 }

@@ -6,8 +6,11 @@ import MetalKit
 
 extension MTLVertexDescriptor {
     // MARK: - Public
-    public static var porcelain: MTLVertexDescriptor {
-        MTKMetalVertexDescriptorFromModelIO(MDLVertexDescriptor.porcelain)!
+    public static var porcelain: MTLVertexDescriptor? {
+        guard let mdlVertexDescriptor = MDLVertexDescriptor.porcelain else {
+            return nil
+        }
+        return MTKMetalVertexDescriptorFromModelIO(mdlVertexDescriptor)
     }
     static var environmentRenderer: MTLVertexDescriptor {
         let descriptor = MTLVertexDescriptor()
