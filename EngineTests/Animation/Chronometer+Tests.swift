@@ -43,7 +43,7 @@ class ChronometerTests: XCTestCase {
     }
     func testResetRunning() {
         var chrono = Chronometer.running
-        usleep(100)
+        sleep(1)
         let sampleA = chrono.elapsedTime
         chrono.reset()
         usleep(1)
