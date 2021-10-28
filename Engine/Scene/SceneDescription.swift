@@ -21,7 +21,7 @@ public struct SceneDescription<DataType, IndexType, GeometryType, TextureType> {
     public var paletteReferences = [Range<Int>]()
     public var animationReferences = [Range<Int>]()
     // MARK: - Capacity E
-    public var skeletalAnimations = [SkeletalAnimation]()
+    public var skeletalAnimations = [AnimatedSkeleton]()
     // MARK: - Capacity F
     public var cameraNames = [String]()
     public var cameras = [Camera]()
