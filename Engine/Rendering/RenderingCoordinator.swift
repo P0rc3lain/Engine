@@ -21,7 +21,8 @@ public struct RenderingCoordinator {
     let renderingSize: CGSize
     // MARK: - Initialization
     init?(view metalView: MTKView, canvasSize: CGSize, renderingSize: CGSize) {
-        guard let device = metalView.device, let bufferStore = BufferStore(device: device),
+        guard let device = metalView.device,
+              let bufferStore = BufferStore(device: device),
               let commandQueue = device.makeCommandQueue() else {
             return nil
         }
@@ -55,7 +56,7 @@ public struct RenderingCoordinator {
         self.lightRenderer = lightRenderer
     }
     public mutating func draw(scene: inout GPUSceneDescription) {
-        guard var camera = scene.objects.objects.first(where: { $0.data.type == .camera }),
+        guard var camera = scene.entities.objects.first(where: { $0.data.type == .camera }),
               let commandBuffer = commandQueue.makeCommandBuffer(),
               let renderPassDescriptor = view.currentRenderPassDescriptor,
               let drawable = view.currentDrawable else {
@@ -64,7 +65,7 @@ public struct RenderingCoordinator {
         updatePalettes(scene: &scene)
         bufferStore.omniLights.upload(data: &scene.lights)
         bufferStore.upload(camera: &scene.cameras[camera.data.referenceIdx], transform: &camera.data.transform)
-        bufferStore.upload(models: &scene.objects)
+        bufferStore.upload(models: &scene.entities)
         guard var gBufferEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: gBufferRenderPassDescriptor) else {
             return
         }
@@ -95,7 +96,7 @@ public struct RenderingCoordinator {
     mutating func updatePalettes(scene: inout GPUSceneDescription) {
         var continousPalette = [simd_float4x4]()
         scene.paletteReferences = []
-        for index in scene.objects.indices {
+        for index in scene.entities.indices {
             let palette = generatePalette(objectIdx: index, scene: &scene)
             scene.paletteReferences.append(continousPalette.count ..< continousPalette.count + palette.count)
             continousPalette += palette

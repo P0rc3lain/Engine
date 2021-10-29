@@ -5,34 +5,36 @@
 import MetalBinding
 
 public struct SceneDescription<DataType, IndexType, GeometryType, TextureType> {
-    // MARK: - Properties
     // MARK: - Capacity A
-    public var objectNames = [String]()
-    public var objects = FlatTree<Entity>()
+    public var entityNames = [String]()
+    public var entities = FlatTree<Entity>()
     public var skeletonReferences = [Int]()
     // MARK: - Capacity B
     public var materialNames = [String]()
     public var materials = [Material<TextureType>]()
     // MARK: - Capacity C
     public var meshNames = [String]()
-    public var meshes = [Geometry<DataType, IndexType, GeometryType>]()
+    public var meshBuffers = [DataBuffer<DataType>]()
+    public var indexDrawReferences = [Range<Int>]()
     // MARK: - Capacity D
+    public var indexDraws = [IndexBasedDraw<DataType, IndexType, GeometryType>]()
+    public var indexDrawsMaterials = [Int]()
+    // MARK: - Capacity E
     public var skeletons = [Skeleton]()
     public var paletteReferences = [Range<Int>]()
     public var animationReferences = [Range<Int>]()
-    // MARK: - Capacity E
-    public var skeletalAnimations = [AnimatedSkeleton]()
     // MARK: - Capacity F
+    public var skeletalAnimations = [AnimatedSkeleton]()
+    // MARK: - Capacity G
     public var cameraNames = [String]()
     public var cameras = [Camera]()
-    // MARK: - Capacity G
+    // MARK: - Capacity H
     public var lightNames = [String]()
     public var lights = [OmniLight]()
-    // MARK: - Capacity H
-    public var skyMaps = [TextureType]()
     // MARK: - Capacity I
+    public var skyMaps = [TextureType]()
+    // MARK: - Capacity J
     public var activeCameraIdx = Int.nil
     public var sky = Int.nil
-    // MARK: - Initialization
     public init() { }
 }
