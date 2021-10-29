@@ -12,20 +12,11 @@ public class Translator {
     public func process(asset: MDLAsset) -> RamSceneDescription {
         var scene = RamSceneDescription()
         asset.walk { object in
-            scene.objectNames.append(object.path)
-            var parentIdx = Int.nil
-            if let parent = object.parent,
-                let index = scene.objectNames.firstIndex(of: parent.path) {
-                parentIdx = index
-            }
+            scene.entityNames.append(object.path)
+            let parentIdx = parentIndex(object: object, scene: &scene)
             let transform = object.transform?.decompose ?? .static
             if let object = object as? MDLCamera {
-                scene.cameraNames.append(object.path)
-                scene.cameras.append(object.porcelain)
-                let entity = Entity(transform: transform,
-                                    type: .camera,
-                                    referenceIdx: scene.cameras.count - 1)
-                scene.objects.add(parentIdx: parentIdx, data: entity)
+                add(camera: object, transform: transform, parentIdx: parentIdx, scene: &scene)
             } /* else if let object = object as? MDLLight {
                 fatalError("Not implemented")
             } */ else if let object = object as? MDLMesh {
@@ -53,18 +44,22 @@ public class Translator {
                                                        drawDescription: indexBasedDraw)
                     pieceDescriptions.append(description)
                 }
-                let geometry = Geometry(vertexBuffer: dataBuffer, pieceDescriptions: pieceDescriptions)
                 scene.meshNames.append(object.path)
-                scene.meshes.append(geometry)
+                scene.meshBuffers.append(dataBuffer)
+                scene.indexDrawReferences.append(scene.indexDrawReferences.count ..< scene.indexDrawReferences.count + pieceDescriptions.count)
+                for piece in pieceDescriptions {
+                    scene.indexDraws.append(piece.drawDescription)
+                    scene.indexDrawsMaterials.append(piece.materialIdx)
+                }
                 let entity = Entity(transform: transform,
                                     type: .mesh,
-                                    referenceIdx: scene.meshes.count - 1)
-                scene.objects.add(parentIdx: parentIdx, data: entity)
+                                    referenceIdx: scene.meshBuffers.count - 1)
+                scene.entities.add(parentIdx: parentIdx, data: entity)
             } else {
                 let entity = Entity(transform: transform,
                                     type: .group,
                                     referenceIdx: .nil)
-                scene.objects.add(parentIdx: parentIdx, data: entity)
+                scene.entities.add(parentIdx: parentIdx, data: entity)
             }
             if let animationBindComponent = object.componentConforming(to: MDLComponent.self) as?
                 MDLAnimationBindComponent {
@@ -89,18 +84,40 @@ public class Translator {
                 scene.skeletonReferences.append(Int.nil)
             }
         }
-        assert(scene.objectNames.count == scene.objects.count, "There must be the same number of names as objects")
-        assert(scene.cameraNames.count == scene.cameras.count, "There must be the same number of names as objects")
-        assert(scene.meshNames.count == scene.meshes.count, "There must be the same number of names as objects")
+        validateScene(scene: &scene)
+        return scene
+    }
+    private func validateScene(scene: inout RamSceneDescription) {
+        assert(scene.entityNames.count == scene.entities.count, "There must be the same number of names as objects")
+        assert(scene.cameraNames.count == scene.cameras.count, "There must be the same number of names as cameras")
+        assert(scene.meshNames.count == scene.meshBuffers.count, "There must be the same number of names as meshes")
+        assert(scene.indexDrawsMaterials.count == scene.indexDraws.count, "There must be the same number of material references as draw references")
+        assert(scene.indexDrawReferences.count == scene.meshBuffers.count, "There must be the same number of references as buffers")
         assert(scene.materialNames.count == scene.materials.count, "There must be the same number of names as objects")
-        assert(Set(scene.objectNames).count == scene.objectNames.count, "Object names must be unique")
+        assert(Set(scene.entityNames).count == scene.entityNames.count, "Object names must be unique")
         assert(Set(scene.cameraNames).count == scene.cameraNames.count, "Camera names must be unique")
         assert(Set(scene.meshNames).count == scene.meshNames.count, "Mesh names must be unique")
         assert(Set(scene.materialNames).count == scene.materialNames.count, "Mesh names must be unique")
-        assert(scene.objects.count == scene.skeletonReferences.count, "Each object should have reference to a skeleton")
-        return scene
+        assert(scene.entities.count == scene.skeletonReferences.count, "Each object should have reference to a skeleton")
     }
-    // MARK: - Private
+    private func add(camera: MDLCamera,
+                     transform: TransformAnimation,
+                     parentIdx: Int,
+                     scene: inout RamSceneDescription) {
+        scene.cameraNames.append(camera.path)
+        scene.cameras.append(camera.porcelain)
+        let entity = Entity(transform: transform,
+                            type: .camera,
+                            referenceIdx: scene.cameras.count - 1)
+        scene.entities.add(parentIdx: parentIdx, data: entity)
+    }
+    private func parentIndex(object: MDLObject, scene: inout RamSceneDescription) -> Int {
+        guard let parent = object.parent,
+              let index = scene.entityNames.firstIndex(of: parent.path) else {
+            return .nil
+        }
+        return index
+    }
     private func parentIndex(jointPaths: [String], jointPath: String) -> Int {
         let components = jointPath.components(separatedBy: "/")
         if components.count > 1 {

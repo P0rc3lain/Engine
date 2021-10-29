@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-public class IndexBasedDraw<DataType, IndexType, GeometryType> {
+public struct IndexBasedDraw<DataType, IndexType, GeometryType> {
     // MARK: - Properties
     public let indexBuffer: DataBuffer<DataType>
     public let indexCount: Int

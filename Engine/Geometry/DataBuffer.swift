@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-public class DataBuffer<DataType> {
+public struct DataBuffer<DataType> {
     // MARK: - Properties
     public let buffer: DataType
     public let length: Int
