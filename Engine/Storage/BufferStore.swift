@@ -25,9 +25,8 @@ struct BufferStore {
         self.modelCoordinateSystems = modelCoordinateSystems
         self.matrixPalettes = matrixPalettes
     }
-    mutating func upload(camera: inout Camera, transform: inout TransformAnimation) {
-        let viewMatrix = transform.transformation(at: 0)
-        var uniforms = [CameraUniforms(projectionMatrix: camera.projectionMatrix, viewMatrix: viewMatrix, viewMatrixInverse: viewMatrix.inverse)]
+    mutating func upload(camera: inout Camera, index: Int) {
+        var uniforms = [CameraUniforms(projectionMatrix: camera.projectionMatrix, index: Int32(index))]
         cameras.upload(data: &uniforms)
     }
     mutating func upload(models: inout EntityTree) {

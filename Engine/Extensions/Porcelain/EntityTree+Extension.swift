@@ -15,11 +15,8 @@ extension EntityTree {
             let parentIdx = objects[index].parentIdx
             let finalTransform = objects[index].data.transform.transformation(at: Date().timeIntervalSince1970)
             let transform = parentIdx != .nil ? uniforms[parentIdx].modelMatrix * finalTransform : finalTransform
-            let transformInverse = transform.inverse
             uniforms.append(ModelUniforms(modelMatrix: transform,
-                                          modelMatrixInverse: transformInverse,
-                                          modelMatrixInverse2: transform,
-                                          modelMatrixInverse3: transform))
+                                          modelMatrixInverse: transform.inverse))
         }
         return uniforms
     }

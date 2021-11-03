@@ -41,10 +41,12 @@ struct GBufferRenderer {
                 encoder.setVertexBuffer(mesh.buffer,
                                         offset: mesh.offset,
                                         index: kAttributeGBufferVertexShaderBufferStageIn.int)
+                var mutableIndex = Int32(index)
+                encoder.setVertexBytes(&mutableIndex,
+                                       length: MemoryLayout<Int32>.size,
+                                       index: kAttributeGBufferVertexShaderBufferObjectIndex.int)
                 for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
-                    let offset = index * MemoryLayout<ModelUniforms>.stride
                     encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer,
-                                            offset: offset,
                                             index: kAttributeGBufferVertexShaderBufferModelUniforms.int)
                     encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
                                             offset: scene.paletteReferences[index].lowerBound,
@@ -69,10 +71,12 @@ struct GBufferRenderer {
                 encoder.setVertexBuffer(mesh.buffer,
                                         offset: mesh.offset,
                                         index: kAttributeGBufferVertexShaderBufferStageIn.int)
+                var mutableIndex = Int32(index)
+                encoder.setVertexBytes(&mutableIndex,
+                                       length: MemoryLayout<Int32>.size,
+                                       index: kAttributeGBufferVertexShaderBufferObjectIndex.int)
                 for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
-                    let offset = index * MemoryLayout<ModelUniforms>.stride
                     encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer,
-                                            offset: offset,
                                             index: kAttributeGBufferVertexShaderBufferModelUniforms.int)
                     let material = scene.materials[scene.indexDrawsMaterials[pieceIndex]]
                     encoder.setFragmentTextures([material.albedo, material.roughness, material.normals, material.metallic],

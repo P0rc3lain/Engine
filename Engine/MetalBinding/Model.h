@@ -8,8 +8,6 @@
 struct ModelUniforms {
     simd_float4x4 modelMatrix;
     simd_float4x4 modelMatrixInverse;
-    simd_float4x4 modelMatrixInverse2;
-    simd_float4x4 modelMatrixInverse3;
 };
 
 #endif /* MODEL_H */

@@ -50,7 +50,7 @@ fragment float4 fragmentDeferredLight(TexturePipelineRasterizerData in          
     float3 baseColor = arV.xyz;
     float roughnessFactor = arV.w;
 
-    float3 cameraWorld = (camera.viewMatrixInverse * float4(0, 0, 0, 1)).xyz;
+    float3 cameraWorld = (lightUniforms[camera.index].modelMatrixInverse * float4(0, 0, 0, 1)).xyz;
     float3 eye = normalize(cameraWorld - worldPosition);
     
     float3 outputColor(0, 0, 0);

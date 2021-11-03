@@ -18,7 +18,8 @@ enum AttributeGBufferVertexShaderBufferIndex {
     kAttributeGBufferVertexShaderBufferStageIn = 0,
     kAttributeGBufferVertexShaderBufferCameraUniforms,
     kAttributeGBufferVertexShaderBufferModelUniforms,
-    kAttributeGBufferVertexShaderBufferMatrixPalettes
+    kAttributeGBufferVertexShaderBufferMatrixPalettes,
+    kAttributeGBufferVertexShaderBufferObjectIndex
 };
 
 enum AttributeGBufferFragmentShaderTextureIndex {

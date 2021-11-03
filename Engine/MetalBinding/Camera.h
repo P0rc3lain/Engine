@@ -7,8 +7,7 @@
 
 struct CameraUniforms {
     simd_float4x4 projectionMatrix;
-    simd_float4x4 viewMatrix;
-    simd_float4x4 viewMatrixInverse;
+    int index;
 };
 
 #endif /* CAMERA_H */

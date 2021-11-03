@@ -27,29 +27,31 @@ struct GBufferData {
     float4 positionReflectance  [[color(2)]];
 };
 
-vertex RasterizerData gBufferVertex(Vertex                      in              [[stage_in]],
-                                    constant CameraUniforms &   cameraUniforms  [[buffer(kAttributeGBufferVertexShaderBufferCameraUniforms)]],
-                                    constant ModelUniforms &    modelUniforms   [[buffer(kAttributeGBufferVertexShaderBufferModelUniforms)]]) {
+vertex RasterizerData gBufferVertex(Vertex in [[stage_in]],
+                                    constant CameraUniforms & cameraUniforms [[buffer(kAttributeGBufferVertexShaderBufferCameraUniforms)]],
+                                    constant ModelUniforms * modelUniforms [[buffer(kAttributeGBufferVertexShaderBufferModelUniforms)]],
+                                    constant int & index [[ buffer(kAttributeGBufferVertexShaderBufferObjectIndex) ]]) {
     
     
-    matrix_float3x3 rotation = extract_rotation(modelUniforms.modelMatrix);
-    float4 worldPosition = modelUniforms.modelMatrix * float4(in.position, 1);
+    matrix_float3x3 rotation = extract_rotation(modelUniforms[index].modelMatrix);
+    float4 worldPosition = modelUniforms[index].modelMatrix * float4(in.position, 1);
     float3 rotatedNormal = rotation * in.normal;
     float3 rotatedTangent = rotation * in.tangent;
     RasterizerData out;
     out.t = normalize(rotatedTangent);
     out.b = normalize(cross(rotatedTangent, rotatedNormal));
     out.n = normalize(rotatedNormal);
-    out.clipSpacePosition = cameraUniforms.projectionMatrix * cameraUniforms.viewMatrix * worldPosition;
+    out.clipSpacePosition = cameraUniforms.projectionMatrix * modelUniforms[cameraUniforms.index].modelMatrix * worldPosition;
     out.worldSpacePosition = worldPosition.xyz;
     out.uv = in.textureUV;
     return out;
 }
 
-vertex RasterizerData gBufferAnimatedVertex(Vertex                      in              [[stage_in]],
-                                            constant CameraUniforms &   cameraUniforms  [[buffer(kAttributeGBufferVertexShaderBufferCameraUniforms)]],
-                                            constant ModelUniforms &    modelUniforms   [[buffer(kAttributeGBufferVertexShaderBufferModelUniforms)]],
-                                            constant simd_float4x4 *    matrixPalettes  [[buffer(kAttributeGBufferVertexShaderBufferMatrixPalettes)]]) {
+vertex RasterizerData gBufferAnimatedVertex(Vertex in [[stage_in]],
+                                            constant CameraUniforms & cameraUniforms [[buffer(kAttributeGBufferVertexShaderBufferCameraUniforms)]],
+                                            constant ModelUniforms * modelUniforms [[buffer(kAttributeGBufferVertexShaderBufferModelUniforms)]],
+                                            constant simd_float4x4 * matrixPalettes [[buffer(kAttributeGBufferVertexShaderBufferMatrixPalettes)]],
+                                            constant int & index [[ buffer(kAttributeGBufferVertexShaderBufferObjectIndex) ]]) {
     float4 totalPosition = float4(0);
     float4 totalNormal = float4(0);
     float4 totalTangent = float4(0);
@@ -67,25 +69,25 @@ vertex RasterizerData gBufferAnimatedVertex(Vertex                      in      
         totalTangent += weight * localTangent;
     }
     
-    matrix_float3x3 rotation = extract_rotation(modelUniforms.modelMatrix);
+    matrix_float3x3 rotation = extract_rotation(modelUniforms[index].modelMatrix);
     float3 rotatedNormal = rotation * totalNormal.xyz;
     float3 rotatedTangent = rotation * totalTangent.xyz;
-    float4 worldPosition = modelUniforms.modelMatrix * totalPosition;
+    float4 worldPosition = modelUniforms[index].modelMatrix * totalPosition;
     RasterizerData out;
     out.t = normalize(rotatedTangent);
     out.b = normalize(cross(rotatedTangent, rotatedNormal));
     out.n = normalize(rotatedNormal);
-    out.clipSpacePosition = cameraUniforms.projectionMatrix * cameraUniforms.viewMatrix * worldPosition;
+    out.clipSpacePosition = cameraUniforms.projectionMatrix * modelUniforms[cameraUniforms.index].modelMatrix * worldPosition;
     out.worldSpacePosition = worldPosition.xyz;
     out.uv = in.textureUV;
     return out;
 }
 
-fragment GBufferData gBufferFragment(RasterizerData             in              [[stage_in]],
-                                     texture2d<float>           albedo          [[texture(kAttributeGBufferFragmentShaderTextureAlbedo)]],
-                                     texture2d<float>           roughness       [[texture(kAttributeGBufferFragmentShaderTextureRoughness)]],
-                                     texture2d<float>           normals         [[texture(kAttributeGBufferFragmentShaderTextureNormals)]],
-                                     texture2d<float>           metallic        [[texture(kAttributeGBufferFragmentShaderTextureMetallic)]]) {
+fragment GBufferData gBufferFragment(RasterizerData in [[stage_in]],
+                                     texture2d<float> albedo [[texture(kAttributeGBufferFragmentShaderTextureAlbedo)]],
+                                     texture2d<float> roughness [[texture(kAttributeGBufferFragmentShaderTextureRoughness)]],
+                                     texture2d<float> normals [[texture(kAttributeGBufferFragmentShaderTextureNormals)]],
+                                     texture2d<float> metallic [[texture(kAttributeGBufferFragmentShaderTextureMetallic)]]) {
     constexpr sampler textureSampler(mag_filter::linear, min_filter::nearest, address::mirrored_repeat);
     simd_float3x3 TBN(in.t, in.b, in.n);
     GBufferData out;

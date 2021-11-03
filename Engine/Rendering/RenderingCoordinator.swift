@@ -56,7 +56,7 @@ public struct RenderingCoordinator {
         self.lightRenderer = lightRenderer
     }
     public mutating func draw(scene: inout GPUSceneDescription) {
-        guard var camera = scene.entities.objects.first(where: { $0.data.type == .camera }),
+        guard scene.activeCameraIdx != .nil,
               let commandBuffer = commandQueue.makeCommandBuffer(),
               let renderPassDescriptor = view.currentRenderPassDescriptor,
               let drawable = view.currentDrawable else {
@@ -64,7 +64,7 @@ public struct RenderingCoordinator {
         }
         updatePalettes(scene: &scene)
         bufferStore.omniLights.upload(data: &scene.lights)
-        bufferStore.upload(camera: &scene.cameras[camera.data.referenceIdx], transform: &camera.data.transform)
+        bufferStore.upload(camera: &scene.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx], index: scene.activeCameraIdx)
         bufferStore.upload(models: &scene.entities)
         guard var gBufferEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: gBufferRenderPassDescriptor) else {
             return
