@@ -28,7 +28,15 @@ class AnimatedValueTests: XCTestCase {
         XCTAssertEqual(animation.sample(at: 9.55).ratio, 0.137_5)
     }
     func testLoop() throws {
-        XCTAssertEqual(animation.sample(at: 12.55).currentKeyFrame, "c")
-        XCTAssertEqual(animation.sample(at: 12.55).upcomingKeyFrame, "a")
+        let sample = animation.sample(at: 12.55)
+        XCTAssertEqual(sample.currentKeyFrame, "c")
+        XCTAssertEqual(sample.upcomingKeyFrame, "a")
+        XCTAssertEqual(sample.ratio, 0.887_5)
+    }
+    func testLargeLoop() throws {
+        let sample = animation.sample(at: 1_012.55)
+        XCTAssertEqual(sample.currentKeyFrame, "c")
+        XCTAssertEqual(sample.upcomingKeyFrame, "a")
+        XCTAssertEqual(sample.ratio, 0.887_5)
     }
 }
