@@ -17,6 +17,8 @@ public struct AnimatedValue<T> {
         assert(times.count == keyFrames.count)
         assert(times.sorted() == times)
         assert(!times.isEmpty)
+        assert(times.sorted() == times)
+        assert(times[times.count - 1] <= maximumTime)
         self.keyFrames = keyFrames
         self.times = times
         self.maximumTime = maximumTime
@@ -32,7 +34,7 @@ public struct AnimatedValue<T> {
         let next = times.firstIndex { clipped < $0 } ?? 0
         let current = next > 0 ? next - 1 : times.count - 1
         let timeRange = next > 0 ? times[next] - times[current] : maximumTime - times[current] + times[next]
-        let timePosition = next > 0 ? time - times[current] : (time > times[current] ? time - times[current] : maximumTime - times[current] + time)
+        let timePosition = next > 0 ? clipped - times[current] : (clipped > times[current] ? clipped - times[current] : maximumTime - times[current] + clipped)
         let ratio = (timePosition / timeRange).clamp(min: 0.0, max: 1.0)
         return AnimationSample(currentKeyFrame: keyFrames[current],
                                upcomingKeyFrame: keyFrames[next],
