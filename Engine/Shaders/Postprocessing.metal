@@ -21,8 +21,14 @@ vertex TexturePipelineRasterizerData  vertexPostprocess(Vertex in [[stage_in]]) 
     return out;
 }
 
+float4 vignette(float4 vignetteColor, float2 position, float fromRadius, float toRadius) {
+    float radius = length(float2(0.5, 0.5) - position) * 2;
+    float ratio = saturate(radius - fromRadius) / (toRadius - fromRadius);
+    return smoothstep(float4(1, 1, 1, 1), vignetteColor, ratio);
+}
+
 fragment float4 fragmentPostprocess(TexturePipelineRasterizerData in [[stage_in]],
                                     texture2d<float> texture [[texture(kAttributePostprocessingFragmentShaderTexture)]]) {
     constexpr sampler textureSampler(min_filter::nearest, mag_filter::nearest);
-    return texture.sample(textureSampler, in.texcoord);
+    return vignette(float4(0, 0, 0, 1), in.texcoord, 0.9, 1.4) * texture.sample(textureSampler, in.texcoord);
 }
