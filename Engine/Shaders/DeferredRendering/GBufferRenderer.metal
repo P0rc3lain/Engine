@@ -14,7 +14,7 @@ using namespace metal;
 
 struct RasterizerData {
     float4 clipSpacePosition [[position]];
-    float3 worldSpacePosition;
+    float3 cameraSpacePosition;
     float3 t;
     float3 b;
     float3 n;
@@ -37,12 +37,20 @@ vertex RasterizerData gBufferVertex(Vertex in [[stage_in]],
     float4 worldPosition = modelUniforms[index].modelMatrix * float4(in.position, 1);
     float3 rotatedNormal = rotation * in.normal;
     float3 rotatedTangent = rotation * in.tangent;
+    float4 cameraSpacePosition = modelUniforms[cameraUniforms.index].modelMatrix * worldPosition;
+    float3x3 cameraRotation = float3x3(modelUniforms[cameraUniforms.index].modelMatrix.columns[0].xyz,
+                                       modelUniforms[cameraUniforms.index].modelMatrix.columns[1].xyz,
+                                       modelUniforms[cameraUniforms.index].modelMatrix.columns[2].xyz);
+    float3x3 TBN = float3x3(normalize(rotatedTangent),
+                            normalize(cross(rotatedTangent, rotatedNormal)),
+                            normalize(rotatedNormal));
+    float3x3 cameraTBN = cameraRotation * TBN;
     RasterizerData out;
-    out.t = normalize(rotatedTangent);
-    out.b = normalize(cross(rotatedTangent, rotatedNormal));
-    out.n = normalize(rotatedNormal);
-    out.clipSpacePosition = cameraUniforms.projectionMatrix * modelUniforms[cameraUniforms.index].modelMatrix * worldPosition;
-    out.worldSpacePosition = worldPosition.xyz;
+    out.t = cameraTBN.columns[0];
+    out.b = cameraTBN.columns[1];
+    out.n = cameraTBN.columns[2];
+    out.clipSpacePosition = cameraUniforms.projectionMatrix * cameraSpacePosition;
+    out.cameraSpacePosition = cameraSpacePosition.xyz;
     out.uv = in.textureUV;
     return out;
 }
@@ -68,17 +76,24 @@ vertex RasterizerData gBufferAnimatedVertex(Vertex in [[stage_in]],
         float4 localTangent = transformMatrix * float4(in.tangent, 0);
         totalTangent += weight * localTangent;
     }
-    
     matrix_float3x3 rotation = extract_rotation(modelUniforms[index].modelMatrix);
     float3 rotatedNormal = rotation * totalNormal.xyz;
     float3 rotatedTangent = rotation * totalTangent.xyz;
     float4 worldPosition = modelUniforms[index].modelMatrix * totalPosition;
+    float4 cameraSpacePosition = modelUniforms[cameraUniforms.index].modelMatrix * worldPosition;
+    float3x3 cameraRotation = float3x3(modelUniforms[cameraUniforms.index].modelMatrix.columns[0].xyz,
+                                       modelUniforms[cameraUniforms.index].modelMatrix.columns[1].xyz,
+                                       modelUniforms[cameraUniforms.index].modelMatrix.columns[2].xyz);
+    float3x3 TBN = float3x3(normalize(rotatedTangent),
+                            normalize(cross(rotatedTangent, rotatedNormal)),
+                            normalize(rotatedNormal));
+    float3x3 cameraTBN = cameraRotation * TBN;
     RasterizerData out;
-    out.t = normalize(rotatedTangent);
-    out.b = normalize(cross(rotatedTangent, rotatedNormal));
-    out.n = normalize(rotatedNormal);
-    out.clipSpacePosition = cameraUniforms.projectionMatrix * modelUniforms[cameraUniforms.index].modelMatrix * worldPosition;
-    out.worldSpacePosition = worldPosition.xyz;
+    out.t = cameraTBN.columns[0];
+    out.b = cameraTBN.columns[1];
+    out.n = cameraTBN.columns[2];
+    out.clipSpacePosition = cameraUniforms.projectionMatrix * cameraSpacePosition;
+    out.cameraSpacePosition = cameraSpacePosition.xyz;
     out.uv = in.textureUV;
     return out;
 }
@@ -96,7 +111,7 @@ fragment GBufferData gBufferFragment(RasterizerData in [[stage_in]],
     float3 normalEncoded = normals.sample(textureSampler, in.uv).xyz;
     float3 normalDecoded = (normalEncoded * 2) - 1;
     float3 normalWorldSpace = TBN * normalDecoded;
-    out.positionReflectance = float4(in.worldSpacePosition, 0.04);
+    out.positionReflectance = float4(in.cameraSpacePosition, 0.04);
     out.albedoRoughness = float4(albedo.sample(textureSampler, in.uv).xyz, roughness.sample(textureSampler, in.uv).x);
     out.normalMetallic = float4(normalWorldSpace, metallic.sample(textureSampler, in.uv).x);
     return out;
