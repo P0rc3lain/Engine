@@ -37,8 +37,8 @@ struct EnvironmentRenderer {
         encoder.setStencilReferenceValue(0)
         encoder.setFragmentTexture(scene.skyMaps[scene.sky],
                                    index: kAttributeEnvironmentFragmentShaderTextureCubeMap.int)
-        let cameraIndex = scene.entities.objects[scene.activeCameraIdx].data.referenceIdx
-        let orientation = simd_matrix4x4(scene.entities.objects[scene.activeCameraIdx].data.transform.rotation.interpolated(at: Date().timeIntervalSince1970))
+        let cameraIndex = scene.entities[scene.activeCameraIdx].data.referenceIdx
+        let orientation = simd_matrix4x4(scene.entities[scene.activeCameraIdx].data.transform.rotation.interpolated(at: Date().timeIntervalSince1970))
         let uniforms = Uniforms(projectionMatrix: scene.cameras[cameraIndex].projectionMatrix,
                                 orientation: orientation)
         withUnsafePointer(to: uniforms) { ptr in
