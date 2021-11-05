@@ -5,7 +5,6 @@
 import MetalKit
 
 extension MTLVertexDescriptor {
-    // MARK: - Public
     public static var porcelain: MTLVertexDescriptor? {
         guard let mdlVertexDescriptor = MDLVertexDescriptor.porcelain else {
             return nil

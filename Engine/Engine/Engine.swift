@@ -5,11 +5,9 @@
 import MetalKit
 
 public class Engine {
-    // MARK: - Properties
     private let view: MTKView
     public var sceneDescription: GPUSceneDescription
     private var coordinator: RenderingCoordinator
-    // MARK: - Initialization
     public init?(view: MTKView, renderingSize: CGSize, sceneDescription: GPUSceneDescription) {
         guard let coordinator = RenderingCoordinator(view: view,
                                                      canvasSize: view.drawableSize,
@@ -20,7 +18,6 @@ public class Engine {
         self.coordinator = coordinator
         self.sceneDescription = sceneDescription
     }
-    // MARK: - Public
     public func updateDrawableSize(drawableSize: CGSize) -> Bool {
         guard let updated = RenderingCoordinator(view: view, canvasSize: drawableSize, renderingSize: coordinator.renderingSize) else {
             return false

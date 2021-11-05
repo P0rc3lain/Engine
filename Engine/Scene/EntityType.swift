@@ -3,7 +3,6 @@
 //
 
 public enum EntityType {
-    // MARK: - Cases
     case group
     case light
     case mesh

@@ -7,13 +7,11 @@ import MetalKit
 import simd
 
 struct LightPassRenderer {
-    // MARK: - Properties
     private let pipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport
     private let gbufferRenderPass: MTLRenderPassDescriptor
     private let plane: GPUGeometry
-    // MARK: - Initialization
     init?(pipelineState: MTLRenderPipelineState,
           gBufferRenderPass: MTLRenderPassDescriptor,
           device: MTLDevice,
@@ -28,7 +26,6 @@ struct LightPassRenderer {
         self.plane = plane
         self.viewPort = .porcelain(size: drawableSize)
     }
-    // MARK: - Internal
     func draw(encoder: inout MTLRenderCommandEncoder,
               bufferStore: inout BufferStore,
               lightsCount: Int,

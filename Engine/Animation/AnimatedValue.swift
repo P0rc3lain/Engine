@@ -5,14 +5,12 @@
 import Foundation
 
 public struct AnimatedValue<T> {
-    // MARK: - Properties
     private var keyFrames: [T]
     private let times: [TimeInterval]
     private let maximumTime: TimeInterval
     var keyTimes: [TimeInterval] {
         times
     }
-    // MARK: - Initialization
     public init(keyFrames: [T], times: [TimeInterval], maximumTime: TimeInterval) {
         assert(times.count == keyFrames.count)
         assert(times.sorted() == times)
@@ -23,7 +21,6 @@ public struct AnimatedValue<T> {
         self.times = times
         self.maximumTime = maximumTime
     }
-    // MARK: - Public
     public func sample(at time: TimeInterval) -> AnimationSample<T> {
         guard times.count > 1 else {
             return AnimationSample(currentKeyFrame: keyFrames[0],

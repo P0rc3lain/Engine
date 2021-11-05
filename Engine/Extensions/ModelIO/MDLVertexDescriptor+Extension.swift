@@ -6,7 +6,6 @@ import MetalBinding
 import ModelIO
 
 extension MDLVertexDescriptor {
-    // MARK: - Properties
     public static var porcelain: MDLVertexDescriptor? {
         guard let positionOffset = MemoryLayout<Vertex>.offset(of: \Vertex.position),
               let normalOffset = MemoryLayout<Vertex>.offset(of: \Vertex.normal),

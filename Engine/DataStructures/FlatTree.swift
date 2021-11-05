@@ -3,10 +3,8 @@
 //
 
 public struct Node<T> {
-    // MARK: - Properties
     public let parentIdx: Int
     public var data: T
-    // MARK: - Initialization
     fileprivate init(parentIdx: Int, data: T) {
         self.parentIdx = parentIdx
         self.data = data
@@ -14,7 +12,6 @@ public struct Node<T> {
 }
 
 public struct FlatTree<T> {
-    // MARK: - Properties
     public var objects = [Node<T>]()
     public var count: Int {
         objects.count
@@ -22,9 +19,7 @@ public struct FlatTree<T> {
     public var indices: Range<Int> {
         objects.indices
     }
-    // MARK: - Initialization
     public init() { }
-    // MARK: - Public
     public mutating func add(parentIdx: Int, data: T) {
         assert(parentIdx < objects.count && parentIdx >= 0 || parentIdx == Int.nil)
         objects.append(Node<T>(parentIdx: parentIdx, data: data))

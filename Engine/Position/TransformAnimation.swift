@@ -6,11 +6,9 @@ import ModelIO
 import simd
 
 public struct TransformAnimation {
-    // MARK: - Properties
     public var translation: AnimatedFloat3
     public var scale: AnimatedFloat3
     public var rotation: AnimatedQuatf
-    // MARK: - Initialization
     public init(translation: AnimatedFloat3, rotation: AnimatedQuatf, scale: AnimatedFloat3) {
         self.translation = translation
         self.rotation = rotation

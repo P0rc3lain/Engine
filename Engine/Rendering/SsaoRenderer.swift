@@ -7,14 +7,12 @@ import MetalBinding
 import simd
 
 struct SsaoRenderer {
-    // MARK: - Properties
     private let pipelineState: MTLRenderPipelineState
     private let viewPort: MTLViewport
     private let gBufferRenderPassDescriptor: MTLRenderPassDescriptor
     private let plane: GPUGeometry
     private var kernel = [simd_float3]()
     private var noise = [simd_float3]()
-    // MARK: - Initialization
     init?(pipelineState: MTLRenderPipelineState,
           gBufferRenderPassDescriptor: MTLRenderPassDescriptor,
           device: MTLDevice,
@@ -29,7 +27,6 @@ struct SsaoRenderer {
         self.kernel = generateSamples(size: 64)
         self.noise = generateNoise()
     }
-    // MARK: - Internal
     mutating func draw(encoder: inout MTLRenderCommandEncoder, bufferStore: inout BufferStore) {
         guard let nmTexture = gBufferRenderPassDescriptor.colorAttachments[1].texture,
               let prTexture = gBufferRenderPassDescriptor.colorAttachments[2].texture else {

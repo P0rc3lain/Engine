@@ -5,12 +5,9 @@
 import ModelIO
 
 public class SceneLoader {
-    // MARK: - Properties
     private let assetLoader = AssetLoader()
     private let translator = Translator()
-    // MARK: - Initialization
     public init() { }
-    // MARK: - Public
     public func resource(from url: URL) -> RamSceneDescription? {
         guard let asset = assetLoader.resource(from: url) else {
             return nil

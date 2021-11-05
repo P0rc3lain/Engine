@@ -7,19 +7,16 @@ import MetalBinding
 import simd
 
 struct Postprocessor {
-    // MARK: - Properties
     private let pipelineState: MTLRenderPipelineState
     private let texture: MTLTexture
     private let viewPort: MTLViewport
     private let plane: GPUGeometry
-    // MARK: - Initialization
     init(pipelineState: MTLRenderPipelineState, texture: MTLTexture, plane: GPUGeometry, canvasSize: CGSize) {
         self.texture = texture
         self.pipelineState = pipelineState
         self.plane = plane
         self.viewPort = .porcelain(size: canvasSize)
     }
-    // MARK: - Internal
     func draw(encoder: MTLRenderCommandEncoder) {
         encoder.setFragmentTexture(texture, index: kAttributePostprocessingFragmentShaderTexture.int)
         encoder.setViewport(viewPort)

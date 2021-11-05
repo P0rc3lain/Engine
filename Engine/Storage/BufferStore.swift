@@ -7,14 +7,13 @@ import MetalBinding
 import simd
 
 struct BufferStore {
-    // MARK: - Properties
+
     var omniLights: DynamicBuffer<OmniLight>
     var cameras: DynamicBuffer<CameraUniforms>
     var modelCoordinateSystems: DynamicBuffer<ModelUniforms>
     var matrixPalettes: DynamicBuffer<simd_float4x4>
     var ssaoKernel: DynamicBuffer<simd_float3>
     var ssaoNoise: DynamicBuffer<simd_float3>
-    // MARK: - Initialization
     init?(device: MTLDevice) {
         guard let omniLights = DynamicBuffer<OmniLight>(device: device, initialCapacity: 1),
               let cameras = DynamicBuffer<CameraUniforms>(device: device, initialCapacity: 1),

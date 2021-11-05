@@ -7,12 +7,10 @@ import MetalKit
 import simd
 
 struct GBufferRenderer {
-    // MARK: - Properties
     private let pipelineState: MTLRenderPipelineState
     private let animatedPipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport
-    // MARK: - Initialization
     init(pipelineState: MTLRenderPipelineState,
          animatedPipelineState: MTLRenderPipelineState,
          depthStencilState: MTLDepthStencilState,
@@ -23,7 +21,6 @@ struct GBufferRenderer {
         self.depthStencilState = depthStencilState
         self.viewPort = .porcelain(size: drawableSize)
     }
-    // MARK: - Internal
     func draw(encoder: inout MTLRenderCommandEncoder, scene: inout GPUSceneDescription, dataStore: inout BufferStore) {
         encoder.setViewport(viewPort)
         encoder.setDepthStencilState(depthStencilState)

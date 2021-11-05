@@ -3,7 +3,6 @@
 //
 
 extension Int {
-    // MARK: - Public
     public static var `nil`: Int {
         -1
     }

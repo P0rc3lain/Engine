@@ -3,12 +3,10 @@
 //
 
 public struct Material<DataType> {
-    // MARK: - Properties
     public let albedo: DataType
     public let roughness: DataType
     public let normals: DataType
     public let metallic: DataType
-    // MARK: - Initialization
     public init(albedo: DataType,
                 roughness: DataType,
                 normals: DataType,

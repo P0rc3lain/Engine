@@ -6,9 +6,7 @@ import ModelIO
 import simd
 
 public class Translator {
-    // MARK: - Initialization
     public init() { }
-    // MARK: - Public
     public func process(asset: MDLAsset) -> RamSceneDescription {
         var scene = RamSceneDescription()
         asset.walk { object in

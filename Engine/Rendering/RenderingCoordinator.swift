@@ -8,7 +8,6 @@ import MetalKit
 import MetalPerformanceShaders
 
 public struct RenderingCoordinator {
-    // MARK: - Private
     private let view: MTKView
     private let commandQueue: MTLCommandQueue
     private var offscreenRenderPassDescriptor: MTLRenderPassDescriptor
@@ -24,7 +23,6 @@ public struct RenderingCoordinator {
     private let gaussTexture: MTLTexture
     private let gaussianBlur: MPSImageGaussianBlur
     let renderingSize: CGSize
-    // MARK: - Initialization
     init?(view metalView: MTKView, canvasSize: CGSize, renderingSize: CGSize) {
         guard let device = metalView.device,
               let bufferStore = BufferStore(device: device),

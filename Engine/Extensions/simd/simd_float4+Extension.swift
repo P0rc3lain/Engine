@@ -5,7 +5,6 @@
 import simd
 
 extension simd_float4 {
-    // MARK: - Public
     public var xyz: simd_float3 {
         simd_float3(x, y, z)
     }

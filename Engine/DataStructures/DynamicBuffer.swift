@@ -5,10 +5,8 @@
 import Metal
 
 public struct DynamicBuffer<T> {
-    // MARK: - Properties
     private let device: MTLDevice
     var buffer: MTLBuffer
-    // MARK: - Initialization
     init?(device: MTLDevice, initialCapacity: Int) {
         guard let buffer = device.makeSharedBuffer(length: initialCapacity * MemoryLayout<T>.stride) else {
             return nil
@@ -17,7 +15,6 @@ public struct DynamicBuffer<T> {
         self.buffer = buffer
         self.buffer.label = bufferName
     }
-    // MARK: - Internal
     mutating func upload(data: inout  [T]) {
         let requiredSpace = data.count * MemoryLayout<T>.stride
         if buffer.length < requiredSpace {
@@ -34,7 +31,6 @@ public struct DynamicBuffer<T> {
             buffer.contents().copyMemory(from: baseAddress, byteCount: pointer.count)
         }
     }
-    // MARK: - Private
     private var bufferName: String {
         "\(Self.self)"
     }

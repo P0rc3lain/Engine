@@ -5,7 +5,6 @@
 import ModelIO
 
 class AssetLoader {
-    // MARK: - Internal
     func resource(from url: URL) -> MDLAsset? {
         guard let asset = self.retrieve(url: url) else {
             return nil
@@ -19,7 +18,6 @@ class AssetLoader {
         }
         return self.resource(from: url)
     }
-    // MARK: - Private
     private func retrieve(url: URL) -> MDLAsset? {
         let vertexDescriptor = MDLVertexDescriptor.porcelain
         let asset = MDLAsset(url: url,

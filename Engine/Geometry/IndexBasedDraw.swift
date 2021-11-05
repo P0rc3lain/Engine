@@ -3,12 +3,10 @@
 //
 
 public struct IndexBasedDraw<DataType, IndexType, GeometryType> {
-    // MARK: - Properties
     public let indexBuffer: DataBuffer<DataType>
     public let indexCount: Int
     public let indexType: IndexType
     public let primitiveType: GeometryType
-    // MARK: - Initialization
     public init(indexBuffer: DataBuffer<DataType>,
                 indexCount: Int,
                 indexType: IndexType,

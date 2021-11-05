@@ -12,12 +12,10 @@ fileprivate struct Uniforms {
 }
 
 struct EnvironmentRenderer {
-    // MARK: - Properties
     private let pipelineState: MTLRenderPipelineState
     private let depthStentilState: MTLDepthStencilState
     private let viewPort: MTLViewport
     private let cube: GPUGeometry
-    // MARK: - Initialization
     init(pipelineState: MTLRenderPipelineState,
          depthStentilState: MTLDepthStencilState,
          drawableSize: CGSize,
@@ -27,7 +25,6 @@ struct EnvironmentRenderer {
         self.cube = cube
         self.viewPort = .porcelain(size: drawableSize)
     }
-    // MARK: - Internal
     func draw(encoder: inout MTLRenderCommandEncoder, scene: inout GPUSceneDescription) {
         if scene.sky == .nil {
             return

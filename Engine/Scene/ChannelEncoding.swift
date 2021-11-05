@@ -3,7 +3,6 @@
 //
 
 public enum ChannelEncoding: Int {
-    // MARK: - Cases
     case uInt8 = 1
     case uInt16 = 2
     case uInt24 = 3

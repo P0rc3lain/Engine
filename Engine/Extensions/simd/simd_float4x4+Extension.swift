@@ -5,7 +5,6 @@
 import simd
 
 extension simd_float4x4 {
-    // MARK: - Properties
     public var translation: simd_float3 {
         columns.3.xyz
     }
@@ -20,12 +19,10 @@ extension simd_float4x4 {
     public var decomposed: Position {
         Position(translation: translation, rotation: rotation, scale: scale)
     }
-    // MARK: - Initialization
     public init(_ matrix: simd_double4x4) {
         let columns = matrix.columns
         self.init(columns: (simd_float4(columns.0), simd_float4(columns.1), simd_float4(columns.2), simd_float4(columns.3)))
     }
-    // MARK: - Public
     public static func translation(vector: simd_float3) -> simd_float4x4 {
         simd_float4x4(columns: (simd_float4(1, 0, 0, 0),
                                 simd_float4(0, 1, 0, 0),

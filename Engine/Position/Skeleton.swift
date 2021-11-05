@@ -5,12 +5,10 @@
 import simd
 
 public struct Skeleton {
-    // MARK: - Properties
     // World coordinates
     public var bindTransforms: [simd_float4x4]
     public var inverseBindTransforms: [simd_float4x4]
     public var parentIndices: [Int]
-    // MARK: - Initialization
     public init(localBindTransforms: [simd_float4x4],
                 parentIndices: [Int]) {
         assert(parentIndices.count == localBindTransforms.count, "Each transform must have a reference to its parent")
