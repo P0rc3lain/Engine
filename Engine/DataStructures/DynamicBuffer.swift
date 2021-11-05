@@ -25,10 +25,7 @@ public struct DynamicBuffer<T> {
             buffer = newBuffer
         }
         data.withUnsafeBytes { pointer in
-            guard let baseAddress = pointer.baseAddress else {
-                fatalError("Cannot upload data to the buffer")
-            }
-            buffer.contents().copyMemory(from: baseAddress, byteCount: pointer.count)
+            buffer.contents().copyBuffer(from: pointer)
         }
     }
     private var bufferName: String {

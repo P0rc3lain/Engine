@@ -57,7 +57,7 @@ struct SsaoRenderer {
     }
     func generateNoise() -> [simd_float3] {
         var samples = [simd_float3]()
-        for _ in 0 ..< 16 {
+        for _ in 16.naturalExclusive {
             samples.append(simd_float3(Float.random(in: 0 ..< 1) * 2 - 1,
                                        Float.random(in: 0 ..< 1) * 2 - 1,
                                        0))

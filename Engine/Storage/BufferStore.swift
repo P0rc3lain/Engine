@@ -7,7 +7,6 @@ import MetalBinding
 import simd
 
 struct BufferStore {
-
     var omniLights: DynamicBuffer<OmniLight>
     var cameras: DynamicBuffer<CameraUniforms>
     var modelCoordinateSystems: DynamicBuffer<ModelUniforms>
