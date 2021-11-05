@@ -32,11 +32,11 @@ struct EnvironmentRenderer {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(cube.vertexBuffer.buffer,
-                                index: kAttributeEnvironmentVertexShaderBufferStageIn.int)
+                                index: kAttributeEnvironmentVertexShaderBufferStageIn)
         encoder.setDepthStencilState(depthStentilState)
         encoder.setStencilReferenceValue(0)
         encoder.setFragmentTexture(scene.skyMaps[scene.sky],
-                                   index: kAttributeEnvironmentFragmentShaderTextureCubeMap.int)
+                                   index: kAttributeEnvironmentFragmentShaderTextureCubeMap)
         let cameraIndex = scene.entities[scene.activeCameraIdx].data.referenceIdx
         let orientation = simd_matrix4x4(scene.entities[scene.activeCameraIdx].data.transform.rotation.interpolated(at: Date().timeIntervalSince1970))
         let uniforms = Uniforms(projectionMatrix: scene.cameras[cameraIndex].projectionMatrix,
@@ -44,7 +44,7 @@ struct EnvironmentRenderer {
         withUnsafePointer(to: uniforms) { ptr in
             encoder.setVertexBytes(ptr,
                                    length: MemoryLayout<Uniforms>.size,
-                                   index: kAttributeEnvironmentVertexShaderBufferUniforms.int)
+                                   index: kAttributeEnvironmentVertexShaderBufferUniforms)
         }
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: cube.pieceDescriptions[0].drawDescription.indexBuffer.length / MemoryLayout<UInt16>.size,

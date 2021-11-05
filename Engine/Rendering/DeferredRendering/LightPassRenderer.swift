@@ -39,11 +39,11 @@ struct LightPassRenderer {
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
-                                index: kAttributeLightingVertexShaderBufferStageIn.int)
+                                index: kAttributeLightingVertexShaderBufferStageIn)
         encoder.setFragmentBuffer(bufferStore.omniLights.buffer,
-                                  index: kAttributeLightingFragmentShaderBufferOmniLights.int)
+                                  index: kAttributeLightingFragmentShaderBufferOmniLights)
         encoder.setFragmentBuffer(bufferStore.cameras.buffer,
-                                  index: kAttributeLightingFragmentShaderBufferCamera.int)
+                                  index: kAttributeLightingFragmentShaderBufferCamera)
         encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems.buffer,
                                   index: kAttributeLightingFragmentShaderBufferLightUniforms.int)
         let range = kAttributeLightingFragmentShaderTextureAR.int ... kAttributeLightingFragmentShaderTextureSSAO.int

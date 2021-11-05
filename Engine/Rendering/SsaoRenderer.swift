@@ -37,13 +37,13 @@ struct SsaoRenderer {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
-                                index: kAttributeSsaoVertexShaderBufferStageIn.int)
+                                index: kAttributeSsaoVertexShaderBufferStageIn)
         encoder.setFragmentBuffer(bufferStore.ssaoKernel.buffer,
-                                  index: kAttributeSsaoFragmentShaderBufferSamples.int)
+                                  index: kAttributeSsaoFragmentShaderBufferSamples)
         encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems.buffer,
-                                  index: kAttributeSsaoFragmentShaderBufferModelUniforms.int)
+                                  index: kAttributeSsaoFragmentShaderBufferModelUniforms)
         encoder.setFragmentBuffer(bufferStore.ssaoNoise.buffer,
-                                  index: kAttributeSsaoFragmentShaderBufferNoise.int)
+                                  index: kAttributeSsaoFragmentShaderBufferNoise)
         encoder.setFragmentBuffer(bufferStore.cameras.buffer,
                                   index: kAttributeSsaoFragmentShaderBufferCamera.int)
         let range = kAttributeSsaoFragmentShaderTextureNM.int ... kAttributeSsaoFragmentShaderTexturePR.int

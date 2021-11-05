@@ -27,7 +27,7 @@ struct GBufferRenderer {
         encoder.setCullMode(.back)
         encoder.setFrontFacing(.counterClockwise)
         encoder.setVertexBuffer(dataStore.cameras.buffer,
-                                index: kAttributeGBufferVertexShaderBufferCameraUniforms.int)
+                                index: kAttributeGBufferVertexShaderBufferCameraUniforms)
         encoder.setStencilReferenceValue(1)
         encoder.setRenderPipelineState(animatedPipelineState)
         let texturesRange = kAttributeGBufferFragmentShaderTextureAlbedo.int ... kAttributeGBufferFragmentShaderTextureMetallic.int
@@ -37,17 +37,17 @@ struct GBufferRenderer {
                 let mesh = scene.meshBuffers[object.referenceIdx]
                 encoder.setVertexBuffer(mesh.buffer,
                                         offset: mesh.offset,
-                                        index: kAttributeGBufferVertexShaderBufferStageIn.int)
+                                        index: kAttributeGBufferVertexShaderBufferStageIn)
                 var mutableIndex = Int32(index)
                 encoder.setVertexBytes(&mutableIndex,
                                        length: MemoryLayout<Int32>.size,
-                                       index: kAttributeGBufferVertexShaderBufferObjectIndex.int)
+                                       index: kAttributeGBufferVertexShaderBufferObjectIndex)
                 for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
                     encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer,
-                                            index: kAttributeGBufferVertexShaderBufferModelUniforms.int)
+                                            index: kAttributeGBufferVertexShaderBufferModelUniforms)
                     encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
                                             offset: scene.paletteReferences[index].lowerBound,
-                                            index: kAttributeGBufferVertexShaderBufferMatrixPalettes.int)
+                                            index: kAttributeGBufferVertexShaderBufferMatrixPalettes)
                     let material = scene.materials[scene.indexDrawsMaterials[pieceIndex]]
                     encoder.setFragmentTextures([material.albedo, material.roughness, material.normals, material.metallic],
                                                 range: texturesRange)
@@ -67,14 +67,14 @@ struct GBufferRenderer {
                 let mesh = scene.meshBuffers[object.referenceIdx]
                 encoder.setVertexBuffer(mesh.buffer,
                                         offset: mesh.offset,
-                                        index: kAttributeGBufferVertexShaderBufferStageIn.int)
+                                        index: kAttributeGBufferVertexShaderBufferStageIn)
                 var mutableIndex = Int32(index)
                 encoder.setVertexBytes(&mutableIndex,
                                        length: MemoryLayout<Int32>.size,
-                                       index: kAttributeGBufferVertexShaderBufferObjectIndex.int)
+                                       index: kAttributeGBufferVertexShaderBufferObjectIndex)
                 for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
                     encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer,
-                                            index: kAttributeGBufferVertexShaderBufferModelUniforms.int)
+                                            index: kAttributeGBufferVertexShaderBufferModelUniforms)
                     let material = scene.materials[scene.indexDrawsMaterials[pieceIndex]]
                     encoder.setFragmentTextures([material.albedo, material.roughness, material.normals, material.metallic],
                                                 range: texturesRange)

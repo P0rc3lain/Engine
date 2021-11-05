@@ -18,11 +18,11 @@ struct Postprocessor {
         self.viewPort = .porcelain(size: canvasSize)
     }
     func draw(encoder: MTLRenderCommandEncoder) {
-        encoder.setFragmentTexture(texture, index: kAttributePostprocessingFragmentShaderTexture.int)
+        encoder.setFragmentTexture(texture, index: kAttributePostprocessingFragmentShaderTexture)
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
-                                index: kAttributePostprocessingVertexShaderBufferStageIn.int)
+                                index: kAttributePostprocessingVertexShaderBufferStageIn)
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
                                       indexType: plane.pieceDescriptions[0].drawDescription.indexType,
