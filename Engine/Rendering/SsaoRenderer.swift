@@ -45,8 +45,8 @@ struct SsaoRenderer {
         encoder.setFragmentBuffer(bufferStore.ssaoNoise.buffer,
                                   index: kAttributeSsaoFragmentShaderBufferNoise)
         encoder.setFragmentBuffer(bufferStore.cameras.buffer,
-                                  index: kAttributeSsaoFragmentShaderBufferCamera.int)
-        let range = kAttributeSsaoFragmentShaderTextureNM.int ... kAttributeSsaoFragmentShaderTexturePR.int
+                                  index: kAttributeSsaoFragmentShaderBufferCamera)
+        let range = kAttributeSsaoFragmentShaderTextureNM ... kAttributeSsaoFragmentShaderTexturePR
         encoder.setFragmentTextures([nmTexture, prTexture],
                                     range: range)
         encoder.drawIndexedPrimitives(type: .triangle,

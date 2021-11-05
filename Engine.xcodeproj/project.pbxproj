@@ -114,6 +114,7 @@
 		566020E02734314C000F4CA7 /* SsaoRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566020DF2734314C000F4CA7 /* SsaoRenderer.swift */; };
 		566020E227343280000F4CA7 /* Ssao.metal in Sources */ = {isa = PBXBuildFile; fileRef = 566020E127343280000F4CA7 /* Ssao.metal */; };
 		566020E42734408C000F4CA7 /* SsaoRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566020E32734408C000F4CA7 /* SsaoRenderer+Extension.swift */; };
+		5670EBDC273561FD00375194 /* Operator+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EBDB273561FD00375194 /* Operator+Extension.swift */; };
 		56924ACC271A00D900FF3E06 /* AnimatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACB271A00D900FF3E06 /* AnimatedValue.swift */; };
 		56924ACE271A022900FF3E06 /* EntityTree+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */; };
 		56924AD7271A07FD00FF3E06 /* AnimatedValue+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AD6271A07FD00FF3E06 /* AnimatedValue+Tests.swift */; };
@@ -249,6 +250,7 @@
 		566020DF2734314C000F4CA7 /* SsaoRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SsaoRenderer.swift; sourceTree = "<group>"; };
 		566020E127343280000F4CA7 /* Ssao.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Ssao.metal; sourceTree = "<group>"; };
 		566020E32734408C000F4CA7 /* SsaoRenderer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SsaoRenderer+Extension.swift"; sourceTree = "<group>"; };
+		5670EBDB273561FD00375194 /* Operator+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Operator+Extension.swift"; sourceTree = "<group>"; };
 		56924ACB271A00D900FF3E06 /* AnimatedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedValue.swift; sourceTree = "<group>"; };
 		56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityTree+Extension.swift"; sourceTree = "<group>"; };
 		56924AD4271A07FD00FF3E06 /* EngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -596,6 +598,7 @@
 				56D34A53271B037900A87785 /* Double+Extension.swift */,
 				56407B7A27204EEB00440CAC /* Array+Extension.swift */,
 				563BFC86272878180003EDB7 /* UnsafeMutableRawPointer+Extension.swift */,
+				5670EBDB273561FD00375194 /* Operator+Extension.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -796,6 +799,7 @@
 				561667272719E2CD000063B1 /* MTLRenderPassDescriptor+Extension.swift in Sources */,
 				561667382719E2CD000063B1 /* Geometry.swift in Sources */,
 				563BFC91272898F20003EDB7 /* MDLAnimatedVector3Array+Extension.swift in Sources */,
+				5670EBDC273561FD00375194 /* Operator+Extension.swift in Sources */,
 				563BFC8F272897430003EDB7 /* AnimatedFloat3Array+Extension.swift in Sources */,
 				561667572719E2CD000063B1 /* BufferStore.swift in Sources */,
 				561667432719E2CD000063B1 /* Camera.swift in Sources */,

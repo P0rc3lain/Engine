@@ -30,7 +30,7 @@ struct GBufferRenderer {
                                 index: kAttributeGBufferVertexShaderBufferCameraUniforms)
         encoder.setStencilReferenceValue(1)
         encoder.setRenderPipelineState(animatedPipelineState)
-        let texturesRange = kAttributeGBufferFragmentShaderTextureAlbedo.int ... kAttributeGBufferFragmentShaderTextureMetallic.int
+        let texturesRange = kAttributeGBufferFragmentShaderTextureAlbedo ... kAttributeGBufferFragmentShaderTextureMetallic
         for index in scene.entities.indices {
             let object = scene.entities[index].data
             if object.type == .mesh && scene.skeletonReferences[index] != .nil {
