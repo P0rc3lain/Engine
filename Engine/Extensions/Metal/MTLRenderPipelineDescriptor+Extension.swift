@@ -58,4 +58,12 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexDescriptor = .porcelain
         return descriptor
     }
+    static func ssaoRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
+        let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.vertexFunction = library.makeFunction(name: "vertexSsao")
+        descriptor.fragmentFunction = library.makeFunction(name: "fragmentSsao")
+        descriptor.colorAttachments[0].pixelFormat = .ssaoColor
+        descriptor.vertexDescriptor = .porcelain
+        return descriptor
+    }
 }

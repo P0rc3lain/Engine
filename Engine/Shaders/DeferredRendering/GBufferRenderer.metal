@@ -102,7 +102,8 @@ fragment GBufferData gBufferFragment(RasterizerData in [[stage_in]],
                                      texture2d<float> albedo [[texture(kAttributeGBufferFragmentShaderTextureAlbedo)]],
                                      texture2d<float> roughness [[texture(kAttributeGBufferFragmentShaderTextureRoughness)]],
                                      texture2d<float> normals [[texture(kAttributeGBufferFragmentShaderTextureNormals)]],
-                                     texture2d<float> metallic [[texture(kAttributeGBufferFragmentShaderTextureMetallic)]]) {
+                                     texture2d<float> metallic [[texture(kAttributeGBufferFragmentShaderTextureMetallic)]],
+                                     constant CameraUniforms & cameraUniforms [[buffer(kAttributeGBufferVertexShaderBufferCameraUniforms)]]) {
     constexpr sampler textureSampler(mag_filter::linear, min_filter::nearest, address::mirrored_repeat);
     simd_float3x3 TBN(in.t, in.b, in.n);
     GBufferData out;

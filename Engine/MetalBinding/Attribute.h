@@ -29,6 +29,23 @@ enum AttributeGBufferFragmentShaderTextureIndex {
     kAttributeGBufferFragmentShaderTextureMetallic
 };
 
+enum AttributeSsaoVertexShaderBufferIndex {
+    kAttributeSsaoVertexShaderBufferStageIn = 0
+};
+
+enum AttributeSsaoFragmentShaderTextureIndex {
+    kAttributeSsaoFragmentShaderTextureAR = 0,
+    kAttributeSsaoFragmentShaderTextureNM,
+    kAttributeSsaoFragmentShaderTexturePR
+};
+
+enum AttributeSsaoFragmentShaderBufferIndex {
+    kAttributeSsaoFragmentShaderBufferCamera = 0,
+    kAttributeSsaoFragmentShaderBufferSamples,
+    kAttributeSsaoFragmentShaderBufferNoise,
+    kAttributeSsaoFragmentShaderBufferModelUniforms
+};
+
 enum AttributeLightingVertexShaderBufferIndex {
     kAttributeLightingVertexShaderBufferStageIn = 0
 };
@@ -36,7 +53,8 @@ enum AttributeLightingVertexShaderBufferIndex {
 enum AttributeLightingFragmentShaderTextureIndex {
     kAttributeLightingFragmentShaderTextureAR = 0,
     kAttributeLightingFragmentShaderTextureNM,
-    kAttributeLightingFragmentShaderTexturePR
+    kAttributeLightingFragmentShaderTexturePR,
+    kAttributeLightingFragmentShaderTextureSSAO
 };
 
 enum AttributeLightingFragmentShaderBufferIndex {

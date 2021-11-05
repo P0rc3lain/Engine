@@ -36,6 +36,10 @@ extension MTLDevice {
         let descriptor = MTLRenderPipelineDescriptor.lightRenderer(library: library)
         return try? makeRenderPipelineState(descriptor: descriptor)
     }
+    func makeRenderPipelineStateSsao(library: MTLLibrary) -> MTLRenderPipelineState? {
+        let descriptor = MTLRenderPipelineDescriptor.ssaoRenderer(library: library)
+        return try? makeRenderPipelineState(descriptor: descriptor)
+    }
     func makeTextureLightenSceneDepthStencil(size: CGSize) -> MTLTexture? {
         makeTexture(descriptor: MTLTextureDescriptor.lightenSceneDepthStencil(size: size))
     }
@@ -53,6 +57,9 @@ extension MTLDevice {
     }
     func makeTextureGBufferDepthStencil(size: CGSize) -> MTLTexture? {
         makeTexture(descriptor: MTLTextureDescriptor.gBufferDepthStencil(size: size))
+    }
+    func makeTextureSsao(size: CGSize) -> MTLTexture? {
+        makeTexture(descriptor: MTLTextureDescriptor.ssaoColor(size: size))
     }
     func makePorcelainLibrary() -> MTLLibrary? {
         try? makeDefaultLibrary(bundle: Bundle(for: Engine.self))

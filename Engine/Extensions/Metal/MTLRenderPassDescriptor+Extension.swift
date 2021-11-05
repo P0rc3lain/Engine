@@ -44,4 +44,12 @@ extension MTLRenderPassDescriptor {
         descriptor.stencilAttachment.storeAction = .store
         return descriptor
     }
+    static func ssao(device: MTLDevice, size: CGSize) -> MTLRenderPassDescriptor {
+        let descriptor = MTLRenderPassDescriptor()
+        descriptor.colorAttachments[0].loadAction = .clear
+        descriptor.colorAttachments[0].texture = device.makeTextureSsao(size: size)
+        descriptor.colorAttachments[0].clearColor = MTLClearColor()
+        descriptor.colorAttachments[0].storeAction = .store
+        return descriptor
+    }
 }

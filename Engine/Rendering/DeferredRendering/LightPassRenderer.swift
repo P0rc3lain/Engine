@@ -29,7 +29,10 @@ struct LightPassRenderer {
         self.viewPort = .porcelain(size: drawableSize)
     }
     // MARK: - Internal
-    func draw(encoder: inout MTLRenderCommandEncoder, bufferStore: inout BufferStore, lightsCount: Int) {
+    func draw(encoder: inout MTLRenderCommandEncoder,
+              bufferStore: inout BufferStore,
+              lightsCount: Int,
+              ssao: MTLTexture) {
         guard let arTexture = gbufferRenderPass.colorAttachments[0].texture,
               let nmTexture = gbufferRenderPass.colorAttachments[1].texture,
               let prTexture = gbufferRenderPass.colorAttachments[2].texture else {
@@ -46,9 +49,8 @@ struct LightPassRenderer {
                                   index: kAttributeLightingFragmentShaderBufferCamera.int)
         encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems.buffer,
                                   index: kAttributeLightingFragmentShaderBufferLightUniforms.int)
-        let range = kAttributeLightingFragmentShaderTextureAR.int ... kAttributeLightingFragmentShaderTexturePR.int
-        encoder.setFragmentTextures([arTexture, nmTexture, prTexture],
-                                    range: Range(range))
+        let range = kAttributeLightingFragmentShaderTextureAR.int ... kAttributeLightingFragmentShaderTextureSSAO.int
+        encoder.setFragmentTextures([arTexture, nmTexture, prTexture, ssao], range: Range(range))
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
                                       indexType: plane.pieceDescriptions[0].drawDescription.indexType,
