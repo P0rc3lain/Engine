@@ -11,4 +11,7 @@ extension MTLRenderCommandEncoder {
     func setFragmentBuffer(_ buffer: MTLBuffer?, index: Int) {
         setFragmentBuffer(buffer, offset: 0, index: index)
     }
+    func setFragmentTextures(_ textures: [MTLTexture?], range: ClosedRange<Int>) {
+        setFragmentTextures(textures, range: Range(range))
+    }
 }

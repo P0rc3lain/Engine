@@ -48,7 +48,7 @@ struct SsaoRenderer {
                                   index: kAttributeSsaoFragmentShaderBufferCamera.int)
         let range = kAttributeSsaoFragmentShaderTextureNM.int ... kAttributeSsaoFragmentShaderTexturePR.int
         encoder.setFragmentTextures([nmTexture, prTexture],
-                                    range: Range(range))
+                                    range: range)
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
                                       indexType: plane.pieceDescriptions[0].drawDescription.indexType,

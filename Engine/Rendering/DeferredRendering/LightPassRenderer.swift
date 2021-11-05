@@ -47,7 +47,7 @@ struct LightPassRenderer {
         encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems.buffer,
                                   index: kAttributeLightingFragmentShaderBufferLightUniforms.int)
         let range = kAttributeLightingFragmentShaderTextureAR.int ... kAttributeLightingFragmentShaderTextureSSAO.int
-        encoder.setFragmentTextures([arTexture, nmTexture, prTexture, ssao], range: Range(range))
+        encoder.setFragmentTextures([arTexture, nmTexture, prTexture, ssao], range: range)
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
                                       indexType: plane.pieceDescriptions[0].drawDescription.indexType,
