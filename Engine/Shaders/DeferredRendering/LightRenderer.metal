@@ -40,8 +40,8 @@ fragment float4 fragmentDeferredLight(TexturePipelineRasterizerData in          
     float4 arV = ar.sample(textureSampler, in.texcoord);
     float4 nmV = nm.sample(textureSampler, in.texcoord);
     float4 prV = pr.sample(textureSampler, in.texcoord);
-    
-    float3 worldPosition = prV.xyz;
+    // Camera Space Position
+    float3 fragmentPosition = prV.xyz;
     float reflectance = prV.w;
     
     float3 n = nmV.xyz;
@@ -50,13 +50,13 @@ fragment float4 fragmentDeferredLight(TexturePipelineRasterizerData in          
     float3 baseColor = arV.xyz;
     float roughnessFactor = arV.w;
 
-    float3 cameraWorld = (lightUniforms[camera.index].modelMatrixInverse * float4(0, 0, 0, 1)).xyz;
-    float3 eye = normalize(cameraWorld - worldPosition);
+    float3 cameraPosition = float3(0, 0, 0);
+    float3 eye = normalize(cameraPosition - fragmentPosition);
     
     float3 outputColor(0, 0, 0);
     int id = omniLights[in.instanceId].idx;
-    float4 lightPosition = lightUniforms[id].modelMatrix * float4(0, 0, 0, 1);
-    float3 l = normalize(lightPosition.xyz - worldPosition);
+    float3 lightPosition = (lightUniforms[camera.index].modelMatrix * lightUniforms[id].modelMatrix * float4(0, 0, 0, 1)).xyz;
+    float3 l = normalize(lightPosition - fragmentPosition);
     float3 halfway = normalize(l + eye);
     float3 f0 = 0.16 * reflectance * reflectance * (1 - metallicFactor) + metallicFactor * baseColor;
     float3 specular = cookTorrance(n, eye, halfway, l, roughnessFactor, f0);
