@@ -74,6 +74,16 @@ extension MTLTextureDescriptor {
         descriptor.usage = [.shaderRead, .renderTarget]
         return descriptor
     }
+    static func ssaoColor(size: CGSize) -> MTLTextureDescriptor {
+        let descriptor = MTLTextureDescriptor()
+        descriptor.textureType = .type2D
+        descriptor.width = Int(size.width)
+        descriptor.height = Int(size.height)
+        descriptor.storageMode = .private
+        descriptor.pixelFormat = MTLPixelFormat.ssaoColor
+        descriptor.usage = [.shaderRead, .shaderWrite, .renderTarget]
+        return descriptor
+    }
     static func lightenSceneDepthStencil(size: CGSize) -> MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = .type2D

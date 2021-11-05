@@ -5,6 +5,7 @@
 import Metal
 import MetalBinding
 import MetalKit
+import MetalPerformanceShaders
 
 public struct RenderingCoordinator {
     // MARK: - Private
@@ -12,12 +13,16 @@ public struct RenderingCoordinator {
     private let commandQueue: MTLCommandQueue
     private var offscreenRenderPassDescriptor: MTLRenderPassDescriptor
     private var gBufferRenderPassDescriptor: MTLRenderPassDescriptor
+    private var ssaoRenderPassDescriptor: MTLRenderPassDescriptor
     private var postProcessor: Postprocessor
     private var gBufferRenderer: GBufferRenderer
     private var environmentRenderer: EnvironmentRenderer
     private var lightRenderer: LightPassRenderer
+    private var ssaoRenderer: SsaoRenderer
     private var bufferStore: BufferStore
     private let canvasSize: CGSize
+    private let gaussTexture: MTLTexture
+    private let gaussianBlur: MPSImageGaussianBlur
     let renderingSize: CGSize
     // MARK: - Initialization
     init?(view metalView: MTKView, canvasSize: CGSize, renderingSize: CGSize) {
@@ -42,10 +47,15 @@ public struct RenderingCoordinator {
               let lightRenderer = LightPassRenderer.make(device: device,
                                                          gBufferRenderPassDescriptor: gBufferRenderPassDescriptor,
                                                          drawableSize: renderingSize),
-              let gBufferRenderer = GBufferRenderer.make(device: device, drawableSize: renderingSize) else {
+              let gBufferRenderer = GBufferRenderer.make(device: device, drawableSize: renderingSize),
+              let ssaoRenderer = SsaoRenderer.make(device: device,
+                                                   gBufferRenderPassDescriptor: gBufferRenderPassDescriptor,
+                                                   drawableSize: renderingSize),
+              let gaussTexture = device.makeTexture(descriptor: .ssaoColor(size: renderingSize)) else {
             return nil
         }
         self.view = metalView
+        self.gaussTexture = gaussTexture
         self.canvasSize = canvasSize
         self.renderingSize = renderingSize
         self.bufferStore = bufferStore
@@ -54,6 +64,9 @@ public struct RenderingCoordinator {
         self.environmentRenderer = environmentRenderer
         self.gBufferRenderer = gBufferRenderer
         self.lightRenderer = lightRenderer
+        self.ssaoRenderer = ssaoRenderer
+        self.ssaoRenderPassDescriptor = .ssao(device: device, size: renderingSize)
+        self.gaussianBlur = MPSImageGaussianBlur(device: device, sigma: 1)
     }
     public mutating func draw(scene: inout GPUSceneDescription) {
         guard scene.activeCameraIdx != .nil,
@@ -73,11 +86,26 @@ public struct RenderingCoordinator {
         gBufferRenderer.draw(encoder: &gBufferEncoder, scene: &scene, dataStore: &bufferStore)
         gBufferEncoder.endEncoding()
         commandBuffer.popDebugGroup()
+        commandBuffer.pushDebugGroup("SSAO Renderer Pass")
+        guard var ssaoEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: ssaoRenderPassDescriptor) else {
+            return
+        }
+        ssaoRenderer.draw(encoder: &ssaoEncoder, bufferStore: &bufferStore)
+        ssaoEncoder.endEncoding()
+        commandBuffer.popDebugGroup()
+        commandBuffer.pushDebugGroup("MPS")
+        guard let ssaoTexture = ssaoRenderPassDescriptor.colorAttachments[0].texture else {
+            return
+        }
+        gaussianBlur.encode(commandBuffer: commandBuffer,
+                            sourceTexture: ssaoTexture,
+                            destinationTexture: gaussTexture)
+        commandBuffer.popDebugGroup()
         guard var lightEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor) else {
             return
         }
         commandBuffer.pushDebugGroup("Light Pass")
-        lightRenderer.draw(encoder: &lightEncoder, bufferStore: &bufferStore, lightsCount: scene.lights.count)
+        lightRenderer.draw(encoder: &lightEncoder, bufferStore: &bufferStore, lightsCount: scene.lights.count, ssao: gaussTexture)
         commandBuffer.popDebugGroup()
         commandBuffer.pushDebugGroup("Environment Map")
         environmentRenderer.draw(encoder: &lightEncoder, scene: &scene)

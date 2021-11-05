@@ -20,6 +20,9 @@ extension MTLPixelFormat {
     static var lightenSceneColor: MTLPixelFormat {
         .rgba16Float
     }
+    static var ssaoColor: MTLPixelFormat {
+        .r16Float
+    }
     static var lightenSceneDepthStencil: MTLPixelFormat {
         .depth32Float_stencil8
     }

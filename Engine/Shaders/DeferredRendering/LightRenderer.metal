@@ -29,13 +29,14 @@ vertex TexturePipelineRasterizerData vertexDeferredLight(Vertex in          [[st
     return out;
 }
 
-fragment float4 fragmentDeferredLight(TexturePipelineRasterizerData in              [[stage_in]],
-                                      texture2d<float>              ar              [[texture(kAttributeLightingFragmentShaderTextureAR)]],
-                                      texture2d<float>              nm              [[texture(kAttributeLightingFragmentShaderTextureNM)]],
-                                      texture2d<float>              pr              [[texture(kAttributeLightingFragmentShaderTexturePR)]],
-                                      constant CameraUniforms &     camera          [[buffer(kAttributeLightingFragmentShaderBufferCamera)]],
-                                      constant OmniLight *          omniLights      [[buffer(kAttributeLightingFragmentShaderBufferOmniLights)]],
-                                      constant ModelUniforms *      lightUniforms   [[buffer(kAttributeLightingFragmentShaderBufferLightUniforms)]]) {
+fragment float4 fragmentDeferredLight(TexturePipelineRasterizerData in [[stage_in]],
+                                      texture2d<float> ar [[texture(kAttributeLightingFragmentShaderTextureAR)]],
+                                      texture2d<float> nm [[texture(kAttributeLightingFragmentShaderTextureNM)]],
+                                      texture2d<float> pr [[texture(kAttributeLightingFragmentShaderTexturePR)]],
+                                      texture2d<float> ssao [[texture(kAttributeLightingFragmentShaderTextureSSAO)]],
+                                      constant CameraUniforms & camera [[buffer(kAttributeLightingFragmentShaderBufferCamera)]],
+                                      constant OmniLight * omniLights [[buffer(kAttributeLightingFragmentShaderBufferOmniLights)]],
+                                      constant ModelUniforms * lightUniforms [[buffer(kAttributeLightingFragmentShaderBufferLightUniforms)]]) {
     constexpr sampler textureSampler(mag_filter::nearest, min_filter::nearest);
     float4 arV = ar.sample(textureSampler, in.texcoord);
     float4 nmV = nm.sample(textureSampler, in.texcoord);
@@ -63,7 +64,7 @@ fragment float4 fragmentDeferredLight(TexturePipelineRasterizerData in          
     float3 diffuseColor = (1 - metallicFactor) * baseColor;
     float3 color =  diffuseColor / M_PI_F + specular;
     outputColor += color * omniLights[in.instanceId].color * dot(n, l) * omniLights[in.instanceId].intensity;
-    float ambient = 0.1;
+    float ambient = 0.2 * ssao.sample(textureSampler, in.texcoord).r;
     outputColor += baseColor * ambient;
     return float4(outputColor, 1);
 }
