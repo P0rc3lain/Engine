@@ -11,28 +11,24 @@ public struct RenderingCoordinator {
     private let view: MTKView
     private let commandQueue: MTLCommandQueue
     private var offscreenRenderPassDescriptor: MTLRenderPassDescriptor
-    private var gBufferRenderPassDescriptor: MTLRenderPassDescriptor
     private var postProcessor: Postprocessor
-    private var gBufferRenderer: GBufferRenderer
     private var environmentRenderer: EnvironmentRenderer
     private var lightRenderer: LightPassRenderer
     private var bufferStore: BufferStore
     private var ssaoStage: SSAOStage
     private var bloomStage: BloomStage
+    private var gBufferStage: GBufferStage
     private let canvasSize: CGSize
     let renderingSize: CGSize
     init?(view metalView: MTKView, canvasSize: CGSize, renderingSize: CGSize) {
         guard let device = metalView.device,
               let bufferStore = BufferStore(device: device),
-              let commandQueue = device.makeCommandQueue() else {
-            return nil
-        }
-        gBufferRenderPassDescriptor = .gBuffer(device: device, size: renderingSize)
-        guard let sharedDepthStencilTexture = gBufferRenderPassDescriptor.stencilAttachment.texture else {
+              let commandQueue = device.makeCommandQueue(),
+              let gBufferStage = GBufferStage(device: device, renderingSize: renderingSize) else {
             return nil
         }
         offscreenRenderPassDescriptor = .lightenScene(device: device,
-                                                      depthStencil: sharedDepthStencilTexture,
+                                                      depthStencil: gBufferStage.io.output.stencil!,
                                                       size: renderingSize)
         guard let bloomStage = BloomStage(input: offscreenRenderPassDescriptor.colorAttachments[0].texture!,
                                           device: device,
@@ -43,15 +39,16 @@ public struct RenderingCoordinator {
                                                      canvasSize: canvasSize),
               let environmentRenderer = EnvironmentRenderer.make(device: device, drawableSize: metalView.drawableSize),
               let lightRenderer = LightPassRenderer.make(device: device,
-                                                         gBufferRenderPassDescriptor: gBufferRenderPassDescriptor,
+                                                         inputTextures: gBufferStage.io.output.color,
                                                          drawableSize: renderingSize),
-              let gBufferRenderer = GBufferRenderer.make(device: device, drawableSize: renderingSize),
+              
               let ssaoStage = SSAOStage(device: device,
                                         renderingSize: renderingSize,
-                                        prTexture: gBufferRenderPassDescriptor.colorAttachments[0].texture!,
-                                        nmTexture: gBufferRenderPassDescriptor.colorAttachments[1].texture!) else {
+                                        prTexture: gBufferStage.io.output.color[0],
+                                        nmTexture: gBufferStage.io.output.color[1]) else {
             return nil
         }
+        self.gBufferStage = gBufferStage
         self.view = metalView
         self.canvasSize = canvasSize
         self.renderingSize = renderingSize
@@ -60,7 +57,6 @@ public struct RenderingCoordinator {
         self.commandQueue = commandQueue
         self.postProcessor = postProcessor
         self.environmentRenderer = environmentRenderer
-        self.gBufferRenderer = gBufferRenderer
         self.lightRenderer = lightRenderer
         self.ssaoStage = ssaoStage
     }
@@ -75,13 +71,7 @@ public struct RenderingCoordinator {
         bufferStore.omniLights.upload(data: &scene.lights)
         bufferStore.upload(camera: &scene.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx], index: scene.activeCameraIdx)
         bufferStore.upload(models: &scene.entities)
-        guard var gBufferEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: gBufferRenderPassDescriptor) else {
-            return
-        }
-        commandBuffer.pushDebugGroup("G-Buffer Renderer Pass")
-        gBufferRenderer.draw(encoder: &gBufferEncoder, scene: &scene, dataStore: &bufferStore)
-        gBufferEncoder.endEncoding()
-        commandBuffer.popDebugGroup()
+        gBufferStage.draw(commandBuffer: &commandBuffer, scene: &scene, bufferStore: &bufferStore)
         ssaoStage.draw(commandBuffer: &commandBuffer, bufferStore: &bufferStore)
         commandBuffer.pushDebugGroup("Light Pass")
         guard var lightEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor) else {

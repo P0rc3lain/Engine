@@ -19,7 +19,9 @@ public class Engine {
         self.sceneDescription = sceneDescription
     }
     public func updateDrawableSize(drawableSize: CGSize) -> Bool {
-        guard let updated = RenderingCoordinator(view: view, canvasSize: drawableSize, renderingSize: coordinator.renderingSize) else {
+        guard let updated = RenderingCoordinator(view: view,
+                                                 canvasSize: drawableSize,
+                                                 renderingSize: coordinator.renderingSize) else {
             return false
         }
         coordinator = updated

@@ -10,10 +10,10 @@ struct LightPassRenderer {
     let pipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport
-    private let gbufferRenderPass: MTLRenderPassDescriptor
+    private let inputTextures: [MTLTexture]
     private let plane: GPUGeometry
     init?(pipelineState: MTLRenderPipelineState,
-          gBufferRenderPass: MTLRenderPassDescriptor,
+          inputTextures: [MTLTexture],
           device: MTLDevice,
           depthStencilState: MTLDepthStencilState,
           drawableSize: CGSize) {
@@ -22,7 +22,7 @@ struct LightPassRenderer {
         }
         self.pipelineState = pipelineState
         self.depthStencilState = depthStencilState
-        self.gbufferRenderPass = gBufferRenderPass
+        self.inputTextures = inputTextures
         self.plane = plane
         self.viewPort = .porcelain(size: drawableSize)
     }
@@ -30,11 +30,9 @@ struct LightPassRenderer {
               bufferStore: inout BufferStore,
               lightsCount: Int,
               ssao: MTLTexture) {
-        guard let arTexture = gbufferRenderPass.colorAttachments[0].texture,
-              let nmTexture = gbufferRenderPass.colorAttachments[1].texture,
-              let prTexture = gbufferRenderPass.colorAttachments[2].texture else {
-            fatalError("Required textures not bound")
-        }
+        let arTexture = inputTextures[0]
+        let nmTexture = inputTextures[1]
+        let prTexture = inputTextures[2]
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStencilState)
