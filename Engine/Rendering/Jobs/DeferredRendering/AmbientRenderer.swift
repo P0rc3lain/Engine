@@ -38,13 +38,13 @@ struct AmbientRenderer {
         encoder.setDepthStencilState(depthStencilState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
                                 index: kAttributeAmbientVertexShaderBufferStageIn)
-        encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems.buffer,
+        encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems,
                                   index: kAttributeAmbientFragmentShaderBufferModelUniforms)
         let cameraIdx = scene.entities[scene.activeCameraIdx].data.referenceIdx
-        encoder.setFragmentBuffer(bufferStore.cameras.buffer,
+        encoder.setFragmentBuffer(bufferStore.cameras,
                                   offset: cameraIdx * MemoryLayout<CameraUniforms>.stride,
                                   index: kAttributeAmbientFragmentShaderBufferCamera)
-        encoder.setFragmentBuffer(bufferStore.ambientLights.buffer,
+        encoder.setFragmentBuffer(bufferStore.ambientLights,
                                   index: kAttributeAmbientFragmentShaderBufferAmbientLights)
         encoder.setFragmentTexture(ssao, index: kAttributeAmbientFragmentShaderTextureSSAO)
         encoder.setFragmentTexture(inputTextures[0], index: kAttributeAmbientFragmentShaderTextureAR)

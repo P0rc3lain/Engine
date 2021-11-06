@@ -43,10 +43,10 @@ struct GBufferRenderer {
                 encoder.setVertexBytes(&mutableIndex,
                                        length: MemoryLayout<Int32>.size,
                                        index: kAttributeGBufferVertexShaderBufferObjectIndex)
-                encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer,
+                encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
                                         index: kAttributeGBufferVertexShaderBufferModelUniforms)
                 for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
-                    encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
+                    encoder.setVertexBuffer(dataStore.matrixPalettes,
                                             offset: scene.paletteReferences[index].lowerBound,
                                             index: kAttributeGBufferVertexShaderBufferMatrixPalettes)
                     let materialIdx = scene.indexDrawsMaterials[pieceIndex]
@@ -77,7 +77,7 @@ struct GBufferRenderer {
                 encoder.setVertexBytes(&mutableIndex,
                                        length: MemoryLayout<Int32>.size,
                                        index: kAttributeGBufferVertexShaderBufferObjectIndex)
-                encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer,
+                encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
                                         index: kAttributeGBufferVertexShaderBufferModelUniforms)
                 for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
                     let materialIdx = scene.indexDrawsMaterials[pieceIndex]
