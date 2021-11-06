@@ -6,7 +6,7 @@ import MetalBinding
 import MetalKit
 import simd
 
-struct LightPassRenderer {
+struct OmniRenderer {
     let pipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport

@@ -4,17 +4,17 @@
 
 import Metal
 
-extension LightPassRenderer {
-    static func make(device: MTLDevice, inputTextures: [MTLTexture], drawableSize: CGSize) -> LightPassRenderer? {
+extension OmniRenderer {
+    static func make(device: MTLDevice, inputTextures: [MTLTexture], drawableSize: CGSize) -> OmniRenderer? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRenderPipelineStateLightRenderer(library: library),
               let depthStencilState = device.makeDepthStencilStateLightPass() else {
             return nil
         }
-        return LightPassRenderer(pipelineState: pipelineState,
-                                 inputTextures: inputTextures,
-                                 device: device,
-                                 depthStencilState: depthStencilState,
-                                 drawableSize: drawableSize)
+        return OmniRenderer(pipelineState: pipelineState,
+                            inputTextures: inputTextures,
+                            device: device,
+                            depthStencilState: depthStencilState,
+                            drawableSize: drawableSize)
     }
 }

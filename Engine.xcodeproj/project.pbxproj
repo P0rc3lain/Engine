@@ -72,7 +72,7 @@
 		561667412719E2CD000063B1 /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666D12719E2CC000063B1 /* Material.swift */; };
 		561667422719E2CD000063B1 /* EntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666D22719E2CC000063B1 /* EntityType.swift */; };
 		561667432719E2CD000063B1 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666D32719E2CC000063B1 /* Camera.swift */; };
-		561667452719E2CD000063B1 /* LightRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 561666D72719E2CC000063B1 /* LightRenderer.metal */; };
+		561667452719E2CD000063B1 /* OmniRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 561666D72719E2CC000063B1 /* OmniRenderer.metal */; };
 		561667462719E2CD000063B1 /* GBufferRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 561666D82719E2CC000063B1 /* GBufferRenderer.metal */; };
 		561667472719E2CD000063B1 /* PBR.h in Headers */ = {isa = PBXBuildFile; fileRef = 561666DA2719E2CC000063B1 /* PBR.h */; };
 		561667482719E2CD000063B1 /* Transformation.metal in Sources */ = {isa = PBXBuildFile; fileRef = 561666DB2719E2CC000063B1 /* Transformation.metal */; };
@@ -222,7 +222,7 @@
 		561666D12719E2CC000063B1 /* Material.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Material.swift; sourceTree = "<group>"; };
 		561666D22719E2CC000063B1 /* EntityType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityType.swift; sourceTree = "<group>"; };
 		561666D32719E2CC000063B1 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
-		561666D72719E2CC000063B1 /* LightRenderer.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = LightRenderer.metal; sourceTree = "<group>"; };
+		561666D72719E2CC000063B1 /* OmniRenderer.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = OmniRenderer.metal; sourceTree = "<group>"; };
 		561666D82719E2CC000063B1 /* GBufferRenderer.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = GBufferRenderer.metal; sourceTree = "<group>"; };
 		561666DA2719E2CC000063B1 /* PBR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBR.h; sourceTree = "<group>"; };
 		561666DB2719E2CC000063B1 /* Transformation.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Transformation.metal; sourceTree = "<group>"; };
@@ -462,7 +462,7 @@
 		561666D62719E2CC000063B1 /* DeferredRendering */ = {
 			isa = PBXGroup;
 			children = (
-				561666D72719E2CC000063B1 /* LightRenderer.metal */,
+				561666D72719E2CC000063B1 /* OmniRenderer.metal */,
 				561666D82719E2CC000063B1 /* GBufferRenderer.metal */,
 				56ADD2F5273707E200107E24 /* AmbientRenderer.metal */,
 			);
@@ -867,7 +867,7 @@
 				561667032719E2CD000063B1 /* SceneDescription+Extension.swift in Sources */,
 				561666FB2719E2CD000063B1 /* MDLTransformComponent+Extension.swift in Sources */,
 				5616673A2719E2CD000063B1 /* PrimitiveType.swift in Sources */,
-				561667452719E2CD000063B1 /* LightRenderer.metal in Sources */,
+				561667452719E2CD000063B1 /* OmniRenderer.metal in Sources */,
 				5670EC072735A3F300375194 /* BloomMerge.metal in Sources */,
 				561667282719E2CD000063B1 /* EnvironmentRenderer+Extension.swift in Sources */,
 				5616670B2719E2CD000063B1 /* PieceDescription+Extension.swift in Sources */,

@@ -9,15 +9,15 @@ struct CombineStage: Stage {
     var io: GPUIO
     private var offscreenRenderPassDescriptor: MTLRenderPassDescriptor
     private var environmentRenderer: EnvironmentRenderer
-    private var lightRenderer: LightPassRenderer
+    private var omniRenderer: OmniRenderer
     private var ambientRenderer: AmbientRenderer
     private var ssaoTexture: MTLTexture
     init?(device: MTLDevice, renderingSize: CGSize, gBufferOutput: GPUSupply, ssaoTexture: MTLTexture) {
         guard let stencilTexture = gBufferOutput.stencil,
               let environmentRenderer = EnvironmentRenderer.make(device: device, drawableSize: renderingSize),
-              let lightRenderer = LightPassRenderer.make(device: device,
-                                                           inputTextures: gBufferOutput.color,
-                                                           drawableSize: renderingSize),
+              let omniRenderer = OmniRenderer.make(device: device,
+                                                   inputTextures: gBufferOutput.color,
+                                                   drawableSize: renderingSize),
               let ambientRenderer = AmbientRenderer.make(device: device,
                                                          inputTextures: gBufferOutput.color,
                                                          drawableSize: renderingSize)  else {
@@ -32,7 +32,7 @@ struct CombineStage: Stage {
         self.ambientRenderer = ambientRenderer
         self.ssaoTexture = ssaoTexture
         self.environmentRenderer = environmentRenderer
-        self.lightRenderer = lightRenderer
+        self.omniRenderer = omniRenderer
         self.io = GPUIO(input: GPUSupply(color: gBufferOutput.color + [ssaoTexture],
                                          stencil: gBufferOutput.stencil),
                         output: GPUSupply(color: [outputTexture]))
@@ -44,10 +44,10 @@ struct CombineStage: Stage {
         guard var encoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor) else {
             return
         }
-        lightRenderer.draw(encoder: &encoder,
-                           bufferStore: &bufferStore,
-                           lightsCount: scene.omniLights.count,
-                           scene: &scene)
+        omniRenderer.draw(encoder: &encoder,
+                          bufferStore: &bufferStore,
+                          lightsCount: scene.omniLights.count,
+                          scene: &scene)
         commandBuffer.popDebugGroup()
         commandBuffer.pushDebugGroup("Ambient Light Pass")
         ambientRenderer.draw(encoder: &encoder,

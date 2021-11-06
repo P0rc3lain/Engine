@@ -14,22 +14,22 @@
 
 using namespace metal;
 
-struct TexturePipelineRasterizerData {
+struct RasterizerData {
     float4 position [[position]];
     float2 texcoord;
     uint instanceId [[flat]];
 };
 
-vertex TexturePipelineRasterizerData vertexDeferredLight(Vertex in          [[stage_in]],
-                                                         uint   instanceId  [[instance_id]]) {
-    TexturePipelineRasterizerData out;
-    out.position = float4(in.position, 1);
-    out.texcoord = in.textureUV;
-    out.instanceId = instanceId;
-    return out;
+vertex RasterizerData vertexDeferredLight(Vertex in [[stage_in]],
+                                          uint instanceId [[instance_id]]) {
+    return RasterizerData {
+        float4(in.position, 1),
+        in.textureUV,
+        instanceId
+    };
 }
 
-fragment float4 fragmentDeferredLight(TexturePipelineRasterizerData in [[stage_in]],
+fragment float4 fragmentDeferredLight(RasterizerData in [[stage_in]],
                                       texture2d<float> ar [[texture(kAttributeLightingFragmentShaderTextureAR)]],
                                       texture2d<float> nm [[texture(kAttributeLightingFragmentShaderTextureNM)]],
                                       texture2d<float> pr [[texture(kAttributeLightingFragmentShaderTexturePR)]],
