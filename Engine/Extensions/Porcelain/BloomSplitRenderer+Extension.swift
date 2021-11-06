@@ -6,15 +6,15 @@ import Metal
 
 extension BloomSplitRenderer {
     static func make(device: MTLDevice,
-                     inputRenderPassDescriptor: MTLRenderPassDescriptor,
+                     inputTexture: MTLTexture,
                      drawableSize: CGSize) -> BloomSplitRenderer? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRenderPipelineStateBloomSplit(library: library) else {
             return nil
         }
         return BloomSplitRenderer(pipelineState: pipelineState,
-                             inputRenderPass: inputRenderPassDescriptor,
-                             device: device,
-                             drawableSize: drawableSize)
+                                  inputTexture: inputTexture,
+                                  device: device,
+                                  drawableSize: drawableSize)
     }
 }

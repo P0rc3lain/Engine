@@ -21,10 +21,9 @@ struct BloomMergeRenderer {
         self.plane = plane
         self.viewPort = .porcelain(size: drawableSize)
     }
-    mutating func draw(encoder: inout MTLRenderCommandEncoder, renderPass: inout MTLRenderPassDescriptor, brightAreasTexture: MTLTexture) {
-        guard let unmodifiedSceneTexture = renderPass.colorAttachments[0].texture else {
-            return
-        }
+    mutating func draw(encoder: inout MTLRenderCommandEncoder,
+                       unmodifiedSceneTexture: MTLTexture,
+                       brightAreasTexture: MTLTexture) {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
