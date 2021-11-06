@@ -10,7 +10,7 @@
 #include "../../MetalBinding/Vertex.h"
 #include "../../MetalBinding/Camera.h"
 #include "../../MetalBinding/Attribute.h"
-#include "../../MetalBinding/OmniLight.h"
+#include "../../MetalBinding/Light/OmniLight.h"
 
 using namespace metal;
 
@@ -33,7 +33,6 @@ fragment float4 fragmentDeferredLight(TexturePipelineRasterizerData in [[stage_i
                                       texture2d<float> ar [[texture(kAttributeLightingFragmentShaderTextureAR)]],
                                       texture2d<float> nm [[texture(kAttributeLightingFragmentShaderTextureNM)]],
                                       texture2d<float> pr [[texture(kAttributeLightingFragmentShaderTexturePR)]],
-                                      texture2d<float> ssao [[texture(kAttributeLightingFragmentShaderTextureSSAO)]],
                                       constant CameraUniforms & camera [[buffer(kAttributeLightingFragmentShaderBufferCamera)]],
                                       constant OmniLight * omniLights [[buffer(kAttributeLightingFragmentShaderBufferOmniLights)]],
                                       constant ModelUniforms * lightUniforms [[buffer(kAttributeLightingFragmentShaderBufferLightUniforms)]]) {
@@ -64,7 +63,5 @@ fragment float4 fragmentDeferredLight(TexturePipelineRasterizerData in [[stage_i
     float3 diffuseColor = (1 - metallicFactor) * baseColor;
     float3 color =  diffuseColor / M_PI_F + specular;
     outputColor += color * omniLights[in.instanceId].color * dot(n, l) * omniLights[in.instanceId].intensity;
-    float ambient = 0.2 * ssao.sample(textureSampler, in.texcoord).r;
-    outputColor += baseColor * ambient;
     return float4(outputColor, 1);
 }

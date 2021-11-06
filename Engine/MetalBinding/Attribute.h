@@ -70,14 +70,29 @@ enum AttributeLightingVertexShaderBufferIndex {
 enum AttributeLightingFragmentShaderTextureIndex {
     kAttributeLightingFragmentShaderTextureAR = 0,
     kAttributeLightingFragmentShaderTextureNM,
-    kAttributeLightingFragmentShaderTexturePR,
-    kAttributeLightingFragmentShaderTextureSSAO
+    kAttributeLightingFragmentShaderTexturePR
 };
 
 enum AttributeLightingFragmentShaderBufferIndex {
     kAttributeLightingFragmentShaderBufferCamera = 0,
     kAttributeLightingFragmentShaderBufferOmniLights,
     kAttributeLightingFragmentShaderBufferLightUniforms
+};
+
+enum AttributeAmbientVertexShaderBufferIndex {
+    kAttributeAmbientVertexShaderBufferStageIn = 0
+};
+
+enum AttributeAmbientFragmentShaderTextureIndex {
+    kAttributeAmbientFragmentShaderTextureAR = 0,
+    kAttributeAmbientFragmentShaderTexturePR,
+    kAttributeAmbientFragmentShaderTextureSSAO
+};
+
+enum AttributeAmbientFragmentShaderBufferIndex {
+    kAttributeAmbientFragmentShaderBufferCamera = 0,
+    kAttributeAmbientFragmentShaderBufferAmbientLights,
+    kAttributeAmbientFragmentShaderBufferModelUniforms
 };
 
 enum AttributeEnvironmentVertexShaderBufferIndex {

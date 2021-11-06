@@ -4,9 +4,10 @@
 
 module MetalBinding {
     header "../MetalBinding/Vertex.h"
-    header "../MetalBinding/OmniLight.h"
     header "../MetalBinding/Attribute.h"
     header "../MetalBinding/Model.h"
     header "../MetalBinding/Camera.h"
+    header "../MetalBinding/Light/OmniLight.h"
+    header "../MetalBinding/Light/AmbientLight.h"
     export *
 }

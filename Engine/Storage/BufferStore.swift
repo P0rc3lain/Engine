@@ -8,6 +8,7 @@ import simd
 
 struct BufferStore {
     var omniLights: DynamicBuffer<OmniLight>
+    var ambientLights: DynamicBuffer<AmbientLight>
     var cameras: DynamicBuffer<CameraUniforms>
     var modelCoordinateSystems: DynamicBuffer<ModelUniforms>
     var matrixPalettes: DynamicBuffer<simd_float4x4>
@@ -19,10 +20,12 @@ struct BufferStore {
               let modelCoordinateSystems = DynamicBuffer<ModelUniforms>(device: device, initialCapacity: 1),
               let matrixPalettes = DynamicBuffer<simd_float4x4>(device: device, initialCapacity: 1),
               let ssaoKernel = DynamicBuffer<simd_float3>(device: device, initialCapacity: 1),
-              let ssaoNoise = DynamicBuffer<simd_float3>(device: device, initialCapacity: 1) else {
+              let ssaoNoise = DynamicBuffer<simd_float3>(device: device, initialCapacity: 1),
+              let ambientLights = DynamicBuffer<AmbientLight>(device: device, initialCapacity: 1) else {
                   return nil
         }
         self.omniLights = omniLights
+        self.ambientLights = ambientLights
         self.cameras = cameras
         self.modelCoordinateSystems = modelCoordinateSystems
         self.matrixPalettes = matrixPalettes
