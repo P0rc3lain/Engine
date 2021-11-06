@@ -9,29 +9,28 @@ import simd
 struct SsaoRenderer {
     private let pipelineState: MTLRenderPipelineState
     private let viewPort: MTLViewport
-    private let gBufferRenderPassDescriptor: MTLRenderPassDescriptor
     private let plane: GPUGeometry
+    private let prTexture: MTLTexture
+    private let nmTexture: MTLTexture
     private var kernel = [simd_float3]()
     private var noise = [simd_float3]()
     init?(pipelineState: MTLRenderPipelineState,
-          gBufferRenderPassDescriptor: MTLRenderPassDescriptor,
+          prTexture: MTLTexture,
+          nmTexture: MTLTexture,
           device: MTLDevice,
           drawableSize: CGSize) {
         guard let plane = GPUGeometry.screenSpacePlane(device: device) else {
             return nil
         }
         self.pipelineState = pipelineState
-        self.gBufferRenderPassDescriptor = gBufferRenderPassDescriptor
+        self.nmTexture = nmTexture
+        self.prTexture = prTexture
         self.plane = plane
         self.viewPort = .porcelain(size: drawableSize)
         self.kernel = generateSamples(size: 64)
         self.noise = generateNoise()
     }
     mutating func draw(encoder: inout MTLRenderCommandEncoder, bufferStore: inout BufferStore) {
-        guard let nmTexture = gBufferRenderPassDescriptor.colorAttachments[1].texture,
-              let prTexture = gBufferRenderPassDescriptor.colorAttachments[2].texture else {
-            fatalError("Required textures not bound")
-        }
         bufferStore.ssaoKernel.upload(data: &kernel)
         bufferStore.ssaoNoise.upload(data: &noise)
         encoder.setViewport(viewPort)

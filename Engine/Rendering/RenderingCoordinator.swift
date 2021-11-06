@@ -12,17 +12,14 @@ public struct RenderingCoordinator {
     private let commandQueue: MTLCommandQueue
     private var offscreenRenderPassDescriptor: MTLRenderPassDescriptor
     private var gBufferRenderPassDescriptor: MTLRenderPassDescriptor
-    private var ssaoRenderPassDescriptor: MTLRenderPassDescriptor
     private var postProcessor: Postprocessor
     private var gBufferRenderer: GBufferRenderer
     private var environmentRenderer: EnvironmentRenderer
     private var lightRenderer: LightPassRenderer
-    private var ssaoRenderer: SsaoRenderer
     private var bufferStore: BufferStore
+    private var ssaoStage: SSAOStage
     private var bloomStage: BloomStage
     private let canvasSize: CGSize
-    private let gaussTexture: MTLTexture
-    private let gaussianBlur: MPSImageGaussianBlur
     let renderingSize: CGSize
     init?(view metalView: MTKView, canvasSize: CGSize, renderingSize: CGSize) {
         guard let device = metalView.device,
@@ -49,14 +46,13 @@ public struct RenderingCoordinator {
                                                          gBufferRenderPassDescriptor: gBufferRenderPassDescriptor,
                                                          drawableSize: renderingSize),
               let gBufferRenderer = GBufferRenderer.make(device: device, drawableSize: renderingSize),
-              let ssaoRenderer = SsaoRenderer.make(device: device,
-                                                   gBufferRenderPassDescriptor: gBufferRenderPassDescriptor,
-                                                   drawableSize: renderingSize),
-              let gaussTexture = device.makeTexture(descriptor: .ssaoColor(size: renderingSize)) else {
+              let ssaoStage = SSAOStage(device: device,
+                                        renderingSize: renderingSize,
+                                        prTexture: gBufferRenderPassDescriptor.colorAttachments[0].texture!,
+                                        nmTexture: gBufferRenderPassDescriptor.colorAttachments[1].texture!) else {
             return nil
         }
         self.view = metalView
-        self.gaussTexture = gaussTexture
         self.canvasSize = canvasSize
         self.renderingSize = renderingSize
         self.bufferStore = bufferStore
@@ -66,9 +62,7 @@ public struct RenderingCoordinator {
         self.environmentRenderer = environmentRenderer
         self.gBufferRenderer = gBufferRenderer
         self.lightRenderer = lightRenderer
-        self.ssaoRenderer = ssaoRenderer
-        self.ssaoRenderPassDescriptor = .ssao(device: device, size: renderingSize)
-        self.gaussianBlur = MPSImageGaussianBlur(device: device, sigma: 1)
+        self.ssaoStage = ssaoStage
     }
     public mutating func draw(scene: inout GPUSceneDescription) {
         guard scene.activeCameraIdx != .nil,
@@ -88,26 +82,15 @@ public struct RenderingCoordinator {
         gBufferRenderer.draw(encoder: &gBufferEncoder, scene: &scene, dataStore: &bufferStore)
         gBufferEncoder.endEncoding()
         commandBuffer.popDebugGroup()
-        commandBuffer.pushDebugGroup("SSAO Renderer Pass")
-        guard var ssaoEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: ssaoRenderPassDescriptor) else {
-            return
-        }
-        ssaoRenderer.draw(encoder: &ssaoEncoder, bufferStore: &bufferStore)
-        ssaoEncoder.endEncoding()
-        commandBuffer.popDebugGroup()
-        commandBuffer.pushDebugGroup("MPS")
-        guard let ssaoTexture = ssaoRenderPassDescriptor.colorAttachments[0].texture else {
-            return
-        }
-        gaussianBlur.encode(commandBuffer: commandBuffer,
-                            sourceTexture: ssaoTexture,
-                            destinationTexture: gaussTexture)
-        commandBuffer.popDebugGroup()
+        ssaoStage.draw(commandBuffer: &commandBuffer, bufferStore: &bufferStore)
         commandBuffer.pushDebugGroup("Light Pass")
         guard var lightEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor) else {
             return
         }
-        lightRenderer.draw(encoder: &lightEncoder, bufferStore: &bufferStore, lightsCount: scene.lights.count, ssao: gaussTexture)
+        lightRenderer.draw(encoder: &lightEncoder,
+                           bufferStore: &bufferStore,
+                           lightsCount: scene.lights.count,
+                           ssao: ssaoStage.io.output.color[0])
         commandBuffer.popDebugGroup()
         commandBuffer.pushDebugGroup("Environment Map")
         environmentRenderer.draw(encoder: &lightEncoder, scene: &scene)

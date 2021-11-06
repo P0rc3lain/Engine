@@ -125,6 +125,7 @@
 		5670EC142736A29100375194 /* GPUIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC132736A29100375194 /* GPUIO.swift */; };
 		5670EC162736A2AE00375194 /* GPUSupply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC152736A2AE00375194 /* GPUSupply.swift */; };
 		5670EC182736A36300375194 /* BloomStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC172736A36300375194 /* BloomStage.swift */; };
+		5670EC1B2736AE4B00375194 /* SSAOStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC1A2736AE4B00375194 /* SSAOStage.swift */; };
 		56924ACC271A00D900FF3E06 /* AnimatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACB271A00D900FF3E06 /* AnimatedValue.swift */; };
 		56924ACE271A022900FF3E06 /* EntityTree+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */; };
 		56924AD7271A07FD00FF3E06 /* AnimatedValue+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AD6271A07FD00FF3E06 /* AnimatedValue+Tests.swift */; };
@@ -271,6 +272,7 @@
 		5670EC132736A29100375194 /* GPUIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPUIO.swift; sourceTree = "<group>"; };
 		5670EC152736A2AE00375194 /* GPUSupply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPUSupply.swift; sourceTree = "<group>"; };
 		5670EC172736A36300375194 /* BloomStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloomStage.swift; sourceTree = "<group>"; };
+		5670EC1A2736AE4B00375194 /* SSAOStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSAOStage.swift; sourceTree = "<group>"; };
 		56924ACB271A00D900FF3E06 /* AnimatedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedValue.swift; sourceTree = "<group>"; };
 		56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityTree+Extension.swift"; sourceTree = "<group>"; };
 		56924AD4271A07FD00FF3E06 /* EngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -506,6 +508,7 @@
 				5670EC132736A29100375194 /* GPUIO.swift */,
 				5670EC152736A2AE00375194 /* GPUSupply.swift */,
 				5670EC172736A36300375194 /* BloomStage.swift */,
+				5670EC1A2736AE4B00375194 /* SSAOStage.swift */,
 			);
 			path = Rendering;
 			sourceTree = "<group>";
@@ -883,6 +886,7 @@
 				561667092719E2CD000063B1 /* MDLVertexDescriptor+Extension.swift in Sources */,
 				561667552719E2CD000063B1 /* Postprocessor.swift in Sources */,
 				5616671E2719E2CD000063B1 /* MTLVertexBufferLayoutDescriptor+Extension.swift in Sources */,
+				5670EC1B2736AE4B00375194 /* SSAOStage.swift in Sources */,
 				561667012719E2CD000063B1 /* MDLObject+Extension.swift in Sources */,
 				5616674C2719E2CD000063B1 /* EnvironmentMapper.metal in Sources */,
 				5616670F2719E2CD000063B1 /* Data+Extension.swift in Sources */,
