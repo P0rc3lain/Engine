@@ -26,7 +26,7 @@ public struct RenderingCoordinator {
               let gBufferStage = GBufferStage(device: device, renderingSize: renderingSize),
               let ssaoStage = SSAOStage(device: device,
                                         renderingSize: renderingSize,
-                                        prTexture: gBufferStage.io.output.color[0],
+                                        prTexture: gBufferStage.io.output.color[2],
                                         nmTexture: gBufferStage.io.output.color[1]),
               let combineStage = CombineStage(device: device,
                                               renderingSize: renderingSize,
@@ -60,7 +60,8 @@ public struct RenderingCoordinator {
             return
         }
         updatePalettes(scene: &scene)
-        bufferStore.omniLights.upload(data: &scene.lights)
+        bufferStore.ambientLights.upload(data: &scene.ambientLights)
+        bufferStore.omniLights.upload(data: &scene.omniLights)
         bufferStore.upload(camera: &scene.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx], index: scene.activeCameraIdx)
         bufferStore.upload(models: &scene.entities)
         gBufferStage.draw(commandBuffer: &commandBuffer, scene: &scene, bufferStore: &bufferStore)

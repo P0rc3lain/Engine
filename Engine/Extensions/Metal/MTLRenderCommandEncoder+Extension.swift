@@ -21,7 +21,10 @@ extension MTLRenderCommandEncoder {
         setFragmentBuffer(buffer, offset: 0, index: index)
     }
     func setFragmentBuffer<T: RawRepresentable>(_ buffer: MTLBuffer?, index: T) where T.RawValue == UInt32 {
-        setFragmentBuffer(buffer, offset: 0, index: Int(index.rawValue))
+        setFragmentBuffer(buffer, offset: 0, index: index)
+    }
+    func setFragmentBuffer<T: RawRepresentable>(_ buffer: MTLBuffer?, offset: Int, index: T) where T.RawValue == UInt32 {
+        setFragmentBuffer(buffer, offset: offset, index: Int(index.rawValue))
     }
     func setFragmentTextures(_ textures: [MTLTexture?], range: ClosedRange<Int>) {
         setFragmentTextures(textures, range: Range(range))

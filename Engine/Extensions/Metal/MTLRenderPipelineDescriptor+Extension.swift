@@ -58,6 +58,21 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexDescriptor = .porcelain
         return descriptor
     }
+    static func ambientRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
+        let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.vertexFunction = library.makeFunction(name: "vertexAmbientLight")
+        descriptor.fragmentFunction = library.makeFunction(name: "fragmentAmbientLight")
+        descriptor.colorAttachments[0].pixelFormat = .ambientColor
+        descriptor.colorAttachments[0].rgbBlendOperation = .add
+        descriptor.colorAttachments[0].sourceAlphaBlendFactor = .one
+        descriptor.colorAttachments[0].destinationRGBBlendFactor = .one
+        descriptor.colorAttachments[0].isBlendingEnabled = true
+        descriptor.colorAttachments[0].alphaBlendOperation = .max
+        descriptor.depthAttachmentPixelFormat = .ambientDepthStencil
+        descriptor.stencilAttachmentPixelFormat = .ambientDepthStencil
+        descriptor.vertexDescriptor = .porcelain
+        return descriptor
+    }
     static func ssaoRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.vertexFunction = library.makeFunction(name: "vertexSsao")

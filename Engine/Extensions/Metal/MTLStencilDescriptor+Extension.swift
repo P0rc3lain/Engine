@@ -23,6 +23,9 @@ extension MTLStencilDescriptor {
         stencil.depthStencilPassOperation = .replace
         return stencil
     }
+    static var ambientRenderer: MTLStencilDescriptor {
+        lightPassRenderer
+    }
     static var gBufferRenderer: MTLStencilDescriptor {
         let stencil = MTLStencilDescriptor()
         stencil.stencilCompareFunction = .greaterEqual

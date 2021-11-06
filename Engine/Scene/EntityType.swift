@@ -4,7 +4,8 @@
 
 public enum EntityType {
     case group
-    case light
+    case omniLight
+    case ambientLight
     case mesh
     case camera
 }

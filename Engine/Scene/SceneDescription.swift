@@ -29,11 +29,14 @@ public struct SceneDescription<DataType, IndexType, GeometryType, TextureType> {
     public var cameraNames = [String]()
     public var cameras = [Camera]()
     // MARK: - Capacity H
-    public var lightNames = [String]()
-    public var lights = [OmniLight]()
+    public var omniLightNames = [String]()
+    public var omniLights = [OmniLight]()
     // MARK: - Capacity I
-    public var skyMaps = [TextureType]()
+    public var ambientLightNames = [String]()
+    public var ambientLights = [AmbientLight]()
     // MARK: - Capacity J
+    public var skyMaps = [TextureType]()
+    // MARK: - Capacity K
     public var activeCameraIdx = Int.nil
     public var sky = Int.nil
     public init() { }

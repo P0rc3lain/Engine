@@ -136,6 +136,9 @@
 		56924AE4271A181600FF3E06 /* AnimatedValue+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AE3271A181600FF3E06 /* AnimatedValue+Alias.swift */; };
 		56924AE8271A187400FF3E06 /* AnimatedFloat3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AE7271A187400FF3E06 /* AnimatedFloat3+Extensions.swift */; };
 		56924AEA271A188700FF3E06 /* AnimatedQuatf+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AE9271A188700FF3E06 /* AnimatedQuatf+Extension.swift */; };
+		56ADD2F4273707C500107E24 /* AmbientRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F3273707C500107E24 /* AmbientRenderer.swift */; };
+		56ADD2F6273707E200107E24 /* AmbientRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F5273707E200107E24 /* AmbientRenderer.metal */; };
+		56ADD2F8273709F400107E24 /* AmbientRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F7273709F400107E24 /* AmbientRenderer+Extension.swift */; };
 		56D12AD027231DAD00550530 /* RawRepresentable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D12ACF27231DAD00550530 /* RawRepresentable+Extension.swift */; };
 		56D34A54271B037900A87785 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D34A53271B037900A87785 /* Double+Extension.swift */; };
 		56E8208F2727FD13002D58C3 /* Date+Extensioin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8208E2727FD13002D58C3 /* Date+Extensioin.swift */; };
@@ -287,6 +290,10 @@
 		56924AE3271A181600FF3E06 /* AnimatedValue+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimatedValue+Alias.swift"; sourceTree = "<group>"; };
 		56924AE7271A187400FF3E06 /* AnimatedFloat3+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimatedFloat3+Extensions.swift"; sourceTree = "<group>"; };
 		56924AE9271A188700FF3E06 /* AnimatedQuatf+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimatedQuatf+Extension.swift"; sourceTree = "<group>"; };
+		56ADD2F1273705F800107E24 /* AmbientLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AmbientLight.h; sourceTree = "<group>"; };
+		56ADD2F3273707C500107E24 /* AmbientRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientRenderer.swift; sourceTree = "<group>"; };
+		56ADD2F5273707E200107E24 /* AmbientRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = AmbientRenderer.metal; sourceTree = "<group>"; };
+		56ADD2F7273709F400107E24 /* AmbientRenderer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AmbientRenderer+Extension.swift"; sourceTree = "<group>"; };
 		56D12ACE2723167800550530 /* Attribute.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Attribute.h; sourceTree = "<group>"; };
 		56D12ACF27231DAD00550530 /* RawRepresentable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RawRepresentable+Extension.swift"; sourceTree = "<group>"; };
 		56D34A53271B037900A87785 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
@@ -457,6 +464,7 @@
 			children = (
 				561666D72719E2CC000063B1 /* LightRenderer.metal */,
 				561666D82719E2CC000063B1 /* GBufferRenderer.metal */,
+				56ADD2F5273707E200107E24 /* AmbientRenderer.metal */,
 			);
 			path = DeferredRendering;
 			sourceTree = "<group>";
@@ -491,9 +499,9 @@
 		561666E52719E2CD000063B1 /* MetalBinding */ = {
 			isa = PBXGroup;
 			children = (
+				56ADD2F22737077700107E24 /* Light */,
 				561666E62719E2CD000063B1 /* Compatibility.h */,
 				561666E72719E2CD000063B1 /* Vertex.h */,
-				563D0A292719F76600F77B40 /* OmniLight.h */,
 				563D0A2B2719F79D00F77B40 /* Camera.h */,
 				563D0A2C2719F7A400F77B40 /* Model.h */,
 				56D12ACE2723167800550530 /* Attribute.h */,
@@ -515,6 +523,7 @@
 		561666ED2719E2CD000063B1 /* DeferredRendering */ = {
 			isa = PBXGroup;
 			children = (
+				56ADD2F3273707C500107E24 /* AmbientRenderer.swift */,
 				561666EE2719E2CD000063B1 /* LightPassRenderer.swift */,
 				561666EF2719E2CD000063B1 /* GBufferRenderer.swift */,
 			);
@@ -619,6 +628,15 @@
 			path = Animation;
 			sourceTree = "<group>";
 		};
+		56ADD2F22737077700107E24 /* Light */ = {
+			isa = PBXGroup;
+			children = (
+				563D0A292719F76600F77B40 /* OmniLight.h */,
+				56ADD2F1273705F800107E24 /* AmbientLight.h */,
+			);
+			path = Light;
+			sourceTree = "<group>";
+		};
 		56D1ED582725F83A00D68EA7 /* Metal */ = {
 			isa = PBXGroup;
 			children = (
@@ -708,6 +726,7 @@
 				566020E32734408C000F4CA7 /* SsaoRenderer+Extension.swift */,
 				5670EC082735AB0000375194 /* BloomSplitRenderer+Extension.swift */,
 				5670EC0C2735D5BF00375194 /* BloomMergeRenderer+Extension.swift */,
+				56ADD2F7273709F400107E24 /* AmbientRenderer+Extension.swift */,
 			);
 			path = Porcelain;
 			sourceTree = "<group>";
@@ -865,6 +884,7 @@
 				5616670A2719E2CD000063B1 /* MDLSubmesh+Extension.swift in Sources */,
 				56E8208F2727FD13002D58C3 /* Date+Extensioin.swift in Sources */,
 				5616673B2719E2CD000063B1 /* DataBuffer.swift in Sources */,
+				56ADD2F8273709F400107E24 /* AmbientRenderer+Extension.swift in Sources */,
 				5670EC002735977900375194 /* BloomSplitRenderer.swift in Sources */,
 				561667082719E2CD000063B1 /* DataBuffer+Extension.swift in Sources */,
 				563575F42728486A00CE4988 /* AnimationSample.swift in Sources */,
@@ -879,6 +899,7 @@
 				5616673F2719E2CD000063B1 /* Entity.swift in Sources */,
 				5616674A2719E2CD000063B1 /* PBR.metal in Sources */,
 				5616673D2719E2CD000063B1 /* IndexBasedDraw.swift in Sources */,
+				56ADD2F6273707E200107E24 /* AmbientRenderer.metal in Sources */,
 				560253D52726CA4800B3A13A /* Chronometer.swift in Sources */,
 				561667392719E2CD000063B1 /* PieceDescription.swift in Sources */,
 				56407B7D27206F5D00440CAC /* Vertex+Extension.swift in Sources */,
@@ -908,6 +929,7 @@
 				561667462719E2CD000063B1 /* GBufferRenderer.metal in Sources */,
 				5670EC092735AB0000375194 /* BloomSplitRenderer+Extension.swift in Sources */,
 				561667142719E2CD000063B1 /* MDLAsset+Extension.swift in Sources */,
+				56ADD2F4273707C500107E24 /* AmbientRenderer.swift in Sources */,
 				56924ACC271A00D900FF3E06 /* AnimatedValue.swift in Sources */,
 				561667112719E2CD000063B1 /* CGSize+Extension.swift in Sources */,
 				563BFC9C27294B020003EDB7 /* RamGeometry+Extension.swift in Sources */,

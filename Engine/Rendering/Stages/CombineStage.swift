@@ -10,13 +10,17 @@ struct CombineStage: Stage {
     private var offscreenRenderPassDescriptor: MTLRenderPassDescriptor
     private var environmentRenderer: EnvironmentRenderer
     private var lightRenderer: LightPassRenderer
+    private var ambientRenderer: AmbientRenderer
     private var ssaoTexture: MTLTexture
     init?(device: MTLDevice, renderingSize: CGSize, gBufferOutput: GPUSupply, ssaoTexture: MTLTexture) {
         guard let stencilTexture = gBufferOutput.stencil,
               let environmentRenderer = EnvironmentRenderer.make(device: device, drawableSize: renderingSize),
               let lightRenderer = LightPassRenderer.make(device: device,
                                                            inputTextures: gBufferOutput.color,
-                                                           drawableSize: renderingSize) else {
+                                                           drawableSize: renderingSize),
+              let ambientRenderer = AmbientRenderer.make(device: device,
+                                                         inputTextures: gBufferOutput.color,
+                                                         drawableSize: renderingSize)  else {
             return nil
         }
         offscreenRenderPassDescriptor = .lightenScene(device: device,
@@ -25,6 +29,7 @@ struct CombineStage: Stage {
         guard let outputTexture = offscreenRenderPassDescriptor.colorAttachments[0].texture else {
             return nil
         }
+        self.ambientRenderer = ambientRenderer
         self.ssaoTexture = ssaoTexture
         self.environmentRenderer = environmentRenderer
         self.lightRenderer = lightRenderer
@@ -32,19 +37,28 @@ struct CombineStage: Stage {
                                          stencil: gBufferOutput.stencil),
                         output: GPUSupply(color: [outputTexture]))
     }
-    func draw(commandBuffer: inout MTLCommandBuffer, scene: inout GPUSceneDescription, bufferStore: inout BufferStore) {
+    func draw(commandBuffer: inout MTLCommandBuffer,
+              scene: inout GPUSceneDescription,
+              bufferStore: inout BufferStore) {
         commandBuffer.pushDebugGroup("Omni Light Pass")
-        guard var lightEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor) else {
+        guard var encoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor) else {
             return
         }
-        lightRenderer.draw(encoder: &lightEncoder,
+        lightRenderer.draw(encoder: &encoder,
                            bufferStore: &bufferStore,
-                           lightsCount: scene.lights.count,
-                           ssao: ssaoTexture)
+                           lightsCount: scene.omniLights.count,
+                           scene: &scene)
+        commandBuffer.popDebugGroup()
+        commandBuffer.pushDebugGroup("Ambient Light Pass")
+        ambientRenderer.draw(encoder: &encoder,
+                             bufferStore: &bufferStore,
+                             lightsCount: scene.ambientLights.count,
+                             ssao: ssaoTexture,
+                             scene: &scene)
         commandBuffer.popDebugGroup()
         commandBuffer.pushDebugGroup("Environment Map")
-        environmentRenderer.draw(encoder: &lightEncoder, scene: &scene)
-        lightEncoder.endEncoding()
+        environmentRenderer.draw(encoder: &encoder, scene: &scene)
+        encoder.endEncoding()
         commandBuffer.popDebugGroup()
     }
 }

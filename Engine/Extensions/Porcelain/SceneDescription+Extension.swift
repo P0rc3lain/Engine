@@ -31,11 +31,14 @@ extension RamSceneDescription {
         description.cameraNames = cameraNames
         description.cameras = cameras
         // MARK: - Capacity H
-        description.lightNames = lightNames
-        description.lights = lights
+        description.omniLightNames = omniLightNames
+        description.omniLights = omniLights
         // MARK: - Capacity I
-        description.skyMaps = skyMaps.compactMap { $0.upload(device: device) }
+        description.ambientLightNames = ambientLightNames
+        description.ambientLights = ambientLights
         // MARK: - Capacity J
+        description.skyMaps = skyMaps.compactMap { $0.upload(device: device) }
+        // MARK: - Capacity K
         description.activeCameraIdx = activeCameraIdx
         description.sky = sky
         guard description.materials.count == materials.count,
