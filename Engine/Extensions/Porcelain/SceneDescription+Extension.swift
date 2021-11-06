@@ -37,8 +37,11 @@ extension RamSceneDescription {
         description.ambientLightNames = ambientLightNames
         description.ambientLights = ambientLights
         // MARK: - Capacity J
-        description.skyMaps = skyMaps.compactMap { $0.upload(device: device) }
+        description.directionalLightNames = directionalLightNames
+        description.directionalLights = directionalLights
         // MARK: - Capacity K
+        description.skyMaps = skyMaps.compactMap { $0.upload(device: device) }
+        // MARK: - Capacity L
         description.activeCameraIdx = activeCameraIdx
         description.sky = sky
         guard description.materials.count == materials.count,

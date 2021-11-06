@@ -11,6 +11,7 @@ struct CombineStage: Stage {
     private var environmentRenderer: EnvironmentRenderer
     private var omniRenderer: OmniRenderer
     private var ambientRenderer: AmbientRenderer
+    private var directionalRenderer: DirectionalRenderer
     private var ssaoTexture: MTLTexture
     init?(device: MTLDevice, renderingSize: CGSize, gBufferOutput: GPUSupply, ssaoTexture: MTLTexture) {
         guard let stencilTexture = gBufferOutput.stencil,
@@ -20,7 +21,10 @@ struct CombineStage: Stage {
                                                    drawableSize: renderingSize),
               let ambientRenderer = AmbientRenderer.make(device: device,
                                                          inputTextures: gBufferOutput.color,
-                                                         drawableSize: renderingSize)  else {
+                                                         drawableSize: renderingSize),
+              let directionalRenderer = DirectionalRenderer.make(device: device,
+                                                                 inputTextures: gBufferOutput.color,
+                                                                 drawableSize: renderingSize) else {
             return nil
         }
         offscreenRenderPassDescriptor = .lightenScene(device: device,
@@ -33,6 +37,7 @@ struct CombineStage: Stage {
         self.ssaoTexture = ssaoTexture
         self.environmentRenderer = environmentRenderer
         self.omniRenderer = omniRenderer
+        self.directionalRenderer = directionalRenderer
         self.io = GPUIO(input: GPUSupply(color: gBufferOutput.color + [ssaoTexture],
                                          stencil: gBufferOutput.stencil),
                         output: GPUSupply(color: [outputTexture]))
@@ -46,15 +51,18 @@ struct CombineStage: Stage {
         }
         omniRenderer.draw(encoder: &encoder,
                           bufferStore: &bufferStore,
-                          lightsCount: scene.omniLights.count,
                           scene: &scene)
         commandBuffer.popDebugGroup()
         commandBuffer.pushDebugGroup("Ambient Light Pass")
         ambientRenderer.draw(encoder: &encoder,
                              bufferStore: &bufferStore,
-                             lightsCount: scene.ambientLights.count,
                              ssao: ssaoTexture,
                              scene: &scene)
+        commandBuffer.popDebugGroup()
+        commandBuffer.pushDebugGroup("Directional Light Pass")
+        directionalRenderer.draw(encoder: &encoder,
+                                 bufferStore: &bufferStore,
+                                 scene: &scene)
         commandBuffer.popDebugGroup()
         commandBuffer.pushDebugGroup("Environment Map")
         environmentRenderer.draw(encoder: &encoder, scene: &scene)

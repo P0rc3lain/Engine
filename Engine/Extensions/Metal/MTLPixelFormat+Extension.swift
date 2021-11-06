@@ -20,6 +20,9 @@ extension MTLPixelFormat {
     static var ambientColor: MTLPixelFormat {
         .rgba16Float
     }
+    static var directionalColor: MTLPixelFormat {
+        .rgba16Float
+    }
     static var lightenSceneColor: MTLPixelFormat {
         .rgba16Float
     }

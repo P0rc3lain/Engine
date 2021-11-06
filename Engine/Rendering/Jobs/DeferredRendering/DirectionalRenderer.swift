@@ -2,10 +2,11 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import Metal
 import MetalBinding
+import MetalKit
+import simd
 
-struct AmbientRenderer {
+struct DirectionalRenderer {
     let pipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport
@@ -27,32 +28,33 @@ struct AmbientRenderer {
     }
     func draw(encoder: inout MTLRenderCommandEncoder,
               bufferStore: inout BufferStore,
-              ssao: MTLTexture,
               scene: inout GPUSceneDescription) {
-        guard !scene.ambientLights.isEmpty else {
+        guard !scene.directionalLights.isEmpty else {
             return
         }
+        let arTexture = inputTextures[0]
+        let nmTexture = inputTextures[1]
+        let prTexture = inputTextures[2]
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
-                                index: kAttributeAmbientVertexShaderBufferStageIn)
-        encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems,
-                                  index: kAttributeAmbientFragmentShaderBufferModelUniforms)
+                                index: kAttributeDirectionalVertexShaderBufferStageIn)
+        encoder.setFragmentBuffer(bufferStore.directionalLights,
+                                  index: kAttributeDirectionalFragmentShaderBufferDirectionalLights)
         let cameraIdx = scene.entities[scene.activeCameraIdx].data.referenceIdx
         encoder.setFragmentBuffer(bufferStore.cameras,
                                   offset: cameraIdx * MemoryLayout<CameraUniforms>.stride,
-                                  index: kAttributeAmbientFragmentShaderBufferCamera)
-        encoder.setFragmentBuffer(bufferStore.ambientLights,
-                                  index: kAttributeAmbientFragmentShaderBufferAmbientLights)
-        encoder.setFragmentTexture(ssao, index: kAttributeAmbientFragmentShaderTextureSSAO)
-        encoder.setFragmentTexture(inputTextures[0], index: kAttributeAmbientFragmentShaderTextureAR)
-        encoder.setFragmentTexture(inputTextures[2], index: kAttributeAmbientFragmentShaderTexturePR)
+                                  index: kAttributeDirectionalFragmentShaderBufferCamera)
+        encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems,
+                                  index: kAttributeDirectionalFragmentShaderBufferLightUniforms)
+        let range = kAttributeDirectionalFragmentShaderTextureAR ... kAttributeDirectionalFragmentShaderTexturePR
+        encoder.setFragmentTextures([arTexture, nmTexture, prTexture], range: range)
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
                                       indexType: plane.pieceDescriptions[0].drawDescription.indexType,
                                       indexBuffer: plane.pieceDescriptions[0].drawDescription.indexBuffer.buffer,
                                       indexBufferOffset: plane.pieceDescriptions[0].drawDescription.indexBuffer.offset,
-                                      instanceCount: scene.ambientLights.count)
+                                      instanceCount: scene.directionalLights.count)
     }
 }

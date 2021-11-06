@@ -35,8 +35,11 @@ public struct SceneDescription<DataType, IndexType, GeometryType, TextureType> {
     public var ambientLightNames = [String]()
     public var ambientLights = [AmbientLight]()
     // MARK: - Capacity J
-    public var skyMaps = [TextureType]()
+    public var directionalLightNames = [String]()
+    public var directionalLights = [DirectionalLight]()
     // MARK: - Capacity K
+    public var skyMaps = [TextureType]()
+    // MARK: - Capacity L
     public var activeCameraIdx = Int.nil
     public var sky = Int.nil
     public init() { }

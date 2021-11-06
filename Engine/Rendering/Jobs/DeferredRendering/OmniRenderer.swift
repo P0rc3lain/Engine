@@ -28,8 +28,10 @@ struct OmniRenderer {
     }
     func draw(encoder: inout MTLRenderCommandEncoder,
               bufferStore: inout BufferStore,
-              lightsCount: Int,
               scene: inout GPUSceneDescription) {
+        guard !scene.omniLights.isEmpty else {
+            return
+        }
         let arTexture = inputTextures[0]
         let nmTexture = inputTextures[1]
         let prTexture = inputTextures[2]
@@ -53,6 +55,6 @@ struct OmniRenderer {
                                       indexType: plane.pieceDescriptions[0].drawDescription.indexType,
                                       indexBuffer: plane.pieceDescriptions[0].drawDescription.indexBuffer.buffer,
                                       indexBufferOffset: plane.pieceDescriptions[0].drawDescription.indexBuffer.offset,
-                                      instanceCount: lightsCount)
+                                      instanceCount: scene.omniLights.count)
     }
 }

@@ -29,6 +29,14 @@ extension MTLDepthStencilDescriptor {
         descriptor.frontFaceStencil = stencil
         return descriptor
     }
+    static var directionalRenderer: MTLDepthStencilDescriptor {
+        let stencil = MTLStencilDescriptor.directionalRenderer
+        let descriptor = MTLDepthStencilDescriptor()
+        descriptor.depthCompareFunction = .lessEqual
+        descriptor.isDepthWriteEnabled = true
+        descriptor.frontFaceStencil = stencil
+        return descriptor
+    }
     static var environmentRenderer: MTLDepthStencilDescriptor {
         let stencil = MTLStencilDescriptor.environmentRenderer
         let descriptor = MTLDepthStencilDescriptor()
