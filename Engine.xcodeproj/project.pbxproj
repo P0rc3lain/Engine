@@ -127,6 +127,7 @@
 		5670EC182736A36300375194 /* BloomStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC172736A36300375194 /* BloomStage.swift */; };
 		5670EC1B2736AE4B00375194 /* SSAOStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC1A2736AE4B00375194 /* SSAOStage.swift */; };
 		5670EC1D2736B8BC00375194 /* GBufferStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC1C2736B8BC00375194 /* GBufferStage.swift */; };
+		5670EC252736E1EF00375194 /* CombineStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC232736DD6100375194 /* CombineStage.swift */; };
 		56924ACC271A00D900FF3E06 /* AnimatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACB271A00D900FF3E06 /* AnimatedValue.swift */; };
 		56924ACE271A022900FF3E06 /* EntityTree+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */; };
 		56924AD7271A07FD00FF3E06 /* AnimatedValue+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AD6271A07FD00FF3E06 /* AnimatedValue+Tests.swift */; };
@@ -275,6 +276,7 @@
 		5670EC172736A36300375194 /* BloomStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloomStage.swift; sourceTree = "<group>"; };
 		5670EC1A2736AE4B00375194 /* SSAOStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSAOStage.swift; sourceTree = "<group>"; };
 		5670EC1C2736B8BC00375194 /* GBufferStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBufferStage.swift; sourceTree = "<group>"; };
+		5670EC232736DD6100375194 /* CombineStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineStage.swift; sourceTree = "<group>"; };
 		56924ACB271A00D900FF3E06 /* AnimatedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedValue.swift; sourceTree = "<group>"; };
 		56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityTree+Extension.swift"; sourceTree = "<group>"; };
 		56924AD4271A07FD00FF3E06 /* EngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -570,6 +572,7 @@
 				5670EC1A2736AE4B00375194 /* SSAOStage.swift */,
 				5670EC1C2736B8BC00375194 /* GBufferStage.swift */,
 				5670EC112736A1BE00375194 /* Stage.swift */,
+				5670EC232736DD6100375194 /* CombineStage.swift */,
 			);
 			path = Stages;
 			sourceTree = "<group>";
@@ -940,6 +943,7 @@
 				566020E227343280000F4CA7 /* Ssao.metal in Sources */,
 				561667232719E2CD000063B1 /* MTLPixelFormat+Extension.swift in Sources */,
 				561666FF2719E2CD000063B1 /* simd_float3+Extension.swift in Sources */,
+				5670EC252736E1EF00375194 /* CombineStage.swift in Sources */,
 				561666F82719E2CD000063B1 /* MTLVertexDescriptor+Extension.swift in Sources */,
 				561667322719E2CD000063B1 /* IndexBasedDraw+Alias.swift in Sources */,
 				561667122719E2CD000063B1 /* Float+Extension.swift in Sources */,
