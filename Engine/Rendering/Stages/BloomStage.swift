@@ -17,13 +17,14 @@ struct BloomStage: Stage {
         guard let bloomSplitRenderer = BloomSplitRenderer.make(device: device,
                                                                inputTexture: input,
                                                                drawableSize: renderingSize),
-              let bloomMergeRenderer = BloomMergeRenderer.make(device: device, drawableSize: renderingSize)  else {
+              let bloomMergeRenderer = BloomMergeRenderer.make(device: device, drawableSize: renderingSize),
+              let outputTexture = bloomMergeRenderPassDescriptor.colorAttachments[0].texture else {
             return nil
         }
         self.bloomSplitRenderer = bloomSplitRenderer
         self.bloomMergeRenderer = bloomMergeRenderer
         self.io = GPUIO(input: GPUSupply(color: [input]),
-                        output: GPUSupply(color: [bloomMergeRenderPassDescriptor.colorAttachments[0].texture!]))
+                        output: GPUSupply(color: [outputTexture]))
     }
     mutating func draw(commandBuffer: inout MTLCommandBuffer) {
         commandBuffer.pushDebugGroup("Bloom Pass")

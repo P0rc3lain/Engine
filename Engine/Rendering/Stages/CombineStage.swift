@@ -12,23 +12,26 @@ struct CombineStage: Stage {
     private var lightRenderer: LightPassRenderer
     private var ssaoTexture: MTLTexture
     init?(device: MTLDevice, renderingSize: CGSize, gBufferOutput: GPUSupply, ssaoTexture: MTLTexture) {
-        offscreenRenderPassDescriptor = .lightenScene(device: device,
-                                                      depthStencil: gBufferOutput.stencil!,
-                                                      size: renderingSize)
-        guard let environmentRenderer = EnvironmentRenderer.make(device: device, drawableSize: renderingSize),
+        guard let stencilTexture = gBufferOutput.stencil,
+              let environmentRenderer = EnvironmentRenderer.make(device: device, drawableSize: renderingSize),
               let lightRenderer = LightPassRenderer.make(device: device,
-                                                         inputTextures: gBufferOutput.color,
-                                                         drawableSize: renderingSize) else {
-                  return nil
-              }
+                                                           inputTextures: gBufferOutput.color,
+                                                           drawableSize: renderingSize) else {
+            return nil
+        }
+        offscreenRenderPassDescriptor = .lightenScene(device: device,
+                                                      depthStencil: stencilTexture,
+                                                      size: renderingSize)
+        guard let outputTexture = offscreenRenderPassDescriptor.colorAttachments[0].texture else {
+            return nil
+        }
         self.ssaoTexture = ssaoTexture
         self.environmentRenderer = environmentRenderer
         self.lightRenderer = lightRenderer
         self.io = GPUIO(input: GPUSupply(color: gBufferOutput.color + [ssaoTexture],
                                          stencil: gBufferOutput.stencil),
-                        output: GPUSupply(color: [offscreenRenderPassDescriptor.colorAttachments[0].texture!]))
+                        output: GPUSupply(color: [outputTexture]))
     }
-    
     func draw(commandBuffer: inout MTLCommandBuffer, scene: inout GPUSceneDescription, bufferStore: inout BufferStore) {
         commandBuffer.pushDebugGroup("Omni Light Pass")
         guard var lightEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor) else {

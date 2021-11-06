@@ -67,7 +67,6 @@ opt_in_rules:
 - discouraged_optional_collection
 - literal_expression_end_indentation
 - no_extension_access_modifier
-- identifier_name
 - trailing_whitespace
 - switch_case_alignment
 - trailing_comma
@@ -86,4 +85,4 @@ disabled_rules:
 - todo
 - private_over_fileprivate
 - let_var_whitespace
-
+- identifier_name

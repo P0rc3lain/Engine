@@ -11,13 +11,14 @@ struct GBufferStage: Stage {
     private let gBufferRenderer: GBufferRenderer
     init?(device: MTLDevice, renderingSize: CGSize) {
         gBufferRenderPassDescriptor = .gBuffer(device: device, size: renderingSize)
-        guard let gBufferRenderer = GBufferRenderer.make(device: device, drawableSize: renderingSize) else {
+        guard let gBufferRenderer = GBufferRenderer.make(device: device, drawableSize: renderingSize),
+              let arTexture = gBufferRenderPassDescriptor.colorAttachments[0].texture,
+              let nmTexture = gBufferRenderPassDescriptor.colorAttachments[1].texture,
+              let prTexture = gBufferRenderPassDescriptor.colorAttachments[2].texture else {
             return nil
         }
         self.gBufferRenderer = gBufferRenderer
-        self.io = GPUIO(input: GPUSupply(color: []), output: GPUSupply(color: [gBufferRenderPassDescriptor.colorAttachments[0].texture!,
-                                                                               gBufferRenderPassDescriptor.colorAttachments[1].texture!,
-                                                                               gBufferRenderPassDescriptor.colorAttachments[2].texture!],
+        self.io = GPUIO(input: GPUSupply(color: []), output: GPUSupply(color: [arTexture, nmTexture, prTexture],
                                                                       stencil: gBufferRenderPassDescriptor.stencilAttachment.texture))
     }
     mutating func draw(commandBuffer: inout MTLCommandBuffer, scene: inout GPUSceneDescription, bufferStore: inout BufferStore) {
