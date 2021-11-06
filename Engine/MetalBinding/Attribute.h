@@ -46,6 +46,23 @@ enum AttributeSsaoFragmentShaderBufferIndex {
     kAttributeSsaoFragmentShaderBufferModelUniforms
 };
 
+enum AttributeBloomSplitVertexShaderBufferIndex {
+    kAttributeBloomSplitVertexShaderBufferStageIn = 0
+};
+
+enum AttributeBloomSplitFragmentShaderTextureIndex {
+    kAttributeBloomSplitFragmentShaderTextureInput = 0,
+};
+
+enum AttributeBloomMergeVertexShaderBufferIndex {
+    kAttributeBloomMergeVertexShaderBufferStageIn = 0
+};
+
+enum AttributeBloomMergeFragmentShaderTextureIndex {
+    kAttributeBloomMergeFragmentShaderTextureOriginal = 0,
+    kAttributeBloomMergeFragmentShaderTextureBrightAreas
+};
+
 enum AttributeLightingVertexShaderBufferIndex {
     kAttributeLightingVertexShaderBufferStageIn = 0
 };
