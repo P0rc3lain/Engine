@@ -8,7 +8,7 @@
 struct AmbientLight {
     float radius;
     simd_float3 color;
-    float strength;
+    float intensity;
     int idx;
 };
 

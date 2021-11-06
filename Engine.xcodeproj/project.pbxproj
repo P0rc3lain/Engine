@@ -143,6 +143,9 @@
 		56D34A54271B037900A87785 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D34A53271B037900A87785 /* Double+Extension.swift */; };
 		56E8208F2727FD13002D58C3 /* Date+Extensioin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8208E2727FD13002D58C3 /* Date+Extensioin.swift */; };
 		56E8209D27284664002D58C3 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8209C27284664002D58C3 /* Position.swift */; };
+		56F59269273725FB008652C9 /* DirectionalRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F59268273725FB008652C9 /* DirectionalRenderer.swift */; };
+		56F5926B2737264A008652C9 /* DirectionalRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F5926A2737264A008652C9 /* DirectionalRenderer+Extension.swift */; };
+		56F5926D2737276D008652C9 /* DirectionalRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56F5926C2737276D008652C9 /* DirectionalRenderer.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -299,6 +302,10 @@
 		56D34A53271B037900A87785 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		56E8208E2727FD13002D58C3 /* Date+Extensioin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensioin.swift"; sourceTree = "<group>"; };
 		56E8209C27284664002D58C3 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
+		56F5926727372526008652C9 /* DirectionalLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DirectionalLight.h; sourceTree = "<group>"; };
+		56F59268273725FB008652C9 /* DirectionalRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionalRenderer.swift; sourceTree = "<group>"; };
+		56F5926A2737264A008652C9 /* DirectionalRenderer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DirectionalRenderer+Extension.swift"; sourceTree = "<group>"; };
+		56F5926C2737276D008652C9 /* DirectionalRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = DirectionalRenderer.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -465,6 +472,7 @@
 				561666D72719E2CC000063B1 /* OmniRenderer.metal */,
 				561666D82719E2CC000063B1 /* GBufferRenderer.metal */,
 				56ADD2F5273707E200107E24 /* AmbientRenderer.metal */,
+				56F5926C2737276D008652C9 /* DirectionalRenderer.metal */,
 			);
 			path = DeferredRendering;
 			sourceTree = "<group>";
@@ -526,6 +534,7 @@
 				56ADD2F3273707C500107E24 /* AmbientRenderer.swift */,
 				561666EE2719E2CD000063B1 /* OmniRenderer.swift */,
 				561666EF2719E2CD000063B1 /* GBufferRenderer.swift */,
+				56F59268273725FB008652C9 /* DirectionalRenderer.swift */,
 			);
 			path = DeferredRendering;
 			sourceTree = "<group>";
@@ -633,6 +642,7 @@
 			children = (
 				563D0A292719F76600F77B40 /* OmniLight.h */,
 				56ADD2F1273705F800107E24 /* AmbientLight.h */,
+				56F5926727372526008652C9 /* DirectionalLight.h */,
 			);
 			path = Light;
 			sourceTree = "<group>";
@@ -727,6 +737,7 @@
 				5670EC082735AB0000375194 /* BloomSplitRenderer+Extension.swift */,
 				5670EC0C2735D5BF00375194 /* BloomMergeRenderer+Extension.swift */,
 				56ADD2F7273709F400107E24 /* AmbientRenderer+Extension.swift */,
+				56F5926A2737264A008652C9 /* DirectionalRenderer+Extension.swift */,
 			);
 			path = Porcelain;
 			sourceTree = "<group>";
@@ -907,6 +918,7 @@
 				561667382719E2CD000063B1 /* Geometry.swift in Sources */,
 				563BFC91272898F20003EDB7 /* MDLAnimatedVector3Array+Extension.swift in Sources */,
 				5670EC0D2735D5BF00375194 /* BloomMergeRenderer+Extension.swift in Sources */,
+				56F5926B2737264A008652C9 /* DirectionalRenderer+Extension.swift in Sources */,
 				5670EBDC273561FD00375194 /* Operator+Extension.swift in Sources */,
 				563BFC8F272897430003EDB7 /* AnimatedFloat3Array+Extension.swift in Sources */,
 				561667572719E2CD000063B1 /* BufferStore.swift in Sources */,
@@ -952,6 +964,7 @@
 				5670EC182736A36300375194 /* BloomStage.swift in Sources */,
 				5670EC0B2735D47900375194 /* BloomMergeRenderer.swift in Sources */,
 				561666F92719E2CD000063B1 /* MDLMaterialProperty+Extension.swift in Sources */,
+				56F59269273725FB008652C9 /* DirectionalRenderer.swift in Sources */,
 				56E8209D27284664002D58C3 /* Position.swift in Sources */,
 				561667292719E2CD000063B1 /* Translator.swift in Sources */,
 				56D34A54271B037900A87785 /* Double+Extension.swift in Sources */,
@@ -982,6 +995,7 @@
 				561667532719E2CD000063B1 /* OmniRenderer.swift in Sources */,
 				561667042719E2CD000063B1 /* MDLTexture+Extension.swift in Sources */,
 				561667422719E2CD000063B1 /* EntityType.swift in Sources */,
+				56F5926D2737276D008652C9 /* DirectionalRenderer.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

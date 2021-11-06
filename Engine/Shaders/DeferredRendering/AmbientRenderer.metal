@@ -40,7 +40,7 @@ fragment float4 fragmentAmbientLight(RasterizerData in [[stage_in]],
     float3 lightPosition = (modelUniforms[camera.index].modelMatrix *  lightTransformation * float4(float3(0), 1)).xyz;
     if (length(fragmentPosition - lightPosition) < ambientLights[in.instanceId].radius) {
         float occlusion = ssao.sample(textureSampler, in.texcoord).x;
-        float3 finalColor = ambientLights[in.instanceId].strength * ambientLights[in.instanceId].color;
+        float3 finalColor = ambientLights[in.instanceId].intensity * ambientLights[in.instanceId].color;
         return float4(finalColor * ar.sample(textureSampler, in.texcoord).xyz * occlusion, 1);
     } else {
         return float4(0);

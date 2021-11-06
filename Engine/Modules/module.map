@@ -9,5 +9,6 @@ module MetalBinding {
     header "../MetalBinding/Camera.h"
     header "../MetalBinding/Light/OmniLight.h"
     header "../MetalBinding/Light/AmbientLight.h"
+    header "../MetalBinding/Light/DirectionalLight.h"
     export *
 }
