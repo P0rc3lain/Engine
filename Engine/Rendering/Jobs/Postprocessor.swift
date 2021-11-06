@@ -8,17 +8,21 @@ import simd
 
 struct Postprocessor {
     private let pipelineState: MTLRenderPipelineState
-    private let texture: MTLTexture
+    private let inputTexture: MTLTexture
     private let viewPort: MTLViewport
     private let plane: GPUGeometry
-    init(pipelineState: MTLRenderPipelineState, texture: MTLTexture, plane: GPUGeometry, canvasSize: CGSize) {
-        self.texture = texture
+    init(pipelineState: MTLRenderPipelineState,
+         inputTexture: MTLTexture,
+         plane: GPUGeometry,
+         canvasSize: CGSize) {
+        self.inputTexture = inputTexture
         self.pipelineState = pipelineState
         self.plane = plane
         self.viewPort = .porcelain(size: canvasSize)
     }
     func draw(encoder: MTLRenderCommandEncoder) {
-        encoder.setFragmentTexture(texture, index: kAttributePostprocessingFragmentShaderTexture)
+        encoder.setFragmentTexture(inputTexture,
+                                   index: kAttributePostprocessingFragmentShaderTexture)
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,

@@ -15,9 +15,8 @@ extension MTLDevice {
     func makeDepthStencilStateLightPass() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: MTLDepthStencilDescriptor.lightPassRenderer)
     }
-    func makeRenderPipelineStatePostprocessor(library: MTLLibrary,
-                                              format: MTLPixelFormat) -> MTLRenderPipelineState? {
-        let descriptor = MTLRenderPipelineDescriptor.postProcessor(library: library, format: format)
+    func makeRenderPipelineStatePostprocessor(library: MTLLibrary) -> MTLRenderPipelineState? {
+        let descriptor = MTLRenderPipelineDescriptor.postProcessor(library: library)
         return try? makeRenderPipelineState(descriptor: descriptor)
     }
     func makeRenderPipelineStateEnvironmentRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
@@ -74,6 +73,9 @@ extension MTLDevice {
     }
     func makeTextureBloomMergeColor(size: CGSize) -> MTLTexture? {
         makeTexture(descriptor: MTLTextureDescriptor.bloomMergeColor(size: size))
+    }
+    func makeTexturePostprocessColor(size: CGSize) -> MTLTexture? {
+        makeTexture(descriptor: MTLTextureDescriptor.postprocessColor(size: size))
     }
     func makePorcelainLibrary() -> MTLLibrary? {
         try? makeDefaultLibrary(bundle: Bundle(for: Engine.self))

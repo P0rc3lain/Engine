@@ -114,4 +114,14 @@ extension MTLTextureDescriptor {
         descriptor.usage = .renderTarget
         return descriptor
     }
+    static func postprocessColor(size: CGSize) -> MTLTextureDescriptor {
+        let descriptor = MTLTextureDescriptor()
+        descriptor.textureType = .type2D
+        descriptor.width = Int(size.width)
+        descriptor.height = Int(size.height)
+        descriptor.storageMode = .private
+        descriptor.pixelFormat = MTLPixelFormat.postprocessorRendererColor
+        descriptor.usage = [.renderTarget, .shaderRead, .shaderWrite]
+        return descriptor
+    }
 }

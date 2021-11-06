@@ -9,14 +9,15 @@ import MetalPerformanceShaders
 
 public struct RenderingCoordinator {
     private let view: MTKView
+    private let canvasSize: CGSize
     private let commandQueue: MTLCommandQueue
-    private var postProcessor: Postprocessor
     private var bufferStore: BufferStore
     private var combineStage: CombineStage
     private var ssaoStage: SSAOStage
     private var bloomStage: BloomStage
     private var gBufferStage: GBufferStage
-    private let canvasSize: CGSize
+    private var postprocessStage: PostprocessStage
+    private let imageConverter: MPSImageConversion
     let renderingSize: CGSize
     init?(view metalView: MTKView, canvasSize: CGSize, renderingSize: CGSize) {
         guard let device = metalView.device,
@@ -34,17 +35,13 @@ public struct RenderingCoordinator {
               let bloomStage = BloomStage(input: combineStage.io.output.color[0],
                                           device: device,
                                           renderingSize: renderingSize),
-              let postProcessor = Postprocessor.make(device: device,
-                                                     inputTexture: bloomStage.io.output.color[0],
-                                                     outputFormat: metalView.colorPixelFormat,
-                                                     canvasSize: canvasSize),
-              let ssaoStage = SSAOStage(device: device,
-                                        renderingSize: renderingSize,
-                                        prTexture: gBufferStage.io.output.color[0],
-                                        nmTexture: gBufferStage.io.output.color[1]) else {
+              let postprocessStage = PostprocessStage(device: device,
+                                                      inputTexture: bloomStage.io.output.color[0],
+                                                      renderingSize: canvasSize) else {
             return nil
         }
         self.gBufferStage = gBufferStage
+        self.imageConverter = MPSImageConversion(device: device)
         self.view = metalView
         self.canvasSize = canvasSize
         self.combineStage = combineStage
@@ -52,14 +49,14 @@ public struct RenderingCoordinator {
         self.bufferStore = bufferStore
         self.bloomStage = bloomStage
         self.commandQueue = commandQueue
-        self.postProcessor = postProcessor
         self.ssaoStage = ssaoStage
+        self.postprocessStage = postprocessStage
     }
     public mutating func draw(scene: inout GPUSceneDescription) {
         guard scene.activeCameraIdx != .nil,
               var commandBuffer = commandQueue.makeCommandBuffer(),
-              let renderPassDescriptor = view.currentRenderPassDescriptor,
-              let drawable = view.currentDrawable else {
+              let drawable = view.currentDrawable,
+              let outputTexture = view.currentRenderPassDescriptor?.colorAttachments[0].texture else {
             return
         }
         updatePalettes(scene: &scene)
@@ -70,13 +67,10 @@ public struct RenderingCoordinator {
         ssaoStage.draw(commandBuffer: &commandBuffer, bufferStore: &bufferStore)
         combineStage.draw(commandBuffer: &commandBuffer, scene: &scene, bufferStore: &bufferStore)
         bloomStage.draw(commandBuffer: &commandBuffer)
-        guard let texturePass = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else {
-            return
-        }
-        commandBuffer.pushDebugGroup("Post Processing Pass")
-        postProcessor.draw(encoder: texturePass)
-        texturePass.endEncoding()
-        commandBuffer.popDebugGroup()
+        postprocessStage.draw(commandBuffer: &commandBuffer)
+        imageConverter.encode(commandBuffer: commandBuffer,
+                              sourceTexture: postprocessStage.io.output.color[0],
+                              destinationTexture: outputTexture)
         commandBuffer.present(drawable)
         commandBuffer.commit()
     }

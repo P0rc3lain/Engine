@@ -7,11 +7,11 @@ import MetalKit
 import ModelIO
 
 extension MTLRenderPipelineDescriptor {
-    static func postProcessor(library: MTLLibrary, format: MTLPixelFormat) -> MTLRenderPipelineDescriptor {
+    static func postProcessor(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.vertexFunction = library.makeFunction(name: "vertexPostprocess")
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentPostprocess")
-        descriptor.colorAttachments[0].pixelFormat = format
+        descriptor.colorAttachments[0].pixelFormat = .postprocessorRendererColor
         descriptor.vertexBuffers[0].mutability = .immutable
         descriptor.vertexDescriptor = .porcelain
         return descriptor
