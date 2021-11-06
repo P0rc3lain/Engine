@@ -84,6 +84,26 @@ extension MTLTextureDescriptor {
         descriptor.usage = [.shaderRead, .shaderWrite, .renderTarget]
         return descriptor
     }
+    static func bloomSplitColor(size: CGSize) -> MTLTextureDescriptor {
+        let descriptor = MTLTextureDescriptor()
+        descriptor.textureType = .type2D
+        descriptor.width = Int(size.width)
+        descriptor.height = Int(size.height)
+        descriptor.storageMode = .private
+        descriptor.pixelFormat = MTLPixelFormat.bloomSplitColor
+        descriptor.usage = [.renderTarget, .shaderRead, .shaderWrite]
+        return descriptor
+    }
+    static func bloomMergeColor(size: CGSize) -> MTLTextureDescriptor {
+        let descriptor = MTLTextureDescriptor()
+        descriptor.textureType = .type2D
+        descriptor.width = Int(size.width)
+        descriptor.height = Int(size.height)
+        descriptor.storageMode = .private
+        descriptor.pixelFormat = MTLPixelFormat.bloomMergeColor
+        descriptor.usage = [.renderTarget, .shaderRead, .shaderWrite]
+        return descriptor
+    }
     static func lightenSceneDepthStencil(size: CGSize) -> MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = .type2D

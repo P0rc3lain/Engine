@@ -66,4 +66,20 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexDescriptor = .porcelain
         return descriptor
     }
+    static func bloomSplitRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
+        let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.vertexFunction = library.makeFunction(name: "vertexBloomSplit")
+        descriptor.fragmentFunction = library.makeFunction(name: "fragmentBloomSplit")
+        descriptor.colorAttachments[0].pixelFormat = .bloomSplitColor
+        descriptor.vertexDescriptor = .porcelain
+        return descriptor
+    }
+    static func bloomMergeRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
+        let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.vertexFunction = library.makeFunction(name: "vertexBloomMerge")
+        descriptor.fragmentFunction = library.makeFunction(name: "fragmentBloomMerge")
+        descriptor.colorAttachments[0].pixelFormat = .bloomSplitColor
+        descriptor.vertexDescriptor = .porcelain
+        return descriptor
+    }
 }

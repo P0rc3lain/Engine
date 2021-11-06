@@ -13,11 +13,15 @@ public struct RenderingCoordinator {
     private var offscreenRenderPassDescriptor: MTLRenderPassDescriptor
     private var gBufferRenderPassDescriptor: MTLRenderPassDescriptor
     private var ssaoRenderPassDescriptor: MTLRenderPassDescriptor
+    private var bloomSplitRenderPassDescriptor: MTLRenderPassDescriptor
+    private var bloomMergeRenderPassDescriptor: MTLRenderPassDescriptor
     private var postProcessor: Postprocessor
     private var gBufferRenderer: GBufferRenderer
     private var environmentRenderer: EnvironmentRenderer
     private var lightRenderer: LightPassRenderer
     private var ssaoRenderer: SsaoRenderer
+    private var bloomRenderer: BloomSplitRenderer
+    private var bloomMergeRenderer: BloomMergeRenderer
     private var bufferStore: BufferStore
     private let canvasSize: CGSize
     private let gaussTexture: MTLTexture
@@ -33,12 +37,16 @@ public struct RenderingCoordinator {
         guard let sharedDepthStencilTexture = gBufferRenderPassDescriptor.stencilAttachment.texture else {
             return nil
         }
+        bloomSplitRenderPassDescriptor = .bloomSplit(device: device, size: renderingSize)
+        bloomMergeRenderPassDescriptor = .bloomMerge(device: device, size: renderingSize)
         offscreenRenderPassDescriptor = .lightenScene(device: device,
                                                       depthStencil: sharedDepthStencilTexture,
                                                       size: renderingSize)
-        guard let postProcessorInputTexture = offscreenRenderPassDescriptor.colorAttachments[0].texture,
+        guard let bloomMergeRenderer = BloomMergeRenderer.make(device: device,
+                                                               drawableSize: renderingSize),
+              let postProcessorInput = bloomMergeRenderPassDescriptor.colorAttachments[0].texture,
               let postProcessor = Postprocessor.make(device: device,
-                                                     inputTexture: postProcessorInputTexture,
+                                                     inputTexture: postProcessorInput,
                                                      outputFormat: metalView.colorPixelFormat,
                                                      canvasSize: canvasSize),
               let environmentRenderer = EnvironmentRenderer.make(device: device, drawableSize: metalView.drawableSize),
@@ -49,7 +57,11 @@ public struct RenderingCoordinator {
               let ssaoRenderer = SsaoRenderer.make(device: device,
                                                    gBufferRenderPassDescriptor: gBufferRenderPassDescriptor,
                                                    drawableSize: renderingSize),
-              let gaussTexture = device.makeTexture(descriptor: .ssaoColor(size: renderingSize)) else {
+              let gaussTexture = device.makeTexture(descriptor: .ssaoColor(size: renderingSize)),
+              let bloomRenderer = BloomSplitRenderer.make(device: device,
+                                                     inputRenderPassDescriptor: offscreenRenderPassDescriptor,
+                                                     drawableSize: renderingSize)
+         else {
             return nil
         }
         self.view = metalView
@@ -65,10 +77,12 @@ public struct RenderingCoordinator {
         self.ssaoRenderer = ssaoRenderer
         self.ssaoRenderPassDescriptor = .ssao(device: device, size: renderingSize)
         self.gaussianBlur = MPSImageGaussianBlur(device: device, sigma: 1)
+        self.bloomRenderer = bloomRenderer
+        self.bloomMergeRenderer = bloomMergeRenderer
     }
     public mutating func draw(scene: inout GPUSceneDescription) {
         guard scene.activeCameraIdx != .nil,
-              let commandBuffer = commandQueue.makeCommandBuffer(),
+              var commandBuffer = commandQueue.makeCommandBuffer(),
               let renderPassDescriptor = view.currentRenderPassDescriptor,
               let drawable = view.currentDrawable else {
             return
@@ -99,16 +113,31 @@ public struct RenderingCoordinator {
                             sourceTexture: ssaoTexture,
                             destinationTexture: gaussTexture)
         commandBuffer.popDebugGroup()
+        commandBuffer.pushDebugGroup("Light Pass")
         guard var lightEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor) else {
             return
         }
-        commandBuffer.pushDebugGroup("Light Pass")
         lightRenderer.draw(encoder: &lightEncoder, bufferStore: &bufferStore, lightsCount: scene.lights.count, ssao: gaussTexture)
         commandBuffer.popDebugGroup()
         commandBuffer.pushDebugGroup("Environment Map")
         environmentRenderer.draw(encoder: &lightEncoder, scene: &scene)
-        commandBuffer.popDebugGroup()
         lightEncoder.endEncoding()
+        commandBuffer.popDebugGroup()
+        commandBuffer.pushDebugGroup("Bloom Pass")
+        guard var bloomEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: bloomSplitRenderPassDescriptor) else {
+            return
+        }
+        bloomRenderer.draw(encoder: &bloomEncoder, commandBuffer: &commandBuffer, renderPass: &bloomSplitRenderPassDescriptor)
+        commandBuffer.popDebugGroup()
+        commandBuffer.pushDebugGroup("Bloom Merge Pass")
+        guard var bloomMergeEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: bloomMergeRenderPassDescriptor) else {
+            return
+        }
+        bloomMergeRenderer.draw(encoder: &bloomMergeEncoder,
+                                renderPass: &offscreenRenderPassDescriptor,
+                                brightAreasTexture: bloomRenderer.outputTexture)
+        bloomMergeEncoder.endEncoding()
+        commandBuffer.popDebugGroup()
         guard let texturePass = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else {
             return
         }

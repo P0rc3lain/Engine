@@ -115,6 +115,12 @@
 		566020E227343280000F4CA7 /* Ssao.metal in Sources */ = {isa = PBXBuildFile; fileRef = 566020E127343280000F4CA7 /* Ssao.metal */; };
 		566020E42734408C000F4CA7 /* SsaoRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566020E32734408C000F4CA7 /* SsaoRenderer+Extension.swift */; };
 		5670EBDC273561FD00375194 /* Operator+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EBDB273561FD00375194 /* Operator+Extension.swift */; };
+		5670EC002735977900375194 /* BloomSplitRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EBFF2735977900375194 /* BloomSplitRenderer.swift */; };
+		5670EC052735A3EA00375194 /* BloomSplit.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC042735A3EA00375194 /* BloomSplit.metal */; };
+		5670EC072735A3F300375194 /* BloomMerge.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC062735A3F300375194 /* BloomMerge.metal */; };
+		5670EC092735AB0000375194 /* BloomSplitRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC082735AB0000375194 /* BloomSplitRenderer+Extension.swift */; };
+		5670EC0B2735D47900375194 /* BloomMergeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC0A2735D47900375194 /* BloomMergeRenderer.swift */; };
+		5670EC0D2735D5BF00375194 /* BloomMergeRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC0C2735D5BF00375194 /* BloomMergeRenderer+Extension.swift */; };
 		56924ACC271A00D900FF3E06 /* AnimatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACB271A00D900FF3E06 /* AnimatedValue.swift */; };
 		56924ACE271A022900FF3E06 /* EntityTree+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */; };
 		56924AD7271A07FD00FF3E06 /* AnimatedValue+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AD6271A07FD00FF3E06 /* AnimatedValue+Tests.swift */; };
@@ -251,6 +257,12 @@
 		566020E127343280000F4CA7 /* Ssao.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Ssao.metal; sourceTree = "<group>"; };
 		566020E32734408C000F4CA7 /* SsaoRenderer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SsaoRenderer+Extension.swift"; sourceTree = "<group>"; };
 		5670EBDB273561FD00375194 /* Operator+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Operator+Extension.swift"; sourceTree = "<group>"; };
+		5670EBFF2735977900375194 /* BloomSplitRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloomSplitRenderer.swift; sourceTree = "<group>"; };
+		5670EC042735A3EA00375194 /* BloomSplit.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = BloomSplit.metal; sourceTree = "<group>"; };
+		5670EC062735A3F300375194 /* BloomMerge.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = BloomMerge.metal; sourceTree = "<group>"; };
+		5670EC082735AB0000375194 /* BloomSplitRenderer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BloomSplitRenderer+Extension.swift"; sourceTree = "<group>"; };
+		5670EC0A2735D47900375194 /* BloomMergeRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloomMergeRenderer.swift; sourceTree = "<group>"; };
+		5670EC0C2735D5BF00375194 /* BloomMergeRenderer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BloomMergeRenderer+Extension.swift"; sourceTree = "<group>"; };
 		56924ACB271A00D900FF3E06 /* AnimatedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedValue.swift; sourceTree = "<group>"; };
 		56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityTree+Extension.swift"; sourceTree = "<group>"; };
 		56924AD4271A07FD00FF3E06 /* EngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -414,6 +426,7 @@
 		561666D52719E2CC000063B1 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				5670EC012735A3BB00375194 /* Bloom */,
 				561666D62719E2CC000063B1 /* DeferredRendering */,
 				561666D92719E2CC000063B1 /* Common */,
 				561666DE2719E2CC000063B1 /* Postprocessing.metal */,
@@ -475,6 +488,7 @@
 		561666EB2719E2CD000063B1 /* Rendering */ = {
 			isa = PBXGroup;
 			children = (
+				5670EC0E27368F9F00375194 /* Bloom */,
 				561666EC2719E2CD000063B1 /* EnvironmentRenderer.swift */,
 				561666ED2719E2CD000063B1 /* DeferredRendering */,
 				561666F02719E2CD000063B1 /* Postprocessor.swift */,
@@ -519,6 +533,24 @@
 				56270166272B54EB00071620 /* AnimatedTransform.swift */,
 			);
 			path = Animation;
+			sourceTree = "<group>";
+		};
+		5670EC012735A3BB00375194 /* Bloom */ = {
+			isa = PBXGroup;
+			children = (
+				5670EC042735A3EA00375194 /* BloomSplit.metal */,
+				5670EC062735A3F300375194 /* BloomMerge.metal */,
+			);
+			path = Bloom;
+			sourceTree = "<group>";
+		};
+		5670EC0E27368F9F00375194 /* Bloom */ = {
+			isa = PBXGroup;
+			children = (
+				5670EBFF2735977900375194 /* BloomSplitRenderer.swift */,
+				5670EC0A2735D47900375194 /* BloomMergeRenderer.swift */,
+			);
+			path = Bloom;
 			sourceTree = "<group>";
 		};
 		56924AD5271A07FD00FF3E06 /* EngineTests */ = {
@@ -626,6 +658,8 @@
 				563BFC9B27294B020003EDB7 /* RamGeometry+Extension.swift */,
 				5627016C272B589800071620 /* AnimatedCoordinateSpace+Extension.swift */,
 				566020E32734408C000F4CA7 /* SsaoRenderer+Extension.swift */,
+				5670EC082735AB0000375194 /* BloomSplitRenderer+Extension.swift */,
+				5670EC0C2735D5BF00375194 /* BloomMergeRenderer+Extension.swift */,
 			);
 			path = Porcelain;
 			sourceTree = "<group>";
@@ -767,6 +801,7 @@
 				561666FB2719E2CD000063B1 /* MDLTransformComponent+Extension.swift in Sources */,
 				5616673A2719E2CD000063B1 /* PrimitiveType.swift in Sources */,
 				561667452719E2CD000063B1 /* LightRenderer.metal in Sources */,
+				5670EC072735A3F300375194 /* BloomMerge.metal in Sources */,
 				561667282719E2CD000063B1 /* EnvironmentRenderer+Extension.swift in Sources */,
 				5616670B2719E2CD000063B1 /* PieceDescription+Extension.swift in Sources */,
 				561667412719E2CD000063B1 /* Material.swift in Sources */,
@@ -781,6 +816,7 @@
 				5616670A2719E2CD000063B1 /* MDLSubmesh+Extension.swift in Sources */,
 				56E8208F2727FD13002D58C3 /* Date+Extensioin.swift in Sources */,
 				5616673B2719E2CD000063B1 /* DataBuffer.swift in Sources */,
+				5670EC002735977900375194 /* BloomSplitRenderer.swift in Sources */,
 				561667082719E2CD000063B1 /* DataBuffer+Extension.swift in Sources */,
 				563575F42728486A00CE4988 /* AnimationSample.swift in Sources */,
 				561667312719E2CD000063B1 /* DataBuffer+Alias.swift in Sources */,
@@ -799,6 +835,7 @@
 				561667272719E2CD000063B1 /* MTLRenderPassDescriptor+Extension.swift in Sources */,
 				561667382719E2CD000063B1 /* Geometry.swift in Sources */,
 				563BFC91272898F20003EDB7 /* MDLAnimatedVector3Array+Extension.swift in Sources */,
+				5670EC0D2735D5BF00375194 /* BloomMergeRenderer+Extension.swift in Sources */,
 				5670EBDC273561FD00375194 /* Operator+Extension.swift in Sources */,
 				563BFC8F272897430003EDB7 /* AnimatedFloat3Array+Extension.swift in Sources */,
 				561667572719E2CD000063B1 /* BufferStore.swift in Sources */,
@@ -818,11 +855,13 @@
 				566020E02734314C000F4CA7 /* SsaoRenderer.swift in Sources */,
 				5616671F2719E2CD000063B1 /* MTLRenderPipelineDescriptor+Extension.swift in Sources */,
 				561667462719E2CD000063B1 /* GBufferRenderer.metal in Sources */,
+				5670EC092735AB0000375194 /* BloomSplitRenderer+Extension.swift in Sources */,
 				561667142719E2CD000063B1 /* MDLAsset+Extension.swift in Sources */,
 				56924ACC271A00D900FF3E06 /* AnimatedValue.swift in Sources */,
 				561667112719E2CD000063B1 /* CGSize+Extension.swift in Sources */,
 				563BFC9C27294B020003EDB7 /* RamGeometry+Extension.swift in Sources */,
 				5616672B2719E2CD000063B1 /* AssetLoader.swift in Sources */,
+				5670EC052735A3EA00375194 /* BloomSplit.metal in Sources */,
 				561666FE2719E2CD000063B1 /* MDLMaterial+Extension.swift in Sources */,
 				56924AE8271A187400FF3E06 /* AnimatedFloat3+Extensions.swift in Sources */,
 				561667372719E2CD000063B1 /* PieceDescription+Alias.swift in Sources */,
@@ -835,6 +874,7 @@
 				5616670F2719E2CD000063B1 /* Data+Extension.swift in Sources */,
 				563BFC93272899FD0003EDB7 /* AnimatedQuatfArray+Extension.swift in Sources */,
 				561667352719E2CD000063B1 /* Geometry+Alias.swift in Sources */,
+				5670EC0B2735D47900375194 /* BloomMergeRenderer.swift in Sources */,
 				561666F92719E2CD000063B1 /* MDLMaterialProperty+Extension.swift in Sources */,
 				56E8209D27284664002D58C3 /* Position.swift in Sources */,
 				561667292719E2CD000063B1 /* Translator.swift in Sources */,

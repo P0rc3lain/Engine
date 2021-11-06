@@ -26,6 +26,12 @@ extension MTLPixelFormat {
     static var lightenSceneDepthStencil: MTLPixelFormat {
         .depth32Float_stencil8
     }
+    static var bloomSplitColor: MTLPixelFormat {
+        .rgba16Float
+    }
+    static var bloomMergeColor: MTLPixelFormat {
+        .rgba16Float
+    }
     static var environmentRendererColor: MTLPixelFormat {
         lightenSceneColor
     }

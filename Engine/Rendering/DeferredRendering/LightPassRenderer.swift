@@ -7,7 +7,7 @@ import MetalKit
 import simd
 
 struct LightPassRenderer {
-    private let pipelineState: MTLRenderPipelineState
+    let pipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport
     private let gbufferRenderPass: MTLRenderPassDescriptor
