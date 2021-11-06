@@ -10,12 +10,12 @@ import simd
 struct BloomSplitRenderer {
     private let pipelineState: MTLRenderPipelineState
     private let viewPort: MTLViewport
-    private let inputRenderPass: MTLRenderPassDescriptor
+    private let inputTexture: MTLTexture
     private let plane: GPUGeometry
     private let gaussianBlur: MPSImageGaussianBlur
     let outputTexture: MTLTexture
     init?(pipelineState: MTLRenderPipelineState,
-          inputRenderPass: MTLRenderPassDescriptor,
+          inputTexture: MTLTexture,
           device: MTLDevice,
           drawableSize: CGSize) {
         guard let plane = GPUGeometry.screenSpacePlane(device: device),
@@ -23,15 +23,14 @@ struct BloomSplitRenderer {
             return nil
         }
         self.pipelineState = pipelineState
-        self.inputRenderPass = inputRenderPass
+        self.inputTexture = inputTexture
         self.plane = plane
         self.viewPort = .porcelain(size: drawableSize)
         self.gaussianBlur = MPSImageGaussianBlur(device: device, sigma: 15)
         self.outputTexture = outputTexture
     }
     mutating func draw(encoder: inout MTLRenderCommandEncoder, commandBuffer: inout MTLCommandBuffer, renderPass: inout MTLRenderPassDescriptor) {
-        guard let inputTexture = inputRenderPass.colorAttachments[0].texture,
-              let gaussianBlurSource = renderPass.colorAttachments[0].texture else {
+        guard let gaussianBlurSource = renderPass.colorAttachments[0].texture else {
             fatalError("Required textures not bound")
         }
         encoder.setViewport(viewPort)

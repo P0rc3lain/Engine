@@ -22,6 +22,7 @@ struct GBufferRenderer {
         self.viewPort = .porcelain(size: drawableSize)
     }
     func draw(encoder: inout MTLRenderCommandEncoder, scene: inout GPUSceneDescription, dataStore: inout BufferStore) {
+        var boundMaterialIdx = Int.nil
         encoder.setViewport(viewPort)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setCullMode(.back)
@@ -42,15 +43,19 @@ struct GBufferRenderer {
                 encoder.setVertexBytes(&mutableIndex,
                                        length: MemoryLayout<Int32>.size,
                                        index: kAttributeGBufferVertexShaderBufferObjectIndex)
+                encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer,
+                                        index: kAttributeGBufferVertexShaderBufferModelUniforms)
                 for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
-                    encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer,
-                                            index: kAttributeGBufferVertexShaderBufferModelUniforms)
                     encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
                                             offset: scene.paletteReferences[index].lowerBound,
                                             index: kAttributeGBufferVertexShaderBufferMatrixPalettes)
-                    let material = scene.materials[scene.indexDrawsMaterials[pieceIndex]]
-                    encoder.setFragmentTextures([material.albedo, material.roughness, material.normals, material.metallic],
-                                                range: texturesRange)
+                    let materialIdx = scene.indexDrawsMaterials[pieceIndex]
+                    if boundMaterialIdx != materialIdx {
+                        let material = scene.materials[materialIdx]
+                        encoder.setFragmentTextures([material.albedo, material.roughness, material.normals, material.metallic],
+                                                    range: texturesRange)
+                        boundMaterialIdx = materialIdx
+                    }
                     let indexDraw = scene.indexDraws[pieceIndex]
                     encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
                                                   indexCount: indexDraw.indexCount,
@@ -72,13 +77,17 @@ struct GBufferRenderer {
                 encoder.setVertexBytes(&mutableIndex,
                                        length: MemoryLayout<Int32>.size,
                                        index: kAttributeGBufferVertexShaderBufferObjectIndex)
+                encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer,
+                                        index: kAttributeGBufferVertexShaderBufferModelUniforms)
                 for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
-                    encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer,
-                                            index: kAttributeGBufferVertexShaderBufferModelUniforms)
-                    let material = scene.materials[scene.indexDrawsMaterials[pieceIndex]]
-                    encoder.setFragmentTextures([material.albedo, material.roughness, material.normals, material.metallic],
-                                                range: texturesRange)
-                        let indexDraw = scene.indexDraws[pieceIndex]
+                    let materialIdx = scene.indexDrawsMaterials[pieceIndex]
+                    if boundMaterialIdx != materialIdx {
+                        let material = scene.materials[materialIdx]
+                        encoder.setFragmentTextures([material.albedo, material.roughness, material.normals, material.metallic],
+                                                    range: texturesRange)
+                        boundMaterialIdx = materialIdx
+                    }
+                    let indexDraw = scene.indexDraws[pieceIndex]
                     encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
                                                   indexCount: indexDraw.indexCount,
                                                   indexType: indexDraw.indexType,

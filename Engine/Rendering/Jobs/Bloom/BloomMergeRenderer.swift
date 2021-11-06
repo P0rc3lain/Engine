@@ -4,25 +4,32 @@
 
 import Metal
 import MetalBinding
+import MetalPerformanceShaders
 import simd
 
-struct Postprocessor {
+struct BloomMergeRenderer {
     private let pipelineState: MTLRenderPipelineState
-    private let texture: MTLTexture
     private let viewPort: MTLViewport
     private let plane: GPUGeometry
-    init(pipelineState: MTLRenderPipelineState, texture: MTLTexture, plane: GPUGeometry, canvasSize: CGSize) {
-        self.texture = texture
+    init?(pipelineState: MTLRenderPipelineState,
+          device: MTLDevice,
+          drawableSize: CGSize) {
+        guard let plane = GPUGeometry.screenSpacePlane(device: device) else {
+            return nil
+        }
         self.pipelineState = pipelineState
         self.plane = plane
-        self.viewPort = .porcelain(size: canvasSize)
+        self.viewPort = .porcelain(size: drawableSize)
     }
-    func draw(encoder: MTLRenderCommandEncoder) {
-        encoder.setFragmentTexture(texture, index: kAttributePostprocessingFragmentShaderTexture)
+    mutating func draw(encoder: inout MTLRenderCommandEncoder,
+                       unmodifiedSceneTexture: MTLTexture,
+                       brightAreasTexture: MTLTexture) {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
-                                index: kAttributePostprocessingVertexShaderBufferStageIn)
+                                index: kAttributeBloomSplitVertexShaderBufferStageIn)
+        encoder.setFragmentTexture(unmodifiedSceneTexture, index: kAttributeBloomMergeFragmentShaderTextureOriginal)
+        encoder.setFragmentTexture(brightAreasTexture, index: kAttributeBloomMergeFragmentShaderTextureBrightAreas)
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
                                       indexType: plane.pieceDescriptions[0].drawDescription.indexType,

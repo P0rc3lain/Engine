@@ -4,33 +4,29 @@
 
 import Metal
 import MetalBinding
-import MetalPerformanceShaders
 import simd
 
-struct BloomMergeRenderer {
+struct Postprocessor {
     private let pipelineState: MTLRenderPipelineState
+    private let inputTexture: MTLTexture
     private let viewPort: MTLViewport
     private let plane: GPUGeometry
-    init?(pipelineState: MTLRenderPipelineState,
-          device: MTLDevice,
-          drawableSize: CGSize) {
-        guard let plane = GPUGeometry.screenSpacePlane(device: device) else {
-            return nil
-        }
+    init(pipelineState: MTLRenderPipelineState,
+         inputTexture: MTLTexture,
+         plane: GPUGeometry,
+         canvasSize: CGSize) {
+        self.inputTexture = inputTexture
         self.pipelineState = pipelineState
         self.plane = plane
-        self.viewPort = .porcelain(size: drawableSize)
+        self.viewPort = .porcelain(size: canvasSize)
     }
-    mutating func draw(encoder: inout MTLRenderCommandEncoder, renderPass: inout MTLRenderPassDescriptor, brightAreasTexture: MTLTexture) {
-        guard let unmodifiedSceneTexture = renderPass.colorAttachments[0].texture else {
-            return
-        }
+    func draw(encoder: MTLRenderCommandEncoder) {
+        encoder.setFragmentTexture(inputTexture,
+                                   index: kAttributePostprocessingFragmentShaderTexture)
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
-                                index: kAttributeBloomSplitVertexShaderBufferStageIn)
-        encoder.setFragmentTexture(unmodifiedSceneTexture, index: kAttributeBloomMergeFragmentShaderTextureOriginal)
-        encoder.setFragmentTexture(brightAreasTexture, index: kAttributeBloomMergeFragmentShaderTextureBrightAreas)
+                                index: kAttributePostprocessingVertexShaderBufferStageIn)
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
                                       indexType: plane.pieceDescriptions[0].drawDescription.indexType,

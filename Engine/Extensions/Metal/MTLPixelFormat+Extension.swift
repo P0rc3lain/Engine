@@ -38,4 +38,7 @@ extension MTLPixelFormat {
     static var environmentRendererDepthStencil: MTLPixelFormat {
         lightenSceneDepthStencil
     }
+    static var postprocessorRendererColor: MTLPixelFormat {
+        .rgba16Float
+    }
 }

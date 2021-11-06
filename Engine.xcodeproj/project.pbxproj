@@ -121,6 +121,14 @@
 		5670EC092735AB0000375194 /* BloomSplitRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC082735AB0000375194 /* BloomSplitRenderer+Extension.swift */; };
 		5670EC0B2735D47900375194 /* BloomMergeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC0A2735D47900375194 /* BloomMergeRenderer.swift */; };
 		5670EC0D2735D5BF00375194 /* BloomMergeRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC0C2735D5BF00375194 /* BloomMergeRenderer+Extension.swift */; };
+		5670EC122736A1BE00375194 /* Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC112736A1BE00375194 /* Stage.swift */; };
+		5670EC142736A29100375194 /* GPUIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC132736A29100375194 /* GPUIO.swift */; };
+		5670EC162736A2AE00375194 /* GPUSupply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC152736A2AE00375194 /* GPUSupply.swift */; };
+		5670EC182736A36300375194 /* BloomStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC172736A36300375194 /* BloomStage.swift */; };
+		5670EC1B2736AE4B00375194 /* SSAOStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC1A2736AE4B00375194 /* SSAOStage.swift */; };
+		5670EC1D2736B8BC00375194 /* GBufferStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC1C2736B8BC00375194 /* GBufferStage.swift */; };
+		5670EC252736E1EF00375194 /* CombineStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC232736DD6100375194 /* CombineStage.swift */; };
+		5670EC272736EA2400375194 /* PostprocessStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC262736EA2400375194 /* PostprocessStage.swift */; };
 		56924ACC271A00D900FF3E06 /* AnimatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACB271A00D900FF3E06 /* AnimatedValue.swift */; };
 		56924ACE271A022900FF3E06 /* EntityTree+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */; };
 		56924AD7271A07FD00FF3E06 /* AnimatedValue+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AD6271A07FD00FF3E06 /* AnimatedValue+Tests.swift */; };
@@ -263,6 +271,14 @@
 		5670EC082735AB0000375194 /* BloomSplitRenderer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BloomSplitRenderer+Extension.swift"; sourceTree = "<group>"; };
 		5670EC0A2735D47900375194 /* BloomMergeRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloomMergeRenderer.swift; sourceTree = "<group>"; };
 		5670EC0C2735D5BF00375194 /* BloomMergeRenderer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BloomMergeRenderer+Extension.swift"; sourceTree = "<group>"; };
+		5670EC112736A1BE00375194 /* Stage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stage.swift; sourceTree = "<group>"; };
+		5670EC132736A29100375194 /* GPUIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPUIO.swift; sourceTree = "<group>"; };
+		5670EC152736A2AE00375194 /* GPUSupply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPUSupply.swift; sourceTree = "<group>"; };
+		5670EC172736A36300375194 /* BloomStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloomStage.swift; sourceTree = "<group>"; };
+		5670EC1A2736AE4B00375194 /* SSAOStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSAOStage.swift; sourceTree = "<group>"; };
+		5670EC1C2736B8BC00375194 /* GBufferStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBufferStage.swift; sourceTree = "<group>"; };
+		5670EC232736DD6100375194 /* CombineStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineStage.swift; sourceTree = "<group>"; };
+		5670EC262736EA2400375194 /* PostprocessStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostprocessStage.swift; sourceTree = "<group>"; };
 		56924ACB271A00D900FF3E06 /* AnimatedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedValue.swift; sourceTree = "<group>"; };
 		56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityTree+Extension.swift"; sourceTree = "<group>"; };
 		56924AD4271A07FD00FF3E06 /* EngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -488,12 +504,10 @@
 		561666EB2719E2CD000063B1 /* Rendering */ = {
 			isa = PBXGroup;
 			children = (
-				5670EC0E27368F9F00375194 /* Bloom */,
-				561666EC2719E2CD000063B1 /* EnvironmentRenderer.swift */,
-				561666ED2719E2CD000063B1 /* DeferredRendering */,
-				561666F02719E2CD000063B1 /* Postprocessor.swift */,
+				5670EC202736C1E400375194 /* IO */,
+				5670EC1F2736C1D500375194 /* Jobs */,
+				5670EC1E2736C1A100375194 /* Stages */,
 				561666F12719E2CD000063B1 /* RenderingCoordinator.swift */,
-				566020DF2734314C000F4CA7 /* SsaoRenderer.swift */,
 			);
 			path = Rendering;
 			sourceTree = "<group>";
@@ -551,6 +565,40 @@
 				5670EC0A2735D47900375194 /* BloomMergeRenderer.swift */,
 			);
 			path = Bloom;
+			sourceTree = "<group>";
+		};
+		5670EC1E2736C1A100375194 /* Stages */ = {
+			isa = PBXGroup;
+			children = (
+				5670EC172736A36300375194 /* BloomStage.swift */,
+				5670EC1A2736AE4B00375194 /* SSAOStage.swift */,
+				5670EC1C2736B8BC00375194 /* GBufferStage.swift */,
+				5670EC112736A1BE00375194 /* Stage.swift */,
+				5670EC232736DD6100375194 /* CombineStage.swift */,
+				5670EC262736EA2400375194 /* PostprocessStage.swift */,
+			);
+			path = Stages;
+			sourceTree = "<group>";
+		};
+		5670EC1F2736C1D500375194 /* Jobs */ = {
+			isa = PBXGroup;
+			children = (
+				5670EC0E27368F9F00375194 /* Bloom */,
+				561666EC2719E2CD000063B1 /* EnvironmentRenderer.swift */,
+				561666ED2719E2CD000063B1 /* DeferredRendering */,
+				561666F02719E2CD000063B1 /* Postprocessor.swift */,
+				566020DF2734314C000F4CA7 /* SsaoRenderer.swift */,
+			);
+			path = Jobs;
+			sourceTree = "<group>";
+		};
+		5670EC202736C1E400375194 /* IO */ = {
+			isa = PBXGroup;
+			children = (
+				5670EC132736A29100375194 /* GPUIO.swift */,
+				5670EC152736A2AE00375194 /* GPUSupply.swift */,
+			);
+			path = IO;
 			sourceTree = "<group>";
 		};
 		56924AD5271A07FD00FF3E06 /* EngineTests */ = {
@@ -804,6 +852,7 @@
 				5670EC072735A3F300375194 /* BloomMerge.metal in Sources */,
 				561667282719E2CD000063B1 /* EnvironmentRenderer+Extension.swift in Sources */,
 				5616670B2719E2CD000063B1 /* PieceDescription+Extension.swift in Sources */,
+				5670EC142736A29100375194 /* GPUIO.swift in Sources */,
 				561667412719E2CD000063B1 /* Material.swift in Sources */,
 				563BFC81272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift in Sources */,
 				561667202719E2CD000063B1 /* MTLDepthStencilDescriptor+Extension.swift in Sources */,
@@ -819,6 +868,7 @@
 				5670EC002735977900375194 /* BloomSplitRenderer.swift in Sources */,
 				561667082719E2CD000063B1 /* DataBuffer+Extension.swift in Sources */,
 				563575F42728486A00CE4988 /* AnimationSample.swift in Sources */,
+				5670EC272736EA2400375194 /* PostprocessStage.swift in Sources */,
 				561667312719E2CD000063B1 /* DataBuffer+Alias.swift in Sources */,
 				5616671C2719E2CD000063B1 /* MTLStencilDescriptor+Extension.swift in Sources */,
 				563BFC87272878180003EDB7 /* UnsafeMutableRawPointer+Extension.swift in Sources */,
@@ -854,6 +904,7 @@
 				561667162719E2CD000063B1 /* TransformAnimation.swift in Sources */,
 				566020E02734314C000F4CA7 /* SsaoRenderer.swift in Sources */,
 				5616671F2719E2CD000063B1 /* MTLRenderPipelineDescriptor+Extension.swift in Sources */,
+				5670EC122736A1BE00375194 /* Stage.swift in Sources */,
 				561667462719E2CD000063B1 /* GBufferRenderer.metal in Sources */,
 				5670EC092735AB0000375194 /* BloomSplitRenderer+Extension.swift in Sources */,
 				561667142719E2CD000063B1 /* MDLAsset+Extension.swift in Sources */,
@@ -862,6 +913,7 @@
 				563BFC9C27294B020003EDB7 /* RamGeometry+Extension.swift in Sources */,
 				5616672B2719E2CD000063B1 /* AssetLoader.swift in Sources */,
 				5670EC052735A3EA00375194 /* BloomSplit.metal in Sources */,
+				5670EC1D2736B8BC00375194 /* GBufferStage.swift in Sources */,
 				561666FE2719E2CD000063B1 /* MDLMaterial+Extension.swift in Sources */,
 				56924AE8271A187400FF3E06 /* AnimatedFloat3+Extensions.swift in Sources */,
 				561667372719E2CD000063B1 /* PieceDescription+Alias.swift in Sources */,
@@ -869,11 +921,13 @@
 				561667092719E2CD000063B1 /* MDLVertexDescriptor+Extension.swift in Sources */,
 				561667552719E2CD000063B1 /* Postprocessor.swift in Sources */,
 				5616671E2719E2CD000063B1 /* MTLVertexBufferLayoutDescriptor+Extension.swift in Sources */,
+				5670EC1B2736AE4B00375194 /* SSAOStage.swift in Sources */,
 				561667012719E2CD000063B1 /* MDLObject+Extension.swift in Sources */,
 				5616674C2719E2CD000063B1 /* EnvironmentMapper.metal in Sources */,
 				5616670F2719E2CD000063B1 /* Data+Extension.swift in Sources */,
 				563BFC93272899FD0003EDB7 /* AnimatedQuatfArray+Extension.swift in Sources */,
 				561667352719E2CD000063B1 /* Geometry+Alias.swift in Sources */,
+				5670EC182736A36300375194 /* BloomStage.swift in Sources */,
 				5670EC0B2735D47900375194 /* BloomMergeRenderer.swift in Sources */,
 				561666F92719E2CD000063B1 /* MDLMaterialProperty+Extension.swift in Sources */,
 				56E8209D27284664002D58C3 /* Position.swift in Sources */,
@@ -893,9 +947,11 @@
 				566020E227343280000F4CA7 /* Ssao.metal in Sources */,
 				561667232719E2CD000063B1 /* MTLPixelFormat+Extension.swift in Sources */,
 				561666FF2719E2CD000063B1 /* simd_float3+Extension.swift in Sources */,
+				5670EC252736E1EF00375194 /* CombineStage.swift in Sources */,
 				561666F82719E2CD000063B1 /* MTLVertexDescriptor+Extension.swift in Sources */,
 				561667322719E2CD000063B1 /* IndexBasedDraw+Alias.swift in Sources */,
 				561667122719E2CD000063B1 /* Float+Extension.swift in Sources */,
+				5670EC162736A2AE00375194 /* GPUSupply.swift in Sources */,
 				5616673C2719E2CD000063B1 /* IndexBitDepth.swift in Sources */,
 				563BFC9527289A3B0003EDB7 /* MDLAnimatedQuaternionArray+Extension.swift in Sources */,
 				56270169272B556500071620 /* AnimatedTransform+Alias.swift in Sources */,
