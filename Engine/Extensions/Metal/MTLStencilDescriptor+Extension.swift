@@ -13,7 +13,7 @@ extension MTLStencilDescriptor {
         stencil.depthStencilPassOperation = .invert
         return stencil
     }
-    static var lightPassRenderer: MTLStencilDescriptor {
+    static var omniRenderer: MTLStencilDescriptor {
         let stencil = MTLStencilDescriptor()
         stencil.stencilCompareFunction = .greaterEqual
         stencil.readMask = 0b00000000
@@ -24,10 +24,10 @@ extension MTLStencilDescriptor {
         return stencil
     }
     static var ambientRenderer: MTLStencilDescriptor {
-        lightPassRenderer
+        omniRenderer
     }
     static var directionalRenderer: MTLStencilDescriptor {
-        lightPassRenderer
+        omniRenderer
     }
     static var gBufferRenderer: MTLStencilDescriptor {
         let stencil = MTLStencilDescriptor()

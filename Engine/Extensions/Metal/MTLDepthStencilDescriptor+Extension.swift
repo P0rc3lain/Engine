@@ -13,8 +13,8 @@ extension MTLDepthStencilDescriptor {
         descriptor.frontFaceStencil = stencil
         return descriptor
     }
-    static var lightPassRenderer: MTLDepthStencilDescriptor {
-        let stencil = MTLStencilDescriptor.lightPassRenderer
+    static var omniRenderer: MTLDepthStencilDescriptor {
+        let stencil = MTLStencilDescriptor.omniRenderer
         let descriptor = MTLDepthStencilDescriptor()
         descriptor.depthCompareFunction = .lessEqual
         descriptor.isDepthWriteEnabled = true

@@ -12,8 +12,8 @@ extension MTLDevice {
     func makeDepthStencilStateEnvironmentRenderer() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: MTLDepthStencilDescriptor.environmentRenderer)
     }
-    func makeDepthStencilStateLightPass() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: MTLDepthStencilDescriptor.lightPassRenderer)
+    func makeDepthStencilStateOmniPass() -> MTLDepthStencilState? {
+        makeDepthStencilState(descriptor: MTLDepthStencilDescriptor.omniRenderer)
     }
     func makeDepthStencilStateDirectionalPass() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: MTLDepthStencilDescriptor.directionalRenderer)
@@ -37,8 +37,8 @@ extension MTLDevice {
         let descriptor = MTLRenderPipelineDescriptor.gBufferAnimatedRenderer(library: library)
         return try? makeRenderPipelineState(descriptor: descriptor)
     }
-    func makeRenderPipelineStateLightRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
-        let descriptor = MTLRenderPipelineDescriptor.lightRenderer(library: library)
+    func makeRenderPipelineStateOmniRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
+        let descriptor = MTLRenderPipelineDescriptor.omniRenderer(library: library)
         return try? makeRenderPipelineState(descriptor: descriptor)
     }
     func makeRenderPipelineStateDirectionalRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {

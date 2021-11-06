@@ -7,8 +7,8 @@ import Metal
 extension OmniRenderer {
     static func make(device: MTLDevice, inputTextures: [MTLTexture], drawableSize: CGSize) -> OmniRenderer? {
         guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRenderPipelineStateLightRenderer(library: library),
-              let depthStencilState = device.makeDepthStencilStateLightPass() else {
+              let pipelineState = device.makeRenderPipelineStateOmniRenderer(library: library),
+              let depthStencilState = device.makeDepthStencilStateOmniPass() else {
             return nil
         }
         return OmniRenderer(pipelineState: pipelineState,

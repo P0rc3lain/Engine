@@ -43,7 +43,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexFunction = library.makeFunction(name: "gBufferAnimatedVertex")
         return descriptor
     }
-    static func lightRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
+    static func omniRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.vertexFunction = library.makeFunction(name: "vertexDeferredLight")
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentDeferredLight")
