@@ -77,7 +77,7 @@ extension MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.vertexFunction = library.makeFunction(name: "vertexDirectionalLight")
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentDirectionalLight")
-        descriptor.colorAttachments[0].pixelFormat = .ambientColor
+        descriptor.colorAttachments[0].pixelFormat = .directionalColor
         descriptor.colorAttachments[0].rgbBlendOperation = .add
         descriptor.colorAttachments[0].sourceAlphaBlendFactor = .one
         descriptor.colorAttachments[0].destinationRGBBlendFactor = .one
@@ -85,6 +85,21 @@ extension MTLRenderPipelineDescriptor {
         descriptor.colorAttachments[0].alphaBlendOperation = .max
         descriptor.depthAttachmentPixelFormat = .ambientDepthStencil
         descriptor.stencilAttachmentPixelFormat = .ambientDepthStencil
+        descriptor.vertexDescriptor = .porcelain
+        return descriptor
+    }
+    static func spotRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
+        let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.vertexFunction = library.makeFunction(name: "vertexSpotLight")
+        descriptor.fragmentFunction = library.makeFunction(name: "fragmentSpotLight")
+        descriptor.colorAttachments[0].pixelFormat = .spotColor
+        descriptor.colorAttachments[0].rgbBlendOperation = .add
+        descriptor.colorAttachments[0].sourceAlphaBlendFactor = .one
+        descriptor.colorAttachments[0].destinationRGBBlendFactor = .one
+        descriptor.colorAttachments[0].isBlendingEnabled = true
+        descriptor.colorAttachments[0].alphaBlendOperation = .max
+        descriptor.depthAttachmentPixelFormat = .spotDepthStencil
+        descriptor.stencilAttachmentPixelFormat = .spotDepthStencil
         descriptor.vertexDescriptor = .porcelain
         return descriptor
     }

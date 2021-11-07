@@ -10,6 +10,7 @@ struct BufferStore {
     var omniLights: DynamicBuffer<OmniLight>
     var ambientLights: DynamicBuffer<AmbientLight>
     var directionalLights: DynamicBuffer<DirectionalLight>
+    var spotLights: DynamicBuffer<SpotLight>
     var cameras: DynamicBuffer<CameraUniforms>
     var modelCoordinateSystems: DynamicBuffer<ModelUniforms>
     var matrixPalettes: DynamicBuffer<simd_float4x4>
@@ -23,7 +24,8 @@ struct BufferStore {
               let ssaoKernel = DynamicBuffer<simd_float3>(device: device, initialCapacity: 1),
               let ssaoNoise = DynamicBuffer<simd_float3>(device: device, initialCapacity: 1),
               let ambientLights = DynamicBuffer<AmbientLight>(device: device, initialCapacity: 1),
-              let directionalLights = DynamicBuffer<DirectionalLight>(device: device, initialCapacity: 1) else {
+              let directionalLights = DynamicBuffer<DirectionalLight>(device: device, initialCapacity: 1),
+              let spotLights = DynamicBuffer<SpotLight>(device: device, initialCapacity: 1) else {
                   return nil
         }
         self.omniLights = omniLights
@@ -34,6 +36,7 @@ struct BufferStore {
         self.ssaoKernel = ssaoKernel
         self.ssaoNoise = ssaoNoise
         self.directionalLights = directionalLights
+        self.spotLights = spotLights
     }
     mutating func upload(camera: inout Camera, index: Int) {
         var uniforms = [CameraUniforms(projectionMatrix: camera.projectionMatrix, index: Int32(index))]
