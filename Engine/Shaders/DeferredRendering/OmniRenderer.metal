@@ -57,6 +57,9 @@ fragment float4 fragmentDeferredLight(RasterizerData in [[stage_in]],
     int id = omniLights[in.instanceId].idx;
     float3 lightPosition = (lightUniforms[camera.index].modelMatrix * lightUniforms[id].modelMatrix * float4(0, 0, 0, 1)).xyz;
     float3 l = normalize(lightPosition - fragmentPosition);
+    if (dot(n, l) < 0) {
+        discard_fragment();
+    }
     float3 halfway = normalize(l + eye);
     float3 f0 = 0.16 * reflectance * reflectance * (1 - metallicFactor) + metallicFactor * baseColor;
     float3 specular = cookTorrance(n, eye, halfway, l, roughnessFactor, f0);

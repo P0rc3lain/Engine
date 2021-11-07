@@ -59,7 +59,7 @@ fragment float4 fragmentSpotLight(RasterizerData in [[stage_in]],
     float3 lightDirection = (lightTransformation * float4(light.direction, 1)).xyz - lightPosition;
     float3 l = normalize(lightPosition - fragmentPosition);
     float angle = acos(saturate(dot(-lightDirection, l)));
-    if (angle > light.coneAngle) {
+    if (angle > light.coneAngle || angle <= 0 || dot(n, l) < 0) {
         discard_fragment();
     }
     float3 halfway = normalize(l + eye);

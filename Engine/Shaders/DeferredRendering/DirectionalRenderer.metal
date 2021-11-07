@@ -56,6 +56,9 @@ fragment float4 fragmentDirectionalLight(RasterizerData in [[stage_in]],
     float3 outputColor(0, 0, 0);
     DirectionalLight light = directionalLights[in.instanceId];
     float3 l = normalize(-light.direction);
+    if (dot(n, l) < 0) {
+        discard_fragment();
+    }
     float3 halfway = normalize(l + eye);
     float3 f0 = 0.16 * reflectance * reflectance * (1 - metallicFactor) + metallicFactor * baseColor;
     float3 specular = cookTorrance(n, eye, halfway, l, roughnessFactor, f0);
