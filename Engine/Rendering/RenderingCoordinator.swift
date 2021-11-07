@@ -63,6 +63,7 @@ public struct RenderingCoordinator {
         bufferStore.ambientLights.upload(data: &scene.ambientLights)
         bufferStore.omniLights.upload(data: &scene.omniLights)
         bufferStore.directionalLights.upload(data: &scene.directionalLights)
+        bufferStore.spotLights.upload(data: &scene.spotLights)
         bufferStore.upload(camera: &scene.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx], index: scene.activeCameraIdx)
         bufferStore.upload(models: &scene.entities)
         gBufferStage.draw(commandBuffer: &commandBuffer, scene: &scene, bufferStore: &bufferStore)

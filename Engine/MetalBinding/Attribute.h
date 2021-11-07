@@ -95,6 +95,22 @@ enum AttributeDirectionalFragmentShaderBufferIndex {
     kAttributeDirectionalFragmentShaderBufferLightUniforms
 };
 
+enum AttributeSpotVertexShaderBufferIndex {
+    kAttributeSpotVertexShaderBufferStageIn = 0
+};
+
+enum AttributeSpotFragmentShaderTextureIndex {
+    kAttributeSpotFragmentShaderTextureAR = 0,
+    kAttributeSpotFragmentShaderTextureNM,
+    kAttributeSpotFragmentShaderTexturePR
+};
+
+enum AttributeSpotFragmentShaderBufferIndex {
+    kAttributeSpotFragmentShaderBufferCamera = 0,
+    kAttributeSpotFragmentShaderBufferSpotLights,
+    kAttributeSpotFragmentShaderBufferModelUniforms
+};
+
 enum AttributeAmbientVertexShaderBufferIndex {
     kAttributeAmbientVertexShaderBufferStageIn = 0
 };

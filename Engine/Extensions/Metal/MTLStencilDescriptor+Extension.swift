@@ -23,6 +23,9 @@ extension MTLStencilDescriptor {
         stencil.depthStencilPassOperation = .replace
         return stencil
     }
+    static var spotRenderer: MTLStencilDescriptor {
+        omniRenderer
+    }
     static var ambientRenderer: MTLStencilDescriptor {
         omniRenderer
     }

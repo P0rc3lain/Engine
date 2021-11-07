@@ -139,6 +139,9 @@
 		56ADD2F4273707C500107E24 /* AmbientRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F3273707C500107E24 /* AmbientRenderer.swift */; };
 		56ADD2F6273707E200107E24 /* AmbientRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F5273707E200107E24 /* AmbientRenderer.metal */; };
 		56ADD2F8273709F400107E24 /* AmbientRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F7273709F400107E24 /* AmbientRenderer+Extension.swift */; };
+		56C4CD512737FFDD000A994E /* SpotRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C4CD502737FFDD000A994E /* SpotRenderer.swift */; };
+		56C4CD53273800E4000A994E /* SpotRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56C4CD52273800E4000A994E /* SpotRenderer.metal */; };
+		56C4CD55273801EB000A994E /* SpotRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C4CD54273801EB000A994E /* SpotRenderer+Extension.swift */; };
 		56D12AD027231DAD00550530 /* RawRepresentable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D12ACF27231DAD00550530 /* RawRepresentable+Extension.swift */; };
 		56D34A54271B037900A87785 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D34A53271B037900A87785 /* Double+Extension.swift */; };
 		56E8208F2727FD13002D58C3 /* Date+Extensioin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8208E2727FD13002D58C3 /* Date+Extensioin.swift */; };
@@ -297,6 +300,10 @@
 		56ADD2F3273707C500107E24 /* AmbientRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientRenderer.swift; sourceTree = "<group>"; };
 		56ADD2F5273707E200107E24 /* AmbientRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = AmbientRenderer.metal; sourceTree = "<group>"; };
 		56ADD2F7273709F400107E24 /* AmbientRenderer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AmbientRenderer+Extension.swift"; sourceTree = "<group>"; };
+		56C4CD4F2737FF24000A994E /* SpotLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpotLight.h; sourceTree = "<group>"; };
+		56C4CD502737FFDD000A994E /* SpotRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotRenderer.swift; sourceTree = "<group>"; };
+		56C4CD52273800E4000A994E /* SpotRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = SpotRenderer.metal; sourceTree = "<group>"; };
+		56C4CD54273801EB000A994E /* SpotRenderer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpotRenderer+Extension.swift"; sourceTree = "<group>"; };
 		56D12ACE2723167800550530 /* Attribute.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Attribute.h; sourceTree = "<group>"; };
 		56D12ACF27231DAD00550530 /* RawRepresentable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RawRepresentable+Extension.swift"; sourceTree = "<group>"; };
 		56D34A53271B037900A87785 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
@@ -473,6 +480,7 @@
 				561666D82719E2CC000063B1 /* GBufferRenderer.metal */,
 				56ADD2F5273707E200107E24 /* AmbientRenderer.metal */,
 				56F5926C2737276D008652C9 /* DirectionalRenderer.metal */,
+				56C4CD52273800E4000A994E /* SpotRenderer.metal */,
 			);
 			path = DeferredRendering;
 			sourceTree = "<group>";
@@ -535,6 +543,7 @@
 				561666EE2719E2CD000063B1 /* OmniRenderer.swift */,
 				561666EF2719E2CD000063B1 /* GBufferRenderer.swift */,
 				56F59268273725FB008652C9 /* DirectionalRenderer.swift */,
+				56C4CD502737FFDD000A994E /* SpotRenderer.swift */,
 			);
 			path = DeferredRendering;
 			sourceTree = "<group>";
@@ -643,6 +652,7 @@
 				563D0A292719F76600F77B40 /* OmniLight.h */,
 				56ADD2F1273705F800107E24 /* AmbientLight.h */,
 				56F5926727372526008652C9 /* DirectionalLight.h */,
+				56C4CD4F2737FF24000A994E /* SpotLight.h */,
 			);
 			path = Light;
 			sourceTree = "<group>";
@@ -738,6 +748,7 @@
 				5670EC0C2735D5BF00375194 /* BloomMergeRenderer+Extension.swift */,
 				56ADD2F7273709F400107E24 /* AmbientRenderer+Extension.swift */,
 				56F5926A2737264A008652C9 /* DirectionalRenderer+Extension.swift */,
+				56C4CD54273801EB000A994E /* SpotRenderer+Extension.swift */,
 			);
 			path = Porcelain;
 			sourceTree = "<group>";
@@ -870,6 +881,7 @@
 			files = (
 				561DF41727246F1800D95ACC /* MTLViewport+Extension.swift in Sources */,
 				56270167272B54EB00071620 /* AnimatedTransform.swift in Sources */,
+				56C4CD53273800E4000A994E /* SpotRenderer.metal in Sources */,
 				561667342719E2CD000063B1 /* SceneDescription+Alias.swift in Sources */,
 				561667182719E2CD000063B1 /* Skeleton.swift in Sources */,
 				563BFC8527285F100003EDB7 /* MTLBuffer+Extension.swift in Sources */,
@@ -896,6 +908,7 @@
 				56E8208F2727FD13002D58C3 /* Date+Extensioin.swift in Sources */,
 				5616673B2719E2CD000063B1 /* DataBuffer.swift in Sources */,
 				56ADD2F8273709F400107E24 /* AmbientRenderer+Extension.swift in Sources */,
+				56C4CD55273801EB000A994E /* SpotRenderer+Extension.swift in Sources */,
 				5670EC002735977900375194 /* BloomSplitRenderer.swift in Sources */,
 				561667082719E2CD000063B1 /* DataBuffer+Extension.swift in Sources */,
 				563575F42728486A00CE4988 /* AnimationSample.swift in Sources */,
@@ -904,6 +917,7 @@
 				5616671C2719E2CD000063B1 /* MTLStencilDescriptor+Extension.swift in Sources */,
 				563BFC87272878180003EDB7 /* UnsafeMutableRawPointer+Extension.swift in Sources */,
 				561667562719E2CD000063B1 /* RenderingCoordinator.swift in Sources */,
+				56C4CD512737FFDD000A994E /* SpotRenderer.swift in Sources */,
 				5616674D2719E2CD000063B1 /* Engine.swift in Sources */,
 				561667212719E2CD000063B1 /* Postprocessor+Extension.swift in Sources */,
 				5616672A2719E2CD000063B1 /* Uploader.swift in Sources */,

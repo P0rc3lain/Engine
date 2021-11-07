@@ -3,11 +3,12 @@
 //
 
 module MetalBinding {
-    header "../MetalBinding/Vertex.h"
-    header "../MetalBinding/Attribute.h"
     header "../MetalBinding/Model.h"
+    header "../MetalBinding/Vertex.h"
     header "../MetalBinding/Camera.h"
+    header "../MetalBinding/Attribute.h"    
     header "../MetalBinding/Light/OmniLight.h"
+    header "../MetalBinding/Light/SpotLight.h"
     header "../MetalBinding/Light/AmbientLight.h"
     header "../MetalBinding/Light/DirectionalLight.h"
     export *

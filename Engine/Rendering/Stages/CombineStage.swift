@@ -11,6 +11,7 @@ struct CombineStage: Stage {
     private var environmentRenderer: EnvironmentRenderer
     private var omniRenderer: OmniRenderer
     private var ambientRenderer: AmbientRenderer
+    private var spotRenderer: SpotRenderer
     private var directionalRenderer: DirectionalRenderer
     private var ssaoTexture: MTLTexture
     init?(device: MTLDevice, renderingSize: CGSize, gBufferOutput: GPUSupply, ssaoTexture: MTLTexture) {
@@ -24,7 +25,10 @@ struct CombineStage: Stage {
                                                          drawableSize: renderingSize),
               let directionalRenderer = DirectionalRenderer.make(device: device,
                                                                  inputTextures: gBufferOutput.color,
-                                                                 drawableSize: renderingSize) else {
+                                                                 drawableSize: renderingSize),
+              let spotRenderer = SpotRenderer.make(device: device,
+                                                   inputTextures: gBufferOutput.color,
+                                                   drawableSize: renderingSize) else {
             return nil
         }
         offscreenRenderPassDescriptor = .lightenScene(device: device,
@@ -37,6 +41,7 @@ struct CombineStage: Stage {
         self.ssaoTexture = ssaoTexture
         self.environmentRenderer = environmentRenderer
         self.omniRenderer = omniRenderer
+        self.spotRenderer = spotRenderer
         self.directionalRenderer = directionalRenderer
         self.io = GPUIO(input: GPUSupply(color: gBufferOutput.color + [ssaoTexture],
                                          stencil: gBufferOutput.stencil),
@@ -58,6 +63,11 @@ struct CombineStage: Stage {
                              bufferStore: &bufferStore,
                              ssao: ssaoTexture,
                              scene: &scene)
+        commandBuffer.popDebugGroup()
+        commandBuffer.pushDebugGroup("Spot Light Pass")
+        spotRenderer.draw(encoder: &encoder,
+                          bufferStore: &bufferStore,
+                          scene: &scene)
         commandBuffer.popDebugGroup()
         commandBuffer.pushDebugGroup("Directional Light Pass")
         directionalRenderer.draw(encoder: &encoder,

@@ -2,7 +2,6 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-
 #include <simd/simd.h>
 #include <metal_stdlib>
 

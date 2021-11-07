@@ -23,6 +23,9 @@ extension MTLPixelFormat {
     static var directionalColor: MTLPixelFormat {
         .rgba16Float
     }
+    static var spotColor: MTLPixelFormat {
+        .rgba16Float
+    }
     static var lightenSceneColor: MTLPixelFormat {
         .rgba16Float
     }
@@ -33,6 +36,9 @@ extension MTLPixelFormat {
         .depth32Float_stencil8
     }
     static var ambientDepthStencil: MTLPixelFormat {
+        .depth32Float_stencil8
+    }
+    static var spotDepthStencil: MTLPixelFormat {
         .depth32Float_stencil8
     }
     static var bloomSplitColor: MTLPixelFormat {
