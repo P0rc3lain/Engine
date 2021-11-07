@@ -7,52 +7,26 @@ import MetalBinding
 import MetalKit
 import MetalPerformanceShaders
 
-public struct RenderingCoordinator {
+struct RenderingCoordinator {
     private let view: MTKView
-    private let canvasSize: CGSize
     private let commandQueue: MTLCommandQueue
     private var bufferStore: BufferStore
-    private var combineStage: CombineStage
-    private var ssaoStage: SSAOStage
-    private var bloomStage: BloomStage
-    private var gBufferStage: GBufferStage
-    private var postprocessStage: PostprocessStage
+    private var pipeline: Pipeline
     private let imageConverter: MPSImageConversion
-    let renderingSize: CGSize
-    init?(view metalView: MTKView, canvasSize: CGSize, renderingSize: CGSize) {
+    init?(view metalView: MTKView, renderingSize: CGSize) {
         guard let device = metalView.device,
               let bufferStore = BufferStore(device: device),
               let commandQueue = device.makeCommandQueue(),
-              let gBufferStage = GBufferStage(device: device, renderingSize: renderingSize),
-              let ssaoStage = SSAOStage(device: device,
-                                        renderingSize: renderingSize,
-                                        prTexture: gBufferStage.io.output.color[2],
-                                        nmTexture: gBufferStage.io.output.color[1]),
-              let combineStage = CombineStage(device: device,
-                                              renderingSize: renderingSize,
-                                              gBufferOutput: gBufferStage.io.output,
-                                              ssaoTexture: ssaoStage.io.output.color[0]),
-              let bloomStage = BloomStage(input: combineStage.io.output.color[0],
-                                          device: device,
-                                          renderingSize: renderingSize),
-              let postprocessStage = PostprocessStage(device: device,
-                                                      inputTexture: bloomStage.io.output.color[0],
-                                                      renderingSize: canvasSize) else {
+              let pipeline = Pipeline(device: device, renderingSize: renderingSize) else {
             return nil
         }
-        self.gBufferStage = gBufferStage
         self.imageConverter = MPSImageConversion(device: device)
         self.view = metalView
-        self.canvasSize = canvasSize
-        self.combineStage = combineStage
-        self.renderingSize = renderingSize
+        self.pipeline = pipeline
         self.bufferStore = bufferStore
-        self.bloomStage = bloomStage
         self.commandQueue = commandQueue
-        self.ssaoStage = ssaoStage
-        self.postprocessStage = postprocessStage
     }
-    public mutating func draw(scene: inout GPUSceneDescription) {
+    mutating func draw(scene: inout GPUSceneDescription) {
         guard scene.activeCameraIdx != .nil,
               var commandBuffer = commandQueue.makeCommandBuffer(),
               let drawable = view.currentDrawable,
@@ -66,13 +40,11 @@ public struct RenderingCoordinator {
         bufferStore.spotLights.upload(data: &scene.spotLights)
         bufferStore.upload(camera: &scene.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx], index: scene.activeCameraIdx)
         bufferStore.upload(models: &scene.entities)
-        gBufferStage.draw(commandBuffer: &commandBuffer, scene: &scene, bufferStore: &bufferStore)
-        ssaoStage.draw(commandBuffer: &commandBuffer, bufferStore: &bufferStore)
-        combineStage.draw(commandBuffer: &commandBuffer, scene: &scene, bufferStore: &bufferStore)
-        bloomStage.draw(commandBuffer: &commandBuffer)
-        postprocessStage.draw(commandBuffer: &commandBuffer)
+        pipeline.draw(commandBuffer: &commandBuffer,
+                      scene: &scene,
+                      bufferStore: &bufferStore)
         imageConverter.encode(commandBuffer: commandBuffer,
-                              sourceTexture: postprocessStage.io.output.color[0],
+                              sourceTexture: pipeline.io.output.color[0],
                               destinationTexture: outputTexture)
         commandBuffer.present(drawable)
         commandBuffer.commit()

@@ -10,7 +10,6 @@ public class Engine {
     private var coordinator: RenderingCoordinator
     public init?(view: MTKView, renderingSize: CGSize, sceneDescription: GPUSceneDescription) {
         guard let coordinator = RenderingCoordinator(view: view,
-                                                     canvasSize: view.drawableSize,
                                                      renderingSize: renderingSize) else {
             return nil
         }
@@ -20,8 +19,7 @@ public class Engine {
     }
     public func updateDrawableSize(drawableSize: CGSize) -> Bool {
         guard let updated = RenderingCoordinator(view: view,
-                                                 canvasSize: drawableSize,
-                                                 renderingSize: coordinator.renderingSize) else {
+                                                 renderingSize: drawableSize) else {
             return false
         }
         coordinator = updated

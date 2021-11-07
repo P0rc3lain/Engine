@@ -25,37 +25,37 @@ extension MTLDevice {
         makeDepthStencilState(descriptor: .ambientRenderer)
     }
     func makeRenderPipelineStatePostprocessor(library: MTLLibrary) -> MTLRenderPipelineState? {
-        return try? makeRenderPipelineState(descriptor: .postProcessor(library: library))
+        try? makeRenderPipelineState(descriptor: .postProcessor(library: library))
     }
     func makeRenderPipelineStateEnvironmentRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
-        return try? makeRenderPipelineState(descriptor: .environmentRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .environmentRenderer(library: library))
     }
     func makeRenderPipelineStateGBufferRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
-        return try? makeRenderPipelineState(descriptor: .gBufferRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .gBufferRenderer(library: library))
     }
     func makeRenderPipelineStateGBufferAnimatedRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
-        return try? makeRenderPipelineState(descriptor: .gBufferAnimatedRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .gBufferAnimatedRenderer(library: library))
     }
     func makeRenderPipelineStateOmniRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
-        return try? makeRenderPipelineState(descriptor: .omniRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .omniRenderer(library: library))
     }
     func makeRenderPipelineStateDirectionalRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
-        return try? makeRenderPipelineState(descriptor: .directionalRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .directionalRenderer(library: library))
     }
     func makeRenderPipelineStateSpotRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
-        return try? makeRenderPipelineState(descriptor: .spotRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .spotRenderer(library: library))
     }
     func makeRenderPipelineStateAmbientRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
-        return try? makeRenderPipelineState(descriptor: .ambientRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .ambientRenderer(library: library))
     }
     func makeRenderPipelineStateSsao(library: MTLLibrary) -> MTLRenderPipelineState? {
-        return try? makeRenderPipelineState(descriptor: .ssaoRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .ssaoRenderer(library: library))
     }
     func makeRenderPipelineStateBloomSplit(library: MTLLibrary) -> MTLRenderPipelineState? {
-        return try? makeRenderPipelineState(descriptor: .bloomSplitRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .bloomSplitRenderer(library: library))
     }
     func makeRenderPipelineStateBloomMerge(library: MTLLibrary) -> MTLRenderPipelineState? {
-        return try? makeRenderPipelineState(descriptor: .bloomMergeRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .bloomMergeRenderer(library: library))
     }
     func makeTextureLightenSceneDepthStencil(size: CGSize) -> MTLTexture? {
         makeTexture(descriptor: .lightenSceneDepthStencil(size: size))

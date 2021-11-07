@@ -106,6 +106,7 @@
 		563BFC9527289A3B0003EDB7 /* MDLAnimatedQuaternionArray+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563BFC9427289A3B0003EDB7 /* MDLAnimatedQuaternionArray+Extension.swift */; };
 		563BFC9A27294AF70003EDB7 /* GPUGeometry+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563BFC9927294AF70003EDB7 /* GPUGeometry+Extension.swift */; };
 		563BFC9C27294B020003EDB7 /* RamGeometry+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563BFC9B27294B020003EDB7 /* RamGeometry+Extension.swift */; };
+		563C9C1D27387B940014CFF3 /* Pipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563C9C1C27387B940014CFF3 /* Pipeline.swift */; };
 		563D0A2A2719F77000F77B40 /* OmniLight.h in Headers */ = {isa = PBXBuildFile; fileRef = 563D0A292719F76600F77B40 /* OmniLight.h */; };
 		563D0A2D2719F7A700F77B40 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 563D0A2B2719F79D00F77B40 /* Camera.h */; };
 		563D0A2E2719F7A700F77B40 /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = 563D0A2C2719F7A400F77B40 /* Model.h */; };
@@ -266,6 +267,7 @@
 		563BFC9427289A3B0003EDB7 /* MDLAnimatedQuaternionArray+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MDLAnimatedQuaternionArray+Extension.swift"; sourceTree = "<group>"; };
 		563BFC9927294AF70003EDB7 /* GPUGeometry+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GPUGeometry+Extension.swift"; sourceTree = "<group>"; };
 		563BFC9B27294B020003EDB7 /* RamGeometry+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RamGeometry+Extension.swift"; sourceTree = "<group>"; };
+		563C9C1C27387B940014CFF3 /* Pipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pipeline.swift; sourceTree = "<group>"; };
 		563D0A292719F76600F77B40 /* OmniLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OmniLight.h; sourceTree = "<group>"; };
 		563D0A2B2719F79D00F77B40 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		563D0A2C2719F7A400F77B40 /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
@@ -605,6 +607,7 @@
 				5670EC112736A1BE00375194 /* Stage.swift */,
 				5670EC232736DD6100375194 /* CombineStage.swift */,
 				5670EC262736EA2400375194 /* PostprocessStage.swift */,
+				563C9C1C27387B940014CFF3 /* Pipeline.swift */,
 			);
 			path = Stages;
 			sourceTree = "<group>";
@@ -1008,6 +1011,7 @@
 				5616673C2719E2CD000063B1 /* IndexBitDepth.swift in Sources */,
 				563BFC9527289A3B0003EDB7 /* MDLAnimatedQuaternionArray+Extension.swift in Sources */,
 				56270169272B556500071620 /* AnimatedTransform+Alias.swift in Sources */,
+				563C9C1D27387B940014CFF3 /* Pipeline.swift in Sources */,
 				5616672C2719E2CD000063B1 /* SceneLoader.swift in Sources */,
 				561667522719E2CD000063B1 /* EnvironmentRenderer.swift in Sources */,
 				561667532719E2CD000063B1 /* OmniRenderer.swift in Sources */,
