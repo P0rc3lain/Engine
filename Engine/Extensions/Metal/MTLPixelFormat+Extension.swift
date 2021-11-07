@@ -35,6 +35,9 @@ extension MTLPixelFormat {
     static var lightenSceneDepthStencil: MTLPixelFormat {
         .depth32Float_stencil8
     }
+    static var directionalDepthStencil: MTLPixelFormat {
+        .depth32Float_stencil8
+    }
     static var ambientDepthStencil: MTLPixelFormat {
         .depth32Float_stencil8
     }

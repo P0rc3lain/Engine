@@ -83,8 +83,8 @@ extension MTLRenderPipelineDescriptor {
         descriptor.colorAttachments[0].destinationRGBBlendFactor = .one
         descriptor.colorAttachments[0].isBlendingEnabled = true
         descriptor.colorAttachments[0].alphaBlendOperation = .max
-        descriptor.depthAttachmentPixelFormat = .ambientDepthStencil
-        descriptor.stencilAttachmentPixelFormat = .ambientDepthStencil
+        descriptor.depthAttachmentPixelFormat = .directionalDepthStencil
+        descriptor.stencilAttachmentPixelFormat = .directionalDepthStencil
         descriptor.vertexDescriptor = .porcelain
         return descriptor
     }

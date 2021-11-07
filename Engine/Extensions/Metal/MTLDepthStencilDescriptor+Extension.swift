@@ -13,37 +13,25 @@ extension MTLDepthStencilDescriptor {
         descriptor.frontFaceStencil = stencil
         return descriptor
     }
-    static var omniRenderer: MTLDepthStencilDescriptor {
-        let stencil = MTLStencilDescriptor.omniRenderer
+    static var lightRenderer: MTLDepthStencilDescriptor {
+        let stencil = MTLStencilDescriptor.lightRenderer
         let descriptor = MTLDepthStencilDescriptor()
         descriptor.depthCompareFunction = .lessEqual
         descriptor.isDepthWriteEnabled = true
         descriptor.frontFaceStencil = stencil
         return descriptor
+    }
+    static var omniRenderer: MTLDepthStencilDescriptor {
+        lightRenderer
     }
     static var spotRenderer: MTLDepthStencilDescriptor {
-        let stencil = MTLStencilDescriptor.spotRenderer
-        let descriptor = MTLDepthStencilDescriptor()
-        descriptor.depthCompareFunction = .lessEqual
-        descriptor.isDepthWriteEnabled = true
-        descriptor.frontFaceStencil = stencil
-        return descriptor
+        lightRenderer
     }
     static var ambientRenderer: MTLDepthStencilDescriptor {
-        let stencil = MTLStencilDescriptor.ambientRenderer
-        let descriptor = MTLDepthStencilDescriptor()
-        descriptor.depthCompareFunction = .lessEqual
-        descriptor.isDepthWriteEnabled = true
-        descriptor.frontFaceStencil = stencil
-        return descriptor
+        lightRenderer
     }
     static var directionalRenderer: MTLDepthStencilDescriptor {
-        let stencil = MTLStencilDescriptor.directionalRenderer
-        let descriptor = MTLDepthStencilDescriptor()
-        descriptor.depthCompareFunction = .lessEqual
-        descriptor.isDepthWriteEnabled = true
-        descriptor.frontFaceStencil = stencil
-        return descriptor
+        lightRenderer
     }
     static var environmentRenderer: MTLDepthStencilDescriptor {
         let stencil = MTLStencilDescriptor.environmentRenderer
