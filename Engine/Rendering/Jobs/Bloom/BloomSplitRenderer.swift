@@ -29,7 +29,9 @@ struct BloomSplitRenderer {
         self.gaussianBlur = MPSImageGaussianBlur(device: device, sigma: 15)
         self.outputTexture = outputTexture
     }
-    mutating func draw(encoder: inout MTLRenderCommandEncoder, commandBuffer: inout MTLCommandBuffer, renderPass: inout MTLRenderPassDescriptor) {
+    mutating func draw(encoder: inout MTLRenderCommandEncoder,
+                       commandBuffer: inout MTLCommandBuffer,
+                       renderPass: inout MTLRenderPassDescriptor) {
         guard let gaussianBlurSource = renderPass.colorAttachments[0].texture else {
             fatalError("Required textures not bound")
         }

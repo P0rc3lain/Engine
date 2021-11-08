@@ -28,7 +28,8 @@ struct SpotRenderer {
     }
     func draw(encoder: inout MTLRenderCommandEncoder,
               bufferStore: inout BufferStore,
-              scene: inout GPUSceneDescription) {
+              scene: inout GPUSceneDescription,
+              shadowMap: MTLTexture) {
         guard !scene.spotLights.isEmpty else {
             return
         }
@@ -48,8 +49,8 @@ struct SpotRenderer {
                                   index: kAttributeSpotFragmentShaderBufferCamera)
         encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems,
                                   index: kAttributeSpotFragmentShaderBufferModelUniforms)
-        let range = kAttributeSpotFragmentShaderTextureAR ... kAttributeSpotFragmentShaderTexturePR
-        encoder.setFragmentTextures([arTexture, nmTexture, prTexture], range: range)
+        let range = kAttributeSpotFragmentShaderTextureAR ... kAttributeSpotFragmentShaderTextureShadowMaps
+        encoder.setFragmentTextures([arTexture, nmTexture, prTexture, shadowMap], range: range)
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
                                       indexType: plane.pieceDescriptions[0].drawDescription.indexType,

@@ -5,6 +5,9 @@
 import Metal
 
 struct GPUSupply {
+    static var empty: GPUSupply {
+        GPUSupply()
+    }
     let color: [MTLTexture]
     let stencil: MTLTexture?
     let depth: MTLTexture?

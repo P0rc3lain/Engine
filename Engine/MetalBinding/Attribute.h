@@ -14,6 +14,14 @@ enum VertexAttribute {
     kVertexAttributeJointWeights
 };
 
+enum AttributeSpotShadowVertexShaderBufferIndex {
+    kAttributeSpotShadowVertexShaderBufferStageIn = 0,
+    kAttributeSpotShadowVertexShaderBufferSpotLights,
+    kAttributeSpotShadowVertexShaderBufferModelUniforms,
+    kAttributeSpotShadowVertexShaderBufferMatrixPalettes,
+    kAttributeSpotShadowVertexShaderBufferObjectIndex
+};
+
 enum AttributeGBufferVertexShaderBufferIndex {
     kAttributeGBufferVertexShaderBufferStageIn = 0,
     kAttributeGBufferVertexShaderBufferCameraUniforms,
@@ -102,7 +110,8 @@ enum AttributeSpotVertexShaderBufferIndex {
 enum AttributeSpotFragmentShaderTextureIndex {
     kAttributeSpotFragmentShaderTextureAR = 0,
     kAttributeSpotFragmentShaderTextureNM,
-    kAttributeSpotFragmentShaderTexturePR
+    kAttributeSpotFragmentShaderTexturePR,
+    kAttributeSpotFragmentShaderTextureShadowMaps
 };
 
 enum AttributeSpotFragmentShaderBufferIndex {

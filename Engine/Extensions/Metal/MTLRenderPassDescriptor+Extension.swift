@@ -44,6 +44,16 @@ extension MTLRenderPassDescriptor {
         descriptor.stencilAttachment.storeAction = .store
         return descriptor
     }
+    static func spotLightShadow(device: MTLDevice, size: CGSize, layers: Int) -> MTLRenderPassDescriptor {
+        let descriptor = MTLRenderPassDescriptor()
+        let texture = device.makeTextureSpotLightShadowDepthStencil(size: size)
+        descriptor.renderTargetArrayLength = layers
+        descriptor.depthAttachment.clearDepth = 1
+        descriptor.depthAttachment.texture = texture
+        descriptor.depthAttachment.storeAction = .store
+        descriptor.depthAttachment.loadAction = .clear
+        return descriptor
+    }
     static func ssao(device: MTLDevice, size: CGSize) -> MTLRenderPassDescriptor {
         let descriptor = MTLRenderPassDescriptor()
         descriptor.colorAttachments[0].loadAction = .clear

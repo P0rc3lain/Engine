@@ -64,6 +64,17 @@ extension MTLTextureDescriptor {
     static func gBufferDepthStencil(size: CGSize) -> MTLTextureDescriptor {
         gBufferAttachment(size: size, pixelFormat: .gBufferDepthStencil)
     }
+    static func spotLightShadowDepthStencil(size: CGSize) -> MTLTextureDescriptor {
+        let descriptor = MTLTextureDescriptor()
+        descriptor.textureType = .type2DArray
+        descriptor.width = Int(size.width)
+        descriptor.height = Int(size.height)
+        descriptor.arrayLength = 100
+        descriptor.storageMode = .private
+        descriptor.pixelFormat = .spotShadowDepthStencil
+        descriptor.usage = [.shaderRead, .renderTarget, .shaderWrite]
+        return descriptor
+    }
     static func lightenSceneColor(size: CGSize) -> MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = .type2D

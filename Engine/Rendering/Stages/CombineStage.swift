@@ -12,9 +12,10 @@ struct CombineStage: Stage {
     private var omniRenderer: OmniRenderer
     private var ambientRenderer: AmbientRenderer
     private var spotRenderer: SpotRenderer
+    private var spotLightShadows: MTLTexture
     private var directionalRenderer: DirectionalRenderer
     private var ssaoTexture: MTLTexture
-    init?(device: MTLDevice, renderingSize: CGSize, gBufferOutput: GPUSupply, ssaoTexture: MTLTexture) {
+    init?(device: MTLDevice, renderingSize: CGSize, gBufferOutput: GPUSupply, ssaoTexture: MTLTexture, spotLightShadows: MTLTexture) {
         guard let stencilTexture = gBufferOutput.stencil,
               let environmentRenderer = EnvironmentRenderer.make(device: device, drawableSize: renderingSize),
               let omniRenderer = OmniRenderer.make(device: device,
@@ -42,6 +43,7 @@ struct CombineStage: Stage {
         self.environmentRenderer = environmentRenderer
         self.omniRenderer = omniRenderer
         self.spotRenderer = spotRenderer
+        self.spotLightShadows = spotLightShadows
         self.directionalRenderer = directionalRenderer
         self.io = GPUIO(input: GPUSupply(color: gBufferOutput.color + [ssaoTexture],
                                          stencil: gBufferOutput.stencil),
@@ -50,31 +52,24 @@ struct CombineStage: Stage {
     func draw(commandBuffer: inout MTLCommandBuffer,
               scene: inout GPUSceneDescription,
               bufferStore: inout BufferStore) {
-        commandBuffer.pushDebugGroup("Omni Light Pass")
+        commandBuffer.pushDebugGroup("Light Pass")
         guard var encoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor) else {
             return
         }
         omniRenderer.draw(encoder: &encoder,
                           bufferStore: &bufferStore,
                           scene: &scene)
-        commandBuffer.popDebugGroup()
-        commandBuffer.pushDebugGroup("Ambient Light Pass")
         ambientRenderer.draw(encoder: &encoder,
                              bufferStore: &bufferStore,
                              ssao: ssaoTexture,
                              scene: &scene)
-        commandBuffer.popDebugGroup()
-        commandBuffer.pushDebugGroup("Spot Light Pass")
         spotRenderer.draw(encoder: &encoder,
                           bufferStore: &bufferStore,
-                          scene: &scene)
-        commandBuffer.popDebugGroup()
-        commandBuffer.pushDebugGroup("Directional Light Pass")
+                          scene: &scene,
+                          shadowMap: spotLightShadows)
         directionalRenderer.draw(encoder: &encoder,
                                  bufferStore: &bufferStore,
                                  scene: &scene)
-        commandBuffer.popDebugGroup()
-        commandBuffer.pushDebugGroup("Environment Map")
         environmentRenderer.draw(encoder: &encoder, scene: &scene)
         encoder.endEncoding()
         commandBuffer.popDebugGroup()
