@@ -8,7 +8,6 @@
 struct SpotLight {
     simd_float3 color;
     float intensity;
-    simd_float3 direction;
     float coneAngle;
     int idx;
 };

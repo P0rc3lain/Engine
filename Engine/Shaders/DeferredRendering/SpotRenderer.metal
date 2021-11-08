@@ -56,7 +56,8 @@ fragment float4 fragmentSpotLight(RasterizerData in [[stage_in]],
     int id = light.idx;
     float4x4 lightTransformation = modelUniforms[camera.index].modelMatrix * modelUniforms[id].modelMatrix;
     float3 lightPosition = (lightTransformation * float4(0, 0, 0, 1)).xyz;
-    float3 lightDirection = (lightTransformation * float4(light.direction, 1)).xyz - lightPosition;
+    float3 lightLocalDirection = modelUniforms[id].modelMatrix.columns[2].xyz;
+    float3 lightDirection = (lightTransformation * float4(lightLocalDirection, 1)).xyz - lightPosition;
     float3 l = normalize(lightPosition - fragmentPosition);
     float angle = acos(saturate(dot(-lightDirection, l)));
     if (angle > light.coneAngle || angle <= 0 || dot(n, l) < 0) {
