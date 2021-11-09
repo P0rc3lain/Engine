@@ -17,11 +17,16 @@ extension simd_float4x4 {
                     simd_length(columns.2.xyz))
     }
     public var decomposed: Position {
-        Position(translation: translation, rotation: rotation, scale: scale)
+        Position(translation: translation,
+                 rotation: rotation,
+                 scale: scale)
     }
     public init(_ matrix: simd_double4x4) {
         let columns = matrix.columns
-        self.init(columns: (simd_float4(columns.0), simd_float4(columns.1), simd_float4(columns.2), simd_float4(columns.3)))
+        self.init(columns: (simd_float4(columns.0),
+                            simd_float4(columns.1),
+                            simd_float4(columns.2),
+                            simd_float4(columns.3)))
     }
     public static func translation(vector: simd_float3) -> simd_float4x4 {
         simd_float4x4(columns: (simd_float4(1, 0, 0, 0),
@@ -44,7 +49,9 @@ extension simd_float4x4 {
                                     simd_float4(0, 0, zScale, nearZ * zScale),
                                     simd_float4(0, 0, -1, 0 )])
     }
-    public static func compose(translation: simd_float3, rotation: simd_quatf, scale: simd_float3) -> simd_float4x4 {
+    public static func compose(translation: simd_float3,
+                               rotation: simd_quatf,
+                               scale: simd_float3) -> simd_float4x4 {
         .translation(vector: translation) * matrix_float4x4(rotation) * .scale(scale)
     }
 }

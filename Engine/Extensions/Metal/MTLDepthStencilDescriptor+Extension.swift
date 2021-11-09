@@ -27,6 +27,12 @@ extension MTLDepthStencilDescriptor {
     static var spotRenderer: MTLDepthStencilDescriptor {
         lightRenderer
     }
+    static var spotShadowRenderer: MTLDepthStencilDescriptor {
+        let descriptor = MTLDepthStencilDescriptor()
+        descriptor.depthCompareFunction = .lessEqual
+        descriptor.isDepthWriteEnabled = true
+        return descriptor
+    }
     static var ambientRenderer: MTLDepthStencilDescriptor {
         lightRenderer
     }

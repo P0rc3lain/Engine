@@ -10,17 +10,24 @@ struct Pipeline: Stage {
     private var ssaoStage: SSAOStage
     private var bloomStage: BloomStage
     private var gBufferStage: GBufferStage
+    private var shadowStage: ShadowStage
     private var postprocessStage: PostprocessStage
     init?(device: MTLDevice, renderingSize: CGSize) {
-        guard let gBufferStage = GBufferStage(device: device, renderingSize: renderingSize),
+        guard let gBufferStage = GBufferStage(device: device,
+                                              renderingSize: renderingSize),
+              let shadowStage = ShadowStage(device: device,
+                                            spotShadowTextureSideSize: 1_024,
+                                            spotLightsNumber: 100),
               let ssaoStage = SSAOStage(device: device,
                                         renderingSize: renderingSize,
                                         prTexture: gBufferStage.io.output.color[2],
                                         nmTexture: gBufferStage.io.output.color[1]),
+              let spotShadowDepth = shadowStage.io.output.depth,
               let combineStage = CombineStage(device: device,
                                               renderingSize: renderingSize,
                                               gBufferOutput: gBufferStage.io.output,
-                                              ssaoTexture: ssaoStage.io.output.color[0]),
+                                              ssaoTexture: ssaoStage.io.output.color[0],
+                                              spotLightShadows: spotShadowDepth),
               let bloomStage = BloomStage(input: combineStage.io.output.color[0],
                                           device: device,
                                           renderingSize: renderingSize),
@@ -34,14 +41,24 @@ struct Pipeline: Stage {
         self.bloomStage = bloomStage
         self.ssaoStage = ssaoStage
         self.postprocessStage = postprocessStage
-        self.io = GPUIO(input: GPUSupply(), output: GPUSupply(color: postprocessStage.io.output.color))
+        self.shadowStage = shadowStage
+        self.io = GPUIO(input: .empty,
+                        output: GPUSupply(color: postprocessStage.io.output.color))
     }
     mutating func draw(commandBuffer: inout MTLCommandBuffer,
                        scene: inout GPUSceneDescription,
                        bufferStore: inout BufferStore) {
-        gBufferStage.draw(commandBuffer: &commandBuffer, scene: &scene, bufferStore: &bufferStore)
-        ssaoStage.draw(commandBuffer: &commandBuffer, bufferStore: &bufferStore)
-        combineStage.draw(commandBuffer: &commandBuffer, scene: &scene, bufferStore: &bufferStore)
+        shadowStage.draw(commandBuffer: &commandBuffer,
+                         scene: &scene,
+                         bufferStore: &bufferStore)
+        gBufferStage.draw(commandBuffer: &commandBuffer,
+                          scene: &scene,
+                          bufferStore: &bufferStore)
+        ssaoStage.draw(commandBuffer: &commandBuffer,
+                       bufferStore: &bufferStore)
+        combineStage.draw(commandBuffer: &commandBuffer,
+                          scene: &scene,
+                          bufferStore: &bufferStore)
         bloomStage.draw(commandBuffer: &commandBuffer)
         postprocessStage.draw(commandBuffer: &commandBuffer)
     }

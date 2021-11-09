@@ -17,6 +17,9 @@ extension MTLPixelFormat {
     static var gBufferDepthStencil: MTLPixelFormat {
         .depth32Float_stencil8
     }
+    static var spotShadowDepthStencil: MTLPixelFormat {
+        .depth32Float
+    }
     static var ambientColor: MTLPixelFormat {
         .rgba16Float
     }

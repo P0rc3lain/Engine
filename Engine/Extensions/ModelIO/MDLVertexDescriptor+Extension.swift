@@ -7,6 +7,7 @@ import ModelIO
 
 extension MDLVertexDescriptor {
     public static var porcelain: MDLVertexDescriptor? {
+        assert(MAX_JOINT_NUMBER == 4, "Vertex Descriptor is setup to use up to four joints")
         guard let positionOffset = MemoryLayout<Vertex>.offset(of: \Vertex.position),
               let normalOffset = MemoryLayout<Vertex>.offset(of: \Vertex.normal),
               let tangentOffset = MemoryLayout<Vertex>.offset(of: \Vertex.tangent),

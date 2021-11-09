@@ -38,6 +38,21 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexDescriptor = .porcelain
         return descriptor
     }
+    static func spotLightShadowRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
+        let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.vertexFunction = try? library.makeFunction(name: "vertexSpotLightShadow",
+                                                              constantValues: .bool(false, index: 0))
+        descriptor.depthAttachmentPixelFormat = .spotShadowDepthStencil
+        descriptor.vertexDescriptor = .porcelain
+        descriptor.sampleCount = 1
+        descriptor.inputPrimitiveTopology = .triangle
+        return descriptor
+    }
+    static func spotLightShadowAnimatedRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor { let descriptor = MTLRenderPipelineDescriptor.spotLightShadowRenderer(library: library)
+        descriptor.vertexFunction = try? library.makeFunction(name: "vertexSpotLightShadow",
+                                                              constantValues: .bool(true, index: 0))
+        return descriptor
+    }
     static func gBufferAnimatedRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor.gBufferRenderer(library: library)
         descriptor.vertexFunction = library.makeFunction(name: "gBufferAnimatedVertex")
