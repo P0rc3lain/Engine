@@ -9,6 +9,7 @@ import ModelIO
 extension MTLRenderPipelineDescriptor {
     static func postProcessor(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.label = "Postprocessor"
         descriptor.vertexFunction = library.makeFunction(name: "vertexPostprocess")
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentPostprocess")
         descriptor.colorAttachments[0].pixelFormat = .postprocessorRendererColor
@@ -18,6 +19,7 @@ extension MTLRenderPipelineDescriptor {
     }
     static func environmentRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.label = "Environment"
         descriptor.vertexFunction = library.makeFunction(name: "environmentVertexShader")
         descriptor.fragmentFunction = library.makeFunction(name: "environmentFragmentShader")
         descriptor.colorAttachments[0].pixelFormat = .environmentRendererColor
@@ -28,6 +30,7 @@ extension MTLRenderPipelineDescriptor {
     }
     static func gBufferRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.label = "GBuffer"
         descriptor.vertexFunction = library.makeFunction(name: "gBufferVertex")
         descriptor.fragmentFunction = library.makeFunction(name: "gBufferFragment")
         descriptor.colorAttachments[0].pixelFormat = .gBufferAR
@@ -38,8 +41,15 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexDescriptor = .porcelain
         return descriptor
     }
+    static func gBufferAnimatedRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
+        let descriptor = MTLRenderPipelineDescriptor.gBufferRenderer(library: library)
+        descriptor.label = "GBuffer Animated"
+        descriptor.vertexFunction = library.makeFunction(name: "gBufferAnimatedVertex")
+        return descriptor
+    }
     static func spotLightShadowRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.label = "Spot Shadows"
         descriptor.vertexFunction = try? library.makeFunction(name: "vertexSpotLightShadow",
                                                               constantValues: .bool(false, index: 0))
         descriptor.depthAttachmentPixelFormat = .spotShadowDepthStencil
@@ -48,18 +58,16 @@ extension MTLRenderPipelineDescriptor {
         descriptor.inputPrimitiveTopology = .triangle
         return descriptor
     }
-    static func spotLightShadowAnimatedRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor { let descriptor = MTLRenderPipelineDescriptor.spotLightShadowRenderer(library: library)
+    static func spotLightShadowAnimatedRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
+        let descriptor = MTLRenderPipelineDescriptor.spotLightShadowRenderer(library: library)
+        descriptor.label = "Spot Shadows Animated"
         descriptor.vertexFunction = try? library.makeFunction(name: "vertexSpotLightShadow",
                                                               constantValues: .bool(true, index: 0))
         return descriptor
     }
-    static func gBufferAnimatedRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
-        let descriptor = MTLRenderPipelineDescriptor.gBufferRenderer(library: library)
-        descriptor.vertexFunction = library.makeFunction(name: "gBufferAnimatedVertex")
-        return descriptor
-    }
     static func omniRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.label = "Omni Lighting"
         descriptor.vertexFunction = library.makeFunction(name: "vertexDeferredLight")
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentDeferredLight")
         descriptor.colorAttachments[0].pixelFormat = .lightenSceneColor
@@ -75,6 +83,7 @@ extension MTLRenderPipelineDescriptor {
     }
     static func ambientRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.label = "Ambient Lighting"
         descriptor.vertexFunction = library.makeFunction(name: "vertexAmbientLight")
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentAmbientLight")
         descriptor.colorAttachments[0].pixelFormat = .ambientColor
@@ -90,6 +99,7 @@ extension MTLRenderPipelineDescriptor {
     }
     static func directionalRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.label = "Directional Lighting"
         descriptor.vertexFunction = library.makeFunction(name: "vertexDirectionalLight")
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentDirectionalLight")
         descriptor.colorAttachments[0].pixelFormat = .directionalColor
@@ -105,6 +115,7 @@ extension MTLRenderPipelineDescriptor {
     }
     static func spotRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.label = "Spot Lighting"
         descriptor.vertexFunction = library.makeFunction(name: "vertexSpotLight")
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentSpotLight")
         descriptor.colorAttachments[0].pixelFormat = .spotColor
@@ -120,6 +131,7 @@ extension MTLRenderPipelineDescriptor {
     }
     static func ssaoRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.label = "SSAO"
         descriptor.vertexFunction = library.makeFunction(name: "vertexSsao")
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentSsao")
         descriptor.colorAttachments[0].pixelFormat = .ssaoColor
@@ -128,6 +140,7 @@ extension MTLRenderPipelineDescriptor {
     }
     static func bloomSplitRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.label = "Bloom Split"
         descriptor.vertexFunction = library.makeFunction(name: "vertexBloomSplit")
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentBloomSplit")
         descriptor.colorAttachments[0].pixelFormat = .bloomSplitColor
@@ -136,6 +149,7 @@ extension MTLRenderPipelineDescriptor {
     }
     static func bloomMergeRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.label = "Bloom Merge"
         descriptor.vertexFunction = library.makeFunction(name: "vertexBloomMerge")
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentBloomMerge")
         descriptor.colorAttachments[0].pixelFormat = .bloomSplitColor
