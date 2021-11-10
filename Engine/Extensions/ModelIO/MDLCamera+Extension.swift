@@ -9,6 +9,6 @@ extension MDLCamera {
         Camera(nearPlane: nearVisibilityDistance,
                farPlane: farVisibilityDistance,
                fovRadians: fieldOfView.radians,
-               aspectRation: sensorAspect)
+               aspectRatio: sensorAspect)
     }
 }
