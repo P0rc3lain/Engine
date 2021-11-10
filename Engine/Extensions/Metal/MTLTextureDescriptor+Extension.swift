@@ -43,7 +43,7 @@ extension MTLTextureDescriptor {
         descriptor.height = Int(size.height)
         descriptor.storageMode = .private
         descriptor.pixelFormat = pixelFormat
-        descriptor.usage = [.shaderRead, .renderTarget, .shaderWrite]
+        descriptor.usage = [.shaderRead, .renderTarget]
         return descriptor
     }
     static func gBufferAR(size: CGSize) -> MTLTextureDescriptor {
@@ -81,7 +81,7 @@ extension MTLTextureDescriptor {
         descriptor.width = Int(size.width)
         descriptor.height = Int(size.height)
         descriptor.storageMode = .private
-        descriptor.pixelFormat = MTLPixelFormat.lightenSceneColor
+        descriptor.pixelFormat = .lightenSceneColor
         descriptor.usage = [.shaderRead, .renderTarget]
         return descriptor
     }
@@ -91,8 +91,8 @@ extension MTLTextureDescriptor {
         descriptor.width = Int(size.width)
         descriptor.height = Int(size.height)
         descriptor.storageMode = .private
-        descriptor.pixelFormat = MTLPixelFormat.ssaoColor
-        descriptor.usage = [.shaderRead, .shaderWrite, .renderTarget]
+        descriptor.pixelFormat = .ssaoColor
+        descriptor.usage = [.shaderRead, .renderTarget, .shaderWrite]
         return descriptor
     }
     static func bloomSplitColor(size: CGSize) -> MTLTextureDescriptor {
@@ -101,7 +101,7 @@ extension MTLTextureDescriptor {
         descriptor.width = Int(size.width)
         descriptor.height = Int(size.height)
         descriptor.storageMode = .private
-        descriptor.pixelFormat = MTLPixelFormat.bloomSplitColor
+        descriptor.pixelFormat = .bloomSplitColor
         descriptor.usage = [.renderTarget, .shaderRead, .shaderWrite]
         return descriptor
     }
@@ -111,7 +111,7 @@ extension MTLTextureDescriptor {
         descriptor.width = Int(size.width)
         descriptor.height = Int(size.height)
         descriptor.storageMode = .private
-        descriptor.pixelFormat = MTLPixelFormat.bloomMergeColor
+        descriptor.pixelFormat = .bloomMergeColor
         descriptor.usage = [.renderTarget, .shaderRead, .shaderWrite]
         return descriptor
     }
@@ -121,7 +121,7 @@ extension MTLTextureDescriptor {
         descriptor.width = Int(size.width)
         descriptor.height = Int(size.height)
         descriptor.storageMode = .private
-        descriptor.pixelFormat = MTLPixelFormat.lightenSceneDepthStencil
+        descriptor.pixelFormat = .lightenSceneDepthStencil
         descriptor.usage = .renderTarget
         return descriptor
     }
@@ -131,8 +131,8 @@ extension MTLTextureDescriptor {
         descriptor.width = Int(size.width)
         descriptor.height = Int(size.height)
         descriptor.storageMode = .private
-        descriptor.pixelFormat = MTLPixelFormat.postprocessorRendererColor
-        descriptor.usage = [.renderTarget, .shaderRead, .shaderWrite]
+        descriptor.pixelFormat = .postprocessorRendererColor
+        descriptor.usage = [.renderTarget, .shaderRead]
         return descriptor
     }
 }
