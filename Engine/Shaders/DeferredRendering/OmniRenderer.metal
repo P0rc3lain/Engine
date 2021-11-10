@@ -33,10 +33,12 @@ fragment float4 fragmentDeferredLight(RasterizerData in [[stage_in]],
                                       texture2d<float> ar [[texture(kAttributeLightingFragmentShaderTextureAR)]],
                                       texture2d<float> nm [[texture(kAttributeLightingFragmentShaderTextureNM)]],
                                       texture2d<float> pr [[texture(kAttributeLightingFragmentShaderTexturePR)]],
+                                      depthcube_array<float> shadows [[texture(kAttributeLightingFragmentShaderTextureShadowMaps)]],
                                       constant CameraUniforms & camera [[buffer(kAttributeLightingFragmentShaderBufferCamera)]],
                                       constant OmniLight * omniLights [[buffer(kAttributeLightingFragmentShaderBufferOmniLights)]],
                                       constant ModelUniforms * lightUniforms [[buffer(kAttributeLightingFragmentShaderBufferLightUniforms)]]) {
     constexpr sampler textureSampler(mag_filter::nearest, min_filter::nearest);
+    
     float4 arV = ar.sample(textureSampler, in.texcoord);
     float4 nmV = nm.sample(textureSampler, in.texcoord);
     float4 prV = pr.sample(textureSampler, in.texcoord);
@@ -54,12 +56,24 @@ fragment float4 fragmentDeferredLight(RasterizerData in [[stage_in]],
     float3 eye = normalize(cameraPosition - fragmentPosition);
     
     float3 outputColor(0, 0, 0);
-    int id = omniLights[in.instanceId].idx;
-    float3 lightPosition = (lightUniforms[camera.index].modelMatrix * lightUniforms[id].modelMatrix * float4(0, 0, 0, 1)).xyz;
+    OmniLight light = omniLights[in.instanceId];
+    float3 lightPosition = (lightUniforms[camera.index].modelMatrix * lightUniforms[light.idx].modelMatrix * float4(0, 0, 0, 1)).xyz;
     float3 l = normalize(lightPosition - fragmentPosition);
     if (dot(n, l) < 0) {
         discard_fragment();
     }
+    
+    // Shadow
+    float4 lightSpacesFragmentPosition = lightUniforms[light.idx].modelMatrixInverse * lightUniforms[camera.index].modelMatrixInverse * float4(fragmentPosition, 1);
+    float currentDistance = length(lightSpacesFragmentPosition.xyz)/100;
+    float3 sampleVector = normalize(lightSpacesFragmentPosition.xyz);
+    sampleVector.x = -sampleVector.x;
+    float existingDistance = shadows.sample(textureSampler, sampleVector, in.instanceId);
+    bool inShadow = currentDistance > existingDistance;
+    if (inShadow) {
+        discard_fragment();
+    }
+    
     float3 halfway = normalize(l + eye);
     float3 f0 = 0.16 * reflectance * reflectance * (1 - metallicFactor) + metallicFactor * baseColor;
     float3 specular = cookTorrance(n, eye, halfway, l, roughnessFactor, f0);

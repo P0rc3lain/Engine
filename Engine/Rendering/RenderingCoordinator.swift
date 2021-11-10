@@ -6,6 +6,7 @@ import Metal
 import MetalBinding
 import MetalKit
 import MetalPerformanceShaders
+import simd
 
 struct RenderingCoordinator {
     private let view: MTKView
@@ -34,6 +35,8 @@ struct RenderingCoordinator {
             return
         }
         updatePalettes(scene: &scene)
+        var rotationMatrices = generateRotationMatrices()
+        bufferStore.rotationMatrices.upload(data: &rotationMatrices)
         bufferStore.ambientLights.upload(data: &scene.ambientLights)
         bufferStore.omniLights.upload(data: &scene.omniLights)
         bufferStore.directionalLights.upload(data: &scene.directionalLights)
@@ -77,5 +80,21 @@ struct RenderingCoordinator {
             }
             return palette
         }
+    }
+    func generateRotationMatrices() -> [simd_float4x4] {
+        var rotations = [simd_float4x4]()
+        let xPlus = simd_quatf(angle: Float(180).radians, axis: [0, 0, 1]) * simd_quatf(angle: Float(-90).radians, axis: [0, 1, 0])
+        let xMinus = simd_quatf(angle: Float(180).radians, axis: [0, 0, 1]) * simd_quatf(angle: Float(90).radians, axis: [0, 1, 0])
+        let yPlus = simd_quatf(angle: Float(90).radians, axis: [1, 0, 0]) * simd_quatf(angle: Float(-180).radians, axis: [0, 0, 1])
+        let yMinus = simd_quatf(angle: Float(-90).radians, axis: [1, 0, 0]) * simd_quatf(angle: Float(-180).radians, axis: [0, 0, 1])
+        let zPlus = simd_quatf(angle: Float(180).radians, axis: [0, 0, 1])
+        let zMinus = simd_quatf(angle: Float(180).radians, axis: [0, 0, 1]) * simd_quatf(angle: Float(180).radians, axis: [0, 1, 0])
+        rotations.append(simd_float4x4(xPlus))
+        rotations.append(simd_float4x4(xMinus))
+        rotations.append(simd_float4x4(yPlus))
+        rotations.append(simd_float4x4(yMinus))
+        rotations.append(simd_float4x4(zPlus))
+        rotations.append(simd_float4x4(zMinus))
+        return rotations
     }
 }

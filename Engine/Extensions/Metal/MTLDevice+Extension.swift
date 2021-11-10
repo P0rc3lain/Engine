@@ -12,6 +12,9 @@ extension MTLDevice {
     func makeDepthStencilStateSpotLightShadowRenderer() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: .spotShadowRenderer)
     }
+    func makeDepthStencilStateOmniLightShadowRenderer() -> MTLDepthStencilState? {
+        makeDepthStencilState(descriptor: .omniShadowRenderer)
+    }
     func makeDepthStencilStateEnvironmentRenderer() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: .environmentRenderer)
     }
@@ -35,6 +38,12 @@ extension MTLDevice {
     }
     func makeRenderPipelineStateSpotLightShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .spotLightShadowAnimatedRenderer(library: library))
+    }
+    func makeRenderPipelineStateOmniLightShadow(library: MTLLibrary) -> MTLRenderPipelineState? {
+        try? makeRenderPipelineState(descriptor: .omniLightShadowRenderer(library: library))
+    }
+    func makeRenderPipelineStateOmniLightShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
+        try? makeRenderPipelineState(descriptor: .omniLightShadowAnimatedRenderer(library: library))
     }
     func makeRenderPipelineStateEnvironmentRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .environmentRenderer(library: library))
@@ -86,6 +95,9 @@ extension MTLDevice {
     }
     func makeTextureSpotLightShadowDepthStencil(size: CGSize, lightsCount: Int) -> MTLTexture? {
         makeTexture(descriptor: .spotLightShadowDepthStencil(size: size, lightsCount: lightsCount))
+    }
+    func makeTextureOmniLightShadowDepthStencil(size: CGSize, lightsCount: Int) -> MTLTexture? {
+        makeTexture(descriptor: .omniLightShadowDepthStencil(size: size, lightsCount: lightsCount))
     }
     func makeTextureSsao(size: CGSize) -> MTLTexture? {
         makeTexture(descriptor: .ssaoColor(size: size))

@@ -33,6 +33,9 @@ extension MTLDepthStencilDescriptor {
         descriptor.isDepthWriteEnabled = true
         return descriptor
     }
+    static var omniShadowRenderer: MTLDepthStencilDescriptor {
+        spotShadowRenderer
+    }
     static var ambientRenderer: MTLDepthStencilDescriptor {
         lightRenderer
     }
