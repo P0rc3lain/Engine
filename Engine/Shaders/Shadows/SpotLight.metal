@@ -36,7 +36,7 @@ vertex RasterizerData vertexSpotLightShadow(Vertex in [[stage_in]],
                                             constant ModelUniforms * modelUniforms [[buffer(kAttributeSpotShadowVertexShaderBufferModelUniforms)]],
                                             constant simd_float4x4 * matrixPalettes [[buffer(kAttributeSpotShadowVertexShaderBufferMatrixPalettes)]],
                                             constant int & index [[buffer(kAttributeSpotShadowVertexShaderBufferObjectIndex)]]) {
-    float4 totalPosition = hasSkeleton ? totalPosition = calculatePose(in, matrixPalettes) : float4(in.position, 1);
+    float4 totalPosition = hasSkeleton ? calculatePose(in, matrixPalettes) : float4(in.position, 1);
     float4 worldPosition = modelUniforms[index].modelMatrix * totalPosition;
     SpotLight light = spotLights[instanceId];
     float4 lightSpacePosition = modelUniforms[light.idx].modelMatrixInverse * worldPosition;
