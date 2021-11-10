@@ -38,18 +38,22 @@ struct ShadowStage: Stage {
     mutating func draw(commandBuffer: inout MTLCommandBuffer,
                        scene: inout GPUSceneDescription,
                        bufferStore: inout BufferStore) {
-        guard var spotEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: spotLightShadowRenderPassDescriptor) else {
-            return
+        if !scene.spotLights.isEmpty {
+            guard var spotEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: spotLightShadowRenderPassDescriptor) else {
+                return
+            }
+            spotEncoder.pushDebugGroup("Spot Light Shadow Pass")
+            spotLightShadowRenderer.draw(encoder: &spotEncoder, scene: &scene, dataStore: &bufferStore)
+            spotEncoder.endEncoding()
+            commandBuffer.popDebugGroup()
         }
-        spotEncoder.pushDebugGroup("Spot Light Shadow Pass")
-        spotLightShadowRenderer.draw(encoder: &spotEncoder, scene: &scene, dataStore: &bufferStore)
-        spotEncoder.endEncoding()
-        commandBuffer.popDebugGroup()
-        guard var omniEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: omniLightShadowRenderPassDescriptor) else {
-            return
+        if !scene.omniLights.isEmpty {
+            guard var omniEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: omniLightShadowRenderPassDescriptor) else {
+                return
+            }
+            omniEncoder.pushDebugGroup("Omni Light Shadow Pass")
+            omniLightShadowRenderer.draw(encoder: &omniEncoder, scene: &scene, dataStore: &bufferStore)
+            omniEncoder.endEncoding()
         }
-        omniEncoder.pushDebugGroup("Omni Light Shadow Pass")
-        omniLightShadowRenderer.draw(encoder: &omniEncoder, scene: &scene, dataStore: &bufferStore)
-        omniEncoder.endEncoding()
     }
 }

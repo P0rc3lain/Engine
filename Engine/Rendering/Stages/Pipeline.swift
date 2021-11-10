@@ -55,8 +55,10 @@ struct Pipeline: Stage {
         gBufferStage.draw(commandBuffer: &commandBuffer,
                           scene: &scene,
                           bufferStore: &bufferStore)
-        ssaoStage.draw(commandBuffer: &commandBuffer,
-                       bufferStore: &bufferStore)
+        if !scene.ambientLights.isEmpty {
+            ssaoStage.draw(commandBuffer: &commandBuffer,
+                           bufferStore: &bufferStore)
+        }
         combineStage.draw(commandBuffer: &commandBuffer,
                           scene: &scene,
                           bufferStore: &bufferStore)
