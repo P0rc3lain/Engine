@@ -139,6 +139,7 @@
 		5670EC1D2736B8BC00375194 /* GBufferStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC1C2736B8BC00375194 /* GBufferStage.swift */; };
 		5670EC252736E1EF00375194 /* CombineStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC232736DD6100375194 /* CombineStage.swift */; };
 		5670EC272736EA2400375194 /* PostprocessStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC262736EA2400375194 /* PostprocessStage.swift */; };
+		5686BD9A273C1CD300329FA0 /* StaticBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5686BD99273C1CD300329FA0 /* StaticBuffer.swift */; };
 		56924ACC271A00D900FF3E06 /* AnimatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACB271A00D900FF3E06 /* AnimatedValue.swift */; };
 		56924ACE271A022900FF3E06 /* EntityTree+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */; };
 		56924AD7271A07FD00FF3E06 /* AnimatedValue+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AD6271A07FD00FF3E06 /* AnimatedValue+Tests.swift */; };
@@ -311,6 +312,7 @@
 		5670EC1C2736B8BC00375194 /* GBufferStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBufferStage.swift; sourceTree = "<group>"; };
 		5670EC232736DD6100375194 /* CombineStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineStage.swift; sourceTree = "<group>"; };
 		5670EC262736EA2400375194 /* PostprocessStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostprocessStage.swift; sourceTree = "<group>"; };
+		5686BD99273C1CD300329FA0 /* StaticBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticBuffer.swift; sourceTree = "<group>"; };
 		56924ACB271A00D900FF3E06 /* AnimatedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedValue.swift; sourceTree = "<group>"; };
 		56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityTree+Extension.swift"; sourceTree = "<group>"; };
 		56924AD4271A07FD00FF3E06 /* EngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -439,6 +441,7 @@
 			children = (
 				561666B92719E2CC000063B1 /* FlatTree.swift */,
 				561666BA2719E2CC000063B1 /* DynamicBuffer.swift */,
+				5686BD99273C1CD300329FA0 /* StaticBuffer.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -956,6 +959,7 @@
 				5616670A2719E2CD000063B1 /* MDLSubmesh+Extension.swift in Sources */,
 				56E8208F2727FD13002D58C3 /* Date+Extensioin.swift in Sources */,
 				563C9C26273884700014CFF3 /* SpotShadowRenderer+Extension.swift in Sources */,
+				5686BD9A273C1CD300329FA0 /* StaticBuffer.swift in Sources */,
 				5616673B2719E2CD000063B1 /* DataBuffer.swift in Sources */,
 				56ADD2F8273709F400107E24 /* AmbientRenderer+Extension.swift in Sources */,
 				56C4CD55273801EB000A994E /* SpotRenderer+Extension.swift in Sources */,
