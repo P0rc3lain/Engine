@@ -28,7 +28,8 @@ struct OmniRenderer {
     }
     func draw(encoder: inout MTLRenderCommandEncoder,
               bufferStore: inout BufferStore,
-              scene: inout GPUSceneDescription) {
+              scene: inout GPUSceneDescription,
+              shadowMaps: MTLTexture) {
         guard !scene.omniLights.isEmpty else {
             return
         }
@@ -48,8 +49,8 @@ struct OmniRenderer {
                                   index: kAttributeLightingFragmentShaderBufferCamera)
         encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems,
                                   index: kAttributeLightingFragmentShaderBufferLightUniforms)
-        let range = kAttributeLightingFragmentShaderTextureAR ... kAttributeLightingFragmentShaderTexturePR
-        encoder.setFragmentTextures([arTexture, nmTexture, prTexture], range: range)
+        let range = kAttributeLightingFragmentShaderTextureAR ... kAttributeLightingFragmentShaderTextureShadowMaps
+        encoder.setFragmentTextures([arTexture, nmTexture, prTexture, shadowMaps], range: range)
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
                                       indexType: plane.pieceDescriptions[0].drawDescription.indexType,

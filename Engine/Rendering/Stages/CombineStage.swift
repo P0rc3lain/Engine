@@ -13,11 +13,11 @@ struct CombineStage: Stage {
     private var ambientRenderer: AmbientRenderer
     private var spotRenderer: SpotRenderer
     private var spotLightShadows: MTLTexture
+    private var pointLightsShadows: MTLTexture
     private var directionalRenderer: DirectionalRenderer
     private var ssaoTexture: MTLTexture
-    init?(device: MTLDevice, renderingSize: CGSize, gBufferOutput: GPUSupply, ssaoTexture: MTLTexture, spotLightShadows: MTLTexture) {
-        guard let stencilTexture = gBufferOutput.stencil,
-              let environmentRenderer = EnvironmentRenderer.make(device: device, drawableSize: renderingSize),
+    init?(device: MTLDevice, renderingSize: CGSize, gBufferOutput: GPUSupply, ssaoTexture: MTLTexture, spotLightShadows: MTLTexture, pointLightsShadows: MTLTexture) {
+        guard let environmentRenderer = EnvironmentRenderer.make(device: device, drawableSize: renderingSize),
               let omniRenderer = OmniRenderer.make(device: device,
                                                    inputTextures: gBufferOutput.color,
                                                    drawableSize: renderingSize),
@@ -33,7 +33,7 @@ struct CombineStage: Stage {
             return nil
         }
         offscreenRenderPassDescriptor = .lightenScene(device: device,
-                                                      depthStencil: stencilTexture,
+                                                      depthStencil: gBufferOutput.stencil[0],
                                                       size: renderingSize)
         guard let outputTexture = offscreenRenderPassDescriptor.colorAttachments[0].texture else {
             return nil
@@ -45,6 +45,7 @@ struct CombineStage: Stage {
         self.spotRenderer = spotRenderer
         self.spotLightShadows = spotLightShadows
         self.directionalRenderer = directionalRenderer
+        self.pointLightsShadows = pointLightsShadows
         self.io = GPUIO(input: GPUSupply(color: gBufferOutput.color + [ssaoTexture],
                                          stencil: gBufferOutput.stencil),
                         output: GPUSupply(color: [outputTexture]))
@@ -58,7 +59,8 @@ struct CombineStage: Stage {
         }
         omniRenderer.draw(encoder: &encoder,
                           bufferStore: &bufferStore,
-                          scene: &scene)
+                          scene: &scene,
+                          shadowMaps: pointLightsShadows)
         ambientRenderer.draw(encoder: &encoder,
                              bufferStore: &bufferStore,
                              ssao: ssaoTexture,

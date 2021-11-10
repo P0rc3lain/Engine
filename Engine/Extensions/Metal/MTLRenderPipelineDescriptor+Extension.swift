@@ -156,4 +156,23 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexDescriptor = .porcelain
         return descriptor
     }
+    static func omniLightShadowRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
+        let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.label = "Omni Shadows"
+        descriptor.vertexFunction = try? library.makeFunction(name: "vertexOmniLightShadow",
+                                                              constantValues: .bool(false, index: 0))
+        descriptor.fragmentFunction = library.makeFunction(name: "fragmentOmniLightShadow")
+        descriptor.depthAttachmentPixelFormat = .omniShadowDepthStencil
+        descriptor.vertexDescriptor = .porcelain
+        descriptor.sampleCount = 1
+        descriptor.inputPrimitiveTopology = .triangle
+        return descriptor
+    }
+    static func omniLightShadowAnimatedRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
+        let descriptor = MTLRenderPipelineDescriptor.omniLightShadowRenderer(library: library)
+        descriptor.vertexFunction = try? library.makeFunction(name: "vertexOmniLightShadow",
+                                                              constantValues: .bool(true, index: 0))
+        descriptor.label = "Omni Shadows Animated"
+        return descriptor
+    }
 }

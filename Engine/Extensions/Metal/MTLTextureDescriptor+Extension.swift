@@ -75,6 +75,17 @@ extension MTLTextureDescriptor {
         descriptor.usage = [.shaderRead, .renderTarget]
         return descriptor
     }
+    static func omniLightShadowDepthStencil(size: CGSize, lightsCount: Int) -> MTLTextureDescriptor {
+        let descriptor = MTLTextureDescriptor()
+        descriptor.textureType = .typeCubeArray
+        descriptor.width = Int(size.width)
+        descriptor.height = Int(size.height)
+        descriptor.arrayLength = lightsCount
+        descriptor.storageMode = .private
+        descriptor.pixelFormat = .omniShadowDepthStencil
+        descriptor.usage = [.shaderRead, .renderTarget]
+        return descriptor
+    }
     static func lightenSceneColor(size: CGSize) -> MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = .type2D
