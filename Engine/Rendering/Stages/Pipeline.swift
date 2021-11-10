@@ -17,7 +17,7 @@ struct Pipeline: Stage {
                                               renderingSize: renderingSize),
               let shadowStage = ShadowStage(device: device,
                                             spotShadowTextureSideSize: 1_024,
-                                            spotLightsNumber: 100),
+                                            spotLightsNumber: 2),
               let ssaoStage = SSAOStage(device: device,
                                         renderingSize: renderingSize,
                                         prTexture: gBufferStage.io.output.color[2],

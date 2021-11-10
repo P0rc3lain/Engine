@@ -84,8 +84,8 @@ extension MTLDevice {
     func makeTextureGBufferDepthStencil(size: CGSize) -> MTLTexture? {
         makeTexture(descriptor: .gBufferDepthStencil(size: size))
     }
-    func makeTextureSpotLightShadowDepthStencil(size: CGSize) -> MTLTexture? {
-        makeTexture(descriptor: .spotLightShadowDepthStencil(size: size))
+    func makeTextureSpotLightShadowDepthStencil(size: CGSize, lightsCount: Int) -> MTLTexture? {
+        makeTexture(descriptor: .spotLightShadowDepthStencil(size: size, lightsCount: lightsCount))
     }
     func makeTextureSsao(size: CGSize) -> MTLTexture? {
         makeTexture(descriptor: .ssaoColor(size: size))

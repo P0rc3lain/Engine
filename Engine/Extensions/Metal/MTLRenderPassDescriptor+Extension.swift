@@ -46,7 +46,7 @@ extension MTLRenderPassDescriptor {
     }
     static func spotLightShadow(device: MTLDevice, size: CGSize, layers: Int) -> MTLRenderPassDescriptor {
         let descriptor = MTLRenderPassDescriptor()
-        let texture = device.makeTextureSpotLightShadowDepthStencil(size: size)
+        let texture = device.makeTextureSpotLightShadowDepthStencil(size: size, lightsCount: layers)
         descriptor.renderTargetArrayLength = layers
         descriptor.depthAttachment.clearDepth = 1
         descriptor.depthAttachment.texture = texture
