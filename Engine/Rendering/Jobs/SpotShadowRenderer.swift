@@ -30,6 +30,8 @@ struct SpotShadowRenderer {
         encoder.setFrontFacing(.counterClockwise)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setRenderPipelineState(animatedPipelineState)
+        encoder.setVertexBuffer(dataStore.spotLights,
+                                index: kAttributeSpotShadowVertexShaderBufferSpotLights)
         for index in scene.entities.indices {
             let object = scene.entities[index].data
             if object.type == .mesh && scene.skeletonReferences[index] != .nil {
@@ -43,8 +45,6 @@ struct SpotShadowRenderer {
                                        index: kAttributeSpotShadowVertexShaderBufferObjectIndex)
                 encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
                                         index: kAttributeSpotShadowVertexShaderBufferModelUniforms)
-                encoder.setVertexBuffer(dataStore.spotLights,
-                                        index: kAttributeSpotShadowVertexShaderBufferSpotLights)
                 for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
                     encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
                                             offset: scene.paletteReferences[index].lowerBound,
@@ -73,8 +73,6 @@ struct SpotShadowRenderer {
                                        index: kAttributeSpotShadowVertexShaderBufferObjectIndex)
                 encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
                                         index: kAttributeSpotShadowVertexShaderBufferModelUniforms)
-                encoder.setVertexBuffer(dataStore.spotLights,
-                                        index: kAttributeSpotShadowVertexShaderBufferSpotLights)
                 for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
                     let indexDraw = scene.indexDraws[pieceIndex]
                     encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
