@@ -12,13 +12,15 @@ struct SsaoRenderer {
     private let plane: GPUGeometry
     private let prTexture: MTLTexture
     private let nmTexture: MTLTexture
-    private var kernel = [simd_float3]()
-    private var noise = [simd_float3]()
+    private var kernelBuffer: StaticBuffer<simd_float3>
+    private var noiseBuffer: StaticBuffer<simd_float3>
     init?(pipelineState: MTLRenderPipelineState,
           prTexture: MTLTexture,
           nmTexture: MTLTexture,
           device: MTLDevice,
-          drawableSize: CGSize) {
+          drawableSize: CGSize,
+          kernelBuffer: StaticBuffer<simd_float3>,
+          noiseBuffer: StaticBuffer<simd_float3>) {
         guard let plane = GPUGeometry.screenSpacePlane(device: device) else {
             return nil
         }
@@ -27,21 +29,23 @@ struct SsaoRenderer {
         self.prTexture = prTexture
         self.plane = plane
         self.viewPort = .porcelain(size: drawableSize)
-        self.kernel = generateSamples(size: 64)
-        self.noise = generateNoise()
+        self.kernelBuffer = kernelBuffer
+        self.noiseBuffer = noiseBuffer
+        var kernel = generateSamples(size: 64)
+        var noise = generateNoise()
+        self.kernelBuffer.upload(data: &kernel)
+        self.noiseBuffer.upload(data: &noise)
     }
     mutating func draw(encoder: inout MTLRenderCommandEncoder, bufferStore: inout BufferStore) {
-        bufferStore.ssaoKernel.upload(data: &kernel)
-        bufferStore.ssaoNoise.upload(data: &noise)
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
                                 index: kAttributeSsaoVertexShaderBufferStageIn)
-        encoder.setFragmentBuffer(bufferStore.ssaoKernel,
+        encoder.setFragmentBuffer(kernelBuffer.buffer,
                                   index: kAttributeSsaoFragmentShaderBufferSamples)
         encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems,
                                   index: kAttributeSsaoFragmentShaderBufferModelUniforms)
-        encoder.setFragmentBuffer(bufferStore.ssaoNoise,
+        encoder.setFragmentBuffer(noiseBuffer.buffer,
                                   index: kAttributeSsaoFragmentShaderBufferNoise)
         encoder.setFragmentBuffer(bufferStore.cameras,
                                   index: kAttributeSsaoFragmentShaderBufferCamera)
@@ -54,7 +58,7 @@ struct SsaoRenderer {
                                       indexBuffer: plane.pieceDescriptions[0].drawDescription.indexBuffer.buffer,
                                       indexBufferOffset: plane.pieceDescriptions[0].drawDescription.indexBuffer.offset)
     }
-    func generateNoise() -> [simd_float3] {
+    private func generateNoise() -> [simd_float3] {
         var samples = [simd_float3]()
         for _ in 16.naturalExclusive {
             samples.append(simd_float3(Float.random(in: 0 ..< 1) * 2 - 1,
@@ -63,7 +67,7 @@ struct SsaoRenderer {
         }
         return samples
     }
-    func generateSamples(size: Int) -> [simd_float3] {
+    private func generateSamples(size: Int) -> [simd_float3] {
         var samples = [simd_float3]()
         for index in 0 ..< size {
             var vector = normalize(simd_float3(Float.random(in: 0 ..< 1) * 2 - 1,
