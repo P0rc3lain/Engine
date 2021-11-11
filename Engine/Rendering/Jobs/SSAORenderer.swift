@@ -6,7 +6,7 @@ import Metal
 import MetalBinding
 import simd
 
-struct SsaoRenderer {
+struct SSAORenderer {
     private let pipelineState: MTLRenderPipelineState
     private let viewPort: MTLViewport
     private let plane: GPUGeometry

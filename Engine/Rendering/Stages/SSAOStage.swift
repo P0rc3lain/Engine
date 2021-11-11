@@ -10,12 +10,12 @@ struct SSAOStage: Stage {
     private let gaussTexture: MTLTexture
     private let gaussianBlur: MPSImageGaussianBlur
     private var ssaoRenderPassDescriptor: MTLRenderPassDescriptor
-    private var ssaoRenderer: SsaoRenderer
+    private var ssaoRenderer: SSAORenderer
     init?(device: MTLDevice,
           renderingSize: CGSize,
           prTexture: MTLTexture,
           nmTexture: MTLTexture) {
-        guard let ssaoRenderer = SsaoRenderer.make(device: device,
+        guard let ssaoRenderer = SSAORenderer.make(device: device,
                                                    prTexture: prTexture,
                                                    nmTexture: nmTexture,
                                                    drawableSize: renderingSize),

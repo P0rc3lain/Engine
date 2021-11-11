@@ -12,19 +12,19 @@
 using namespace metal;
 
 
-struct SsaoRasterizedData {
+struct RasterizedData {
     float4 position [[position]];
     float2 texcoord;
 };
 
-vertex SsaoRasterizedData  vertexSsao(Vertex in [[stage_in]]) {
-    SsaoRasterizedData out;
-    out.position = float4(in.position, 1);
-    out.texcoord = in.textureUV;
-    return out;
+vertex RasterizedData vertexSSAO(Vertex in [[stage_in]]) {
+    return RasterizedData {
+        float4(in.position, 1),
+        in.textureUV
+    };
 }
 
-fragment float4 fragmentSsao(SsaoRasterizedData in [[stage_in]],
+fragment float4 fragmentSSAO(RasterizedData in [[stage_in]],
                              texture2d<float> nm [[texture(kAttributeSsaoFragmentShaderTextureNM)]],
                              texture2d<float> pr [[texture(kAttributeSsaoFragmentShaderTexturePR)]],
                              constant CameraUniforms & camera [[buffer(kAttributeLightingFragmentShaderBufferCamera)]],

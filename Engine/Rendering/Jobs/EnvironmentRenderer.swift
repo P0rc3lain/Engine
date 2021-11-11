@@ -6,11 +6,6 @@ import Metal
 import MetalBinding
 import simd
 
-fileprivate struct Uniforms {
-    let projectionMatrix: matrix_float4x4
-    let orientation: matrix_float4x4
-}
-
 struct EnvironmentRenderer {
     private let pipelineState: MTLRenderPipelineState
     private let depthStentilState: MTLDepthStencilState
@@ -25,27 +20,25 @@ struct EnvironmentRenderer {
         self.cube = cube
         self.viewPort = .porcelain(size: drawableSize)
     }
-    func draw(encoder: inout MTLRenderCommandEncoder, scene: inout GPUSceneDescription) {
+    func draw(encoder: inout MTLRenderCommandEncoder,
+              scene: inout GPUSceneDescription,
+              bufferStore: inout BufferStore) {
         if scene.sky == .nil {
             return
         }
         encoder.setViewport(viewPort)
+        encoder.setStencilReferenceValue(0)
         encoder.setRenderPipelineState(pipelineState)
+        encoder.setDepthStencilState(depthStentilState)
         encoder.setVertexBuffer(cube.vertexBuffer.buffer,
                                 index: kAttributeEnvironmentVertexShaderBufferStageIn)
-        encoder.setDepthStencilState(depthStentilState)
-        encoder.setStencilReferenceValue(0)
+        encoder.setVertexBuffer(bufferStore.modelCoordinateSystems,
+                                index: kAttributeEnvironmentVertexShaderBufferModelUniforms)
+        encoder.setVertexBuffer(bufferStore.cameras,
+                                offset: scene.entities[scene.activeCameraIdx].data.referenceIdx * MemoryLayout<CameraUniforms>.stride,
+                                index: kAttributeEnvironmentVertexShaderBufferCamera)
         encoder.setFragmentTexture(scene.skyMaps[scene.sky],
                                    index: kAttributeEnvironmentFragmentShaderTextureCubeMap)
-        let cameraIndex = scene.entities[scene.activeCameraIdx].data.referenceIdx
-        let orientation = simd_matrix4x4(scene.entities[scene.activeCameraIdx].data.transform.rotation.interpolated(at: Date().timeIntervalSince1970))
-        let uniforms = Uniforms(projectionMatrix: scene.cameras[cameraIndex].projectionMatrix,
-                                orientation: orientation)
-        withUnsafePointer(to: uniforms) { ptr in
-            encoder.setVertexBytes(ptr,
-                                   length: MemoryLayout<Uniforms>.size,
-                                   index: kAttributeEnvironmentVertexShaderBufferUniforms)
-        }
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: cube.pieceDescriptions[0].drawDescription.indexBuffer.length / MemoryLayout<UInt16>.size,
                                       indexType: .uint16,

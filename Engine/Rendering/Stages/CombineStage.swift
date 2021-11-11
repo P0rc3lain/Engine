@@ -72,7 +72,9 @@ struct CombineStage: Stage {
         directionalRenderer.draw(encoder: &encoder,
                                  bufferStore: &bufferStore,
                                  scene: &scene)
-        environmentRenderer.draw(encoder: &encoder, scene: &scene)
+        environmentRenderer.draw(encoder: &encoder,
+                                 scene: &scene,
+                                 bufferStore: &bufferStore)
         encoder.endEncoding()
         commandBuffer.popDebugGroup()
     }
