@@ -316,6 +316,7 @@
 		5686BD99273C1CD300329FA0 /* StaticBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticBuffer.swift; sourceTree = "<group>"; };
 		5686BD9B273D78A900329FA0 /* Animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		5686BD9C273D78B700329FA0 /* Animation.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Animation.metal; sourceTree = "<group>"; };
+		5686BD9E273D7D7100329FA0 /* Pose.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pose.h; sourceTree = "<group>"; };
 		56924ACB271A00D900FF3E06 /* AnimatedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedValue.swift; sourceTree = "<group>"; };
 		56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityTree+Extension.swift"; sourceTree = "<group>"; };
 		56924AD4271A07FD00FF3E06 /* EngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -526,6 +527,7 @@
 				561666DB2719E2CC000063B1 /* Transformation.metal */,
 				5686BD9B273D78A900329FA0 /* Animation.h */,
 				5686BD9C273D78B700329FA0 /* Animation.metal */,
+				5686BD9E273D7D7100329FA0 /* Pose.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";

@@ -31,8 +31,9 @@ extension MTLRenderPipelineDescriptor {
     static func gBufferRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.label = "GBuffer"
-        descriptor.vertexFunction = library.makeFunction(name: "gBufferVertex")
-        descriptor.fragmentFunction = library.makeFunction(name: "gBufferFragment")
+        descriptor.vertexFunction = try? library.makeFunction(name: "vertexGBuffer",
+                                                              constantValues: .bool(false, index: 0))
+        descriptor.fragmentFunction = library.makeFunction(name: "fragmentGBuffer")
         descriptor.colorAttachments[0].pixelFormat = .gBufferAR
         descriptor.colorAttachments[1].pixelFormat = .gBufferNM
         descriptor.colorAttachments[2].pixelFormat = .gBufferPR
@@ -44,7 +45,8 @@ extension MTLRenderPipelineDescriptor {
     static func gBufferAnimatedRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor.gBufferRenderer(library: library)
         descriptor.label = "GBuffer Animated"
-        descriptor.vertexFunction = library.makeFunction(name: "gBufferAnimatedVertex")
+        descriptor.vertexFunction = try? library.makeFunction(name: "vertexGBuffer",
+                                                              constantValues: .bool(true, index: 0))
         return descriptor
     }
     static func spotLightShadowRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {

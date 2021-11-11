@@ -27,7 +27,7 @@ vertex RasterizerData vertexOmniLightShadow(Vertex in [[stage_in]],
                                             constant simd_float4x4 * matrixPalettes [[buffer(kAttributeSpotShadowVertexShaderBufferMatrixPalettes)]],
                                             constant int & index [[buffer(kAttributeSpotShadowVertexShaderBufferObjectIndex)]],
                                             constant simd_float4x4 * rotations [[buffer(kAttributeOmniShadowVertexShaderBufferRotations)]]) {
-    float4 totalPosition = hasSkeleton ? totalPosition = calculatePose(in, matrixPalettes) : float4(in.position, 1);
+    float4 totalPosition = hasSkeleton ? totalPosition = calculatePosition(in, matrixPalettes) : float4(in.position, 1);
     float4 worldPosition = modelUniforms[index].modelMatrix * totalPosition;
     OmniLight light = omniLights[instanceId / 6];
     uint face = instanceId % 6;
