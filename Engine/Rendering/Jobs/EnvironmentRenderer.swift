@@ -35,7 +35,7 @@ struct EnvironmentRenderer {
         encoder.setVertexBuffer(bufferStore.modelCoordinateSystems,
                                 index: kAttributeEnvironmentVertexShaderBufferModelUniforms)
         encoder.setVertexBuffer(bufferStore.cameras,
-//                                offset: scene.entities[scene.activeCameraIdx].data.referenceIdx * MemoryLayout<CameraUniforms>.stride,
+                                offset: scene.entities[scene.activeCameraIdx].data.referenceIdx * MemoryLayout<CameraUniforms>.stride,
                                 index: kAttributeEnvironmentVertexShaderBufferCamera)
         encoder.setFragmentTexture(scene.skyMaps[scene.sky],
                                    index: kAttributeEnvironmentFragmentShaderTextureCubeMap)

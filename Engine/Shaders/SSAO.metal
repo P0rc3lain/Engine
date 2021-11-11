@@ -17,14 +17,14 @@ struct RasterizedData {
     float2 texcoord;
 };
 
-vertex RasterizedData vertexSsao(Vertex in [[stage_in]]) {
+vertex RasterizedData vertexSSAO(Vertex in [[stage_in]]) {
     return RasterizedData {
         float4(in.position, 1),
         in.textureUV
     };
 }
 
-fragment float4 fragmentSsao(RasterizedData in [[stage_in]],
+fragment float4 fragmentSSAO(RasterizedData in [[stage_in]],
                              texture2d<float> nm [[texture(kAttributeSsaoFragmentShaderTextureNM)]],
                              texture2d<float> pr [[texture(kAttributeSsaoFragmentShaderTexturePR)]],
                              constant CameraUniforms & camera [[buffer(kAttributeLightingFragmentShaderBufferCamera)]],
