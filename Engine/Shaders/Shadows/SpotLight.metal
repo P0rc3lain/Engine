@@ -4,6 +4,7 @@
 
 #include <metal_stdlib>
 
+#include "../Common/Animation.h"
 #include "../../MetalBinding/Model.h"
 #include "../../MetalBinding/Vertex.h"
 #include "../../MetalBinding/Constant.h"
@@ -18,17 +19,6 @@ struct RasterizerData {
 };
 
 constant bool hasSkeleton [[ function_constant(0) ]];
-
-inline float4 calculatePose(Vertex in, constant simd_float4x4 * matrixPalettes) {
-    float4 totalPosition = float4(0);
-    for(auto i{0}; i < MAX_JOINT_NUMBER; ++i) {
-        float4x4 transformMatrix = matrixPalettes[in.jointIndices[i]];
-        float4 weight = in.jointWeights[i];
-        float4 localPosition = transformMatrix * float4(in.position, 1);
-        totalPosition += weight * localPosition;
-    }
-    return totalPosition;
-}
 
 vertex RasterizerData vertexSpotLightShadow(Vertex in [[stage_in]],
                                             uint instanceId [[instance_id]],

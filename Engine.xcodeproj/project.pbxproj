@@ -140,6 +140,7 @@
 		5670EC252736E1EF00375194 /* CombineStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC232736DD6100375194 /* CombineStage.swift */; };
 		5670EC272736EA2400375194 /* PostprocessStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC262736EA2400375194 /* PostprocessStage.swift */; };
 		5686BD9A273C1CD300329FA0 /* StaticBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5686BD99273C1CD300329FA0 /* StaticBuffer.swift */; };
+		5686BD9D273D78B700329FA0 /* Animation.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5686BD9C273D78B700329FA0 /* Animation.metal */; };
 		56924ACC271A00D900FF3E06 /* AnimatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACB271A00D900FF3E06 /* AnimatedValue.swift */; };
 		56924ACE271A022900FF3E06 /* EntityTree+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */; };
 		56924AD7271A07FD00FF3E06 /* AnimatedValue+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AD6271A07FD00FF3E06 /* AnimatedValue+Tests.swift */; };
@@ -313,6 +314,8 @@
 		5670EC232736DD6100375194 /* CombineStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineStage.swift; sourceTree = "<group>"; };
 		5670EC262736EA2400375194 /* PostprocessStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostprocessStage.swift; sourceTree = "<group>"; };
 		5686BD99273C1CD300329FA0 /* StaticBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticBuffer.swift; sourceTree = "<group>"; };
+		5686BD9B273D78A900329FA0 /* Animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
+		5686BD9C273D78B700329FA0 /* Animation.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Animation.metal; sourceTree = "<group>"; };
 		56924ACB271A00D900FF3E06 /* AnimatedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedValue.swift; sourceTree = "<group>"; };
 		56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityTree+Extension.swift"; sourceTree = "<group>"; };
 		56924AD4271A07FD00FF3E06 /* EngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -518,9 +521,11 @@
 			isa = PBXGroup;
 			children = (
 				561666DA2719E2CC000063B1 /* PBR.h */,
-				561666DB2719E2CC000063B1 /* Transformation.metal */,
-				561666DC2719E2CC000063B1 /* Transformation.h */,
 				561666DD2719E2CC000063B1 /* PBR.metal */,
+				561666DC2719E2CC000063B1 /* Transformation.h */,
+				561666DB2719E2CC000063B1 /* Transformation.metal */,
+				5686BD9B273D78A900329FA0 /* Animation.h */,
+				5686BD9C273D78B700329FA0 /* Animation.metal */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -970,6 +975,7 @@
 				561667312719E2CD000063B1 /* DataBuffer+Alias.swift in Sources */,
 				5616671C2719E2CD000063B1 /* MTLStencilDescriptor+Extension.swift in Sources */,
 				563BFC87272878180003EDB7 /* UnsafeMutableRawPointer+Extension.swift in Sources */,
+				5686BD9D273D78B700329FA0 /* Animation.metal in Sources */,
 				561667562719E2CD000063B1 /* RenderingCoordinator.swift in Sources */,
 				56C4CD512737FFDD000A994E /* SpotRenderer.swift in Sources */,
 				5616674D2719E2CD000063B1 /* Engine.swift in Sources */,
