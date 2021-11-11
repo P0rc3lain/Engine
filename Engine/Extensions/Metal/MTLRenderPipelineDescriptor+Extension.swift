@@ -25,7 +25,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.colorAttachments[0].pixelFormat = .environmentRendererColor
         descriptor.depthAttachmentPixelFormat = .environmentRendererDepthStencil
         descriptor.stencilAttachmentPixelFormat = .environmentRendererDepthStencil
-        descriptor.vertexDescriptor = MTLVertexDescriptor.environmentRenderer
+        descriptor.vertexDescriptor = .environmentRenderer
         return descriptor
     }
     static func gBufferRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -134,8 +134,8 @@ extension MTLRenderPipelineDescriptor {
     static func ssaoRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.label = "SSAO"
-        descriptor.vertexFunction = library.makeFunction(name: "vertexSsao")
-        descriptor.fragmentFunction = library.makeFunction(name: "fragmentSsao")
+        descriptor.vertexFunction = library.makeFunction(name: "vertexSSAO")
+        descriptor.fragmentFunction = library.makeFunction(name: "fragmentSSAO")
         descriptor.colorAttachments[0].pixelFormat = .ssaoColor
         descriptor.vertexDescriptor = .porcelain
         return descriptor

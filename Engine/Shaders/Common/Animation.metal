@@ -9,7 +9,7 @@
 using namespace metal;
 
 float4 calculatePosition(Vertex in, constant float4x4 * matrixPalettes) {
-    float4 totalPosition = float4(0);
+    float4 totalPosition{0};
     for(auto i{0}; i < MAX_JOINT_NUMBER; ++i) {
         float4x4 transformMatrix = matrixPalettes[in.jointIndices[i]];
         float4 weight = in.jointWeights[i];
@@ -19,7 +19,7 @@ float4 calculatePosition(Vertex in, constant float4x4 * matrixPalettes) {
     return totalPosition;
 }
 
-Pose calculatePose(Vertex in, constant metal::float4x4 * matrixPalettes) {
+Pose calculatePose(Vertex in, constant float4x4 * matrixPalettes) {
     float4 totalPosition{0};
     float4 totalNormal{0};
     float4 totalTangent{0};

@@ -13,8 +13,8 @@ extension MTLVertexDescriptor {
     }
     static var environmentRenderer: MTLVertexDescriptor {
         let descriptor = MTLVertexDescriptor()
-        descriptor.layouts[0] = MTLVertexBufferLayoutDescriptor.environmentRenderer
-        descriptor.attributes[0].format = .float4
+        descriptor.layouts[0] = .environmentRenderer
+        descriptor.attributes[0].format = .float3
         descriptor.attributes[0].offset = 0
         descriptor.attributes[0].bufferIndex = 0
         return descriptor

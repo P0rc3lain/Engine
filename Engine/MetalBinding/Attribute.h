@@ -148,7 +148,8 @@ enum AttributeAmbientFragmentShaderBufferIndex {
 
 enum AttributeEnvironmentVertexShaderBufferIndex {
     kAttributeEnvironmentVertexShaderBufferStageIn = 0,
-    kAttributeEnvironmentVertexShaderBufferUniforms
+    kAttributeEnvironmentVertexShaderBufferModelUniforms,
+    kAttributeEnvironmentVertexShaderBufferCamera
 };
 
 enum AttributeEnvironmentFragmentShaderTextureIndex {
