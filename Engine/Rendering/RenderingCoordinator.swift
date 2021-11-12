@@ -39,11 +39,14 @@ struct RenderingCoordinator {
         bufferStore.omniLights.upload(data: &scene.omniLights)
         bufferStore.directionalLights.upload(data: &scene.directionalLights)
         bufferStore.spotLights.upload(data: &scene.spotLights)
-        bufferStore.upload(camera: &scene.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx], index: scene.activeCameraIdx)
-        bufferStore.upload(models: &scene.entities)
+        bufferStore.upload(camera: &scene.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx],
+                           index: scene.activeCameraIdx)
+        var modelUniforms = scene.entities.modelUniforms
+        bufferStore.modelCoordinateSystems.upload(data: &modelUniforms)
         pipeline.draw(commandBuffer: &commandBuffer,
                       scene: &scene,
-                      bufferStore: &bufferStore)
+                      bufferStore: &bufferStore,
+                      transformedEntities: &modelUniforms)
         imageConverter.encode(commandBuffer: commandBuffer,
                               sourceTexture: pipeline.io.output.color[0],
                               destinationTexture: outputTexture)
@@ -58,7 +61,7 @@ struct RenderingCoordinator {
             scene.paletteReferences.append(continousPalette.count ..< continousPalette.count + palette.count)
             continousPalette += palette
         }
-        bufferStore.upload(palettes: &continousPalette)
+        bufferStore.matrixPalettes.upload(data: &continousPalette)
     }
     func generatePalette(objectIdx: Int, scene: inout GPUSceneDescription) -> [simd_float4x4] {
         if scene.skeletonReferences[objectIdx] == .nil {

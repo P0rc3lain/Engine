@@ -147,12 +147,16 @@
 		56924AE4271A181600FF3E06 /* AnimatedValue+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AE3271A181600FF3E06 /* AnimatedValue+Alias.swift */; };
 		56924AE8271A187400FF3E06 /* AnimatedFloat3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AE7271A187400FF3E06 /* AnimatedFloat3+Extensions.swift */; };
 		56924AEA271A188700FF3E06 /* AnimatedQuatf+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AE9271A188700FF3E06 /* AnimatedQuatf+Extension.swift */; };
+		569D923D273DD594004FDFAC /* Bound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D923C273DD594004FDFAC /* Bound.swift */; };
 		569D9242273E7EED004FDFAC /* Color.metal in Sources */ = {isa = PBXBuildFile; fileRef = 569D9241273E7EED004FDFAC /* Color.metal */; };
 		569D9244273E81DD004FDFAC /* VertexP+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D9243273E81DD004FDFAC /* VertexP+Extension.swift */; };
+		569D9246273EA5F6004FDFAC /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D9245273EA5F6004FDFAC /* BoundingBox.swift */; };
 		56A3728E273862300079A93D /* MTLOrigin+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A3728D273862300079A93D /* MTLOrigin+Extension.swift */; };
 		56ADD2F4273707C500107E24 /* AmbientRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F3273707C500107E24 /* AmbientRenderer.swift */; };
 		56ADD2F6273707E200107E24 /* AmbientRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F5273707E200107E24 /* AmbientRenderer.metal */; };
 		56ADD2F8273709F400107E24 /* AmbientRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F7273709F400107E24 /* AmbientRenderer+Extension.swift */; };
+		56B65DEC273ED4CE00DB927E /* BoundingBox+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B65DEB273ED4CE00DB927E /* BoundingBox+Tests.swift */; };
+		56B65DEF273EE06300DB927E /* CullingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B65DEE273EE06300DB927E /* CullingController.swift */; };
 		56C4CD512737FFDD000A994E /* SpotRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C4CD502737FFDD000A994E /* SpotRenderer.swift */; };
 		56C4CD53273800E4000A994E /* SpotRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56C4CD52273800E4000A994E /* SpotRenderer.metal */; };
 		56C4CD55273801EB000A994E /* SpotRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C4CD54273801EB000A994E /* SpotRenderer+Extension.swift */; };
@@ -340,14 +344,18 @@
 		569D9238273DC175004FDFAC /* 2020-11-08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2020-11-08.png"; sourceTree = "<group>"; };
 		569D9239273DC175004FDFAC /* 2021-10-22.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "2021-10-22.gif"; sourceTree = "<group>"; };
 		569D923A273DC17E004FDFAC /* code_stats.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = code_stats.sh; sourceTree = "<group>"; };
+		569D923C273DD594004FDFAC /* Bound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bound.swift; sourceTree = "<group>"; };
 		569D9240273E7EE6004FDFAC /* Color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
 		569D9241273E7EED004FDFAC /* Color.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Color.metal; sourceTree = "<group>"; };
 		569D9243273E81DD004FDFAC /* VertexP+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VertexP+Extension.swift"; sourceTree = "<group>"; };
+		569D9245273EA5F6004FDFAC /* BoundingBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 		56A3728D273862300079A93D /* MTLOrigin+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLOrigin+Extension.swift"; sourceTree = "<group>"; };
 		56ADD2F1273705F800107E24 /* AmbientLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AmbientLight.h; sourceTree = "<group>"; };
 		56ADD2F3273707C500107E24 /* AmbientRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientRenderer.swift; sourceTree = "<group>"; };
 		56ADD2F5273707E200107E24 /* AmbientRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = AmbientRenderer.metal; sourceTree = "<group>"; };
 		56ADD2F7273709F400107E24 /* AmbientRenderer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AmbientRenderer+Extension.swift"; sourceTree = "<group>"; };
+		56B65DEB273ED4CE00DB927E /* BoundingBox+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BoundingBox+Tests.swift"; sourceTree = "<group>"; };
+		56B65DEE273EE06300DB927E /* CullingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CullingController.swift; sourceTree = "<group>"; };
 		56C4CD4F2737FF24000A994E /* SpotLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpotLight.h; sourceTree = "<group>"; };
 		56C4CD502737FFDD000A994E /* SpotRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotRenderer.swift; sourceTree = "<group>"; };
 		56C4CD52273800E4000A994E /* SpotRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = SpotRenderer.metal; sourceTree = "<group>"; };
@@ -508,6 +516,8 @@
 				561666D12719E2CC000063B1 /* Material.swift */,
 				561666D22719E2CC000063B1 /* EntityType.swift */,
 				561666D32719E2CC000063B1 /* Camera.swift */,
+				569D923C273DD594004FDFAC /* Bound.swift */,
+				569D9245273EA5F6004FDFAC /* BoundingBox.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -591,6 +601,7 @@
 				5670EC1F2736C1D500375194 /* Jobs */,
 				5670EC1E2736C1A100375194 /* Stages */,
 				561666F12719E2CD000063B1 /* RenderingCoordinator.swift */,
+				56B65DEE273EE06300DB927E /* CullingController.swift */,
 			);
 			path = Rendering;
 			sourceTree = "<group>";
@@ -703,6 +714,7 @@
 		56924AD5271A07FD00FF3E06 /* EngineTests */ = {
 			isa = PBXGroup;
 			children = (
+				56B65DED273ED4ED00DB927E /* Scene */,
 				56924ADF271A081B00FF3E06 /* Animation */,
 				56924AD8271A07FD00FF3E06 /* Info.plist */,
 			);
@@ -747,6 +759,14 @@
 				56C4CD4F2737FF24000A994E /* SpotLight.h */,
 			);
 			path = Light;
+			sourceTree = "<group>";
+		};
+		56B65DED273ED4ED00DB927E /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				56B65DEB273ED4CE00DB927E /* BoundingBox+Tests.swift */,
+			);
+			path = Scene;
 			sourceTree = "<group>";
 		};
 		56D1ED582725F83A00D68EA7 /* Metal */ = {
@@ -1012,6 +1032,7 @@
 				5686BD9A273C1CD300329FA0 /* StaticBuffer.swift in Sources */,
 				5616673B2719E2CD000063B1 /* DataBuffer.swift in Sources */,
 				56ADD2F8273709F400107E24 /* AmbientRenderer+Extension.swift in Sources */,
+				569D923D273DD594004FDFAC /* Bound.swift in Sources */,
 				56C4CD55273801EB000A994E /* SpotRenderer+Extension.swift in Sources */,
 				5670EC002735977900375194 /* BloomSplitRenderer.swift in Sources */,
 				561667082719E2CD000063B1 /* DataBuffer+Extension.swift in Sources */,
@@ -1072,6 +1093,7 @@
 				5670EC1D2736B8BC00375194 /* GBufferStage.swift in Sources */,
 				561666FE2719E2CD000063B1 /* MDLMaterial+Extension.swift in Sources */,
 				569D9242273E7EED004FDFAC /* Color.metal in Sources */,
+				569D9246273EA5F6004FDFAC /* BoundingBox.swift in Sources */,
 				56924AE8271A187400FF3E06 /* AnimatedFloat3+Extensions.swift in Sources */,
 				561667372719E2CD000063B1 /* PieceDescription+Alias.swift in Sources */,
 				561666FA2719E2CD000063B1 /* simd_float4+Extension.swift in Sources */,
@@ -1103,6 +1125,7 @@
 				562B8F43272599FF00363CE8 /* MTLRenderCommandEncoder+Extension.swift in Sources */,
 				5616672E2719E2CD000063B1 /* DynamicBuffer.swift in Sources */,
 				56924ACE271A022900FF3E06 /* EntityTree+Extension.swift in Sources */,
+				56B65DEF273EE06300DB927E /* CullingController.swift in Sources */,
 				561667542719E2CD000063B1 /* GBufferRenderer.swift in Sources */,
 				561666FC2719E2CD000063B1 /* Int+Extension.swift in Sources */,
 				566020E227343280000F4CA7 /* SSAO.metal in Sources */,
@@ -1132,6 +1155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56924AD7271A07FD00FF3E06 /* AnimatedValue+Tests.swift in Sources */,
+				56B65DEC273ED4CE00DB927E /* BoundingBox+Tests.swift in Sources */,
 				560253D72726CCCA00B3A13A /* Chronometer+Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

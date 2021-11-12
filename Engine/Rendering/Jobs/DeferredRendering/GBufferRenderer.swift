@@ -20,7 +20,14 @@ struct GBufferRenderer {
         self.depthStencilState = depthStencilState
         self.viewPort = .porcelain(size: drawableSize)
     }
-    func draw(encoder: inout MTLRenderCommandEncoder, scene: inout GPUSceneDescription, dataStore: inout BufferStore) {
+    func draw(encoder: inout MTLRenderCommandEncoder,
+              scene: inout GPUSceneDescription,
+              dataStore: inout BufferStore,
+              modelUniforms: inout [ModelUniforms]) {
+        let mask = CullingController.cullingMask(scene: &scene,
+                                                 transformedEntities: modelUniforms,
+                                                 camera: scene.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx],
+                                                 cameraTransfrom: modelUniforms[scene.activeCameraIdx])
         var boundMaterialIdx = Int.nil
         encoder.setViewport(viewPort)
         encoder.setDepthStencilState(depthStencilState)
@@ -34,6 +41,9 @@ struct GBufferRenderer {
         for index in scene.entities.indices {
             let object = scene.entities[index].data
             if object.type == .mesh && scene.skeletonReferences[index] != .nil {
+                if !mask[index] {
+                    continue
+                }
                 let mesh = scene.meshBuffers[object.referenceIdx]
                 encoder.setVertexBuffer(mesh.buffer,
                                         offset: mesh.offset,
@@ -68,6 +78,9 @@ struct GBufferRenderer {
         for index in scene.entities.indices {
             let object = scene.entities[index].data
             if object.type == .mesh && scene.skeletonReferences[index] == .nil {
+                if !mask[index] {
+                    continue
+                }
                 let mesh = scene.meshBuffers[object.referenceIdx]
                 encoder.setVertexBuffer(mesh.buffer,
                                         offset: mesh.offset,

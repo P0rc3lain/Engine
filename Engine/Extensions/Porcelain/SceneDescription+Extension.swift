@@ -17,6 +17,7 @@ extension RamSceneDescription {
         // MARK: - Capacity C
         description.meshNames = meshNames
         description.meshBuffers = meshBuffers.compactMap { $0.upload(device: device) }
+        description.meshBoundingBoxes = meshBoundingBoxes
         description.indexDrawReferences = indexDrawReferences
         // MARK: - Capacity D
         description.indexDrawsMaterials = indexDrawsMaterials

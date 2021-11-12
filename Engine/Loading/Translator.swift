@@ -2,6 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
+import MetalBinding
 import ModelIO
 import simd
 
@@ -79,12 +80,43 @@ public class Translator {
                             referenceIdx: scene.cameras.count - 1)
         scene.entities.add(parentIdx: parentIdx, data: entity)
     }
+    private func getModelBounds(buffer: inout Data) -> Bound {
+        let vertexCount = buffer.count / MemoryLayout<Vertex>.stride
+        assert(buffer.count % MemoryLayout<Vertex>.stride == 0, "Data must contain vertices")
+        var minX = Float(0)
+        var maxX = Float(0)
+        var minY = Float(0)
+        var maxY = Float(0)
+        var minZ = Float(0)
+        var maxZ = Float(0)
+        buffer.withUnsafeBytes { (pointer: UnsafePointer<Vertex>) in
+            let firstVertex = pointer.pointee
+            minX = firstVertex.position.x
+            maxX = firstVertex.position.x
+            minY = firstVertex.position.y
+            maxY = firstVertex.position.y
+            minZ = firstVertex.position.z
+            maxZ = firstVertex.position.z
+            for i in 1 ..< vertexCount {
+                let vertex = pointer.advanced(by: i).pointee
+                minX = min(vertex.position.x, minX)
+                maxX = max(vertex.position.x, maxX)
+                minY = min(vertex.position.y, minX)
+                maxY = max(vertex.position.y, maxX)
+                minZ = min(vertex.position.z, minX)
+                maxZ = max(vertex.position.z, maxX)
+            }
+            
+        }
+        return Bound(min: [minX, minY, minZ], max: [maxX, maxY, maxZ])
+    }
     private func add(mesh: MDLMesh,
                      transform: TransformAnimation,
                      parentIdx: Int,
                      scene: inout RamSceneDescription) {
         assert(mesh.vertexBuffers.count == 1, "Only object that have a single buffer assigned are supported")
-        let buffer = mesh.vertexBuffers[0].rawData
+        var buffer = mesh.vertexBuffers[0].rawData
+        let bounds = getModelBounds(buffer: &buffer)
         let dataBuffer = DataBuffer(buffer: buffer, length: buffer.count)
         var pieceDescriptions = [RamPieceDescription]()
         guard let submeshes = mesh.submeshes as? [MDLSubmesh] else {
@@ -107,6 +139,7 @@ public class Translator {
                                                drawDescription: indexBasedDraw)
             pieceDescriptions.append(description)
         }
+        scene.meshBoundingBoxes.append(BoundingBox.from(bound: bounds))
         scene.meshNames.append(mesh.path)
         scene.meshBuffers.append(dataBuffer)
         scene.indexDrawReferences.append(scene.indexDrawReferences.count ..< scene.indexDrawReferences.count + pieceDescriptions.count)
