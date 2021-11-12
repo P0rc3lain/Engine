@@ -2,8 +2,8 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import Foundation
 import Metal
+import MetalBinding
 
 struct GBufferStage: Stage {
     var io: GPUIO
@@ -24,12 +24,16 @@ struct GBufferStage: Stage {
     }
     mutating func draw(commandBuffer: inout MTLCommandBuffer,
                        scene: inout GPUSceneDescription,
-                       bufferStore: inout BufferStore) {
+                       bufferStore: inout BufferStore,
+                       modelUniforms: inout [ModelUniforms]) {
         guard var gBufferEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: gBufferRenderPassDescriptor) else {
             return
         }
         commandBuffer.pushDebugGroup("G-Buffer Renderer Pass")
-        gBufferRenderer.draw(encoder: &gBufferEncoder, scene: &scene, dataStore: &bufferStore)
+        gBufferRenderer.draw(encoder: &gBufferEncoder,
+                             scene: &scene,
+                             dataStore: &bufferStore,
+                             modelUniforms: &modelUniforms)
         gBufferEncoder.endEncoding()
         commandBuffer.popDebugGroup()
     }

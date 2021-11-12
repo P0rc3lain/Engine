@@ -7,7 +7,7 @@ import MetalKit
 import simd
 
 struct DirectionalRenderer {
-    let pipelineState: MTLRenderPipelineState
+    private let pipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport
     private let inputTextures: [MTLTexture]

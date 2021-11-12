@@ -15,6 +15,7 @@ public struct SceneDescription<DataType, IndexType, GeometryType, TextureType> {
     // MARK: - Capacity C
     public var meshNames = [String]()
     public var meshBuffers = [DataBuffer<DataType>]()
+    var meshBoundingBoxes = [BoundingBox]()
     public var indexDrawReferences = [Range<Int>]()
     // MARK: - Capacity D
     public var indexDraws = [IndexBasedDraw<DataType, IndexType, GeometryType>]()

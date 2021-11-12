@@ -3,6 +3,7 @@
 //
 
 import Metal
+import MetalBinding
 
 struct Pipeline: Stage {
     var io: GPUIO
@@ -48,13 +49,15 @@ struct Pipeline: Stage {
     }
     mutating func draw(commandBuffer: inout MTLCommandBuffer,
                        scene: inout GPUSceneDescription,
-                       bufferStore: inout BufferStore) {
+                       bufferStore: inout BufferStore,
+                       transformedEntities: inout [ModelUniforms]) {
         shadowStage.draw(commandBuffer: &commandBuffer,
                          scene: &scene,
                          bufferStore: &bufferStore)
         gBufferStage.draw(commandBuffer: &commandBuffer,
                           scene: &scene,
-                          bufferStore: &bufferStore)
+                          bufferStore: &bufferStore,
+                          modelUniforms: &transformedEntities)
         if !scene.ambientLights.isEmpty {
             ssaoStage.draw(commandBuffer: &commandBuffer,
                            bufferStore: &bufferStore)

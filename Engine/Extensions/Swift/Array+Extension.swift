@@ -8,4 +8,8 @@ extension Array {
             self[index] = transform(self[index])
         }
     }
+    init(minimalCapacity: Int) {
+        self.init()
+        reserveCapacity(minimalCapacity)
+    }
 }
