@@ -13,4 +13,11 @@ extension MTLVertexBufferLayoutDescriptor {
         layout.stepRate = 1
         return layout
     }
+    static var vertexPUV: MTLVertexBufferLayoutDescriptor {
+        let layout = MTLVertexBufferLayoutDescriptor()
+        layout.stepFunction = .perVertex
+        layout.stride = MemoryLayout<VertexPUV>.stride
+        layout.stepRate = 1
+        return layout
+    }
 }

@@ -14,7 +14,7 @@ struct RasterizedData {
     float2 texcoord;
 };
 
-vertex RasterizedData vertexBloomSplit(Vertex in [[stage_in]]) {
+vertex RasterizedData vertexBloomSplit(VertexPUV in [[stage_in]]) {
     return RasterizedData {
         float4(in.position, 1),
         in.textureUV
