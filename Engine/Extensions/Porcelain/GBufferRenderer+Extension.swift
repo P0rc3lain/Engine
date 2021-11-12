@@ -12,11 +12,9 @@ extension GBufferRenderer {
               let depthStencilState = device.makeDepthStencilStateGBufferRenderer() else {
             return nil
         }
-        let renderPassDescriptor = MTLRenderPassDescriptor.gBuffer(device: device, size: drawableSize)
         return GBufferRenderer(pipelineState: pipelineState,
                                animatedPipelineState: animatedPipelineState,
                                depthStencilState: depthStencilState,
-                               drawableSize: drawableSize,
-                               renderPassRescriptor: renderPassDescriptor)
+                               drawableSize: drawableSize)
     }
 }

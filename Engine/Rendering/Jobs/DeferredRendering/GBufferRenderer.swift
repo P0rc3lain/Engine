@@ -14,8 +14,7 @@ struct GBufferRenderer {
     init(pipelineState: MTLRenderPipelineState,
          animatedPipelineState: MTLRenderPipelineState,
          depthStencilState: MTLDepthStencilState,
-         drawableSize: CGSize,
-         renderPassRescriptor: MTLRenderPassDescriptor) {
+         drawableSize: CGSize) {
         self.pipelineState = pipelineState
         self.animatedPipelineState = animatedPipelineState
         self.depthStencilState = depthStencilState
