@@ -6,6 +6,7 @@
 #include <metal_stdlib>
 
 #include "../Common/PBR.h"
+#include "../Common/LightingInput.h"
 #include "../../MetalBinding/Model.h"
 #include "../../MetalBinding/Vertex.h"
 #include "../../MetalBinding/Camera.h"
@@ -37,33 +38,22 @@ fragment float4 fragmentDirectionalLight(RasterizerData in [[stage_in]],
                                          constant DirectionalLight * directionalLights [[buffer(kAttributeDirectionalFragmentShaderBufferDirectionalLights)]],
                                          constant ModelUniforms * lightUniforms [[buffer(kAttributeDirectionalFragmentShaderBufferLightUniforms)]]) {
     constexpr sampler textureSampler(mag_filter::nearest, min_filter::nearest);
-    float4 arV = ar.sample(textureSampler, in.texcoord);
-    float4 nmV = nm.sample(textureSampler, in.texcoord);
-    float4 prV = pr.sample(textureSampler, in.texcoord);
-    // Camera Space Position
-    float3 fragmentPosition = prV.xyz;
-    float reflectance = prV.w;
-
-    float3 n = nmV.xyz;
-    float metallicFactor = nmV.w;
-
-    float3 baseColor = arV.xyz;
-    float roughnessFactor = arV.w;
+    LightingInput input = LightingInput::fromTextures(ar, nm, pr, textureSampler, in.texcoord);
 
     float3 cameraPosition = float3(0, 0, 0);
-    float3 eye = normalize(cameraPosition - fragmentPosition);
+    float3 eye = normalize(cameraPosition - input.fragmentPosition);
 
     float3 outputColor(0, 0, 0);
     DirectionalLight light = directionalLights[in.instanceId];
     float3 l = normalize(-light.direction);
-    if (dot(n, l) < 0) {
+    if (dot(input.n, l) < 0) {
         discard_fragment();
     }
     float3 halfway = normalize(l + eye);
-    float3 f0 = 0.16 * reflectance * reflectance * (1 - metallicFactor) + metallicFactor * baseColor;
-    float3 specular = cookTorrance(n, eye, halfway, l, roughnessFactor, f0);
-    float3 diffuseColor = (1 - metallicFactor) * baseColor;
+    float3 f0 = 0.16 * input.reflectance * input.reflectance * (1 - input.metallicFactor) + input.metallicFactor * input.baseColor;
+    float3 specular = cookTorrance(input.n, eye, halfway, l, input.roughnessFactor, f0);
+    float3 diffuseColor = (1 - input.metallicFactor) * input.baseColor;
     float3 color =  diffuseColor / M_PI_F + specular;
-    outputColor += color * directionalLights[in.instanceId].color * dot(n, l) * directionalLights[in.instanceId].intensity;
+    outputColor += color * directionalLights[in.instanceId].color * dot(input.n, l) * directionalLights[in.instanceId].intensity;
     return float4(outputColor, 1);
 }

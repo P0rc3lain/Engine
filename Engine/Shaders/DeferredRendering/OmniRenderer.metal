@@ -6,6 +6,7 @@
 #include <metal_stdlib>
 
 #include "../Common/PBR.h"
+#include "../Common/LightingInput.h"
 #include "../../MetalBinding/Model.h"
 #include "../../MetalBinding/Vertex.h"
 #include "../../MetalBinding/Camera.h"
@@ -38,33 +39,21 @@ fragment float4 fragmentDeferredLight(RasterizerData in [[stage_in]],
                                       constant OmniLight * omniLights [[buffer(kAttributeLightingFragmentShaderBufferOmniLights)]],
                                       constant ModelUniforms * lightUniforms [[buffer(kAttributeLightingFragmentShaderBufferLightUniforms)]]) {
     constexpr sampler textureSampler(mag_filter::nearest, min_filter::nearest);
-    
-    float4 arV = ar.sample(textureSampler, in.texcoord);
-    float4 nmV = nm.sample(textureSampler, in.texcoord);
-    float4 prV = pr.sample(textureSampler, in.texcoord);
-    // Camera Space Position
-    float3 fragmentPosition = prV.xyz;
-    float reflectance = prV.w;
-    
-    float3 n = nmV.xyz;
-    float metallicFactor = nmV.w;
-    
-    float3 baseColor = arV.xyz;
-    float roughnessFactor = arV.w;
+    LightingInput input = LightingInput::fromTextures(ar, nm, pr, textureSampler, in.texcoord);
 
     float3 cameraPosition = float3(0, 0, 0);
-    float3 eye = normalize(cameraPosition - fragmentPosition);
+    float3 eye = normalize(cameraPosition - input.fragmentPosition);
     
     float3 outputColor(0, 0, 0);
     OmniLight light = omniLights[in.instanceId];
     float3 lightPosition = (lightUniforms[camera.index].modelMatrix * lightUniforms[light.idx].modelMatrix * float4(0, 0, 0, 1)).xyz;
-    float3 l = normalize(lightPosition - fragmentPosition);
-    if (dot(n, l) < 0) {
+    float3 l = normalize(lightPosition - input.fragmentPosition);
+    if (dot(input.n, l) < 0) {
         discard_fragment();
     }
     
     // Shadow
-    float4 lightSpacesFragmentPosition = lightUniforms[light.idx].modelMatrixInverse * lightUniforms[camera.index].modelMatrixInverse * float4(fragmentPosition, 1);
+    float4 lightSpacesFragmentPosition = lightUniforms[light.idx].modelMatrixInverse * lightUniforms[camera.index].modelMatrixInverse * float4(input.fragmentPosition, 1);
     float currentDistance = length(lightSpacesFragmentPosition.xyz)/100;
     float3 sampleVector = normalize(lightSpacesFragmentPosition.xyz);
     sampleVector.x = -sampleVector.x;
@@ -75,10 +64,10 @@ fragment float4 fragmentDeferredLight(RasterizerData in [[stage_in]],
     }
     
     float3 halfway = normalize(l + eye);
-    float3 f0 = 0.16 * reflectance * reflectance * (1 - metallicFactor) + metallicFactor * baseColor;
-    float3 specular = cookTorrance(n, eye, halfway, l, roughnessFactor, f0);
-    float3 diffuseColor = (1 - metallicFactor) * baseColor;
+    float3 f0 = 0.16 * input.reflectance * input.reflectance * (1 - input.metallicFactor) + input.metallicFactor * input.baseColor;
+    float3 specular = cookTorrance(input.n, eye, halfway, l, input.roughnessFactor, f0);
+    float3 diffuseColor = (1 - input.metallicFactor) * input.baseColor;
     float3 color =  diffuseColor / M_PI_F + specular;
-    outputColor += color * omniLights[in.instanceId].color * dot(n, l) * omniLights[in.instanceId].intensity;
+    outputColor += color * omniLights[in.instanceId].color * dot(input.n, l) * omniLights[in.instanceId].intensity;
     return float4(outputColor, 1);
 }

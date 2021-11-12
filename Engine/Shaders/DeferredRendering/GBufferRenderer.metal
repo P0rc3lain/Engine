@@ -48,14 +48,14 @@ vertex RasterizerData vertexGBuffer(Vertex in [[stage_in]],
                             normalize(cross(rotatedTangent, rotatedNormal)),
                             normalize(rotatedNormal));
     float3x3 cameraTBN = cameraRotation * TBN;
-    RasterizerData out;
-    out.t = cameraTBN.columns[0];
-    out.b = cameraTBN.columns[1];
-    out.n = cameraTBN.columns[2];
-    out.clipSpacePosition = cameraUniforms.projectionMatrix * cameraSpacePosition;
-    out.cameraSpacePosition = cameraSpacePosition.xyz;
-    out.uv = in.textureUV;
-    return out;
+    return RasterizerData {
+        cameraUniforms.projectionMatrix * cameraSpacePosition,
+        cameraSpacePosition.xyz,
+        cameraTBN.columns[0],
+        cameraTBN.columns[1],
+        cameraTBN.columns[2],
+        in.textureUV
+    };
 }
 
 fragment GBufferData fragmentGBuffer(RasterizerData in [[stage_in]],

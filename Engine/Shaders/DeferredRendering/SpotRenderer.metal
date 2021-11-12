@@ -6,6 +6,7 @@
 #include <metal_stdlib>
 
 #include "../Common/PBR.h"
+#include "../Common/LightingInput.h"
 #include "../../MetalBinding/Model.h"
 #include "../../MetalBinding/Vertex.h"
 #include "../../MetalBinding/Camera.h"
@@ -38,33 +39,22 @@ fragment float4 fragmentSpotLight(RasterizerData in [[stage_in]],
                                   constant SpotLight * spotLights [[buffer(kAttributeDirectionalFragmentShaderBufferDirectionalLights)]],
                                   constant ModelUniforms * modelUniforms [[buffer(kAttributeDirectionalFragmentShaderBufferLightUniforms)]]) {
     constexpr sampler textureSampler(mag_filter::nearest, min_filter::nearest);
-    float4 arV = ar.sample(textureSampler, in.texcoord);
-    float4 nmV = nm.sample(textureSampler, in.texcoord);
-    float4 prV = pr.sample(textureSampler, in.texcoord);
-    // Camera Space Position
-    float3 fragmentPosition = prV.xyz;
-    float reflectance = prV.w;
-
-    float3 n = nmV.xyz;
-    float metallicFactor = nmV.w;
-
-    float3 baseColor = arV.xyz;
-    float roughnessFactor = arV.w;
+    LightingInput input = LightingInput::fromTextures(ar, nm, pr, textureSampler, in.texcoord);
     
     float3 cameraPosition = float3(0, 0, 0);
-    float3 eye = normalize(cameraPosition - fragmentPosition);
+    float3 eye = normalize(cameraPosition - input.fragmentPosition);
     SpotLight light = spotLights[in.instanceId];
     int id = light.idx;
     float4x4 lightTransformation = modelUniforms[camera.index].modelMatrix * modelUniforms[id].modelMatrix;
     float3 lightPosition = (lightTransformation * float4(float3(0), 1)).xyz;
     float3 forwardDirection = normalize(lightTransformation.columns[2].xyz);
-    float3 l = normalize(lightPosition - fragmentPosition);
+    float3 l = normalize(lightPosition - input.fragmentPosition);
     float theta = acos(dot(forwardDirection, l));
     if (theta > light.coneAngle/2) {
         discard_fragment();
     }
     
-    float4 lightSpacesFragmentPosition = modelUniforms[id].modelMatrixInverse * modelUniforms[camera.index].modelMatrixInverse * float4(fragmentPosition, 1);
+    float4 lightSpacesFragmentPosition = modelUniforms[id].modelMatrixInverse * modelUniforms[camera.index].modelMatrixInverse * float4(input.fragmentPosition, 1);
     float4 lightProjectedPosition = light.projectionMatrix * lightSpacesFragmentPosition;
     lightProjectedPosition /= lightProjectedPosition.w;
     lightProjectedPosition.xy = lightProjectedPosition.xy * 0.5 + 0.5;
@@ -72,17 +62,17 @@ fragment float4 fragmentSpotLight(RasterizerData in [[stage_in]],
     float existingDepth = shadowMaps.sample(textureSampler, lightProjectedPosition.xy, in.instanceId);
     float4 reconstructedPosition = light.projectionMatrixInverse * float4(lightProjectedPosition.xy, existingDepth, 1.0);
     reconstructedPosition /= reconstructedPosition.w;
-    float bias = max(0.05 * (1.0 - dot(n, l)), 0.005);
+    float bias = max(0.05 * (1.0 - dot(input.n, l)), 0.005);
 
     if (lightSpacesFragmentPosition.z < reconstructedPosition.z - bias) {
         discard_fragment();
     }
     
     float3 halfway = normalize(l + eye);
-    float3 f0 = 0.16 * reflectance * reflectance * (1 - metallicFactor) + metallicFactor * baseColor;
-    float3 specular = cookTorrance(n, eye, halfway, l, roughnessFactor, f0);
-    float3 diffuseColor = (1 - metallicFactor) * baseColor;
+    float3 f0 = 0.16 * input.reflectance * input.reflectance * (1 - input.metallicFactor) + input.metallicFactor * input.baseColor;
+    float3 specular = cookTorrance(input.n, eye, halfway, l, input.roughnessFactor, f0);
+    float3 diffuseColor = (1 - input.metallicFactor) * input.baseColor;
     float3 color =  diffuseColor / M_PI_F + specular;
-    float3 outputColor = color * spotLights[in.instanceId].color * dot(n, l) * spotLights[in.instanceId].intensity;
+    float3 outputColor = color * spotLights[in.instanceId].color * dot(input.n, l) * spotLights[in.instanceId].intensity;
     return float4(outputColor, 1);
 }
