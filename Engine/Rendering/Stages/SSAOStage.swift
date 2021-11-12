@@ -18,7 +18,9 @@ struct SSAOStage: Stage {
         guard let ssaoRenderer = SSAORenderer.make(device: device,
                                                    prTexture: prTexture,
                                                    nmTexture: nmTexture,
-                                                   drawableSize: renderingSize),
+                                                   drawableSize: renderingSize,
+                                                   maxNoiseCount: 16,
+                                                   maxSamplesCount: 64),
               let gaussTexture = device.makeTexture(descriptor: .ssaoColor(size: renderingSize)) else {
             return nil
         }

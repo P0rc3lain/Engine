@@ -140,6 +140,8 @@
 		5670EC272736EA2400375194 /* PostprocessStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC262736EA2400375194 /* PostprocessStage.swift */; };
 		5686BD9A273C1CD300329FA0 /* StaticBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5686BD99273C1CD300329FA0 /* StaticBuffer.swift */; };
 		5686BD9D273D78B700329FA0 /* Animation.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5686BD9C273D78B700329FA0 /* Animation.metal */; };
+		568EBB3A273F0B88007C7D35 /* SSAOUniforms+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EBB39273F0B88007C7D35 /* SSAOUniforms+Extension.swift */; };
+		568EBB3D273F0DE1007C7D35 /* Hemisphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EBB3C273F0DE1007C7D35 /* Hemisphere.swift */; };
 		56924ACC271A00D900FF3E06 /* AnimatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACB271A00D900FF3E06 /* AnimatedValue.swift */; };
 		56924ACE271A022900FF3E06 /* EntityTree+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */; };
 		56924AD7271A07FD00FF3E06 /* AnimatedValue+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AD6271A07FD00FF3E06 /* AnimatedValue+Tests.swift */; };
@@ -321,6 +323,9 @@
 		5686BD9B273D78A900329FA0 /* Animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		5686BD9C273D78B700329FA0 /* Animation.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Animation.metal; sourceTree = "<group>"; };
 		5686BD9E273D7D7100329FA0 /* Pose.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pose.h; sourceTree = "<group>"; };
+		568EBB38273F09BC007C7D35 /* SSAO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSAO.h; sourceTree = "<group>"; };
+		568EBB39273F0B88007C7D35 /* SSAOUniforms+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SSAOUniforms+Extension.swift"; sourceTree = "<group>"; };
+		568EBB3C273F0DE1007C7D35 /* Hemisphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hemisphere.swift; sourceTree = "<group>"; };
 		56924ACB271A00D900FF3E06 /* AnimatedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedValue.swift; sourceTree = "<group>"; };
 		56924ACD271A022900FF3E06 /* EntityTree+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntityTree+Extension.swift"; sourceTree = "<group>"; };
 		56924AD4271A07FD00FF3E06 /* EngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -583,6 +588,7 @@
 		561666E52719E2CD000063B1 /* MetalBinding */ = {
 			isa = PBXGroup;
 			children = (
+				568EBB37273F099B007C7D35 /* Rendering */,
 				56ADD2F22737077700107E24 /* Light */,
 				561666E62719E2CD000063B1 /* Compatibility.h */,
 				561666E72719E2CD000063B1 /* Vertex.h */,
@@ -691,11 +697,11 @@
 		5670EC1F2736C1D500375194 /* Jobs */ = {
 			isa = PBXGroup;
 			children = (
+				568EBB3B273F0DC6007C7D35 /* SSAO */,
 				5670EC0E27368F9F00375194 /* Bloom */,
 				561666EC2719E2CD000063B1 /* EnvironmentRenderer.swift */,
 				561666ED2719E2CD000063B1 /* DeferredRendering */,
 				561666F02719E2CD000063B1 /* Postprocessor.swift */,
-				566020DF2734314C000F4CA7 /* SSAORenderer.swift */,
 				563C9C2027387F8C0014CFF3 /* SpotShadowRenderer.swift */,
 				560C18D2273ABDE700459AEF /* OmniShadowRenderer.swift */,
 			);
@@ -709,6 +715,23 @@
 				5670EC152736A2AE00375194 /* GPUSupply.swift */,
 			);
 			path = IO;
+			sourceTree = "<group>";
+		};
+		568EBB37273F099B007C7D35 /* Rendering */ = {
+			isa = PBXGroup;
+			children = (
+				568EBB38273F09BC007C7D35 /* SSAO.h */,
+			);
+			path = Rendering;
+			sourceTree = "<group>";
+		};
+		568EBB3B273F0DC6007C7D35 /* SSAO */ = {
+			isa = PBXGroup;
+			children = (
+				566020DF2734314C000F4CA7 /* SSAORenderer.swift */,
+				568EBB3C273F0DE1007C7D35 /* Hemisphere.swift */,
+			);
+			path = SSAO;
 			sourceTree = "<group>";
 		};
 		56924AD5271A07FD00FF3E06 /* EngineTests */ = {
@@ -868,6 +891,7 @@
 				560C18D6273AC71100459AEF /* OmniLight+Extension.swift */,
 				560C18D8273ACC0100459AEF /* OmniShadowRenderer+Extension.swift */,
 				569D9243273E81DD004FDFAC /* VertexP+Extension.swift */,
+				568EBB39273F0B88007C7D35 /* SSAOUniforms+Extension.swift */,
 			);
 			path = Porcelain;
 			sourceTree = "<group>";
@@ -998,6 +1022,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				568EBB3A273F0B88007C7D35 /* SSAOUniforms+Extension.swift in Sources */,
 				561DF41727246F1800D95ACC /* MTLViewport+Extension.swift in Sources */,
 				56270167272B54EB00071620 /* AnimatedTransform.swift in Sources */,
 				56C4CD53273800E4000A994E /* SpotRenderer.metal in Sources */,
@@ -1011,6 +1036,7 @@
 				5616673A2719E2CD000063B1 /* PrimitiveType.swift in Sources */,
 				561667452719E2CD000063B1 /* OmniRenderer.metal in Sources */,
 				5670EC072735A3F300375194 /* BloomMerge.metal in Sources */,
+				568EBB3D273F0DE1007C7D35 /* Hemisphere.swift in Sources */,
 				561667282719E2CD000063B1 /* EnvironmentRenderer+Extension.swift in Sources */,
 				560C18D9273ACC0100459AEF /* OmniShadowRenderer+Extension.swift in Sources */,
 				5616670B2719E2CD000063B1 /* PieceDescription+Extension.swift in Sources */,

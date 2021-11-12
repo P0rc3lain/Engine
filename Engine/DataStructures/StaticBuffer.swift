@@ -13,10 +13,14 @@ public struct StaticBuffer<T> {
         self.buffer = buffer
         self.buffer.label = bufferName
     }
-    mutating func upload(data: inout  [T]) {
+    mutating func upload(data: inout [T]) {
         data.withUnsafeBytes { pointer in
             buffer.contents().copyBuffer(from: pointer)
         }
+    }
+    mutating func upload(value: inout T) {
+        var data = [value]
+        upload(data: &data)
     }
     private var bufferName: String {
         "\(Self.self)"

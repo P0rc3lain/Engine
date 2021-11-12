@@ -12,5 +12,6 @@ module MetalBinding {
     header "../MetalBinding/Light/SpotLight.h"
     header "../MetalBinding/Light/AmbientLight.h"
     header "../MetalBinding/Light/DirectionalLight.h"
+    header "../MetalBinding/Rendering/SSAO.h"
     export *
 }

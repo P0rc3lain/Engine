@@ -69,7 +69,8 @@ enum AttributeSsaoFragmentShaderBufferIndex {
     kAttributeSsaoFragmentShaderBufferCamera = 0,
     kAttributeSsaoFragmentShaderBufferSamples,
     kAttributeSsaoFragmentShaderBufferNoise,
-    kAttributeSsaoFragmentShaderBufferModelUniforms
+    kAttributeSsaoFragmentShaderBufferModelUniforms,
+    kAttributeSsaoFragmentShaderBufferRenderingUniforms
 };
 
 enum AttributeBloomSplitVertexShaderBufferIndex {
