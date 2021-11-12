@@ -42,3 +42,12 @@ float3 cookTorrance(float3 n, float3 v, float3 h, float3 l, float roughness, flo
     float denominator = 4 * nl * nh;
     return numerator / max(denominator, 0.001f); // 0.001f is bias
 }
+
+float3 lighting(float3 l, float3 eye, LightingInput input, float3 lightColor, float lightIntensity) {
+    float3 halfway = normalize(l + eye);
+    float3 f0 = 0.16 * input.reflectance * input.reflectance * (1 - input.metallicFactor) + input.metallicFactor * input.baseColor;
+    float3 specular = cookTorrance(input.n, eye, halfway, l, input.roughnessFactor, f0);
+    float3 diffuseColor = (1 - input.metallicFactor) * input.baseColor;
+    float3 color =  diffuseColor / M_PI_F + specular;
+    return color * lightColor * dot(input.n, l) * lightIntensity;
+}

@@ -41,10 +41,8 @@ fragment float4 fragmentDeferredLight(RasterizerData in [[stage_in]],
     constexpr sampler textureSampler(mag_filter::nearest, min_filter::nearest);
     LightingInput input = LightingInput::fromTextures(ar, nm, pr, textureSampler, in.texcoord);
 
-    float3 cameraPosition = float3(0, 0, 0);
-    float3 eye = normalize(cameraPosition - input.fragmentPosition);
+    float3 eye = normalize(-input.fragmentPosition);
     
-    float3 outputColor(0, 0, 0);
     OmniLight light = omniLights[in.instanceId];
     float3 lightPosition = (lightUniforms[camera.index].modelMatrix * lightUniforms[light.idx].modelMatrix * float4(0, 0, 0, 1)).xyz;
     float3 l = normalize(lightPosition - input.fragmentPosition);
@@ -63,11 +61,9 @@ fragment float4 fragmentDeferredLight(RasterizerData in [[stage_in]],
         discard_fragment();
     }
     
-    float3 halfway = normalize(l + eye);
-    float3 f0 = 0.16 * input.reflectance * input.reflectance * (1 - input.metallicFactor) + input.metallicFactor * input.baseColor;
-    float3 specular = cookTorrance(input.n, eye, halfway, l, input.roughnessFactor, f0);
-    float3 diffuseColor = (1 - input.metallicFactor) * input.baseColor;
-    float3 color =  diffuseColor / M_PI_F + specular;
-    outputColor += color * omniLights[in.instanceId].color * dot(input.n, l) * omniLights[in.instanceId].intensity;
-    return float4(outputColor, 1);
+    return float4(lighting(l,
+                           eye,
+                           input,
+                           omniLights[in.instanceId].color,
+                           omniLights[in.instanceId].intensity), 1);
 }

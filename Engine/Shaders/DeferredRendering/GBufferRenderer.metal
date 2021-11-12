@@ -66,14 +66,14 @@ fragment GBufferData fragmentGBuffer(RasterizerData in [[stage_in]],
                                      constant CameraUniforms & cameraUniforms [[buffer(kAttributeGBufferVertexShaderBufferCameraUniforms)]]) {
     constexpr sampler textureSampler(mag_filter::linear, min_filter::nearest, address::mirrored_repeat);
     simd_float3x3 TBN(in.t, in.b, in.n);
-    GBufferData out;
     // 0.04 is reflactance for common materials
     // should be possible to configure it
     float3 normalEncoded = normals.sample(textureSampler, in.uv).xyz;
     float3 normalDecoded = (normalEncoded * 2) - 1;
     float3 normalWorldSpace = TBN * normalDecoded;
-    out.positionReflectance = float4(in.cameraSpacePosition, 0.04);
-    out.albedoRoughness = float4(albedo.sample(textureSampler, in.uv).xyz, roughness.sample(textureSampler, in.uv).x);
-    out.normalMetallic = float4(normalWorldSpace, metallic.sample(textureSampler, in.uv).x);
-    return out;
+    return GBufferData {
+        float4(albedo.sample(textureSampler, in.uv).xyz, roughness.sample(textureSampler, in.uv).x),
+        float4(normalWorldSpace, metallic.sample(textureSampler, in.uv).x),
+        float4(in.cameraSpacePosition, 0.04)
+    };
 }

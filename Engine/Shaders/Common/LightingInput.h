@@ -6,6 +6,7 @@
 #define LIGHTING_INPUT_H
 
 #include <simd/simd.h>
+#include <metal_stdlib>
 
 struct LightingInput {
     float3 fragmentPosition;

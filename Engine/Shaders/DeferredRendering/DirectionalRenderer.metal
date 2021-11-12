@@ -39,21 +39,15 @@ fragment float4 fragmentDirectionalLight(RasterizerData in [[stage_in]],
                                          constant ModelUniforms * lightUniforms [[buffer(kAttributeDirectionalFragmentShaderBufferLightUniforms)]]) {
     constexpr sampler textureSampler(mag_filter::nearest, min_filter::nearest);
     LightingInput input = LightingInput::fromTextures(ar, nm, pr, textureSampler, in.texcoord);
-
-    float3 cameraPosition = float3(0, 0, 0);
-    float3 eye = normalize(cameraPosition - input.fragmentPosition);
-
-    float3 outputColor(0, 0, 0);
+    float3 eye = normalize(-input.fragmentPosition);
     DirectionalLight light = directionalLights[in.instanceId];
     float3 l = normalize(-light.direction);
     if (dot(input.n, l) < 0) {
         discard_fragment();
     }
-    float3 halfway = normalize(l + eye);
-    float3 f0 = 0.16 * input.reflectance * input.reflectance * (1 - input.metallicFactor) + input.metallicFactor * input.baseColor;
-    float3 specular = cookTorrance(input.n, eye, halfway, l, input.roughnessFactor, f0);
-    float3 diffuseColor = (1 - input.metallicFactor) * input.baseColor;
-    float3 color =  diffuseColor / M_PI_F + specular;
-    outputColor += color * directionalLights[in.instanceId].color * dot(input.n, l) * directionalLights[in.instanceId].intensity;
-    return float4(outputColor, 1);
+    return float4(lighting(l,
+                           eye,
+                           input,
+                           directionalLights[in.instanceId].color,
+                           directionalLights[in.instanceId].intensity), 1);
 }

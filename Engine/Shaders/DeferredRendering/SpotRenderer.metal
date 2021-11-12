@@ -67,12 +67,9 @@ fragment float4 fragmentSpotLight(RasterizerData in [[stage_in]],
     if (lightSpacesFragmentPosition.z < reconstructedPosition.z - bias) {
         discard_fragment();
     }
-    
-    float3 halfway = normalize(l + eye);
-    float3 f0 = 0.16 * input.reflectance * input.reflectance * (1 - input.metallicFactor) + input.metallicFactor * input.baseColor;
-    float3 specular = cookTorrance(input.n, eye, halfway, l, input.roughnessFactor, f0);
-    float3 diffuseColor = (1 - input.metallicFactor) * input.baseColor;
-    float3 color =  diffuseColor / M_PI_F + specular;
-    float3 outputColor = color * spotLights[in.instanceId].color * dot(input.n, l) * spotLights[in.instanceId].intensity;
-    return float4(outputColor, 1);
+    return float4(lighting(l,
+                           eye,
+                           input,
+                           spotLights[in.instanceId].color,
+                           spotLights[in.instanceId].intensity), 1);
 }
