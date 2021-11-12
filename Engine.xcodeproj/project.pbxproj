@@ -73,7 +73,6 @@
 		5616673D2719E2CD000063B1 /* IndexBasedDraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666CC2719E2CC000063B1 /* IndexBasedDraw.swift */; };
 		5616673E2719E2CD000063B1 /* SceneDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666CE2719E2CC000063B1 /* SceneDescription.swift */; };
 		5616673F2719E2CD000063B1 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666CF2719E2CC000063B1 /* Entity.swift */; };
-		561667402719E2CD000063B1 /* ChannelEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666D02719E2CC000063B1 /* ChannelEncoding.swift */; };
 		561667412719E2CD000063B1 /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666D12719E2CC000063B1 /* Material.swift */; };
 		561667422719E2CD000063B1 /* EntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666D22719E2CC000063B1 /* EntityType.swift */; };
 		561667432719E2CD000063B1 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666D32719E2CC000063B1 /* Camera.swift */; };
@@ -244,7 +243,6 @@
 		561666CC2719E2CC000063B1 /* IndexBasedDraw.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexBasedDraw.swift; sourceTree = "<group>"; };
 		561666CE2719E2CC000063B1 /* SceneDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDescription.swift; sourceTree = "<group>"; };
 		561666CF2719E2CC000063B1 /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
-		561666D02719E2CC000063B1 /* ChannelEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelEncoding.swift; sourceTree = "<group>"; };
 		561666D12719E2CC000063B1 /* Material.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Material.swift; sourceTree = "<group>"; };
 		561666D22719E2CC000063B1 /* EntityType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityType.swift; sourceTree = "<group>"; };
 		561666D32719E2CC000063B1 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
@@ -502,7 +500,6 @@
 			children = (
 				561666CE2719E2CC000063B1 /* SceneDescription.swift */,
 				561666CF2719E2CC000063B1 /* Entity.swift */,
-				561666D02719E2CC000063B1 /* ChannelEncoding.swift */,
 				561666D12719E2CC000063B1 /* Material.swift */,
 				561666D22719E2CC000063B1 /* EntityType.swift */,
 				561666D32719E2CC000063B1 /* Camera.swift */,
@@ -1043,7 +1040,6 @@
 				561667002719E2CD000063B1 /* IndexBasedDraw+Extension.swift in Sources */,
 				561667482719E2CD000063B1 /* Transformation.metal in Sources */,
 				561667062719E2CD000063B1 /* MDLMaterialSemantic+Extension.swift in Sources */,
-				561667402719E2CD000063B1 /* ChannelEncoding.swift in Sources */,
 				56924AE4271A181600FF3E06 /* AnimatedValue+Alias.swift in Sources */,
 				5616673E2719E2CD000063B1 /* SceneDescription.swift in Sources */,
 				5616672D2719E2CD000063B1 /* FlatTree.swift in Sources */,
