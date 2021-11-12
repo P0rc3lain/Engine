@@ -20,10 +20,11 @@ struct GBufferStage: Stage {
         }
         self.gBufferRenderer = gBufferRenderer
         self.io = GPUIO(input: .empty, output: GPUSupply(color: [arTexture, nmTexture, prTexture],
-                                                         stencil: [stencil],
-                                                         depth: []))
+                                                         stencil: [stencil]))
     }
-    mutating func draw(commandBuffer: inout MTLCommandBuffer, scene: inout GPUSceneDescription, bufferStore: inout BufferStore) {
+    mutating func draw(commandBuffer: inout MTLCommandBuffer,
+                       scene: inout GPUSceneDescription,
+                       bufferStore: inout BufferStore) {
         guard var gBufferEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: gBufferRenderPassDescriptor) else {
             return
         }

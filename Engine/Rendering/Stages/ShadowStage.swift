@@ -8,8 +8,8 @@ struct ShadowStage: Stage {
     var io: GPUIO
     private var omniLightShadowRenderPassDescriptor: MTLRenderPassDescriptor
     private var spotLightShadowRenderPassDescriptor: MTLRenderPassDescriptor
-    private var spotLightShadowRenderer: SpotShadowRenderer
     private var omniLightShadowRenderer: OmniShadowRenderer
+    private var spotLightShadowRenderer: SpotShadowRenderer
     init?(device: MTLDevice,
           spotShadowTextureSideSize: Float,
           spotLightsNumber: Int,
@@ -31,7 +31,7 @@ struct ShadowStage: Stage {
             return nil
         }
         self.io = GPUIO(input: .empty,
-                        output: GPUSupply(color: [], stencil: [], depth: [spotLightTextures, omniLightTextures]))
+                        output: GPUSupply(depth: [spotLightTextures, omniLightTextures]))
         self.spotLightShadowRenderer = spotLightShadowRenderer
         self.omniLightShadowRenderer = omniLightShadowRenderer
     }

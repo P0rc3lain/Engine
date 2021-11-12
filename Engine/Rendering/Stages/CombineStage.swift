@@ -7,7 +7,7 @@ import Metal
 
 struct CombineStage: Stage {
     var io: GPUIO
-    private var offscreenRenderPassDescriptor: MTLRenderPassDescriptor
+    private var renderPassDescriptor: MTLRenderPassDescriptor
     private var environmentRenderer: EnvironmentRenderer
     private var omniRenderer: OmniRenderer
     private var ambientRenderer: AmbientRenderer
@@ -16,8 +16,14 @@ struct CombineStage: Stage {
     private var pointLightsShadows: MTLTexture
     private var directionalRenderer: DirectionalRenderer
     private var ssaoTexture: MTLTexture
-    init?(device: MTLDevice, renderingSize: CGSize, gBufferOutput: GPUSupply, ssaoTexture: MTLTexture, spotLightShadows: MTLTexture, pointLightsShadows: MTLTexture) {
-        guard let environmentRenderer = EnvironmentRenderer.make(device: device, drawableSize: renderingSize),
+    init?(device: MTLDevice,
+          renderingSize: CGSize,
+          gBufferOutput: GPUSupply,
+          ssaoTexture: MTLTexture,
+          spotLightShadows: MTLTexture,
+          pointLightsShadows: MTLTexture) {
+        guard let environmentRenderer = EnvironmentRenderer.make(device: device,
+                                                                 drawableSize: renderingSize),
               let omniRenderer = OmniRenderer.make(device: device,
                                                    inputTextures: gBufferOutput.color,
                                                    drawableSize: renderingSize),
@@ -32,10 +38,10 @@ struct CombineStage: Stage {
                                                    drawableSize: renderingSize) else {
             return nil
         }
-        offscreenRenderPassDescriptor = .lightenScene(device: device,
-                                                      depthStencil: gBufferOutput.stencil[0],
-                                                      size: renderingSize)
-        guard let outputTexture = offscreenRenderPassDescriptor.colorAttachments[0].texture else {
+        renderPassDescriptor = .lightenScene(device: device,
+                                             depthStencil: gBufferOutput.stencil[0],
+                                             size: renderingSize)
+        guard let outputTexture = renderPassDescriptor.colorAttachments[0].texture else {
             return nil
         }
         self.ambientRenderer = ambientRenderer
@@ -54,7 +60,7 @@ struct CombineStage: Stage {
               scene: inout GPUSceneDescription,
               bufferStore: inout BufferStore) {
         commandBuffer.pushDebugGroup("Light Pass")
-        guard var encoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor) else {
+        guard var encoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else {
             return
         }
         omniRenderer.draw(encoder: &encoder,
