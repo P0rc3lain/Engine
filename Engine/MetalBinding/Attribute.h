@@ -14,6 +14,15 @@ enum VertexAttribute {
     kVertexAttributeJointWeights
 };
 
+enum VertexPAttribute {
+    kVertexPAttributePositionIndex = 0,
+};
+
+enum VertexPUVAttribute {
+    kVertexPUVAttributePositionIndex = 0,
+    kVertexPUVAttributeTextureUV,
+};
+
 enum AttributeSpotShadowVertexShaderBufferIndex {
     kAttributeSpotShadowVertexShaderBufferStageIn = 0,
     kAttributeSpotShadowVertexShaderBufferSpotLights,

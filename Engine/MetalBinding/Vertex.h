@@ -20,7 +20,12 @@ struct Vertex {
 };
 
 struct VertexP {
-    simd_float3 position metal_only([[attribute(kVertexAttributePositionIndex)]]);
+    simd_float3 position metal_only([[attribute(kVertexPAttributePositionIndex)]]);
+};
+
+struct VertexPUV {
+    simd_float3 position metal_only([[attribute(kVertexPUVAttributePositionIndex)]]);
+    simd_float2 textureUV metal_only([[attribute(kVertexPUVAttributeTextureUV)]]);
 };
 
 #endif /* VERTEX_H */

@@ -14,7 +14,7 @@ struct RasterizerData {
     float2 texcoord;
 };
 
-vertex RasterizerData  vertexPostprocess(Vertex in [[stage_in]]) {
+vertex RasterizerData vertexPostprocess(VertexPUV in [[stage_in]]) {
     return RasterizerData {
         float4(in.position, 1),
         in.textureUV
