@@ -11,7 +11,6 @@
 
 using namespace metal;
 
-
 struct RasterizedData {
     float4 position [[position]];
     float2 texcoord;

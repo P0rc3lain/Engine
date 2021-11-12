@@ -9,16 +9,16 @@
 
 using namespace metal;
 
-struct TexturePipelineRasterizerData {
+struct RasterizerData {
     float4 position [[position]];
     float2 texcoord;
 };
 
-vertex TexturePipelineRasterizerData  vertexPostprocess(Vertex in [[stage_in]]) {
-    TexturePipelineRasterizerData out;
-    out.position = float4(in.position, 1);
-    out.texcoord = in.textureUV;
-    return out;
+vertex RasterizerData  vertexPostprocess(Vertex in [[stage_in]]) {
+    return RasterizerData {
+        float4(in.position, 1),
+        in.textureUV
+    };
 }
 
 float4 vignette(float4 vignetteColor, float2 position, float fromRadius, float toRadius) {
@@ -27,7 +27,7 @@ float4 vignette(float4 vignetteColor, float2 position, float fromRadius, float t
     return smoothstep(float4(1, 1, 1, 1), vignetteColor, ratio);
 }
 
-fragment float4 fragmentPostprocess(TexturePipelineRasterizerData in [[stage_in]],
+fragment float4 fragmentPostprocess(RasterizerData in [[stage_in]],
                                     texture2d<float> texture [[texture(kAttributePostprocessingFragmentShaderTexture)]]) {
     constexpr sampler textureSampler(min_filter::nearest, mag_filter::nearest);
     return vignette(float4(0, 0, 0, 1), in.texcoord, 0.9, 1.4) * texture.sample(textureSampler, in.texcoord);

@@ -9,19 +9,19 @@
 
 using namespace metal;
 
-struct BloomMergeRasterizedData {
+struct RasterizedData {
     float4 position [[position]];
     float2 texcoord;
 };
 
-vertex BloomMergeRasterizedData  vertexBloomMerge(Vertex in [[stage_in]]) {
-    BloomMergeRasterizedData out;
-    out.position = float4(in.position, 1);
-    out.texcoord = in.textureUV;
-    return out;
+vertex RasterizedData  vertexBloomMerge(Vertex in [[stage_in]]) {
+    return RasterizedData {
+        float4(in.position, 1),
+        in.textureUV
+    };
 }
 
-fragment float4 fragmentBloomMerge(BloomMergeRasterizedData in [[stage_in]],
+fragment float4 fragmentBloomMerge(RasterizedData in [[stage_in]],
                                    texture2d<float> inputTexture [[texture(kAttributeBloomMergeFragmentShaderTextureOriginal)]],
                                    texture2d<float> brightAreasTexture [[texture(kAttributeBloomMergeFragmentShaderTextureBrightAreas)]]) {
     constexpr sampler textureSampler(mag_filter::nearest, min_filter::nearest);
