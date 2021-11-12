@@ -29,37 +29,37 @@ extension GPUGeometry {
        16, 19, 18, 18, 17, 16,
        20, 23, 22, 22, 21, 20
     ]
-    private static var cubeVertices: [simd_float3] = [
+    private static var cubeVertices: [VertexP] = [
         // + Y
-        simd_float3(-0.5, 0.5, 0.5),
-        simd_float3(0.5, 0.5, 0.5),
-        simd_float3(0.5, 0.5, -0.5),
-        simd_float3(-0.5, 0.5, -0.5),
+        VertexP(-0.5, 0.5, 0.5),
+        VertexP(0.5, 0.5, 0.5),
+        VertexP(0.5, 0.5, -0.5),
+        VertexP(-0.5, 0.5, -0.5),
         // -Y
-        simd_float3(-0.5, -0.5, -0.5),
-        simd_float3(0.5, -0.5, -0.5),
-        simd_float3(0.5, -0.5, 0.5),
-        simd_float3(-0.5, -0.5, 0.5),
+        VertexP(-0.5, -0.5, -0.5),
+        VertexP(0.5, -0.5, -0.5),
+        VertexP(0.5, -0.5, 0.5),
+        VertexP(-0.5, -0.5, 0.5),
         // +Z
-        simd_float3(-0.5, -0.5, 0.5),
-        simd_float3(0.5, -0.5, 0.5),
-        simd_float3(0.5, 0.5, 0.5),
-        simd_float3(-0.5, 0.5, 0.5),
+        VertexP(-0.5, -0.5, 0.5),
+        VertexP(0.5, -0.5, 0.5),
+        VertexP(0.5, 0.5, 0.5),
+        VertexP(-0.5, 0.5, 0.5),
         // -Z
-        simd_float3(0.5, -0.5, -0.5),
-        simd_float3(-0.5, -0.5, -0.5),
-        simd_float3(-0.5, 0.5, -0.5),
-        simd_float3(0.5, 0.5, -0.5),
+        VertexP(0.5, -0.5, -0.5),
+        VertexP(-0.5, -0.5, -0.5),
+        VertexP(-0.5, 0.5, -0.5),
+        VertexP(0.5, 0.5, -0.5),
         // -X
-        simd_float3(-0.5, -0.5, -0.5),
-        simd_float3(-0.5, -0.5, 0.5),
-        simd_float3(-0.5, 0.5, 0.5),
-        simd_float3(-0.5, 0.5, -0.5),
+        VertexP(-0.5, -0.5, -0.5),
+        VertexP(-0.5, -0.5, 0.5),
+        VertexP(-0.5, 0.5, 0.5),
+        VertexP(-0.5, 0.5, -0.5),
         // +X
-        simd_float3(0.5, -0.5, 0.5),
-        simd_float3(0.5, -0.5, -0.5),
-        simd_float3(0.5, 0.5, -0.5),
-        simd_float3(0.5, 0.5, 0.5)
+        VertexP(0.5, -0.5, 0.5),
+        VertexP(0.5, -0.5, -0.5),
+        VertexP(0.5, 0.5, -0.5),
+        VertexP(0.5, 0.5, 0.5)
     ]
     static func screenSpacePlane(device: MTLDevice) -> GPUGeometry? {
         guard let indices = device.makeBuffer(array: planeIndices),

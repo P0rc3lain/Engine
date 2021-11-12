@@ -3,12 +3,13 @@
 //
 
 import Metal
+import MetalBinding
 
 extension MTLVertexBufferLayoutDescriptor {
-    static var environmentRenderer: MTLVertexBufferLayoutDescriptor {
+    static var vertexP: MTLVertexBufferLayoutDescriptor {
         let layout = MTLVertexBufferLayoutDescriptor()
         layout.stepFunction = .perVertex
-        layout.stride = MemoryLayout<SIMD3<Float>>.stride
+        layout.stride = MemoryLayout<VertexP>.stride
         layout.stepRate = 1
         return layout
     }

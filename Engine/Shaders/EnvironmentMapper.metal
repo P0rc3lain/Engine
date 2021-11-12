@@ -7,6 +7,7 @@
 
 #include "Common/Transformation.h"
 #include "../MetalBinding/Model.h"
+#include "../MetalBinding/Vertex.h"
 #include "../MetalBinding/Camera.h"
 #include "../MetalBinding/Attribute.h"
 
@@ -17,13 +18,13 @@ struct RasterizedData {
     float3 viewPosition;
 };
 
-vertex RasterizedData environmentVertexShader(float3 in [[stage_in attribute(kAttributeEnvironmentVertexShaderBufferStageIn)]],
+vertex RasterizedData environmentVertexShader(VertexP in [[stage_in]],
                                               constant CameraUniforms & camera [[buffer(kAttributeEnvironmentVertexShaderBufferCamera)]],
                                               constant ModelUniforms * modelUniforms [[buffer(kAttributeEnvironmentVertexShaderBufferModelUniforms)]]) {
     float3x3 extractedRotation = extract_rotation(modelUniforms[camera.index].modelMatrix);
     return RasterizedData {
-        camera.projectionMatrix * float4(extractedRotation * in, 1),
-        in
+        camera.projectionMatrix * float4(extractedRotation * in.position, 1),
+        in.position
     };
 }
 

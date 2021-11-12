@@ -148,6 +148,7 @@
 		56924AE8271A187400FF3E06 /* AnimatedFloat3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AE7271A187400FF3E06 /* AnimatedFloat3+Extensions.swift */; };
 		56924AEA271A188700FF3E06 /* AnimatedQuatf+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AE9271A188700FF3E06 /* AnimatedQuatf+Extension.swift */; };
 		569D9242273E7EED004FDFAC /* Color.metal in Sources */ = {isa = PBXBuildFile; fileRef = 569D9241273E7EED004FDFAC /* Color.metal */; };
+		569D9244273E81DD004FDFAC /* VertexP+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D9243273E81DD004FDFAC /* VertexP+Extension.swift */; };
 		56A3728E273862300079A93D /* MTLOrigin+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A3728D273862300079A93D /* MTLOrigin+Extension.swift */; };
 		56ADD2F4273707C500107E24 /* AmbientRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F3273707C500107E24 /* AmbientRenderer.swift */; };
 		56ADD2F6273707E200107E24 /* AmbientRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F5273707E200107E24 /* AmbientRenderer.metal */; };
@@ -341,6 +342,7 @@
 		569D923A273DC17E004FDFAC /* code_stats.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = code_stats.sh; sourceTree = "<group>"; };
 		569D9240273E7EE6004FDFAC /* Color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
 		569D9241273E7EED004FDFAC /* Color.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Color.metal; sourceTree = "<group>"; };
+		569D9243273E81DD004FDFAC /* VertexP+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VertexP+Extension.swift"; sourceTree = "<group>"; };
 		56A3728D273862300079A93D /* MTLOrigin+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLOrigin+Extension.swift"; sourceTree = "<group>"; };
 		56ADD2F1273705F800107E24 /* AmbientLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AmbientLight.h; sourceTree = "<group>"; };
 		56ADD2F3273707C500107E24 /* AmbientRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientRenderer.swift; sourceTree = "<group>"; };
@@ -845,6 +847,7 @@
 				56D8C4112739D404005E58E3 /* SpotLight+Extension.swift */,
 				560C18D6273AC71100459AEF /* OmniLight+Extension.swift */,
 				560C18D8273ACC0100459AEF /* OmniShadowRenderer+Extension.swift */,
+				569D9243273E81DD004FDFAC /* VertexP+Extension.swift */,
 			);
 			path = Porcelain;
 			sourceTree = "<group>";
@@ -1049,6 +1052,7 @@
 				5616673E2719E2CD000063B1 /* SceneDescription.swift in Sources */,
 				5616672D2719E2CD000063B1 /* FlatTree.swift in Sources */,
 				560C18D3273ABDE700459AEF /* OmniShadowRenderer.swift in Sources */,
+				569D9244273E81DD004FDFAC /* VertexP+Extension.swift in Sources */,
 				56407B7B27204EEB00440CAC /* Array+Extension.swift in Sources */,
 				56A3728E273862300079A93D /* MTLOrigin+Extension.swift in Sources */,
 				561667162719E2CD000063B1 /* TransformAnimation.swift in Sources */,

@@ -14,7 +14,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentPostprocess")
         descriptor.colorAttachments[0].pixelFormat = .postprocessorRendererColor
         descriptor.vertexBuffers[0].mutability = .immutable
-        descriptor.vertexDescriptor = .porcelain
+        descriptor.vertexDescriptor = .vertex
         return descriptor
     }
     static func environmentRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -25,7 +25,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.colorAttachments[0].pixelFormat = .environmentRendererColor
         descriptor.depthAttachmentPixelFormat = .environmentRendererDepthStencil
         descriptor.stencilAttachmentPixelFormat = .environmentRendererDepthStencil
-        descriptor.vertexDescriptor = .environmentRenderer
+        descriptor.vertexDescriptor = .vertexP
         return descriptor
     }
     static func gBufferRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -39,7 +39,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.colorAttachments[2].pixelFormat = .gBufferPR
         descriptor.depthAttachmentPixelFormat = .gBufferDepthStencil
         descriptor.stencilAttachmentPixelFormat = .gBufferDepthStencil
-        descriptor.vertexDescriptor = .porcelain
+        descriptor.vertexDescriptor = .vertex
         return descriptor
     }
     static func gBufferAnimatedRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -55,7 +55,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexFunction = try? library.makeFunction(name: "vertexSpotLightShadow",
                                                               constantValues: .bool(false, index: 0))
         descriptor.depthAttachmentPixelFormat = .spotShadowDepthStencil
-        descriptor.vertexDescriptor = .porcelain
+        descriptor.vertexDescriptor = .vertex
         descriptor.sampleCount = 1
         descriptor.inputPrimitiveTopology = .triangle
         return descriptor
@@ -80,7 +80,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.colorAttachments[0].alphaBlendOperation = .max
         descriptor.depthAttachmentPixelFormat = .lightenSceneDepthStencil
         descriptor.stencilAttachmentPixelFormat = .lightenSceneDepthStencil
-        descriptor.vertexDescriptor = .porcelain
+        descriptor.vertexDescriptor = .vertex
         return descriptor
     }
     static func ambientRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -96,7 +96,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.colorAttachments[0].alphaBlendOperation = .max
         descriptor.depthAttachmentPixelFormat = .ambientDepthStencil
         descriptor.stencilAttachmentPixelFormat = .ambientDepthStencil
-        descriptor.vertexDescriptor = .porcelain
+        descriptor.vertexDescriptor = .vertex
         return descriptor
     }
     static func directionalRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -112,7 +112,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.colorAttachments[0].alphaBlendOperation = .max
         descriptor.depthAttachmentPixelFormat = .directionalDepthStencil
         descriptor.stencilAttachmentPixelFormat = .directionalDepthStencil
-        descriptor.vertexDescriptor = .porcelain
+        descriptor.vertexDescriptor = .vertex
         return descriptor
     }
     static func spotRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -128,7 +128,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.colorAttachments[0].alphaBlendOperation = .max
         descriptor.depthAttachmentPixelFormat = .spotDepthStencil
         descriptor.stencilAttachmentPixelFormat = .spotDepthStencil
-        descriptor.vertexDescriptor = .porcelain
+        descriptor.vertexDescriptor = .vertex
         return descriptor
     }
     static func ssaoRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -137,7 +137,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexFunction = library.makeFunction(name: "vertexSSAO")
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentSSAO")
         descriptor.colorAttachments[0].pixelFormat = .ssaoColor
-        descriptor.vertexDescriptor = .porcelain
+        descriptor.vertexDescriptor = .vertex
         return descriptor
     }
     static func bloomSplitRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -146,7 +146,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexFunction = library.makeFunction(name: "vertexBloomSplit")
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentBloomSplit")
         descriptor.colorAttachments[0].pixelFormat = .bloomSplitColor
-        descriptor.vertexDescriptor = .porcelain
+        descriptor.vertexDescriptor = .vertex
         return descriptor
     }
     static func bloomMergeRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -155,7 +155,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexFunction = library.makeFunction(name: "vertexBloomMerge")
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentBloomMerge")
         descriptor.colorAttachments[0].pixelFormat = .bloomSplitColor
-        descriptor.vertexDescriptor = .porcelain
+        descriptor.vertexDescriptor = .vertex
         return descriptor
     }
     static func omniLightShadowRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -165,7 +165,7 @@ extension MTLRenderPipelineDescriptor {
                                                               constantValues: .bool(false, index: 0))
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentOmniLightShadow")
         descriptor.depthAttachmentPixelFormat = .omniShadowDepthStencil
-        descriptor.vertexDescriptor = .porcelain
+        descriptor.vertexDescriptor = .vertex
         descriptor.sampleCount = 1
         descriptor.inputPrimitiveTopology = .triangle
         return descriptor
