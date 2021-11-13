@@ -38,7 +38,7 @@ fragment float4 fragmentSpotLight(RasterizerData in [[stage_in]],
                                   constant CameraUniforms & camera [[buffer(kAttributeDirectionalFragmentShaderBufferCamera)]],
                                   constant SpotLight * spotLights [[buffer(kAttributeDirectionalFragmentShaderBufferDirectionalLights)]],
                                   constant ModelUniforms * modelUniforms [[buffer(kAttributeDirectionalFragmentShaderBufferLightUniforms)]]) {
-    constexpr sampler textureSampler(mag_filter::nearest, min_filter::nearest);
+    constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
     LightingInput input = LightingInput::fromTextures(ar, nm, pr, textureSampler, in.texcoord);
     
     float3 cameraPosition = float3(0, 0, 0);

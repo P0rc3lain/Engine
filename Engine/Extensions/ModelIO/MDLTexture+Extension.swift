@@ -20,7 +20,9 @@ extension MDLTexture {
     }
     func upload(device: MTLDevice) -> MTLTexture? {
         let loader = MTKTextureLoader(device: device)
-        let texture = try? loader.newTexture(texture: self, options: nil)
+        let texture = try? loader.newTexture(texture: self,
+                                             options: [.generateMipmaps: NSNumber(booleanLiteral: true)])
+        
         texture?.label = name
         return texture
     }

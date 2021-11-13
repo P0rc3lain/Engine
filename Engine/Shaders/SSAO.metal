@@ -32,7 +32,7 @@ fragment float4 fragmentSSAO(RasterizedData in [[stage_in]],
                              constant simd_float3 * noise [[buffer(kAttributeSsaoFragmentShaderBufferNoise)]],
                              constant ModelUniforms * modelUniforms [[buffer(kAttributeSsaoFragmentShaderBufferModelUniforms)]],
                              constant SSAOUniforms & renderingUniforms [[buffer(kAttributeSsaoFragmentShaderBufferRenderingUniforms)]]) {
-    constexpr sampler textureSampler(mag_filter::nearest, min_filter::nearest);
+    constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
     float3 worldPosition = pr.sample(textureSampler, in.texcoord).xyz;
     float3 normal = normalize(nm.sample(textureSampler, in.texcoord)).xyz;
     int2 accessCoordinates = int2(in.texcoord * 100);

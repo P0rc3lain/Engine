@@ -37,7 +37,7 @@ fragment float4 fragmentDirectionalLight(RasterizerData in [[stage_in]],
                                          constant CameraUniforms & camera [[buffer(kAttributeDirectionalFragmentShaderBufferCamera)]],
                                          constant DirectionalLight * directionalLights [[buffer(kAttributeDirectionalFragmentShaderBufferDirectionalLights)]],
                                          constant ModelUniforms * lightUniforms [[buffer(kAttributeDirectionalFragmentShaderBufferLightUniforms)]]) {
-    constexpr sampler textureSampler(mag_filter::nearest, min_filter::nearest);
+    constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
     LightingInput input = LightingInput::fromTextures(ar, nm, pr, textureSampler, in.texcoord);
     float3 eye = normalize(-input.fragmentPosition);
     DirectionalLight light = directionalLights[in.instanceId];

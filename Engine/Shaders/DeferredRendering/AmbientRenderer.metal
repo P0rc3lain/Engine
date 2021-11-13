@@ -34,7 +34,7 @@ fragment float4 fragmentAmbientLight(RasterizerData in [[stage_in]],
                                      texture2d<float> ar [[texture(kAttributeAmbientFragmentShaderTextureAR)]],
                                      texture2d<float> pr [[texture(kAttributeAmbientFragmentShaderTexturePR)]],
                                      texture2d<float> ssao [[texture(kAttributeAmbientFragmentShaderTextureSSAO)]]) {
-    constexpr sampler textureSampler(mag_filter::nearest, min_filter::nearest);
+    constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
     float3 fragmentPosition = pr.sample(textureSampler, in.texcoord).xyz;
     float4x4 lightTransformation = modelUniforms[ambientLights[in.instanceId].idx].modelMatrix;
     float3 lightPosition = (modelUniforms[camera.index].modelMatrix *  lightTransformation * float4(float3(0), 1)).xyz;

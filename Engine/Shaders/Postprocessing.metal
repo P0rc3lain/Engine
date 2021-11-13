@@ -29,6 +29,6 @@ float4 vignette(float4 vignetteColor, float2 position, float fromRadius, float t
 
 fragment float4 fragmentPostprocess(RasterizerData in [[stage_in]],
                                     texture2d<float> texture [[texture(kAttributePostprocessingFragmentShaderTexture)]]) {
-    constexpr sampler textureSampler(min_filter::nearest, mag_filter::nearest);
+    constexpr sampler textureSampler(min_filter::linear, mag_filter::linear, mip_filter::linear);
     return vignette(float4(0, 0, 0, 1), in.texcoord, 0.9, 1.4) * texture.sample(textureSampler, in.texcoord);
 }

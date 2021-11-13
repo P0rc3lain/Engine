@@ -38,7 +38,7 @@ fragment float4 fragmentDeferredLight(RasterizerData in [[stage_in]],
                                       constant CameraUniforms & camera [[buffer(kAttributeLightingFragmentShaderBufferCamera)]],
                                       constant OmniLight * omniLights [[buffer(kAttributeLightingFragmentShaderBufferOmniLights)]],
                                       constant ModelUniforms * lightUniforms [[buffer(kAttributeLightingFragmentShaderBufferLightUniforms)]]) {
-    constexpr sampler textureSampler(mag_filter::nearest, min_filter::nearest);
+    constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
     LightingInput input = LightingInput::fromTextures(ar, nm, pr, textureSampler, in.texcoord);
 
     float3 eye = normalize(-input.fragmentPosition);

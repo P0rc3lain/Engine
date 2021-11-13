@@ -24,7 +24,7 @@ vertex RasterizedData  vertexBloomMerge(VertexPUV in [[stage_in]]) {
 fragment float4 fragmentBloomMerge(RasterizedData in [[stage_in]],
                                    texture2d<float> inputTexture [[texture(kAttributeBloomMergeFragmentShaderTextureOriginal)]],
                                    texture2d<float> brightAreasTexture [[texture(kAttributeBloomMergeFragmentShaderTextureBrightAreas)]]) {
-    constexpr sampler textureSampler(mag_filter::nearest, min_filter::nearest);
+    constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
     float3 originalColor = inputTexture.sample(textureSampler, in.texcoord).xyz;
     float3 bloomColor = brightAreasTexture.sample(textureSampler, in.texcoord).xyz;
     return float4(bloomColor + originalColor, 1);

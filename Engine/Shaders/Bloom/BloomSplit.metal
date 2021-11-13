@@ -23,7 +23,9 @@ vertex RasterizedData vertexBloomSplit(VertexPUV in [[stage_in]]) {
 
 fragment float4 fragmentBloomSplit(RasterizedData in [[stage_in]],
                                    texture2d<float> inputTexture [[texture(kAttributeBloomSplitFragmentShaderTextureInput)]]) {
-    constexpr sampler textureSampler(mag_filter::nearest, min_filter::nearest);
+    constexpr sampler textureSampler(mag_filter::linear,
+                                     min_filter::linear,
+                                     mip_filter::linear);
     float3 color = inputTexture.sample(textureSampler, in.texcoord).xyz;
     return luminance(color) > 0.7 ? float4(color * 2, 1) : float4(0, 0, 0, 1);
 }

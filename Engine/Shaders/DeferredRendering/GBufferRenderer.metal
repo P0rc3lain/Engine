@@ -64,7 +64,7 @@ fragment GBufferData fragmentGBuffer(RasterizerData in [[stage_in]],
                                      texture2d<float> normals [[texture(kAttributeGBufferFragmentShaderTextureNormals)]],
                                      texture2d<float> metallic [[texture(kAttributeGBufferFragmentShaderTextureMetallic)]],
                                      constant CameraUniforms & cameraUniforms [[buffer(kAttributeGBufferVertexShaderBufferCameraUniforms)]]) {
-    constexpr sampler textureSampler(mag_filter::linear, min_filter::nearest, address::mirrored_repeat);
+    constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear, address::mirrored_repeat);
     simd_float3x3 TBN(in.t, in.b, in.n);
     // 0.04 is reflactance for common materials
     // should be possible to configure it
