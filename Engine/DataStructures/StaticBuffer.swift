@@ -7,6 +7,7 @@ import Metal
 public struct StaticBuffer<T> {
     var buffer: MTLBuffer
     init?(device: MTLDevice, capacity: Int) {
+        assert(capacity > 0, "Buffer size must be greater than zero")
         guard let buffer = device.makeSharedBuffer(length: capacity * MemoryLayout<T>.stride) else {
             return nil
         }
@@ -14,6 +15,7 @@ public struct StaticBuffer<T> {
         self.buffer.label = bufferName
     }
     mutating func upload(data: inout [T]) {
+        assert(data.count == buffer.length / MemoryLayout<T>.stride, "Buffers size must match")
         data.withUnsafeBytes { pointer in
             buffer.contents().copyBuffer(from: pointer)
         }
