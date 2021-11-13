@@ -10,6 +10,6 @@ extension SSAOUniforms {
                      noiseCount: 16,
                      radius: 0.7,
                      bias: 0.05,
-                     power: 2)
+                     power: 10)
     }
 }

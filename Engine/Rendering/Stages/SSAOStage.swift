@@ -14,7 +14,8 @@ struct SSAOStage: Stage {
     init?(device: MTLDevice,
           renderingSize: CGSize,
           prTexture: MTLTexture,
-          nmTexture: MTLTexture) {
+          nmTexture: MTLTexture,
+          blurSigma: Float) {
         guard let ssaoRenderer = SSAORenderer.make(device: device,
                                                    prTexture: prTexture,
                                                    nmTexture: nmTexture,
@@ -28,7 +29,8 @@ struct SSAOStage: Stage {
         self.ssaoRenderPassDescriptor = .ssao(device: device, size: renderingSize)
         self.io = GPUIO(input: GPUSupply(color: [prTexture, nmTexture]),
                         output: GPUSupply(color: [gaussTexture]))
-        self.gaussianBlur = MPSImageGaussianBlur(device: device, sigma: 1)
+        self.gaussianBlur = MPSImageGaussianBlur(device: device,
+                                                 sigma: blurSigma)
         self.gaussTexture = gaussTexture
     }
     mutating func draw(commandBuffer: inout MTLCommandBuffer, bufferStore: inout BufferStore) {
