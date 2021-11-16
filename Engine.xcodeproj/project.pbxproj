@@ -445,6 +445,14 @@
 			path = Engine;
 			sourceTree = "<group>";
 		};
+		56165BE1274405010025D58B /* Bounds */ = {
+			isa = PBXGroup;
+			children = (
+				56B65DEB273ED4CE00DB927E /* BoundingBox+Tests.swift */,
+			);
+			path = Bounds;
+			sourceTree = "<group>";
+		};
 		5616667F2719E2CC000063B1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -521,13 +529,12 @@
 		561666CD2719E2CC000063B1 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				56416D872743F728003C99C2 /* Bounds */,
 				561666CE2719E2CC000063B1 /* SceneDescription.swift */,
 				561666CF2719E2CC000063B1 /* Entity.swift */,
 				561666D12719E2CC000063B1 /* Material.swift */,
 				561666D22719E2CC000063B1 /* EntityType.swift */,
 				561666D32719E2CC000063B1 /* Camera.swift */,
-				569D923C273DD594004FDFAC /* Bound.swift */,
-				569D9245273EA5F6004FDFAC /* BoundingBox.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -691,6 +698,15 @@
 			path = simd;
 			sourceTree = "<group>";
 		};
+		56416D872743F728003C99C2 /* Bounds */ = {
+			isa = PBXGroup;
+			children = (
+				569D9245273EA5F6004FDFAC /* BoundingBox.swift */,
+				569D923C273DD594004FDFAC /* Bound.swift */,
+			);
+			path = Bounds;
+			sourceTree = "<group>";
+		};
 		5670EC012735A3BB00375194 /* Bloom */ = {
 			isa = PBXGroup;
 			children = (
@@ -819,7 +835,7 @@
 		56B65DED273ED4ED00DB927E /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				56B65DEB273ED4CE00DB927E /* BoundingBox+Tests.swift */,
+				56165BE1274405010025D58B /* Bounds */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
