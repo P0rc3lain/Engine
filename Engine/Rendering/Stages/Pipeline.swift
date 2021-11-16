@@ -51,14 +51,14 @@ struct Pipeline: Stage {
     mutating func draw(commandBuffer: inout MTLCommandBuffer,
                        scene: inout GPUSceneDescription,
                        bufferStore: inout BufferStore,
-                       transformedEntities: inout [ModelUniforms]) {
+                       arrangement: inout Arrangement) {
         shadowStage.draw(commandBuffer: &commandBuffer,
                          scene: &scene,
                          bufferStore: &bufferStore)
         gBufferStage.draw(commandBuffer: &commandBuffer,
                           scene: &scene,
                           bufferStore: &bufferStore,
-                          modelUniforms: &transformedEntities)
+                          arrangement: &arrangement)
         if !scene.ambientLights.isEmpty {
             ssaoStage.draw(commandBuffer: &commandBuffer,
                            bufferStore: &bufferStore)

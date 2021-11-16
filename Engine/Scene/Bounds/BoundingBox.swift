@@ -4,7 +4,7 @@
 
 import simd
 
-struct BoundingBox {
+struct BoundingBox: Equatable {
     let corners: [simd_float3]
     init(corners: [simd_float3]) {
         assert(corners.count == 8, "Each point of the bounding box must be defined")
@@ -42,7 +42,8 @@ struct BoundingBox {
             minZ = min(minZ, corners[i].z)
             maxZ = max(maxZ, corners[i].z)
         }
-        return Bound(min: [minX, minY, minZ], max: [maxX, maxY, maxZ])
+        return Bound(min: [minX, minY, minZ],
+                     max: [maxX, maxY, maxZ])
     }
     var aabb: BoundingBox {
         BoundingBox.from(bound: bound)
@@ -56,5 +57,8 @@ struct BoundingBox {
         b1.min.y < b2.max.y &&
         b1.max.z > b2.min.z &&
         b1.min.z < b2.max.z
+    }
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.corners == rhs.corners
     }
 }

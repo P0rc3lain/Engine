@@ -34,6 +34,7 @@ struct RenderingCoordinator {
               let outputTexture = view.currentRenderPassDescriptor?.colorAttachments[0].texture else {
             return
         }
+        var arrangement = ArrangementController.arrangement(scene: &scene)
         updatePalettes(scene: &scene)
         bufferStore.ambientLights.upload(data: &scene.ambientLights)
         bufferStore.omniLights.upload(data: &scene.omniLights)
@@ -41,12 +42,11 @@ struct RenderingCoordinator {
         bufferStore.spotLights.upload(data: &scene.spotLights)
         bufferStore.upload(camera: &scene.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx],
                            index: scene.activeCameraIdx)
-        var modelUniforms = scene.entities.modelUniforms
-        bufferStore.modelCoordinateSystems.upload(data: &modelUniforms)
+        bufferStore.modelCoordinateSystems.upload(data: &arrangement.worldPositions)
         pipeline.draw(commandBuffer: &commandBuffer,
                       scene: &scene,
                       bufferStore: &bufferStore,
-                      transformedEntities: &modelUniforms)
+                      arrangement: &arrangement)
         imageConverter.encode(commandBuffer: commandBuffer,
                               sourceTexture: pipeline.io.output.color[0],
                               destinationTexture: outputTexture)

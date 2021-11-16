@@ -25,7 +25,7 @@ struct GBufferStage: Stage {
     mutating func draw(commandBuffer: inout MTLCommandBuffer,
                        scene: inout GPUSceneDescription,
                        bufferStore: inout BufferStore,
-                       modelUniforms: inout [ModelUniforms]) {
+                       arrangement: inout Arrangement) {
         guard var gBufferEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: gBufferRenderPassDescriptor) else {
             return
         }
@@ -33,7 +33,7 @@ struct GBufferStage: Stage {
         gBufferRenderer.draw(encoder: &gBufferEncoder,
                              scene: &scene,
                              dataStore: &bufferStore,
-                             modelUniforms: &modelUniforms)
+                             arrangement: &arrangement)
         gBufferEncoder.endEncoding()
         commandBuffer.popDebugGroup()
     }

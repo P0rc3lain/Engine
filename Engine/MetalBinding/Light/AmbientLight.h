@@ -6,7 +6,7 @@
 #define AMBIENT_LIGHT_H
 
 struct AmbientLight {
-    float radius;
+    float diameter;
     simd_float3 color;
     float intensity;
     int idx;

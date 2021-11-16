@@ -11,21 +11,10 @@ struct CullingController {
         self.camera = camera
         self.cameraIdx = cameraIdx
     }
-    static func cullingMask(scene: inout GPUSceneDescription,
-                            transformedEntities: [ModelUniforms],
-                            camera: Camera,
-                            cameraTransfrom: ModelUniforms) -> [Bool] {
-        let cameraBB = camera.boundingBox
-        let transformedCamera = (cameraTransfrom.modelMatrixInverse * cameraBB).aabb
-        var mask = [Bool](minimalCapacity: scene.entities.count)
-        for i in scene.entities.indices {
-            if scene.entities[i].data.type == .mesh {
-                let meshBox = scene.meshBoundingBoxes[scene.entities[i].data.referenceIdx]
-                let transformedMesh = (transformedEntities[i].modelMatrix * meshBox).aabb
-                mask.append(transformedCamera.overlap(transformedMesh))
-            } else {
-                mask.append(true)
-            }
+    static func cullingMask(arrangement: inout Arrangement, worldBoundingBox: BoundingBox) -> [Bool] {
+        var mask = [Bool](minimalCapacity: arrangement.worldPositions.count)
+        for i in arrangement.worldBoundingBoxes.indices {
+            mask.append(arrangement.worldBoundingBoxes[i].overlap(worldBoundingBox))
         }
         return mask
     }

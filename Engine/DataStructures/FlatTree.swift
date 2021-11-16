@@ -38,7 +38,6 @@ public struct FlatTree<T> {
         }
     }
     public func children(of idx: Int) -> [Int] {
-        objects.filter { node in node.parentIdx == idx }
-               .map { node in node.parentIdx }
+        objects.indices.filter { objects[$0].parentIdx == idx }
     }
 }
