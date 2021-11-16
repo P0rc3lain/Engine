@@ -23,11 +23,11 @@ struct GBufferRenderer {
     func draw(encoder: inout MTLRenderCommandEncoder,
               scene: inout GPUSceneDescription,
               dataStore: inout BufferStore,
-              modelUniforms: inout [ModelUniforms]) {
-        let mask = CullingController.cullingMask(scene: &scene,
-                                                 transformedEntities: modelUniforms,
-                                                 camera: scene.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx],
-                                                 cameraTransfrom: modelUniforms[scene.activeCameraIdx])
+              arrangement: inout Arrangement) {
+        let cameraTransform = arrangement.worldPositions[scene.activeCameraIdx].modelMatrixInverse
+        let cameraBoundingBox = (cameraTransform * scene.cameras[0].boundingBox).aabb
+        let mask = CullingController.cullingMask(arrangement: &arrangement,
+                                                 worldBoundingBox: cameraBoundingBox)
         var boundMaterialIdx = Int.nil
         encoder.setViewport(viewPort)
         encoder.setDepthStencilState(depthStencilState)
