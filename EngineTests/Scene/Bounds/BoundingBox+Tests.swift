@@ -42,4 +42,29 @@ class BoundingBoxTests: XCTestCase {
         let aaBoundingBox = boundingBox.aabb.corners
         XCTAssertEqual(boundingBox.corners, aaBoundingBox)
     }
+    func testAABBFromOOBB() throws {
+        let boundingBox = BoundingBox(corners: [[0, 0, 0], [2, 0, 0], [0, 1, 3], [2, 1, 3],
+                                                [0, 3, 0], [2, 3, 0], [0, 4, 3], [2, 4, 3]])
+        let aabb = boundingBox.aabb
+        XCTAssertEqual(aabb.corners[0], [0, 0, 0])
+        XCTAssertEqual(aabb.corners[1], [2, 0, 0])
+        XCTAssertEqual(aabb.corners[2], [0, 0, 3])
+        XCTAssertEqual(aabb.corners[3], [2, 0, 3])
+        XCTAssertEqual(aabb.corners[4], [0, 4, 0])
+        XCTAssertEqual(aabb.corners[5], [2, 4, 0])
+        XCTAssertEqual(aabb.corners[6], [0, 4, 3])
+        XCTAssertEqual(aabb.corners[7], [2, 4, 3])
+    }
+    func testMergeTheSameBox() throws {
+        let box = BoundingBox.from(bound: Bound.zero).merge(BoundingBox.from(bound: Bound.zero))
+        for i in 8.naturalExclusive {
+            XCTAssertEqual(box.corners[i], [0, 0, 0])
+        }
+    }
+    func testMergeDisjointBoxes() throws {
+        let boundA = Bound(min: [0, 0, 0], max: [2, 2, 2])
+        let boundB = Bound(min: [-4, -4, -4], max: [-2, -2, -2])
+        let merged = BoundingBox.from(bound: boundA).merge(BoundingBox.from(bound: boundB))
+        XCTAssertEqual(merged.bound, Bound(min: [-4, -4, -4], max: [2, 2, 2]))
+    }
 }

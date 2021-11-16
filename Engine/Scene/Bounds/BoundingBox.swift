@@ -10,6 +10,9 @@ struct BoundingBox {
         assert(corners.count == 8, "Each point of the bounding box must be defined")
         self.corners = corners
     }
+    func merge(_ boundingBox: BoundingBox) -> BoundingBox {
+        BoundingBox.from(bound: bound.merge(boundingBox.bound))
+    }
     static func from(bound: Bound) -> BoundingBox {
         var bounds = [simd_float3](minimalCapacity: 8)
         // Lower
