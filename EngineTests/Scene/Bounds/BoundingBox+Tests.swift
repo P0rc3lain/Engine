@@ -67,4 +67,11 @@ class BoundingBoxTests: XCTestCase {
         let merged = BoundingBox.from(bound: boundA).merge(BoundingBox.from(bound: boundB))
         XCTAssertEqual(merged.bound, Bound(min: [-4, -4, -4], max: [2, 2, 2]))
     }
+    func testMultiplication() throws {
+        let bounds = Bound(min: [0, 0, 0], max: [2, 2, 2])
+        let boundingBox = BoundingBox.from(bound: bounds)
+        let result = (simd_float4x4.translation(vector: [1, 2, 3]) * boundingBox).bound
+        XCTAssertEqual(result.min, [1, 2, 3])
+        XCTAssertEqual(result.max, [3, 4, 5])
+    }
 }
