@@ -21,7 +21,7 @@ struct RasterizerData {
 constant bool hasSkeleton [[ function_constant(0) ]];
 
 vertex RasterizerData vertexSpotLightShadow(Vertex in [[stage_in]],
-                                            uint instanceId [[instance_id]],
+                                            constant uint & instanceId [[buffer(kAttributeSpotShadowVertexShaderBufferInstanceId)]],
                                             constant SpotLight * spotLights [[buffer(kAttributeSpotShadowVertexShaderBufferSpotLights)]],
                                             constant ModelUniforms * modelUniforms [[buffer(kAttributeSpotShadowVertexShaderBufferModelUniforms)]],
                                             constant simd_float4x4 * matrixPalettes [[buffer(kAttributeSpotShadowVertexShaderBufferMatrixPalettes)]],

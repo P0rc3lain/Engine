@@ -54,7 +54,8 @@ struct Pipeline: Stage {
                        arrangement: inout Arrangement) {
         shadowStage.draw(commandBuffer: &commandBuffer,
                          scene: &scene,
-                         bufferStore: &bufferStore)
+                         bufferStore: &bufferStore,
+                         arrangement: &arrangement)
         gBufferStage.draw(commandBuffer: &commandBuffer,
                           scene: &scene,
                           bufferStore: &bufferStore,

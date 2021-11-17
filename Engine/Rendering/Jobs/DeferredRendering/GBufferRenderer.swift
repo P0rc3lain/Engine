@@ -20,14 +20,19 @@ struct GBufferRenderer {
         self.depthStencilState = depthStencilState
         self.viewPort = .porcelain(size: drawableSize)
     }
+    private func generateRenderMask(scene: inout GPUSceneDescription,
+                                     arrangement: inout Arrangement) -> [Bool] {
+        let cameraTransform = arrangement.worldPositions[scene.activeCameraIdx].modelMatrixInverse
+        let cameraIndex = scene.entities[scene.activeCameraIdx].data.referenceIdx
+        let cameraBoundingBox = (cameraTransform * scene.cameras[cameraIndex].boundingBox).aabb
+        return CullingController.cullingMask(arrangement: &arrangement,
+                                             worldBoundingBox: cameraBoundingBox)
+    }
     func draw(encoder: inout MTLRenderCommandEncoder,
               scene: inout GPUSceneDescription,
               dataStore: inout BufferStore,
               arrangement: inout Arrangement) {
-        let cameraTransform = arrangement.worldPositions[scene.activeCameraIdx].modelMatrixInverse
-        let cameraBoundingBox = (cameraTransform * scene.cameras[0].boundingBox).aabb
-        let mask = CullingController.cullingMask(arrangement: &arrangement,
-                                                 worldBoundingBox: cameraBoundingBox)
+        let mask = generateRenderMask(scene: &scene, arrangement: &arrangement)
         var boundMaterialIdx = Int.nil
         encoder.setViewport(viewPort)
         encoder.setDepthStencilState(depthStencilState)
