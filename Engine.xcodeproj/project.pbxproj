@@ -171,6 +171,8 @@
 		56C4CD55273801EB000A994E /* SpotRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C4CD54273801EB000A994E /* SpotRenderer+Extension.swift */; };
 		56D12AD027231DAD00550530 /* RawRepresentable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D12ACF27231DAD00550530 /* RawRepresentable+Extension.swift */; };
 		56D34A54271B037900A87785 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D34A53271B037900A87785 /* Double+Extension.swift */; };
+		56D50858274542EA0097DEB2 /* simd_quatf+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D50857274542EA0097DEB2 /* simd_quatf+Extension.swift */; };
+		56D5085B27454B250097DEB2 /* OmniLight+Extension+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D5085A27454B250097DEB2 /* OmniLight+Extension+Tests.swift */; };
 		56D8C4122739D404005E58E3 /* SpotLight+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8C4112739D404005E58E3 /* SpotLight+Extension.swift */; };
 		56E8208F2727FD13002D58C3 /* Date+Extensioin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8208E2727FD13002D58C3 /* Date+Extensioin.swift */; };
 		56E8209D27284664002D58C3 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8209C27284664002D58C3 /* Position.swift */; };
@@ -383,6 +385,8 @@
 		56D12ACE2723167800550530 /* Attribute.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Attribute.h; sourceTree = "<group>"; };
 		56D12ACF27231DAD00550530 /* RawRepresentable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RawRepresentable+Extension.swift"; sourceTree = "<group>"; };
 		56D34A53271B037900A87785 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		56D50857274542EA0097DEB2 /* simd_quatf+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd_quatf+Extension.swift"; sourceTree = "<group>"; };
+		56D5085A27454B250097DEB2 /* OmniLight+Extension+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OmniLight+Extension+Tests.swift"; sourceTree = "<group>"; };
 		56D8C4112739D404005E58E3 /* SpotLight+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpotLight+Extension.swift"; sourceTree = "<group>"; };
 		56E8208E2727FD13002D58C3 /* Date+Extensioin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensioin.swift"; sourceTree = "<group>"; };
 		56E8209C27284664002D58C3 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
@@ -722,6 +726,7 @@
 		56416D7827413429003C99C2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				56D5085927454B130097DEB2 /* Porcelain */,
 				56416D7927413430003C99C2 /* simd */,
 			);
 			path = Extensions;
@@ -989,8 +994,17 @@
 				561666822719E2CC000063B1 /* simd_float4+Extension.swift */,
 				561666872719E2CC000063B1 /* simd_float3+Extension.swift */,
 				5616668D2719E2CC000063B1 /* simd_float4x4+Extension.swift */,
+				56D50857274542EA0097DEB2 /* simd_quatf+Extension.swift */,
 			);
 			path = simd;
+			sourceTree = "<group>";
+		};
+		56D5085927454B130097DEB2 /* Porcelain */ = {
+			isa = PBXGroup;
+			children = (
+				56D5085A27454B250097DEB2 /* OmniLight+Extension+Tests.swift */,
+			);
+			path = Porcelain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1221,6 +1235,7 @@
 				561667012719E2CD000063B1 /* MDLObject+Extension.swift in Sources */,
 				563C9C2127387F8C0014CFF3 /* SpotShadowRenderer.swift in Sources */,
 				560C18D5273AC30800459AEF /* OmniLight.metal in Sources */,
+				56D50858274542EA0097DEB2 /* simd_quatf+Extension.swift in Sources */,
 				5616674C2719E2CD000063B1 /* EnvironmentMapper.metal in Sources */,
 				5616670F2719E2CD000063B1 /* Data+Extension.swift in Sources */,
 				563BFC93272899FD0003EDB7 /* AnimatedQuatfArray+Extension.swift in Sources */,
@@ -1273,6 +1288,7 @@
 				56416D7B27413443003C99C2 /* simd_float4x4+Extension+Tests.swift in Sources */,
 				56924AD7271A07FD00FF3E06 /* AnimatedValue+Tests.swift in Sources */,
 				56165BEE27443EAE0025D58B /* ArrangementController+Tests.swift in Sources */,
+				56D5085B27454B250097DEB2 /* OmniLight+Extension+Tests.swift in Sources */,
 				56165BF627444A680025D58B /* FlatTree+Tests.swift in Sources */,
 				56416D7427400F66003C99C2 /* DynamicBuffer+Tests.swift in Sources */,
 				56B65DEC273ED4CE00DB927E /* BoundingBox+Tests.swift in Sources */,

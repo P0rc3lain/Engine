@@ -94,19 +94,13 @@ struct OmniShadowRenderer {
         }
     }
     private static var rotationMatrices: [simd_float4x4] {
-        var rotations = [simd_float4x4]()
-        let xPlus = simd_quatf(angle: Float(180).radians, axis: [0, 0, 1]) * simd_quatf(angle: Float(-90).radians, axis: [0, 1, 0])
-        let xMinus = simd_quatf(angle: Float(180).radians, axis: [0, 0, 1]) * simd_quatf(angle: Float(90).radians, axis: [0, 1, 0])
-        let yPlus = simd_quatf(angle: Float(90).radians, axis: [1, 0, 0]) * simd_quatf(angle: Float(-180).radians, axis: [0, 0, 1])
-        let yMinus = simd_quatf(angle: Float(-90).radians, axis: [1, 0, 0]) * simd_quatf(angle: Float(-180).radians, axis: [0, 0, 1])
-        let zPlus = simd_quatf(angle: Float(180).radians, axis: [0, 0, 1])
-        let zMinus = simd_quatf(angle: Float(180).radians, axis: [0, 0, 1]) * simd_quatf(angle: Float(180).radians, axis: [0, 1, 0])
-        rotations.append(simd_float4x4(xPlus))
-        rotations.append(simd_float4x4(xMinus))
-        rotations.append(simd_float4x4(yPlus))
-        rotations.append(simd_float4x4(yMinus))
-        rotations.append(simd_float4x4(zPlus))
-        rotations.append(simd_float4x4(zMinus))
-        return rotations
+        return [
+            simd_quatf.environment.positiveX.rotationMatrix,
+            simd_quatf.environment.negativeX.rotationMatrix,
+            simd_quatf.environment.positiveY.rotationMatrix,
+            simd_quatf.environment.negativeY.rotationMatrix,
+            simd_quatf.environment.positiveZ.rotationMatrix,
+            simd_quatf.environment.negativeZ.rotationMatrix
+        ]
     }
 }

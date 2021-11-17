@@ -21,8 +21,7 @@ struct ArrangementController {
             case .spotLight:
                 boundingBoxes.insert((transform * scene.spotLights[scene.entities[index].data.referenceIdx].boundingBox).aabb)
             case .omniLight:
-                boundingBoxes.insert((transform * BoundingBox.from(bound: Bound(min: [-100, -100, -100],
-                                                                                max: [100, 100, 100]))).aabb)
+                boundingBoxes.insert((transform * scene.omniLights[scene.entities[index].data.referenceIdx].boundingBox).aabb)
             case .ambientLight:
                 boundingBoxes.insert((transform * scene.ambientLights[scene.entities[index].data.referenceIdx].boundingBox).aabb)
             case .group:
