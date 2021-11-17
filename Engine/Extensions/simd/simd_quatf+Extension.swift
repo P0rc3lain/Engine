@@ -12,6 +12,24 @@ extension simd_quatf {
         let negativeY: simd_quatf
         let positiveZ: simd_quatf
         let negativeZ: simd_quatf
+        public subscript(index: Int) -> simd_quatf {
+            switch index {
+            case 0:
+                return positiveX
+            case 1:
+                return negativeX
+            case 2:
+                return positiveY
+            case 3:
+                return negativeY
+            case 4:
+                return positiveZ
+            case 5:
+                return negativeZ
+            default:
+                fatalError("Index out of bounds")
+            }
+        }
     }
     static var environment: Environment {
         let xPlus = simd_quatf(angle: Float(180).radians, axis: [0, 0, 1]) * simd_quatf(angle: Float(-90).radians, axis: [0, 1, 0])

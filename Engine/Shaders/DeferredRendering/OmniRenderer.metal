@@ -55,8 +55,11 @@ fragment float4 fragmentDeferredLight(RasterizerData in [[stage_in]],
     float currentDistance = length(lightSpacesFragmentPosition.xyz)/100;
     float3 sampleVector = normalize(lightSpacesFragmentPosition.xyz);
     sampleVector.x = -sampleVector.x;
+    sampleVector.y = -sampleVector.y;
+    sampleVector.z = -sampleVector.z;
     float existingDistance = shadows.sample(textureSampler, sampleVector, in.instanceId);
-    bool inShadow = currentDistance > existingDistance;
+    float bias = max(0.0001 * (1.0 - dot(input.n, l)), 0.00001);
+    bool inShadow = currentDistance - bias > existingDistance;
     if (inShadow) {
         discard_fragment();
     }

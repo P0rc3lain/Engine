@@ -38,7 +38,8 @@ enum AttributeOmniShadowVertexShaderBufferIndex {
     kAttributeOmniShadowVertexShaderBufferModelUniforms,
     kAttributeOmniShadowVertexShaderBufferMatrixPalettes,
     kAttributeOmniShadowVertexShaderBufferObjectIndex,
-    kAttributeOmniShadowVertexShaderBufferRotations
+    kAttributeOmniShadowVertexShaderBufferRotations,
+    kAttributeOmniShadowVertexShaderBufferInstanceId
 };
 
 enum AttributeGBufferVertexShaderBufferIndex {

@@ -53,7 +53,7 @@ struct ShadowStage: Stage {
                 return
             }
             omniEncoder.pushDebugGroup("Omni Light Shadow Pass")
-            omniLightShadowRenderer.draw(encoder: &omniEncoder, scene: &scene, dataStore: &bufferStore)
+            omniLightShadowRenderer.draw(encoder: &omniEncoder, scene: &scene, dataStore: &bufferStore, arrangement: &arrangement)
             omniEncoder.endEncoding()
         }
     }

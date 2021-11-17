@@ -25,12 +25,32 @@ struct OmniShadowRenderer {
         var rotations = OmniShadowRenderer.rotationMatrices
         self.rotationsBuffer.upload(data: &rotations)
     }
+    private func generateRenderMasks(scene: inout GPUSceneDescription,
+                                     arrangement: inout Arrangement) -> [[[Bool]]] {
+        let rotations = simd_quatf.environment
+        return scene.omniLights.count.naturalExclusive.map { lightIndex in
+            var faceData = [[Bool]]()
+            for faceIndex in 6.naturalExclusive {
+                let entityIndex = Int(scene.omniLights[lightIndex].idx)
+                let cameraTransform = arrangement.worldPositions[entityIndex].modelMatrixInverse
+                let boundingBox = BoundingBox.projectionBounds(inverseProjection: scene.omniLights[lightIndex].projectionMatrixInverse)
+                let cameraBoundingBox = (rotations[faceIndex].rotationMatrix * cameraTransform * boundingBox).aabb
+                let mask = CullingController.cullingMask(arrangement: &arrangement,
+                                                         worldBoundingBox: cameraBoundingBox)
+                faceData.append(mask)
+            }
+            return faceData
+        }
+    }
     func draw(encoder: inout MTLRenderCommandEncoder,
               scene: inout GPUSceneDescription,
-              dataStore: inout BufferStore) {
+              dataStore: inout BufferStore,
+              arrangement: inout Arrangement) {
         guard !scene.omniLights.isEmpty else {
             return
         }
+        let masks = generateRenderMasks(scene: &scene,
+                                        arrangement: &arrangement)
         encoder.setViewport(viewPort)
         encoder.setCullMode(.front)
         encoder.setFrontFacing(.counterClockwise)
@@ -40,55 +60,67 @@ struct OmniShadowRenderer {
                                 index: kAttributeOmniShadowVertexShaderBufferRotations)
         encoder.setVertexBuffer(dataStore.omniLights,
                                 index: kAttributeOmniShadowVertexShaderBufferOmniLights)
-        for index in scene.entities.indices {
-            let object = scene.entities[index].data
-            if object.type == .mesh && scene.skeletonReferences[index] != .nil {
-                let mesh = scene.meshBuffers[object.referenceIdx]
-                encoder.setVertexBuffer(mesh.buffer,
-                                        offset: mesh.offset,
-                                        index: kAttributeOmniShadowVertexShaderBufferStageIn)
-                var mutableIndex = Int32(index)
-                encoder.setVertexBytes(&mutableIndex,
-                                       length: MemoryLayout<Int32>.size,
-                                       index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
-                encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
-                                        index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
-                for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
-                    encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
-                                            offset: scene.paletteReferences[index].lowerBound,
-                                            index: kAttributeOmniShadowVertexShaderBufferMatrixPalettes)
-                    let indexDraw = scene.indexDraws[pieceIndex]
-                    encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
-                                                  indexCount: indexDraw.indexCount,
-                                                  indexType: indexDraw.indexType,
-                                                  indexBuffer: indexDraw.indexBuffer.buffer,
-                                                  indexBufferOffset: indexDraw.indexBuffer.offset,
-                                                  instanceCount: scene.omniLights.count * 6)
+        for lightIndex in scene.omniLights.count.naturalExclusive {
+            for faceIndex in 6.naturalExclusive {
+                var lIndex = lightIndex + faceIndex
+                encoder.setVertexBytes(&lIndex,
+                                       length: MemoryLayout<Int>.size,
+                                       index: kAttributeOmniShadowVertexShaderBufferInstanceId)
+                for index in scene.entities.indices {
+                    if !masks[lightIndex][faceIndex][index] {
+                        continue
+                    }
+                    let object = scene.entities[index].data
+                    if object.type == .mesh && scene.skeletonReferences[index] != .nil {
+                        let mesh = scene.meshBuffers[object.referenceIdx]
+                        encoder.setVertexBuffer(mesh.buffer,
+                                                offset: mesh.offset,
+                                                index: kAttributeOmniShadowVertexShaderBufferStageIn)
+                        var mutableIndex = Int32(index)
+                        encoder.setVertexBytes(&mutableIndex,
+                                               length: MemoryLayout<Int32>.size,
+                                               index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
+                        encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
+                                                index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
+                        for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
+                            encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
+                                                    offset: scene.paletteReferences[index].lowerBound,
+                                                    index: kAttributeOmniShadowVertexShaderBufferMatrixPalettes)
+                            let indexDraw = scene.indexDraws[pieceIndex]
+                            encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
+                                                          indexCount: indexDraw.indexCount,
+                                                          indexType: indexDraw.indexType,
+                                                          indexBuffer: indexDraw.indexBuffer.buffer,
+                                                          indexBufferOffset: indexDraw.indexBuffer.offset)
+                        }
+                    }
                 }
-            }
-        }
-        encoder.setRenderPipelineState(pipelineState)
-        for index in scene.entities.indices {
-            let object = scene.entities[index].data
-            if object.type == .mesh && scene.skeletonReferences[index] == .nil {
-                let mesh = scene.meshBuffers[object.referenceIdx]
-                encoder.setVertexBuffer(mesh.buffer,
-                                        offset: mesh.offset,
-                                        index: kAttributeOmniShadowVertexShaderBufferStageIn)
-                var mutableIndex = Int32(index)
-                encoder.setVertexBytes(&mutableIndex,
-                                       length: MemoryLayout<Int32>.size,
-                                       index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
-                encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
-                                        index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
-                for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
-                    let indexDraw = scene.indexDraws[pieceIndex]
-                    encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
-                                                  indexCount: indexDraw.indexCount,
-                                                  indexType: indexDraw.indexType,
-                                                  indexBuffer: indexDraw.indexBuffer.buffer,
-                                                  indexBufferOffset: indexDraw.indexBuffer.offset,
-                                                  instanceCount: scene.omniLights.count * 6)
+                encoder.setRenderPipelineState(pipelineState)
+                for index in scene.entities.indices {
+                    if !masks[lightIndex][faceIndex][index] {
+                        continue
+                    }
+                    let object = scene.entities[index].data
+                    if object.type == .mesh && scene.skeletonReferences[index] == .nil {
+                        let mesh = scene.meshBuffers[object.referenceIdx]
+                        encoder.setVertexBuffer(mesh.buffer,
+                                                offset: mesh.offset,
+                                                index: kAttributeOmniShadowVertexShaderBufferStageIn)
+                        var mutableIndex = Int32(index)
+                        encoder.setVertexBytes(&mutableIndex,
+                                               length: MemoryLayout<Int32>.size,
+                                               index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
+                        encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
+                                                index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
+                        for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
+                            let indexDraw = scene.indexDraws[pieceIndex]
+                            encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
+                                                          indexCount: indexDraw.indexCount,
+                                                          indexType: indexDraw.indexType,
+                                                          indexBuffer: indexDraw.indexBuffer.buffer,
+                                                          indexBufferOffset: indexDraw.indexBuffer.offset)
+                        }
+                    }
                 }
             }
         }
