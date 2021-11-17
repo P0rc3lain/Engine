@@ -21,4 +21,12 @@ public struct Bound: Equatable {
     public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.min == rhs.min && lhs.max == rhs.max
     }
+    func overlap(_ bound: Bound) -> Bool {
+        return max.x > bound.min.x &&
+        min.x < bound.max.x &&
+        max.y > bound.min.y &&
+        min.y < bound.max.y &&
+        max.z > bound.min.z &&
+        min.z < bound.max.z
+    }
 }

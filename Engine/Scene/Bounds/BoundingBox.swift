@@ -49,14 +49,7 @@ struct BoundingBox: Equatable {
         BoundingBox.from(bound: bound)
     }
     func overlap(_ boundingBox: BoundingBox) -> Bool {
-        let b1 = bound
-        let b2 = boundingBox.bound
-        return b1.max.x > b2.min.x &&
-        b1.min.x < b2.max.x &&
-        b1.max.y > b2.min.y &&
-        b1.min.y < b2.max.y &&
-        b1.max.z > b2.min.z &&
-        b1.min.z < b2.max.z
+        bound.overlap(boundingBox.bound)
     }
     public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.corners == rhs.corners
