@@ -5,6 +5,19 @@
 import MetalBinding
 
 extension SpotLight {
+    var boundingBox: BoundingBox {
+        let ndcBounds: [simd_float3] = [
+            [-1, -1, 0],
+            [1, -1, 0],
+            [-1, -1, 1],
+            [1, -1, 1],
+            [-1, 1, 0],
+            [1, 1, 0],
+            [-1, 1, 1],
+            [1, 1, 1]
+        ]
+        return (projectionMatrixInverse * BoundingBox(corners: ndcBounds)).aabb
+    }
     public static func make(color: simd_float3, intensity: Float, coneAngle: Float, index: Int) -> SpotLight {
         let projectionMatrix = simd_float4x4.perspectiveProjectionRightHand(fovyRadians: coneAngle,
                                                                             aspect: 1,
