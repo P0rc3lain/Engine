@@ -47,8 +47,7 @@ struct ArrangementController {
         if tree.isEmpty {
             return []
         }
-        var uniforms = [ModelUniforms]()
-        uniforms.reserveCapacity(tree.count)
+        var uniforms = [ModelUniforms](minimalCapacity: tree.count)
         for index in tree.indices {
             let parentIdx = tree[index].parentIdx
             let finalTransform = tree[index].data.transform.transformation(at: Date().timeIntervalSince1970)
