@@ -14,10 +14,10 @@ extension MTLRenderCommandEncoder {
     func setVertexBuffer<T: RawRepresentable>(_ buffer: MTLBuffer?, index: T) where T.RawValue == UInt32 {
         setVertexBuffer(buffer, offset: 0, index: Int(index.rawValue))
     }
-    func setVertexBuffer<T: RawRepresentable, Z>(_ dynamicBuffer: DynamicBuffer<Z>?, offset: Int, index: T) where T.RawValue == UInt32 {
+    func setVertexBuffer<T: RawRepresentable, Z>(_ dynamicBuffer: PNAnyDynamicBuffer<Z>?, offset: Int, index: T) where T.RawValue == UInt32 {
         setVertexBuffer(dynamicBuffer?.buffer, offset: offset, index: index)
     }
-    func setVertexBuffer<T: RawRepresentable, Z>(_ dynamicBuffer: DynamicBuffer<Z>?, index: T) where T.RawValue == UInt32 {
+    func setVertexBuffer<T: RawRepresentable, Z>(_ dynamicBuffer: PNAnyDynamicBuffer<Z>?, index: T) where T.RawValue == UInt32 {
         setVertexBuffer(dynamicBuffer?.buffer, offset: 0, index: index)
     }
     func setVertexBuffer<T: RawRepresentable, Z>(_ dynamicBuffer: PNAnyStaticBuffer<Z>?, index: T) where T.RawValue == UInt32 {
@@ -35,10 +35,10 @@ extension MTLRenderCommandEncoder {
     func setFragmentBuffer<T: RawRepresentable>(_ buffer: MTLBuffer?, offset: Int, index: T) where T.RawValue == UInt32 {
         setFragmentBuffer(buffer, offset: offset, index: Int(index.rawValue))
     }
-    func setFragmentBuffer<T: RawRepresentable, Z>(_ dynamicBuffer: DynamicBuffer<Z>?, offset: Int, index: T) where T.RawValue == UInt32 {
+    func setFragmentBuffer<T: RawRepresentable, Z>(_ dynamicBuffer: PNAnyDynamicBuffer<Z>?, offset: Int, index: T) where T.RawValue == UInt32 {
         setFragmentBuffer(dynamicBuffer?.buffer, offset: offset, index: Int(index.rawValue))
     }
-    func setFragmentBuffer<T: RawRepresentable, Z>(_ dynamicBuffer: DynamicBuffer<Z>?, index: T) where T.RawValue == UInt32 {
+    func setFragmentBuffer<T: RawRepresentable, Z>(_ dynamicBuffer: PNAnyDynamicBuffer<Z>?, index: T) where T.RawValue == UInt32 {
         setFragmentBuffer(dynamicBuffer?.buffer, offset: 0, index: index)
     }
     func setFragmentTextures(_ textures: [MTLTexture?], range: ClosedRange<Int>) {

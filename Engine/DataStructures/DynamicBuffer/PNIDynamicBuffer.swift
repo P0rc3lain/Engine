@@ -4,13 +4,16 @@
 
 import Metal
 
-public struct DynamicBuffer<T> {
+public class PNIDynamicBuffer<T>: PNDynamicBuffer {
     private let device: MTLDevice
-    var buffer: MTLBuffer
+    private(set) var buffer: MTLBuffer
     private(set) var count: Int
     var pulled: [T] {
         let pointer = buffer.contents().bindMemory(to: T.self, capacity: count)
         return [T](UnsafeBufferPointer(start: pointer, count: count))
+    }
+    private var bufferName: String {
+        "\(Self.self)"
     }
     init?(device: MTLDevice, initialCapacity: Int) {
         assert(initialCapacity >= 0, "Capacity must be a natural value")
@@ -22,7 +25,7 @@ public struct DynamicBuffer<T> {
         self.buffer = buffer
         self.buffer.label = bufferName
     }
-    mutating func upload(data: inout  [T]) {
+    func upload(data: inout [T]) {
         count = data.count
         let requiredSpace = data.count * MemoryLayout<T>.stride
         if buffer.length < requiredSpace {
@@ -35,8 +38,5 @@ public struct DynamicBuffer<T> {
         data.withUnsafeBytes { pointer in
             buffer.contents().copyBuffer(from: pointer)
         }
-    }
-    private var bufferName: String {
-        "\(Self.self)"
     }
 }
