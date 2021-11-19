@@ -49,7 +49,7 @@
 		561667122719E2CD000063B1 /* Float+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5616669A2719E2CC000063B1 /* Float+Extension.swift */; };
 		561667142719E2CD000063B1 /* MDLAsset+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5616669C2719E2CC000063B1 /* MDLAsset+Extension.swift */; };
 		561667162719E2CD000063B1 /* TransformAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5616669F2719E2CC000063B1 /* TransformAnimation.swift */; };
-		561667182719E2CD000063B1 /* Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666A12719E2CC000063B1 /* Skeleton.swift */; };
+		561667182719E2CD000063B1 /* PNISkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666A12719E2CC000063B1 /* PNISkeleton.swift */; };
 		5616671B2719E2CD000063B1 /* OmniRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666A52719E2CC000063B1 /* OmniRenderer+Extension.swift */; };
 		5616671C2719E2CD000063B1 /* MTLStencilDescriptor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666A62719E2CC000063B1 /* MTLStencilDescriptor+Extension.swift */; };
 		5616671E2719E2CD000063B1 /* MTLVertexBufferLayoutDescriptor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666A82719E2CC000063B1 /* MTLVertexBufferLayoutDescriptor+Extension.swift */; };
@@ -148,6 +148,9 @@
 		5670EC272736EA2400375194 /* PostprocessStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC262736EA2400375194 /* PostprocessStage.swift */; };
 		5686BD9A273C1CD300329FA0 /* StaticBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5686BD99273C1CD300329FA0 /* StaticBuffer.swift */; };
 		5686BD9D273D78B700329FA0 /* Animation.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5686BD9C273D78B700329FA0 /* Animation.metal */; };
+		568807462747EEC000C95F55 /* PNSkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568807452747EEC000C95F55 /* PNSkeleton.swift */; };
+		568807482747EFC800C95F55 /* simd_float4x4+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568807472747EFC800C95F55 /* simd_float4x4+Alias.swift */; };
+		5688074A2747F10700C95F55 /* Int+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568807492747F10700C95F55 /* Int+Alias.swift */; };
 		568EBB3A273F0B88007C7D35 /* SSAOUniforms+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EBB39273F0B88007C7D35 /* SSAOUniforms+Extension.swift */; };
 		568EBB3D273F0DE1007C7D35 /* Hemisphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EBB3C273F0DE1007C7D35 /* Hemisphere.swift */; };
 		56924ACC271A00D900FF3E06 /* AnimatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACB271A00D900FF3E06 /* AnimatedValue.swift */; };
@@ -236,7 +239,7 @@
 		5616669A2719E2CC000063B1 /* Float+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float+Extension.swift"; sourceTree = "<group>"; };
 		5616669C2719E2CC000063B1 /* MDLAsset+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MDLAsset+Extension.swift"; sourceTree = "<group>"; };
 		5616669F2719E2CC000063B1 /* TransformAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformAnimation.swift; sourceTree = "<group>"; };
-		561666A12719E2CC000063B1 /* Skeleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skeleton.swift; sourceTree = "<group>"; };
+		561666A12719E2CC000063B1 /* PNISkeleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNISkeleton.swift; sourceTree = "<group>"; };
 		561666A52719E2CC000063B1 /* OmniRenderer+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OmniRenderer+Extension.swift"; sourceTree = "<group>"; };
 		561666A62719E2CC000063B1 /* MTLStencilDescriptor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MTLStencilDescriptor+Extension.swift"; sourceTree = "<group>"; };
 		561666A82719E2CC000063B1 /* MTLVertexBufferLayoutDescriptor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MTLVertexBufferLayoutDescriptor+Extension.swift"; sourceTree = "<group>"; };
@@ -340,6 +343,9 @@
 		5686BD9B273D78A900329FA0 /* Animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		5686BD9C273D78B700329FA0 /* Animation.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Animation.metal; sourceTree = "<group>"; };
 		5686BD9E273D7D7100329FA0 /* Pose.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pose.h; sourceTree = "<group>"; };
+		568807452747EEC000C95F55 /* PNSkeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSkeleton.swift; sourceTree = "<group>"; };
+		568807472747EFC800C95F55 /* simd_float4x4+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd_float4x4+Alias.swift"; sourceTree = "<group>"; };
+		568807492747F10700C95F55 /* Int+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Alias.swift"; sourceTree = "<group>"; };
 		568EBB38273F09BC007C7D35 /* SSAO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSAO.h; sourceTree = "<group>"; };
 		568EBB39273F0B88007C7D35 /* SSAOUniforms+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SSAOUniforms+Extension.swift"; sourceTree = "<group>"; };
 		568EBB3C273F0DE1007C7D35 /* Hemisphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hemisphere.swift; sourceTree = "<group>"; };
@@ -509,8 +515,8 @@
 		5616669E2719E2CC000063B1 /* Position */ = {
 			isa = PBXGroup;
 			children = (
+				568807442747EEB300C95F55 /* Skeleton */,
 				5616669F2719E2CC000063B1 /* TransformAnimation.swift */,
-				561666A12719E2CC000063B1 /* Skeleton.swift */,
 				56E8209C27284664002D58C3 /* Position.swift */,
 			);
 			path = Position;
@@ -549,6 +555,8 @@
 				561666C52719E2CC000063B1 /* PieceDescription+Alias.swift */,
 				56924AE3271A181600FF3E06 /* AnimatedValue+Alias.swift */,
 				56270168272B556500071620 /* AnimatedTransform+Alias.swift */,
+				568807472747EFC800C95F55 /* simd_float4x4+Alias.swift */,
+				568807492747F10700C95F55 /* Int+Alias.swift */,
 			);
 			path = Aliases;
 			sourceTree = "<group>";
@@ -803,6 +811,15 @@
 				5670EC152736A2AE00375194 /* GPUSupply.swift */,
 			);
 			path = IO;
+			sourceTree = "<group>";
+		};
+		568807442747EEB300C95F55 /* Skeleton */ = {
+			isa = PBXGroup;
+			children = (
+				561666A12719E2CC000063B1 /* PNISkeleton.swift */,
+				568807452747EEC000C95F55 /* PNSkeleton.swift */,
+			);
+			path = Skeleton;
 			sourceTree = "<group>";
 		};
 		568EBB37273F099B007C7D35 /* Rendering */ = {
@@ -1128,7 +1145,7 @@
 				56270167272B54EB00071620 /* AnimatedTransform.swift in Sources */,
 				56C4CD53273800E4000A994E /* SpotRenderer.metal in Sources */,
 				561667342719E2CD000063B1 /* SceneDescription+Alias.swift in Sources */,
-				561667182719E2CD000063B1 /* Skeleton.swift in Sources */,
+				561667182719E2CD000063B1 /* PNISkeleton.swift in Sources */,
 				563BFC8527285F100003EDB7 /* MTLBuffer+Extension.swift in Sources */,
 				5627016D272B589800071620 /* AnimatedCoordinateSpace+Extension.swift in Sources */,
 				561666FD2719E2CD000063B1 /* MTLTextureDescriptor+Extension.swift in Sources */,
@@ -1165,6 +1182,7 @@
 				56165BE527440CF70025D58B /* Arrangement.swift in Sources */,
 				5670EC002735977900375194 /* BloomSplitRenderer.swift in Sources */,
 				561667082719E2CD000063B1 /* DataBuffer+Extension.swift in Sources */,
+				5688074A2747F10700C95F55 /* Int+Alias.swift in Sources */,
 				563575F42728486A00CE4988 /* AnimationSample.swift in Sources */,
 				5670EC272736EA2400375194 /* PostprocessStage.swift in Sources */,
 				561667312719E2CD000063B1 /* DataBuffer+Alias.swift in Sources */,
@@ -1190,6 +1208,7 @@
 				56F5926B2737264A008652C9 /* DirectionalRenderer+Extension.swift in Sources */,
 				5670EBDC273561FD00375194 /* Operator+Extension.swift in Sources */,
 				563BFC8F272897430003EDB7 /* AnimatedFloat3Array+Extension.swift in Sources */,
+				568807482747EFC800C95F55 /* simd_float4x4+Alias.swift in Sources */,
 				561667572719E2CD000063B1 /* BufferStore.swift in Sources */,
 				561667432719E2CD000063B1 /* Camera.swift in Sources */,
 				5616670C2719E2CD000063B1 /* MTLDevice+Extension.swift in Sources */,
@@ -1249,6 +1268,7 @@
 				56D34A54271B037900A87785 /* Double+Extension.swift in Sources */,
 				561667252719E2CD000063B1 /* GBufferRenderer+Extension.swift in Sources */,
 				561667332719E2CD000063B1 /* Material+Alias.swift in Sources */,
+				568807462747EEC000C95F55 /* PNSkeleton.swift in Sources */,
 				56924AEA271A188700FF3E06 /* AnimatedQuatf+Extension.swift in Sources */,
 				5616670D2719E2CD000063B1 /* MDLMeshBuffer+Extension.swift in Sources */,
 				563C9C24273882F60014CFF3 /* SpotLight.metal in Sources */,

@@ -60,8 +60,8 @@ public class Translator {
                                                              rotation: jointAnimation.rotations.porcelain,
                                                              scale: jointAnimation.scales.porcelain))
             // TODO use geometry bind transform
-            let skeleton = Skeleton(localBindTransforms: skeleton.jointBindTransforms.float4x4Array,
-                                    parentIndices: jointAnimation.jointPaths.map { parentIndex(jointPaths: jointAnimation.jointPaths, jointPath: $0) })
+            let skeleton = PNISkeleton(bindTransforms: skeleton.jointBindTransforms.float4x4Array,
+                                       parentIndices: jointAnimation.jointPaths.map { parentIndex(jointPaths: jointAnimation.jointPaths, jointPath: $0) })
             scene.animationReferences.append(scene.skeletalAnimations.count - 1 ..< scene.skeletalAnimations.count)
             scene.skeletons.append(skeleton)
             scene.skeletonReferences.append(scene.skeletons.count - 1)
