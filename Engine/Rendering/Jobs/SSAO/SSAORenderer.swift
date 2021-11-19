@@ -12,17 +12,17 @@ struct SSAORenderer {
     private let plane: GPUGeometry
     private let prTexture: MTLTexture
     private let nmTexture: MTLTexture
-    private var kernelBuffer: StaticBuffer<simd_float3>
-    private var noiseBuffer: StaticBuffer<simd_float3>
-    private var uniforms: StaticBuffer<SSAOUniforms>
+    private var kernelBuffer: PNAnyStaticBuffer<simd_float3>
+    private var noiseBuffer: PNAnyStaticBuffer<simd_float3>
+    private var uniforms: PNAnyStaticBuffer<SSAOUniforms>
     init?(pipelineState: MTLRenderPipelineState,
           prTexture: MTLTexture,
           nmTexture: MTLTexture,
           device: MTLDevice,
           drawableSize: CGSize,
-          kernelBuffer: StaticBuffer<simd_float3>,
-          noiseBuffer: StaticBuffer<simd_float3>,
-          uniforms: StaticBuffer<SSAOUniforms>,
+          kernelBuffer: PNAnyStaticBuffer<simd_float3>,
+          noiseBuffer: PNAnyStaticBuffer<simd_float3>,
+          uniforms: PNAnyStaticBuffer<SSAOUniforms>,
           maxNoiseCount: Int,
           maxSamplesCount: Int) {
         guard let plane = GPUGeometry.screenSpacePlane(device: device) else {
