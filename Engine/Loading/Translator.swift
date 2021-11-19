@@ -2,13 +2,17 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
+import Metal
 import MetalBinding
 import ModelIO
 import simd
 
 public class Translator {
-    public init() { }
-    public func process(asset: MDLAsset) -> RamSceneDescription {
+    private let device: MTLDevice
+    public init(device: MTLDevice) {
+        self.device = device
+    }
+    public func process(asset: MDLAsset) -> GPUSceneDescription? {
         var scene = RamSceneDescription()
         asset.walk { object in
             scene.entityNames.append(object.path)
@@ -34,7 +38,7 @@ public class Translator {
             }
         }
         validateScene(scene: &scene)
-        return scene
+        return scene.upload(device: device)
     }
     private func validateScene(scene: inout RamSceneDescription) {
         assert(scene.entityNames.count == scene.entities.count, "There must be the same number of names as objects")
@@ -42,11 +46,9 @@ public class Translator {
         assert(scene.meshNames.count == scene.meshBuffers.count, "There must be the same number of names as meshes")
         assert(scene.indexDrawsMaterials.count == scene.indexDraws.count, "There must be the same number of material references as draw references")
         assert(scene.indexDrawReferences.count == scene.meshBuffers.count, "There must be the same number of references as buffers")
-        assert(scene.materialNames.count == scene.materials.count, "There must be the same number of names as objects")
         assert(Set(scene.entityNames).count == scene.entityNames.count, "Object names must be unique")
         assert(Set(scene.cameraNames).count == scene.cameraNames.count, "Camera names must be unique")
         assert(Set(scene.meshNames).count == scene.meshNames.count, "Mesh names must be unique")
-        assert(Set(scene.materialNames).count == scene.materialNames.count, "Mesh names must be unique")
         assert(scene.entities.count == scene.skeletonReferences.count, "Each object should have reference to a skeleton")
     }
     private func add(animation: MDLAnimationBindComponent,
@@ -124,12 +126,12 @@ public class Translator {
         }
         submeshes.forEach {
             var materialIdx = Int.nil
-            if let material = $0.material {
-                materialIdx = scene.materialNames.firstIndex(of: material.name) ?? .nil
+            if let material = $0.material,
+               let uploadedMaterial = material.upload(device: device) {
+                materialIdx = scene.materials.firstIndex(where: { $0.name == material.name }) ?? .nil
                 if materialIdx == .nil {
                     materialIdx = scene.materials.count
-                    scene.materialNames.append(material.name)
-                    scene.materials.append(material.porcelain)
+                    scene.materials.append(uploadedMaterial)
                 }
             }
             guard let indexBasedDraw = $0.porcelainIndexBasedDraw else {

@@ -10,8 +10,7 @@ public struct SceneDescription<DataType, IndexType, GeometryType, TextureType> {
     public var entities = FlatTree<Entity>()
     public var skeletonReferences = [Int]()
     // MARK: - Capacity B
-    public var materialNames = [String]()
-    public var materials = [Material<TextureType>]()
+    public var materials = [PNMaterial]()
     // MARK: - Capacity C
     public var meshNames = [String]()
     public var meshBuffers = [DataBuffer<DataType>]()

@@ -22,7 +22,6 @@ extension MDLTexture {
         let loader = MTKTextureLoader(device: device)
         let texture = try? loader.newTexture(texture: self,
                                              options: [.generateMipmaps: NSNumber(booleanLiteral: true)])
-        
         texture?.label = name
         return texture
     }

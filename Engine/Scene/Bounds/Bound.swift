@@ -22,7 +22,7 @@ public struct Bound: Equatable {
         lhs.min == rhs.min && lhs.max == rhs.max
     }
     func overlap(_ bound: Bound) -> Bool {
-        return max.x > bound.min.x &&
+        max.x > bound.min.x &&
         min.x < bound.max.x &&
         max.y > bound.min.y &&
         min.y < bound.max.y &&

@@ -12,8 +12,7 @@ extension RamSceneDescription {
         description.entities = entities
         description.skeletonReferences = skeletonReferences
         // MARK: - Capacity B
-        description.materialNames = materialNames
-        description.materials = materials.compactMap { $0.upload(device: device) }
+        description.materials = materials
         // MARK: - Capacity C
         description.meshNames = meshNames
         description.meshBuffers = meshBuffers.compactMap { $0.upload(device: device) }

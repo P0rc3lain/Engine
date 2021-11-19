@@ -8,14 +8,14 @@ struct BoundingBox: Equatable {
     let cornersLower: simd_float4x4
     let cornersUpper: simd_float4x4
     var corners: [simd_float3] {
-        return [cornersLower.columns.0.xyz,
-                cornersLower.columns.1.xyz,
-                cornersLower.columns.2.xyz,
-                cornersLower.columns.3.xyz,
-                cornersUpper.columns.0.xyz,
-                cornersUpper.columns.1.xyz,
-                cornersUpper.columns.2.xyz,
-                cornersUpper.columns.3.xyz]
+        [cornersLower.columns.0.xyz,
+         cornersLower.columns.1.xyz,
+         cornersLower.columns.2.xyz,
+         cornersLower.columns.3.xyz,
+         cornersUpper.columns.0.xyz,
+         cornersUpper.columns.1.xyz,
+         cornersUpper.columns.2.xyz,
+         cornersUpper.columns.3.xyz]
     }
     init(cornersLower: simd_float4x4,
          cornersUpper: simd_float4x4) {
@@ -49,18 +49,54 @@ struct BoundingBox: Equatable {
                                                 ))
     }
     var bound: Bound {
-        let minX = min(cornersLower.columns.0.x, cornersLower.columns.1.x, cornersLower.columns.2.x, cornersLower.columns.3.x,
-                       cornersUpper.columns.0.x, cornersUpper.columns.1.x, cornersUpper.columns.2.x, cornersUpper.columns.3.x)
-        let maxX = max(cornersLower.columns.0.x, cornersLower.columns.1.x, cornersLower.columns.2.x, cornersLower.columns.3.x,
-                       cornersUpper.columns.0.x, cornersUpper.columns.1.x, cornersUpper.columns.2.x, cornersUpper.columns.3.x)
-        let minY = min(cornersLower.columns.0.y, cornersLower.columns.1.y, cornersLower.columns.2.y, cornersLower.columns.3.y,
-                       cornersUpper.columns.0.y, cornersUpper.columns.1.y, cornersUpper.columns.2.y, cornersUpper.columns.3.y)
-        let maxY = max(cornersLower.columns.0.y, cornersLower.columns.1.y, cornersLower.columns.2.y, cornersLower.columns.3.y,
-                       cornersUpper.columns.0.y, cornersUpper.columns.1.y, cornersUpper.columns.2.y, cornersUpper.columns.3.y)
-        let minZ = min(cornersLower.columns.0.z, cornersLower.columns.1.z, cornersLower.columns.2.z, cornersLower.columns.3.z,
-                       cornersUpper.columns.0.z, cornersUpper.columns.1.z, cornersUpper.columns.2.z, cornersUpper.columns.3.z)
-        let maxZ = max(cornersLower.columns.0.z, cornersLower.columns.1.z, cornersLower.columns.2.z, cornersLower.columns.3.z,
-                       cornersUpper.columns.0.z, cornersUpper.columns.1.z, cornersUpper.columns.2.z, cornersUpper.columns.3.z)
+        let minX = min(cornersLower.columns.0.x,
+                       cornersLower.columns.1.x,
+                       cornersLower.columns.2.x,
+                       cornersLower.columns.3.x,
+                       cornersUpper.columns.0.x,
+                       cornersUpper.columns.1.x,
+                       cornersUpper.columns.2.x,
+                       cornersUpper.columns.3.x)
+        let maxX = max(cornersLower.columns.0.x,
+                       cornersLower.columns.1.x,
+                       cornersLower.columns.2.x,
+                       cornersLower.columns.3.x,
+                       cornersUpper.columns.0.x,
+                       cornersUpper.columns.1.x,
+                       cornersUpper.columns.2.x,
+                       cornersUpper.columns.3.x)
+        let minY = min(cornersLower.columns.0.y,
+                       cornersLower.columns.1.y,
+                       cornersLower.columns.2.y,
+                       cornersLower.columns.3.y,
+                       cornersUpper.columns.0.y,
+                       cornersUpper.columns.1.y,
+                       cornersUpper.columns.2.y,
+                       cornersUpper.columns.3.y)
+        let maxY = max(cornersLower.columns.0.y,
+                       cornersLower.columns.1.y,
+                       cornersLower.columns.2.y,
+                       cornersLower.columns.3.y,
+                       cornersUpper.columns.0.y,
+                       cornersUpper.columns.1.y,
+                       cornersUpper.columns.2.y,
+                       cornersUpper.columns.3.y)
+        let minZ = min(cornersLower.columns.0.z,
+                       cornersLower.columns.1.z,
+                       cornersLower.columns.2.z,
+                       cornersLower.columns.3.z,
+                       cornersUpper.columns.0.z,
+                       cornersUpper.columns.1.z,
+                       cornersUpper.columns.2.z,
+                       cornersUpper.columns.3.z)
+        let maxZ = max(cornersLower.columns.0.z,
+                       cornersLower.columns.1.z,
+                       cornersLower.columns.2.z,
+                       cornersLower.columns.3.z,
+                       cornersUpper.columns.0.z,
+                       cornersUpper.columns.1.z,
+                       cornersUpper.columns.2.z,
+                       cornersUpper.columns.3.z)
         return Bound(min: simd_float3(minX, minY, minZ),
                      max: simd_float3(maxX, maxY, maxZ))
     }

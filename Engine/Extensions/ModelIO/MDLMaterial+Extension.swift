@@ -2,15 +2,22 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
+import Metal
 import ModelIO
 
 extension MDLMaterial {
-    var porcelain: RamMaterial {
-        let albedo = defaultTexture(for: .baseColor)
-        let roughness = defaultTexture(for: .roughness)
-        let normals = defaultTexture(for: .tangentSpaceNormal)
-        let metallic = defaultTexture(for: .metallic)
-        return Material(albedo: albedo, roughness: roughness, normals: normals, metallic: metallic)
+    func upload(device: MTLDevice) -> PNMaterial? {
+        guard let albedo = defaultTexture(for: .baseColor).upload(device: device),
+              let roughness = defaultTexture(for: .roughness).upload(device: device),
+              let normals = defaultTexture(for: .tangentSpaceNormal).upload(device: device),
+              let metallic = defaultTexture(for: .metallic).upload(device: device) else {
+                  return nil
+        }
+        return PNIMaterial(name: name,
+                           albedo: albedo,
+                           roughness: roughness,
+                           normals: normals,
+                           metallic: metallic)
     }
     private func storedTexture(for semantic: MDLMaterialSemantic) -> MDLTexture? {
         guard let materialProperty = property(with: semantic) else { return nil }
@@ -21,6 +28,7 @@ extension MDLMaterial {
             associatedTexture.name = "\(semantic.label) (Loaded)"
             return associatedTexture
         }
-        return MDLTexture.solid2D(color: semantic.defaultColor, name: "\(semantic.label) (Generated)")
+        return .solid2D(color: semantic.defaultColor,
+                        name: "\(semantic.label) (Generated)")
     }
 }
