@@ -21,7 +21,7 @@ public struct SceneDescription<DataType, IndexType, GeometryType, TextureType> {
     public var indexDraws = [IndexBasedDraw<DataType, IndexType, GeometryType>]()
     public var indexDrawsMaterials = [Int]()
     // MARK: - Capacity E
-    public var skeletons = [Skeleton]()
+    var skeletons = [PNSkeleton]()
     public var paletteReferences = [Range<Int>]()
     public var animationReferences = [Range<Int>]()
     // MARK: - Capacity F
