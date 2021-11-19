@@ -126,7 +126,7 @@
 		563D0A2E2719F7A700F77B40 /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = 563D0A2C2719F7A400F77B40 /* Model.h */; };
 		56407B7B27204EEB00440CAC /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56407B7A27204EEB00440CAC /* Array+Extension.swift */; };
 		56407B7D27206F5D00440CAC /* Vertex+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56407B7C27206F5D00440CAC /* Vertex+Extension.swift */; };
-		56416D7427400F66003C99C2 /* DynamicBuffer+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56416D7327400F66003C99C2 /* DynamicBuffer+Tests.swift */; };
+		56416D7427400F66003C99C2 /* PNIDynamicBuffer+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56416D7327400F66003C99C2 /* PNIDynamicBuffer+Tests.swift */; };
 		56416D7B27413443003C99C2 /* simd_float4x4+Extension+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56416D7A27413443003C99C2 /* simd_float4x4+Extension+Tests.swift */; };
 		566020E02734314C000F4CA7 /* SSAORenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566020DF2734314C000F4CA7 /* SSAORenderer.swift */; };
 		566020E227343280000F4CA7 /* SSAO.metal in Sources */ = {isa = PBXBuildFile; fileRef = 566020E127343280000F4CA7 /* SSAO.metal */; };
@@ -323,7 +323,7 @@
 		563D0A2C2719F7A400F77B40 /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		56407B7A27204EEB00440CAC /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		56407B7C27206F5D00440CAC /* Vertex+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vertex+Extension.swift"; sourceTree = "<group>"; };
-		56416D7327400F66003C99C2 /* DynamicBuffer+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DynamicBuffer+Tests.swift"; sourceTree = "<group>"; };
+		56416D7327400F66003C99C2 /* PNIDynamicBuffer+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIDynamicBuffer+Tests.swift"; sourceTree = "<group>"; };
 		56416D7A27413443003C99C2 /* simd_float4x4+Extension+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd_float4x4+Extension+Tests.swift"; sourceTree = "<group>"; };
 		566020DF2734314C000F4CA7 /* SSAORenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSAORenderer.swift; sourceTree = "<group>"; };
 		566020E127343280000F4CA7 /* SSAO.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = SSAO.metal; sourceTree = "<group>"; };
@@ -733,7 +733,7 @@
 		56416D7227400F53003C99C2 /* DataStructures */ = {
 			isa = PBXGroup;
 			children = (
-				56416D7327400F66003C99C2 /* DynamicBuffer+Tests.swift */,
+				56416D7327400F66003C99C2 /* PNIDynamicBuffer+Tests.swift */,
 				56165BF527444A680025D58B /* FlatTree+Tests.swift */,
 			);
 			path = DataStructures;
@@ -1342,7 +1342,7 @@
 				56165BEE27443EAE0025D58B /* ArrangementController+Tests.swift in Sources */,
 				56D5085B27454B250097DEB2 /* OmniLight+Extension+Tests.swift in Sources */,
 				56165BF627444A680025D58B /* FlatTree+Tests.swift in Sources */,
-				56416D7427400F66003C99C2 /* DynamicBuffer+Tests.swift in Sources */,
+				56416D7427400F66003C99C2 /* PNIDynamicBuffer+Tests.swift in Sources */,
 				56B65DEC273ED4CE00DB927E /* BoundingBox+Tests.swift in Sources */,
 				560253D72726CCCA00B3A13A /* Chronometer+Tests.swift in Sources */,
 			);

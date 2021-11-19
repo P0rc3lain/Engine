@@ -6,10 +6,11 @@
 import simd
 import XCTest
 
-class DynamicBufferTests: XCTestCase {
+class PNIDynamicBufferTests: XCTestCase {
     func testPullingOnEmpty() throws {
         guard let device = MTLCreateSystemDefaultDevice(),
-              let dynamicBuffer = DynamicBuffer<Int>(device: device, initialCapacity: 1) else {
+              let dynamicBuffer = PNIDynamicBuffer<Int>(device: device,
+                                                        initialCapacity: 1) else {
             XCTFail("Could not initiate device")
             return
         }
@@ -17,7 +18,8 @@ class DynamicBufferTests: XCTestCase {
     }
     func testPullingOnNonEmpty() throws {
         guard let device = MTLCreateSystemDefaultDevice(),
-              var dynamicBuffer = DynamicBuffer<Int>(device: device, initialCapacity: 1) else {
+              let dynamicBuffer = PNIDynamicBuffer<Int>(device: device,
+                                                        initialCapacity: 1) else {
             XCTFail("Could not initiate device")
             return
         }
@@ -27,15 +29,17 @@ class DynamicBufferTests: XCTestCase {
     }
     func testBufferName() throws {
         guard let device = MTLCreateSystemDefaultDevice(),
-              let dynamicBuffer = DynamicBuffer<Int>(device: device, initialCapacity: 1) else {
+              let dynamicBuffer = PNIDynamicBuffer<Int>(device: device,
+                                                        initialCapacity: 1) else {
             XCTFail("Could not initiate device")
             return
         }
-        XCTAssertEqual(dynamicBuffer.buffer.label, "DynamicBuffer<Int>")
+        XCTAssertEqual(dynamicBuffer.buffer.label, "PNIDynamicBuffer<Int>")
     }
     func testExtending() throws {
         guard let device = MTLCreateSystemDefaultDevice(),
-              var dynamicBuffer = DynamicBuffer<Int>(device: device, initialCapacity: 1) else {
+              let dynamicBuffer = PNIDynamicBuffer<Int>(device: device,
+                                                        initialCapacity: 1) else {
             XCTFail("Could not initiate device")
             return
         }
