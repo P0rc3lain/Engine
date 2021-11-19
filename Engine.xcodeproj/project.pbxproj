@@ -146,11 +146,13 @@
 		5670EC1D2736B8BC00375194 /* GBufferStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC1C2736B8BC00375194 /* GBufferStage.swift */; };
 		5670EC252736E1EF00375194 /* CombineStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC232736DD6100375194 /* CombineStage.swift */; };
 		5670EC272736EA2400375194 /* PostprocessStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC262736EA2400375194 /* PostprocessStage.swift */; };
-		5686BD9A273C1CD300329FA0 /* StaticBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5686BD99273C1CD300329FA0 /* StaticBuffer.swift */; };
+		5686BD9A273C1CD300329FA0 /* PNIStaticBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5686BD99273C1CD300329FA0 /* PNIStaticBuffer.swift */; };
 		5686BD9D273D78B700329FA0 /* Animation.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5686BD9C273D78B700329FA0 /* Animation.metal */; };
 		568807462747EEC000C95F55 /* PNSkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568807452747EEC000C95F55 /* PNSkeleton.swift */; };
 		568807482747EFC800C95F55 /* simd_float4x4+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568807472747EFC800C95F55 /* simd_float4x4+Alias.swift */; };
 		5688074A2747F10700C95F55 /* Int+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568807492747F10700C95F55 /* Int+Alias.swift */; };
+		5688074E274801EC00C95F55 /* PNStaticBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5688074D274801EC00C95F55 /* PNStaticBuffer.swift */; };
+		568807512748088400C95F55 /* PNAnyStaticBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568807502748088400C95F55 /* PNAnyStaticBuffer.swift */; };
 		568EBB3A273F0B88007C7D35 /* SSAOUniforms+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EBB39273F0B88007C7D35 /* SSAOUniforms+Extension.swift */; };
 		568EBB3D273F0DE1007C7D35 /* Hemisphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EBB3C273F0DE1007C7D35 /* Hemisphere.swift */; };
 		56924ACC271A00D900FF3E06 /* AnimatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACB271A00D900FF3E06 /* AnimatedValue.swift */; };
@@ -339,13 +341,15 @@
 		5670EC1C2736B8BC00375194 /* GBufferStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBufferStage.swift; sourceTree = "<group>"; };
 		5670EC232736DD6100375194 /* CombineStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineStage.swift; sourceTree = "<group>"; };
 		5670EC262736EA2400375194 /* PostprocessStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostprocessStage.swift; sourceTree = "<group>"; };
-		5686BD99273C1CD300329FA0 /* StaticBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticBuffer.swift; sourceTree = "<group>"; };
+		5686BD99273C1CD300329FA0 /* PNIStaticBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIStaticBuffer.swift; sourceTree = "<group>"; };
 		5686BD9B273D78A900329FA0 /* Animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		5686BD9C273D78B700329FA0 /* Animation.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Animation.metal; sourceTree = "<group>"; };
 		5686BD9E273D7D7100329FA0 /* Pose.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pose.h; sourceTree = "<group>"; };
 		568807452747EEC000C95F55 /* PNSkeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSkeleton.swift; sourceTree = "<group>"; };
 		568807472747EFC800C95F55 /* simd_float4x4+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd_float4x4+Alias.swift"; sourceTree = "<group>"; };
 		568807492747F10700C95F55 /* Int+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Alias.swift"; sourceTree = "<group>"; };
+		5688074D274801EC00C95F55 /* PNStaticBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNStaticBuffer.swift; sourceTree = "<group>"; };
+		568807502748088400C95F55 /* PNAnyStaticBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnyStaticBuffer.swift; sourceTree = "<group>"; };
 		568EBB38273F09BC007C7D35 /* SSAO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSAO.h; sourceTree = "<group>"; };
 		568EBB39273F0B88007C7D35 /* SSAOUniforms+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SSAOUniforms+Extension.swift"; sourceTree = "<group>"; };
 		568EBB3C273F0DE1007C7D35 /* Hemisphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hemisphere.swift; sourceTree = "<group>"; };
@@ -536,9 +540,9 @@
 		561666B82719E2CC000063B1 /* DataStructures */ = {
 			isa = PBXGroup;
 			children = (
+				5688074C274801DD00C95F55 /* StaticBuffer */,
 				561666B92719E2CC000063B1 /* FlatTree.swift */,
 				561666BA2719E2CC000063B1 /* DynamicBuffer.swift */,
-				5686BD99273C1CD300329FA0 /* StaticBuffer.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -820,6 +824,16 @@
 				568807452747EEC000C95F55 /* PNSkeleton.swift */,
 			);
 			path = Skeleton;
+			sourceTree = "<group>";
+		};
+		5688074C274801DD00C95F55 /* StaticBuffer */ = {
+			isa = PBXGroup;
+			children = (
+				5686BD99273C1CD300329FA0 /* PNIStaticBuffer.swift */,
+				5688074D274801EC00C95F55 /* PNStaticBuffer.swift */,
+				568807502748088400C95F55 /* PNAnyStaticBuffer.swift */,
+			);
+			path = StaticBuffer;
 			sourceTree = "<group>";
 		};
 		568EBB37273F099B007C7D35 /* Rendering */ = {
@@ -1174,7 +1188,7 @@
 				5616670A2719E2CD000063B1 /* MDLSubmesh+Extension.swift in Sources */,
 				56E8208F2727FD13002D58C3 /* Date+Extensioin.swift in Sources */,
 				563C9C26273884700014CFF3 /* SpotShadowRenderer+Extension.swift in Sources */,
-				5686BD9A273C1CD300329FA0 /* StaticBuffer.swift in Sources */,
+				5686BD9A273C1CD300329FA0 /* PNIStaticBuffer.swift in Sources */,
 				5616673B2719E2CD000063B1 /* DataBuffer.swift in Sources */,
 				56ADD2F8273709F400107E24 /* AmbientRenderer+Extension.swift in Sources */,
 				569D923D273DD594004FDFAC /* Bound.swift in Sources */,
@@ -1215,6 +1229,7 @@
 				563BFC9A27294AF70003EDB7 /* GPUGeometry+Extension.swift in Sources */,
 				561667362719E2CD000063B1 /* FlatTree+Alias.swift in Sources */,
 				561667002719E2CD000063B1 /* IndexBasedDraw+Extension.swift in Sources */,
+				5688074E274801EC00C95F55 /* PNStaticBuffer.swift in Sources */,
 				561667482719E2CD000063B1 /* Transformation.metal in Sources */,
 				561667062719E2CD000063B1 /* MDLMaterialSemantic+Extension.swift in Sources */,
 				56165BEB27440DA90025D58B /* EntityType.swift in Sources */,
@@ -1229,6 +1244,7 @@
 				566020E02734314C000F4CA7 /* SSAORenderer.swift in Sources */,
 				5616671F2719E2CD000063B1 /* MTLRenderPipelineDescriptor+Extension.swift in Sources */,
 				5670EC122736A1BE00375194 /* Stage.swift in Sources */,
+				568807512748088400C95F55 /* PNAnyStaticBuffer.swift in Sources */,
 				561667462719E2CD000063B1 /* GBufferRenderer.metal in Sources */,
 				5670EC092735AB0000375194 /* BloomSplitRenderer+Extension.swift in Sources */,
 				561667142719E2CD000063B1 /* MDLAsset+Extension.swift in Sources */,

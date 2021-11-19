@@ -10,12 +10,12 @@ struct OmniShadowRenderer {
     private let pipelineState: MTLRenderPipelineState
     private let animatedPipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
-    private var rotationsBuffer: StaticBuffer<simd_float4x4>
+    private var rotationsBuffer: PNAnyStaticBuffer<simd_float4x4>
     private let viewPort: MTLViewport
     init(pipelineState: MTLRenderPipelineState,
          animatedPipelineState: MTLRenderPipelineState,
          depthStencilState: MTLDepthStencilState,
-         rotationsBuffer: StaticBuffer<simd_float4x4>,
+         rotationsBuffer: PNAnyStaticBuffer<simd_float4x4>,
          viewPort: MTLViewport) {
         self.pipelineState = pipelineState
         self.animatedPipelineState = animatedPipelineState
