@@ -6,7 +6,7 @@
 import XCTest
 
 class AnimatedValueTests: XCTestCase {
-    var animation = AnimatedValue<String>(keyFrames: ["a", "b", "c"], times: [3, 5, 9], maximumTime: 10)
+    var animation = PNIAnimatedValue<String>(keyFrames: ["a", "b", "c"], times: [3, 5, 9], maximumTime: 10)
     func testBeforeFirst() throws {
         XCTAssertEqual(animation.sample(at: 2.55).currentKeyFrame, "c")
         XCTAssertEqual(animation.sample(at: 2.55).upcomingKeyFrame, "a")
