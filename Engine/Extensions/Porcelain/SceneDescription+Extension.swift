@@ -11,8 +11,6 @@ extension RamSceneDescription {
         description.entityNames = entityNames
         description.entities = entities
         description.skeletonReferences = skeletonReferences
-        // MARK: - Capacity B
-        description.materials = materials
         // MARK: - Capacity C
         description.meshes = meshes.compactMap { $0.upload(device: device) }
         description.meshBoundingBoxes = meshBoundingBoxes
@@ -42,8 +40,7 @@ extension RamSceneDescription {
         // MARK: - Capacity M
         description.activeCameraIdx = activeCameraIdx
         description.sky = sky
-        guard description.materials.count == materials.count,
-              description.skyMaps.count == skyMaps.count,
+        guard description.skyMaps.count == skyMaps.count,
               description.meshes.count == meshes.count else {
             return nil
         }

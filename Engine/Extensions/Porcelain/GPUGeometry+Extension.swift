@@ -18,7 +18,8 @@ extension GPUGeometry {
                                                 indexCount: indices.length,
                                                 indexType: .uint16,
                                                 primitiveType: .triangle)
-        let pieceDescription = PieceDescription(materialIdx: .nil, drawDescription: drawDescription)
+        let pieceDescription = PieceDescription(material: nil,
+                                                drawDescription: drawDescription)
         return GPUGeometry(name: "Cube",
                            vertexBuffer: verticesBuffer,
                            pieceDescriptions: [pieceDescription])
@@ -74,7 +75,8 @@ extension GPUGeometry {
                                                 indexCount: indicesBuffer.length / MemoryLayout<UInt16>.stride,
                                                 indexType: .uint16,
                                                 primitiveType: .triangle)
-        let pieceDescription = PieceDescription(materialIdx: .nil, drawDescription: drawDescription)
+        let pieceDescription = PieceDescription(material: nil,
+                                                drawDescription: drawDescription)
         return GPUGeometry(name: "Plane",
                            vertexBuffer: verticesBuffer,
                            pieceDescriptions: [pieceDescription])

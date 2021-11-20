@@ -3,11 +3,11 @@
 //
 
 public struct PieceDescription<DataType, IndexType, GeometryType> {
-    public let materialIdx: Int
+    public let material: PNMaterial?
     public let drawDescription: IndexBasedDraw<DataType, IndexType, GeometryType>
-    public init(materialIdx: Int,
+    public init(material: PNMaterial?,
                 drawDescription: IndexBasedDraw<DataType, IndexType, GeometryType>) {
-        self.materialIdx = materialIdx
+        self.material = material
         self.drawDescription = drawDescription
     }
 }

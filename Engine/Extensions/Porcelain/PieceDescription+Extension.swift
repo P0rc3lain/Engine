@@ -9,7 +9,7 @@ extension RamPieceDescription {
         guard let drawDescription = drawDescription.upload(device: device) else {
             return nil
         }
-        return GPUPieceDescription(materialIdx: materialIdx,
+        return GPUPieceDescription(material: material,
                                    drawDescription: drawDescription)
     }
 }

@@ -33,7 +33,6 @@ struct GBufferRenderer {
               dataStore: inout BufferStore,
               arrangement: inout Arrangement) {
         let mask = generateRenderMask(scene: &scene, arrangement: &arrangement)
-        var boundMaterialIdx = Int.nil
         encoder.setViewport(viewPort)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setCullMode(.back)
@@ -63,15 +62,12 @@ struct GBufferRenderer {
                     encoder.setVertexBuffer(dataStore.matrixPalettes,
                                             offset: scene.paletteReferences[index].lowerBound,
                                             index: kAttributeGBufferVertexShaderBufferMatrixPalettes)
-                    let materialIdx = pieceIndex.materialIdx
-                    if boundMaterialIdx != materialIdx {
-                        let material = scene.materials[materialIdx]
+                    if let material = pieceIndex.material {
                         encoder.setFragmentTextures([material.albedo,
                                                      material.roughness,
                                                      material.normals,
                                                      material.metallic],
                                                     range: texturesRange)
-                        boundMaterialIdx = materialIdx
                     }
                     let indexDraw = pieceIndex.drawDescription
                     encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
@@ -100,15 +96,12 @@ struct GBufferRenderer {
                 encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
                                         index: kAttributeGBufferVertexShaderBufferModelUniforms)
                 for pieceIndex in mesh.pieceDescriptions {
-                    let materialIdx = pieceIndex.materialIdx
-                    if boundMaterialIdx != materialIdx {
-                        let material = scene.materials[materialIdx]
+                    if let material = pieceIndex.material {
                         encoder.setFragmentTextures([material.albedo,
                                                      material.roughness,
                                                      material.normals,
                                                      material.metallic],
                                                     range: texturesRange)
-                        boundMaterialIdx = materialIdx
                     }
                     let indexDraw = pieceIndex.drawDescription
                     encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,

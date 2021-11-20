@@ -9,8 +9,6 @@ public struct SceneDescription<DataType, IndexType, GeometryType, TextureType> {
     public var entityNames = [String]()
     public var entities = FlatTree<Entity>()
     public var skeletonReferences = [Int]()
-    // MARK: - Capacity B
-    public var materials = [PNMaterial]()
     // MARK: - Capacity C
     public var meshes = [Geometry<DataType, IndexType, GeometryType>]()
     var meshBoundingBoxes = [BoundingBox]()

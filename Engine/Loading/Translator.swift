@@ -121,21 +121,14 @@ public class Translator {
             fatalError("Malformed object")
         }
         submeshes.forEach {
-            var materialIdx = Int.nil
             if let material = $0.material,
-               let uploadedMaterial = material.upload(device: device) {
-                materialIdx = scene.materials.firstIndex(where: { $0.name == material.name }) ?? .nil
-                if materialIdx == .nil {
-                    materialIdx = scene.materials.count
-                    scene.materials.append(uploadedMaterial)
-                }
+               let uploadedMaterial = material.upload(device: device),
+               let indexBasedDraw = $0.porcelainIndexBasedDraw {
+                let description = PieceDescription(material: uploadedMaterial,
+                                                   drawDescription: indexBasedDraw)
+                pieceDescriptions.append(description)
             }
-            guard let indexBasedDraw = $0.porcelainIndexBasedDraw else {
-                fatalError("Cannot convert ModelIO type to internal type")
-            }
-            let description = PieceDescription(materialIdx: materialIdx,
-                                               drawDescription: indexBasedDraw)
-            pieceDescriptions.append(description)
+                    
         }
         scene.meshBoundingBoxes.append(BoundingBox.from(bound: bounds))
         scene.meshes.append(RamGeometry(name: mesh.name,
