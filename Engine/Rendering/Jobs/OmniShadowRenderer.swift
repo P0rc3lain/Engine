@@ -86,7 +86,7 @@ struct OmniShadowRenderer {
                             encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
                                                     offset: scene.paletteReferences[index].lowerBound,
                                                     index: kAttributeOmniShadowVertexShaderBufferMatrixPalettes)
-                            let indexDraw = scene.indexDraws[pieceIndex]
+                            let indexDraw = scene.pieceDescriptions[pieceIndex].drawDescription
                             encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
                                                           indexCount: indexDraw.indexCount,
                                                           indexType: indexDraw.indexType,
@@ -113,7 +113,7 @@ struct OmniShadowRenderer {
                         encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
                                                 index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
                         for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
-                            let indexDraw = scene.indexDraws[pieceIndex]
+                            let indexDraw = scene.pieceDescriptions[pieceIndex].drawDescription
                             encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
                                                           indexCount: indexDraw.indexCount,
                                                           indexType: indexDraw.indexType,

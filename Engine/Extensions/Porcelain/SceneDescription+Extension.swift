@@ -19,8 +19,7 @@ extension RamSceneDescription {
         description.meshBoundingBoxes = meshBoundingBoxes
         description.indexDrawReferences = indexDrawReferences
         // MARK: - Capacity D
-        description.indexDrawsMaterials = indexDrawsMaterials
-        description.indexDraws = indexDraws.compactMap { $0.upload(device: device) }
+        description.pieceDescriptions = pieceDescriptions.compactMap { $0.upload(device: device) }
         // MARK: - Capacity E
         description.skeletons = skeletons
         description.paletteReferences = paletteReferences
@@ -48,7 +47,8 @@ extension RamSceneDescription {
         description.activeCameraIdx = activeCameraIdx
         description.sky = sky
         guard description.materials.count == materials.count,
-              description.skyMaps.count == skyMaps.count else {
+              description.skyMaps.count == skyMaps.count,
+              description.pieceDescriptions.count == pieceDescriptions.count else {
             return nil
         }
         return description

@@ -17,8 +17,7 @@ public struct SceneDescription<DataType, IndexType, GeometryType, TextureType> {
     var meshBoundingBoxes = [BoundingBox]()
     public var indexDrawReferences = [Range<Int>]()
     // MARK: - Capacity D
-    public var indexDraws = [IndexBasedDraw<DataType, IndexType, GeometryType>]()
-    public var indexDrawsMaterials = [Int]()
+    public var pieceDescriptions = [PieceDescription<DataType, IndexType, GeometryType>]()
     // MARK: - Capacity E
     var skeletons = [PNSkeleton]()
     public var paletteReferences = [Range<Int>]()

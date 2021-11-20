@@ -44,7 +44,6 @@ public class Translator {
         assert(scene.entityNames.count == scene.entities.count, "There must be the same number of names as objects")
         assert(scene.cameraNames.count == scene.cameras.count, "There must be the same number of names as cameras")
         assert(scene.meshNames.count == scene.meshBuffers.count, "There must be the same number of names as meshes")
-        assert(scene.indexDrawsMaterials.count == scene.indexDraws.count, "There must be the same number of material references as draw references")
         assert(scene.indexDrawReferences.count == scene.meshBuffers.count, "There must be the same number of references as buffers")
         assert(Set(scene.entityNames).count == scene.entityNames.count, "Object names must be unique")
         assert(Set(scene.cameraNames).count == scene.cameraNames.count, "Camera names must be unique")
@@ -145,10 +144,7 @@ public class Translator {
         scene.meshNames.append(mesh.path)
         scene.meshBuffers.append(dataBuffer)
         scene.indexDrawReferences.append(scene.indexDrawReferences.count ..< scene.indexDrawReferences.count + pieceDescriptions.count)
-        for piece in pieceDescriptions {
-            scene.indexDraws.append(piece.drawDescription)
-            scene.indexDrawsMaterials.append(piece.materialIdx)
-        }
+        scene.pieceDescriptions.append(contentsOf: pieceDescriptions)
         let entity = Entity(transform: transform,
                             type: .mesh,
                             referenceIdx: scene.meshBuffers.count - 1)

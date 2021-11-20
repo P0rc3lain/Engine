@@ -63,14 +63,17 @@ struct GBufferRenderer {
                     encoder.setVertexBuffer(dataStore.matrixPalettes,
                                             offset: scene.paletteReferences[index].lowerBound,
                                             index: kAttributeGBufferVertexShaderBufferMatrixPalettes)
-                    let materialIdx = scene.indexDrawsMaterials[pieceIndex]
+                    let materialIdx = scene.pieceDescriptions[pieceIndex].materialIdx
                     if boundMaterialIdx != materialIdx {
                         let material = scene.materials[materialIdx]
-                        encoder.setFragmentTextures([material.albedo, material.roughness, material.normals, material.metallic],
+                        encoder.setFragmentTextures([material.albedo,
+                                                     material.roughness,
+                                                     material.normals,
+                                                     material.metallic],
                                                     range: texturesRange)
                         boundMaterialIdx = materialIdx
                     }
-                    let indexDraw = scene.indexDraws[pieceIndex]
+                    let indexDraw = scene.pieceDescriptions[pieceIndex].drawDescription
                     encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
                                                   indexCount: indexDraw.indexCount,
                                                   indexType: indexDraw.indexType,
@@ -97,14 +100,17 @@ struct GBufferRenderer {
                 encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
                                         index: kAttributeGBufferVertexShaderBufferModelUniforms)
                 for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
-                    let materialIdx = scene.indexDrawsMaterials[pieceIndex]
+                    let materialIdx = scene.pieceDescriptions[pieceIndex].materialIdx
                     if boundMaterialIdx != materialIdx {
                         let material = scene.materials[materialIdx]
-                        encoder.setFragmentTextures([material.albedo, material.roughness, material.normals, material.metallic],
+                        encoder.setFragmentTextures([material.albedo,
+                                                     material.roughness,
+                                                     material.normals,
+                                                     material.metallic],
                                                     range: texturesRange)
                         boundMaterialIdx = materialIdx
                     }
-                    let indexDraw = scene.indexDraws[pieceIndex]
+                    let indexDraw = scene.pieceDescriptions[pieceIndex].drawDescription
                     encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
                                                   indexCount: indexDraw.indexCount,
                                                   indexType: indexDraw.indexType,
