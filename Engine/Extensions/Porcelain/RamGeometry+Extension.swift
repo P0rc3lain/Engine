@@ -11,6 +11,8 @@ extension RamGeometry {
               let buffer = vertexBuffer.upload(device: device) else {
             return nil
         }
-        return GPUGeometry(vertexBuffer: buffer, pieceDescriptions: descriptions)
+        return GPUGeometry(name: name,
+                           vertexBuffer: buffer,
+                           pieceDescriptions: descriptions)
     }
 }

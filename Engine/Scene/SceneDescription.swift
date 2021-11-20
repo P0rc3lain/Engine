@@ -12,7 +12,6 @@ public struct SceneDescription<DataType, IndexType, GeometryType, TextureType> {
     // MARK: - Capacity B
     public var materials = [PNMaterial]()
     // MARK: - Capacity C
-    public var meshNames = [String]()
     public var meshes = [Geometry<DataType, IndexType, GeometryType>]()
     var meshBoundingBoxes = [BoundingBox]()
     // MARK: - Capacity E

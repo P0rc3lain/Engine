@@ -45,7 +45,6 @@ public class Translator {
         assert(scene.cameraNames.count == scene.cameras.count, "There must be the same number of names as cameras")
         assert(Set(scene.entityNames).count == scene.entityNames.count, "Object names must be unique")
         assert(Set(scene.cameraNames).count == scene.cameraNames.count, "Camera names must be unique")
-        assert(Set(scene.meshNames).count == scene.meshNames.count, "Mesh names must be unique")
         assert(scene.entities.count == scene.skeletonReferences.count, "Each object should have reference to a skeleton")
     }
     private func add(animation: MDLAnimationBindComponent,
@@ -139,8 +138,8 @@ public class Translator {
             pieceDescriptions.append(description)
         }
         scene.meshBoundingBoxes.append(BoundingBox.from(bound: bounds))
-        scene.meshNames.append(mesh.path)
-        scene.meshes.append(RamGeometry(vertexBuffer: dataBuffer,
+        scene.meshes.append(RamGeometry(name: mesh.name,
+                                        vertexBuffer: dataBuffer,
                                         pieceDescriptions: pieceDescriptions))
         let entity = Entity(transform: transform,
                             type: .mesh,

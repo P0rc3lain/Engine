@@ -19,7 +19,9 @@ extension GPUGeometry {
                                                 indexType: .uint16,
                                                 primitiveType: .triangle)
         let pieceDescription = PieceDescription(materialIdx: .nil, drawDescription: drawDescription)
-        return GPUGeometry(vertexBuffer: verticesBuffer, pieceDescriptions: [pieceDescription])
+        return GPUGeometry(name: "Cube",
+                           vertexBuffer: verticesBuffer,
+                           pieceDescriptions: [pieceDescription])
     }
     private static var cubeIndices: [UInt16] = [
         0, 3, 2, 2, 1, 0,
@@ -73,7 +75,9 @@ extension GPUGeometry {
                                                 indexType: .uint16,
                                                 primitiveType: .triangle)
         let pieceDescription = PieceDescription(materialIdx: .nil, drawDescription: drawDescription)
-        return GPUGeometry(vertexBuffer: verticesBuffer, pieceDescriptions: [pieceDescription])
+        return GPUGeometry(name: "Plane",
+                           vertexBuffer: verticesBuffer,
+                           pieceDescriptions: [pieceDescription])
     }
     private static var planeVertices: [VertexPUV] = [
         VertexPUV(position: simd_float3(-1, -1, 0),
