@@ -72,9 +72,9 @@ struct OmniShadowRenderer {
                     }
                     let object = scene.entities[index].data
                     if object.type == .mesh && scene.skeletonReferences[index] != .nil {
-                        let mesh = scene.meshBuffers[object.referenceIdx]
-                        encoder.setVertexBuffer(mesh.buffer,
-                                                offset: mesh.offset,
+                        let mesh = scene.meshes[object.referenceIdx]
+                        encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
+                                                offset: mesh.vertexBuffer.offset,
                                                 index: kAttributeOmniShadowVertexShaderBufferStageIn)
                         var mutableIndex = Int32(index)
                         encoder.setVertexBytes(&mutableIndex,
@@ -82,11 +82,11 @@ struct OmniShadowRenderer {
                                                index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
                         encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
                                                 index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
-                        for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
+                        for pieceIndex in mesh.pieceDescriptions {
                             encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
                                                     offset: scene.paletteReferences[index].lowerBound,
                                                     index: kAttributeOmniShadowVertexShaderBufferMatrixPalettes)
-                            let indexDraw = scene.pieceDescriptions[pieceIndex].drawDescription
+                            let indexDraw = pieceIndex.drawDescription
                             encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
                                                           indexCount: indexDraw.indexCount,
                                                           indexType: indexDraw.indexType,
@@ -102,9 +102,9 @@ struct OmniShadowRenderer {
                     }
                     let object = scene.entities[index].data
                     if object.type == .mesh && scene.skeletonReferences[index] == .nil {
-                        let mesh = scene.meshBuffers[object.referenceIdx]
-                        encoder.setVertexBuffer(mesh.buffer,
-                                                offset: mesh.offset,
+                        let mesh = scene.meshes[object.referenceIdx]
+                        encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
+                                                offset: mesh.vertexBuffer.offset,
                                                 index: kAttributeOmniShadowVertexShaderBufferStageIn)
                         var mutableIndex = Int32(index)
                         encoder.setVertexBytes(&mutableIndex,
@@ -112,8 +112,8 @@ struct OmniShadowRenderer {
                                                index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
                         encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
                                                 index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
-                        for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
-                            let indexDraw = scene.pieceDescriptions[pieceIndex].drawDescription
+                        for pieceIndex in mesh.pieceDescriptions {
+                            let indexDraw = pieceIndex.drawDescription
                             encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
                                                           indexCount: indexDraw.indexCount,
                                                           indexType: indexDraw.indexType,

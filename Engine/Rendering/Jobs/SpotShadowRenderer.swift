@@ -55,9 +55,9 @@ struct SpotShadowRenderer {
                 }
                 let object = scene.entities[index].data
                 if object.type == .mesh && scene.skeletonReferences[index] != .nil {
-                    let mesh = scene.meshBuffers[object.referenceIdx]
-                    encoder.setVertexBuffer(mesh.buffer,
-                                            offset: mesh.offset,
+                    let mesh = scene.meshes[object.referenceIdx]
+                    encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
+                                            offset: mesh.vertexBuffer.offset,
                                             index: kAttributeSpotShadowVertexShaderBufferStageIn)
                     var mutableIndex = Int32(index)
                     encoder.setVertexBytes(&mutableIndex,
@@ -65,16 +65,16 @@ struct SpotShadowRenderer {
                                            index: kAttributeSpotShadowVertexShaderBufferObjectIndex)
                     encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
                                             index: kAttributeSpotShadowVertexShaderBufferModelUniforms)
-                    for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
-                            encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
-                                                    offset: scene.paletteReferences[index].lowerBound,
-                                                    index: kAttributeSpotShadowVertexShaderBufferMatrixPalettes)
-                            let indexDraw = scene.pieceDescriptions[pieceIndex].drawDescription
-                            encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
-                                                          indexCount: indexDraw.indexCount,
-                                                          indexType: indexDraw.indexType,
-                                                          indexBuffer: indexDraw.indexBuffer.buffer,
-                                                          indexBufferOffset: indexDraw.indexBuffer.offset)
+                    for pieceIndex in mesh.pieceDescriptions {
+                        encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
+                                                offset: scene.paletteReferences[index].lowerBound,
+                                                index: kAttributeSpotShadowVertexShaderBufferMatrixPalettes)
+                        let indexDraw = pieceIndex.drawDescription
+                        encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
+                                                      indexCount: indexDraw.indexCount,
+                                                      indexType: indexDraw.indexType,
+                                                      indexBuffer: indexDraw.indexBuffer.buffer,
+                                                      indexBufferOffset: indexDraw.indexBuffer.offset)
                     }
                 }
             }
@@ -85,9 +85,9 @@ struct SpotShadowRenderer {
                 }
                 let object = scene.entities[index].data
                 if object.type == .mesh && scene.skeletonReferences[index] == .nil {
-                    let mesh = scene.meshBuffers[object.referenceIdx]
-                    encoder.setVertexBuffer(mesh.buffer,
-                                            offset: mesh.offset,
+                    let mesh = scene.meshes[object.referenceIdx]
+                    encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
+                                            offset: mesh.vertexBuffer.buffer.offset,
                                             index: kAttributeSpotShadowVertexShaderBufferStageIn)
                     var mutableIndex = Int32(index)
                     encoder.setVertexBytes(&mutableIndex,
@@ -95,8 +95,8 @@ struct SpotShadowRenderer {
                                            index: kAttributeSpotShadowVertexShaderBufferObjectIndex)
                     encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
                                             index: kAttributeSpotShadowVertexShaderBufferModelUniforms)
-                    for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
-                        let indexDraw = scene.pieceDescriptions[pieceIndex].drawDescription
+                    for pieceIndex in mesh.pieceDescriptions {
+                        let indexDraw = pieceIndex.drawDescription
                         encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
                                                       indexCount: indexDraw.indexCount,
                                                       indexType: indexDraw.indexType,

@@ -49,9 +49,9 @@ struct GBufferRenderer {
                 if !mask[index] {
                     continue
                 }
-                let mesh = scene.meshBuffers[object.referenceIdx]
-                encoder.setVertexBuffer(mesh.buffer,
-                                        offset: mesh.offset,
+                let mesh = scene.meshes[object.referenceIdx]
+                encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
+                                        offset: mesh.vertexBuffer.offset,
                                         index: kAttributeGBufferVertexShaderBufferStageIn)
                 var mutableIndex = Int32(index)
                 encoder.setVertexBytes(&mutableIndex,
@@ -59,11 +59,11 @@ struct GBufferRenderer {
                                        index: kAttributeGBufferVertexShaderBufferObjectIndex)
                 encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
                                         index: kAttributeGBufferVertexShaderBufferModelUniforms)
-                for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
+                for pieceIndex in mesh.pieceDescriptions {
                     encoder.setVertexBuffer(dataStore.matrixPalettes,
                                             offset: scene.paletteReferences[index].lowerBound,
                                             index: kAttributeGBufferVertexShaderBufferMatrixPalettes)
-                    let materialIdx = scene.pieceDescriptions[pieceIndex].materialIdx
+                    let materialIdx = pieceIndex.materialIdx
                     if boundMaterialIdx != materialIdx {
                         let material = scene.materials[materialIdx]
                         encoder.setFragmentTextures([material.albedo,
@@ -73,7 +73,7 @@ struct GBufferRenderer {
                                                     range: texturesRange)
                         boundMaterialIdx = materialIdx
                     }
-                    let indexDraw = scene.pieceDescriptions[pieceIndex].drawDescription
+                    let indexDraw = pieceIndex.drawDescription
                     encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
                                                   indexCount: indexDraw.indexCount,
                                                   indexType: indexDraw.indexType,
@@ -89,9 +89,9 @@ struct GBufferRenderer {
                 if !mask[index] {
                     continue
                 }
-                let mesh = scene.meshBuffers[object.referenceIdx]
-                encoder.setVertexBuffer(mesh.buffer,
-                                        offset: mesh.offset,
+                let mesh = scene.meshes[object.referenceIdx]
+                encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
+                                        offset: mesh.vertexBuffer.offset,
                                         index: kAttributeGBufferVertexShaderBufferStageIn)
                 var mutableIndex = Int32(index)
                 encoder.setVertexBytes(&mutableIndex,
@@ -99,8 +99,8 @@ struct GBufferRenderer {
                                        index: kAttributeGBufferVertexShaderBufferObjectIndex)
                 encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
                                         index: kAttributeGBufferVertexShaderBufferModelUniforms)
-                for pieceIndex in scene.indexDrawReferences[object.referenceIdx].indices {
-                    let materialIdx = scene.pieceDescriptions[pieceIndex].materialIdx
+                for pieceIndex in mesh.pieceDescriptions {
+                    let materialIdx = pieceIndex.materialIdx
                     if boundMaterialIdx != materialIdx {
                         let material = scene.materials[materialIdx]
                         encoder.setFragmentTextures([material.albedo,
@@ -110,7 +110,7 @@ struct GBufferRenderer {
                                                     range: texturesRange)
                         boundMaterialIdx = materialIdx
                     }
-                    let indexDraw = scene.pieceDescriptions[pieceIndex].drawDescription
+                    let indexDraw = pieceIndex.drawDescription
                     encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
                                                   indexCount: indexDraw.indexCount,
                                                   indexType: indexDraw.indexType,

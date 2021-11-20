@@ -13,11 +13,8 @@ public struct SceneDescription<DataType, IndexType, GeometryType, TextureType> {
     public var materials = [PNMaterial]()
     // MARK: - Capacity C
     public var meshNames = [String]()
-    public var meshBuffers = [DataBuffer<DataType>]()
+    public var meshes = [Geometry<DataType, IndexType, GeometryType>]()
     var meshBoundingBoxes = [BoundingBox]()
-    public var indexDrawReferences = [Range<Int>]()
-    // MARK: - Capacity D
-    public var pieceDescriptions = [PieceDescription<DataType, IndexType, GeometryType>]()
     // MARK: - Capacity E
     var skeletons = [PNSkeleton]()
     public var paletteReferences = [Range<Int>]()
