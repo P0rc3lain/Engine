@@ -9,7 +9,7 @@ extension EnvironmentRenderer {
         guard let library = device.makePorcelainLibrary(),
               let environmentPipelineState = device.makeRenderPipelineStateEnvironmentRenderer(library: library),
               let depthStencilState = device.makeDepthStencilStateEnvironmentRenderer(),
-              let cube = Geometry.cube(device: device) else {
+              let cube = PNMesh.cube(device: device) else {
             return nil
         }
         return EnvironmentRenderer(pipelineState: environmentPipelineState,

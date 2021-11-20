@@ -4,14 +4,14 @@
 
 import Metal
 
-extension RamIndexBasedDraw {
-    func upload(device: MTLDevice) -> GPUIndexBasedDraw? {
+extension PNRamSubmesh {
+    func upload(device: MTLDevice) -> PNGPUSubmesh? {
         guard let buffer = indexBuffer.upload(device: device) else {
             return nil
         }
-        return GPUIndexBasedDraw(indexBuffer: buffer,
-                                 indexCount: indexCount,
-                                 indexType: indexType.metal,
-                                 primitiveType: primitiveType.metal)
+        return PNGPUSubmesh(indexBuffer: buffer,
+                          indexCount: indexCount,
+                          indexType: indexType.metal,
+                          primitiveType: primitiveType.metal)
     }
 }

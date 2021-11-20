@@ -5,16 +5,16 @@
 import ModelIO
 
 extension MDLSubmesh {
-    var porcelainIndexBasedDraw: RamIndexBasedDraw? {
-        guard let primitiveType = PrimitiveType(modelIO: geometryType),
-              let indexBitDepth = IndexBitDepth(modelIO: indexType) else {
+    var porcelainSubmesh: PNRamSubmesh? {
+        guard let primitiveType = PNPrimitiveType(modelIO: geometryType),
+              let indexBitDepth = PNIndexBitDepth(modelIO: indexType) else {
             return nil
         }
         let rawBuffer = indexBuffer.rawData
-        let dataBuffer = DataBuffer(buffer: rawBuffer, length: rawBuffer.count)
-        return IndexBasedDraw(indexBuffer: dataBuffer,
-                              indexCount: indexCount,
-                              indexType: indexBitDepth,
-                              primitiveType: primitiveType)
+        let dataBuffer = PNDataBuffer(buffer: rawBuffer, length: rawBuffer.count)
+        return PNRamSubmesh(indexBuffer: dataBuffer,
+                          indexCount: indexCount,
+                          indexType: indexBitDepth,
+                          primitiveType: primitiveType)
     }
 }

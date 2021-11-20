@@ -10,14 +10,14 @@ public struct SceneDescription<DataType, IndexType, GeometryType, TextureType> {
     public var entities = FlatTree<Entity>()
     public var skeletonReferences = [Int]()
     // MARK: - Capacity C
-    public var meshes = [Geometry<DataType, IndexType, GeometryType>]()
+    public var meshes = [PNMesh<DataType, IndexType, GeometryType>]()
     var meshBoundingBoxes = [BoundingBox]()
     // MARK: - Capacity E
     var skeletons = [PNSkeleton]()
     public var paletteReferences = [Range<Int>]()
     public var animationReferences = [Range<Int>]()
     // MARK: - Capacity F
-    public var skeletalAnimations = [AnimatedSkeleton]()
+    public var skeletalAnimations = [PNAnimatedSkeleton]()
     // MARK: - Capacity G
     public var cameraNames = [String]()
     public var cameras = [Camera]()

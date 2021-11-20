@@ -4,15 +4,15 @@
 
 import Metal
 
-extension RamGeometry {
-    func upload(device: MTLDevice) -> GPUGeometry? {
+extension PNRamMesh {
+    func upload(device: MTLDevice) -> PNGPUMesh? {
         let descriptions = pieceDescriptions.compactMap { $0.upload(device: device) }
         guard descriptions.count == pieceDescriptions.count,
               let buffer = vertexBuffer.upload(device: device) else {
             return nil
         }
-        return GPUGeometry(name: name,
-                           vertexBuffer: buffer,
-                           pieceDescriptions: descriptions)
+        return PNGPUMesh(name: name,
+                         vertexBuffer: buffer,
+                         pieceDescriptions: descriptions)
     }
 }

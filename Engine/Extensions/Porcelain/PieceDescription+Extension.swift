@@ -4,12 +4,12 @@
 
 import Metal
 
-extension RamPieceDescription {
-    func upload(device: MTLDevice) -> GPUPieceDescription? {
+extension PNRamPieceDescription {
+    func upload(device: MTLDevice) -> PNGPUPieceDescription? {
         guard let drawDescription = drawDescription.upload(device: device) else {
             return nil
         }
-        return GPUPieceDescription(material: material,
-                                   drawDescription: drawDescription)
+        return PNGPUPieceDescription(material: material,
+                                     drawDescription: drawDescription)
     }
 }

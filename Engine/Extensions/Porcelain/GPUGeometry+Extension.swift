@@ -6,23 +6,23 @@ import Metal
 import MetalBinding
 import ModelIO
 
-extension GPUGeometry {
-    static func cube(device: MTLDevice) -> GPUGeometry? {
+extension PNGPUMesh {
+    static func cube(device: MTLDevice) -> PNGPUMesh? {
         guard let vertices = device.makeBuffer(array: cubeVertices),
               let indices = device.makeBuffer(array: cubeIndices) else {
             return nil
         }
-        let verticesBuffer = GPUDataBuffer(buffer: vertices, length: vertices.length)
-        let indicesBuffer = GPUDataBuffer(buffer: indices, length: indices.length)
-        let drawDescription = GPUIndexBasedDraw(indexBuffer: indicesBuffer,
-                                                indexCount: indices.length,
-                                                indexType: .uint16,
-                                                primitiveType: .triangle)
-        let pieceDescription = PieceDescription(material: nil,
-                                                drawDescription: drawDescription)
-        return GPUGeometry(name: "Cube",
-                           vertexBuffer: verticesBuffer,
-                           pieceDescriptions: [pieceDescription])
+        let verticesBuffer = PNGPUDataBuffer(buffer: vertices, length: vertices.length)
+        let indicesBuffer = PNGPUDataBuffer(buffer: indices, length: indices.length)
+        let drawDescription = PNGPUSubmesh(indexBuffer: indicesBuffer,
+                                         indexCount: indices.length,
+                                         indexType: .uint16,
+                                         primitiveType: .triangle)
+        let pieceDescription = PNPieceDescription(material: nil,
+                                                  drawDescription: drawDescription)
+        return PNGPUMesh(name: "Cube",
+                         vertexBuffer: verticesBuffer,
+                         pieceDescriptions: [pieceDescription])
     }
     private static var cubeIndices: [UInt16] = [
         0, 3, 2, 2, 1, 0,
@@ -64,22 +64,22 @@ extension GPUGeometry {
         VertexP(0.5, 0.5, -0.5),
         VertexP(0.5, 0.5, 0.5)
     ]
-    static func screenSpacePlane(device: MTLDevice) -> GPUGeometry? {
+    static func screenSpacePlane(device: MTLDevice) -> PNGPUMesh? {
         guard let indices = device.makeBuffer(array: planeIndices),
               let vertices = device.makeBuffer(array: planeVertices) else {
             return nil
         }
-        let indicesBuffer = GPUDataBuffer(buffer: indices, length: indices.length, offset: indices.offset)
-        let verticesBuffer = GPUDataBuffer(buffer: vertices, length: vertices.length, offset: vertices.offset)
-        let drawDescription = GPUIndexBasedDraw(indexBuffer: indicesBuffer,
-                                                indexCount: indicesBuffer.length / MemoryLayout<UInt16>.stride,
-                                                indexType: .uint16,
-                                                primitiveType: .triangle)
-        let pieceDescription = PieceDescription(material: nil,
-                                                drawDescription: drawDescription)
-        return GPUGeometry(name: "Plane",
-                           vertexBuffer: verticesBuffer,
-                           pieceDescriptions: [pieceDescription])
+        let indicesBuffer = PNGPUDataBuffer(buffer: indices, length: indices.length, offset: indices.offset)
+        let verticesBuffer = PNGPUDataBuffer(buffer: vertices, length: vertices.length, offset: vertices.offset)
+        let drawDescription = PNGPUSubmesh(indexBuffer: indicesBuffer,
+                                         indexCount: indicesBuffer.length / MemoryLayout<UInt16>.stride,
+                                         indexType: .uint16,
+                                         primitiveType: .triangle)
+        let pieceDescription = PNPieceDescription(material: nil,
+                                                  drawDescription: drawDescription)
+        return PNGPUMesh(name: "Plane",
+                         vertexBuffer: verticesBuffer,
+                         pieceDescriptions: [pieceDescription])
     }
     private static var planeVertices: [VertexPUV] = [
         VertexPUV(position: simd_float3(-1, -1, 0),

@@ -54,9 +54,9 @@ public class Translator {
         }
         if let jointAnimation = animation.jointAnimation as? MDLPackedJointAnimation {
             assert(skeleton.jointPaths == jointAnimation.jointPaths, "Skeleton and animation must describe exactu number of joints")
-            scene.skeletalAnimations.append(AnimatedSkeleton(translation: PNAnySampleProvider(jointAnimation.translations.porcelain),
-                                                             rotation: PNAnySampleProvider(jointAnimation.rotations.porcelain),
-                                                             scale: PNAnySampleProvider(jointAnimation.scales.porcelain)))
+            scene.skeletalAnimations.append(PNAnimatedSkeleton(translation: PNAnySampleProvider(jointAnimation.translations.porcelain),
+                                                               rotation: PNAnySampleProvider(jointAnimation.rotations.porcelain),
+                                                               scale: PNAnySampleProvider(jointAnimation.scales.porcelain)))
             // TODO use geometry bind transform
             let skeleton = PNISkeleton(bindTransforms: skeleton.jointBindTransforms.float4x4Array,
                                        parentIndices: jointAnimation.jointPaths.map { parentIndex(jointPaths: jointAnimation.jointPaths, jointPath: $0) })
@@ -68,7 +68,7 @@ public class Translator {
         }
     }
     private func add(camera: MDLCamera,
-                     transform: AnimatedCoordinateSpace,
+                     transform: PNAnimatedCoordinateSpace,
                      parentIdx: Int,
                      scene: inout RamSceneDescription) {
         scene.cameraNames.append(camera.path)
@@ -109,31 +109,31 @@ public class Translator {
         return Bound(min: [minX, minY, minZ], max: [maxX, maxY, maxZ])
     }
     private func add(mesh: MDLMesh,
-                     transform: AnimatedCoordinateSpace,
+                     transform: PNAnimatedCoordinateSpace,
                      parentIdx: Int,
                      scene: inout RamSceneDescription) {
         assert(mesh.vertexBuffers.count == 1, "Only object that have a single buffer assigned are supported")
         var buffer = mesh.vertexBuffers[0].rawData
         let bounds = getModelBounds(buffer: &buffer)
-        let dataBuffer = DataBuffer(buffer: buffer, length: buffer.count)
-        var pieceDescriptions = [RamPieceDescription]()
+        let dataBuffer = PNDataBuffer(buffer: buffer, length: buffer.count)
+        var pieceDescriptions = [PNRamPieceDescription]()
         guard let submeshes = mesh.submeshes as? [MDLSubmesh] else {
             fatalError("Malformed object")
         }
         submeshes.forEach {
             if let material = $0.material,
                let uploadedMaterial = material.upload(device: device),
-               let indexBasedDraw = $0.porcelainIndexBasedDraw {
-                let description = PieceDescription(material: uploadedMaterial,
-                                                   drawDescription: indexBasedDraw)
+               let indexBasedDraw = $0.porcelainSubmesh {
+                let description = PNPieceDescription(material: uploadedMaterial,
+                                                     drawDescription: indexBasedDraw)
                 pieceDescriptions.append(description)
             }
                     
         }
         scene.meshBoundingBoxes.append(BoundingBox.from(bound: bounds))
-        scene.meshes.append(RamGeometry(name: mesh.name,
-                                        vertexBuffer: dataBuffer,
-                                        pieceDescriptions: pieceDescriptions))
+        scene.meshes.append(PNRamMesh(name: mesh.name,
+                                      vertexBuffer: dataBuffer,
+                                      pieceDescriptions: pieceDescriptions))
         let entity = Entity(transform: transform,
                             type: .mesh,
                             referenceIdx: scene.meshes.count - 1)

@@ -11,13 +11,13 @@ struct OmniRenderer {
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport
     private let inputTextures: [MTLTexture]
-    private let plane: GPUGeometry
+    private let plane: PNGPUMesh
     init?(pipelineState: MTLRenderPipelineState,
           inputTextures: [MTLTexture],
           device: MTLDevice,
           depthStencilState: MTLDepthStencilState,
           drawableSize: CGSize) {
-        guard let plane = GPUGeometry.screenSpacePlane(device: device) else {
+        guard let plane = PNGPUMesh.screenSpacePlane(device: device) else {
             return nil
         }
         self.pipelineState = pipelineState

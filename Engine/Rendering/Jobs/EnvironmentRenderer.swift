@@ -10,11 +10,11 @@ struct EnvironmentRenderer {
     private let pipelineState: MTLRenderPipelineState
     private let depthStentilState: MTLDepthStencilState
     private let viewPort: MTLViewport
-    private let cube: GPUGeometry
+    private let cube: PNGPUMesh
     init(pipelineState: MTLRenderPipelineState,
          depthStentilState: MTLDepthStencilState,
          drawableSize: CGSize,
-         cube: GPUGeometry) {
+         cube: PNGPUMesh) {
         self.pipelineState = pipelineState
         self.depthStentilState = depthStentilState
         self.cube = cube

@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-public struct DataBuffer<DataType> {
+public struct PNDataBuffer<DataType> {
     public let buffer: DataType
     public let length: Int
     public let offset: Int

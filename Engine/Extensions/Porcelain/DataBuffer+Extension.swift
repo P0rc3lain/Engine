@@ -4,11 +4,11 @@
 
 import Metal
 
-extension RamDataBuffer {
-    func upload(device: MTLDevice) -> GPUDataBuffer? {
+extension PNRamDataBuffer {
+    func upload(device: MTLDevice) -> PNGPUDataBuffer? {
         guard let deviceBuffer = device.makeBuffer(data: buffer) else {
             return nil
         }
-        return GPUDataBuffer(buffer: deviceBuffer, length: length, offset: offset)
+        return PNGPUDataBuffer(buffer: deviceBuffer, length: length, offset: offset)
     }
 }

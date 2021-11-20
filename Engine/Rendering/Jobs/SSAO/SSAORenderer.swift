@@ -9,7 +9,7 @@ import simd
 struct SSAORenderer {
     private let pipelineState: MTLRenderPipelineState
     private let viewPort: MTLViewport
-    private let plane: GPUGeometry
+    private let plane: PNGPUMesh
     private let prTexture: MTLTexture
     private let nmTexture: MTLTexture
     private var kernelBuffer: PNAnyStaticBuffer<simd_float3>
@@ -25,7 +25,7 @@ struct SSAORenderer {
           uniforms: PNAnyStaticBuffer<SSAOUniforms>,
           maxNoiseCount: Int,
           maxSamplesCount: Int) {
-        guard let plane = GPUGeometry.screenSpacePlane(device: device) else {
+        guard let plane = PNGPUMesh.screenSpacePlane(device: device) else {
             return nil
         }
         self.pipelineState = pipelineState

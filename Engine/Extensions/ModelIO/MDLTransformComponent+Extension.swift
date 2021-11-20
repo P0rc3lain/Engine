@@ -5,7 +5,7 @@
 import ModelIO
 
 extension MDLTransformComponent {
-    var decompose: AnimatedCoordinateSpace {
+    var decompose: PNAnimatedCoordinateSpace {
         if !keyTimes.isEmpty {
             let times = keyTimes.map { number in TimeInterval(truncating: number) }
             var translations = [simd_float3]()
@@ -20,11 +20,11 @@ extension MDLTransformComponent {
             let scaleAnimation = AnimatedFloat3(keyFrames: scales, times: times, maximumTime: maximumTime)
             let translationAnimation = AnimatedFloat3(keyFrames: translations, times: times, maximumTime: maximumTime)
             let orientationAnimation = AnimatedQuatf(keyFrames: orientations, times: times, maximumTime: maximumTime)
-            return AnimatedCoordinateSpace(translation: PNAnySampleProvider(translationAnimation),
-                                           rotation: PNAnySampleProvider(orientationAnimation),
-                                           scale: PNAnySampleProvider(scaleAnimation))
+            return PNAnimatedCoordinateSpace(translation: PNAnySampleProvider(translationAnimation),
+                                             rotation: PNAnySampleProvider(orientationAnimation),
+                                             scale: PNAnySampleProvider(scaleAnimation))
         } else {
-            return AnimatedCoordinateSpace.static(from: matrix)
+            return PNAnimatedCoordinateSpace.static(from: matrix)
         }
     }
 }
