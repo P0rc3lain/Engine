@@ -3,10 +3,10 @@
 //
 
 public struct Entity {
-    public var transform: TransformAnimation
+    public var transform: AnimatedCoordinateSpace
     public let type: EntityType
     public let referenceIdx: Int
-    public init(transform: TransformAnimation, type: EntityType, referenceIdx: Int) {
+    public init(transform: AnimatedCoordinateSpace, type: EntityType, referenceIdx: Int) {
         self.transform = transform
         self.type = type
         self.referenceIdx = referenceIdx

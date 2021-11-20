@@ -47,7 +47,6 @@
 		561667112719E2CD000063B1 /* CGSize+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666992719E2CC000063B1 /* CGSize+Extension.swift */; };
 		561667122719E2CD000063B1 /* Float+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5616669A2719E2CC000063B1 /* Float+Extension.swift */; };
 		561667142719E2CD000063B1 /* MDLAsset+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5616669C2719E2CC000063B1 /* MDLAsset+Extension.swift */; };
-		561667162719E2CD000063B1 /* TransformAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5616669F2719E2CC000063B1 /* TransformAnimation.swift */; };
 		561667182719E2CD000063B1 /* PNISkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666A12719E2CC000063B1 /* PNISkeleton.swift */; };
 		5616671B2719E2CD000063B1 /* OmniRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666A52719E2CC000063B1 /* OmniRenderer+Extension.swift */; };
 		5616671C2719E2CD000063B1 /* MTLStencilDescriptor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666A62719E2CC000063B1 /* MTLStencilDescriptor+Extension.swift */; };
@@ -107,6 +106,7 @@
 		5629FBE727491DDB005476AF /* PNAnySampleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBE627491DDB005476AF /* PNAnySampleProvider.swift */; };
 		5629FBEA2749201F005476AF /* PNInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBE92749201F005476AF /* PNInterpolator.swift */; };
 		5629FBEC2749209C005476AF /* PNIInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBEB2749209C005476AF /* PNIInterpolator.swift */; };
+		5629FBEE27492533005476AF /* AnimatedCoordinateSpace+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBED27492533005476AF /* AnimatedCoordinateSpace+Extension.swift */; };
 		562B8F43272599FF00363CE8 /* MTLRenderCommandEncoder+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562B8F42272599FF00363CE8 /* MTLRenderCommandEncoder+Extension.swift */; };
 		563575F42728486A00CE4988 /* PNAnimationSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563575F32728486A00CE4988 /* PNAnimationSample.swift */; };
 		563BFC81272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563BFC80272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift */; };
@@ -242,7 +242,6 @@
 		561666992719E2CC000063B1 /* CGSize+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGSize+Extension.swift"; sourceTree = "<group>"; };
 		5616669A2719E2CC000063B1 /* Float+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float+Extension.swift"; sourceTree = "<group>"; };
 		5616669C2719E2CC000063B1 /* MDLAsset+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MDLAsset+Extension.swift"; sourceTree = "<group>"; };
-		5616669F2719E2CC000063B1 /* TransformAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformAnimation.swift; sourceTree = "<group>"; };
 		561666A12719E2CC000063B1 /* PNISkeleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNISkeleton.swift; sourceTree = "<group>"; };
 		561666A52719E2CC000063B1 /* OmniRenderer+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OmniRenderer+Extension.swift"; sourceTree = "<group>"; };
 		561666A62719E2CC000063B1 /* MTLStencilDescriptor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MTLStencilDescriptor+Extension.swift"; sourceTree = "<group>"; };
@@ -305,6 +304,7 @@
 		5629FBE627491DDB005476AF /* PNAnySampleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnySampleProvider.swift; sourceTree = "<group>"; };
 		5629FBE92749201F005476AF /* PNInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNInterpolator.swift; sourceTree = "<group>"; };
 		5629FBEB2749209C005476AF /* PNIInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIInterpolator.swift; sourceTree = "<group>"; };
+		5629FBED27492533005476AF /* AnimatedCoordinateSpace+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimatedCoordinateSpace+Extension.swift"; sourceTree = "<group>"; };
 		562B8F42272599FF00363CE8 /* MTLRenderCommandEncoder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLRenderCommandEncoder+Extension.swift"; sourceTree = "<group>"; };
 		563575F32728486A00CE4988 /* PNAnimationSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnimationSample.swift; sourceTree = "<group>"; };
 		563BFC80272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MDLObjectContainerComponent+Extension.swift"; sourceTree = "<group>"; };
@@ -526,7 +526,6 @@
 			isa = PBXGroup;
 			children = (
 				568807442747EEB300C95F55 /* Skeleton */,
-				5616669F2719E2CC000063B1 /* TransformAnimation.swift */,
 				56E8209C27284664002D58C3 /* Position.swift */,
 			);
 			path = Position;
@@ -1056,6 +1055,7 @@
 				568EBB39273F0B88007C7D35 /* SSAOUniforms+Extension.swift */,
 				56165BEF2744401B0025D58B /* ModelUniforms+Extension.swift */,
 				56165BF1274441D90025D58B /* AmbientLight+Extension.swift */,
+				5629FBED27492533005476AF /* AnimatedCoordinateSpace+Extension.swift */,
 			);
 			path = Porcelain;
 			sourceTree = "<group>";
@@ -1204,6 +1204,7 @@
 				563BFC8527285F100003EDB7 /* MTLBuffer+Extension.swift in Sources */,
 				5629FBE127491ABF005476AF /* PNAnyAnimatedValue.swift in Sources */,
 				561666FD2719E2CD000063B1 /* MTLTextureDescriptor+Extension.swift in Sources */,
+				5629FBEE27492533005476AF /* AnimatedCoordinateSpace+Extension.swift in Sources */,
 				561667032719E2CD000063B1 /* SceneDescription+Extension.swift in Sources */,
 				561666FB2719E2CD000063B1 /* MDLTransformComponent+Extension.swift in Sources */,
 				5616673A2719E2CD000063B1 /* PrimitiveType.swift in Sources */,
@@ -1281,7 +1282,6 @@
 				569D9244273E81DD004FDFAC /* VertexP+Extension.swift in Sources */,
 				56407B7B27204EEB00440CAC /* Array+Extension.swift in Sources */,
 				56A3728E273862300079A93D /* MTLOrigin+Extension.swift in Sources */,
-				561667162719E2CD000063B1 /* TransformAnimation.swift in Sources */,
 				566020E02734314C000F4CA7 /* SSAORenderer.swift in Sources */,
 				5616671F2719E2CD000063B1 /* MTLRenderPipelineDescriptor+Extension.swift in Sources */,
 				5670EC122736A1BE00375194 /* Stage.swift in Sources */,

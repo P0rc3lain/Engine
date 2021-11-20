@@ -68,7 +68,7 @@ public class Translator {
         }
     }
     private func add(camera: MDLCamera,
-                     transform: TransformAnimation,
+                     transform: AnimatedCoordinateSpace,
                      parentIdx: Int,
                      scene: inout RamSceneDescription) {
         scene.cameraNames.append(camera.path)
@@ -109,7 +109,7 @@ public class Translator {
         return Bound(min: [minX, minY, minZ], max: [maxX, maxY, maxZ])
     }
     private func add(mesh: MDLMesh,
-                     transform: TransformAnimation,
+                     transform: AnimatedCoordinateSpace,
                      parentIdx: Int,
                      scene: inout RamSceneDescription) {
         assert(mesh.vertexBuffers.count == 1, "Only object that have a single buffer assigned are supported")
