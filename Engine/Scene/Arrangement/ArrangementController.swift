@@ -51,7 +51,7 @@ struct ArrangementController {
         var uniforms = [ModelUniforms](minimalCapacity: tree.count)
         for index in tree.indices {
             let parentIdx = tree[index].parentIdx
-            let finalTransform = tree[index].data.transform.transformation(at: Date().timeIntervalSince1970)
+            let finalTransform = tree[index].data.transform.transformation(at: Date().timeIntervalSince1970, interpolator: PNIInterpolator())
             let transform = parentIdx != .nil ? uniforms[parentIdx].modelMatrix * finalTransform : finalTransform
             uniforms.append(ModelUniforms(modelMatrix: transform,
                                           modelMatrixInverse: transform.inverse))

@@ -3,12 +3,12 @@
 //
 
 public struct AnimatedTransform<TranslationType, RotationType, ScaleType> {
-    public var translation: AnimatedValue<TranslationType>
-    public var rotation: AnimatedValue<RotationType>
-    public var scale: AnimatedValue<ScaleType>
-    public init(translation: AnimatedValue<TranslationType>,
-                rotation: AnimatedValue<RotationType>,
-                scale: AnimatedValue<ScaleType>) {
+    public var translation: PNAnySampleProvider<TranslationType>
+    public var rotation: PNAnySampleProvider<RotationType>
+    public var scale: PNAnySampleProvider<ScaleType>
+    public init(translation: PNAnySampleProvider<TranslationType>,
+                rotation: PNAnySampleProvider<RotationType>,
+                scale: PNAnySampleProvider<ScaleType>) {
         self.translation = translation
         self.rotation = rotation
         self.scale = scale

@@ -72,7 +72,7 @@ struct RenderingCoordinator {
             let animationReference = scene.animationReferences[skeletonIdx]
             let date = Date().timeIntervalSince1970
             let animation = scene.skeletalAnimations[animationReference.lowerBound]
-            let transformations = animation.localTransformation(at: date)
+            let transformations = animation.localTransformation(at: date, interpolator: PNIInterpolator())
             return skeleton.calculatePose(animationPose: transformations)
         }
     }

@@ -14,10 +14,10 @@ public struct TransformAnimation {
         self.rotation = rotation
         self.scale = scale
     }
-    func transformation(at time: TimeInterval) -> simd_float4x4 {
-        simd_float4x4.compose(translation: translation.interpolated(at: time),
-                              rotation: rotation.interpolated(at: time),
-                              scale: scale.interpolated(at: time))
+    func transformation(at time: TimeInterval, interpolator: PNIInterpolator) -> simd_float4x4 {
+        simd_float4x4.compose(translation: interpolator.interpolated(sample: translation.sample(at: time)),
+                              rotation: interpolator.interpolated(sample: rotation.sample(at: time)),
+                              scale: interpolator.interpolated(sample: scale.sample(at: time)))
     }
     static public var `static`: TransformAnimation {
         TransformAnimation(translation: .defaultTranslation,

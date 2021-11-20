@@ -54,9 +54,9 @@ public class Translator {
         }
         if let jointAnimation = animation.jointAnimation as? MDLPackedJointAnimation {
             assert(skeleton.jointPaths == jointAnimation.jointPaths, "Skeleton and animation must describe exactu number of joints")
-            scene.skeletalAnimations.append(AnimatedSkeleton(translation: jointAnimation.translations.porcelain,
-                                                             rotation: jointAnimation.rotations.porcelain,
-                                                             scale: jointAnimation.scales.porcelain))
+            scene.skeletalAnimations.append(AnimatedSkeleton(translation: PNAnySampleProvider(jointAnimation.translations.porcelain),
+                                                             rotation: PNAnySampleProvider(jointAnimation.rotations.porcelain),
+                                                             scale: PNAnySampleProvider(jointAnimation.scales.porcelain)))
             // TODO use geometry bind transform
             let skeleton = PNISkeleton(bindTransforms: skeleton.jointBindTransforms.float4x4Array,
                                        parentIndices: jointAnimation.jointPaths.map { parentIndex(jointPaths: jointAnimation.jointPaths, jointPath: $0) })

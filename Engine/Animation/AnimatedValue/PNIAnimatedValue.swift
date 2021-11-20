@@ -4,13 +4,10 @@
 
 import Foundation
 
-public struct AnimatedValue<T> {
-    private var keyFrames: [T]
-    private let times: [TimeInterval]
-    private let maximumTime: TimeInterval
-    var keyTimes: [TimeInterval] {
-        times
-    }
+public struct PNIAnimatedValue<T>: PNAnimatedValue {
+    public var keyFrames: [T]
+    public let times: [TimeInterval]
+    public let maximumTime: TimeInterval
     public init(keyFrames: [T], times: [TimeInterval], maximumTime: TimeInterval) {
         assert(times.count == keyFrames.count)
         assert(times.sorted() == times)
@@ -21,11 +18,11 @@ public struct AnimatedValue<T> {
         self.times = times
         self.maximumTime = maximumTime
     }
-    public func sample(at time: TimeInterval) -> AnimationSample<T> {
+    public func sample(at time: TimeInterval) -> PNAnimationSample<T> {
         guard times.count > 1 else {
-            return AnimationSample(currentKeyFrame: keyFrames[0],
-                                   upcomingKeyFrame: keyFrames[0],
-                                   ratio: 0.5)
+            return PNAnimationSample(currentKeyFrame: keyFrames[0],
+                                     upcomingKeyFrame: keyFrames[0],
+                                     ratio: 0.5)
         }
         let clipped = time.truncatingRemainder(dividingBy: maximumTime)
         let next = times.firstIndex { clipped < $0 } ?? 0
@@ -33,12 +30,12 @@ public struct AnimatedValue<T> {
         let timeRange = next > 0 ? times[next] - times[current] : maximumTime - times[current] + times[next]
         let timePosition = next > 0 ? clipped - times[current] : (clipped > times[current] ? clipped - times[current] : maximumTime - times[current] + clipped)
         let ratio = (timePosition / timeRange).clamp(min: 0.0, max: 1.0)
-        return AnimationSample(currentKeyFrame: keyFrames[current],
-                               upcomingKeyFrame: keyFrames[next],
-                               ratio: Float(ratio))
+        return PNAnimationSample(currentKeyFrame: keyFrames[current],
+                                 upcomingKeyFrame: keyFrames[next],
+                                 ratio: Float(ratio))
     }
-    static public func `static`(from value: T) -> AnimatedValue<T> {
-        AnimatedValue<T>(keyFrames: [value], times: [0], maximumTime: 1)
+    static public func `static`(from value: T) -> PNIAnimatedValue<T> {
+        PNIAnimatedValue<T>(keyFrames: [value], times: [0], maximumTime: 1)
     }
     public mutating func map(transform: (T) -> T) {
         keyFrames.inplaceMap(transform: transform)
