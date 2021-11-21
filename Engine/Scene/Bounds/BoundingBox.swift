@@ -4,9 +4,9 @@
 
 import simd
 
-struct BoundingBox: Equatable {
-    let cornersLower: simd_float4x4
-    let cornersUpper: simd_float4x4
+public struct BoundingBox: Equatable {
+    private let cornersLower: simd_float4x4
+    private let cornersUpper: simd_float4x4
     var corners: [simd_float3] {
         [cornersLower.columns.0.xyz,
          cornersLower.columns.1.xyz,
@@ -35,6 +35,10 @@ struct BoundingBox: Equatable {
     }
     func merge(_ boundingBox: BoundingBox) -> BoundingBox {
         BoundingBox.from(bound: bound.merge(boundingBox.bound))
+    }
+    static func * (lhs: simd_float4x4, rhs: BoundingBox) -> BoundingBox {
+        BoundingBox(cornersLower: lhs * rhs.cornersLower,
+                    cornersUpper: lhs * rhs.cornersUpper)
     }
     static func from(bound: Bound) -> BoundingBox {
         BoundingBox(cornersLower: simd_float4x4(simd_float4(bound.min.x, bound.min.y, bound.min.z, 1),

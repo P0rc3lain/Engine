@@ -12,6 +12,7 @@ extension PNRamMesh {
             return nil
         }
         return PNGPUMesh(name: name,
+                         boundingBox: boundingBox,
                          vertexBuffer: buffer,
                          pieceDescriptions: descriptions)
     }

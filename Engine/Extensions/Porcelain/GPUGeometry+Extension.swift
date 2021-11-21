@@ -21,6 +21,8 @@ extension PNGPUMesh {
         let pieceDescription = PNPieceDescription(material: nil,
                                                   drawDescription: drawDescription)
         return PNGPUMesh(name: "Cube",
+                         boundingBox: BoundingBox.from(bound: Bound(min: [-0.5, -0.5, -0.5],
+                                                                    max: [0.5, 0.5, 0.5])),
                          vertexBuffer: verticesBuffer,
                          pieceDescriptions: [pieceDescription])
     }
@@ -78,6 +80,7 @@ extension PNGPUMesh {
         let pieceDescription = PNPieceDescription(material: nil,
                                                   drawDescription: drawDescription)
         return PNGPUMesh(name: "Plane",
+                         boundingBox: BoundingBox.from(bound: Bound(min: [-1, -1, 0], max: [1, 1, 0])),
                          vertexBuffer: verticesBuffer,
                          pieceDescriptions: [pieceDescription])
     }

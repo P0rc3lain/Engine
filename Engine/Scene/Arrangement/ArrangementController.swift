@@ -17,7 +17,7 @@ struct ArrangementController {
             let transform = uniforms[index].modelMatrix
             switch scene.entities[index].data.type {
             case .mesh:
-                boundingBoxes.insert((transform * scene.meshBoundingBoxes[scene.entities[index].data.referenceIdx]).aabb)
+                boundingBoxes.insert((transform * scene.meshes[scene.entities[index].data.referenceIdx].boundingBox).aabb)
             case .spotLight:
                 boundingBoxes.insert((transform * scene.spotLights[scene.entities[index].data.referenceIdx].boundingBox).aabb)
             case .omniLight:

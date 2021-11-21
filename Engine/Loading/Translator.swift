@@ -127,8 +127,8 @@ public class Translator {
             }
                     
         }
-        scene.meshBoundingBoxes.append(BoundingBox.from(bound: bounds))
         scene.meshes.append(PNRamMesh(name: mesh.name,
+                                      boundingBox: BoundingBox.from(bound: bounds),
                                       vertexBuffer: dataBuffer,
                                       pieceDescriptions: pieceDescriptions))
         let entity = Entity(transform: transform,
