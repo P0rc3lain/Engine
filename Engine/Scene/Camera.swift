@@ -5,7 +5,7 @@
 import simd
 
 public struct Camera: Identifiable {
-    let name: String
+    public let name: String
     let projectionMatrix: matrix_float4x4
     let projectionMatrixInverse: matrix_float4x4
     let boundingBox: BoundingBox

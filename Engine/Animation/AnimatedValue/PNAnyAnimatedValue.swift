@@ -13,10 +13,10 @@ public struct PNAnyAnimatedValue<T>: PNAnimatedValue {
     public var maximumTime: TimeInterval {
         maximumTimeProxy()
     }
-    let keyFramesProxy: () -> [T]
-    let timesProxy: () -> [TimeInterval]
-    let maximumTimeProxy: () -> TimeInterval
-    let sampleProxy: (TimeInterval) -> PNAnimationSample<T>
+    private let keyFramesProxy: () -> [T]
+    private let timesProxy: () -> [TimeInterval]
+    private let maximumTimeProxy: () -> TimeInterval
+    private let sampleProxy: (TimeInterval) -> PNAnimationSample<T>
     init<V: PNAnimatedValue>(_ delegatee: V) where V.DataType == T {
         keyFramesProxy = { delegatee.keyFrames }
         timesProxy = { delegatee.times }
