@@ -107,6 +107,7 @@
 		5629FBEA2749201F005476AF /* PNInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBE92749201F005476AF /* PNInterpolator.swift */; };
 		5629FBEC2749209C005476AF /* PNIInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBEB2749209C005476AF /* PNIInterpolator.swift */; };
 		5629FBEE27492533005476AF /* AnimatedCoordinateSpace+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBED27492533005476AF /* AnimatedCoordinateSpace+Extension.swift */; };
+		5629FBF0274A672E005476AF /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBEF274A672E005476AF /* Identifiable.swift */; };
 		562B8F43272599FF00363CE8 /* MTLRenderCommandEncoder+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562B8F42272599FF00363CE8 /* MTLRenderCommandEncoder+Extension.swift */; };
 		563575F42728486A00CE4988 /* PNAnimationSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563575F32728486A00CE4988 /* PNAnimationSample.swift */; };
 		563BFC81272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563BFC80272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift */; };
@@ -305,6 +306,7 @@
 		5629FBE92749201F005476AF /* PNInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNInterpolator.swift; sourceTree = "<group>"; };
 		5629FBEB2749209C005476AF /* PNIInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIInterpolator.swift; sourceTree = "<group>"; };
 		5629FBED27492533005476AF /* AnimatedCoordinateSpace+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimatedCoordinateSpace+Extension.swift"; sourceTree = "<group>"; };
+		5629FBEF274A672E005476AF /* Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		562B8F42272599FF00363CE8 /* MTLRenderCommandEncoder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLRenderCommandEncoder+Extension.swift"; sourceTree = "<group>"; };
 		563575F32728486A00CE4988 /* PNAnimationSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnimationSample.swift; sourceTree = "<group>"; };
 		563BFC80272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MDLObjectContainerComponent+Extension.swift"; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 				56416D872743F728003C99C2 /* Bounds */,
 				561666CE2719E2CC000063B1 /* SceneDescription.swift */,
 				561666D32719E2CC000063B1 /* Camera.swift */,
+				5629FBEF274A672E005476AF /* Identifiable.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -1240,6 +1243,7 @@
 				561667082719E2CD000063B1 /* DataBuffer+Extension.swift in Sources */,
 				5688074A2747F10700C95F55 /* Int+Alias.swift in Sources */,
 				563575F42728486A00CE4988 /* PNAnimationSample.swift in Sources */,
+				5629FBF0274A672E005476AF /* Identifiable.swift in Sources */,
 				5670EC272736EA2400375194 /* PostprocessStage.swift in Sources */,
 				561667312719E2CD000063B1 /* PNDataBuffer+Alias.swift in Sources */,
 				5616671C2719E2CD000063B1 /* MTLStencilDescriptor+Extension.swift in Sources */,

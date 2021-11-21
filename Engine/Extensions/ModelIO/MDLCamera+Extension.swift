@@ -6,7 +6,8 @@ import ModelIO
 
 extension MDLCamera {
     var porcelain: Camera {
-        Camera(nearPlane: nearVisibilityDistance,
+        Camera(name: name,
+               nearPlane: nearVisibilityDistance,
                farPlane: farVisibilityDistance,
                fovRadians: fieldOfView.radians,
                aspectRatio: sensorAspect)

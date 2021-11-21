@@ -19,7 +19,6 @@ public struct SceneDescription<DataType, IndexType, GeometryType, TextureType> {
     // MARK: - Capacity F
     public var skeletalAnimations = [PNAnimatedSkeleton]()
     // MARK: - Capacity G
-    public var cameraNames = [String]()
     public var cameras = [Camera]()
     // MARK: - Capacity H
     public var omniLightNames = [String]()

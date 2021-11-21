@@ -21,7 +21,6 @@ extension RamSceneDescription {
         // MARK: - Capacity F
         description.skeletalAnimations = skeletalAnimations
         // MARK: - Capacity G
-        description.cameraNames = cameraNames
         description.cameras = cameras
         // MARK: - Capacity H
         description.omniLightNames = omniLightNames

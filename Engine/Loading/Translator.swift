@@ -42,9 +42,7 @@ public class Translator {
     }
     private func validateScene(scene: inout RamSceneDescription) {
         assert(scene.entityNames.count == scene.entities.count, "There must be the same number of names as objects")
-        assert(scene.cameraNames.count == scene.cameras.count, "There must be the same number of names as cameras")
         assert(Set(scene.entityNames).count == scene.entityNames.count, "Object names must be unique")
-        assert(Set(scene.cameraNames).count == scene.cameraNames.count, "Camera names must be unique")
         assert(scene.entities.count == scene.skeletonReferences.count, "Each object should have reference to a skeleton")
     }
     private func add(animation: MDLAnimationBindComponent,
@@ -71,7 +69,6 @@ public class Translator {
                      transform: PNAnimatedCoordinateSpace,
                      parentIdx: Int,
                      scene: inout RamSceneDescription) {
-        scene.cameraNames.append(camera.path)
         scene.cameras.append(camera.porcelain)
         let entity = Entity(transform: transform,
                             type: .camera,

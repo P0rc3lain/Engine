@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-public struct PNMesh<DataType, IndexType, PrimitiveType> {
+public struct PNMesh<DataType, IndexType, PrimitiveType>: Identifiable {
     public let name: String
     public let vertexBuffer: PNDataBuffer<DataType>
     public let pieceDescriptions: [PNPieceDescription<DataType, IndexType, PrimitiveType>]
