@@ -25,7 +25,7 @@ struct GBufferStage: Stage {
     mutating func draw(commandBuffer: inout MTLCommandBuffer,
                        scene: inout GPUSceneDescription,
                        bufferStore: inout BufferStore,
-                       arrangement: inout Arrangement) {
+                       arrangement: inout PNArrangement) {
         guard var gBufferEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: gBufferRenderPassDescriptor) else {
             return
         }

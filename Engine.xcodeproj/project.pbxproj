@@ -14,7 +14,7 @@
 		560C18D5273AC30800459AEF /* OmniLight.metal in Sources */ = {isa = PBXBuildFile; fileRef = 560C18D4273AC30800459AEF /* OmniLight.metal */; };
 		560C18D7273AC71100459AEF /* OmniLight+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560C18D6273AC71100459AEF /* OmniLight+Extension.swift */; };
 		560C18D9273ACC0100459AEF /* OmniShadowRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560C18D8273ACC0100459AEF /* OmniShadowRenderer+Extension.swift */; };
-		56165BE527440CF70025D58B /* Arrangement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BE327440CF70025D58B /* Arrangement.swift */; };
+		56165BE527440CF70025D58B /* PNArrangement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BE327440CF70025D58B /* PNArrangement.swift */; };
 		56165BE627440CF70025D58B /* ArrangementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BE427440CF70025D58B /* ArrangementController.swift */; };
 		56165BEA27440DA90025D58B /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BE827440DA90025D58B /* Entity.swift */; };
 		56165BEB27440DA90025D58B /* EntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BE927440DA90025D58B /* EntityType.swift */; };
@@ -172,7 +172,7 @@
 		56ADD2F6273707E200107E24 /* AmbientRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F5273707E200107E24 /* AmbientRenderer.metal */; };
 		56ADD2F8273709F400107E24 /* AmbientRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F7273709F400107E24 /* AmbientRenderer+Extension.swift */; };
 		56B65DEC273ED4CE00DB927E /* PNIBoundingBoxInteractor+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B65DEB273ED4CE00DB927E /* PNIBoundingBoxInteractor+Tests.swift */; };
-		56B65DEF273EE06300DB927E /* CullingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B65DEE273EE06300DB927E /* CullingController.swift */; };
+		56B65DEF273EE06300DB927E /* PNICullingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B65DEE273EE06300DB927E /* PNICullingController.swift */; };
 		56C4CD512737FFDD000A994E /* SpotRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C4CD502737FFDD000A994E /* SpotRenderer.swift */; };
 		56C4CD53273800E4000A994E /* SpotRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56C4CD52273800E4000A994E /* SpotRenderer.metal */; };
 		56C4CD55273801EB000A994E /* SpotRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C4CD54273801EB000A994E /* SpotRenderer+Extension.swift */; };
@@ -189,6 +189,9 @@
 		56D7ED52274C535F00A6C25D /* PNSceneLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7ED51274C535F00A6C25D /* PNSceneLoader.swift */; };
 		56D7ED54274C536700A6C25D /* PNISceneLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7ED53274C536700A6C25D /* PNISceneLoader.swift */; };
 		56D7ED57274C544300A6C25D /* PNITranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7ED56274C544300A6C25D /* PNITranslator.swift */; };
+		56D7ED5A274C605C00A6C25D /* PNCullingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7ED59274C605C00A6C25D /* PNCullingController.swift */; };
+		56D7ED5C274C611C00A6C25D /* PNBoundingBox+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7ED5B274C611C00A6C25D /* PNBoundingBox+Alias.swift */; };
+		56D7ED5E274C617200A6C25D /* ModelUniforms+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7ED5D274C617200A6C25D /* ModelUniforms+Alias.swift */; };
 		56D8C4122739D404005E58E3 /* SpotLight+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8C4112739D404005E58E3 /* SpotLight+Extension.swift */; };
 		56E8208F2727FD13002D58C3 /* Date+Extensioin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8208E2727FD13002D58C3 /* Date+Extensioin.swift */; };
 		56E8209D27284664002D58C3 /* PNPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8209C27284664002D58C3 /* PNPosition.swift */; };
@@ -217,7 +220,7 @@
 		560C18D4273AC30800459AEF /* OmniLight.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = OmniLight.metal; sourceTree = "<group>"; };
 		560C18D6273AC71100459AEF /* OmniLight+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OmniLight+Extension.swift"; sourceTree = "<group>"; };
 		560C18D8273ACC0100459AEF /* OmniShadowRenderer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OmniShadowRenderer+Extension.swift"; sourceTree = "<group>"; };
-		56165BE327440CF70025D58B /* Arrangement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arrangement.swift; sourceTree = "<group>"; };
+		56165BE327440CF70025D58B /* PNArrangement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNArrangement.swift; sourceTree = "<group>"; };
 		56165BE427440CF70025D58B /* ArrangementController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrangementController.swift; sourceTree = "<group>"; };
 		56165BE827440DA90025D58B /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		56165BE927440DA90025D58B /* EntityType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityType.swift; sourceTree = "<group>"; };
@@ -400,7 +403,7 @@
 		56ADD2F5273707E200107E24 /* AmbientRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = AmbientRenderer.metal; sourceTree = "<group>"; };
 		56ADD2F7273709F400107E24 /* AmbientRenderer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AmbientRenderer+Extension.swift"; sourceTree = "<group>"; };
 		56B65DEB273ED4CE00DB927E /* PNIBoundingBoxInteractor+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIBoundingBoxInteractor+Tests.swift"; sourceTree = "<group>"; };
-		56B65DEE273EE06300DB927E /* CullingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CullingController.swift; sourceTree = "<group>"; };
+		56B65DEE273EE06300DB927E /* PNICullingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNICullingController.swift; sourceTree = "<group>"; };
 		56C4CD4F2737FF24000A994E /* SpotLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpotLight.h; sourceTree = "<group>"; };
 		56C4CD502737FFDD000A994E /* SpotRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotRenderer.swift; sourceTree = "<group>"; };
 		56C4CD52273800E4000A994E /* SpotRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = SpotRenderer.metal; sourceTree = "<group>"; };
@@ -419,6 +422,9 @@
 		56D7ED51274C535F00A6C25D /* PNSceneLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSceneLoader.swift; sourceTree = "<group>"; };
 		56D7ED53274C536700A6C25D /* PNISceneLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNISceneLoader.swift; sourceTree = "<group>"; };
 		56D7ED56274C544300A6C25D /* PNITranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNITranslator.swift; sourceTree = "<group>"; };
+		56D7ED59274C605C00A6C25D /* PNCullingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCullingController.swift; sourceTree = "<group>"; };
+		56D7ED5B274C611C00A6C25D /* PNBoundingBox+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNBoundingBox+Alias.swift"; sourceTree = "<group>"; };
+		56D7ED5D274C617200A6C25D /* ModelUniforms+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelUniforms+Alias.swift"; sourceTree = "<group>"; };
 		56D8C4112739D404005E58E3 /* SpotLight+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpotLight+Extension.swift"; sourceTree = "<group>"; };
 		56E8208E2727FD13002D58C3 /* Date+Extensioin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensioin.swift"; sourceTree = "<group>"; };
 		56E8209C27284664002D58C3 /* PNPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNPosition.swift; sourceTree = "<group>"; };
@@ -502,7 +508,7 @@
 		56165BE227440CF70025D58B /* Arrangement */ = {
 			isa = PBXGroup;
 			children = (
-				56165BE327440CF70025D58B /* Arrangement.swift */,
+				56165BE327440CF70025D58B /* PNArrangement.swift */,
 				56165BE427440CF70025D58B /* ArrangementController.swift */,
 			);
 			path = Arrangement;
@@ -580,6 +586,8 @@
 				56270168272B556500071620 /* PNAnimatedTransform+Alias.swift */,
 				568807472747EFC800C95F55 /* simd_float4x4+Alias.swift */,
 				568807492747F10700C95F55 /* Int+Alias.swift */,
+				56D7ED5B274C611C00A6C25D /* PNBoundingBox+Alias.swift */,
+				56D7ED5D274C617200A6C25D /* ModelUniforms+Alias.swift */,
 			);
 			path = Aliases;
 			sourceTree = "<group>";
@@ -600,6 +608,7 @@
 		561666CD2719E2CC000063B1 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				56D7ED58274C604E00A6C25D /* Culling */,
 				5688076627483F3400C95F55 /* Material */,
 				56165BE727440DA90025D58B /* Graph */,
 				56165BE227440CF70025D58B /* Arrangement */,
@@ -692,7 +701,6 @@
 				5670EC1F2736C1D500375194 /* Jobs */,
 				5670EC1E2736C1A100375194 /* Stages */,
 				561666F12719E2CD000063B1 /* RenderingCoordinator.swift */,
-				56B65DEE273EE06300DB927E /* CullingController.swift */,
 			);
 			path = Rendering;
 			sourceTree = "<group>";
@@ -1151,6 +1159,15 @@
 			path = Translator;
 			sourceTree = "<group>";
 		};
+		56D7ED58274C604E00A6C25D /* Culling */ = {
+			isa = PBXGroup;
+			children = (
+				56B65DEE273EE06300DB927E /* PNICullingController.swift */,
+				56D7ED59274C605C00A6C25D /* PNCullingController.swift */,
+			);
+			path = Culling;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1309,7 +1326,7 @@
 				56ADD2F8273709F400107E24 /* AmbientRenderer+Extension.swift in Sources */,
 				569D923D273DD594004FDFAC /* PNBound.swift in Sources */,
 				56C4CD55273801EB000A994E /* SpotRenderer+Extension.swift in Sources */,
-				56165BE527440CF70025D58B /* Arrangement.swift in Sources */,
+				56165BE527440CF70025D58B /* PNArrangement.swift in Sources */,
 				5670EC002735977900375194 /* BloomSplitRenderer.swift in Sources */,
 				561667082719E2CD000063B1 /* DataBuffer+Extension.swift in Sources */,
 				56D7ED4D274C52E000A6C25D /* PNAssetLoader.swift in Sources */,
@@ -1336,6 +1353,7 @@
 				561667272719E2CD000063B1 /* MTLRenderPassDescriptor+Extension.swift in Sources */,
 				561667382719E2CD000063B1 /* PNMesh.swift in Sources */,
 				56D7ED52274C535F00A6C25D /* PNSceneLoader.swift in Sources */,
+				56D7ED5C274C611C00A6C25D /* PNBoundingBox+Alias.swift in Sources */,
 				56D7ED43274C381400A6C25D /* PNBoundingBoxInteractor.swift in Sources */,
 				563BFC91272898F20003EDB7 /* MDLAnimatedVector3Array+Extension.swift in Sources */,
 				5670EC0D2735D5BF00375194 /* BloomMergeRenderer+Extension.swift in Sources */,
@@ -1379,11 +1397,13 @@
 				56165BF02744401B0025D58B /* ModelUniforms+Extension.swift in Sources */,
 				561666FE2719E2CD000063B1 /* MDLMaterial+Extension.swift in Sources */,
 				569D9242273E7EED004FDFAC /* Color.metal in Sources */,
+				56D7ED5A274C605C00A6C25D /* PNCullingController.swift in Sources */,
 				569D9246273EA5F6004FDFAC /* PNBoundingBox.swift in Sources */,
 				56924AE8271A187400FF3E06 /* AnimatedFloat3+Extensions.swift in Sources */,
 				561667372719E2CD000063B1 /* PNPieceDescription+Alias.swift in Sources */,
 				561666FA2719E2CD000063B1 /* simd_float4+Extension.swift in Sources */,
 				561667092719E2CD000063B1 /* MDLVertexDescriptor+Extension.swift in Sources */,
+				56D7ED5E274C617200A6C25D /* ModelUniforms+Alias.swift in Sources */,
 				561667552719E2CD000063B1 /* Postprocessor.swift in Sources */,
 				5616671E2719E2CD000063B1 /* MTLVertexBufferLayoutDescriptor+Extension.swift in Sources */,
 				5670EC1B2736AE4B00375194 /* SSAOStage.swift in Sources */,
@@ -1414,7 +1434,7 @@
 				562B8F43272599FF00363CE8 /* MTLRenderCommandEncoder+Extension.swift in Sources */,
 				5616672E2719E2CD000063B1 /* PNIDynamicBuffer.swift in Sources */,
 				56165BE627440CF70025D58B /* ArrangementController.swift in Sources */,
-				56B65DEF273EE06300DB927E /* CullingController.swift in Sources */,
+				56B65DEF273EE06300DB927E /* PNICullingController.swift in Sources */,
 				561667542719E2CD000063B1 /* GBufferRenderer.swift in Sources */,
 				561666FC2719E2CD000063B1 /* Int+Extension.swift in Sources */,
 				566020E227343280000F4CA7 /* SSAO.metal in Sources */,

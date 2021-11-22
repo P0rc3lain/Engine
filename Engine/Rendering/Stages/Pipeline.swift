@@ -51,7 +51,7 @@ struct Pipeline: Stage {
     mutating func draw(commandBuffer: inout MTLCommandBuffer,
                        scene: inout GPUSceneDescription,
                        bufferStore: inout BufferStore,
-                       arrangement: inout Arrangement) {
+                       arrangement: inout PNArrangement) {
         shadowStage.draw(commandBuffer: &commandBuffer,
                          scene: &scene,
                          bufferStore: &bufferStore,

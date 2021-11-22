@@ -20,21 +20,22 @@ struct SpotShadowRenderer {
         self.viewPort = viewPort
     }
     private func generateRenderMasks(scene: inout GPUSceneDescription,
-                                     arrangement: inout Arrangement) -> [[Bool]] {
+                                     arrangement: inout PNArrangement) -> [[Bool]] {
         return scene.spotLights.count.naturalExclusive.map { i in
-            let cameraTransform = arrangement.worldPositions[Int(scene.spotLights[i].idx)].modelMatrixInverse
+            let cameraTransform = arrangement.positions[Int(scene.spotLights[i].idx)].modelMatrixInverse
             let interactor = PNIBoundingBoxInteractor(boundInteractor: PNIBoundInteractor())
+            let cullingController = PNICullingController(interactor: interactor)
             let cameraBoundingBox = interactor.multiply(cameraTransform, scene.spotLights[i].boundingBox)
             let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
-            let mask = CullingController.cullingMask(arrangement: &arrangement,
-                                                     worldBoundingBox: cameraAlignedBoundingBox)
+            let mask = cullingController.cullingMask(arrangement: &arrangement,
+                                                     boundingBox: cameraAlignedBoundingBox)
             return mask
         }
     }
     func draw(encoder: inout MTLRenderCommandEncoder,
               scene: inout GPUSceneDescription,
               dataStore: inout BufferStore,
-              arrangement: inout Arrangement) {
+              arrangement: inout PNArrangement) {
         guard !scene.spotLights.isEmpty else {
             return
         }

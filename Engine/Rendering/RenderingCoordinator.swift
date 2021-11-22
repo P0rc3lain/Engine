@@ -42,7 +42,7 @@ struct RenderingCoordinator {
         bufferStore.spotLights.upload(data: &scene.spotLights)
         bufferStore.upload(camera: &scene.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx],
                            index: scene.activeCameraIdx)
-        bufferStore.modelCoordinateSystems.upload(data: &arrangement.worldPositions)
+        bufferStore.modelCoordinateSystems.upload(data: &arrangement.positions)
         pipeline.draw(commandBuffer: &commandBuffer,
                       scene: &scene,
                       bufferStore: &bufferStore,

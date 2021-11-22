@@ -38,7 +38,7 @@ struct ShadowStage: Stage {
     mutating func draw(commandBuffer: inout MTLCommandBuffer,
                        scene: inout GPUSceneDescription,
                        bufferStore: inout BufferStore,
-                       arrangement: inout Arrangement) {
+                       arrangement: inout PNArrangement) {
         if !scene.spotLights.isEmpty {
             guard var spotEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: spotLightShadowRenderPassDescriptor) else {
                 return

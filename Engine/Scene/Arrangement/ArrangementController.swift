@@ -5,9 +5,9 @@
 import MetalBinding
 
 struct ArrangementController {
-    static func arrangement<DataType, IndexType, GeometryType, TextureType>(scene: inout SceneDescription<DataType, IndexType, GeometryType, TextureType>) -> Arrangement {
+    static func arrangement<DataType, IndexType, GeometryType, TextureType>(scene: inout SceneDescription<DataType, IndexType, GeometryType, TextureType>) -> PNArrangement {
         var uniforms = modelUniforms(tree: &scene.entities)
-        return Arrangement(worldPositions: uniforms, worldBoundingBoxes: boundingBoxes(scene: &scene, uniforms: &uniforms))
+        return PNArrangement(positions: uniforms, boundingBoxes: boundingBoxes(scene: &scene, uniforms: &uniforms))
     }
     private static func boundingBoxes<DataType, IndexType, GeometryType, TextureType>(scene: inout SceneDescription<DataType, IndexType, GeometryType, TextureType>,
                                                                                       uniforms: inout [ModelUniforms]) -> [PNBoundingBox] {

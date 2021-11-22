@@ -26,20 +26,21 @@ struct OmniShadowRenderer {
         self.rotationsBuffer.upload(data: &rotations)
     }
     private func generateRenderMasks(scene: inout GPUSceneDescription,
-                                     arrangement: inout Arrangement) -> [[[Bool]]] {
+                                     arrangement: inout PNArrangement) -> [[[Bool]]] {
         let rotations = simd_quatf.environment
         let interactor = PNIBoundingBoxInteractor.default
+        let cullingController = PNICullingController(interactor: interactor)
         return scene.omniLights.count.naturalExclusive.map { lightIndex in
             var faceData = [[Bool]]()
             for faceIndex in 6.naturalExclusive {
                 let entityIndex = Int(scene.omniLights[lightIndex].idx)
-                let cameraTransform = arrangement.worldPositions[entityIndex].modelMatrixInverse
+                let cameraTransform = arrangement.positions[entityIndex].modelMatrixInverse
                 let boundingBox = interactor.from(inverseProjection: scene.omniLights[lightIndex].projectionMatrixInverse)
                 let cameraBoundingBox = interactor.multiply(rotations[faceIndex].rotationMatrix,
                                                             interactor.multiply(cameraTransform, boundingBox))
                 let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
-                let mask = CullingController.cullingMask(arrangement: &arrangement,
-                                                         worldBoundingBox: cameraAlignedBoundingBox)
+                let mask = cullingController.cullingMask(arrangement: &arrangement,
+                                                         boundingBox: cameraAlignedBoundingBox)
                 faceData.append(mask)
             }
             return faceData
@@ -48,7 +49,7 @@ struct OmniShadowRenderer {
     func draw(encoder: inout MTLRenderCommandEncoder,
               scene: inout GPUSceneDescription,
               dataStore: inout BufferStore,
-              arrangement: inout Arrangement) {
+              arrangement: inout PNArrangement) {
         guard !scene.omniLights.isEmpty else {
             return
         }
