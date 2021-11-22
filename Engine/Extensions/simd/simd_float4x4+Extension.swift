@@ -16,10 +16,10 @@ extension simd_float4x4 {
                     simd_length(columns.1.xyz),
                     simd_length(columns.2.xyz))
     }
-    public var decomposed: Position {
-        Position(translation: translation,
-                 rotation: rotation,
-                 scale: scale)
+    public var decomposed: PNPosition {
+        PNPosition(translation: translation,
+                   rotation: rotation,
+                   scale: scale)
     }
     public init(_ matrix: simd_double4x4) {
         let columns = matrix.columns

@@ -4,7 +4,7 @@
 
 import simd
 
-public struct Position {
+public struct PNPosition {
     public let translation: simd_float3
     public let rotation: simd_quatf
     public let scale: simd_float3
