@@ -7,7 +7,7 @@ import MetalBinding
 import ModelIO
 import simd
 
-public class Translator {
+public struct PNITranslator: PNTranslator {
     private let device: MTLDevice
     public init(device: MTLDevice) {
         self.device = device

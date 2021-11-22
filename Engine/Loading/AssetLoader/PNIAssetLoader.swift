@@ -4,7 +4,7 @@
 
 import ModelIO
 
-class AssetLoader {
+struct PNIAssetLoader: PNAssetLoader {
     func resource(from url: URL) -> MDLAsset? {
         guard let asset = self.retrieve(url: url) else {
             return nil

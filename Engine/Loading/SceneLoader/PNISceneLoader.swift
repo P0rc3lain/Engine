@@ -5,11 +5,12 @@
 import ModelIO
 import Metal
 
-public class SceneLoader {
-    private let assetLoader = AssetLoader()
-    private let translator: Translator
-    public init(device: MTLDevice) {
-        self.translator = Translator(device: device)
+public class PNISceneLoader: PNSceneLoader {
+    private let assetLoader: PNAssetLoader
+    private let translator: PNTranslator
+    init(device: MTLDevice, assetLoader: PNAssetLoader, translator: PNTranslator) {
+        self.translator = translator
+        self.assetLoader = assetLoader
     }
     public func resource(from url: URL) -> GPUSceneDescription? {
         guard let asset = assetLoader.resource(from: url) else {

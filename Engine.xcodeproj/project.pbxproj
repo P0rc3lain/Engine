@@ -58,9 +58,7 @@
 		561667252719E2CD000063B1 /* GBufferRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666AF2719E2CC000063B1 /* GBufferRenderer+Extension.swift */; };
 		561667272719E2CD000063B1 /* MTLRenderPassDescriptor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666B12719E2CC000063B1 /* MTLRenderPassDescriptor+Extension.swift */; };
 		561667282719E2CD000063B1 /* EnvironmentRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666B22719E2CC000063B1 /* EnvironmentRenderer+Extension.swift */; };
-		561667292719E2CD000063B1 /* Translator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666B42719E2CC000063B1 /* Translator.swift */; };
-		5616672B2719E2CD000063B1 /* AssetLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666B62719E2CC000063B1 /* AssetLoader.swift */; };
-		5616672C2719E2CD000063B1 /* SceneLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666B72719E2CC000063B1 /* SceneLoader.swift */; };
+		561667292719E2CD000063B1 /* PNTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666B42719E2CC000063B1 /* PNTranslator.swift */; };
 		5616672D2719E2CD000063B1 /* FlatTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666B92719E2CC000063B1 /* FlatTree.swift */; };
 		5616672E2719E2CD000063B1 /* PNIDynamicBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666BA2719E2CC000063B1 /* PNIDynamicBuffer.swift */; };
 		561667312719E2CD000063B1 /* PNDataBuffer+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666BF2719E2CC000063B1 /* PNDataBuffer+Alias.swift */; };
@@ -186,6 +184,11 @@
 		56D7ED41274C372800A6C25D /* PNIBoundInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7ED40274C372800A6C25D /* PNIBoundInteractor.swift */; };
 		56D7ED43274C381400A6C25D /* PNBoundingBoxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7ED42274C381400A6C25D /* PNBoundingBoxInteractor.swift */; };
 		56D7ED45274C3AD400A6C25D /* PNIBoundingBoxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7ED44274C3AD400A6C25D /* PNIBoundingBoxInteractor.swift */; };
+		56D7ED4D274C52E000A6C25D /* PNAssetLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7ED4C274C52E000A6C25D /* PNAssetLoader.swift */; };
+		56D7ED4F274C52EA00A6C25D /* PNIAssetLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7ED4E274C52EA00A6C25D /* PNIAssetLoader.swift */; };
+		56D7ED52274C535F00A6C25D /* PNSceneLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7ED51274C535F00A6C25D /* PNSceneLoader.swift */; };
+		56D7ED54274C536700A6C25D /* PNISceneLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7ED53274C536700A6C25D /* PNISceneLoader.swift */; };
+		56D7ED57274C544300A6C25D /* PNITranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7ED56274C544300A6C25D /* PNITranslator.swift */; };
 		56D8C4122739D404005E58E3 /* SpotLight+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8C4112739D404005E58E3 /* SpotLight+Extension.swift */; };
 		56E8208F2727FD13002D58C3 /* Date+Extensioin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8208E2727FD13002D58C3 /* Date+Extensioin.swift */; };
 		56E8209D27284664002D58C3 /* PNPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8209C27284664002D58C3 /* PNPosition.swift */; };
@@ -258,9 +261,7 @@
 		561666AF2719E2CC000063B1 /* GBufferRenderer+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GBufferRenderer+Extension.swift"; sourceTree = "<group>"; };
 		561666B12719E2CC000063B1 /* MTLRenderPassDescriptor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MTLRenderPassDescriptor+Extension.swift"; sourceTree = "<group>"; };
 		561666B22719E2CC000063B1 /* EnvironmentRenderer+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EnvironmentRenderer+Extension.swift"; sourceTree = "<group>"; };
-		561666B42719E2CC000063B1 /* Translator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translator.swift; sourceTree = "<group>"; };
-		561666B62719E2CC000063B1 /* AssetLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetLoader.swift; sourceTree = "<group>"; };
-		561666B72719E2CC000063B1 /* SceneLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneLoader.swift; sourceTree = "<group>"; };
+		561666B42719E2CC000063B1 /* PNTranslator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNTranslator.swift; sourceTree = "<group>"; };
 		561666B92719E2CC000063B1 /* FlatTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatTree.swift; sourceTree = "<group>"; };
 		561666BA2719E2CC000063B1 /* PNIDynamicBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNIDynamicBuffer.swift; sourceTree = "<group>"; };
 		561666BF2719E2CC000063B1 /* PNDataBuffer+Alias.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PNDataBuffer+Alias.swift"; sourceTree = "<group>"; };
@@ -413,6 +414,11 @@
 		56D7ED40274C372800A6C25D /* PNIBoundInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIBoundInteractor.swift; sourceTree = "<group>"; };
 		56D7ED42274C381400A6C25D /* PNBoundingBoxInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNBoundingBoxInteractor.swift; sourceTree = "<group>"; };
 		56D7ED44274C3AD400A6C25D /* PNIBoundingBoxInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIBoundingBoxInteractor.swift; sourceTree = "<group>"; };
+		56D7ED4C274C52E000A6C25D /* PNAssetLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAssetLoader.swift; sourceTree = "<group>"; };
+		56D7ED4E274C52EA00A6C25D /* PNIAssetLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIAssetLoader.swift; sourceTree = "<group>"; };
+		56D7ED51274C535F00A6C25D /* PNSceneLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSceneLoader.swift; sourceTree = "<group>"; };
+		56D7ED53274C536700A6C25D /* PNISceneLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNISceneLoader.swift; sourceTree = "<group>"; };
+		56D7ED56274C544300A6C25D /* PNITranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNITranslator.swift; sourceTree = "<group>"; };
 		56D8C4112739D404005E58E3 /* SpotLight+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpotLight+Extension.swift"; sourceTree = "<group>"; };
 		56E8208E2727FD13002D58C3 /* Date+Extensioin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensioin.swift"; sourceTree = "<group>"; };
 		56E8209C27284664002D58C3 /* PNPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNPosition.swift; sourceTree = "<group>"; };
@@ -544,9 +550,9 @@
 		561666B32719E2CC000063B1 /* Loading */ = {
 			isa = PBXGroup;
 			children = (
-				561666B42719E2CC000063B1 /* Translator.swift */,
-				561666B62719E2CC000063B1 /* AssetLoader.swift */,
-				561666B72719E2CC000063B1 /* SceneLoader.swift */,
+				56D7ED55274C543100A6C25D /* Translator */,
+				56D7ED50274C535800A6C25D /* SceneLoader */,
+				56D7ED4B274C52C600A6C25D /* AssetLoader */,
 			);
 			path = Loading;
 			sourceTree = "<group>";
@@ -1118,6 +1124,33 @@
 			path = BoundingBox;
 			sourceTree = "<group>";
 		};
+		56D7ED4B274C52C600A6C25D /* AssetLoader */ = {
+			isa = PBXGroup;
+			children = (
+				56D7ED4C274C52E000A6C25D /* PNAssetLoader.swift */,
+				56D7ED4E274C52EA00A6C25D /* PNIAssetLoader.swift */,
+			);
+			path = AssetLoader;
+			sourceTree = "<group>";
+		};
+		56D7ED50274C535800A6C25D /* SceneLoader */ = {
+			isa = PBXGroup;
+			children = (
+				56D7ED51274C535F00A6C25D /* PNSceneLoader.swift */,
+				56D7ED53274C536700A6C25D /* PNISceneLoader.swift */,
+			);
+			path = SceneLoader;
+			sourceTree = "<group>";
+		};
+		56D7ED55274C543100A6C25D /* Translator */ = {
+			isa = PBXGroup;
+			children = (
+				561666B42719E2CC000063B1 /* PNTranslator.swift */,
+				56D7ED56274C544300A6C25D /* PNITranslator.swift */,
+			);
+			path = Translator;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1239,6 +1272,7 @@
 				56270167272B54EB00071620 /* PNAnimatedTransform.swift in Sources */,
 				56C4CD53273800E4000A994E /* SpotRenderer.metal in Sources */,
 				561667342719E2CD000063B1 /* SceneDescription+Alias.swift in Sources */,
+				56D7ED54274C536700A6C25D /* PNISceneLoader.swift in Sources */,
 				561667182719E2CD000063B1 /* PNISkeleton.swift in Sources */,
 				563BFC8527285F100003EDB7 /* MTLBuffer+Extension.swift in Sources */,
 				5629FBE127491ABF005476AF /* PNAnyAnimatedValue.swift in Sources */,
@@ -1278,6 +1312,7 @@
 				56165BE527440CF70025D58B /* Arrangement.swift in Sources */,
 				5670EC002735977900375194 /* BloomSplitRenderer.swift in Sources */,
 				561667082719E2CD000063B1 /* DataBuffer+Extension.swift in Sources */,
+				56D7ED4D274C52E000A6C25D /* PNAssetLoader.swift in Sources */,
 				5688074A2747F10700C95F55 /* Int+Alias.swift in Sources */,
 				563575F42728486A00CE4988 /* PNAnimationSample.swift in Sources */,
 				5629FBF0274A672E005476AF /* Identifiable.swift in Sources */,
@@ -1300,6 +1335,7 @@
 				56407B7D27206F5D00440CAC /* Vertex+Extension.swift in Sources */,
 				561667272719E2CD000063B1 /* MTLRenderPassDescriptor+Extension.swift in Sources */,
 				561667382719E2CD000063B1 /* PNMesh.swift in Sources */,
+				56D7ED52274C535F00A6C25D /* PNSceneLoader.swift in Sources */,
 				56D7ED43274C381400A6C25D /* PNBoundingBoxInteractor.swift in Sources */,
 				563BFC91272898F20003EDB7 /* MDLAnimatedVector3Array+Extension.swift in Sources */,
 				5670EC0D2735D5BF00375194 /* BloomMergeRenderer+Extension.swift in Sources */,
@@ -1338,7 +1374,6 @@
 				560C18D0273A832A00459AEF /* MTLFunctionConstantValues+Extension.swift in Sources */,
 				5688076827483F4600C95F55 /* PNIMaterial.swift in Sources */,
 				563BFC9C27294B020003EDB7 /* RamGeometry+Extension.swift in Sources */,
-				5616672B2719E2CD000063B1 /* AssetLoader.swift in Sources */,
 				5670EC052735A3EA00375194 /* BloomSplit.metal in Sources */,
 				5670EC1D2736B8BC00375194 /* GBufferStage.swift in Sources */,
 				56165BF02744401B0025D58B /* ModelUniforms+Extension.swift in Sources */,
@@ -1367,7 +1402,7 @@
 				56F59269273725FB008652C9 /* DirectionalRenderer.swift in Sources */,
 				56E8209D27284664002D58C3 /* PNPosition.swift in Sources */,
 				5629FBEC2749209C005476AF /* PNIInterpolator.swift in Sources */,
-				561667292719E2CD000063B1 /* Translator.swift in Sources */,
+				561667292719E2CD000063B1 /* PNTranslator.swift in Sources */,
 				56D34A54271B037900A87785 /* Double+Extension.swift in Sources */,
 				561667252719E2CD000063B1 /* GBufferRenderer+Extension.swift in Sources */,
 				568807462747EEC000C95F55 /* PNSkeleton.swift in Sources */,
@@ -1394,9 +1429,10 @@
 				560C18D7273AC71100459AEF /* OmniLight+Extension.swift in Sources */,
 				5616673C2719E2CD000063B1 /* PNIndexBitDepth.swift in Sources */,
 				563BFC9527289A3B0003EDB7 /* MDLAnimatedQuaternionArray+Extension.swift in Sources */,
+				56D7ED4F274C52EA00A6C25D /* PNIAssetLoader.swift in Sources */,
+				56D7ED57274C544300A6C25D /* PNITranslator.swift in Sources */,
 				56270169272B556500071620 /* PNAnimatedTransform+Alias.swift in Sources */,
 				563C9C1D27387B940014CFF3 /* Pipeline.swift in Sources */,
-				5616672C2719E2CD000063B1 /* SceneLoader.swift in Sources */,
 				5629FBDF27491A78005476AF /* PNAnimatedValue.swift in Sources */,
 				561667522719E2CD000063B1 /* EnvironmentRenderer.swift in Sources */,
 				561667532719E2CD000063B1 /* OmniRenderer.swift in Sources */,
