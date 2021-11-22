@@ -20,10 +20,9 @@ struct PNIAssetLoader: PNAssetLoader {
     }
     private func retrieve(url: URL) -> MDLAsset? {
         let vertexDescriptor = MDLVertexDescriptor.porcelain
-        let asset = MDLAsset(url: url,
-                             vertexDescriptor: vertexDescriptor,
-                             bufferAllocator: nil)
-        return asset
+        return MDLAsset(url: url,
+                        vertexDescriptor: vertexDescriptor,
+                        bufferAllocator: nil)
     }
     private func adjustAssetToEngineNeeds(asset: MDLAsset) {
         asset.loadTextures()
