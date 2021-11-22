@@ -28,15 +28,18 @@ struct OmniShadowRenderer {
     private func generateRenderMasks(scene: inout GPUSceneDescription,
                                      arrangement: inout Arrangement) -> [[[Bool]]] {
         let rotations = simd_quatf.environment
+        let interactor = PNIBoundingBoxInteractor.default
         return scene.omniLights.count.naturalExclusive.map { lightIndex in
             var faceData = [[Bool]]()
             for faceIndex in 6.naturalExclusive {
                 let entityIndex = Int(scene.omniLights[lightIndex].idx)
                 let cameraTransform = arrangement.worldPositions[entityIndex].modelMatrixInverse
-                let boundingBox = BoundingBox.projectionBounds(inverseProjection: scene.omniLights[lightIndex].projectionMatrixInverse)
-                let cameraBoundingBox = (rotations[faceIndex].rotationMatrix * cameraTransform * boundingBox).aabb
+                let boundingBox = interactor.from(inverseProjection: scene.omniLights[lightIndex].projectionMatrixInverse)
+                let cameraBoundingBox = interactor.multiply(rotations[faceIndex].rotationMatrix,
+                                                            interactor.multiply(cameraTransform, boundingBox))
+                let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
                 let mask = CullingController.cullingMask(arrangement: &arrangement,
-                                                         worldBoundingBox: cameraBoundingBox)
+                                                         worldBoundingBox: cameraAlignedBoundingBox)
                 faceData.append(mask)
             }
             return faceData

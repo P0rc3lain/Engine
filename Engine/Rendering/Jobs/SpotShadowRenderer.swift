@@ -23,9 +23,11 @@ struct SpotShadowRenderer {
                                      arrangement: inout Arrangement) -> [[Bool]] {
         return scene.spotLights.count.naturalExclusive.map { i in
             let cameraTransform = arrangement.worldPositions[Int(scene.spotLights[i].idx)].modelMatrixInverse
-            let cameraBoundingBox = (cameraTransform * scene.spotLights[i].boundingBox).aabb
+            let interactor = PNIBoundingBoxInteractor(boundInteractor: PNIBoundInteractor())
+            let cameraBoundingBox = interactor.multiply(cameraTransform, scene.spotLights[i].boundingBox)
+            let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
             let mask = CullingController.cullingMask(arrangement: &arrangement,
-                                                     worldBoundingBox: cameraBoundingBox)
+                                                     worldBoundingBox: cameraAlignedBoundingBox)
             return mask
         }
     }

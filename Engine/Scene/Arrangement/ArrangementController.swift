@@ -10,20 +10,25 @@ struct ArrangementController {
         return Arrangement(worldPositions: uniforms, worldBoundingBoxes: boundingBoxes(scene: &scene, uniforms: &uniforms))
     }
     private static func boundingBoxes<DataType, IndexType, GeometryType, TextureType>(scene: inout SceneDescription<DataType, IndexType, GeometryType, TextureType>,
-                                                                                      uniforms: inout [ModelUniforms]) -> [BoundingBox] {
-        var boundingBoxes = [BoundingBox](minimalCapacity: scene.entities.count)
+                                                                                      uniforms: inout [ModelUniforms]) -> [PNBoundingBox] {
+        var boundingBoxes = [PNBoundingBox](minimalCapacity: scene.entities.count)
+        let interactor = PNIBoundingBoxInteractor.default
         for i in scene.entities.indices {
             let index = scene.entities.count - (1 + i)
             let transform = uniforms[index].modelMatrix
             switch scene.entities[index].data.type {
             case .mesh:
-                boundingBoxes.insert((transform * scene.meshes[scene.entities[index].data.referenceIdx].boundingBox).aabb)
+                let boundingBox = interactor.aabb(interactor.multiply(transform, scene.meshes[scene.entities[index].data.referenceIdx].boundingBox))
+                boundingBoxes.insert(boundingBox)
             case .spotLight:
-                boundingBoxes.insert((transform * scene.spotLights[scene.entities[index].data.referenceIdx].boundingBox).aabb)
+                let boundingBox = interactor.aabb(interactor.multiply(transform, scene.spotLights[scene.entities[index].data.referenceIdx].boundingBox))
+                boundingBoxes.insert(boundingBox)
             case .omniLight:
-                boundingBoxes.insert((transform * scene.omniLights[scene.entities[index].data.referenceIdx].boundingBox).aabb)
+                let boundingBox = interactor.aabb(interactor.multiply(transform, scene.omniLights[scene.entities[index].data.referenceIdx].boundingBox))
+                boundingBoxes.insert(boundingBox)
             case .ambientLight:
-                boundingBoxes.insert((transform * scene.ambientLights[scene.entities[index].data.referenceIdx].boundingBox).aabb)
+                let boundingBox = interactor.aabb(interactor.multiply(transform, scene.ambientLights[scene.entities[index].data.referenceIdx].boundingBox))
+                boundingBoxes.insert(boundingBox)
             case .group:
                 let children = scene.entities.children(of: index)
                 if !children.isEmpty {
@@ -31,15 +36,17 @@ struct ArrangementController {
                     let offset = -scene.entities.count + i
                     var mergedBox = boundingBoxes[firstChild + offset]
                     for childIndex in children.dropFirst() {
-                        mergedBox = mergedBox.merge(boundingBoxes[childIndex + offset])
+                        mergedBox = interactor.merge(mergedBox, boundingBoxes[childIndex + offset])
                     }
                     boundingBoxes.insert(mergedBox)
                 } else {
-                    boundingBoxes.insert((transform * BoundingBox.from(bound: .zero)).aabb)
+                    let boundingBox = interactor.aabb(interactor.multiply(transform, interactor.from(bound: PNBound(min: .zero, max: .zero))))
+                    boundingBoxes.insert(boundingBox)
                 }
-                
+
             case .camera:
-                boundingBoxes.insert((transform * scene.cameras[scene.entities[index].data.referenceIdx].boundingBox).aabb)
+                let boundingBox = interactor.aabb(interactor.multiply(transform, scene.cameras[scene.entities[index].data.referenceIdx].boundingBox))
+                boundingBoxes.insert(boundingBox)
             }
         }
         return boundingBoxes

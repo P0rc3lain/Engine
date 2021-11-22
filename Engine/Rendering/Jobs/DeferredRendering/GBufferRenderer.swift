@@ -24,9 +24,11 @@ struct GBufferRenderer {
                                      arrangement: inout Arrangement) -> [Bool] {
         let cameraTransform = arrangement.worldPositions[scene.activeCameraIdx].modelMatrixInverse
         let cameraIndex = scene.entities[scene.activeCameraIdx].data.referenceIdx
-        let cameraBoundingBox = (cameraTransform * scene.cameras[cameraIndex].boundingBox).aabb
+        let interactor = PNIBoundingBoxInteractor.default
+        let cameraBoundingBox = interactor.multiply(cameraTransform, scene.cameras[cameraIndex].boundingBox)
+        let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
         return CullingController.cullingMask(arrangement: &arrangement,
-                                             worldBoundingBox: cameraBoundingBox)
+                                             worldBoundingBox: cameraAlignedBoundingBox)
     }
     func draw(encoder: inout MTLRenderCommandEncoder,
               scene: inout GPUSceneDescription,

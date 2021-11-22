@@ -75,7 +75,7 @@ public class Translator {
                             referenceIdx: scene.cameras.count - 1)
         scene.entities.add(parentIdx: parentIdx, data: entity)
     }
-    private func getModelBounds(buffer: inout Data) -> Bound {
+    private func getModelBounds(buffer: inout Data) -> PNBound {
         let vertexCount = buffer.count / MemoryLayout<Vertex>.stride
         assert(buffer.count % MemoryLayout<Vertex>.stride == 0, "Data must contain vertices")
         var minX = Float(0)
@@ -103,7 +103,7 @@ public class Translator {
             }
             
         }
-        return Bound(min: [minX, minY, minZ], max: [maxX, maxY, maxZ])
+        return PNBound(min: [minX, minY, minZ], max: [maxX, maxY, maxZ])
     }
     private func add(mesh: MDLMesh,
                      transform: PNAnimatedCoordinateSpace,
@@ -127,8 +127,9 @@ public class Translator {
             }
                     
         }
+        let interactor = PNIBoundingBoxInteractor.default
         scene.meshes.append(PNRamMesh(name: mesh.name,
-                                      boundingBox: BoundingBox.from(bound: bounds),
+                                      boundingBox: interactor.from(bound: bounds),
                                       vertexBuffer: dataBuffer,
                                       pieceDescriptions: pieceDescriptions))
         let entity = Entity(transform: transform,

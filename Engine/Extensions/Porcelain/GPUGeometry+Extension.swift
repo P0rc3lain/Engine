@@ -20,9 +20,10 @@ extension PNGPUMesh {
                                          primitiveType: .triangle)
         let pieceDescription = PNPieceDescription(material: nil,
                                                   drawDescription: drawDescription)
+        let boundingBox = PNIBoundingBoxInteractor.default.from(bound: PNBound(min: [-0.5, -0.5, -0.5],
+                                                                               max: [0.5, 0.5, 0.5]))
         return PNGPUMesh(name: "Cube",
-                         boundingBox: BoundingBox.from(bound: Bound(min: [-0.5, -0.5, -0.5],
-                                                                    max: [0.5, 0.5, 0.5])),
+                         boundingBox: boundingBox,
                          vertexBuffer: verticesBuffer,
                          pieceDescriptions: [pieceDescription])
     }
@@ -79,8 +80,10 @@ extension PNGPUMesh {
                                          primitiveType: .triangle)
         let pieceDescription = PNPieceDescription(material: nil,
                                                   drawDescription: drawDescription)
+        let interactor = PNIBoundingBoxInteractor.default
         return PNGPUMesh(name: "Plane",
-                         boundingBox: BoundingBox.from(bound: Bound(min: [-1, -1, 0], max: [1, 1, 0])),
+                         boundingBox: interactor.from(bound: PNBound(min: [-1, -1, 0],
+                                                                     max: [1, 1, 0])),
                          vertexBuffer: verticesBuffer,
                          pieceDescriptions: [pieceDescription])
     }

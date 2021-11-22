@@ -18,17 +18,27 @@ extension OmniLight {
                          projectionMatrix: projectionMatrix,
                          projectionMatrixInverse: projectionMatrix.inverse)
     }
-    var boundingBox: BoundingBox {
-        let projectionBoundingBox = BoundingBox.projectionBounds(inverseProjection: projectionMatrixInverse)
+    var boundingBox: PNBoundingBox {
+        let interactor = PNIBoundingBoxInteractor.default
+        let projectionBoundingBox = interactor.from(inverseProjection: projectionMatrixInverse)
         // X
-        let xPositive = (simd_quatf.environment.positiveX.rotationMatrix * projectionBoundingBox).aabb
-        let xNegative = (simd_quatf.environment.negativeX.rotationMatrix * projectionBoundingBox).aabb
+        let xPositive = interactor.aabb(interactor.multiply(simd_quatf.environment.positiveX.rotationMatrix,
+                                                            projectionBoundingBox))
+        let xNegative = interactor.aabb(interactor.multiply(simd_quatf.environment.negativeX.rotationMatrix,
+                                                            projectionBoundingBox))
         // Y
-        let yPositive = (simd_quatf.environment.positiveY.rotationMatrix * projectionBoundingBox).aabb
-        let yNegative = (simd_quatf.environment.negativeY.rotationMatrix * projectionBoundingBox).aabb
+        let yPositive = interactor.aabb(interactor.multiply(simd_quatf.environment.positiveY.rotationMatrix,
+                                                            projectionBoundingBox))
+        let yNegative = interactor.aabb(interactor.multiply(simd_quatf.environment.negativeY.rotationMatrix,
+                                                            projectionBoundingBox))
         // Z
-        let zPositive = (simd_quatf.environment.positiveZ.rotationMatrix * projectionBoundingBox).aabb
-        let zNegative = (simd_quatf.environment.negativeZ.rotationMatrix * projectionBoundingBox).aabb
-        return xPositive.merge(xNegative).merge(yPositive).merge(yNegative).merge(zPositive).merge(zNegative)
+        let zPositive = interactor.aabb(interactor.multiply(simd_quatf.environment.positiveZ.rotationMatrix,
+                                                            projectionBoundingBox))
+        let zNegative = interactor.aabb(interactor.multiply(simd_quatf.environment.negativeZ.rotationMatrix,
+                                                            projectionBoundingBox))
+        let zMerged = interactor.merge(zPositive, zNegative)
+        let yMerged = interactor.merge(yPositive, yNegative)
+        let xMerged = interactor.merge(xPositive, xNegative)
+        return interactor.merge(interactor.merge(xMerged, yMerged), zMerged)
     }
 }

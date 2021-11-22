@@ -6,5 +6,5 @@ import MetalBinding
 
 struct Arrangement {
     var worldPositions: [ModelUniforms]
-    var worldBoundingBoxes: [BoundingBox]
+    var worldBoundingBoxes: [PNBoundingBox]
 }

@@ -11,10 +11,11 @@ struct CullingController {
         self.camera = camera
         self.cameraIdx = cameraIdx
     }
-    static func cullingMask(arrangement: inout Arrangement, worldBoundingBox: BoundingBox) -> [Bool] {
+    static func cullingMask(arrangement: inout Arrangement, worldBoundingBox: PNBoundingBox) -> [Bool] {
         var mask = [Bool](minimalCapacity: arrangement.worldPositions.count)
+        let interactor = PNIBoundingBoxInteractor.default
         for i in arrangement.worldBoundingBoxes.indices {
-            mask.append(arrangement.worldBoundingBoxes[i].overlap(worldBoundingBox))
+            mask.append(interactor.overlap(arrangement.worldBoundingBoxes[i], worldBoundingBox))
         }
         return mask
     }

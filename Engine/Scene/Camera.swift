@@ -8,7 +8,7 @@ public struct Camera: Identifiable {
     public let name: String
     let projectionMatrix: matrix_float4x4
     let projectionMatrixInverse: matrix_float4x4
-    let boundingBox: BoundingBox
+    let boundingBox: PNBoundingBox
     public init(name: String,
                 nearPlane: Float,
                 farPlane: Float,
@@ -18,8 +18,8 @@ public struct Camera: Identifiable {
                                                                           aspect: aspectRatio,
                                                                           nearZ: nearPlane,
                                                                           farZ: farPlane)
-        projectionMatrixInverse = projectionMatrix.inverse
-        boundingBox = BoundingBox.projectionBounds(inverseProjection: projectionMatrixInverse)
+        projectionMatrixInverse = projectionMatrix.inverse        
+        boundingBox = PNIBoundingBoxInteractor.default.from(inverseProjection: projectionMatrixInverse)
         self.name = name
     }
 }

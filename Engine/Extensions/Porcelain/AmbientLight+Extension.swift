@@ -5,10 +5,10 @@
 import MetalBinding
 
 extension AmbientLight {
-    var boundingBox: BoundingBox {
+    var boundingBox: PNBoundingBox {
         let radius = diameter/2
-        let bound = Bound(min: [-radius, -radius, -radius],
-                          max: [radius, radius, radius])
-        return BoundingBox.from(bound: bound)
+        let bound = PNBound(min: [-radius, -radius, -radius],
+                            max: [radius, radius, radius])
+        return PNIBoundingBoxInteractor.default.from(bound: bound)
     }
 }

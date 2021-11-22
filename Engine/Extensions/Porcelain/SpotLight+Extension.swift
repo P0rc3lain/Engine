@@ -5,8 +5,8 @@
 import MetalBinding
 
 extension SpotLight {
-    var boundingBox: BoundingBox {
-        BoundingBox.projectionBounds(inverseProjection: projectionMatrixInverse)
+    var boundingBox: PNBoundingBox {
+        PNIBoundingBoxInteractor.default.from(inverseProjection: projectionMatrixInverse)
     }
     public static func make(color: simd_float3, intensity: Float, coneAngle: Float, index: Int) -> SpotLight {
         let projectionMatrix = simd_float4x4.perspectiveProjectionRightHand(fovyRadians: coneAngle,
