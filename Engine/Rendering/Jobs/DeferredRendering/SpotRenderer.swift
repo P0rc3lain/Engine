@@ -11,13 +11,13 @@ struct SpotRenderer {
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport
     private let inputTextures: [MTLTexture]
-    private let plane: PNGPUMesh
+    private let plane: PNMesh
     init?(pipelineState: MTLRenderPipelineState,
           inputTextures: [MTLTexture],
           device: MTLDevice,
           depthStencilState: MTLDepthStencilState,
           drawableSize: CGSize) {
-        guard let plane = PNGPUMesh.screenSpacePlane(device: device) else {
+        guard let plane = PNMesh.screenSpacePlane(device: device) else {
             return nil
         }
         self.pipelineState = pipelineState
@@ -28,7 +28,7 @@ struct SpotRenderer {
     }
     func draw(encoder: inout MTLRenderCommandEncoder,
               bufferStore: inout BufferStore,
-              scene: inout GPUSceneDescription,
+              scene: inout PNSceneDescription,
               shadowMap: MTLTexture) {
         guard !scene.spotLights.isEmpty else {
             return

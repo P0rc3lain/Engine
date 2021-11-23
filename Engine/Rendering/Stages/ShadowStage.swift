@@ -36,7 +36,7 @@ struct ShadowStage: Stage {
         self.omniLightShadowRenderer = omniLightShadowRenderer
     }
     mutating func draw(commandBuffer: inout MTLCommandBuffer,
-                       scene: inout GPUSceneDescription,
+                       scene: inout PNSceneDescription,
                        bufferStore: inout BufferStore,
                        arrangement: inout PNArrangement) {
         if !scene.spotLights.isEmpty {

@@ -2,15 +2,15 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-public struct PNMesh<DataType, IndexType, PrimitiveType>: Identifiable {
+public struct PNMesh: Identifiable {
     public let name: String
     public let boundingBox: PNBoundingBox
-    public let vertexBuffer: PNDataBuffer<DataType>
-    public let pieceDescriptions: [PNPieceDescription<DataType, IndexType, PrimitiveType>]
+    public let vertexBuffer: PNDataBuffer
+    public let pieceDescriptions: [PNPieceDescription]
     public init(name: String,
                 boundingBox: PNBoundingBox,
-                vertexBuffer: PNDataBuffer<DataType>,
-                pieceDescriptions: [PNPieceDescription<DataType, IndexType, PrimitiveType>]) {
+                vertexBuffer: PNDataBuffer,
+                pieceDescriptions: [PNPieceDescription]) {
         self.name = name
         self.boundingBox = boundingBox
         self.vertexBuffer = vertexBuffer

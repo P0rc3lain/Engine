@@ -25,7 +25,7 @@ struct OmniShadowRenderer {
         var rotations = OmniShadowRenderer.rotationMatrices
         self.rotationsBuffer.upload(data: &rotations)
     }
-    private func generateRenderMasks(scene: inout GPUSceneDescription,
+    private func generateRenderMasks(scene: inout PNSceneDescription,
                                      arrangement: inout PNArrangement) -> [[[Bool]]] {
         let rotations = simd_quatf.environment
         let interactor = PNIBoundingBoxInteractor.default
@@ -47,7 +47,7 @@ struct OmniShadowRenderer {
         }
     }
     func draw(encoder: inout MTLRenderCommandEncoder,
-              scene: inout GPUSceneDescription,
+              scene: inout PNSceneDescription,
               dataStore: inout BufferStore,
               arrangement: inout PNArrangement) {
         guard !scene.omniLights.isEmpty else {

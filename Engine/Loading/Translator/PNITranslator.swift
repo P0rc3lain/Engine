@@ -12,8 +12,8 @@ public struct PNITranslator: PNTranslator {
     public init(device: MTLDevice) {
         self.device = device
     }
-    public func process(asset: MDLAsset) -> GPUSceneDescription? {
-        var scene = RamSceneDescription()
+    public func process(asset: MDLAsset) -> PNSceneDescription? {
+        var scene = PNSceneDescription()
         asset.walk { object in
             scene.entityNames.append(object.path)
             let parentIdx = parentIndex(object: object, scene: &scene)
@@ -38,15 +38,15 @@ public struct PNITranslator: PNTranslator {
             }
         }
         validateScene(scene: &scene)
-        return scene.upload(device: device)
+        return scene
     }
-    private func validateScene(scene: inout RamSceneDescription) {
+    private func validateScene(scene: inout PNSceneDescription) {
         assert(scene.entityNames.count == scene.entities.count, "There must be the same number of names as objects")
         assert(Set(scene.entityNames).count == scene.entityNames.count, "Object names must be unique")
         assert(scene.entities.count == scene.skeletonReferences.count, "Each object should have reference to a skeleton")
     }
     private func add(animation: MDLAnimationBindComponent,
-                     scene: inout RamSceneDescription) {
+                     scene: inout PNSceneDescription) {
         guard let skeleton = animation.skeleton, !skeleton.jointPaths.isEmpty else {
             fatalError("Animation Bind Component is missing a skeleton or the jointPaths is empty")
         }
@@ -68,7 +68,7 @@ public struct PNITranslator: PNTranslator {
     private func add(camera: MDLCamera,
                      transform: PNAnimatedCoordinateSpace,
                      parentIdx: Int,
-                     scene: inout RamSceneDescription) {
+                     scene: inout PNSceneDescription) {
         scene.cameras.append(camera.porcelain)
         let entity = Entity(transform: transform,
                             type: .camera,
@@ -108,36 +108,46 @@ public struct PNITranslator: PNTranslator {
     private func add(mesh: MDLMesh,
                      transform: PNAnimatedCoordinateSpace,
                      parentIdx: Int,
-                     scene: inout RamSceneDescription) {
+                     scene: inout PNSceneDescription) {
         assert(mesh.vertexBuffers.count == 1, "Only object that have a single buffer assigned are supported")
         var buffer = mesh.vertexBuffers[0].rawData
         let bounds = getModelBounds(buffer: &buffer)
-        let dataBuffer = PNDataBuffer(buffer: buffer, length: buffer.count)
-        var pieceDescriptions = [PNRamPieceDescription]()
+        guard let deviceBuffer = device.makeBuffer(data: buffer) else {
+            return
+        }
+        let dataBuffer = PNDataBuffer(buffer: deviceBuffer, length: buffer.count)
+        var pieceDescriptions = [PNPieceDescription]()
         guard let submeshes = mesh.submeshes as? [MDLSubmesh] else {
             fatalError("Malformed object")
         }
         submeshes.forEach {
             if let material = $0.material,
                let uploadedMaterial = material.upload(device: device),
-               let indexBasedDraw = $0.porcelainSubmesh {
+               let submeshBuffer = device.makeBuffer(data: $0.indexBuffer.rawData),
+               let indexType = PNIndexBitDepth(modelIO: $0.indexType)?.metal,
+               let geometryType = PNPrimitiveType(modelIO: $0.geometryType)?.metal {
+                let submesh = PNSubmesh(indexBuffer: PNDataBuffer(buffer: submeshBuffer,
+                                                                  length: $0.indexBuffer.length),
+                                        indexCount: $0.indexCount,
+                                        indexType: indexType,
+                                        primitiveType: geometryType)
                 let description = PNPieceDescription(material: uploadedMaterial,
-                                                     drawDescription: indexBasedDraw)
+                                                     drawDescription: submesh)
                 pieceDescriptions.append(description)
             }
                     
         }
         let interactor = PNIBoundingBoxInteractor.default
-        scene.meshes.append(PNRamMesh(name: mesh.name,
-                                      boundingBox: interactor.from(bound: bounds),
-                                      vertexBuffer: dataBuffer,
-                                      pieceDescriptions: pieceDescriptions))
+        scene.meshes.append(PNMesh(name: mesh.name,
+                                   boundingBox: interactor.from(bound: bounds),
+                                   vertexBuffer: dataBuffer,
+                                   pieceDescriptions: pieceDescriptions))
         let entity = Entity(transform: transform,
                             type: .mesh,
                             referenceIdx: scene.meshes.count - 1)
         scene.entities.add(parentIdx: parentIdx, data: entity)
     }
-    private func parentIndex(object: MDLObject, scene: inout RamSceneDescription) -> Int {
+    private func parentIndex(object: MDLObject, scene: inout PNSceneDescription) -> Int {
         guard let parent = object.parent,
               let index = scene.entityNames.firstIndex(of: parent.path) else {
             return .nil

@@ -3,14 +3,15 @@
 //
 
 import MetalBinding
+import Metal
 
-public struct SceneDescription<DataType, IndexType, GeometryType, TextureType> {
+public struct PNSceneDescription {
     // MARK: - Capacity A
     public var entityNames = [String]()
     public var entities = FlatTree<Entity>()
     public var skeletonReferences = [Int]()
     // MARK: - Capacity C
-    public var meshes = [PNMesh<DataType, IndexType, GeometryType>]()
+    public var meshes = [PNMesh]()
     // MARK: - Capacity E
     var skeletons = [PNSkeleton]()
     public var paletteReferences = [Range<Int>]()
@@ -29,7 +30,7 @@ public struct SceneDescription<DataType, IndexType, GeometryType, TextureType> {
     public var spotLightNames = [String]()
     public var spotLights = [SpotLight]()
     // MARK: - Capacity L
-    public var skyMaps = [TextureType]()
+    public var skyMaps = [MTLTexture]()
     // MARK: - Capacity M
     public var activeCameraIdx = Int.nil
     public var sky = Int.nil

@@ -19,7 +19,7 @@ struct SpotShadowRenderer {
         self.depthStencilState = depthStencilState
         self.viewPort = viewPort
     }
-    private func generateRenderMasks(scene: inout GPUSceneDescription,
+    private func generateRenderMasks(scene: inout PNSceneDescription,
                                      arrangement: inout PNArrangement) -> [[Bool]] {
         return scene.spotLights.count.naturalExclusive.map { i in
             let cameraTransform = arrangement.positions[Int(scene.spotLights[i].idx)].modelMatrixInverse
@@ -33,7 +33,7 @@ struct SpotShadowRenderer {
         }
     }
     func draw(encoder: inout MTLRenderCommandEncoder,
-              scene: inout GPUSceneDescription,
+              scene: inout PNSceneDescription,
               dataStore: inout BufferStore,
               arrangement: inout PNArrangement) {
         guard !scene.spotLights.isEmpty else {

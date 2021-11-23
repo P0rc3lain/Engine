@@ -6,26 +6,26 @@ import Metal
 import MetalBinding
 import ModelIO
 
-extension PNGPUMesh {
-    static func cube(device: MTLDevice) -> PNGPUMesh? {
+extension PNMesh {
+    static func cube(device: MTLDevice) -> PNMesh? {
         guard let vertices = device.makeBuffer(array: cubeVertices),
               let indices = device.makeBuffer(array: cubeIndices) else {
             return nil
         }
-        let verticesBuffer = PNGPUDataBuffer(buffer: vertices, length: vertices.length)
-        let indicesBuffer = PNGPUDataBuffer(buffer: indices, length: indices.length)
-        let drawDescription = PNGPUSubmesh(indexBuffer: indicesBuffer,
-                                         indexCount: indices.length,
-                                         indexType: .uint16,
-                                         primitiveType: .triangle)
+        let verticesBuffer = PNDataBuffer(buffer: vertices, length: vertices.length)
+        let indicesBuffer = PNDataBuffer(buffer: indices, length: indices.length)
+        let drawDescription = PNSubmesh(indexBuffer: indicesBuffer,
+                                        indexCount: indices.length,
+                                        indexType: .uint16,
+                                        primitiveType: .triangle)
         let pieceDescription = PNPieceDescription(material: nil,
                                                   drawDescription: drawDescription)
         let boundingBox = PNIBoundingBoxInteractor.default.from(bound: PNBound(min: [-0.5, -0.5, -0.5],
                                                                                max: [0.5, 0.5, 0.5]))
-        return PNGPUMesh(name: "Cube",
-                         boundingBox: boundingBox,
-                         vertexBuffer: verticesBuffer,
-                         pieceDescriptions: [pieceDescription])
+        return PNMesh(name: "Cube",
+                      boundingBox: boundingBox,
+                      vertexBuffer: verticesBuffer,
+                      pieceDescriptions: [pieceDescription])
     }
     private static var cubeIndices: [UInt16] = [
         0, 3, 2, 2, 1, 0,
@@ -67,25 +67,25 @@ extension PNGPUMesh {
         VertexP(0.5, 0.5, -0.5),
         VertexP(0.5, 0.5, 0.5)
     ]
-    static func screenSpacePlane(device: MTLDevice) -> PNGPUMesh? {
+    static func screenSpacePlane(device: MTLDevice) -> PNMesh? {
         guard let indices = device.makeBuffer(array: planeIndices),
               let vertices = device.makeBuffer(array: planeVertices) else {
             return nil
         }
-        let indicesBuffer = PNGPUDataBuffer(buffer: indices, length: indices.length, offset: indices.offset)
-        let verticesBuffer = PNGPUDataBuffer(buffer: vertices, length: vertices.length, offset: vertices.offset)
-        let drawDescription = PNGPUSubmesh(indexBuffer: indicesBuffer,
-                                         indexCount: indicesBuffer.length / MemoryLayout<UInt16>.stride,
-                                         indexType: .uint16,
-                                         primitiveType: .triangle)
+        let indicesBuffer = PNDataBuffer(buffer: indices, length: indices.length, offset: indices.offset)
+        let verticesBuffer = PNDataBuffer(buffer: vertices, length: vertices.length, offset: vertices.offset)
+        let drawDescription = PNSubmesh(indexBuffer: indicesBuffer,
+                                        indexCount: indicesBuffer.length / MemoryLayout<UInt16>.stride,
+                                        indexType: .uint16,
+                                        primitiveType: .triangle)
         let pieceDescription = PNPieceDescription(material: nil,
                                                   drawDescription: drawDescription)
         let interactor = PNIBoundingBoxInteractor.default
-        return PNGPUMesh(name: "Plane",
-                         boundingBox: interactor.from(bound: PNBound(min: [-1, -1, 0],
-                                                                     max: [1, 1, 0])),
-                         vertexBuffer: verticesBuffer,
-                         pieceDescriptions: [pieceDescription])
+        return PNMesh(name: "Plane",
+                      boundingBox: interactor.from(bound: PNBound(min: [-1, -1, 0],
+                                                                  max: [1, 1, 0])),
+                      vertexBuffer: verticesBuffer,
+                      pieceDescriptions: [pieceDescription])
     }
     private static var planeVertices: [VertexPUV] = [
         VertexPUV(position: simd_float3(-1, -1, 0),

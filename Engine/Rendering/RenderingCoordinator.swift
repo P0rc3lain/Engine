@@ -27,7 +27,7 @@ struct RenderingCoordinator {
         self.bufferStore = bufferStore
         self.commandQueue = commandQueue
     }
-    mutating func draw(scene: inout GPUSceneDescription) {
+    mutating func draw(scene: inout PNSceneDescription) {
         guard scene.activeCameraIdx != .nil,
               var commandBuffer = commandQueue.makeCommandBuffer(),
               let drawable = view.currentDrawable,
@@ -53,7 +53,7 @@ struct RenderingCoordinator {
         commandBuffer.present(drawable)
         commandBuffer.commit()
     }
-    mutating func updatePalettes(scene: inout GPUSceneDescription) {
+    mutating func updatePalettes(scene: inout PNSceneDescription) {
         var continousPalette = [simd_float4x4]()
         scene.paletteReferences = []
         for index in scene.entities.indices {
@@ -63,7 +63,7 @@ struct RenderingCoordinator {
         }
         bufferStore.matrixPalettes.upload(data: &continousPalette)
     }
-    func generatePalette(objectIdx: Int, scene: inout GPUSceneDescription) -> [simd_float4x4] {
+    func generatePalette(objectIdx: Int, scene: inout PNSceneDescription) -> [simd_float4x4] {
         if scene.skeletonReferences[objectIdx] == .nil {
             return []
         } else {

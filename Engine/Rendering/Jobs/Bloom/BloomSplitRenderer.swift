@@ -11,14 +11,14 @@ struct BloomSplitRenderer {
     private let pipelineState: MTLRenderPipelineState
     private let viewPort: MTLViewport
     private let inputTexture: MTLTexture
-    private let plane: PNGPUMesh
+    private let plane: PNMesh
     private let gaussianBlur: MPSImageGaussianBlur
     let outputTexture: MTLTexture
     init?(pipelineState: MTLRenderPipelineState,
           inputTexture: MTLTexture,
           device: MTLDevice,
           drawableSize: CGSize) {
-        guard let plane = PNGPUMesh.screenSpacePlane(device: device),
+        guard let plane = PNMesh.screenSpacePlane(device: device),
               let outputTexture = device.makeTexture(descriptor: .bloomSplitColor(size: drawableSize)) else {
             return nil
         }

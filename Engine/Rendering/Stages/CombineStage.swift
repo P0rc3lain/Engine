@@ -57,7 +57,7 @@ struct CombineStage: Stage {
                           output: PNGPUSupply(color: [outputTexture]))
     }
     func draw(commandBuffer: inout MTLCommandBuffer,
-              scene: inout GPUSceneDescription,
+              scene: inout PNSceneDescription,
               bufferStore: inout BufferStore) {
         commandBuffer.pushDebugGroup("Light Pass")
         guard var encoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else {

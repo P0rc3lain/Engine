@@ -2,15 +2,17 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-public struct PNSubmesh<DataType, IndexType, GeometryType> {
-    public let indexBuffer: PNDataBuffer<DataType>
+import Metal
+
+public struct PNSubmesh {
+    public let indexBuffer: PNDataBuffer
     public let indexCount: Int
-    public let indexType: IndexType
-    public let primitiveType: GeometryType
-    public init(indexBuffer: PNDataBuffer<DataType>,
+    public let indexType: MTLIndexType
+    public let primitiveType: MTLPrimitiveType
+    public init(indexBuffer: PNDataBuffer,
                 indexCount: Int,
-                indexType: IndexType,
-                primitiveType: GeometryType) {
+                indexType: MTLIndexType,
+                primitiveType: MTLPrimitiveType) {
         self.indexBuffer = indexBuffer
         self.indexCount = indexCount
         self.indexType = indexType

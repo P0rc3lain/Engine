@@ -10,7 +10,7 @@ extension Postprocessor {
                      canvasSize: CGSize) -> Postprocessor? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRenderPipelineStatePostprocessor(library: library),
-              let plane = PNGPUMesh.screenSpacePlane(device: device) else {
+              let plane = PNMesh.screenSpacePlane(device: device) else {
             return nil
         }
         return Postprocessor(pipelineState: pipelineState,

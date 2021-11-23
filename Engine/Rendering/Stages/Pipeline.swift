@@ -49,7 +49,7 @@ struct Pipeline: Stage {
                           output: PNGPUSupply(color: postprocessStage.io.output.color))
     }
     mutating func draw(commandBuffer: inout MTLCommandBuffer,
-                       scene: inout GPUSceneDescription,
+                       scene: inout PNSceneDescription,
                        bufferStore: inout BufferStore,
                        arrangement: inout PNArrangement) {
         shadowStage.draw(commandBuffer: &commandBuffer,

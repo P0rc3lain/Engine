@@ -12,13 +12,13 @@ public class PNISceneLoader: PNSceneLoader {
         self.translator = translator
         self.assetLoader = assetLoader
     }
-    public func resource(from url: URL) -> GPUSceneDescription? {
+    public func resource(from url: URL) -> PNSceneDescription? {
         guard let asset = assetLoader.resource(from: url) else {
             return nil
         }
         return translator.process(asset: asset)
     }
-    public func resource(name: String, extension: String, bundle: Bundle) -> GPUSceneDescription? {
+    public func resource(name: String, extension: String, bundle: Bundle) -> PNSceneDescription? {
         guard let asset = assetLoader.resource(name: name, extension: `extension`, bundle: bundle) else {
             return nil
         }

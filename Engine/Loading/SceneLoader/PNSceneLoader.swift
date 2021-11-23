@@ -3,6 +3,6 @@
 //
 
 public protocol PNSceneLoader {
-    func resource(from url: URL) -> GPUSceneDescription?
-    func resource(name: String, extension: String, bundle: Bundle) -> GPUSceneDescription?
+    func resource(from url: URL) -> PNSceneDescription?
+    func resource(name: String, extension: String, bundle: Bundle) -> PNSceneDescription?
 }

@@ -10,11 +10,11 @@ import simd
 struct BloomMergeRenderer {
     private let pipelineState: MTLRenderPipelineState
     private let viewPort: MTLViewport
-    private let plane: PNGPUMesh
+    private let plane: PNMesh
     init?(pipelineState: MTLRenderPipelineState,
           device: MTLDevice,
           drawableSize: CGSize) {
-        guard let plane = PNGPUMesh.screenSpacePlane(device: device) else {
+        guard let plane = PNMesh.screenSpacePlane(device: device) else {
             return nil
         }
         self.pipelineState = pipelineState

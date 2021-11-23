@@ -10,10 +10,10 @@ struct Postprocessor {
     private let pipelineState: MTLRenderPipelineState
     private let inputTexture: MTLTexture
     private let viewPort: MTLViewport
-    private let plane: PNGPUMesh
+    private let plane: PNMesh
     init(pipelineState: MTLRenderPipelineState,
          inputTexture: MTLTexture,
-         plane: PNGPUMesh,
+         plane: PNMesh,
          canvasSize: CGSize) {
         self.inputTexture = inputTexture
         self.pipelineState = pipelineState

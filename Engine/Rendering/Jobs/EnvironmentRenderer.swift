@@ -10,18 +10,18 @@ struct EnvironmentRenderer {
     private let pipelineState: MTLRenderPipelineState
     private let depthStentilState: MTLDepthStencilState
     private let viewPort: MTLViewport
-    private let cube: PNGPUMesh
+    private let cube: PNMesh
     init(pipelineState: MTLRenderPipelineState,
          depthStentilState: MTLDepthStencilState,
          drawableSize: CGSize,
-         cube: PNGPUMesh) {
+         cube: PNMesh) {
         self.pipelineState = pipelineState
         self.depthStentilState = depthStentilState
         self.cube = cube
         self.viewPort = .porcelain(size: drawableSize)
     }
     func draw(encoder: inout MTLRenderCommandEncoder,
-              scene: inout GPUSceneDescription,
+              scene: inout PNSceneDescription,
               bufferStore: inout BufferStore) {
         if scene.sky == .nil {
             return

@@ -6,9 +6,9 @@ import MetalKit
 
 public class Engine {
     private let view: MTKView
-    public var sceneDescription: GPUSceneDescription
+    public var sceneDescription: PNSceneDescription
     private var coordinator: RenderingCoordinator
-    public init?(view: MTKView, renderingSize: CGSize, sceneDescription: GPUSceneDescription) {
+    public init?(view: MTKView, renderingSize: CGSize, sceneDescription: PNSceneDescription) {
         guard let coordinator = RenderingCoordinator(view: view,
                                                      renderingSize: renderingSize) else {
             return nil

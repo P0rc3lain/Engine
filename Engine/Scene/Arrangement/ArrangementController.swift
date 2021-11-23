@@ -5,12 +5,11 @@
 import MetalBinding
 
 struct ArrangementController {
-    static func arrangement<DataType, IndexType, GeometryType, TextureType>(scene: inout SceneDescription<DataType, IndexType, GeometryType, TextureType>) -> PNArrangement {
+    static func arrangement(scene: inout PNSceneDescription) -> PNArrangement {
         var uniforms = modelUniforms(tree: &scene.entities)
         return PNArrangement(positions: uniforms, boundingBoxes: boundingBoxes(scene: &scene, uniforms: &uniforms))
     }
-    private static func boundingBoxes<DataType, IndexType, GeometryType, TextureType>(scene: inout SceneDescription<DataType, IndexType, GeometryType, TextureType>,
-                                                                                      uniforms: inout [ModelUniforms]) -> [PNBoundingBox] {
+    private static func boundingBoxes(scene: inout PNSceneDescription, uniforms: inout [ModelUniforms]) -> [PNBoundingBox] {
         var boundingBoxes = [PNBoundingBox](minimalCapacity: scene.entities.count)
         let interactor = PNIBoundingBoxInteractor.default
         for i in scene.entities.indices {

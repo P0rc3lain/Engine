@@ -5,5 +5,5 @@
 import ModelIO
 
 public protocol PNTranslator {
-    func process(asset: MDLAsset) -> GPUSceneDescription?
+    func process(asset: MDLAsset) -> PNSceneDescription?
 }

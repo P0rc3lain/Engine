@@ -2,11 +2,11 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-public struct PNPieceDescription<DataType, IndexType, GeometryType> {
+public struct PNPieceDescription {
     public let material: PNMaterial?
-    public let drawDescription: PNSubmesh<DataType, IndexType, GeometryType>
+    public let drawDescription: PNSubmesh
     public init(material: PNMaterial?,
-                drawDescription: PNSubmesh<DataType, IndexType, GeometryType>) {
+                drawDescription: PNSubmesh) {
         self.material = material
         self.drawDescription = drawDescription
     }

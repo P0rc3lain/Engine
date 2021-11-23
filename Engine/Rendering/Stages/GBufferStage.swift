@@ -24,7 +24,7 @@ struct GBufferStage: Stage {
                                               stencil: [stencil]))
     }
     mutating func draw(commandBuffer: inout MTLCommandBuffer,
-                       scene: inout GPUSceneDescription,
+                       scene: inout PNSceneDescription,
                        bufferStore: inout BufferStore,
                        arrangement: inout PNArrangement) {
         guard var gBufferEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: gBufferRenderPassDescriptor) else {

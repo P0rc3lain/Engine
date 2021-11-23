@@ -20,7 +20,7 @@ struct GBufferRenderer {
         self.depthStencilState = depthStencilState
         self.viewPort = .porcelain(size: drawableSize)
     }
-    private func generateRenderMask(scene: inout GPUSceneDescription,
+    private func generateRenderMask(scene: inout PNSceneDescription,
                                      arrangement: inout PNArrangement) -> [Bool] {
         let cameraTransform = arrangement.positions[scene.activeCameraIdx].modelMatrixInverse
         let cameraIndex = scene.entities[scene.activeCameraIdx].data.referenceIdx
@@ -32,7 +32,7 @@ struct GBufferRenderer {
                                              boundingBox: cameraAlignedBoundingBox)
     }
     func draw(encoder: inout MTLRenderCommandEncoder,
-              scene: inout GPUSceneDescription,
+              scene: inout PNSceneDescription,
               dataStore: inout BufferStore,
               arrangement: inout PNArrangement) {
         let mask = generateRenderMask(scene: &scene, arrangement: &arrangement)
