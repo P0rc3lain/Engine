@@ -16,9 +16,6 @@ extension RamSceneDescription {
         // MARK: - Capacity E
         description.skeletons = skeletons
         description.paletteReferences = paletteReferences
-        description.animationReferences = animationReferences
-        // MARK: - Capacity F
-        description.skeletalAnimations = skeletalAnimations
         // MARK: - Capacity G
         description.cameras = cameras
         // MARK: - Capacity H

@@ -14,9 +14,6 @@ public struct SceneDescription<DataType, IndexType, GeometryType, TextureType> {
     // MARK: - Capacity E
     var skeletons = [PNSkeleton]()
     public var paletteReferences = [Range<Int>]()
-    public var animationReferences = [Range<Int>]()
-    // MARK: - Capacity F
-    public var skeletalAnimations = [PNAnimatedSkeleton]()
     // MARK: - Capacity G
     public var cameras = [Camera]()
     // MARK: - Capacity H

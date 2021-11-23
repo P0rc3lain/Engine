@@ -5,17 +5,19 @@
 import simd
 
 struct PNISkeleton: PNSkeleton {
-    // World coordinates
     var bindTransforms: [B2MTransform]
     var inverseBindTransforms: [M2BTransform]
+    var animations: [PNAnimatedSkeleton]
     var parentIndices: [Index]
     init(bindTransforms: [BLTransform],
-         parentIndices: [Int]) {
+         parentIndices: [Int],
+         animations: [PNAnimatedSkeleton]) {
         assert(parentIndices.count == bindTransforms.count,
                "Each transform must have a reference to its parent")
         self.bindTransforms = PNISkeleton.computeBindTransforms(bindTransforms: bindTransforms,
                                                                 parentIndices: parentIndices)
         self.inverseBindTransforms = bindTransforms.map { $0.inverse }
+        self.animations = animations
         self.parentIndices = parentIndices
     }
     func calculatePose(animationPose: [BLTransform]) -> [B2MTransform] {

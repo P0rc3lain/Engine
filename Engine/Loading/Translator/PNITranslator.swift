@@ -52,13 +52,13 @@ public struct PNITranslator: PNTranslator {
         }
         if let jointAnimation = animation.jointAnimation as? MDLPackedJointAnimation {
             assert(skeleton.jointPaths == jointAnimation.jointPaths, "Skeleton and animation must describe exactu number of joints")
-            scene.skeletalAnimations.append(PNAnimatedSkeleton(translation: PNAnySampleProvider(jointAnimation.translations.porcelain),
-                                                               rotation: PNAnySampleProvider(jointAnimation.rotations.porcelain),
-                                                               scale: PNAnySampleProvider(jointAnimation.scales.porcelain)))
-            // TODO use geometry bind transform
+            let animation = PNAnimatedSkeleton(translation: PNAnySampleProvider(jointAnimation.translations.porcelain),
+                                               rotation: PNAnySampleProvider(jointAnimation.rotations.porcelain),
+                                               scale: PNAnySampleProvider(jointAnimation.scales.porcelain))
+            let parentIndices = jointAnimation.jointPaths.map { parentIndex(jointPaths: jointAnimation.jointPaths, jointPath: $0) }
             let skeleton = PNISkeleton(bindTransforms: skeleton.jointBindTransforms.float4x4Array,
-                                       parentIndices: jointAnimation.jointPaths.map { parentIndex(jointPaths: jointAnimation.jointPaths, jointPath: $0) })
-            scene.animationReferences.append(scene.skeletalAnimations.count - 1 ..< scene.skeletalAnimations.count)
+                                       parentIndices: parentIndices,
+                                       animations: [animation])
             scene.skeletons.append(skeleton)
             scene.skeletonReferences.append(scene.skeletons.count - 1)
         } else {

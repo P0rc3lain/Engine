@@ -69,9 +69,10 @@ struct RenderingCoordinator {
         } else {
             let skeletonIdx = scene.skeletonReferences[objectIdx]
             let skeleton = scene.skeletons[skeletonIdx]
-            let animationReference = scene.animationReferences[skeletonIdx]
             let date = Date().timeIntervalSince1970
-            let animation = scene.skeletalAnimations[animationReference.lowerBound]
+            guard let animation = skeleton.animations.first else {
+                return []
+            }
             let transformations = animation.localTransformation(at: date, interpolator: PNIInterpolator())
             return skeleton.calculatePose(animationPose: transformations)
         }
