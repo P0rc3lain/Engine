@@ -6,7 +6,7 @@ import Foundation
 import Metal
 
 struct PostprocessStage: Stage {
-    var io: GPUIO
+    var io: PNGPUIO
     private var postProcessor: Postprocessor
     private var postprocessRenderPassDescriptor: MTLRenderPassDescriptor
     init?(device: MTLDevice, inputTexture: MTLTexture, renderingSize: CGSize) {
@@ -18,8 +18,8 @@ struct PostprocessStage: Stage {
             return nil
         }
         self.postProcessor = postProcessor
-        self.io = GPUIO(input: GPUSupply(color: [inputTexture]),
-                        output: GPUSupply(color: [outputTexture]))
+        self.io = PNGPUIO(input: PNGPUSupply(color: [inputTexture]),
+                          output: PNGPUSupply(color: [outputTexture]))
     }
     func draw(commandBuffer: inout MTLCommandBuffer) {
         guard let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: postprocessRenderPassDescriptor) else {

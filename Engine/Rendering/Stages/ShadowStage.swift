@@ -5,7 +5,7 @@
 import Metal
 
 struct ShadowStage: Stage {
-    var io: GPUIO
+    var io: PNGPUIO
     private var omniLightShadowRenderPassDescriptor: MTLRenderPassDescriptor
     private var spotLightShadowRenderPassDescriptor: MTLRenderPassDescriptor
     private var omniLightShadowRenderer: OmniShadowRenderer
@@ -30,8 +30,8 @@ struct ShadowStage: Stage {
                                                                     renderingSize: size) else {
             return nil
         }
-        self.io = GPUIO(input: .empty,
-                        output: GPUSupply(depth: [spotLightTextures, omniLightTextures]))
+        self.io = PNGPUIO(input: .empty,
+                          output: PNGPUSupply(depth: [spotLightTextures, omniLightTextures]))
         self.spotLightShadowRenderer = spotLightShadowRenderer
         self.omniLightShadowRenderer = omniLightShadowRenderer
     }

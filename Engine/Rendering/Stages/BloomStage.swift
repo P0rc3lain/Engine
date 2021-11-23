@@ -6,7 +6,7 @@ import Metal
 import MetalPerformanceShaders
 
 struct BloomStage: Stage {
-    var io: GPUIO
+    var io: PNGPUIO
     private var bloomSplitRenderer: BloomSplitRenderer
     private var bloomMergeRenderer: BloomMergeRenderer
     private var bloomSplitRenderPassDescriptor: MTLRenderPassDescriptor
@@ -23,8 +23,8 @@ struct BloomStage: Stage {
         }
         self.bloomSplitRenderer = bloomSplitRenderer
         self.bloomMergeRenderer = bloomMergeRenderer
-        self.io = GPUIO(input: GPUSupply(color: [input]),
-                        output: GPUSupply(color: [outputTexture]))
+        self.io = PNGPUIO(input: PNGPUSupply(color: [input]),
+                          output: PNGPUSupply(color: [outputTexture]))
     }
     mutating func draw(commandBuffer: inout MTLCommandBuffer) {
         commandBuffer.pushDebugGroup("Bloom Pass")

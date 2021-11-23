@@ -6,7 +6,7 @@ import Metal
 import MetalBinding
 
 struct GBufferStage: Stage {
-    var io: GPUIO
+    var io: PNGPUIO
     private var gBufferRenderPassDescriptor: MTLRenderPassDescriptor
     private let gBufferRenderer: GBufferRenderer
     init?(device: MTLDevice, renderingSize: CGSize) {
@@ -19,8 +19,9 @@ struct GBufferStage: Stage {
             return nil
         }
         self.gBufferRenderer = gBufferRenderer
-        self.io = GPUIO(input: .empty, output: GPUSupply(color: [arTexture, nmTexture, prTexture],
-                                                         stencil: [stencil]))
+        self.io = PNGPUIO(input: .empty,
+                          output: PNGPUSupply(color: [arTexture, nmTexture, prTexture],
+                                              stencil: [stencil]))
     }
     mutating func draw(commandBuffer: inout MTLCommandBuffer,
                        scene: inout GPUSceneDescription,

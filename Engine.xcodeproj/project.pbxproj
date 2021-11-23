@@ -138,8 +138,8 @@
 		5670EC0B2735D47900375194 /* BloomMergeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC0A2735D47900375194 /* BloomMergeRenderer.swift */; };
 		5670EC0D2735D5BF00375194 /* BloomMergeRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC0C2735D5BF00375194 /* BloomMergeRenderer+Extension.swift */; };
 		5670EC122736A1BE00375194 /* Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC112736A1BE00375194 /* Stage.swift */; };
-		5670EC142736A29100375194 /* GPUIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC132736A29100375194 /* GPUIO.swift */; };
-		5670EC162736A2AE00375194 /* GPUSupply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC152736A2AE00375194 /* GPUSupply.swift */; };
+		5670EC142736A29100375194 /* PNGPUIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC132736A29100375194 /* PNGPUIO.swift */; };
+		5670EC162736A2AE00375194 /* PNGPUSupply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC152736A2AE00375194 /* PNGPUSupply.swift */; };
 		5670EC182736A36300375194 /* BloomStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC172736A36300375194 /* BloomStage.swift */; };
 		5670EC1B2736AE4B00375194 /* SSAOStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC1A2736AE4B00375194 /* SSAOStage.swift */; };
 		5670EC1D2736B8BC00375194 /* GBufferStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC1C2736B8BC00375194 /* GBufferStage.swift */; };
@@ -347,8 +347,8 @@
 		5670EC0A2735D47900375194 /* BloomMergeRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloomMergeRenderer.swift; sourceTree = "<group>"; };
 		5670EC0C2735D5BF00375194 /* BloomMergeRenderer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BloomMergeRenderer+Extension.swift"; sourceTree = "<group>"; };
 		5670EC112736A1BE00375194 /* Stage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stage.swift; sourceTree = "<group>"; };
-		5670EC132736A29100375194 /* GPUIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPUIO.swift; sourceTree = "<group>"; };
-		5670EC152736A2AE00375194 /* GPUSupply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPUSupply.swift; sourceTree = "<group>"; };
+		5670EC132736A29100375194 /* PNGPUIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNGPUIO.swift; sourceTree = "<group>"; };
+		5670EC152736A2AE00375194 /* PNGPUSupply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNGPUSupply.swift; sourceTree = "<group>"; };
 		5670EC172736A36300375194 /* BloomStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloomStage.swift; sourceTree = "<group>"; };
 		5670EC1A2736AE4B00375194 /* SSAOStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSAOStage.swift; sourceTree = "<group>"; };
 		5670EC1C2736B8BC00375194 /* GBufferStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GBufferStage.swift; sourceTree = "<group>"; };
@@ -861,8 +861,8 @@
 		5670EC202736C1E400375194 /* IO */ = {
 			isa = PBXGroup;
 			children = (
-				5670EC132736A29100375194 /* GPUIO.swift */,
-				5670EC152736A2AE00375194 /* GPUSupply.swift */,
+				5670EC132736A29100375194 /* PNGPUIO.swift */,
+				5670EC152736A2AE00375194 /* PNGPUSupply.swift */,
 			);
 			path = IO;
 			sourceTree = "<group>";
@@ -1305,7 +1305,7 @@
 				561667282719E2CD000063B1 /* EnvironmentRenderer+Extension.swift in Sources */,
 				560C18D9273ACC0100459AEF /* OmniShadowRenderer+Extension.swift in Sources */,
 				5616670B2719E2CD000063B1 /* PieceDescription+Extension.swift in Sources */,
-				5670EC142736A29100375194 /* GPUIO.swift in Sources */,
+				5670EC142736A29100375194 /* PNGPUIO.swift in Sources */,
 				561667412719E2CD000063B1 /* PNMaterial.swift in Sources */,
 				563BFC81272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift in Sources */,
 				563C9C1F27387F6B0014CFF3 /* ShadowStage.swift in Sources */,
@@ -1445,7 +1445,7 @@
 				5629FBE727491DDB005476AF /* PNAnySampleProvider.swift in Sources */,
 				561667322719E2CD000063B1 /* PNSubmesh+Alias.swift in Sources */,
 				561667122719E2CD000063B1 /* Float+Extension.swift in Sources */,
-				5670EC162736A2AE00375194 /* GPUSupply.swift in Sources */,
+				5670EC162736A2AE00375194 /* PNGPUSupply.swift in Sources */,
 				560C18D7273AC71100459AEF /* OmniLight+Extension.swift in Sources */,
 				5616673C2719E2CD000063B1 /* PNIndexBitDepth.swift in Sources */,
 				563BFC9527289A3B0003EDB7 /* MDLAnimatedQuaternionArray+Extension.swift in Sources */,

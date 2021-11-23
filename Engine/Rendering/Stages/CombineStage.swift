@@ -6,7 +6,7 @@ import Foundation
 import Metal
 
 struct CombineStage: Stage {
-    var io: GPUIO
+    var io: PNGPUIO
     private var renderPassDescriptor: MTLRenderPassDescriptor
     private var environmentRenderer: EnvironmentRenderer
     private var omniRenderer: OmniRenderer
@@ -18,7 +18,7 @@ struct CombineStage: Stage {
     private var ssaoTexture: MTLTexture
     init?(device: MTLDevice,
           renderingSize: CGSize,
-          gBufferOutput: GPUSupply,
+          gBufferOutput: PNGPUSupply,
           ssaoTexture: MTLTexture,
           spotLightShadows: MTLTexture,
           pointLightsShadows: MTLTexture) {
@@ -52,9 +52,9 @@ struct CombineStage: Stage {
         self.spotLightShadows = spotLightShadows
         self.directionalRenderer = directionalRenderer
         self.pointLightsShadows = pointLightsShadows
-        self.io = GPUIO(input: GPUSupply(color: gBufferOutput.color + [ssaoTexture],
-                                         stencil: gBufferOutput.stencil),
-                        output: GPUSupply(color: [outputTexture]))
+        self.io = PNGPUIO(input: PNGPUSupply(color: gBufferOutput.color + [ssaoTexture],
+                                             stencil: gBufferOutput.stencil),
+                          output: PNGPUSupply(color: [outputTexture]))
     }
     func draw(commandBuffer: inout MTLCommandBuffer,
               scene: inout GPUSceneDescription,

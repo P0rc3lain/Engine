@@ -6,7 +6,7 @@ import Metal
 import MetalPerformanceShaders
 
 struct SSAOStage: Stage {
-    var io: GPUIO
+    var io: PNGPUIO
     private let gaussTexture: MTLTexture
     private let gaussianBlur: MPSImageGaussianBlur
     private var ssaoRenderPassDescriptor: MTLRenderPassDescriptor
@@ -27,8 +27,8 @@ struct SSAOStage: Stage {
         }
         self.ssaoRenderer = ssaoRenderer
         self.ssaoRenderPassDescriptor = .ssao(device: device, size: renderingSize)
-        self.io = GPUIO(input: GPUSupply(color: [prTexture, nmTexture]),
-                        output: GPUSupply(color: [gaussTexture]))
+        self.io = PNGPUIO(input: PNGPUSupply(color: [prTexture, nmTexture]),
+                          output: PNGPUSupply(color: [gaussTexture]))
         self.gaussianBlur = MPSImageGaussianBlur(device: device,
                                                  sigma: blurSigma)
         self.gaussTexture = gaussTexture

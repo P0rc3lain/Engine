@@ -5,5 +5,5 @@
 import Metal
 
 protocol Stage {
-    var io: GPUIO { get }
+    var io: PNGPUIO { get }
 }

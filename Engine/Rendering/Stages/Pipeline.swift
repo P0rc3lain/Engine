@@ -6,7 +6,7 @@ import Metal
 import MetalBinding
 
 struct Pipeline: Stage {
-    var io: GPUIO
+    var io: PNGPUIO
     private var combineStage: CombineStage
     private var ssaoStage: SSAOStage
     private var bloomStage: BloomStage
@@ -45,8 +45,8 @@ struct Pipeline: Stage {
         self.ssaoStage = ssaoStage
         self.postprocessStage = postprocessStage
         self.shadowStage = shadowStage
-        self.io = GPUIO(input: .empty,
-                        output: GPUSupply(color: postprocessStage.io.output.color))
+        self.io = PNGPUIO(input: .empty,
+                          output: PNGPUSupply(color: postprocessStage.io.output.color))
     }
     mutating func draw(commandBuffer: inout MTLCommandBuffer,
                        scene: inout GPUSceneDescription,
