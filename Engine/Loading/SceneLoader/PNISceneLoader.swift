@@ -8,7 +8,7 @@ import Metal
 public class PNISceneLoader: PNSceneLoader {
     private let assetLoader: PNAssetLoader
     private let translator: PNTranslator
-    init(device: MTLDevice, assetLoader: PNAssetLoader, translator: PNTranslator) {
+    public init(device: MTLDevice, assetLoader: PNAssetLoader, translator: PNTranslator) {
         self.translator = translator
         self.assetLoader = assetLoader
     }

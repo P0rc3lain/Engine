@@ -4,15 +4,16 @@
 
 import ModelIO
 
-struct PNIAssetLoader: PNAssetLoader {
-    func resource(from url: URL) -> MDLAsset? {
+public struct PNIAssetLoader: PNAssetLoader {
+    public init() {}
+    public func resource(from url: URL) -> MDLAsset? {
         guard let asset = self.retrieve(url: url) else {
             return nil
         }
         self.adjustAssetToEngineNeeds(asset: asset)
         return asset
     }
-    func resource(name: String, extension: String, bundle: Bundle) -> MDLAsset? {
+    public func resource(name: String, extension: String, bundle: Bundle) -> MDLAsset? {
         guard let url = bundle.url(forResource: name, withExtension: `extension`) else {
             return nil
         }
