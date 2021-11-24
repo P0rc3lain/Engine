@@ -16,7 +16,7 @@ public struct PNSceneDescription {
     var skeletons = [PNSkeleton]()
     public var paletteReferences = [Range<Int>]()
     // MARK: - Capacity G
-    public var cameras = [Camera]()
+    public var cameras = [PNCamera]()
     // MARK: - Capacity H
     public var omniLightNames = [String]()
     public var omniLights = [OmniLight]()

@@ -17,4 +17,13 @@ extension MDLObject {
             children[index].walk(handler: handler)
         }
     }
+    func walk<T>(handler: (MDLObject, T?) -> T?) {
+        walk(handler: handler, initialValue: nil)
+    }
+    func walk<T>(handler: (MDLObject, T?) -> T?, initialValue: T?) {
+        let value = handler(self, initialValue)
+        for index in 0 ..< children.objects.count {
+            children[index].walk(handler: handler, initialValue: value)
+        }
+    }
 }

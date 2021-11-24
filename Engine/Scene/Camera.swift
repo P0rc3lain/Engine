@@ -4,7 +4,7 @@
 
 import simd
 
-public struct Camera: Identifiable {
+public struct PNCamera: Identifiable {
     public let name: String
     let projectionMatrix: matrix_float4x4
     let projectionMatrixInverse: matrix_float4x4

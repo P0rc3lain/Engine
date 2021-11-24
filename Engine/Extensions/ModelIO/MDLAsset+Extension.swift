@@ -13,4 +13,12 @@ extension MDLAsset {
             self[index]?.walk(handler: handler)
         }
     }
+    func walk<T>(handler: (MDLObject, T?) -> T?) {
+        walk(handler: handler, initialValue: nil)
+    }
+    func walk<T>(handler: (MDLObject, T?) -> T?, initialValue: T?) {
+        for index in indices {
+            self[index]?.walk(handler: handler, initialValue: initialValue)
+        }
+    }
 }

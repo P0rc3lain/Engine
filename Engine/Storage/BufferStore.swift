@@ -32,7 +32,7 @@ struct BufferStore {
         self.directionalLights = PNAnyDynamicBuffer(directionalLights)
         self.spotLights = PNAnyDynamicBuffer(spotLights)
     }
-    mutating func upload(camera: inout Camera, index: Int) {
+    mutating func upload(camera: inout PNCamera, index: Int) {
         var uniforms = [CameraUniforms(projectionMatrix: camera.projectionMatrix, index: Int32(index))]
         cameras.upload(data: &uniforms)
     }
