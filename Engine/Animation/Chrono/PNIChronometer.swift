@@ -17,7 +17,7 @@
 // startTime = nil
 // pauseTime = nil
 
-struct Chronometer {
+struct PNIChronometer: PNChronometer {
     private var startTime: Date
     private var pauseTime: Date
     private var timeProducer: () -> Date
@@ -32,13 +32,13 @@ struct Chronometer {
     var isPaused: Bool {
         pauseTime != .nil
     }
-    static var running: Chronometer {
-        Chronometer(paused: false) {
+    static var running: PNIChronometer {
+        PNIChronometer(paused: false) {
             Date()
         }
     }
-    static var paused: Chronometer {
-        Chronometer(paused: true) {
+    static var paused: PNIChronometer {
+        PNIChronometer(paused: true) {
             Date()
         }
     }

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		560253D52726CA4800B3A13A /* Chronometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560253D42726CA4800B3A13A /* Chronometer.swift */; };
+		560253D52726CA4800B3A13A /* PNIChronometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560253D42726CA4800B3A13A /* PNIChronometer.swift */; };
 		560253D72726CCCA00B3A13A /* Chronometer+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560253D62726CCCA00B3A13A /* Chronometer+Tests.swift */; };
 		560C18D0273A832A00459AEF /* MTLFunctionConstantValues+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560C18CF273A832A00459AEF /* MTLFunctionConstantValues+Extension.swift */; };
 		560C18D3273ABDE700459AEF /* OmniShadowRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560C18D2273ABDE700459AEF /* OmniShadowRenderer.swift */; };
@@ -137,6 +137,7 @@
 		566795CD274EC074005993D7 /* PNITranscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566795CC274EC074005993D7 /* PNITranscriber.swift */; };
 		566795CF274ECD75005993D7 /* PNAmbientLightNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566795CE274ECD75005993D7 /* PNAmbientLightNode.swift */; };
 		566795D1274ECD7D005993D7 /* PNIAmbientLightNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566795D0274ECD7D005993D7 /* PNIAmbientLightNode.swift */; };
+		566795D4274EEA23005993D7 /* PNChronometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566795D3274EEA23005993D7 /* PNChronometer.swift */; };
 		5670EBDC273561FD00375194 /* Operator+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EBDB273561FD00375194 /* Operator+Extension.swift */; };
 		5670EC002735977900375194 /* BloomSplitRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EBFF2735977900375194 /* BloomSplitRenderer.swift */; };
 		5670EC052735A3EA00375194 /* BloomSplit.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC042735A3EA00375194 /* BloomSplit.metal */; };
@@ -218,7 +219,7 @@
 
 /* Begin PBXFileReference section */
 		5601396C255457D100FC1C45 /* Engine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Engine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		560253D42726CA4800B3A13A /* Chronometer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chronometer.swift; sourceTree = "<group>"; };
+		560253D42726CA4800B3A13A /* PNIChronometer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIChronometer.swift; sourceTree = "<group>"; };
 		560253D62726CCCA00B3A13A /* Chronometer+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chronometer+Tests.swift"; sourceTree = "<group>"; };
 		560C18CE273A819100459AEF /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		560C18CF273A832A00459AEF /* MTLFunctionConstantValues+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLFunctionConstantValues+Extension.swift"; sourceTree = "<group>"; };
@@ -352,6 +353,7 @@
 		566795CC274EC074005993D7 /* PNITranscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNITranscriber.swift; sourceTree = "<group>"; };
 		566795CE274ECD75005993D7 /* PNAmbientLightNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAmbientLightNode.swift; sourceTree = "<group>"; };
 		566795D0274ECD7D005993D7 /* PNIAmbientLightNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIAmbientLightNode.swift; sourceTree = "<group>"; };
+		566795D3274EEA23005993D7 /* PNChronometer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNChronometer.swift; sourceTree = "<group>"; };
 		5670EBDB273561FD00375194 /* Operator+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Operator+Extension.swift"; sourceTree = "<group>"; };
 		5670EBFF2735977900375194 /* BloomSplitRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloomSplitRenderer.swift; sourceTree = "<group>"; };
 		5670EC042735A3EA00375194 /* BloomSplit.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = BloomSplit.metal; sourceTree = "<group>"; };
@@ -776,9 +778,9 @@
 		563D0A2F2719FF5800F77B40 /* Animation */ = {
 			isa = PBXGroup;
 			children = (
+				566795D5274EEA5D005993D7 /* Chrono */,
 				5629FBE827492012005476AF /* Interpolation */,
 				5629FBDD27491A62005476AF /* AnimatedValue */,
-				560253D42726CA4800B3A13A /* Chronometer.swift */,
 				56270166272B54EB00071620 /* PNAnimatedTransform.swift */,
 			);
 			path = Animation;
@@ -871,6 +873,15 @@
 				566795CC274EC074005993D7 /* PNITranscriber.swift */,
 			);
 			path = Transcriber;
+			sourceTree = "<group>";
+		};
+		566795D5274EEA5D005993D7 /* Chrono */ = {
+			isa = PBXGroup;
+			children = (
+				566795D3274EEA23005993D7 /* PNChronometer.swift */,
+				560253D42726CA4800B3A13A /* PNIChronometer.swift */,
+			);
+			path = Chrono;
 			sourceTree = "<group>";
 		};
 		5670EC012735A3BB00375194 /* Bloom */ = {
@@ -1392,6 +1403,7 @@
 				566795BA274DC7F1005993D7 /* PNSceneTranslator.swift in Sources */,
 				56D7ED4D274C52E000A6C25D /* PNAssetLoader.swift in Sources */,
 				5688074A2747F10700C95F55 /* Int+Alias.swift in Sources */,
+				566795D4274EEA23005993D7 /* PNChronometer.swift in Sources */,
 				563575F42728486A00CE4988 /* PNAnimationSample.swift in Sources */,
 				5670EC272736EA2400375194 /* PostprocessStage.swift in Sources */,
 				5616671C2719E2CD000063B1 /* MTLStencilDescriptor+Extension.swift in Sources */,
@@ -1408,7 +1420,7 @@
 				566795CF274ECD75005993D7 /* PNAmbientLightNode.swift in Sources */,
 				566795C2274EA016005993D7 /* PNICameraNode.swift in Sources */,
 				56ADD2F6273707E200107E24 /* AmbientRenderer.metal in Sources */,
-				560253D52726CA4800B3A13A /* Chronometer.swift in Sources */,
+				560253D52726CA4800B3A13A /* PNIChronometer.swift in Sources */,
 				561667392719E2CD000063B1 /* PNPieceDescription.swift in Sources */,
 				56407B7D27206F5D00440CAC /* Vertex+Extension.swift in Sources */,
 				561667272719E2CD000063B1 /* MTLRenderPassDescriptor+Extension.swift in Sources */,

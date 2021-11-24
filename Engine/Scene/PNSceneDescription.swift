@@ -7,7 +7,6 @@ import Metal
 
 public struct PNSceneDescription {
     // MARK: - Capacity A
-    public var entityNames = [String]()
     public var entities = FlatTree<Entity>()
     public var skeletonReferences = [Int]()
     // MARK: - Capacity C
