@@ -4,7 +4,7 @@
 
 import Metal
 
-public protocol PNMaterial: Identifiable {
+public protocol PNMaterial {
     var albedo: MTLTexture { get }
     var roughness: MTLTexture { get }
     var normals: MTLTexture { get }

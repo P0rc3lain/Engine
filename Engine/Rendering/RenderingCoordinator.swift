@@ -27,7 +27,9 @@ struct RenderingCoordinator {
         self.bufferStore = bufferStore
         self.commandQueue = commandQueue
     }
-    mutating func draw(scene: inout PNSceneDescription) {
+    mutating func draw(sceneGraph: inout PNScene) {
+        let transcriber = PNITranscriber()
+        var scene = transcriber.transcribe(scene: sceneGraph)
         guard scene.activeCameraIdx != .nil,
               var commandBuffer = commandQueue.makeCommandBuffer(),
               let drawable = view.currentDrawable,

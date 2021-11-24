@@ -2,6 +2,6 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-protocol PNCameraNode: PNSceneNode {
+public protocol PNCameraNode: PNSceneNode {
     var camera: PNCamera { get }
 }

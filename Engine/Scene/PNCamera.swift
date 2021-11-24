@@ -4,13 +4,11 @@
 
 import simd
 
-public struct PNCamera: Identifiable {
-    public let name: String
+public struct PNCamera {
     let projectionMatrix: matrix_float4x4
     let projectionMatrixInverse: matrix_float4x4
     let boundingBox: PNBoundingBox
-    public init(name: String,
-                nearPlane: Float,
+    public init(nearPlane: Float,
                 farPlane: Float,
                 fovRadians: Float,
                 aspectRatio: Float) {
@@ -20,6 +18,5 @@ public struct PNCamera: Identifiable {
                                                                           farZ: farPlane)
         projectionMatrixInverse = projectionMatrix.inverse        
         boundingBox = PNIBoundingBoxInteractor.default.from(inverseProjection: projectionMatrixInverse)
-        self.name = name
     }
 }

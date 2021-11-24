@@ -8,7 +8,7 @@ struct PNISkeleton: PNSkeleton {
     var bindTransforms: [B2MTransform]
     var inverseBindTransforms: [M2BTransform]
     var animations: [PNAnimatedSkeleton]
-    var parentIndices: [Index]
+    var parentIndices: [PNIndex]
     init(bindTransforms: [BLTransform],
          parentIndices: [Int],
          animations: [PNAnimatedSkeleton]) {
@@ -28,7 +28,7 @@ struct PNISkeleton: PNSkeleton {
         }
     }
     private static func computeBindTransforms(bindTransforms: [BLTransform],
-                                              parentIndices: [Index]) -> [B2MTransform] {
+                                              parentIndices: [PNIndex]) -> [B2MTransform] {
         assert(bindTransforms.count == parentIndices.count,
                "There must be a parent index assigned to each transform")
         var transforms = [B2MTransform]()

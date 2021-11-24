@@ -6,7 +6,7 @@ import Metal
 import MetalBinding
 import ModelIO
 
-struct PNISceneTranslator: PNSceneTranslator {
+public struct PNISceneTranslator: PNSceneTranslator {
     private let device: MTLDevice
     public init(device: MTLDevice) {
         self.device = device
@@ -124,8 +124,7 @@ struct PNISceneTranslator: PNSceneTranslator {
 
         }
         let interactor = PNIBoundingBoxInteractor.default
-        return PNMesh(name: mesh.name,
-                      boundingBox: interactor.from(bound: bounds),
+        return PNMesh(boundingBox: interactor.from(bound: bounds),
                       vertexBuffer: dataBuffer,
                       pieceDescriptions: pieceDescriptions)
     }

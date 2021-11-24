@@ -22,8 +22,7 @@ extension PNMesh {
                                                   drawDescription: drawDescription)
         let boundingBox = PNIBoundingBoxInteractor.default.from(bound: PNBound(min: [-0.5, -0.5, -0.5],
                                                                                max: [0.5, 0.5, 0.5]))
-        return PNMesh(name: "Cube",
-                      boundingBox: boundingBox,
+        return PNMesh(boundingBox: boundingBox,
                       vertexBuffer: verticesBuffer,
                       pieceDescriptions: [pieceDescription])
     }
@@ -81,8 +80,7 @@ extension PNMesh {
         let pieceDescription = PNPieceDescription(material: nil,
                                                   drawDescription: drawDescription)
         let interactor = PNIBoundingBoxInteractor.default
-        return PNMesh(name: "Plane",
-                      boundingBox: interactor.from(bound: PNBound(min: [-1, -1, 0],
+        return PNMesh(boundingBox: interactor.from(bound: PNBound(min: [-1, -1, 0],
                                                                   max: [1, 1, 0])),
                       vertexBuffer: verticesBuffer,
                       pieceDescriptions: [pieceDescription])

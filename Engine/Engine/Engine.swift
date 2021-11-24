@@ -6,16 +6,16 @@ import MetalKit
 
 public class Engine {
     private let view: MTKView
-    public var sceneDescription: PNSceneDescription
+    public var scene: PNScene
     private var coordinator: RenderingCoordinator
-    public init?(view: MTKView, renderingSize: CGSize, sceneDescription: PNSceneDescription) {
+    public init?(view: MTKView, renderingSize: CGSize, scene: PNScene) {
         guard let coordinator = RenderingCoordinator(view: view,
                                                      renderingSize: renderingSize) else {
             return nil
         }
         self.view = view
         self.coordinator = coordinator
-        self.sceneDescription = sceneDescription
+        self.scene = scene
     }
     public func updateDrawableSize(drawableSize: CGSize) -> Bool {
         guard let updated = RenderingCoordinator(view: view,
@@ -26,6 +26,6 @@ public class Engine {
         return true
     }
     public func draw() {
-        coordinator.draw(scene: &sceneDescription)
+        coordinator.draw(sceneGraph: &scene)
     }
 }

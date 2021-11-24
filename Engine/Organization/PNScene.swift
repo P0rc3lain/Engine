@@ -3,5 +3,5 @@
 //
 
 public struct PNScene {
-    let rootNode: PNNode<PNSceneNode>
+    public let rootNode: PNNode<PNSceneNode>
 }
