@@ -2,10 +2,14 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-struct PNIWorkloadManager: PNWorkloadManager {
+public struct PNIWorkloadManager: PNWorkloadManager {
     private var bufferStore: BufferStore
     private var renderingCoordinator: PNRenderingCoordinator
-    mutating func draw(sceneGraph: inout PNScene) {
+    public init(bufferStore: BufferStore, renderingCoordinator: PNRenderingCoordinator) {
+        self.bufferStore = bufferStore
+        self.renderingCoordinator = renderingCoordinator
+    }
+    public mutating func draw(sceneGraph: inout PNScene) {
         let transcriber = PNITranscriber(transformCalculator: PNITransformCalculator(interpolator: PNIInterpolator()))
         var scene = transcriber.transcribe(scene: sceneGraph)
         bufferStore.matrixPalettes.upload(data: &scene.palettes)

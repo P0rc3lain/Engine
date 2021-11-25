@@ -4,12 +4,12 @@
 
 import MetalKit
 
-struct PNIRenderingCoordinatorFactory: PNRenderingCoordinatorFactory {
+public struct PNIRenderingCoordinatorFactory: PNRenderingCoordinatorFactory {
     private let view: MTKView
-    init(view: MTKView) {
+    public init(view: MTKView) {
         self.view = view
     }
-    func new(drawableSize: CGSize) -> PNRenderingCoordinator? {
+    public func new(drawableSize: CGSize) -> PNRenderingCoordinator? {
         PNIRenderingCoordinator(view: view, renderingSize: drawableSize)
     }
 }

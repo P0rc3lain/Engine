@@ -145,6 +145,8 @@
 		566795EB274FEE37005993D7 /* PNIWorkloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566795EA274FEE37005993D7 /* PNIWorkloadManager.swift */; };
 		566795ED274FF235005993D7 /* PNRenderingCoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566795EC274FF235005993D7 /* PNRenderingCoordinatorFactory.swift */; };
 		566795EF274FF240005993D7 /* PNIRenderingCoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566795EE274FF240005993D7 /* PNIRenderingCoordinatorFactory.swift */; };
+		566795F8274FFE72005993D7 /* PNWorkloadManagerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566795F6274FFE72005993D7 /* PNWorkloadManagerFactory.swift */; };
+		566795F9274FFE72005993D7 /* PNIWorkloadManagerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566795F7274FFE72005993D7 /* PNIWorkloadManagerFactory.swift */; };
 		5670EBDC273561FD00375194 /* Operator+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EBDB273561FD00375194 /* Operator+Extension.swift */; };
 		5670EC002735977900375194 /* BloomSplitRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EBFF2735977900375194 /* BloomSplitRenderer.swift */; };
 		5670EC052735A3EA00375194 /* BloomSplit.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC042735A3EA00375194 /* BloomSplit.metal */; };
@@ -368,6 +370,8 @@
 		566795EA274FEE37005993D7 /* PNIWorkloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIWorkloadManager.swift; sourceTree = "<group>"; };
 		566795EC274FF235005993D7 /* PNRenderingCoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNRenderingCoordinatorFactory.swift; sourceTree = "<group>"; };
 		566795EE274FF240005993D7 /* PNIRenderingCoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIRenderingCoordinatorFactory.swift; sourceTree = "<group>"; };
+		566795F6274FFE72005993D7 /* PNWorkloadManagerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNWorkloadManagerFactory.swift; sourceTree = "<group>"; };
+		566795F7274FFE72005993D7 /* PNIWorkloadManagerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNIWorkloadManagerFactory.swift; sourceTree = "<group>"; };
 		5670EBDB273561FD00375194 /* Operator+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Operator+Extension.swift"; sourceTree = "<group>"; };
 		5670EBFF2735977900375194 /* BloomSplitRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloomSplitRenderer.swift; sourceTree = "<group>"; };
 		5670EC042735A3EA00375194 /* BloomSplit.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = BloomSplit.metal; sourceTree = "<group>"; };
@@ -941,6 +945,8 @@
 			children = (
 				566795E8274FEE2B005993D7 /* PNWorkloadManager.swift */,
 				566795EA274FEE37005993D7 /* PNIWorkloadManager.swift */,
+				566795F7274FFE72005993D7 /* PNIWorkloadManagerFactory.swift */,
+				566795F6274FFE72005993D7 /* PNWorkloadManagerFactory.swift */,
 			);
 			path = Workload;
 			sourceTree = "<group>";
@@ -1450,6 +1456,7 @@
 				5616670A2719E2CD000063B1 /* MDLSubmesh+Extension.swift in Sources */,
 				56E8208F2727FD13002D58C3 /* Date+Extensioin.swift in Sources */,
 				566795EF274FF240005993D7 /* PNIRenderingCoordinatorFactory.swift in Sources */,
+				566795F9274FFE72005993D7 /* PNIWorkloadManagerFactory.swift in Sources */,
 				563C9C26273884700014CFF3 /* SpotShadowRenderer+Extension.swift in Sources */,
 				56D7ED45274C3AD400A6C25D /* PNIBoundingBoxInteractor.swift in Sources */,
 				5686BD9A273C1CD300329FA0 /* PNIStaticBuffer.swift in Sources */,
@@ -1507,6 +1514,7 @@
 				56924AE4271A181600FF3E06 /* PNIAnimatedValue+Alias.swift in Sources */,
 				5629FBEA2749201F005476AF /* PNInterpolator.swift in Sources */,
 				5616673E2719E2CD000063B1 /* PNSceneDescription.swift in Sources */,
+				566795F8274FFE72005993D7 /* PNWorkloadManagerFactory.swift in Sources */,
 				5616672D2719E2CD000063B1 /* PNFlatTree.swift in Sources */,
 				560C18D3273ABDE700459AEF /* OmniShadowRenderer.swift in Sources */,
 				569D9244273E81DD004FDFAC /* VertexP+Extension.swift in Sources */,
