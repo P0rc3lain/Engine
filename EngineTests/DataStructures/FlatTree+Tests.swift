@@ -6,20 +6,20 @@
 import simd
 import XCTest
 
-class FlatTreeTests: XCTestCase {
+class PNFlatTreeTests: XCTestCase {
     func testChildrenEmptyTree() throws {
-        let tree = FlatTree<Int>()
+        let tree = PNFlatTree<Int>()
         XCTAssertEqual(tree.children(of: -1), [])
         XCTAssertEqual(tree.children(of: 0), [])
     }
     func testSingleNodeTree() throws {
-        var tree = FlatTree<Int>()
+        var tree = PNFlatTree<Int>()
         tree.add(parentIdx: .nil, data: 100)
         XCTAssertEqual(tree.children(of: -1), [0])
         XCTAssertEqual(tree.children(of: 0), [])
     }
     func testMultipleChildren() throws {
-        var tree = FlatTree<Int>()
+        var tree = PNFlatTree<Int>()
         tree.add(parentIdx: .nil, data: 100)
         tree.add(parentIdx: 0, data: 101)
         tree.add(parentIdx: 0, data: 102)

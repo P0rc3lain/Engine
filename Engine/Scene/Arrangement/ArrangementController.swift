@@ -50,7 +50,7 @@ struct ArrangementController {
         }
         return boundingBoxes
     }
-    private static func modelUniforms(tree: inout EntityTree) -> [ModelUniforms] {
+    private static func modelUniforms(tree: inout PNEntityTree) -> [ModelUniforms] {
         if tree.isEmpty {
             return []
         }

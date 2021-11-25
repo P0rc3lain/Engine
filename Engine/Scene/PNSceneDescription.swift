@@ -7,13 +7,13 @@ import Metal
 
 public struct PNSceneDescription {
     // MARK: - Capacity A
-    public var entities = FlatTree<Entity>()
-    public var skeletonReferences = [Int]()
+    public var entities = PNEntityTree()
+    public var skeletonReferences = [PNIndex]()
     // MARK: - Capacity C
     public var meshes = [PNMesh]()
     // MARK: - Capacity E
     public var skeletons = [PNSkeleton]()
-    public var paletteReferences = [Range<Int>]()
+    public var paletteReferences = [Range<PNIndex>]()
     // MARK: - Capacity G
     public var cameras = [PNCamera]()
     // MARK: - Capacity H
