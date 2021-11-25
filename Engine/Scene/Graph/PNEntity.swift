@@ -3,13 +3,10 @@
 //
 
 public struct PNEntity {
-    public var transform: PNAnimatedCoordinateSpace
     public let type: PNEntityType
     public let referenceIdx: PNIndex
-    public init(transform: PNAnimatedCoordinateSpace,
-                type: PNEntityType,
+    public init(type: PNEntityType,
                 referenceIdx: PNIndex) {
-        self.transform = transform
         self.type = type
         self.referenceIdx = referenceIdx
     }

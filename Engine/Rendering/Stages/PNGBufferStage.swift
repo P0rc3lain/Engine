@@ -25,16 +25,14 @@ struct PNGBufferStage: PNStage {
     }
     mutating func draw(commandBuffer: inout MTLCommandBuffer,
                        scene: inout PNSceneDescription,
-                       bufferStore: inout BufferStore,
-                       arrangement: inout PNArrangement) {
+                       bufferStore: inout BufferStore) {
         guard var gBufferEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: gBufferRenderPassDescriptor) else {
             return
         }
         commandBuffer.pushDebugGroup("G-Buffer Renderer Pass")
         gBufferRenderer.draw(encoder: &gBufferEncoder,
                              scene: &scene,
-                             dataStore: &bufferStore,
-                             arrangement: &arrangement)
+                             dataStore: &bufferStore)
         gBufferEncoder.endEncoding()
         commandBuffer.popDebugGroup()
     }

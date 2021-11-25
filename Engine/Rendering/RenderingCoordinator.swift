@@ -28,7 +28,7 @@ struct RenderingCoordinator {
         self.commandQueue = commandQueue
     }
     mutating func draw(sceneGraph: inout PNScene) {
-        let transcriber = PNITranscriber()
+        let transcriber = PNITranscriber(transformCalculator: PNITransformCalculator(interpolator: PNIInterpolator()))
         var scene = transcriber.transcribe(scene: sceneGraph)
         guard scene.activeCameraIdx != .nil,
               var commandBuffer = commandQueue.makeCommandBuffer(),
@@ -36,7 +36,6 @@ struct RenderingCoordinator {
               let outputTexture = view.currentRenderPassDescriptor?.colorAttachments[0].texture else {
             return
         }
-        var arrangement = ArrangementController.arrangement(scene: &scene)
         updatePalettes(scene: &scene)
         bufferStore.ambientLights.upload(data: &scene.ambientLights)
         bufferStore.omniLights.upload(data: &scene.omniLights)
@@ -44,11 +43,10 @@ struct RenderingCoordinator {
         bufferStore.spotLights.upload(data: &scene.spotLights)
         bufferStore.upload(camera: &scene.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx],
                            index: scene.activeCameraIdx)
-        bufferStore.modelCoordinateSystems.upload(data: &arrangement.positions)
+        bufferStore.modelCoordinateSystems.upload(data: &scene.uniforms)
         pipeline.draw(commandBuffer: &commandBuffer,
                       scene: &scene,
-                      bufferStore: &bufferStore,
-                      arrangement: &arrangement)
+                      bufferStore: &bufferStore)
         imageConverter.encode(commandBuffer: commandBuffer,
                               sourceTexture: pipeline.io.output.color[0],
                               destinationTexture: outputTexture)

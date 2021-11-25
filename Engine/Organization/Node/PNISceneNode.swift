@@ -5,8 +5,7 @@
 struct PNISceneNode: PNSceneNode {
     var transform: PNAnimatedCoordinateSpace
     func write(scene: inout PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
-        let entity = PNEntity(transform: transform,
-                              type: .group,
+        let entity = PNEntity(type: .group,
                               referenceIdx: .nil)
         scene.entities.add(parentIdx: parentIdx, data: entity)
         scene.skeletonReferences.append(.nil)

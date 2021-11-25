@@ -25,8 +25,7 @@ struct OmniShadowRenderer {
         var rotations = OmniShadowRenderer.rotationMatrices
         self.rotationsBuffer.upload(data: &rotations)
     }
-    private func generateRenderMasks(scene: inout PNSceneDescription,
-                                     arrangement: inout PNArrangement) -> [[[Bool]]] {
+    private func generateRenderMasks(scene: inout PNSceneDescription) -> [[[Bool]]] {
         let rotations = simd_quatf.environment
         let interactor = PNIBoundingBoxInteractor.default
         let cullingController = PNICullingController(interactor: interactor)
@@ -34,12 +33,12 @@ struct OmniShadowRenderer {
             var faceData = [[Bool]]()
             for faceIndex in 6.naturalExclusive {
                 let entityIndex = Int(scene.omniLights[lightIndex].idx)
-                let cameraTransform = arrangement.positions[entityIndex].modelMatrixInverse
+                let cameraTransform = scene.uniforms[entityIndex].modelMatrixInverse
                 let boundingBox = interactor.from(inverseProjection: scene.omniLights[lightIndex].projectionMatrixInverse)
                 let cameraBoundingBox = interactor.multiply(rotations[faceIndex].rotationMatrix,
                                                             interactor.multiply(cameraTransform, boundingBox))
                 let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
-                let mask = cullingController.cullingMask(arrangement: &arrangement,
+                let mask = cullingController.cullingMask(scene: &scene,
                                                          boundingBox: cameraAlignedBoundingBox)
                 faceData.append(mask)
             }
@@ -48,13 +47,11 @@ struct OmniShadowRenderer {
     }
     func draw(encoder: inout MTLRenderCommandEncoder,
               scene: inout PNSceneDescription,
-              dataStore: inout BufferStore,
-              arrangement: inout PNArrangement) {
+              dataStore: inout BufferStore) {
         guard !scene.omniLights.isEmpty else {
             return
         }
-        let masks = generateRenderMasks(scene: &scene,
-                                        arrangement: &arrangement)
+        let masks = generateRenderMasks(scene: &scene)
         encoder.setViewport(viewPort)
         encoder.setCullMode(.front)
         encoder.setFrontFacing(.counterClockwise)

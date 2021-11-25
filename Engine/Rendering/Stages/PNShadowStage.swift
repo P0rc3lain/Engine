@@ -37,14 +37,13 @@ struct PNShadowStage: PNStage {
     }
     mutating func draw(commandBuffer: inout MTLCommandBuffer,
                        scene: inout PNSceneDescription,
-                       bufferStore: inout BufferStore,
-                       arrangement: inout PNArrangement) {
+                       bufferStore: inout BufferStore) {
         if !scene.spotLights.isEmpty {
             guard var spotEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: spotLightShadowRenderPassDescriptor) else {
                 return
             }
             spotEncoder.pushDebugGroup("Spot Light Shadow Pass")
-            spotLightShadowRenderer.draw(encoder: &spotEncoder, scene: &scene, dataStore: &bufferStore, arrangement: &arrangement)
+            spotLightShadowRenderer.draw(encoder: &spotEncoder, scene: &scene, dataStore: &bufferStore)
             spotEncoder.endEncoding()
             commandBuffer.popDebugGroup()
         }
@@ -53,7 +52,7 @@ struct PNShadowStage: PNStage {
                 return
             }
             omniEncoder.pushDebugGroup("Omni Light Shadow Pass")
-            omniLightShadowRenderer.draw(encoder: &omniEncoder, scene: &scene, dataStore: &bufferStore, arrangement: &arrangement)
+            omniLightShadowRenderer.draw(encoder: &omniEncoder, scene: &scene, dataStore: &bufferStore)
             omniEncoder.endEncoding()
         }
     }

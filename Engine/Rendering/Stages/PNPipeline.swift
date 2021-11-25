@@ -50,16 +50,13 @@ struct PNPipeline: PNStage {
     }
     mutating func draw(commandBuffer: inout MTLCommandBuffer,
                        scene: inout PNSceneDescription,
-                       bufferStore: inout BufferStore,
-                       arrangement: inout PNArrangement) {
+                       bufferStore: inout BufferStore) {
         shadowStage.draw(commandBuffer: &commandBuffer,
                          scene: &scene,
-                         bufferStore: &bufferStore,
-                         arrangement: &arrangement)
+                         bufferStore: &bufferStore)
         gBufferStage.draw(commandBuffer: &commandBuffer,
                           scene: &scene,
-                          bufferStore: &bufferStore,
-                          arrangement: &arrangement)
+                          bufferStore: &bufferStore)
         if !scene.ambientLights.isEmpty {
             ssaoStage.draw(commandBuffer: &commandBuffer,
                            bufferStore: &bufferStore)

@@ -3,5 +3,5 @@
 //
 
 protocol PNCullingController {
-    func cullingMask(arrangement: inout PNArrangement, boundingBox: PNWBoundingBox) -> [Bool]
+    func cullingMask(scene: inout PNSceneDescription, boundingBox: PNWBoundingBox) -> [Bool]
 }

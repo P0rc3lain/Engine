@@ -19,23 +19,21 @@ struct SpotShadowRenderer {
         self.depthStencilState = depthStencilState
         self.viewPort = viewPort
     }
-    private func generateRenderMasks(scene: inout PNSceneDescription,
-                                     arrangement: inout PNArrangement) -> [[Bool]] {
+    private func generateRenderMasks(scene: inout PNSceneDescription) -> [[Bool]] {
         return scene.spotLights.count.naturalExclusive.map { i in
-            let cameraTransform = arrangement.positions[Int(scene.spotLights[i].idx)].modelMatrixInverse
+            let cameraTransform = scene.uniforms[Int(scene.spotLights[i].idx)].modelMatrixInverse
             let interactor = PNIBoundingBoxInteractor(boundInteractor: PNIBoundInteractor())
             let cullingController = PNICullingController(interactor: interactor)
             let cameraBoundingBox = interactor.multiply(cameraTransform, scene.spotLights[i].boundingBox)
             let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
-            let mask = cullingController.cullingMask(arrangement: &arrangement,
+            let mask = cullingController.cullingMask(scene: &scene,
                                                      boundingBox: cameraAlignedBoundingBox)
             return mask
         }
     }
     func draw(encoder: inout MTLRenderCommandEncoder,
               scene: inout PNSceneDescription,
-              dataStore: inout BufferStore,
-              arrangement: inout PNArrangement) {
+              dataStore: inout BufferStore) {
         guard !scene.spotLights.isEmpty else {
             return
         }
@@ -46,7 +44,7 @@ struct SpotShadowRenderer {
         encoder.setRenderPipelineState(animatedPipelineState)
         encoder.setVertexBuffer(dataStore.spotLights,
                                 index: kAttributeSpotShadowVertexShaderBufferSpotLights)
-        let masks = generateRenderMasks(scene: &scene, arrangement: &arrangement)
+        let masks = generateRenderMasks(scene: &scene)
         for lightIndex in scene.spotLights.count.naturalExclusive {
             var lIndex = lightIndex
             encoder.setVertexBytes(&lIndex,

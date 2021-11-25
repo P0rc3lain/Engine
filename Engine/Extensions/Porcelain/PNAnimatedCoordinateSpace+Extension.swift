@@ -5,7 +5,7 @@
 import simd
 
 extension PNAnimatedCoordinateSpace {
-    func transformation(at time: TimeInterval, interpolator: PNIInterpolator) -> simd_float4x4 {
+    func transformation(at time: TimeInterval, interpolator: PNInterpolator) -> simd_float4x4 {
         simd_float4x4.compose(translation: interpolator.interpolated(sample: translation.sample(at: time)),
                               rotation: interpolator.interpolated(sample: rotation.sample(at: time)),
                               scale: interpolator.interpolated(sample: scale.sample(at: time)))

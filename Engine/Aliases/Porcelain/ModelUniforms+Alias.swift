@@ -4,4 +4,4 @@
 
 import MetalBinding
 
-typealias WModelUniforms = ModelUniforms
+public typealias WModelUniforms = ModelUniforms

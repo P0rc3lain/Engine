@@ -9,10 +9,10 @@ struct PNICullingController: PNCullingController {
     init(interactor: PNIBoundingBoxInteractor) {
         self.interactor = interactor
     }
-    func cullingMask(arrangement: inout PNArrangement, boundingBox: PNWBoundingBox) -> [Bool] {
-        var mask = [Bool](minimalCapacity: arrangement.positions.count)
-        for i in arrangement.boundingBoxes.indices {
-            mask.append(interactor.overlap(arrangement.boundingBoxes[i], boundingBox))
+    func cullingMask(scene: inout PNSceneDescription, boundingBox: PNWBoundingBox) -> [Bool] {
+        var mask = [Bool](minimalCapacity: scene.uniforms.count)
+        for i in scene.boundingBoxes.indices {
+            mask.append(interactor.overlap(scene.boundingBoxes[i], boundingBox))
         }
         return mask
     }

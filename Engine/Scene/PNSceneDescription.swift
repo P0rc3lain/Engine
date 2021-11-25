@@ -8,6 +8,8 @@ import Metal
 public struct PNSceneDescription {
     // MARK: - Capacity A
     public var entities = PNEntityTree()
+    var uniforms = [WModelUniforms]()
+    var boundingBoxes = [PNBoundingBox]()
     public var skeletonReferences = [PNIndex]()
     // MARK: - Capacity C
     public var meshes = [PNMesh]()
