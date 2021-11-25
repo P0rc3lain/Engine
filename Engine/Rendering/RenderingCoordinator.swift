@@ -12,13 +12,13 @@ struct RenderingCoordinator {
     private let view: MTKView
     private let commandQueue: MTLCommandQueue
     private var bufferStore: BufferStore
-    private var pipeline: Pipeline
+    private var pipeline: PNPipeline
     private let imageConverter: MPSImageConversion
     init?(view metalView: MTKView, renderingSize: CGSize) {
         guard let device = metalView.device,
               let bufferStore = BufferStore(device: device),
               let commandQueue = device.makeCommandQueue(),
-              let pipeline = Pipeline(device: device, renderingSize: renderingSize) else {
+              let pipeline = PNPipeline(device: device, renderingSize: renderingSize) else {
             return nil
         }
         self.imageConverter = MPSImageConversion(device: device)

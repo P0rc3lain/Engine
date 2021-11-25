@@ -5,7 +5,7 @@
 import Metal
 import MetalPerformanceShaders
 
-struct BloomStage: Stage {
+struct PNBloomStage: PNStage {
     var io: PNGPUIO
     private var bloomSplitRenderer: BloomSplitRenderer
     private var bloomMergeRenderer: BloomMergeRenderer

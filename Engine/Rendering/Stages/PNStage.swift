@@ -4,6 +4,6 @@
 
 import Metal
 
-protocol Stage {
+protocol PNStage {
     var io: PNGPUIO { get }
 }

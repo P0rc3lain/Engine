@@ -5,7 +5,7 @@
 import Metal
 import MetalPerformanceShaders
 
-struct SSAOStage: Stage {
+struct PNSSAOStage: PNStage {
     var io: PNGPUIO
     private let gaussTexture: MTLTexture
     private let gaussianBlur: MPSImageGaussianBlur

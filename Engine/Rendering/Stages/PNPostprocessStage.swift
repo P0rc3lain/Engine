@@ -5,7 +5,7 @@
 import Foundation
 import Metal
 
-struct PostprocessStage: Stage {
+struct PNPostprocessStage: PNStage {
     var io: PNGPUIO
     private var postProcessor: Postprocessor
     private var postprocessRenderPassDescriptor: MTLRenderPassDescriptor

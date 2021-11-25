@@ -5,7 +5,7 @@
 import Foundation
 import Metal
 
-struct CombineStage: Stage {
+struct PNCombineStage: PNStage {
     var io: PNGPUIO
     private var renderPassDescriptor: MTLRenderPassDescriptor
     private var environmentRenderer: EnvironmentRenderer

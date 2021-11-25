@@ -5,7 +5,7 @@
 import Metal
 import MetalBinding
 
-struct GBufferStage: Stage {
+struct PNGBufferStage: PNStage {
     var io: PNGPUIO
     private var gBufferRenderPassDescriptor: MTLRenderPassDescriptor
     private let gBufferRenderer: GBufferRenderer

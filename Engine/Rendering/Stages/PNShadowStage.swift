@@ -4,7 +4,7 @@
 
 import Metal
 
-struct ShadowStage: Stage {
+struct PNShadowStage: PNStage {
     var io: PNGPUIO
     private var omniLightShadowRenderPassDescriptor: MTLRenderPassDescriptor
     private var spotLightShadowRenderPassDescriptor: MTLRenderPassDescriptor
