@@ -6,7 +6,9 @@ struct PNIMeshNode: PNMeshNode {
     var mesh: PNMesh
     var transform: PNAnimatedCoordinateSpace
     func write(scene: inout PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
-        let entity = Entity(transform: transform, type: .mesh, referenceIdx: scene.meshes.count)
+        let entity = PNEntity(transform: transform,
+                              type: .mesh,
+                              referenceIdx: scene.meshes.count)
         scene.entities.add(parentIdx: parentIdx, data: entity)
         scene.skeletonReferences.append(.nil)
         scene.meshes.append(mesh)

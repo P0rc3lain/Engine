@@ -2,13 +2,13 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-public struct Entity {
+public struct PNEntity {
     public var transform: PNAnimatedCoordinateSpace
-    public let type: EntityType
-    public let referenceIdx: Int
+    public let type: PNEntityType
+    public let referenceIdx: PNIndex
     public init(transform: PNAnimatedCoordinateSpace,
-                type: EntityType,
-                referenceIdx: Int) {
+                type: PNEntityType,
+                referenceIdx: PNIndex) {
         self.transform = transform
         self.type = type
         self.referenceIdx = referenceIdx

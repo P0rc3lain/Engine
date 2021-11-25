@@ -12,10 +12,16 @@ public struct PNIAmbientLightNode: PNAmbientLightNode {
         self.transform = transform
     }
     public func write(scene: inout PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
-        let entity = Entity(transform: transform, type: .ambientLight, referenceIdx: scene.ambientLights.count)
+        let entity = PNEntity(transform: transform,
+                              type: .ambientLight,
+                              referenceIdx: scene.ambientLights.count)
         scene.entities.add(parentIdx: parentIdx, data: entity)
         scene.skeletonReferences.append(.nil)
-        scene.ambientLights.append(AmbientLight(diameter: light.diameter, color: light.color, intensity: light.intensity, idx: Int32(scene.entities.count - 1)))
+        let underlyinglight = AmbientLight(diameter: light.diameter,
+                                           color: light.color,
+                                           intensity: light.intensity,
+                                           idx: Int32(scene.entities.count - 1))
+        scene.ambientLights.append(underlyinglight)
         return scene.entities.count - 1
     }
 }

@@ -4,4 +4,4 @@
 
 import Metal
 
-public typealias PNEntityTree = PNFlatTree<Entity>
+public typealias PNEntityTree = PNFlatTree<PNEntity>

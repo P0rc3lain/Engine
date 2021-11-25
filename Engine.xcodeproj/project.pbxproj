@@ -16,8 +16,8 @@
 		560C18D9273ACC0100459AEF /* OmniShadowRenderer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560C18D8273ACC0100459AEF /* OmniShadowRenderer+Extension.swift */; };
 		56165BE527440CF70025D58B /* PNArrangement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BE327440CF70025D58B /* PNArrangement.swift */; };
 		56165BE627440CF70025D58B /* ArrangementController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BE427440CF70025D58B /* ArrangementController.swift */; };
-		56165BEA27440DA90025D58B /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BE827440DA90025D58B /* Entity.swift */; };
-		56165BEB27440DA90025D58B /* EntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BE927440DA90025D58B /* EntityType.swift */; };
+		56165BEA27440DA90025D58B /* PNEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BE827440DA90025D58B /* PNEntity.swift */; };
+		56165BEB27440DA90025D58B /* PNEntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BE927440DA90025D58B /* PNEntityType.swift */; };
 		56165BEE27443EAE0025D58B /* ArrangementController+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BED27443EAE0025D58B /* ArrangementController+Tests.swift */; };
 		56165BF02744401B0025D58B /* ModelUniforms+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BEF2744401B0025D58B /* ModelUniforms+Extension.swift */; };
 		56165BF2274441D90025D58B /* AmbientLight+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BF1274441D90025D58B /* AmbientLight+Extension.swift */; };
@@ -229,8 +229,8 @@
 		560C18D8273ACC0100459AEF /* OmniShadowRenderer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OmniShadowRenderer+Extension.swift"; sourceTree = "<group>"; };
 		56165BE327440CF70025D58B /* PNArrangement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNArrangement.swift; sourceTree = "<group>"; };
 		56165BE427440CF70025D58B /* ArrangementController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrangementController.swift; sourceTree = "<group>"; };
-		56165BE827440DA90025D58B /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
-		56165BE927440DA90025D58B /* EntityType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityType.swift; sourceTree = "<group>"; };
+		56165BE827440DA90025D58B /* PNEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNEntity.swift; sourceTree = "<group>"; };
+		56165BE927440DA90025D58B /* PNEntityType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNEntityType.swift; sourceTree = "<group>"; };
 		56165BED27443EAE0025D58B /* ArrangementController+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArrangementController+Tests.swift"; sourceTree = "<group>"; };
 		56165BEF2744401B0025D58B /* ModelUniforms+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelUniforms+Extension.swift"; sourceTree = "<group>"; };
 		56165BF1274441D90025D58B /* AmbientLight+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AmbientLight+Extension.swift"; sourceTree = "<group>"; };
@@ -532,8 +532,8 @@
 		56165BE727440DA90025D58B /* Graph */ = {
 			isa = PBXGroup;
 			children = (
-				56165BE827440DA90025D58B /* Entity.swift */,
-				56165BE927440DA90025D58B /* EntityType.swift */,
+				56165BE827440DA90025D58B /* PNEntity.swift */,
+				56165BE927440DA90025D58B /* PNEntityType.swift */,
 			);
 			path = Graph;
 			sourceTree = "<group>";
@@ -1390,7 +1390,7 @@
 				5629FBEE27492533005476AF /* AnimatedCoordinateSpace+Extension.swift in Sources */,
 				561666FB2719E2CD000063B1 /* MDLTransformComponent+Extension.swift in Sources */,
 				5616673A2719E2CD000063B1 /* PNPrimitiveType.swift in Sources */,
-				56165BEA27440DA90025D58B /* Entity.swift in Sources */,
+				56165BEA27440DA90025D58B /* PNEntity.swift in Sources */,
 				561667452719E2CD000063B1 /* OmniRenderer.metal in Sources */,
 				5670EC072735A3F300375194 /* BloomMerge.metal in Sources */,
 				568EBB3D273F0DE1007C7D35 /* Hemisphere.swift in Sources */,
@@ -1465,7 +1465,7 @@
 				5688074E274801EC00C95F55 /* PNStaticBuffer.swift in Sources */,
 				561667482719E2CD000063B1 /* Transformation.metal in Sources */,
 				561667062719E2CD000063B1 /* MDLMaterialSemantic+Extension.swift in Sources */,
-				56165BEB27440DA90025D58B /* EntityType.swift in Sources */,
+				56165BEB27440DA90025D58B /* PNEntityType.swift in Sources */,
 				56924AE4271A181600FF3E06 /* PNIAnimatedValue+Alias.swift in Sources */,
 				5629FBEA2749201F005476AF /* PNInterpolator.swift in Sources */,
 				5616673E2719E2CD000063B1 /* PNSceneDescription.swift in Sources */,

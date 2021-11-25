@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-public enum EntityType {
+public enum PNEntityType {
     case group
     case omniLight
     case spotLight
