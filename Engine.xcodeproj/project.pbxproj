@@ -591,13 +591,9 @@
 		561666BE2719E2CC000063B1 /* Aliases */ = {
 			isa = PBXGroup;
 			children = (
-				561666C42719E2CC000063B1 /* FlatTree+Alias.swift */,
-				56924AE3271A181600FF3E06 /* PNIAnimatedValue+Alias.swift */,
-				56270168272B556500071620 /* PNAnimatedTransform+Alias.swift */,
-				568807472747EFC800C95F55 /* simd_float4x4+Alias.swift */,
-				568807492747F10700C95F55 /* Int+Alias.swift */,
-				56D7ED5B274C611C00A6C25D /* PNBoundingBox+Alias.swift */,
-				56D7ED5D274C617200A6C25D /* ModelUniforms+Alias.swift */,
+				566795D8274F9C9F005993D7 /* Porcelain */,
+				566795D7274F9C8F005993D7 /* simd */,
+				566795D6274F9C86005993D7 /* Swift */,
 			);
 			path = Aliases;
 			sourceTree = "<group>";
@@ -882,6 +878,34 @@
 				560253D42726CA4800B3A13A /* PNIChronometer.swift */,
 			);
 			path = Chrono;
+			sourceTree = "<group>";
+		};
+		566795D6274F9C86005993D7 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				568807492747F10700C95F55 /* Int+Alias.swift */,
+			);
+			path = Swift;
+			sourceTree = "<group>";
+		};
+		566795D7274F9C8F005993D7 /* simd */ = {
+			isa = PBXGroup;
+			children = (
+				568807472747EFC800C95F55 /* simd_float4x4+Alias.swift */,
+			);
+			path = simd;
+			sourceTree = "<group>";
+		};
+		566795D8274F9C9F005993D7 /* Porcelain */ = {
+			isa = PBXGroup;
+			children = (
+				561666C42719E2CC000063B1 /* FlatTree+Alias.swift */,
+				56924AE3271A181600FF3E06 /* PNIAnimatedValue+Alias.swift */,
+				56270168272B556500071620 /* PNAnimatedTransform+Alias.swift */,
+				56D7ED5B274C611C00A6C25D /* PNBoundingBox+Alias.swift */,
+				56D7ED5D274C617200A6C25D /* ModelUniforms+Alias.swift */,
+			);
+			path = Porcelain;
 			sourceTree = "<group>";
 		};
 		5670EC012735A3BB00375194 /* Bloom */ = {
