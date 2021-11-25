@@ -19,9 +19,9 @@ class ArrangementControllerTests: XCTestCase {
     }
     func testGroup() throws {
         var scene = PNSceneDescription()
-        scene.entities.add(parentIdx: .nil, data: Entity(transform: .static(from: .translation(vector: [0, 0, 0])), type: .group, referenceIdx: .nil))
+        scene.entities.add(parentIdx: .nil, data: PNEntity(transform: .static(from: .translation(vector: [0, 0, 0])), type: .group, referenceIdx: .nil))
         scene.skeletonReferences.append(.nil)
-        scene.entities.add(parentIdx: 0, data: Entity(transform: .static(from: .translation(vector: [4, 4, 4])), type: .ambientLight, referenceIdx: 0))
+        scene.entities.add(parentIdx: 0, data: PNEntity(transform: .static(from: .translation(vector: [4, 4, 4])), type: .ambientLight, referenceIdx: 0))
         scene.skeletonReferences.append(.nil)
         scene.ambientLights.append(AmbientLight(diameter: 10, color: [1, 1, 1], intensity: 0.2, idx: 1))
         let arrangement = ArrangementController.arrangement(scene: &scene)
@@ -32,9 +32,9 @@ class ArrangementControllerTests: XCTestCase {
     }
     func testTransformedGroup() throws {
         var scene = PNSceneDescription()
-        scene.entities.add(parentIdx: .nil, data: Entity(transform: .static(from: .translation(vector: [2, 2, 2])), type: .group, referenceIdx: .nil))
+        scene.entities.add(parentIdx: .nil, data: PNEntity(transform: .static(from: .translation(vector: [2, 2, 2])), type: .group, referenceIdx: .nil))
         scene.skeletonReferences.append(.nil)
-        scene.entities.add(parentIdx: 0, data: Entity(transform: .static(from: .translation(vector: [4, 4, 4])), type: .ambientLight, referenceIdx: 0))
+        scene.entities.add(parentIdx: 0, data: PNEntity(transform: .static(from: .translation(vector: [4, 4, 4])), type: .ambientLight, referenceIdx: 0))
         scene.skeletonReferences.append(.nil)
         scene.ambientLights.append(AmbientLight(diameter: 10, color: [1, 1, 1], intensity: 0.2, idx: 1))
         let arrangement = ArrangementController.arrangement(scene: &scene)
@@ -45,12 +45,12 @@ class ArrangementControllerTests: XCTestCase {
     }
     func testTransformedGroupMultipleChildren() throws {
         var scene = PNSceneDescription()
-        scene.entities.add(parentIdx: .nil, data: Entity(transform: .static(from: .translation(vector: [2, 2, 2])), type: .group, referenceIdx: .nil))
+        scene.entities.add(parentIdx: .nil, data: PNEntity(transform: .static(from: .translation(vector: [2, 2, 2])), type: .group, referenceIdx: .nil))
         scene.skeletonReferences.append(.nil)
-        scene.entities.add(parentIdx: 0, data: Entity(transform: .static(from: .translation(vector: [4, 4, 4])), type: .ambientLight, referenceIdx: 0))
+        scene.entities.add(parentIdx: 0, data: PNEntity(transform: .static(from: .translation(vector: [4, 4, 4])), type: .ambientLight, referenceIdx: 0))
         scene.skeletonReferences.append(.nil)
         scene.ambientLights.append(AmbientLight(diameter: 10, color: [1, 1, 1], intensity: 0.2, idx: 1))
-        scene.entities.add(parentIdx: 0, data: Entity(transform: .static(from: .translation(vector: [10, 10, 10])), type: .ambientLight, referenceIdx: 1))
+        scene.entities.add(parentIdx: 0, data: PNEntity(transform: .static(from: .translation(vector: [10, 10, 10])), type: .ambientLight, referenceIdx: 1))
         scene.skeletonReferences.append(.nil)
         scene.ambientLights.append(AmbientLight(diameter: 20, color: [1, 1, 1], intensity: 0.2, idx: 2))
         let arrangement = ArrangementController.arrangement(scene: &scene)
