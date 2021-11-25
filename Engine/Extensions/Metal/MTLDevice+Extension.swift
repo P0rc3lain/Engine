@@ -112,7 +112,7 @@ extension MTLDevice {
         makeTexture(descriptor: .postprocessColor(size: size))
     }
     func makePorcelainLibrary() -> MTLLibrary? {
-        try? makeDefaultLibrary(bundle: Bundle(for: Engine.self))
+        try? makeDefaultLibrary(bundle: Bundle(for: Self.self))
     }
     func makeSharedBuffer(length: Int) -> MTLBuffer? {
         makeBuffer(length: length, options: [.storageModeShared])

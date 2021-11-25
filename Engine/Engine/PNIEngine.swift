@@ -4,7 +4,7 @@
 
 import MetalKit
 
-public class Engine {
+public class PNIEngine: PNEngine {
     private let view: MTKView
     public var scene: PNScene
     private var coordinator: RenderingCoordinator
@@ -17,7 +17,7 @@ public class Engine {
         self.coordinator = coordinator
         self.scene = scene
     }
-    public func updateDrawableSize(drawableSize: CGSize) -> Bool {
+    public func update(drawableSize: CGSize) -> Bool {
         guard let updated = RenderingCoordinator(view: view,
                                                  renderingSize: drawableSize) else {
             return false
