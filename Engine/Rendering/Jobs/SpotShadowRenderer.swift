@@ -68,7 +68,7 @@ struct SpotShadowRenderer {
                                             index: kAttributeSpotShadowVertexShaderBufferModelUniforms)
                     for pieceIndex in mesh.pieceDescriptions {
                         encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
-                                                offset: scene.paletteReferences[index].lowerBound,
+                                                offset: scene.paletteOffset[index],
                                                 index: kAttributeSpotShadowVertexShaderBufferMatrixPalettes)
                         let indexDraw = pieceIndex.drawDescription
                         encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,

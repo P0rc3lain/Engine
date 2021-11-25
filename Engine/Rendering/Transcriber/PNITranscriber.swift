@@ -13,6 +13,7 @@ struct PNITranscriber: PNTranscriber {
         var sceneDescription = PNSceneDescription()
         write(node: scene.rootNode, scene: &sceneDescription, parentIndex: .nil)
         sceneDescription.boundingBoxes = boundingBoxes(scene: &sceneDescription)
+        updatePalettes(scene: &sceneDescription)
         return sceneDescription
     }
     private func write(node: PNNode<PNSceneNode>, scene: inout PNSceneDescription, parentIndex: PNIndex) {
@@ -69,5 +70,26 @@ struct PNITranscriber: PNTranscriber {
             }
         }
         return boundingBoxes
+    }
+    func updatePalettes(scene: inout PNSceneDescription) {
+        for index in scene.entities.indices {
+            let palette = generatePalette(objectIdx: index, scene: &scene)
+            scene.paletteOffset.append(scene.palettes.count)
+            scene.palettes.append(contentsOf: palette)
+        }
+    }
+    func generatePalette(objectIdx: Int, scene: inout PNSceneDescription) -> [simd_float4x4] {
+        if scene.skeletonReferences[objectIdx] == .nil {
+            return []
+        } else {
+            let skeletonIdx = scene.skeletonReferences[objectIdx]
+            let skeleton = scene.skeletons[skeletonIdx]
+            let date = Date().timeIntervalSince1970
+            guard let animation = skeleton.animations.first else {
+                return []
+            }
+            let transformations = animation.localTransformation(at: date, interpolator: PNIInterpolator())
+            return skeleton.calculatePose(animationPose: transformations)
+        }
     }
 }

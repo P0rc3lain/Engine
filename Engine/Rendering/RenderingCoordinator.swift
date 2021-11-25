@@ -36,7 +36,7 @@ struct RenderingCoordinator {
               let outputTexture = view.currentRenderPassDescriptor?.colorAttachments[0].texture else {
             return
         }
-        updatePalettes(scene: &scene)
+        bufferStore.matrixPalettes.upload(data: &scene.palettes)
         bufferStore.ambientLights.upload(data: &scene.ambientLights)
         bufferStore.omniLights.upload(data: &scene.omniLights)
         bufferStore.directionalLights.upload(data: &scene.directionalLights)
@@ -52,29 +52,5 @@ struct RenderingCoordinator {
                               destinationTexture: outputTexture)
         commandBuffer.present(drawable)
         commandBuffer.commit()
-    }
-    mutating func updatePalettes(scene: inout PNSceneDescription) {
-        var continousPalette = [simd_float4x4]()
-        scene.paletteReferences = []
-        for index in scene.entities.indices {
-            let palette = generatePalette(objectIdx: index, scene: &scene)
-            scene.paletteReferences.append(continousPalette.count ..< continousPalette.count + palette.count)
-            continousPalette += palette
-        }
-        bufferStore.matrixPalettes.upload(data: &continousPalette)
-    }
-    func generatePalette(objectIdx: Int, scene: inout PNSceneDescription) -> [simd_float4x4] {
-        if scene.skeletonReferences[objectIdx] == .nil {
-            return []
-        } else {
-            let skeletonIdx = scene.skeletonReferences[objectIdx]
-            let skeleton = scene.skeletons[skeletonIdx]
-            let date = Date().timeIntervalSince1970
-            guard let animation = skeleton.animations.first else {
-                return []
-            }
-            let transformations = animation.localTransformation(at: date, interpolator: PNIInterpolator())
-            return skeleton.calculatePose(animationPose: transformations)
-        }
     }
 }

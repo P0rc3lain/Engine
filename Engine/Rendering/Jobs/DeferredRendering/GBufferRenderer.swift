@@ -61,7 +61,7 @@ struct GBufferRenderer {
                                         index: kAttributeGBufferVertexShaderBufferModelUniforms)
                 for pieceIndex in mesh.pieceDescriptions {
                     encoder.setVertexBuffer(dataStore.matrixPalettes,
-                                            offset: scene.paletteReferences[index].lowerBound,
+                                            offset: scene.paletteOffset[index],
                                             index: kAttributeGBufferVertexShaderBufferMatrixPalettes)
                     if let material = pieceIndex.material {
                         encoder.setFragmentTextures([material.albedo,
