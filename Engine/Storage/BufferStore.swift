@@ -6,7 +6,7 @@ import Metal
 import MetalBinding
 import simd
 
-struct BufferStore {
+public struct BufferStore {
     var omniLights: PNAnyDynamicBuffer<OmniLight>
     var ambientLights: PNAnyDynamicBuffer<AmbientLight>
     var directionalLights: PNAnyDynamicBuffer<DirectionalLight>

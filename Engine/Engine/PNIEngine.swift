@@ -6,26 +6,32 @@ import MetalKit
 
 public class PNIEngine: PNEngine {
     private let view: MTKView
+    private let coordinatorFactory: PNRenderingCoordinatorFactory
+    private var coordinator: PNRenderingCoordinator
     public var scene: PNScene
-    private var coordinator: RenderingCoordinator
-    public init?(view: MTKView, renderingSize: CGSize, scene: PNScene) {
-        guard let coordinator = RenderingCoordinator(view: view,
-                                                     renderingSize: renderingSize) else {
+    private var workloadManager: PNWorkloadManager
+    public init?(view: MTKView,
+                 renderingSize: CGSize,
+                 scene: PNScene,
+                 coordinatorFactory: PNRenderingCoordinatorFactory,
+                 workloadManager: PNWorkloadManager) {
+        guard let coordinator = coordinatorFactory.new(drawableSize: renderingSize) else {
             return nil
         }
         self.view = view
         self.coordinator = coordinator
+        self.coordinatorFactory = coordinatorFactory
         self.scene = scene
+        self.workloadManager = workloadManager
     }
     public func update(drawableSize: CGSize) -> Bool {
-        guard let updated = RenderingCoordinator(view: view,
-                                                 renderingSize: drawableSize) else {
+        guard let updated = coordinatorFactory.new(drawableSize: drawableSize) else {
             return false
         }
         coordinator = updated
         return true
     }
     public func draw() {
-        coordinator.draw(sceneGraph: &scene)
+        workloadManager.draw(sceneGraph: &scene)
     }
 }
