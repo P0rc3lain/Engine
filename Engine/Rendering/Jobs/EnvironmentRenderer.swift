@@ -23,7 +23,7 @@ struct EnvironmentRenderer {
     func draw(encoder: inout MTLRenderCommandEncoder,
               scene: inout PNSceneDescription,
               bufferStore: inout BufferStore) {
-        if scene.sky == .nil {
+        guard let skyMap = scene.skyMap else {
             return
         }
         encoder.setViewport(viewPort)
@@ -37,7 +37,7 @@ struct EnvironmentRenderer {
         encoder.setVertexBuffer(bufferStore.cameras,
                                 offset: scene.entities[scene.activeCameraIdx].data.referenceIdx * MemoryLayout<CameraUniforms>.stride,
                                 index: kAttributeEnvironmentVertexShaderBufferCamera)
-        encoder.setFragmentTexture(scene.skyMaps[scene.sky],
+        encoder.setFragmentTexture(skyMap,
                                    index: kAttributeEnvironmentFragmentShaderTextureCubeMap)
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: cube.pieceDescriptions[0].drawDescription.indexBuffer.length / MemoryLayout<UInt16>.size,

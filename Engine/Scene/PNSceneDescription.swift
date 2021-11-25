@@ -25,9 +25,6 @@ public struct PNSceneDescription {
     // MARK: - Capacity K
     public var spotLights = [SpotLight]()
     // MARK: - Capacity L
-    public var skyMaps = [MTLTexture]()
-    // MARK: - Capacity M
+    public var skyMap: MTLTexture? = nil
     public var activeCameraIdx = Int.nil
-    public var sky = Int.nil
-    init() { }
 }
