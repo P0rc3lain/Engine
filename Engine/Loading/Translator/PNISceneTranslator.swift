@@ -6,8 +6,9 @@ import Metal
 import MetalBinding
 import ModelIO
 
-public struct PNISceneTranslator: PNSceneTranslator {
+public class PNISceneTranslator: PNSceneTranslator {
     private let device: MTLDevice
+    private var materialCache = [String: PNMaterial]()
     public init(device: MTLDevice) {
         self.device = device
     }
@@ -45,6 +46,7 @@ public struct PNISceneTranslator: PNSceneTranslator {
             }
             return node
         }, initialValue: scene.rootNode)
+        materialCache = [:]
         return scene
     }
     private func convert(animation: MDLAnimationBindComponent) -> PNSkeleton {
@@ -108,7 +110,6 @@ public struct PNISceneTranslator: PNSceneTranslator {
         }
         submeshes.forEach {
             if let material = $0.material,
-               let uploadedMaterial = material.upload(device: device),
                let submeshBuffer = device.makeBuffer(data: $0.indexBuffer.rawData),
                let indexType = PNIndexBitDepth(modelIO: $0.indexType)?.metal,
                let geometryType = PNPrimitiveType(modelIO: $0.geometryType)?.metal {
@@ -117,7 +118,11 @@ public struct PNISceneTranslator: PNSceneTranslator {
                                         indexCount: $0.indexCount,
                                         indexType: indexType,
                                         primitiveType: geometryType)
-                let description = PNPieceDescription(material: uploadedMaterial,
+                guard let loadedMaterial = materialCache[material.name] ?? material.upload(device: device) else {
+                    return
+                }
+                materialCache[material.name] = loadedMaterial
+                let description = PNPieceDescription(material: loadedMaterial,
                                                      drawDescription: submesh)
                 pieceDescriptions.append(description)
             }
