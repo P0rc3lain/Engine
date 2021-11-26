@@ -6,7 +6,7 @@ import Metal
 import MetalBinding
 import simd
 
-struct EnvironmentRenderer {
+struct PNEnvironmentJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let depthStentilState: MTLDepthStencilState
     private let viewPort: MTLViewport
@@ -20,10 +20,8 @@ struct EnvironmentRenderer {
         self.cube = cube
         self.viewPort = .porcelain(size: drawableSize)
     }
-    func draw(encoder: inout MTLRenderCommandEncoder,
-              scene: inout PNSceneDescription,
-              bufferStore: inout BufferStore) {
-        guard let skyMap = scene.skyMap else {
+    func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
+        guard let skyMap = supply.scene.skyMap else {
             return
         }
         encoder.setViewport(viewPort)
@@ -32,10 +30,10 @@ struct EnvironmentRenderer {
         encoder.setDepthStencilState(depthStentilState)
         encoder.setVertexBuffer(cube.vertexBuffer.buffer,
                                 index: kAttributeEnvironmentVertexShaderBufferStageIn)
-        encoder.setVertexBuffer(bufferStore.modelCoordinateSystems,
+        encoder.setVertexBuffer(supply.bufferStore.modelCoordinateSystems,
                                 index: kAttributeEnvironmentVertexShaderBufferModelUniforms)
-        encoder.setVertexBuffer(bufferStore.cameras,
-                                offset: scene.entities[scene.activeCameraIdx].data.referenceIdx * MemoryLayout<CameraUniforms>.stride,
+        encoder.setVertexBuffer(supply.bufferStore.cameras,
+                                offset: supply.scene.entities[supply.scene.activeCameraIdx].data.referenceIdx * MemoryLayout<CameraUniforms>.stride,
                                 index: kAttributeEnvironmentVertexShaderBufferCamera)
         encoder.setFragmentTexture(skyMap,
                                    index: kAttributeEnvironmentFragmentShaderTextureCubeMap)

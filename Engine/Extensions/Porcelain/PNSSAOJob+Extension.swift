@@ -6,13 +6,13 @@ import Metal
 import MetalBinding
 import simd
 
-extension SSAORenderer {
+extension PNSSAOJob {
     static func make(device: MTLDevice,
                      prTexture: MTLTexture,
                      nmTexture: MTLTexture,
                      drawableSize: CGSize,
                      maxNoiseCount: Int,
-                     maxSamplesCount: Int) -> SSAORenderer? {
+                     maxSamplesCount: Int) -> PNSSAOJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRenderPipelineStateSsao(library: library),
               let kernelBuffer = PNIStaticBuffer<simd_float3>(device: device, capacity: 64),
@@ -21,15 +21,15 @@ extension SSAORenderer {
         else {
             return nil
         }
-        return SSAORenderer(pipelineState: pipelineState,
-                            prTexture: prTexture,
-                            nmTexture: nmTexture,
-                            device: device,
-                            drawableSize: drawableSize,
-                            kernelBuffer: PNAnyStaticBuffer(kernelBuffer),
-                            noiseBuffer: PNAnyStaticBuffer(noiseBuffer),
-                            uniforms: PNAnyStaticBuffer(uniforms),
-                            maxNoiseCount: maxNoiseCount,
-                            maxSamplesCount: maxSamplesCount)
+        return PNSSAOJob(pipelineState: pipelineState,
+                         prTexture: prTexture,
+                         nmTexture: nmTexture,
+                         device: device,
+                         drawableSize: drawableSize,
+                         kernelBuffer: PNAnyStaticBuffer(kernelBuffer),
+                         noiseBuffer: PNAnyStaticBuffer(noiseBuffer),
+                         uniforms: PNAnyStaticBuffer(uniforms),
+                         maxNoiseCount: maxNoiseCount,
+                         maxSamplesCount: maxSamplesCount)
     }
 }

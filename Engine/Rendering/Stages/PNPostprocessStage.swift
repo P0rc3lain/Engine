@@ -7,26 +7,26 @@ import Metal
 
 struct PNPostprocessStage: PNStage {
     var io: PNGPUIO
-    private var postProcessor: Postprocessor
+    private var vignetteJob: PNVignetteJob
     private var postprocessRenderPassDescriptor: MTLRenderPassDescriptor
     init?(device: MTLDevice, inputTexture: MTLTexture, renderingSize: CGSize) {
         self.postprocessRenderPassDescriptor = .postprocess(device: device, size: renderingSize)
-        guard let postProcessor = Postprocessor.make(device: device,
-                                                     inputTexture: inputTexture,
-                                                     canvasSize: renderingSize),
+        guard let vignetteJob = PNVignetteJob.make(device: device,
+                                                   inputTexture: inputTexture,
+                                                   canvasSize: renderingSize),
               let outputTexture = postprocessRenderPassDescriptor.colorAttachments[0].texture else {
             return nil
         }
-        self.postProcessor = postProcessor
+        self.vignetteJob = vignetteJob
         self.io = PNGPUIO(input: PNGPUSupply(color: [inputTexture]),
                           output: PNGPUSupply(color: [outputTexture]))
     }
-    func draw(commandBuffer: inout MTLCommandBuffer) {
+    func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
         guard let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: postprocessRenderPassDescriptor) else {
             return
         }
         commandBuffer.pushDebugGroup("Post Processing Pass")
-        postProcessor.draw(encoder: encoder)
+        vignetteJob.draw(encoder: encoder, supply: supply)
         encoder.endEncoding()
         commandBuffer.popDebugGroup()
     }

@@ -7,14 +7,12 @@ import Metal
 
 struct PNCombineStage: PNStage {
     var io: PNGPUIO
+    private var environmentJob: PNRenderJob
+    private var omniJob: PNRenderJob
+    private var ambientJob: PNRenderJob
+    private var spotJob: PNRenderJob
+    private var directionalJob: PNRenderJob
     private var renderPassDescriptor: MTLRenderPassDescriptor
-    private var environmentRenderer: EnvironmentRenderer
-    private var omniRenderer: OmniRenderer
-    private var ambientRenderer: AmbientRenderer
-    private var spotRenderer: SpotRenderer
-    private var spotLightShadows: MTLTexture
-    private var pointLightsShadows: MTLTexture
-    private var directionalRenderer: DirectionalRenderer
     private var ssaoTexture: MTLTexture
     init?(device: MTLDevice,
           renderingSize: CGSize,
@@ -22,20 +20,23 @@ struct PNCombineStage: PNStage {
           ssaoTexture: MTLTexture,
           spotLightShadows: MTLTexture,
           pointLightsShadows: MTLTexture) {
-        guard let environmentRenderer = EnvironmentRenderer.make(device: device,
-                                                                 drawableSize: renderingSize),
-              let omniRenderer = OmniRenderer.make(device: device,
-                                                   inputTextures: gBufferOutput.color,
-                                                   drawableSize: renderingSize),
-              let ambientRenderer = AmbientRenderer.make(device: device,
+        guard let environmentJob = PNEnvironmentJob.make(device: device,
+                                                         drawableSize: renderingSize),
+              let omniJob = PNOmniJob.make(device: device,
+                                           inputTextures: gBufferOutput.color,
+                                           shadowMaps: pointLightsShadows,
+                                           drawableSize: renderingSize),
+              let ambientJob = PNAmbientJob.make(device: device,
+                                                 inputTextures: gBufferOutput.color,
+                                                 ssaoTexture: ssaoTexture,
+                                                 drawableSize: renderingSize),
+              let directionalJob = PNDirectionalJob.make(device: device,
                                                          inputTextures: gBufferOutput.color,
                                                          drawableSize: renderingSize),
-              let directionalRenderer = DirectionalRenderer.make(device: device,
-                                                                 inputTextures: gBufferOutput.color,
-                                                                 drawableSize: renderingSize),
-              let spotRenderer = SpotRenderer.make(device: device,
-                                                   inputTextures: gBufferOutput.color,
-                                                   drawableSize: renderingSize) else {
+              let spotJob = PNSpotJob.make(device: device,
+                                           inputTextures: gBufferOutput.color,
+                                           shadowMap: spotLightShadows,
+                                           drawableSize: renderingSize) else {
             return nil
         }
         renderPassDescriptor = .lightenScene(device: device,
@@ -44,43 +45,26 @@ struct PNCombineStage: PNStage {
         guard let outputTexture = renderPassDescriptor.colorAttachments[0].texture else {
             return nil
         }
-        self.ambientRenderer = ambientRenderer
+        self.ambientJob = ambientJob
         self.ssaoTexture = ssaoTexture
-        self.environmentRenderer = environmentRenderer
-        self.omniRenderer = omniRenderer
-        self.spotRenderer = spotRenderer
-        self.spotLightShadows = spotLightShadows
-        self.directionalRenderer = directionalRenderer
-        self.pointLightsShadows = pointLightsShadows
+        self.environmentJob = environmentJob
+        self.omniJob = omniJob
+        self.spotJob = spotJob
+        self.directionalJob = directionalJob
         self.io = PNGPUIO(input: PNGPUSupply(color: gBufferOutput.color + [ssaoTexture],
                                              stencil: gBufferOutput.stencil),
                           output: PNGPUSupply(color: [outputTexture]))
     }
-    func draw(commandBuffer: inout MTLCommandBuffer,
-              scene: inout PNSceneDescription,
-              bufferStore: inout BufferStore) {
+    func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
         commandBuffer.pushDebugGroup("Light Pass")
-        guard var encoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else {
+        guard let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else {
             return
         }
-        omniRenderer.draw(encoder: &encoder,
-                          bufferStore: &bufferStore,
-                          scene: &scene,
-                          shadowMaps: pointLightsShadows)
-        ambientRenderer.draw(encoder: &encoder,
-                             bufferStore: &bufferStore,
-                             ssao: ssaoTexture,
-                             scene: &scene)
-        spotRenderer.draw(encoder: &encoder,
-                          bufferStore: &bufferStore,
-                          scene: &scene,
-                          shadowMap: spotLightShadows)
-        directionalRenderer.draw(encoder: &encoder,
-                                 bufferStore: &bufferStore,
-                                 scene: &scene)
-        environmentRenderer.draw(encoder: &encoder,
-                                 scene: &scene,
-                                 bufferStore: &bufferStore)
+        omniJob.draw(encoder: encoder, supply: supply)
+        ambientJob.draw(encoder: encoder, supply: supply)
+        spotJob.draw(encoder: encoder, supply: supply)
+        directionalJob.draw(encoder: encoder, supply: supply)
+        environmentJob.draw(encoder: encoder, supply: supply)
         encoder.endEncoding()
         commandBuffer.popDebugGroup()
     }

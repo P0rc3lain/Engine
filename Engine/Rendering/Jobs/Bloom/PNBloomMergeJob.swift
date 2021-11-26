@@ -4,50 +4,39 @@
 
 import Metal
 import MetalBinding
-import MetalPerformanceShaders
 import simd
 
-struct BloomSplitRenderer {
+struct PNBloomMergeJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let viewPort: MTLViewport
-    private let inputTexture: MTLTexture
     private let plane: PNMesh
-    private let gaussianBlur: MPSImageGaussianBlur
-    let outputTexture: MTLTexture
+    private let unmodifiedSceneTexture: MTLTexture
+    private let brightAreasTexture: MTLTexture
     init?(pipelineState: MTLRenderPipelineState,
-          inputTexture: MTLTexture,
           device: MTLDevice,
+          unmodifiedSceneTexture: MTLTexture,
+          brightAreasTexture: MTLTexture,
           drawableSize: CGSize) {
-        guard let plane = PNMesh.screenSpacePlane(device: device),
-              let outputTexture = device.makeTexture(descriptor: .bloomSplitColor(size: drawableSize)) else {
+        guard let plane = PNMesh.screenSpacePlane(device: device) else {
             return nil
         }
         self.pipelineState = pipelineState
-        self.inputTexture = inputTexture
         self.plane = plane
         self.viewPort = .porcelain(size: drawableSize)
-        self.gaussianBlur = MPSImageGaussianBlur(device: device, sigma: 15)
-        self.outputTexture = outputTexture
+        self.unmodifiedSceneTexture = unmodifiedSceneTexture
+        self.brightAreasTexture = brightAreasTexture
     }
-    mutating func draw(encoder: inout MTLRenderCommandEncoder,
-                       commandBuffer: inout MTLCommandBuffer,
-                       renderPass: inout MTLRenderPassDescriptor) {
-        guard let gaussianBlurSource = renderPass.colorAttachments[0].texture else {
-            fatalError("Required textures not bound")
-        }
+    func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
                                 index: kAttributeBloomSplitVertexShaderBufferStageIn)
-        encoder.setFragmentTexture(inputTexture, index: kAttributeBloomSplitFragmentShaderTextureInput)
+        encoder.setFragmentTexture(unmodifiedSceneTexture, index: kAttributeBloomMergeFragmentShaderTextureOriginal)
+        encoder.setFragmentTexture(brightAreasTexture, index: kAttributeBloomMergeFragmentShaderTextureBrightAreas)
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
                                       indexType: plane.pieceDescriptions[0].drawDescription.indexType,
                                       indexBuffer: plane.pieceDescriptions[0].drawDescription.indexBuffer.buffer,
                                       indexBufferOffset: plane.pieceDescriptions[0].drawDescription.indexBuffer.offset)
-        encoder.endEncoding()
-        gaussianBlur.encode(commandBuffer: commandBuffer,
-                            sourceTexture: gaussianBlurSource,
-                            destinationTexture: outputTexture)
     }
 }

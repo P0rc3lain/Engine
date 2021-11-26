@@ -6,7 +6,7 @@ import Metal
 import MetalBinding
 import simd
 
-struct SSAORenderer {
+struct PNSSAOJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let viewPort: MTLViewport
     private let plane: PNMesh
@@ -43,10 +43,11 @@ struct SSAORenderer {
         self.noiseBuffer.upload(data: &noise)
         self.uniforms.upload(value: &uniforms)
     }
-    mutating func updateUniforms(_ uniforms: inout SSAOUniforms) {
+    private mutating func updateUniforms(_ uniforms: inout SSAOUniforms) {
         self.uniforms.upload(value: &uniforms)
     }
-    mutating func draw(encoder: inout MTLRenderCommandEncoder, bufferStore: inout BufferStore) {
+    func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
+        let bufferStore = supply.bufferStore
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,

@@ -3,5 +3,5 @@
 //
 
 public protocol PNRenderingCoordinator {
-    mutating func draw(scene: inout PNSceneDescription, bufferStore: inout BufferStore)
+    mutating func draw(frameSupply: PNFrameSupply)
 }

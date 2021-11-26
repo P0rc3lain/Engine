@@ -5,7 +5,7 @@
 import Metal
 import MetalBinding
 
-struct SpotShadowRenderer {
+struct PNSpotShadowJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let animatedPipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
@@ -19,21 +19,21 @@ struct SpotShadowRenderer {
         self.depthStencilState = depthStencilState
         self.viewPort = viewPort
     }
-    private func generateRenderMasks(scene: inout PNSceneDescription) -> [[Bool]] {
+    private func generateRenderMasks(scene: PNSceneDescription) -> [[Bool]] {
         return scene.spotLights.count.naturalExclusive.map { i in
             let cameraTransform = scene.uniforms[Int(scene.spotLights[i].idx)].modelMatrixInverse
             let interactor = PNIBoundingBoxInteractor(boundInteractor: PNIBoundInteractor())
             let cullingController = PNICullingController(interactor: interactor)
             let cameraBoundingBox = interactor.multiply(cameraTransform, scene.spotLights[i].boundingBox)
             let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
-            let mask = cullingController.cullingMask(scene: &scene,
+            let mask = cullingController.cullingMask(scene: scene,
                                                      boundingBox: cameraAlignedBoundingBox)
             return mask
         }
     }
-    func draw(encoder: inout MTLRenderCommandEncoder,
-              scene: inout PNSceneDescription,
-              dataStore: inout BufferStore) {
+    func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
+        let scene = supply.scene
+        let dataStore = supply.bufferStore
         guard !scene.spotLights.isEmpty else {
             return
         }
@@ -44,7 +44,7 @@ struct SpotShadowRenderer {
         encoder.setRenderPipelineState(animatedPipelineState)
         encoder.setVertexBuffer(dataStore.spotLights,
                                 index: kAttributeSpotShadowVertexShaderBufferSpotLights)
-        let masks = generateRenderMasks(scene: &scene)
+        let masks = generateRenderMasks(scene: scene)
         for lightIndex in scene.spotLights.count.naturalExclusive {
             var lIndex = lightIndex
             encoder.setVertexBytes(&lIndex,

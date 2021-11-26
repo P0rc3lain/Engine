@@ -7,41 +7,50 @@ import MetalPerformanceShaders
 
 struct PNBloomStage: PNStage {
     var io: PNGPUIO
-    private var bloomSplitRenderer: BloomSplitRenderer
-    private var bloomMergeRenderer: BloomMergeRenderer
+    private var bloomSplitJob: PNBloomSplitJob
+    private var bloomMergeJob: PNBloomMergeJob
+    private let gaussianBlurJob: MPSImageGaussianBlur
+    private let splitBlurredTexture: MTLTexture
     private var bloomSplitRenderPassDescriptor: MTLRenderPassDescriptor
     private let bloomMergeRenderPassDescriptor: MTLRenderPassDescriptor
     init?(input: MTLTexture, device: MTLDevice, renderingSize: CGSize) {
         bloomSplitRenderPassDescriptor = .bloomSplit(device: device, size: renderingSize)
         bloomMergeRenderPassDescriptor = .bloomMerge(device: device, size: renderingSize)
-        guard let bloomSplitRenderer = BloomSplitRenderer.make(device: device,
-                                                               inputTexture: input,
-                                                               drawableSize: renderingSize),
-              let bloomMergeRenderer = BloomMergeRenderer.make(device: device, drawableSize: renderingSize),
-              let outputTexture = bloomMergeRenderPassDescriptor.colorAttachments[0].texture else {
+        guard let bloomSplitJob = PNBloomSplitJob.make(device: device,
+                                                       inputTexture: input,
+                                                       drawableSize: renderingSize),
+              let stageOutputTexture = bloomMergeRenderPassDescriptor.colorAttachments[0].texture,
+              let splitBlurredTexture = device.makeTexture(descriptor: .bloomSplitColor(size: renderingSize)),
+              let bloomMergeJob = PNBloomMergeJob.make(device: device,
+                                                       drawableSize: renderingSize,
+                                                       unmodifiedSceneTexture: input,
+                                                       brightAreasTexture: splitBlurredTexture) else {
             return nil
         }
-        self.bloomSplitRenderer = bloomSplitRenderer
-        self.bloomMergeRenderer = bloomMergeRenderer
+        self.gaussianBlurJob = MPSImageGaussianBlur(device: device, sigma: 2)
+        self.bloomSplitJob = bloomSplitJob
+        self.bloomMergeJob = bloomMergeJob
+        self.splitBlurredTexture = splitBlurredTexture
         self.io = PNGPUIO(input: PNGPUSupply(color: [input]),
-                          output: PNGPUSupply(color: [outputTexture]))
+                          output: PNGPUSupply(color: [stageOutputTexture]))
     }
-    mutating func draw(commandBuffer: inout MTLCommandBuffer) {
+    func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
         commandBuffer.pushDebugGroup("Bloom Pass")
-        guard var bloomSplitEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: bloomSplitRenderPassDescriptor) else {
+        guard let bloomSplitEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: bloomSplitRenderPassDescriptor),
+              let gaussianBlurSource = bloomSplitRenderPassDescriptor.colorAttachments[0].texture else {
             return
         }
-        bloomSplitRenderer.draw(encoder: &bloomSplitEncoder,
-                                commandBuffer: &commandBuffer,
-                                renderPass: &bloomSplitRenderPassDescriptor)
+        bloomSplitJob.draw(encoder: bloomSplitEncoder, supply: supply)
+        bloomSplitEncoder.endEncoding()
+        gaussianBlurJob.encode(commandBuffer: commandBuffer,
+                               sourceTexture: gaussianBlurSource,
+                               destinationTexture: splitBlurredTexture)
         commandBuffer.popDebugGroup()
         commandBuffer.pushDebugGroup("Bloom Merge Pass")
-        guard var bloomMergeEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: bloomMergeRenderPassDescriptor) else {
+        guard let bloomMergeEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: bloomMergeRenderPassDescriptor) else {
             return
         }
-        bloomMergeRenderer.draw(encoder: &bloomMergeEncoder,
-                                unmodifiedSceneTexture: io.input.color[0],
-                                brightAreasTexture: bloomSplitRenderer.outputTexture)
+        bloomMergeJob.draw(encoder: bloomMergeEncoder, supply: supply)
         bloomMergeEncoder.endEncoding()
         commandBuffer.popDebugGroup()
     }

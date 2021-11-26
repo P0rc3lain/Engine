@@ -8,8 +8,8 @@ struct PNShadowStage: PNStage {
     var io: PNGPUIO
     private var omniLightShadowRenderPassDescriptor: MTLRenderPassDescriptor
     private var spotLightShadowRenderPassDescriptor: MTLRenderPassDescriptor
-    private var omniLightShadowRenderer: OmniShadowRenderer
-    private var spotLightShadowRenderer: SpotShadowRenderer
+    private var omniLightShadowJob: PNOmniShadowJob
+    private var spotLightShadowJob: PNSpotShadowJob
     init?(device: MTLDevice,
           spotShadowTextureSideSize: Float,
           spotLightsNumber: Int,
@@ -24,35 +24,33 @@ struct PNShadowStage: PNStage {
                                                                     layers: omniLightsNumber)
         guard let spotLightTextures = spotLightShadowRenderPassDescriptor.depthAttachment.texture,
               let omniLightTextures = omniLightShadowRenderPassDescriptor.depthAttachment.texture,
-              let spotLightShadowRenderer = SpotShadowRenderer.make(device: device,
-                                                                    renderingSize: size),
-              let omniLightShadowRenderer = OmniShadowRenderer.make(device: device,
-                                                                    renderingSize: size) else {
+              let spotLightShadowJob = PNSpotShadowJob.make(device: device,
+                                                            renderingSize: size),
+              let omniLightShadowJob = PNOmniShadowJob.make(device: device,
+                                                            renderingSize: size) else {
             return nil
         }
         self.io = PNGPUIO(input: .empty,
                           output: PNGPUSupply(depth: [spotLightTextures, omniLightTextures]))
-        self.spotLightShadowRenderer = spotLightShadowRenderer
-        self.omniLightShadowRenderer = omniLightShadowRenderer
+        self.spotLightShadowJob = spotLightShadowJob
+        self.omniLightShadowJob = omniLightShadowJob
     }
-    mutating func draw(commandBuffer: inout MTLCommandBuffer,
-                       scene: inout PNSceneDescription,
-                       bufferStore: inout BufferStore) {
-        if !scene.spotLights.isEmpty {
-            guard var spotEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: spotLightShadowRenderPassDescriptor) else {
+    func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
+        if !supply.scene.spotLights.isEmpty {
+            guard let spotEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: spotLightShadowRenderPassDescriptor) else {
                 return
             }
             spotEncoder.pushDebugGroup("Spot Light Shadow Pass")
-            spotLightShadowRenderer.draw(encoder: &spotEncoder, scene: &scene, dataStore: &bufferStore)
+            spotLightShadowJob.draw(encoder: spotEncoder, supply: supply)
             spotEncoder.endEncoding()
             commandBuffer.popDebugGroup()
         }
-        if !scene.omniLights.isEmpty {
-            guard var omniEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: omniLightShadowRenderPassDescriptor) else {
+        if !supply.scene.omniLights.isEmpty {
+            guard let omniEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: omniLightShadowRenderPassDescriptor) else {
                 return
             }
             omniEncoder.pushDebugGroup("Omni Light Shadow Pass")
-            omniLightShadowRenderer.draw(encoder: &omniEncoder, scene: &scene, dataStore: &bufferStore)
+            omniLightShadowJob.draw(encoder: omniEncoder, supply: supply)
             omniEncoder.endEncoding()
         }
     }

@@ -65,4 +65,7 @@ extension MTLPixelFormat {
     static var postprocessorRendererColor: MTLPixelFormat {
         .rgba16Float
     }
+    static var vignetteColor: MTLPixelFormat {
+        .postprocessorRendererColor
+    }
 }

@@ -24,17 +24,14 @@ struct PNIRenderingCoordinator: PNRenderingCoordinator {
         self.pipeline = pipeline
         self.commandQueue = commandQueue
     }
-    mutating func draw(scene: inout PNSceneDescription,
-                       bufferStore: inout BufferStore) {
-        guard scene.activeCameraIdx != .nil,
-              var commandBuffer = commandQueue.makeCommandBuffer(),
+    mutating func draw(frameSupply: PNFrameSupply) {
+        guard frameSupply.scene.activeCameraIdx != .nil,
+              let commandBuffer = commandQueue.makeCommandBuffer(),
               let drawable = view.currentDrawable,
               let outputTexture = view.currentRenderPassDescriptor?.colorAttachments[0].texture else {
             return
         }
-        pipeline.draw(commandBuffer: &commandBuffer,
-                      scene: &scene,
-                      bufferStore: &bufferStore)
+        pipeline.draw(commandBuffer: commandBuffer, supply: frameSupply)
         imageConverter.encode(commandBuffer: commandBuffer,
                               sourceTexture: pipeline.io.output.color[0],
                               destinationTexture: outputTexture)

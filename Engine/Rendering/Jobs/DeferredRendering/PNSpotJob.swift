@@ -6,31 +6,33 @@ import MetalBinding
 import MetalKit
 import simd
 
-struct OmniRenderer {
+struct PNSpotJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport
     private let inputTextures: [MTLTexture]
+    private let shadowMap: MTLTexture
     private let plane: PNMesh
     init?(pipelineState: MTLRenderPipelineState,
           inputTextures: [MTLTexture],
+          shadowMap: MTLTexture,
           device: MTLDevice,
           depthStencilState: MTLDepthStencilState,
           drawableSize: CGSize) {
         guard let plane = PNMesh.screenSpacePlane(device: device) else {
             return nil
         }
+        self.shadowMap = shadowMap
         self.pipelineState = pipelineState
         self.depthStencilState = depthStencilState
         self.inputTextures = inputTextures
         self.plane = plane
         self.viewPort = .porcelain(size: drawableSize)
     }
-    func draw(encoder: inout MTLRenderCommandEncoder,
-              bufferStore: inout BufferStore,
-              scene: inout PNSceneDescription,
-              shadowMaps: MTLTexture) {
-        guard !scene.omniLights.isEmpty else {
+    func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
+        let scene = supply.scene
+        let bufferStore = supply.bufferStore
+        guard !scene.spotLights.isEmpty else {
             return
         }
         let arTexture = inputTextures[0]
@@ -40,22 +42,22 @@ struct OmniRenderer {
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
-                                index: kAttributeLightingVertexShaderBufferStageIn)
-        encoder.setFragmentBuffer(bufferStore.omniLights,
-                                  index: kAttributeLightingFragmentShaderBufferOmniLights)
+                                index: kAttributeSpotVertexShaderBufferStageIn)
+        encoder.setFragmentBuffer(bufferStore.spotLights,
+                                  index: kAttributeSpotFragmentShaderBufferSpotLights)
         let cameraIdx = scene.entities[scene.activeCameraIdx].data.referenceIdx
         encoder.setFragmentBuffer(bufferStore.cameras,
                                   offset: cameraIdx * MemoryLayout<CameraUniforms>.stride,
-                                  index: kAttributeLightingFragmentShaderBufferCamera)
+                                  index: kAttributeSpotFragmentShaderBufferCamera)
         encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems,
-                                  index: kAttributeLightingFragmentShaderBufferLightUniforms)
-        let range = kAttributeLightingFragmentShaderTextureAR ... kAttributeLightingFragmentShaderTextureShadowMaps
-        encoder.setFragmentTextures([arTexture, nmTexture, prTexture, shadowMaps], range: range)
+                                  index: kAttributeSpotFragmentShaderBufferModelUniforms)
+        let range = kAttributeSpotFragmentShaderTextureAR ... kAttributeSpotFragmentShaderTextureShadowMaps
+        encoder.setFragmentTextures([arTexture, nmTexture, prTexture, shadowMap], range: range)
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
                                       indexType: plane.pieceDescriptions[0].drawDescription.indexType,
                                       indexBuffer: plane.pieceDescriptions[0].drawDescription.indexBuffer.buffer,
                                       indexBufferOffset: plane.pieceDescriptions[0].drawDescription.indexBuffer.offset,
-                                      instanceCount: scene.omniLights.count)
+                                      instanceCount: scene.spotLights.count)
     }
 }

@@ -4,16 +4,16 @@
 
 import Metal
 
-extension Postprocessor {
+extension PNVignetteJob {
     static func make(device: MTLDevice,
                      inputTexture: MTLTexture,
-                     canvasSize: CGSize) -> Postprocessor? {
+                     canvasSize: CGSize) -> PNVignetteJob? {
         guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRenderPipelineStatePostprocessor(library: library),
+              let pipelineState = device.makeRenderPipelineStateVignette(library: library),
               let plane = PNMesh.screenSpacePlane(device: device) else {
             return nil
         }
-        return Postprocessor(pipelineState: pipelineState,
+        return PNVignetteJob(pipelineState: pipelineState,
                              inputTexture: inputTexture,
                              plane: plane,
                              canvasSize: canvasSize)

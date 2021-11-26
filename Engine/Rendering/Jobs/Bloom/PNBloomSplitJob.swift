@@ -7,29 +7,29 @@ import MetalBinding
 import MetalPerformanceShaders
 import simd
 
-struct BloomMergeRenderer {
+struct PNBloomSplitJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let viewPort: MTLViewport
+    private let inputTexture: MTLTexture
     private let plane: PNMesh
     init?(pipelineState: MTLRenderPipelineState,
+          inputTexture: MTLTexture,
           device: MTLDevice,
           drawableSize: CGSize) {
         guard let plane = PNMesh.screenSpacePlane(device: device) else {
             return nil
         }
         self.pipelineState = pipelineState
+        self.inputTexture = inputTexture
         self.plane = plane
         self.viewPort = .porcelain(size: drawableSize)
     }
-    mutating func draw(encoder: inout MTLRenderCommandEncoder,
-                       unmodifiedSceneTexture: MTLTexture,
-                       brightAreasTexture: MTLTexture) {
+    func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
                                 index: kAttributeBloomSplitVertexShaderBufferStageIn)
-        encoder.setFragmentTexture(unmodifiedSceneTexture, index: kAttributeBloomMergeFragmentShaderTextureOriginal)
-        encoder.setFragmentTexture(brightAreasTexture, index: kAttributeBloomMergeFragmentShaderTextureBrightAreas)
+        encoder.setFragmentTexture(inputTexture, index: kAttributeBloomSplitFragmentShaderTextureInput)
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
                                       indexType: plane.pieceDescriptions[0].drawDescription.indexType,

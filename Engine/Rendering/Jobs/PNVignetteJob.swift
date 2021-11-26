@@ -6,7 +6,7 @@ import Metal
 import MetalBinding
 import simd
 
-struct Postprocessor {
+struct PNVignetteJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let inputTexture: MTLTexture
     private let viewPort: MTLViewport
@@ -20,7 +20,7 @@ struct Postprocessor {
         self.plane = plane
         self.viewPort = .porcelain(size: canvasSize)
     }
-    func draw(encoder: MTLRenderCommandEncoder) {
+    func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         encoder.setFragmentTexture(inputTexture,
                                    index: kAttributePostprocessingFragmentShaderTexture)
         encoder.setViewport(viewPort)

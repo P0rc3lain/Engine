@@ -2,18 +2,19 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
+import Metal
 import MetalBinding
-import MetalKit
-import simd
 
-struct DirectionalRenderer {
+struct PNAmbientJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport
     private let inputTextures: [MTLTexture]
+    private let ssaoTexture: MTLTexture
     private let plane: PNMesh
     init?(pipelineState: MTLRenderPipelineState,
           inputTextures: [MTLTexture],
+          ssaoTexture: MTLTexture,
           device: MTLDevice,
           depthStencilState: MTLDepthStencilState,
           drawableSize: CGSize) {
@@ -23,38 +24,37 @@ struct DirectionalRenderer {
         self.pipelineState = pipelineState
         self.depthStencilState = depthStencilState
         self.inputTextures = inputTextures
+        self.ssaoTexture = ssaoTexture
         self.plane = plane
         self.viewPort = .porcelain(size: drawableSize)
     }
-    func draw(encoder: inout MTLRenderCommandEncoder,
-              bufferStore: inout BufferStore,
-              scene: inout PNSceneDescription) {
-        guard !scene.directionalLights.isEmpty else {
+    func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
+        let scene = supply.scene
+        let bufferStore = supply.bufferStore
+        guard !scene.ambientLights.isEmpty else {
             return
         }
-        let arTexture = inputTextures[0]
-        let nmTexture = inputTextures[1]
-        let prTexture = inputTextures[2]
         encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
-                                index: kAttributeDirectionalVertexShaderBufferStageIn)
-        encoder.setFragmentBuffer(bufferStore.directionalLights,
-                                  index: kAttributeDirectionalFragmentShaderBufferDirectionalLights)
+                                index: kAttributeAmbientVertexShaderBufferStageIn)
+        encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems,
+                                  index: kAttributeAmbientFragmentShaderBufferModelUniforms)
         let cameraIdx = scene.entities[scene.activeCameraIdx].data.referenceIdx
         encoder.setFragmentBuffer(bufferStore.cameras,
                                   offset: cameraIdx * MemoryLayout<CameraUniforms>.stride,
-                                  index: kAttributeDirectionalFragmentShaderBufferCamera)
-        encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems,
-                                  index: kAttributeDirectionalFragmentShaderBufferLightUniforms)
-        let range = kAttributeDirectionalFragmentShaderTextureAR ... kAttributeDirectionalFragmentShaderTexturePR
-        encoder.setFragmentTextures([arTexture, nmTexture, prTexture], range: range)
+                                  index: kAttributeAmbientFragmentShaderBufferCamera)
+        encoder.setFragmentBuffer(bufferStore.ambientLights,
+                                  index: kAttributeAmbientFragmentShaderBufferAmbientLights)
+        encoder.setFragmentTexture(ssaoTexture, index: kAttributeAmbientFragmentShaderTextureSSAO)
+        encoder.setFragmentTexture(inputTextures[0], index: kAttributeAmbientFragmentShaderTextureAR)
+        encoder.setFragmentTexture(inputTextures[2], index: kAttributeAmbientFragmentShaderTexturePR)
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
                                       indexType: plane.pieceDescriptions[0].drawDescription.indexType,
                                       indexBuffer: plane.pieceDescriptions[0].drawDescription.indexBuffer.buffer,
                                       indexBufferOffset: plane.pieceDescriptions[0].drawDescription.indexBuffer.offset,
-                                      instanceCount: scene.directionalLights.count)
+                                      instanceCount: scene.ambientLights.count)
     }
 }

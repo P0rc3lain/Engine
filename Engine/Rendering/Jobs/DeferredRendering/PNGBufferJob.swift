@@ -6,7 +6,7 @@ import MetalBinding
 import MetalKit
 import simd
 
-struct GBufferRenderer {
+struct PNGBufferJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let animatedPipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
@@ -20,20 +20,20 @@ struct GBufferRenderer {
         self.depthStencilState = depthStencilState
         self.viewPort = .porcelain(size: drawableSize)
     }
-    private func generateRenderMask(scene: inout PNSceneDescription) -> [Bool] {
+    private func generateRenderMask(scene: PNSceneDescription) -> [Bool] {
         let cameraTransform = scene.uniforms[scene.activeCameraIdx].modelMatrixInverse
         let cameraIndex = scene.entities[scene.activeCameraIdx].data.referenceIdx
         let interactor = PNIBoundingBoxInteractor.default
         let cullingController = PNICullingController(interactor: interactor)
         let cameraBoundingBox = interactor.multiply(cameraTransform, scene.cameras[cameraIndex].boundingBox)
         let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
-        return cullingController.cullingMask(scene: &scene,
+        return cullingController.cullingMask(scene: scene,
                                              boundingBox: cameraAlignedBoundingBox)
     }
-    func draw(encoder: inout MTLRenderCommandEncoder,
-              scene: inout PNSceneDescription,
-              dataStore: inout BufferStore) {
-        let mask = generateRenderMask(scene: &scene)
+    func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
+        let scene = supply.scene
+        let dataStore = supply.bufferStore
+        let mask = generateRenderMask(scene: scene)
         encoder.setViewport(viewPort)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setCullMode(.back)

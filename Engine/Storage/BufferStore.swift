@@ -6,7 +6,7 @@ import Metal
 import MetalBinding
 import simd
 
-public struct BufferStore {
+public class BufferStore {
     var omniLights: PNAnyDynamicBuffer<OmniLight>
     var ambientLights: PNAnyDynamicBuffer<AmbientLight>
     var directionalLights: PNAnyDynamicBuffer<DirectionalLight>
@@ -32,7 +32,7 @@ public struct BufferStore {
         self.directionalLights = PNAnyDynamicBuffer(directionalLights)
         self.spotLights = PNAnyDynamicBuffer(spotLights)
     }
-    mutating func upload(camera: inout PNCamera, index: Int) {
+    func upload(camera: inout PNCamera, index: Int) {
         var uniforms = [CameraUniforms(projectionMatrix: camera.projectionMatrix, index: Int32(index))]
         cameras.upload(data: &uniforms)
     }
