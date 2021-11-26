@@ -5,9 +5,13 @@
 public struct PNIWorkloadManager: PNWorkloadManager {
     private var bufferStore: BufferStore
     private var renderingCoordinator: PNRenderingCoordinator
-    public init(bufferStore: BufferStore, renderingCoordinator: PNRenderingCoordinator) {
+    private let renderMaskGenerator: PNRenderMaskGenerator
+    public init(bufferStore: BufferStore,
+                renderingCoordinator: PNRenderingCoordinator,
+                renderMaskGenerator: PNRenderMaskGenerator) {
         self.bufferStore = bufferStore
         self.renderingCoordinator = renderingCoordinator
+        self.renderMaskGenerator = renderMaskGenerator
     }
     public mutating func draw(sceneGraph: inout PNScene) {
         let transcriber = PNITranscriber(transformCalculator: PNITransformCalculator(interpolator: PNIInterpolator()))
@@ -20,6 +24,8 @@ public struct PNIWorkloadManager: PNWorkloadManager {
         bufferStore.upload(camera: &scene.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx],
                            index: scene.activeCameraIdx)
         bufferStore.modelCoordinateSystems.upload(data: &scene.uniforms)
-        renderingCoordinator.draw(frameSupply: PNFrameSupply(scene: scene, bufferStore: bufferStore))
+        renderingCoordinator.draw(frameSupply: PNFrameSupply(scene: scene,
+                                                             bufferStore: bufferStore,
+                                                             mask: renderMaskGenerator.generate(scene: scene)))
     }
 }

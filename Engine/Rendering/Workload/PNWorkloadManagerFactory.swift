@@ -3,5 +3,7 @@
 //
 
 public protocol PNWorkloadManagerFactory {
-    func new(bufferStore: BufferStore, renderingCoordinator: PNRenderingCoordinator) -> PNWorkloadManager
+    func new(bufferStore: BufferStore,
+             renderingCoordinator: PNRenderingCoordinator,
+             renderMaskGenerator: PNRenderMaskGenerator) -> PNWorkloadManager
 }

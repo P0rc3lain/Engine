@@ -25,33 +25,13 @@ struct PNOmniShadowJob: PNRenderJob {
         var rotations = PNOmniShadowJob.rotationMatrices
         self.rotationsBuffer.upload(data: &rotations)
     }
-    private func generateRenderMasks(scene: PNSceneDescription) -> [[[Bool]]] {
-        let rotations = simd_quatf.environment
-        let interactor = PNIBoundingBoxInteractor.default
-        let cullingController = PNICullingController(interactor: interactor)
-        return scene.omniLights.count.naturalExclusive.map { lightIndex in
-            var faceData = [[Bool]]()
-            for faceIndex in 6.naturalExclusive {
-                let entityIndex = Int(scene.omniLights[lightIndex].idx)
-                let cameraTransform = scene.uniforms[entityIndex].modelMatrixInverse
-                let boundingBox = interactor.from(inverseProjection: scene.omniLights[lightIndex].projectionMatrixInverse)
-                let cameraBoundingBox = interactor.multiply(rotations[faceIndex].rotationMatrix,
-                                                            interactor.multiply(cameraTransform, boundingBox))
-                let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
-                let mask = cullingController.cullingMask(scene: scene,
-                                                         boundingBox: cameraAlignedBoundingBox)
-                faceData.append(mask)
-            }
-            return faceData
-        }
-    }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         let scene = supply.scene
         let dataStore = supply.bufferStore
         guard !scene.omniLights.isEmpty else {
             return
         }
-        let masks = generateRenderMasks(scene: scene)
+        let masks = supply.mask.omniLights
         encoder.setViewport(viewPort)
         encoder.setCullMode(.front)
         encoder.setFrontFacing(.counterClockwise)

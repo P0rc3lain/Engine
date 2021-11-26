@@ -4,7 +4,11 @@
 
 public struct PNIWorkloadManagerFactory: PNWorkloadManagerFactory {
     public init() {}
-    public func new(bufferStore: BufferStore, renderingCoordinator: PNRenderingCoordinator) -> PNWorkloadManager {
-        PNIWorkloadManager(bufferStore: bufferStore, renderingCoordinator: renderingCoordinator)
+    public func new(bufferStore: BufferStore,
+                    renderingCoordinator: PNRenderingCoordinator,
+                    renderMaskGenerator: PNRenderMaskGenerator) -> PNWorkloadManager {
+        PNIWorkloadManager(bufferStore: bufferStore,
+                           renderingCoordinator: renderingCoordinator,
+                           renderMaskGenerator: renderMaskGenerator)
     }
 }

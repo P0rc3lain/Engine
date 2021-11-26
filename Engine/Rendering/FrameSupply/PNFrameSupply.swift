@@ -5,8 +5,10 @@
 public class PNFrameSupply {
     let scene: PNSceneDescription
     let bufferStore: BufferStore
-    public init(scene: PNSceneDescription, bufferStore: BufferStore) {
+    let mask: PNRenderMask
+    public init(scene: PNSceneDescription, bufferStore: BufferStore, mask: PNRenderMask) {
         self.scene = scene
         self.bufferStore = bufferStore
+        self.mask = mask
     }
 }

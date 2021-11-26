@@ -19,18 +19,6 @@ struct PNSpotShadowJob: PNRenderJob {
         self.depthStencilState = depthStencilState
         self.viewPort = viewPort
     }
-    private func generateRenderMasks(scene: PNSceneDescription) -> [[Bool]] {
-        return scene.spotLights.count.naturalExclusive.map { i in
-            let cameraTransform = scene.uniforms[Int(scene.spotLights[i].idx)].modelMatrixInverse
-            let interactor = PNIBoundingBoxInteractor(boundInteractor: PNIBoundInteractor())
-            let cullingController = PNICullingController(interactor: interactor)
-            let cameraBoundingBox = interactor.multiply(cameraTransform, scene.spotLights[i].boundingBox)
-            let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
-            let mask = cullingController.cullingMask(scene: scene,
-                                                     boundingBox: cameraAlignedBoundingBox)
-            return mask
-        }
-    }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         let scene = supply.scene
         let dataStore = supply.bufferStore
@@ -44,7 +32,7 @@ struct PNSpotShadowJob: PNRenderJob {
         encoder.setRenderPipelineState(animatedPipelineState)
         encoder.setVertexBuffer(dataStore.spotLights,
                                 index: kAttributeSpotShadowVertexShaderBufferSpotLights)
-        let masks = generateRenderMasks(scene: scene)
+        let masks = supply.mask.spotLights
         for lightIndex in scene.spotLights.count.naturalExclusive {
             var lIndex = lightIndex
             encoder.setVertexBytes(&lIndex,

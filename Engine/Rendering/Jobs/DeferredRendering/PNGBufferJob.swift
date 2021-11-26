@@ -20,20 +20,10 @@ struct PNGBufferJob: PNRenderJob {
         self.depthStencilState = depthStencilState
         self.viewPort = .porcelain(size: drawableSize)
     }
-    private func generateRenderMask(scene: PNSceneDescription) -> [Bool] {
-        let cameraTransform = scene.uniforms[scene.activeCameraIdx].modelMatrixInverse
-        let cameraIndex = scene.entities[scene.activeCameraIdx].data.referenceIdx
-        let interactor = PNIBoundingBoxInteractor.default
-        let cullingController = PNICullingController(interactor: interactor)
-        let cameraBoundingBox = interactor.multiply(cameraTransform, scene.cameras[cameraIndex].boundingBox)
-        let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
-        return cullingController.cullingMask(scene: scene,
-                                             boundingBox: cameraAlignedBoundingBox)
-    }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         let scene = supply.scene
         let dataStore = supply.bufferStore
-        let mask = generateRenderMask(scene: scene)
+        let mask = supply.mask.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx]
         encoder.setViewport(viewPort)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setCullMode(.back)
