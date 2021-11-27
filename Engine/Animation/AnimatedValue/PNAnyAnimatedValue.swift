@@ -16,14 +16,19 @@ public struct PNAnyAnimatedValue<T>: PNAnimatedValue {
     private let keyFramesProxy: () -> [T]
     private let timesProxy: () -> [TimeInterval]
     private let maximumTimeProxy: () -> TimeInterval
+    private let mapProxy: ((T) -> T) -> Void
     private let sampleProxy: (TimeInterval) -> PNAnimationSample<T>
-    init<V: PNAnimatedValue>(_ delegatee: V) where V.DataType == T {
+    public init<V: PNAnimatedValue>(_ delegatee: V) where V.DataType == T {
         keyFramesProxy = { delegatee.keyFrames }
         timesProxy = { delegatee.times }
         maximumTimeProxy = { delegatee.maximumTime }
         sampleProxy = delegatee.sample(at:)
+        mapProxy = { input in delegatee.map(input) }
     }
     public func sample(at time: TimeInterval) -> PNAnimationSample<T> {
         sampleProxy(time)
+    }
+    public func map(_ transfrom: (T) -> T) {
+        mapProxy(transfrom)
     }
 }

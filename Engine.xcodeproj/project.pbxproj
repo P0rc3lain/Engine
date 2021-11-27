@@ -89,7 +89,6 @@
 		5629FBDF27491A78005476AF /* PNAnimatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBDE27491A78005476AF /* PNAnimatedValue.swift */; };
 		5629FBE127491ABF005476AF /* PNAnyAnimatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBE027491ABF005476AF /* PNAnyAnimatedValue.swift */; };
 		5629FBE327491D03005476AF /* PNSampleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBE227491D03005476AF /* PNSampleProvider.swift */; };
-		5629FBE727491DDB005476AF /* PNAnySampleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBE627491DDB005476AF /* PNAnySampleProvider.swift */; };
 		5629FBEA2749201F005476AF /* PNInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBE92749201F005476AF /* PNInterpolator.swift */; };
 		5629FBEC2749209C005476AF /* PNIInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBEB2749209C005476AF /* PNIInterpolator.swift */; };
 		5629FBEE27492533005476AF /* PNAnimatedCoordinateSpace+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBED27492533005476AF /* PNAnimatedCoordinateSpace+Extension.swift */; };
@@ -198,6 +197,7 @@
 		56C47BAC2751769A0075C61B /* PNBufferedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C47BAB2751769A0075C61B /* PNBufferedValue.swift */; };
 		56C47BAF275176EC0075C61B /* PNIBufferedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C47BAE275176EC0075C61B /* PNIBufferedValue.swift */; };
 		56C47BB1275177B70075C61B /* PNAnyBufferedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C47BB0275177B70075C61B /* PNAnyBufferedValue.swift */; };
+		56C47BB32751B5C00075C61B /* PNManageableTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C47BB22751B5C00075C61B /* PNManageableTransform.swift */; };
 		56C4CD512737FFDD000A994E /* PNSpotJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C4CD502737FFDD000A994E /* PNSpotJob.swift */; };
 		56C4CD53273800E4000A994E /* SpotRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56C4CD52273800E4000A994E /* SpotRenderer.metal */; };
 		56C4CD55273801EB000A994E /* PNSpotJob+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C4CD54273801EB000A994E /* PNSpotJob+Extension.swift */; };
@@ -322,7 +322,6 @@
 		5629FBDE27491A78005476AF /* PNAnimatedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnimatedValue.swift; sourceTree = "<group>"; };
 		5629FBE027491ABF005476AF /* PNAnyAnimatedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnyAnimatedValue.swift; sourceTree = "<group>"; };
 		5629FBE227491D03005476AF /* PNSampleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSampleProvider.swift; sourceTree = "<group>"; };
-		5629FBE627491DDB005476AF /* PNAnySampleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnySampleProvider.swift; sourceTree = "<group>"; };
 		5629FBE92749201F005476AF /* PNInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNInterpolator.swift; sourceTree = "<group>"; };
 		5629FBEB2749209C005476AF /* PNIInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIInterpolator.swift; sourceTree = "<group>"; };
 		5629FBED27492533005476AF /* PNAnimatedCoordinateSpace+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNAnimatedCoordinateSpace+Extension.swift"; sourceTree = "<group>"; };
@@ -453,6 +452,7 @@
 		56C47BAB2751769A0075C61B /* PNBufferedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNBufferedValue.swift; sourceTree = "<group>"; };
 		56C47BAE275176EC0075C61B /* PNIBufferedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIBufferedValue.swift; sourceTree = "<group>"; };
 		56C47BB0275177B70075C61B /* PNAnyBufferedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnyBufferedValue.swift; sourceTree = "<group>"; };
+		56C47BB22751B5C00075C61B /* PNManageableTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNManageableTransform.swift; sourceTree = "<group>"; };
 		56C4CD4F2737FF24000A994E /* SpotLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpotLight.h; sourceTree = "<group>"; };
 		56C4CD502737FFDD000A994E /* PNSpotJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSpotJob.swift; sourceTree = "<group>"; };
 		56C4CD52273800E4000A994E /* SpotRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = SpotRenderer.metal; sourceTree = "<group>"; };
@@ -776,7 +776,7 @@
 				5629FBDE27491A78005476AF /* PNAnimatedValue.swift */,
 				5629FBE027491ABF005476AF /* PNAnyAnimatedValue.swift */,
 				5629FBE227491D03005476AF /* PNSampleProvider.swift */,
-				5629FBE627491DDB005476AF /* PNAnySampleProvider.swift */,
+				56C47BB22751B5C00075C61B /* PNManageableTransform.swift */,
 			);
 			path = AnimatedValue;
 			sourceTree = "<group>";
@@ -1531,6 +1531,7 @@
 				56D7ED4D274C52E000A6C25D /* PNAssetLoader.swift in Sources */,
 				5688074A2747F10700C95F55 /* Int+Alias.swift in Sources */,
 				566795D4274EEA23005993D7 /* PNChronometer.swift in Sources */,
+				56C47BB32751B5C00075C61B /* PNManageableTransform.swift in Sources */,
 				563575F42728486A00CE4988 /* PNAnimationSample.swift in Sources */,
 				5670EC272736EA2400375194 /* PNPostprocessStage.swift in Sources */,
 				566795ED274FF235005993D7 /* PNRenderingCoordinatorFactory.swift in Sources */,
@@ -1656,7 +1657,6 @@
 				56C47BB1275177B70075C61B /* PNAnyBufferedValue.swift in Sources */,
 				5670EC252736E1EF00375194 /* PNCombineStage.swift in Sources */,
 				561666F82719E2CD000063B1 /* MTLVertexDescriptor+Extension.swift in Sources */,
-				5629FBE727491DDB005476AF /* PNAnySampleProvider.swift in Sources */,
 				561667122719E2CD000063B1 /* Float+Extension.swift in Sources */,
 				566795DC274FC5C9005993D7 /* Bool+Alias.swift in Sources */,
 				5670EC162736A2AE00375194 /* PNGPUSupply.swift in Sources */,

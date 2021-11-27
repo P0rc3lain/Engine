@@ -20,9 +20,9 @@ extension MDLTransformComponent {
             let scaleAnimation = AnimatedFloat3(keyFrames: scales, times: times, maximumTime: maximumTime)
             let translationAnimation = AnimatedFloat3(keyFrames: translations, times: times, maximumTime: maximumTime)
             let orientationAnimation = AnimatedQuatf(keyFrames: orientations, times: times, maximumTime: maximumTime)
-            return PNAnimatedCoordinateSpace(translation: PNAnySampleProvider(translationAnimation),
-                                             rotation: PNAnySampleProvider(orientationAnimation),
-                                             scale: PNAnySampleProvider(scaleAnimation))
+            return PNAnimatedCoordinateSpace(translation: PNAnyAnimatedValue(translationAnimation),
+                                             rotation: PNAnyAnimatedValue(orientationAnimation),
+                                             scale: PNAnyAnimatedValue(scaleAnimation))
         } else {
             return PNAnimatedCoordinateSpace.static(from: matrix)
         }

@@ -4,7 +4,7 @@
 
 import Foundation
 
-public struct PNIAnimatedValue<T>: PNAnimatedValue {
+public class PNIAnimatedValue<T>: PNAnimatedValue {
     public var keyFrames: [T]
     public let times: [TimeInterval]
     public let maximumTime: TimeInterval
@@ -37,7 +37,7 @@ public struct PNIAnimatedValue<T>: PNAnimatedValue {
     static public func `static`(from value: T) -> PNIAnimatedValue<T> {
         PNIAnimatedValue<T>(keyFrames: [value], times: [0], maximumTime: 1)
     }
-    public mutating func map(transform: (T) -> T) {
+    public func map(_ transform: (T) -> T) {
         keyFrames.inplaceMap(transform: transform)
     }
 }

@@ -24,10 +24,6 @@ struct PNITranscriber: PNTranscriber {
         scene.uniforms.append(ModelUniforms.from(transform: transform))
         for child in node.children {
             write(node: child, scene: &scene, parentIndex: index)
-            let childTransform = transformCalculator.transformation(node: node.data,
-                                                                    parent: parentIndex,
-                                                                    scene: &scene)
-            scene.uniforms.append(ModelUniforms.from(transform: childTransform))
         }
     }
     private func boundingBoxes(scene: inout PNSceneDescription) -> [PNBoundingBox] {
