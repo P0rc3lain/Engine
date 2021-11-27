@@ -198,6 +198,8 @@
 		56C47BAF275176EC0075C61B /* PNIBufferedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C47BAE275176EC0075C61B /* PNIBufferedValue.swift */; };
 		56C47BB1275177B70075C61B /* PNAnyBufferedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C47BB0275177B70075C61B /* PNAnyBufferedValue.swift */; };
 		56C47BB32751B5C00075C61B /* PNManageableTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C47BB22751B5C00075C61B /* PNManageableTransform.swift */; };
+		56C47BB62751BF390075C61B /* PNAmbientLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C47BB52751BF390075C61B /* PNAmbientLight.swift */; };
+		56C47BB82751BF7F0075C61B /* PNIAmbientLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C47BB72751BF7F0075C61B /* PNIAmbientLight.swift */; };
 		56C4CD512737FFDD000A994E /* PNSpotJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C4CD502737FFDD000A994E /* PNSpotJob.swift */; };
 		56C4CD53273800E4000A994E /* SpotRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56C4CD52273800E4000A994E /* SpotRenderer.metal */; };
 		56C4CD55273801EB000A994E /* PNSpotJob+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C4CD54273801EB000A994E /* PNSpotJob+Extension.swift */; };
@@ -453,6 +455,8 @@
 		56C47BAE275176EC0075C61B /* PNIBufferedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIBufferedValue.swift; sourceTree = "<group>"; };
 		56C47BB0275177B70075C61B /* PNAnyBufferedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnyBufferedValue.swift; sourceTree = "<group>"; };
 		56C47BB22751B5C00075C61B /* PNManageableTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNManageableTransform.swift; sourceTree = "<group>"; };
+		56C47BB52751BF390075C61B /* PNAmbientLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAmbientLight.swift; sourceTree = "<group>"; };
+		56C47BB72751BF7F0075C61B /* PNIAmbientLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIAmbientLight.swift; sourceTree = "<group>"; };
 		56C4CD4F2737FF24000A994E /* SpotLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpotLight.h; sourceTree = "<group>"; };
 		56C4CD502737FFDD000A994E /* PNSpotJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSpotJob.swift; sourceTree = "<group>"; };
 		56C4CD52273800E4000A994E /* SpotRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = SpotRenderer.metal; sourceTree = "<group>"; };
@@ -640,6 +644,7 @@
 		561666CD2719E2CC000063B1 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				56C47BB42751BF2C0075C61B /* Light */,
 				56D7ED58274C604E00A6C25D /* Culling */,
 				5688076627483F3400C95F55 /* Material */,
 				56165BE727440DA90025D58B /* Graph */,
@@ -1180,6 +1185,15 @@
 			path = BufferedValue;
 			sourceTree = "<group>";
 		};
+		56C47BB42751BF2C0075C61B /* Light */ = {
+			isa = PBXGroup;
+			children = (
+				56C47BB52751BF390075C61B /* PNAmbientLight.swift */,
+				56C47BB72751BF7F0075C61B /* PNIAmbientLight.swift */,
+			);
+			path = Light;
+			sourceTree = "<group>";
+		};
 		56D1ED582725F83A00D68EA7 /* Metal */ = {
 			isa = PBXGroup;
 			children = (
@@ -1511,6 +1525,7 @@
 				56D8C4122739D404005E58E3 /* SpotLight+Extension.swift in Sources */,
 				56D12AD027231DAD00550530 /* RawRepresentable+Extension.swift in Sources */,
 				5627016B272B583F00071620 /* PNAnimatedSkeleton+Extension.swift in Sources */,
+				56C47BB82751BF7F0075C61B /* PNIAmbientLight.swift in Sources */,
 				5616670A2719E2CD000063B1 /* MDLSubmesh+Extension.swift in Sources */,
 				56E8208F2727FD13002D58C3 /* Date+Extensioin.swift in Sources */,
 				566795EF274FF240005993D7 /* PNIRenderingCoordinatorFactory.swift in Sources */,
@@ -1544,6 +1559,7 @@
 				5616674D2719E2CD000063B1 /* PNIEngine.swift in Sources */,
 				5688075627480D2700C95F55 /* PNAnyDynamicBuffer.swift in Sources */,
 				561667212719E2CD000063B1 /* PNVignetteJob+Extension.swift in Sources */,
+				56C47BB62751BF390075C61B /* PNAmbientLight.swift in Sources */,
 				5616674A2719E2CD000063B1 /* PBR.metal in Sources */,
 				5616673D2719E2CD000063B1 /* PNSubmesh.swift in Sources */,
 				566795CF274ECD75005993D7 /* PNAmbientLightNode.swift in Sources */,

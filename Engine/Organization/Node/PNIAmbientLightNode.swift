@@ -5,9 +5,9 @@
 import MetalBinding
 
 public struct PNIAmbientLightNode: PNAmbientLightNode {
-    public var light: AmbientLight
+    public var light: PNAmbientLight
     public var transform: PNAnimatedCoordinateSpace
-    public init(light: AmbientLight, transform: PNAnimatedCoordinateSpace) {
+    public init(light: PNAmbientLight, transform: PNAnimatedCoordinateSpace) {
         self.light = light
         self.transform = transform
     }

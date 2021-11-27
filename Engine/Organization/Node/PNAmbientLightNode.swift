@@ -5,5 +5,5 @@
 import MetalBinding
 
 public protocol PNAmbientLightNode: PNSceneNode {
-    var light: AmbientLight { get }
+    var light: PNAmbientLight { get }
 }
