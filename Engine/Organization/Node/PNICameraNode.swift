@@ -6,8 +6,8 @@ import MetalBinding
 
 public struct PNICameraNode: PNCameraNode {
     public var camera: PNCamera
-    public var transform: PNAnimatedCoordinateSpace
-    public init(camera: PNCamera, transform: PNAnimatedCoordinateSpace) {
+    public var transform: PNTransform
+    public init(camera: PNCamera, transform: PNTransform) {
         self.camera = camera
         self.transform = transform
     }

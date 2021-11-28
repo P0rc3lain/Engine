@@ -17,7 +17,7 @@ public class PNSceneDescription {
     public var skeletons = [PNSkeleton]()
     public var paletteOffset = [Int]()
     // MARK: - Capacity F
-    public var palettes = [M2WTransform]()
+    public var palettes = [PNM2WTransform]()
     // MARK: - Capacity G
     public var cameras = [PNCamera]()
     public var cameraUniforms = [CameraUniforms]()

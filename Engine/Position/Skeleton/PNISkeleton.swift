@@ -5,11 +5,11 @@
 import simd
 
 struct PNISkeleton: PNSkeleton {
-    var bindTransforms: [B2MTransform]
-    var inverseBindTransforms: [M2BTransform]
+    var bindTransforms: [PNB2MTransform]
+    var inverseBindTransforms: [PNM2BTransform]
     var animations: [PNAnimatedSkeleton]
     var parentIndices: [PNIndex]
-    init(bindTransforms: [BLTransform],
+    init(bindTransforms: [PNBLTransform],
          parentIndices: [Int],
          animations: [PNAnimatedSkeleton]) {
         assert(parentIndices.count == bindTransforms.count,
@@ -20,18 +20,18 @@ struct PNISkeleton: PNSkeleton {
         self.animations = animations
         self.parentIndices = parentIndices
     }
-    func calculatePose(animationPose: [BLTransform]) -> [B2MTransform] {
+    func calculatePose(animationPose: [PNBLTransform]) -> [PNB2MTransform] {
         let pose = PNISkeleton.computeBindTransforms(bindTransforms: animationPose,
                                                      parentIndices: parentIndices)
         return bindTransforms.indices.map { index in
             pose[index] * inverseBindTransforms[index]
         }
     }
-    private static func computeBindTransforms(bindTransforms: [BLTransform],
-                                              parentIndices: [PNIndex]) -> [B2MTransform] {
+    private static func computeBindTransforms(bindTransforms: [PNBLTransform],
+                                              parentIndices: [PNIndex]) -> [PNB2MTransform] {
         assert(bindTransforms.count == parentIndices.count,
                "There must be a parent index assigned to each transform")
-        var transforms = [B2MTransform]()
+        var transforms = [PNB2MTransform]()
         for index in bindTransforms.indices {
             let parentTransform = parentIndices[index] == .nil ? matrix_identity_float4x4 : transforms[parentIndices[index]]
             transforms.append(parentTransform * bindTransforms[index])

@@ -9,8 +9,7 @@ struct PNITransformCalculator: PNTransformCalculator {
     init(interpolator: PNInterpolator) {
         self.interpolator = interpolator
     }
-    func transformation(node: PNSceneNode, parent: PNIndex, scene: inout PNSceneDescription) -> M2WTransform {
-        let transform = node.transform.transformation(at: Date().timeIntervalSince1970, interpolator: interpolator)
-        return parent != .nil ? (scene.uniforms[parent].modelMatrix * transform) : transform
+    func transformation(node: PNSceneNode, parent: PNIndex, scene: inout PNSceneDescription) -> PNM2WTransform {
+        return parent != .nil ? (scene.uniforms[parent].modelMatrix * node.transform) : node.transform
     }
 }

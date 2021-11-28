@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-protocol PNChronometer {
+public protocol PNChronometer {
     var isPaused: Bool { get }
     var elapsedTime: TimeInterval { get }
     mutating func pause()

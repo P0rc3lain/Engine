@@ -9,7 +9,7 @@ extension ModelUniforms: Equatable {
         lhs.modelMatrixInverse == rhs.modelMatrixInverse &&
         lhs.modelMatrix == rhs.modelMatrix
     }
-    static func from(transform: Transform) -> ModelUniforms {
+    static func from(transform: PNTransform) -> ModelUniforms {
         ModelUniforms(modelMatrix: transform, modelMatrixInverse: transform.inverse)
     }
 }

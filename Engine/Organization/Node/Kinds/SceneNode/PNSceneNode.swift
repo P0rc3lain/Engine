@@ -3,6 +3,6 @@
 //
 
 public protocol PNSceneNode {
-    var transform: PNAnimatedCoordinateSpace { get }
+    var transform: PNTransform { get }
     func write(scene: inout PNSceneDescription, parentIdx: PNIndex) -> PNIndex
 }

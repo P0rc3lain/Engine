@@ -13,12 +13,12 @@ public class PNIBufferStore: PNBufferStore {
     public var spotLights: PNAnyDynamicBuffer<SpotLight>
     public var cameras: PNAnyDynamicBuffer<CameraUniforms>
     public var modelCoordinateSystems: PNAnyDynamicBuffer<ModelUniforms>
-    public var matrixPalettes: PNAnyDynamicBuffer<BLTransform>
+    public var matrixPalettes: PNAnyDynamicBuffer<PNBLTransform>
     init?(device: MTLDevice) {
         guard let omniLights = PNIDynamicBuffer<OmniLight>(device: device, initialCapacity: 1),
               let cameras = PNIDynamicBuffer<CameraUniforms>(device: device, initialCapacity: 1),
               let modelCoordinateSystems = PNIDynamicBuffer<ModelUniforms>(device: device, initialCapacity: 1),
-              let matrixPalettes = PNIDynamicBuffer<BLTransform>(device: device, initialCapacity: 1),
+              let matrixPalettes = PNIDynamicBuffer<PNBLTransform>(device: device, initialCapacity: 1),
               let ambientLights = PNIDynamicBuffer<AmbientLight>(device: device, initialCapacity: 1),
               let directionalLights = PNIDynamicBuffer<DirectionalLight>(device: device, initialCapacity: 1),
               let spotLights = PNIDynamicBuffer<SpotLight>(device: device, initialCapacity: 1) else {

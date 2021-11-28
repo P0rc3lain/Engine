@@ -13,9 +13,9 @@ public class PNISceneTranslator: PNSceneTranslator {
         self.device = device
     }
     public func process(asset: MDLAsset) -> PNScene? {
-        let scene = PNScene(rootNode: PNNode(data: PNISceneNode.init(transform: .static)))
+        let scene = PNScene(rootNode: PNNode(data: PNISceneNode.init(transform: matrix_identity_float4x4)))
         asset.walk(handler: { (object: MDLObject, passedValue: PNNode<PNSceneNode>?) in
-            let transform = object.transform?.decompose ?? .static
+            let transform = matrix_identity_float4x4 // object.transform?.decomposed ?? .static
             var node: PNNode<PNSceneNode>? = nil
             if let object = object as? MDLCamera {
                 node =  PNNode(data: PNICameraNode(camera: object.porcelain, transform: transform) as PNSceneNode,
