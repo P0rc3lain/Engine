@@ -15,12 +15,11 @@ public class PNISceneTranslator: PNSceneTranslator {
     public func process(asset: MDLAsset) -> PNScene? {
         let scene = PNScene(rootNode: PNNode(data: PNISceneNode.init(transform: matrix_identity_float4x4)))
         asset.walk(handler: { (object: MDLObject, passedValue: PNNode<PNSceneNode>?) in
-            let transform = matrix_identity_float4x4 // object.transform?.decomposed ?? .static
-            var node: PNNode<PNSceneNode>? = nil
+            var node: PNNode<PNSceneNode>! = nil
             if let object = object as? MDLCamera {
-                node =  PNNode(data: PNICameraNode(camera: object.porcelain, transform: transform) as PNSceneNode,
+                node =  PNNode(data: cameraNode(camera: object.porcelain, transform: object.transform),
                                parent: passedValue)
-                passedValue?.children.append(node!)
+                passedValue?.children.append(node)
                 return node
             } /* else if let object = object as? MDLLight {
                 fatalError("Not implemented")
@@ -31,18 +30,18 @@ public class PNISceneTranslator: PNSceneTranslator {
                 if let component = object.componentConforming(to: MDLComponent.self),
                    let animation = component as? MDLAnimationBindComponent {
                     let skeleton = convert(animation: animation)
-                    node = PNNode(data: PNIRiggedMesh(mesh: mesh, skeleton: skeleton, transform: transform) as PNSceneNode,
+                    node = PNNode(data: riggedMeshNode(mesh: mesh, skeleton: skeleton, transform: object.transform),
                                   parent: passedValue)
                 } else {
-                    node = PNNode(data: PNIMeshNode(mesh: mesh, transform: transform) as PNSceneNode,
+                    node = PNNode(data: meshNode(mesh: mesh, transform: object.transform),
                                   parent: passedValue)
                 }
                 node?.parent = passedValue
-                passedValue?.children.append(node!)
+                passedValue?.children.append(node)
             } else {
-                node =  PNNode(data: PNISceneNode(transform: transform) as PNSceneNode,
+                node =  PNNode(data: groupNode(transfrom: object.transform),
                                parent: passedValue)
-                passedValue?.children.append(node!)
+                passedValue?.children.append(node)
             }
             return node
         }, initialValue: scene.rootNode)
@@ -65,6 +64,30 @@ public class PNISceneTranslator: PNSceneTranslator {
         } else {
             fatalError("Unhandled case")
         }
+    }
+    private func riggedMeshNode(mesh: PNMesh, skeleton: PNSkeleton, transform: MDLTransformComponent?) -> PNSceneNode {
+        guard let transfrom = transform?.decomposed else {
+            return PNIRiggedMesh(mesh: mesh, skeleton: skeleton, transform: matrix_identity_float4x4)
+        }
+        return PNIAnimatedRiggedMesh(mesh: mesh, skeleton: skeleton, animator: PNIAnimator.default, animation: transfrom)
+    }
+    private func meshNode(mesh: PNMesh, transform: MDLTransformComponent?) -> PNSceneNode {
+        guard let transfrom = transform?.decomposed else {
+            return PNIMeshNode(mesh: mesh, transform: matrix_identity_float4x4)
+        }
+        return PNIAnimatedMeshNode(mesh: mesh, animator: PNIAnimator.default, animation: transfrom)
+    }
+    private func cameraNode(camera: PNCamera, transform: MDLTransformComponent?) -> PNSceneNode {
+        guard let transfrom = transform?.decomposed else {
+            return PNICameraNode(camera: camera, transform: matrix_identity_float4x4)
+        }
+        return PNIAnimatedCameraNode(camera: camera, animator: PNIAnimator.default, animation: transfrom)
+    }
+    private func groupNode(transfrom: MDLTransformComponent?) -> PNSceneNode {
+        guard let transfrom = transfrom?.decomposed else {
+            return PNISceneNode(transform: matrix_identity_float4x4)
+        }
+        return PNIAnimatedNode(animator: PNIAnimator.default, animation: transfrom)
     }
     private func getModelBounds(buffer: inout Data) -> PNBound {
         let vertexCount = buffer.count / MemoryLayout<Vertex>.stride

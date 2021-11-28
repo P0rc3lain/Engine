@@ -12,4 +12,8 @@ struct PNIAnimator: PNAnimator {
     func transform(coordinateSpace: PNAnimatedCoordinateSpace) -> PNTransform {
         coordinateSpace.transformation(at: chronometer.elapsedTime, interpolator: interpolator)
     }
+    static var `default`: PNIAnimator {
+        PNIAnimator(chronometer: PNIChronometer(timeProducer: { Date() }),
+                    interpolator: PNIInterpolator())
+    }
 }

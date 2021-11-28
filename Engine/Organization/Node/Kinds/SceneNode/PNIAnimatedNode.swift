@@ -2,17 +2,17 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-struct PNIAnimatedNode: PNAnimatedNode {
-    var animator: PNAnimator
-    var animation: PNAnimatedCoordinateSpace
-    var transform: PNTransform {
+public struct PNIAnimatedNode: PNAnimatedNode {
+    public var animator: PNAnimator
+    public var animation: PNAnimatedCoordinateSpace
+    public var transform: PNTransform {
         animator.transform(coordinateSpace: animation)
     }
-    init(animator: PNAnimator, animation: PNAnimatedCoordinateSpace) {
+    public init(animator: PNAnimator, animation: PNAnimatedCoordinateSpace) {
         self.animator = animator
         self.animation = animation
     }
-    func write(scene: inout PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
+    public func write(scene: inout PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
         let entity = PNEntity(type: .group,
                               referenceIdx: .nil)
         scene.entities.add(parentIdx: parentIdx, data: entity)

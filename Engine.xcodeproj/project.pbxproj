@@ -14,6 +14,12 @@
 		560A0BAF275416E8005AE29D /* PNIAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560A0BAE275416E8005AE29D /* PNIAnimator.swift */; };
 		560A0BB2275419E8005AE29D /* PNAnimatedNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560A0BB1275419E8005AE29D /* PNAnimatedNode.swift */; };
 		560A0BB627541BBA005AE29D /* PNIAnimatedNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560A0BB527541BBA005AE29D /* PNIAnimatedNode.swift */; };
+		560A0BBB2754223B005AE29D /* PNAnimatedCameraNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560A0BBA2754223B005AE29D /* PNAnimatedCameraNode.swift */; };
+		560A0BBD27542244005AE29D /* PNIAnimatedCameraNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560A0BBC27542244005AE29D /* PNIAnimatedCameraNode.swift */; };
+		560A0BC027542458005AE29D /* PNAnimatedMeshNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560A0BBF27542458005AE29D /* PNAnimatedMeshNode.swift */; };
+		560A0BC227542460005AE29D /* PNIAnimatedMeshNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560A0BC127542460005AE29D /* PNIAnimatedMeshNode.swift */; };
+		560A0BC527542557005AE29D /* PNAnimatedRiggedMesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560A0BC427542557005AE29D /* PNAnimatedRiggedMesh.swift */; };
+		560A0BC72754255F005AE29D /* PNIAnimatedRiggedMesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560A0BC62754255F005AE29D /* PNIAnimatedRiggedMesh.swift */; };
 		560C18D0273A832A00459AEF /* MTLFunctionConstantValues+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560C18CF273A832A00459AEF /* MTLFunctionConstantValues+Extension.swift */; };
 		560C18D3273ABDE700459AEF /* PNOmniShadowJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560C18D2273ABDE700459AEF /* PNOmniShadowJob.swift */; };
 		560C18D5273AC30800459AEF /* OmniLight.metal in Sources */ = {isa = PBXBuildFile; fileRef = 560C18D4273AC30800459AEF /* OmniLight.metal */; };
@@ -250,6 +256,12 @@
 		560A0BAE275416E8005AE29D /* PNIAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIAnimator.swift; sourceTree = "<group>"; };
 		560A0BB1275419E8005AE29D /* PNAnimatedNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnimatedNode.swift; sourceTree = "<group>"; };
 		560A0BB527541BBA005AE29D /* PNIAnimatedNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIAnimatedNode.swift; sourceTree = "<group>"; };
+		560A0BBA2754223B005AE29D /* PNAnimatedCameraNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnimatedCameraNode.swift; sourceTree = "<group>"; };
+		560A0BBC27542244005AE29D /* PNIAnimatedCameraNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIAnimatedCameraNode.swift; sourceTree = "<group>"; };
+		560A0BBF27542458005AE29D /* PNAnimatedMeshNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnimatedMeshNode.swift; sourceTree = "<group>"; };
+		560A0BC127542460005AE29D /* PNIAnimatedMeshNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIAnimatedMeshNode.swift; sourceTree = "<group>"; };
+		560A0BC427542557005AE29D /* PNAnimatedRiggedMesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnimatedRiggedMesh.swift; sourceTree = "<group>"; };
+		560A0BC62754255F005AE29D /* PNIAnimatedRiggedMesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIAnimatedRiggedMesh.swift; sourceTree = "<group>"; };
 		560C18CE273A819100459AEF /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		560C18CF273A832A00459AEF /* MTLFunctionConstantValues+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLFunctionConstantValues+Extension.swift"; sourceTree = "<group>"; };
 		560C18D2273ABDE700459AEF /* PNOmniShadowJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNOmniShadowJob.swift; sourceTree = "<group>"; };
@@ -589,6 +601,9 @@
 		560A0BB727541BC3005AE29D /* Kinds */ = {
 			isa = PBXGroup;
 			children = (
+				560A0BC32754253C005AE29D /* RiggedMesh */,
+				560A0BBE27542443005AE29D /* Mesh */,
+				560A0BB92754222B005AE29D /* Camera */,
 				560A0BB827541BC7005AE29D /* SceneNode */,
 			);
 			path = Kinds;
@@ -603,6 +618,39 @@
 				560A0BB527541BBA005AE29D /* PNIAnimatedNode.swift */,
 			);
 			path = SceneNode;
+			sourceTree = "<group>";
+		};
+		560A0BB92754222B005AE29D /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				566795BF274E9F98005993D7 /* PNCameraNode.swift */,
+				566795C1274EA016005993D7 /* PNICameraNode.swift */,
+				560A0BBA2754223B005AE29D /* PNAnimatedCameraNode.swift */,
+				560A0BBC27542244005AE29D /* PNIAnimatedCameraNode.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		560A0BBE27542443005AE29D /* Mesh */ = {
+			isa = PBXGroup;
+			children = (
+				566795B7274DC51E005993D7 /* PNMeshNode.swift */,
+				566795C3274EA1FB005993D7 /* PNIMeshNode.swift */,
+				560A0BBF27542458005AE29D /* PNAnimatedMeshNode.swift */,
+				560A0BC127542460005AE29D /* PNIAnimatedMeshNode.swift */,
+			);
+			path = Mesh;
+			sourceTree = "<group>";
+		};
+		560A0BC32754253C005AE29D /* RiggedMesh */ = {
+			isa = PBXGroup;
+			children = (
+				566795C5274EB950005993D7 /* PNRiggedMesh.swift */,
+				566795C7274EB977005993D7 /* PNIRiggedMesh.swift */,
+				560A0BC427542557005AE29D /* PNAnimatedRiggedMesh.swift */,
+				560A0BC62754255F005AE29D /* PNIAnimatedRiggedMesh.swift */,
+			);
+			path = RiggedMesh;
 			sourceTree = "<group>";
 		};
 		56165BE1274405010025D58B /* Bounds */ = {
@@ -925,12 +973,6 @@
 				560A0BB727541BC3005AE29D /* Kinds */,
 				560A0BB427541B89005AE29D /* Structure */,
 				560A0BB327541B80005AE29D /* Interactor */,
-				566795B7274DC51E005993D7 /* PNMeshNode.swift */,
-				566795BF274E9F98005993D7 /* PNCameraNode.swift */,
-				566795C1274EA016005993D7 /* PNICameraNode.swift */,
-				566795C3274EA1FB005993D7 /* PNIMeshNode.swift */,
-				566795C5274EB950005993D7 /* PNRiggedMesh.swift */,
-				566795C7274EB977005993D7 /* PNIRiggedMesh.swift */,
 				566795CE274ECD75005993D7 /* PNAmbientLightNode.swift */,
 				566795D0274ECD7D005993D7 /* PNIAmbientLightNode.swift */,
 			);
@@ -1624,6 +1666,7 @@
 				560253D52726CA4800B3A13A /* PNIChronometer.swift in Sources */,
 				56C47B9E27511E9C0075C61B /* PNFrameSupply.swift in Sources */,
 				561667392719E2CD000063B1 /* PNPieceDescription.swift in Sources */,
+				560A0BC72754255F005AE29D /* PNIAnimatedRiggedMesh.swift in Sources */,
 				560A0BB627541BBA005AE29D /* PNIAnimatedNode.swift in Sources */,
 				56407B7D27206F5D00440CAC /* Vertex+Extension.swift in Sources */,
 				561667272719E2CD000063B1 /* MTLRenderPassDescriptor+Extension.swift in Sources */,
@@ -1650,6 +1693,7 @@
 				56924AE4271A181600FF3E06 /* PNIAnimatedValue+Alias.swift in Sources */,
 				5629FBEA2749201F005476AF /* PNInterpolator.swift in Sources */,
 				5616673E2719E2CD000063B1 /* PNSceneDescription.swift in Sources */,
+				560A0BC027542458005AE29D /* PNAnimatedMeshNode.swift in Sources */,
 				566795F8274FFE72005993D7 /* PNWorkloadManagerFactory.swift in Sources */,
 				5616672D2719E2CD000063B1 /* PNFlatTree.swift in Sources */,
 				560C18D3273ABDE700459AEF /* PNOmniShadowJob.swift in Sources */,
@@ -1676,6 +1720,7 @@
 				5670EC1D2736B8BC00375194 /* PNGBufferStage.swift in Sources */,
 				56165BF02744401B0025D58B /* ModelUniforms+Extension.swift in Sources */,
 				561666FE2719E2CD000063B1 /* MDLMaterial+Extension.swift in Sources */,
+				560A0BBD27542244005AE29D /* PNIAnimatedCameraNode.swift in Sources */,
 				569D9242273E7EED004FDFAC /* Color.metal in Sources */,
 				56D7ED5A274C605C00A6C25D /* PNCullingController.swift in Sources */,
 				569D9246273EA5F6004FDFAC /* PNBoundingBox.swift in Sources */,
@@ -1696,6 +1741,7 @@
 				56D50858274542EA0097DEB2 /* simd_quatf+Extension.swift in Sources */,
 				5616674C2719E2CD000063B1 /* EnvironmentMapper.metal in Sources */,
 				5616670F2719E2CD000063B1 /* Data+Extension.swift in Sources */,
+				560A0BC527542557005AE29D /* PNAnimatedRiggedMesh.swift in Sources */,
 				560A0BB2275419E8005AE29D /* PNAnimatedNode.swift in Sources */,
 				56D7ED41274C372800A6C25D /* PNIBoundInteractor.swift in Sources */,
 				5629FBE327491D03005476AF /* PNSampleProvider.swift in Sources */,
@@ -1729,12 +1775,14 @@
 				561667232719E2CD000063B1 /* MTLPixelFormat+Extension.swift in Sources */,
 				566795E1274FCBDF005993D7 /* PNITransformCalculator.swift in Sources */,
 				561666FF2719E2CD000063B1 /* simd_float3+Extension.swift in Sources */,
+				560A0BBB2754223B005AE29D /* PNAnimatedCameraNode.swift in Sources */,
 				56C47BB1275177B70075C61B /* PNAnyBufferedValue.swift in Sources */,
 				5670EC252736E1EF00375194 /* PNCombineStage.swift in Sources */,
 				561666F82719E2CD000063B1 /* MTLVertexDescriptor+Extension.swift in Sources */,
 				561667122719E2CD000063B1 /* Float+Extension.swift in Sources */,
 				566795DC274FC5C9005993D7 /* Bool+Alias.swift in Sources */,
 				5670EC162736A2AE00375194 /* PNGPUSupply.swift in Sources */,
+				560A0BC227542460005AE29D /* PNIAnimatedMeshNode.swift in Sources */,
 				566795E6274FED66005993D7 /* PNRenderingCoordinator.swift in Sources */,
 				560C18D7273AC71100459AEF /* OmniLight+Extension.swift in Sources */,
 				566795AE274DBE0E005993D7 /* PNSceneNode.swift in Sources */,
