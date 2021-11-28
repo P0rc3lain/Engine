@@ -6,19 +6,19 @@ import Metal
 import MetalBinding
 import simd
 
-public class BufferStore {
-    var omniLights: PNAnyDynamicBuffer<OmniLight>
-    var ambientLights: PNAnyDynamicBuffer<AmbientLight>
-    var directionalLights: PNAnyDynamicBuffer<DirectionalLight>
-    var spotLights: PNAnyDynamicBuffer<SpotLight>
-    var cameras: PNAnyDynamicBuffer<CameraUniforms>
-    var modelCoordinateSystems: PNAnyDynamicBuffer<ModelUniforms>
-    var matrixPalettes: PNAnyDynamicBuffer<simd_float4x4>
+public class PNIBufferStore: PNBufferStore {
+    public var omniLights: PNAnyDynamicBuffer<OmniLight>
+    public var ambientLights: PNAnyDynamicBuffer<AmbientLight>
+    public var directionalLights: PNAnyDynamicBuffer<DirectionalLight>
+    public var spotLights: PNAnyDynamicBuffer<SpotLight>
+    public var cameras: PNAnyDynamicBuffer<CameraUniforms>
+    public var modelCoordinateSystems: PNAnyDynamicBuffer<ModelUniforms>
+    public var matrixPalettes: PNAnyDynamicBuffer<BLTransform>
     init?(device: MTLDevice) {
         guard let omniLights = PNIDynamicBuffer<OmniLight>(device: device, initialCapacity: 1),
               let cameras = PNIDynamicBuffer<CameraUniforms>(device: device, initialCapacity: 1),
               let modelCoordinateSystems = PNIDynamicBuffer<ModelUniforms>(device: device, initialCapacity: 1),
-              let matrixPalettes = PNIDynamicBuffer<simd_float4x4>(device: device, initialCapacity: 1),
+              let matrixPalettes = PNIDynamicBuffer<BLTransform>(device: device, initialCapacity: 1),
               let ambientLights = PNIDynamicBuffer<AmbientLight>(device: device, initialCapacity: 1),
               let directionalLights = PNIDynamicBuffer<DirectionalLight>(device: device, initialCapacity: 1),
               let spotLights = PNIDynamicBuffer<SpotLight>(device: device, initialCapacity: 1) else {
@@ -32,9 +32,4 @@ public class BufferStore {
         self.directionalLights = PNAnyDynamicBuffer(directionalLights)
         self.spotLights = PNAnyDynamicBuffer(spotLights)
     }
-    func upload(camera: inout PNCamera, index: Int) {
-        var uniforms = [CameraUniforms(projectionMatrix: camera.projectionMatrix, index: Int32(index))]
-        cameras.upload(data: &uniforms)
-    }
-
 }

@@ -4,7 +4,7 @@
 
 import Metal
 
-struct PNAnyDynamicBuffer<T>: PNDynamicBuffer {
+public struct PNAnyDynamicBuffer<T>: PNDynamicBuffer {
     typealias DataType = T
     private let bufferRetriever: () -> MTLBuffer
     private let pulledValueRetriever: () -> [T]

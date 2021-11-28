@@ -3,10 +3,10 @@
 //
 
 public struct PNIWorkloadManager: PNWorkloadManager {
-    private var bufferStore: BufferStore
+    private var bufferStore: PNBufferStore
     private var renderingCoordinator: PNRenderingCoordinator
     private let renderMaskGenerator: PNRenderMaskGenerator
-    public init(bufferStore: BufferStore,
+    public init(bufferStore: PNBufferStore,
                 renderingCoordinator: PNRenderingCoordinator,
                 renderMaskGenerator: PNRenderMaskGenerator) {
         self.bufferStore = bufferStore
@@ -21,8 +21,7 @@ public struct PNIWorkloadManager: PNWorkloadManager {
         bufferStore.omniLights.upload(data: &scene.omniLights)
         bufferStore.directionalLights.upload(data: &scene.directionalLights)
         bufferStore.spotLights.upload(data: &scene.spotLights)
-        bufferStore.upload(camera: &scene.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx],
-                           index: scene.activeCameraIdx)
+        bufferStore.cameras.upload(data: &scene.cameraUniforms)
         bufferStore.modelCoordinateSystems.upload(data: &scene.uniforms)
         renderingCoordinator.draw(frameSupply: PNFrameSupply(scene: scene,
                                                              bufferStore: bufferStore,

@@ -11,7 +11,7 @@ public class PNIEngine: PNEngine {
     private let coordinatorFactory: PNRenderingCoordinatorFactory
     private let workloadManagerFactory: PNWorkloadManagerFactory
     private var workloadManager: PNWorkloadManager
-    private var bufferStore: BufferStore
+    private var bufferStore: PNBufferStore
     public init?(view: MTKView,
                  renderingSize: CGSize,
                  scene: PNScene,
@@ -25,7 +25,7 @@ public class PNIEngine: PNEngine {
         self.view = view
         self.coordinatorFactory = coordinatorFactory
         self.scene = scene
-        self.bufferStore = BufferStore(device: view.device!)!
+        self.bufferStore = PNIBufferStore(device: view.device!)!
         self.workloadManagerFactory = workloadManagerFactory
         self.renderMaskGenerator = renderMaskGenerator
         self.workloadManager = workloadManagerFactory.new(bufferStore: bufferStore,

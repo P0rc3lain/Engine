@@ -20,6 +20,7 @@ public class PNSceneDescription {
     public var palettes = [M2WTransform]()
     // MARK: - Capacity G
     public var cameras = [PNCamera]()
+    public var cameraUniforms = [CameraUniforms]()
     // MARK: - Capacity H
     public var omniLights = [OmniLight]()
     // MARK: - Capacity I
