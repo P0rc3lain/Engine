@@ -66,6 +66,9 @@ extension simd_float4x4 {
         let s = simd_float4(-aLength * sLength, -aHeight * sHeight, -near * sDepth, 1)
         return float4x4(p, q, r, s)
     }
+    public static func from(directionVector: simd_float3) -> simd_float4x4 {
+        simd_float3x3.from(directionVector: directionVector).expanded
+    }
     public static func compose(translation: simd_float3,
                                rotation: simd_quatf,
                                scale: simd_float3) -> simd_float4x4 {
