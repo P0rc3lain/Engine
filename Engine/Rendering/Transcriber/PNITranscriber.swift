@@ -14,7 +14,15 @@ struct PNITranscriber: PNTranscriber {
         write(node: scene.rootNode, scene: sceneDescription, parentIndex: .nil)
         sceneDescription.boundingBoxes = boundingBoxes(scene: sceneDescription)
         updatePalettes(scene: sceneDescription)
+        write(lights: scene.directionalLights, scene: sceneDescription)
         return sceneDescription
+    }
+    private func write(lights: [PNDirectionalLight], scene: PNSceneDescription) {
+        for light in lights {
+            scene.directionalLights.append(DirectionalLight(color: light.color,
+                                                            intensity: light.intensity,
+                                                            direction: light.direction))
+        }
     }
     private func write(node: PNNode<PNSceneNode>, scene: PNSceneDescription, parentIndex: PNIndex) {
         let index = node.data.write(scene: scene, parentIdx: parentIndex)
