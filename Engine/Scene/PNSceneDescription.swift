@@ -11,25 +11,25 @@ public class PNSceneDescription {
     public var uniforms = [WModelUniforms]()
     public var boundingBoxes = [PNWBoundingBox]()
     public var skeletonReferences = [PNIndex]()
-    // MARK: - Capacity C
+    // MARK: - Capacity B
     public var meshes = [PNMesh]()
-    // MARK: - Capacity E
+    // MARK: - Capacity C
     public var skeletons = [PNSkeleton]()
     public var paletteOffset = [Int]()
-    // MARK: - Capacity F
+    // MARK: - Capacity D
     public var palettes = [PNM2WTransform]()
-    // MARK: - Capacity G
+    // MARK: - Capacity E
     public var cameras = [PNCamera]()
     public var cameraUniforms = [CameraUniforms]()
-    // MARK: - Capacity H
+    // MARK: - Capacity F
     public var omniLights = [OmniLight]()
-    // MARK: - Capacity I
+    // MARK: - Capacity G
     public var ambientLights = [AmbientLight]()
-    // MARK: - Capacity J
+    // MARK: - Capacity H
     public var directionalLights = [DirectionalLight]()
-    // MARK: - Capacity K
+    // MARK: - Capacity I
     public var spotLights = [SpotLight]()
-    // MARK: - Capacity L
+    // MARK: - Capacity J
     public var skyMap: MTLTexture? = nil
     public var activeCameraIdx = Int.nil
 }
