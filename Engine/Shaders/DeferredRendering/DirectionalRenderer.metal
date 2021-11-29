@@ -34,17 +34,31 @@ fragment float4 fragmentDirectionalLight(RasterizerData in [[stage_in]],
                                          texture2d<float> ar [[texture(kAttributeDirectionalFragmentShaderTextureAR)]],
                                          texture2d<float> nm [[texture(kAttributeDirectionalFragmentShaderTextureNM)]],
                                          texture2d<float> pr [[texture(kAttributeDirectionalFragmentShaderTexturePR)]],
+                                         depth2d_array<float> shadowMaps [[texture(kAttributeDirectionalFragmentShaderTextureShadowMaps)]],
                                          constant CameraUniforms & camera [[buffer(kAttributeDirectionalFragmentShaderBufferCamera)]],
                                          constant DirectionalLight * directionalLights [[buffer(kAttributeDirectionalFragmentShaderBufferDirectionalLights)]],
-                                         constant ModelUniforms * lightUniforms [[buffer(kAttributeDirectionalFragmentShaderBufferLightUniforms)]]) {
+                                         constant ModelUniforms * modelUniforms [[buffer(kAttributeDirectionalFragmentShaderBufferLightUniforms)]]) {
     constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
+    DirectionalLight light = directionalLights[in.instanceId];
+    float3 lightDirection = light.rotationMatrix.columns[2].xyz;
     LightingInput input = LightingInput::fromTextures(ar, nm, pr, textureSampler, in.texcoord);
     float3 eye = normalize(-input.fragmentPosition);
-    DirectionalLight light = directionalLights[in.instanceId];
-    float3 l = normalize(-light.direction);
+    
+    float3 l = normalize(lightDirection);
     if (dot(input.n, l) < 0) {
         discard_fragment();
     }
+    
+    float4 lightSpacesFragmentPosition = light.rotationMatrixInverse * modelUniforms[camera.index].modelMatrixInverse * float4(input.fragmentPosition, 1);
+    float4 lightProjectedPosition = light.projectionMatrix * lightSpacesFragmentPosition;
+    lightProjectedPosition.xy = lightProjectedPosition.xy * 0.5 + 0.5;
+    lightProjectedPosition.y = 1.0 - lightProjectedPosition.y;
+    float existingDepth = shadowMaps.sample(textureSampler, lightProjectedPosition.xy, in.instanceId);
+    float bias = max(0.05 * (1.0 - dot(input.n, l)), 0.005);
+    if (existingDepth < lightProjectedPosition.z - bias) {
+        discard_fragment();
+    }
+    
     return float4(lighting(l,
                            eye,
                            input,

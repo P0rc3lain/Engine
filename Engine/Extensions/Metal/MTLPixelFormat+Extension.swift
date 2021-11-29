@@ -20,6 +20,9 @@ extension MTLPixelFormat {
     static var spotShadowDepthStencil: MTLPixelFormat {
         .depth32Float
     }
+    static var directionalShadowDepthStencil: MTLPixelFormat {
+        .depth32Float
+    }
     static var omniShadowDepthStencil: MTLPixelFormat {
         .depth32Float
     }

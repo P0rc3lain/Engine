@@ -7,9 +7,9 @@ import simd
 extension simd_float3x3 {
     public static func from(directionVector binormal: simd_float3) -> simd_float3x3 {
         var normal = simd_float3.random().normalized
-        normal = (normal - dot(normal, binormal)).normalized
+        normal = (normal - dot(binormal, normal)).normalized
         let tangent = cross(normal, binormal).normalized
-        return simd_float3x3(tangent, normal, binormal)
+        return simd_float3x3(tangent, normal, -binormal)
     }
     public var expanded: simd_float4x4 {
         simd_float4x4(simd_float4(columns.0, 0),
