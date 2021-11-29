@@ -13,7 +13,7 @@ public class PNISceneTranslator: PNSceneTranslator {
         self.device = device
     }
     public func process(asset: MDLAsset) -> PNScene? {
-        let scene = PNScene(rootNode: PNNode(data: PNISceneNode(transform: matrix_identity_float4x4)))
+        let scene = PNScene.default
         asset.walk(handler: { (object: MDLObject, passedValue: PNNode<PNSceneNode>?) in
             if let object = object as? MDLCamera {
                 let node = PNNode(data: cameraNode(camera: object.porcelain, transform: object.transform), parent: passedValue)

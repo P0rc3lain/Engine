@@ -93,6 +93,16 @@
 		561667582719E2CD000063B1 /* Engine.h in Headers */ = {isa = PBXBuildFile; fileRef = 561666F52719E2CD000063B1 /* Engine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		561DF41727246F1800D95ACC /* MTLViewport+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DF41627246F1800D95ACC /* MTLViewport+Extension.swift */; };
 		5620C8112754E8740098D6FA /* PNSSAOHemisphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C8102754E8740098D6FA /* PNSSAOHemisphere.swift */; };
+		5620C8132754F3AE0098D6FA /* PNOmniLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C8122754F3AE0098D6FA /* PNOmniLight.swift */; };
+		5620C8152754F3B60098D6FA /* PNSpotLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C8142754F3B60098D6FA /* PNSpotLight.swift */; };
+		5620C8172754F3C80098D6FA /* PNDirectionalLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C8162754F3C80098D6FA /* PNDirectionalLight.swift */; };
+		5620C8192754F4FE0098D6FA /* PNIOmniLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C8182754F4FE0098D6FA /* PNIOmniLight.swift */; };
+		5620C81B2754F52C0098D6FA /* PNISpotLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C81A2754F52C0098D6FA /* PNISpotLight.swift */; };
+		5620C81D2754F5480098D6FA /* PNIDirectionalLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C81C2754F5480098D6FA /* PNIDirectionalLight.swift */; };
+		5620C8212754F5DD0098D6FA /* PNSpotLightNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C8202754F5DD0098D6FA /* PNSpotLightNode.swift */; };
+		5620C8252754F65B0098D6FA /* PNOmniLightNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C8242754F65B0098D6FA /* PNOmniLightNode.swift */; };
+		5620C8272754F7DF0098D6FA /* PNIOmniLightNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C8262754F7DF0098D6FA /* PNIOmniLightNode.swift */; };
+		5620C8292754F8CD0098D6FA /* PNISpotLightNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C8282754F8CD0098D6FA /* PNISpotLightNode.swift */; };
 		56270167272B54EB00071620 /* PNAnimatedTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56270166272B54EB00071620 /* PNAnimatedTransform.swift */; };
 		56270169272B556500071620 /* PNAnimatedTransform+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56270168272B556500071620 /* PNAnimatedTransform+Alias.swift */; };
 		5627016B272B583F00071620 /* PNAnimatedSkeleton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627016A272B583F00071620 /* PNAnimatedSkeleton+Extension.swift */; };
@@ -337,6 +347,16 @@
 		561666F62719E2CD000063B1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		561DF41627246F1800D95ACC /* MTLViewport+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLViewport+Extension.swift"; sourceTree = "<group>"; };
 		5620C8102754E8740098D6FA /* PNSSAOHemisphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSSAOHemisphere.swift; sourceTree = "<group>"; };
+		5620C8122754F3AE0098D6FA /* PNOmniLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNOmniLight.swift; sourceTree = "<group>"; };
+		5620C8142754F3B60098D6FA /* PNSpotLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSpotLight.swift; sourceTree = "<group>"; };
+		5620C8162754F3C80098D6FA /* PNDirectionalLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNDirectionalLight.swift; sourceTree = "<group>"; };
+		5620C8182754F4FE0098D6FA /* PNIOmniLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIOmniLight.swift; sourceTree = "<group>"; };
+		5620C81A2754F52C0098D6FA /* PNISpotLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNISpotLight.swift; sourceTree = "<group>"; };
+		5620C81C2754F5480098D6FA /* PNIDirectionalLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIDirectionalLight.swift; sourceTree = "<group>"; };
+		5620C8202754F5DD0098D6FA /* PNSpotLightNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSpotLightNode.swift; sourceTree = "<group>"; };
+		5620C8242754F65B0098D6FA /* PNOmniLightNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNOmniLightNode.swift; sourceTree = "<group>"; };
+		5620C8262754F7DF0098D6FA /* PNIOmniLightNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIOmniLightNode.swift; sourceTree = "<group>"; };
+		5620C8282754F8CD0098D6FA /* PNISpotLightNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNISpotLightNode.swift; sourceTree = "<group>"; };
 		56270166272B54EB00071620 /* PNAnimatedTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnimatedTransform.swift; sourceTree = "<group>"; };
 		56270168272B556500071620 /* PNAnimatedTransform+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNAnimatedTransform+Alias.swift"; sourceTree = "<group>"; };
 		5627016A272B583F00071620 /* PNAnimatedSkeleton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNAnimatedSkeleton+Extension.swift"; sourceTree = "<group>"; };
@@ -599,6 +619,9 @@
 		560A0BB727541BC3005AE29D /* Kinds */ = {
 			isa = PBXGroup;
 			children = (
+				5620C8222754F6130098D6FA /* OmniLight */,
+				5620C81F2754F5C60098D6FA /* SpotLight */,
+				5620C81E2754F5BE0098D6FA /* AmbientLight */,
 				560A0BC32754253C005AE29D /* RiggedMesh */,
 				560A0BBE27542443005AE29D /* Mesh */,
 				560A0BB92754222B005AE29D /* Camera */,
@@ -867,6 +890,33 @@
 			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
+		5620C81E2754F5BE0098D6FA /* AmbientLight */ = {
+			isa = PBXGroup;
+			children = (
+				566795CE274ECD75005993D7 /* PNAmbientLightNode.swift */,
+				566795D0274ECD7D005993D7 /* PNIAmbientLightNode.swift */,
+			);
+			path = AmbientLight;
+			sourceTree = "<group>";
+		};
+		5620C81F2754F5C60098D6FA /* SpotLight */ = {
+			isa = PBXGroup;
+			children = (
+				5620C8202754F5DD0098D6FA /* PNSpotLightNode.swift */,
+				5620C8282754F8CD0098D6FA /* PNISpotLightNode.swift */,
+			);
+			path = SpotLight;
+			sourceTree = "<group>";
+		};
+		5620C8222754F6130098D6FA /* OmniLight */ = {
+			isa = PBXGroup;
+			children = (
+				5620C8242754F65B0098D6FA /* PNOmniLightNode.swift */,
+				5620C8262754F7DF0098D6FA /* PNIOmniLightNode.swift */,
+			);
+			path = OmniLight;
+			sourceTree = "<group>";
+		};
 		5629FBDD27491A62005476AF /* AnimatedValue */ = {
 			isa = PBXGroup;
 			children = (
@@ -963,8 +1013,6 @@
 				560A0BB727541BC3005AE29D /* Kinds */,
 				560A0BB427541B89005AE29D /* Structure */,
 				560A0BB327541B80005AE29D /* Interactor */,
-				566795CE274ECD75005993D7 /* PNAmbientLightNode.swift */,
-				566795D0274ECD7D005993D7 /* PNIAmbientLightNode.swift */,
 			);
 			path = Node;
 			sourceTree = "<group>";
@@ -1277,6 +1325,12 @@
 			children = (
 				56C47BB52751BF390075C61B /* PNAmbientLight.swift */,
 				56C47BB72751BF7F0075C61B /* PNIAmbientLight.swift */,
+				5620C8122754F3AE0098D6FA /* PNOmniLight.swift */,
+				5620C8182754F4FE0098D6FA /* PNIOmniLight.swift */,
+				5620C8142754F3B60098D6FA /* PNSpotLight.swift */,
+				5620C81A2754F52C0098D6FA /* PNISpotLight.swift */,
+				5620C8162754F3C80098D6FA /* PNDirectionalLight.swift */,
+				5620C81C2754F5480098D6FA /* PNIDirectionalLight.swift */,
 			);
 			path = Light;
 			sourceTree = "<group>";
@@ -1581,6 +1635,7 @@
 				561DF41727246F1800D95ACC /* MTLViewport+Extension.swift in Sources */,
 				56270167272B54EB00071620 /* PNAnimatedTransform.swift in Sources */,
 				56C4CD53273800E4000A994E /* SpotRenderer.metal in Sources */,
+				5620C8172754F3C80098D6FA /* PNDirectionalLight.swift in Sources */,
 				56D7ED54274C536700A6C25D /* PNISceneLoader.swift in Sources */,
 				566795AB274DBDE0005993D7 /* PNNode.swift in Sources */,
 				561667182719E2CD000063B1 /* PNISkeleton.swift in Sources */,
@@ -1618,10 +1673,12 @@
 				563C9C26273884700014CFF3 /* PNSpotShadowJob+Extension.swift in Sources */,
 				56D7ED45274C3AD400A6C25D /* PNIBoundingBoxInteractor.swift in Sources */,
 				5686BD9A273C1CD300329FA0 /* PNIStaticBuffer.swift in Sources */,
+				5620C8272754F7DF0098D6FA /* PNIOmniLightNode.swift in Sources */,
 				5688075427480D1A00C95F55 /* PNDynamicBuffer.swift in Sources */,
 				5616673B2719E2CD000063B1 /* PNDataBuffer.swift in Sources */,
 				56ADD2F8273709F400107E24 /* PNAmbientJob+Extension.swift in Sources */,
 				569D923D273DD594004FDFAC /* PNBound.swift in Sources */,
+				5620C8212754F5DD0098D6FA /* PNSpotLightNode.swift in Sources */,
 				56C4CD55273801EB000A994E /* PNSpotJob+Extension.swift in Sources */,
 				566795B0274DBE22005993D7 /* PNNodeInteractor.swift in Sources */,
 				56C47BA827516C610075C61B /* PNRenderMaskGenerator.swift in Sources */,
@@ -1677,8 +1734,10 @@
 				561667062719E2CD000063B1 /* MDLMaterialSemantic+Extension.swift in Sources */,
 				56165BEB27440DA90025D58B /* PNEntityType.swift in Sources */,
 				56C47BA027511EDB0075C61B /* PNRenderJob.swift in Sources */,
+				5620C8292754F8CD0098D6FA /* PNISpotLightNode.swift in Sources */,
 				56C47BAC2751769A0075C61B /* PNBufferedValue.swift in Sources */,
 				56924AE4271A181600FF3E06 /* PNIAnimatedValue+Alias.swift in Sources */,
+				5620C8252754F65B0098D6FA /* PNOmniLightNode.swift in Sources */,
 				5629FBEA2749201F005476AF /* PNInterpolator.swift in Sources */,
 				5616673E2719E2CD000063B1 /* PNSceneDescription.swift in Sources */,
 				560A0BC027542458005AE29D /* PNAnimatedMeshNode.swift in Sources */,
@@ -1698,12 +1757,15 @@
 				5670EC092735AB0000375194 /* PNBloomSplitJob+Extension.swift in Sources */,
 				561667142719E2CD000063B1 /* MDLAsset+Extension.swift in Sources */,
 				56ADD2F4273707C500107E24 /* PNAmbientJob.swift in Sources */,
+				5620C8192754F4FE0098D6FA /* PNIOmniLight.swift in Sources */,
 				566795C0274E9F98005993D7 /* PNCameraNode.swift in Sources */,
 				56924ACC271A00D900FF3E06 /* PNIAnimatedValue.swift in Sources */,
+				5620C81B2754F52C0098D6FA /* PNISpotLight.swift in Sources */,
 				561667112719E2CD000063B1 /* CGSize+Extension.swift in Sources */,
 				560C18D0273A832A00459AEF /* MTLFunctionConstantValues+Extension.swift in Sources */,
 				5688076827483F4600C95F55 /* PNIMaterial.swift in Sources */,
 				566795DA274FC561005993D7 /* PNEngine.swift in Sources */,
+				5620C8152754F3B60098D6FA /* PNSpotLight.swift in Sources */,
 				5670EC052735A3EA00375194 /* BloomSplit.metal in Sources */,
 				5670EC1D2736B8BC00375194 /* PNGBufferStage.swift in Sources */,
 				56165BF02744401B0025D58B /* ModelUniforms+Extension.swift in Sources */,
@@ -1731,6 +1793,7 @@
 				5616670F2719E2CD000063B1 /* Data+Extension.swift in Sources */,
 				560A0BC527542557005AE29D /* PNAnimatedRiggedMesh.swift in Sources */,
 				560A0BB2275419E8005AE29D /* PNAnimatedNode.swift in Sources */,
+				5620C8132754F3AE0098D6FA /* PNOmniLight.swift in Sources */,
 				56D7ED41274C372800A6C25D /* PNIBoundInteractor.swift in Sources */,
 				5629FBE327491D03005476AF /* PNSampleProvider.swift in Sources */,
 				5670EC182736A36300375194 /* PNBloomStage.swift in Sources */,
@@ -1780,6 +1843,7 @@
 				56D7ED4F274C52EA00A6C25D /* PNIAssetLoader.swift in Sources */,
 				56270169272B556500071620 /* PNAnimatedTransform+Alias.swift in Sources */,
 				563C9C1D27387B940014CFF3 /* PNPipeline.swift in Sources */,
+				5620C81D2754F5480098D6FA /* PNIDirectionalLight.swift in Sources */,
 				5629FBDF27491A78005476AF /* PNAnimatedValue.swift in Sources */,
 				560A0BAA27540D9A005AE29D /* PNBufferStore.swift in Sources */,
 				561667522719E2CD000063B1 /* PNEnvironmentJob.swift in Sources */,
