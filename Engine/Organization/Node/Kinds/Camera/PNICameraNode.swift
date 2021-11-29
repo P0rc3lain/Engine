@@ -11,7 +11,7 @@ public struct PNICameraNode: PNCameraNode {
         self.camera = camera
         self.transform = transform
     }
-    public func write(scene: inout PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
+    public func write(scene: PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
         scene.entities.add(parentIdx: parentIdx, data: PNEntity(type: .camera,
                                                                 referenceIdx: scene.cameras.count))
         scene.skeletonReferences.append(.nil)

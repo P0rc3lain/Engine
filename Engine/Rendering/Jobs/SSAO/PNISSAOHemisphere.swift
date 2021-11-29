@@ -4,8 +4,8 @@
 
 import simd
 
-struct Hemisphere {
-    static func noise(count: Int) -> [simd_float3] {
+struct PNISSAOHemisphere: PNSSAOHemisphere {
+    func noise(count: Int) -> [simd_float3] {
         var samples = [simd_float3]()
         for _ in count.naturalExclusive {
             samples.append(simd_float3(Float.random(in: 0 ..< 1) * 2 - 1,
@@ -14,7 +14,7 @@ struct Hemisphere {
         }
         return samples
     }
-    static func samples(size: Int) -> [simd_float3] {
+    func samples(size: Int) -> [simd_float3] {
         var samples = [simd_float3]()
         for index in 0 ..< size {
             var vector = normalize(simd_float3(Float.random(in: 0 ..< 1) * 2 - 1,

@@ -10,23 +10,23 @@ struct PNITranscriber: PNTranscriber {
         self.transformCalculator = transformCalculator
     }
     func transcribe(scene: PNScene) -> PNSceneDescription {
-        var sceneDescription = PNSceneDescription()
-        write(node: scene.rootNode, scene: &sceneDescription, parentIndex: .nil)
-        sceneDescription.boundingBoxes = boundingBoxes(scene: &sceneDescription)
-        updatePalettes(scene: &sceneDescription)
+        let sceneDescription = PNSceneDescription()
+        write(node: scene.rootNode, scene: sceneDescription, parentIndex: .nil)
+        sceneDescription.boundingBoxes = boundingBoxes(scene: sceneDescription)
+        updatePalettes(scene: sceneDescription)
         return sceneDescription
     }
-    private func write(node: PNNode<PNSceneNode>, scene: inout PNSceneDescription, parentIndex: PNIndex) {
-        let index = node.data.write(scene: &scene, parentIdx: parentIndex)
+    private func write(node: PNNode<PNSceneNode>, scene: PNSceneDescription, parentIndex: PNIndex) {
+        let index = node.data.write(scene: scene, parentIdx: parentIndex)
         let transform = transformCalculator.transformation(node: node.data,
                                                            parent: parentIndex,
-                                                           scene: &scene)
+                                                           scene: scene)
         scene.uniforms.append(ModelUniforms.from(transform: transform))
         for child in node.children {
-            write(node: child, scene: &scene, parentIndex: index)
+            write(node: child, scene: scene, parentIndex: index)
         }
     }
-    private func boundingBoxes(scene: inout PNSceneDescription) -> [PNBoundingBox] {
+    private func boundingBoxes(scene: PNSceneDescription) -> [PNBoundingBox] {
         var boundingBoxes = [PNBoundingBox](minimalCapacity: scene.entities.count)
         let interactor = PNIBoundingBoxInteractor.default
         for i in scene.entities.indices {
@@ -47,8 +47,7 @@ struct PNITranscriber: PNTranscriber {
                 boundingBoxes.insert(boundingBox)
             case .group:
                 let children = scene.entities.children(of: index)
-                if !children.isEmpty {
-                    let firstChild = children.first!
+                if let firstChild = children.first {
                     let offset = -scene.entities.count + i
                     var mergedBox = boundingBoxes[firstChild + offset]
                     for childIndex in children.dropFirst() {
@@ -67,14 +66,14 @@ struct PNITranscriber: PNTranscriber {
         }
         return boundingBoxes
     }
-    func updatePalettes(scene: inout PNSceneDescription) {
+    func updatePalettes(scene: PNSceneDescription) {
         for index in scene.entities.indices {
-            let palette = generatePalette(objectIdx: index, scene: &scene)
+            let palette = generatePalette(objectIdx: index, scene: scene)
             scene.paletteOffset.append(scene.palettes.count)
             scene.palettes.append(contentsOf: palette)
         }
     }
-    func generatePalette(objectIdx: Int, scene: inout PNSceneDescription) -> [simd_float4x4] {
+    func generatePalette(objectIdx: Int, scene: PNSceneDescription) -> [simd_float4x4] {
         if scene.skeletonReferences[objectIdx] == .nil {
             return []
         } else {

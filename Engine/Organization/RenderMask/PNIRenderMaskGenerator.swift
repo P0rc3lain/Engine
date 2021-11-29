@@ -19,7 +19,7 @@ public struct PNIRenderMaskGenerator: PNRenderMaskGenerator {
                      omniLights: generateRenderMasks(scene: scene))
     }
     private func generateSpotRenderMasks(scene: PNSceneDescription) -> [[Bool]] {
-        return scene.spotLights.count.naturalExclusive.map { i in
+        scene.spotLights.count.naturalExclusive.map { i in
             let cameraTransform = scene.uniforms[Int(scene.spotLights[i].idx)].modelMatrixInverse
             let cameraBoundingBox = interactor.multiply(cameraTransform, scene.spotLights[i].boundingBox)
             let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
@@ -29,7 +29,7 @@ public struct PNIRenderMaskGenerator: PNRenderMaskGenerator {
         }
     }
     private func generateCameraRenderMask(scene: PNSceneDescription) -> [[Bool]] {
-        return scene.cameras.indices.map { index in
+        scene.cameras.indices.map { index in
             let cameraTransform = scene.uniforms[index].modelMatrixInverse
             let cameraBoundingBox = interactor.multiply(cameraTransform, scene.cameras[index].boundingBox)
             let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
@@ -38,7 +38,7 @@ public struct PNIRenderMaskGenerator: PNRenderMaskGenerator {
         }
     }
     private func generateRenderMasks(scene: PNSceneDescription) -> [[[Bool]]] {
-        return scene.omniLights.count.naturalExclusive.map { lightIndex in
+        scene.omniLights.count.naturalExclusive.map { lightIndex in
             var faceData = [[Bool]]()
             for faceIndex in 6.naturalExclusive {
                 let entityIndex = Int(scene.omniLights[lightIndex].idx)

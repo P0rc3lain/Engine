@@ -12,7 +12,7 @@ extension Array {
         self.init()
         reserveCapacity(minimalCapacity)
     }
-    @inlinable public mutating func insert(_ newElement: Element) {
+    public mutating func insert(_ newElement: Element) {
         insert(newElement, at: 0)
     }
 }

@@ -5,7 +5,7 @@
 struct PNIMeshNode: PNMeshNode {
     var mesh: PNMesh
     var transform: PNTransform
-    func write(scene: inout PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
+    func write(scene: PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
         let entity = PNEntity(type: .mesh,
                               referenceIdx: scene.meshes.count)
         scene.entities.add(parentIdx: parentIdx, data: entity)

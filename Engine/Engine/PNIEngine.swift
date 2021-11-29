@@ -18,14 +18,16 @@ public class PNIEngine: PNEngine {
                  coordinatorFactory: PNRenderingCoordinatorFactory,
                  workloadManagerFactory: PNWorkloadManagerFactory,
                  renderMaskGenerator: PNRenderMaskGenerator) {
-        guard let coordinator = coordinatorFactory.new(drawableSize: renderingSize) else {
+        guard let coordinator = coordinatorFactory.new(drawableSize: renderingSize),
+              let device = view.device,
+              let bufferStore = PNIBufferStore(device: device) else {
             assert(false, "Could not create coordinator")
             return nil
         }
         self.view = view
         self.coordinatorFactory = coordinatorFactory
         self.scene = scene
-        self.bufferStore = PNIBufferStore(device: view.device!)!
+        self.bufferStore = bufferStore
         self.workloadManagerFactory = workloadManagerFactory
         self.renderMaskGenerator = renderMaskGenerator
         self.workloadManager = workloadManagerFactory.new(bufferStore: bufferStore,

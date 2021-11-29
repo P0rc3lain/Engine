@@ -3,5 +3,5 @@
 //
 
 protocol PNTransformCalculator {
-    func transformation(node: PNSceneNode, parent: PNIndex, scene: inout PNSceneDescription) -> PNM2WTransform
+    func transformation(node: PNSceneNode, parent: PNIndex, scene: PNSceneDescription) -> PNM2WTransform
 }

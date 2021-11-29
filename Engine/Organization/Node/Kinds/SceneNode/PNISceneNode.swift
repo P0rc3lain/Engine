@@ -4,7 +4,7 @@
 
 struct PNISceneNode: PNSceneNode {
     var transform: PNTransform
-    func write(scene: inout PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
+    func write(scene: PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
         let entity = PNEntity(type: .group,
                               referenceIdx: .nil)
         scene.entities.add(parentIdx: parentIdx, data: entity)
