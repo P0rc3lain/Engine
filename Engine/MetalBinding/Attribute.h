@@ -32,6 +32,15 @@ enum AttributeSpotShadowVertexShaderBufferIndex {
     kAttributeSpotShadowVertexShaderBufferInstanceId
 };
 
+enum AttributeDirectionalShadowVertexShaderBufferIndex {
+    kAttributeDirectionalShadowVertexShaderBufferStageIn = 0,
+    kAttributeDirectionalShadowVertexShaderBufferDirectionalLights,
+    kAttributeDirectionalShadowVertexShaderBufferModelUniforms,
+    kAttributeDirectionalShadowVertexShaderBufferMatrixPalettes,
+    kAttributeDirectionalShadowVertexShaderBufferObjectIndex,
+    kAttributeDirectionalShadowVertexShaderBufferInstanceId
+};
+
 enum AttributeOmniShadowVertexShaderBufferIndex {
     kAttributeOmniShadowVertexShaderBufferStageIn = 0,
     kAttributeOmniShadowVertexShaderBufferOmniLights,
@@ -116,7 +125,8 @@ enum AttributeDirectionalVertexShaderBufferIndex {
 enum AttributeDirectionalFragmentShaderTextureIndex {
     kAttributeDirectionalFragmentShaderTextureAR = 0,
     kAttributeDirectionalFragmentShaderTextureNM,
-    kAttributeDirectionalFragmentShaderTexturePR
+    kAttributeDirectionalFragmentShaderTexturePR,
+    kAttributeDirectionalFragmentShaderTextureShadowMaps
 };
 
 enum AttributeDirectionalFragmentShaderBufferIndex {

@@ -19,7 +19,8 @@ struct PNCombineStage: PNStage {
           gBufferOutput: PNGPUSupply,
           ssaoTexture: MTLTexture,
           spotLightShadows: MTLTexture,
-          pointLightsShadows: MTLTexture) {
+          pointLightsShadows: MTLTexture,
+          directionalLightsShadows: MTLTexture) {
         guard let environmentJob = PNEnvironmentJob.make(device: device,
                                                          drawableSize: renderingSize),
               let omniJob = PNOmniJob.make(device: device,
@@ -32,6 +33,7 @@ struct PNCombineStage: PNStage {
                                                  drawableSize: renderingSize),
               let directionalJob = PNDirectionalJob.make(device: device,
                                                          inputTextures: gBufferOutput.color,
+                                                         shadowMap: directionalLightsShadows,
                                                          drawableSize: renderingSize),
               let spotJob = PNSpotJob.make(device: device,
                                            inputTextures: gBufferOutput.color,

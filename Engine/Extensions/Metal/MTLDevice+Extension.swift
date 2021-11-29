@@ -15,6 +15,9 @@ extension MTLDevice {
     func makeDepthStencilStateOmniLightShadowRenderer() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: .omniShadowRenderer)
     }
+    func makeDepthStencilStateDirectionalLightShadowRenderer() -> MTLDepthStencilState? {
+        makeDepthStencilState(descriptor: .directionalShadowRenderer)
+    }
     func makeDepthStencilStateEnvironmentRenderer() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: .environmentRenderer)
     }
@@ -38,6 +41,12 @@ extension MTLDevice {
     }
     func makeRenderPipelineStateSpotLightShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .spotLightShadowAnimatedRenderer(library: library))
+    }
+    func makeRenderPipelineStateDirectionalLightShadow(library: MTLLibrary) -> MTLRenderPipelineState? {
+        try? makeRenderPipelineState(descriptor: .directionalLightShadowRenderer(library: library))
+    }
+    func makeRenderPipelineStateDirectionalLightShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
+        try? makeRenderPipelineState(descriptor: .directionalLightShadowAnimatedRenderer(library: library))
     }
     func makeRenderPipelineStateOmniLightShadow(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .omniLightShadowRenderer(library: library))
@@ -95,6 +104,9 @@ extension MTLDevice {
     }
     func makeTextureSpotLightShadowDepthStencil(size: CGSize, lightsCount: Int) -> MTLTexture? {
         makeTexture(descriptor: .spotLightShadowDepthStencil(size: size, lightsCount: lightsCount))
+    }
+    func makeTextureDirectionalLightShadowDepthStencil(size: CGSize, lightsCount: Int) -> MTLTexture? {
+        makeTexture(descriptor: .directionalLightShadowDepthStencil(size: size, lightsCount: lightsCount))
     }
     func makeTextureOmniLightShadowDepthStencil(size: CGSize, lightsCount: Int) -> MTLTexture? {
         makeTexture(descriptor: .omniLightShadowDepthStencil(size: size, lightsCount: lightsCount))

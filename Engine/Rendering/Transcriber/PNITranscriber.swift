@@ -13,15 +13,29 @@ struct PNITranscriber: PNTranscriber {
         let sceneDescription = PNSceneDescription()
         write(node: scene.rootNode, scene: sceneDescription, parentIndex: .nil)
         sceneDescription.boundingBoxes = boundingBoxes(scene: sceneDescription)
-        updatePalettes(scene: sceneDescription)
         write(lights: scene.directionalLights, scene: sceneDescription)
+        updatePalettes(scene: sceneDescription)
         return sceneDescription
     }
     private func write(lights: [PNDirectionalLight], scene: PNSceneDescription) {
+        let cameraBB = scene.boundingBoxes[scene.activeCameraIdx]
         for light in lights {
+            let interactor = PNIBoundingBoxInteractor.default
+            let orientation = light.orientation.expanded
+            let orientationInverse = orientation.inverse
+            let bound = interactor.bound(interactor.aabb(interactor.multiply(orientationInverse, cameraBB)))
+            let projectionMatrix = simd_float4x4.orthographicProjection(left: bound.min.x,
+                                                                        right: bound.max.x,
+                                                                        top: bound.max.y,
+                                                                        bottom: bound.min.y,
+                                                                        near: bound.min.z,
+                                                                        far: bound.max.z)
             scene.directionalLights.append(DirectionalLight(color: light.color,
                                                             intensity: light.intensity,
-                                                            direction: light.direction))
+                                                            rotationMatrix: orientation,
+                                                            rotationMatrixInverse: orientationInverse,
+                                                            projectionMatrix: projectionMatrix,
+                                                            projectionMatrixInverse: projectionMatrix.inverse))
         }
     }
     private func write(node: PNNode<PNSceneNode>, scene: PNSceneDescription, parentIndex: PNIndex) {
@@ -68,20 +82,20 @@ struct PNITranscriber: PNTranscriber {
                 }
 
             case .camera:
-                let boundingBox = interactor.aabb(interactor.multiply(transform, scene.cameras[scene.entities[index].data.referenceIdx].boundingBox))
+                let boundingBox = interactor.aabb(interactor.multiply(transform.inverse, scene.cameras[scene.entities[index].data.referenceIdx].boundingBox))
                 boundingBoxes.insert(boundingBox)
             }
         }
         return boundingBoxes
     }
-    func updatePalettes(scene: PNSceneDescription) {
+    private func updatePalettes(scene: PNSceneDescription) {
         for index in scene.entities.indices {
             let palette = generatePalette(objectIdx: index, scene: scene)
             scene.paletteOffset.append(scene.palettes.count)
             scene.palettes.append(contentsOf: palette)
         }
     }
-    func generatePalette(objectIdx: Int, scene: PNSceneDescription) -> [simd_float4x4] {
+    private func generatePalette(objectIdx: Int, scene: PNSceneDescription) -> [simd_float4x4] {
         if scene.skeletonReferences[objectIdx] == .nil {
             return []
         } else {

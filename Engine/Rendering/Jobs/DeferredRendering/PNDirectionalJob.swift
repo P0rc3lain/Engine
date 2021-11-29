@@ -11,15 +11,18 @@ struct PNDirectionalJob: PNRenderJob {
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport
     private let inputTextures: [MTLTexture]
+    private let shadowMap: MTLTexture
     private let plane: PNMesh
     init?(pipelineState: MTLRenderPipelineState,
           inputTextures: [MTLTexture],
+          shadowMap: MTLTexture,
           device: MTLDevice,
           depthStencilState: MTLDepthStencilState,
           drawableSize: CGSize) {
         guard let plane = PNMesh.screenSpacePlane(device: device) else {
             return nil
         }
+        self.shadowMap = shadowMap
         self.pipelineState = pipelineState
         self.depthStencilState = depthStencilState
         self.inputTextures = inputTextures
@@ -48,8 +51,8 @@ struct PNDirectionalJob: PNRenderJob {
                                   index: kAttributeDirectionalFragmentShaderBufferCamera)
         encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems,
                                   index: kAttributeDirectionalFragmentShaderBufferLightUniforms)
-        let range = kAttributeDirectionalFragmentShaderTextureAR ... kAttributeDirectionalFragmentShaderTexturePR
-        encoder.setFragmentTextures([arTexture, nmTexture, prTexture], range: range)
+        let range = kAttributeDirectionalFragmentShaderTextureAR ... kAttributeDirectionalFragmentShaderTextureShadowMaps
+        encoder.setFragmentTextures([arTexture, nmTexture, prTexture, shadowMap], range: range)
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
                                       indexType: plane.pieceDescriptions[0].drawDescription.indexType,

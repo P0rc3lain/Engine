@@ -54,6 +54,16 @@ extension MTLRenderPassDescriptor {
         descriptor.depthAttachment.loadAction = .clear
         return descriptor
     }
+    static func directionalLightShadow(device: MTLDevice, size: CGSize, layers: Int) -> MTLRenderPassDescriptor {
+        let descriptor = MTLRenderPassDescriptor()
+        let texture = device.makeTextureDirectionalLightShadowDepthStencil(size: size, lightsCount: layers)
+        descriptor.renderTargetArrayLength = layers
+        descriptor.depthAttachment.clearDepth = 1
+        descriptor.depthAttachment.texture = texture
+        descriptor.depthAttachment.storeAction = .store
+        descriptor.depthAttachment.loadAction = .clear
+        return descriptor
+    }
     static func omniLightShadow(device: MTLDevice, size: CGSize, layers: Int) -> MTLRenderPassDescriptor {
         let descriptor = MTLRenderPassDescriptor()
         let texture = device.makeTextureOmniLightShadowDepthStencil(size: size, lightsCount: layers)

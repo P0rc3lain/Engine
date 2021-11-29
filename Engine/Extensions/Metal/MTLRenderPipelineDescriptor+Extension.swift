@@ -67,6 +67,24 @@ extension MTLRenderPipelineDescriptor {
                                                               constantValues: .bool(true, index: 0))
         return descriptor
     }
+    static func directionalLightShadowRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
+        let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.label = "Directional Shadows"
+        descriptor.vertexFunction = try? library.makeFunction(name: "vertexDirectionalLightShadow",
+                                                              constantValues: .bool(false, index: 0))
+        descriptor.depthAttachmentPixelFormat = .directionalShadowDepthStencil
+        descriptor.vertexDescriptor = .vertex
+        descriptor.sampleCount = 1
+        descriptor.inputPrimitiveTopology = .triangle
+        return descriptor
+    }
+    static func directionalLightShadowAnimatedRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
+        let descriptor = MTLRenderPipelineDescriptor.spotLightShadowRenderer(library: library)
+        descriptor.label = "Directional Shadows Animated"
+        descriptor.vertexFunction = try? library.makeFunction(name: "vertexDirectionalLightShadow",
+                                                              constantValues: .bool(true, index: 0))
+        return descriptor
+    }
     static func omniRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.label = "Omni Lighting"
