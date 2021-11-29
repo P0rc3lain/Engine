@@ -36,8 +36,8 @@ struct PNSSAOJob: PNRenderJob {
         self.kernelBuffer = kernelBuffer
         self.noiseBuffer = noiseBuffer
         self.uniforms = uniforms
-        var kernel = Hemisphere.samples(size: maxSamplesCount)
-        var noise = Hemisphere.noise(count: maxNoiseCount)
+        var kernel = PNISSAOHemisphere().samples(size: maxSamplesCount)
+        var noise = PNISSAOHemisphere().noise(count: maxNoiseCount)
         var uniforms = SSAOUniforms.default
         self.kernelBuffer.upload(data: &kernel)
         self.noiseBuffer.upload(data: &noise)

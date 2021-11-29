@@ -18,7 +18,7 @@ public struct PNIAnimatedCameraNode: PNAnimatedCameraNode {
         self.animator = animator
         self.animation = animation
     }
-    public func write(scene: inout PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
+    public func write(scene: PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
         scene.entities.add(parentIdx: parentIdx, data: PNEntity(type: .camera,
                                                                 referenceIdx: scene.cameras.count))
         scene.skeletonReferences.append(.nil)

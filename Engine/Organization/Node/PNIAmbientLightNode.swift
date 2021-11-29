@@ -11,7 +11,7 @@ public struct PNIAmbientLightNode: PNAmbientLightNode {
         self.light = light
         self.transform = transform
     }
-    public func write(scene: inout PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
+    public func write(scene: PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
         let entity = PNEntity(type: .ambientLight,
                               referenceIdx: scene.ambientLights.count)
         scene.entities.add(parentIdx: parentIdx, data: entity)

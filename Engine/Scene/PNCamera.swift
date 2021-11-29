@@ -16,7 +16,7 @@ public struct PNCamera {
                                                                           aspect: aspectRatio,
                                                                           nearZ: nearPlane,
                                                                           farZ: farPlane)
-        projectionMatrixInverse = projectionMatrix.inverse        
+        projectionMatrixInverse = projectionMatrix.inverse
         boundingBox = PNIBoundingBoxInteractor.default.from(inverseProjection: projectionMatrixInverse)
     }
 }

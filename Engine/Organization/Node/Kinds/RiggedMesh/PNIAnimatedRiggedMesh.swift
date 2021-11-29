@@ -10,7 +10,7 @@ struct PNIAnimatedRiggedMesh: PNAnimatedRiggedMesh {
     var transform: PNTransform {
         animator.transform(coordinateSpace: animation)
     }
-    func write(scene: inout PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
+    func write(scene: PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
         let entity = PNEntity(type: .mesh,
                               referenceIdx: scene.meshes.count)
         scene.entities.add(parentIdx: parentIdx, data: entity)

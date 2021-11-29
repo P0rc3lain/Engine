@@ -2,8 +2,8 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import MetalBinding
 import Metal
+import MetalBinding
 
 public class PNSceneDescription {
     // MARK: - Capacity A
@@ -30,6 +30,6 @@ public class PNSceneDescription {
     // MARK: - Capacity I
     public var spotLights = [SpotLight]()
     // MARK: - Capacity J
-    public var skyMap: MTLTexture? = nil
+    public var skyMap: MTLTexture?
     public var activeCameraIdx = Int.nil
 }

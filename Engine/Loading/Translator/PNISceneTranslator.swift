@@ -13,12 +13,10 @@ public class PNISceneTranslator: PNSceneTranslator {
         self.device = device
     }
     public func process(asset: MDLAsset) -> PNScene? {
-        let scene = PNScene(rootNode: PNNode(data: PNISceneNode.init(transform: matrix_identity_float4x4)))
+        let scene = PNScene(rootNode: PNNode(data: PNISceneNode(transform: matrix_identity_float4x4)))
         asset.walk(handler: { (object: MDLObject, passedValue: PNNode<PNSceneNode>?) in
-            var node: PNNode<PNSceneNode>! = nil
             if let object = object as? MDLCamera {
-                node =  PNNode(data: cameraNode(camera: object.porcelain, transform: object.transform),
-                               parent: passedValue)
+                let node = PNNode(data: cameraNode(camera: object.porcelain, transform: object.transform), parent: passedValue)
                 passedValue?.children.append(node)
                 return node
             } /* else if let object = object as? MDLLight {
@@ -30,20 +28,24 @@ public class PNISceneTranslator: PNSceneTranslator {
                 if let component = object.componentConforming(to: MDLComponent.self),
                    let animation = component as? MDLAnimationBindComponent {
                     let skeleton = convert(animation: animation)
-                    node = PNNode(data: riggedMeshNode(mesh: mesh, skeleton: skeleton, transform: object.transform),
-                                  parent: passedValue)
+                    let node = PNNode(data: riggedMeshNode(mesh: mesh,
+                                                           skeleton: skeleton,
+                                                           transform: object.transform),
+                                      parent: passedValue)
+                    passedValue?.children.append(node)
+                    return node
                 } else {
-                    node = PNNode(data: meshNode(mesh: mesh, transform: object.transform),
-                                  parent: passedValue)
+                    let node = PNNode(data: meshNode(mesh: mesh,
+                                                     transform: object.transform),
+                                      parent: passedValue)
+                    passedValue?.children.append(node)
+                    return node
                 }
-                node?.parent = passedValue
-                passedValue?.children.append(node)
             } else {
-                node =  PNNode(data: groupNode(transfrom: object.transform),
-                               parent: passedValue)
+                let node = PNNode(data: groupNode(transfrom: object.transform), parent: passedValue)
                 passedValue?.children.append(node)
+                return node
             }
-            return node
         }, initialValue: scene.rootNode)
         materialCache = [:]
         return scene

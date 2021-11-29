@@ -26,12 +26,9 @@ struct PNOmniShadowJob: PNRenderJob {
         self.rotationsBuffer.upload(data: &rotations)
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
-        let scene = supply.scene
-        let dataStore = supply.bufferStore
-        guard !scene.omniLights.isEmpty else {
+        guard !supply.scene.omniLights.isEmpty else {
             return
         }
-        let masks = supply.mask.omniLights
         encoder.setViewport(viewPort)
         encoder.setCullMode(.front)
         encoder.setFrontFacing(.counterClockwise)
@@ -39,75 +36,68 @@ struct PNOmniShadowJob: PNRenderJob {
         encoder.setRenderPipelineState(animatedPipelineState)
         encoder.setVertexBuffer(rotationsBuffer,
                                 index: kAttributeOmniShadowVertexShaderBufferRotations)
-        encoder.setVertexBuffer(dataStore.omniLights,
+        encoder.setVertexBuffer(supply.bufferStore.omniLights,
                                 index: kAttributeOmniShadowVertexShaderBufferOmniLights)
-        for lightIndex in scene.omniLights.count.naturalExclusive {
+        for lightIndex in supply.scene.omniLights.count.naturalExclusive {
             for faceIndex in 6.naturalExclusive {
                 var lIndex = lightIndex + faceIndex
                 encoder.setVertexBytes(&lIndex,
                                        length: MemoryLayout<Int>.size,
                                        index: kAttributeOmniShadowVertexShaderBufferInstanceId)
-                for index in scene.entities.indices {
-                    if !masks[lightIndex][faceIndex][index] {
+                for index in supply.scene.entities.indices {
+                    if !supply.mask.omniLights[lightIndex][faceIndex][index] {
                         continue
                     }
-                    let object = scene.entities[index].data
-                    if object.type == .mesh && scene.skeletonReferences[index] != .nil {
-                        let mesh = scene.meshes[object.referenceIdx]
-                        encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
-                                                offset: mesh.vertexBuffer.offset,
-                                                index: kAttributeOmniShadowVertexShaderBufferStageIn)
+                    let object = supply.scene.entities[index].data
+                    if object.type == .mesh && supply.scene.skeletonReferences[index] != .nil {
+                        encoder.setVertexBuffer(supply.bufferStore.matrixPalettes.buffer,
+                                                offset: supply.scene.paletteOffset[index],
+                                                index: kAttributeOmniShadowVertexShaderBufferMatrixPalettes)
+                        let mesh = supply.scene.meshes[object.referenceIdx]
                         var mutableIndex = Int32(index)
                         encoder.setVertexBytes(&mutableIndex,
                                                length: MemoryLayout<Int32>.size,
                                                index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
-                        encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
+                        encoder.setVertexBuffer(supply.bufferStore.modelCoordinateSystems,
                                                 index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
-                        for pieceIndex in mesh.pieceDescriptions {
-                            encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
-                                                    offset: scene.paletteOffset[index],
-                                                    index: kAttributeOmniShadowVertexShaderBufferMatrixPalettes)
-                            let indexDraw = pieceIndex.drawDescription
-                            encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
-                                                          indexCount: indexDraw.indexCount,
-                                                          indexType: indexDraw.indexType,
-                                                          indexBuffer: indexDraw.indexBuffer.buffer,
-                                                          indexBufferOffset: indexDraw.indexBuffer.offset)
-                        }
+                        encodeMeshDraw(commandEncoder: encoder, mesh: mesh)
                     }
                 }
                 encoder.setRenderPipelineState(pipelineState)
-                for index in scene.entities.indices {
-                    if !masks[lightIndex][faceIndex][index] {
+                for index in supply.scene.entities.indices {
+                    if !supply.mask.omniLights[lightIndex][faceIndex][index] {
                         continue
                     }
-                    let object = scene.entities[index].data
-                    if object.type == .mesh && scene.skeletonReferences[index] == .nil {
-                        let mesh = scene.meshes[object.referenceIdx]
-                        encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
-                                                offset: mesh.vertexBuffer.offset,
-                                                index: kAttributeOmniShadowVertexShaderBufferStageIn)
+                    let object = supply.scene.entities[index].data
+                    if object.type == .mesh && supply.scene.skeletonReferences[index] == .nil {
+                        let mesh = supply.scene.meshes[object.referenceIdx]
+                        encoder.setVertexBuffer(supply.bufferStore.modelCoordinateSystems,
+                                                index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
                         var mutableIndex = Int32(index)
                         encoder.setVertexBytes(&mutableIndex,
                                                length: MemoryLayout<Int32>.size,
                                                index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
-                        encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
-                                                index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
-                        for pieceIndex in mesh.pieceDescriptions {
-                            let indexDraw = pieceIndex.drawDescription
-                            encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
-                                                          indexCount: indexDraw.indexCount,
-                                                          indexType: indexDraw.indexType,
-                                                          indexBuffer: indexDraw.indexBuffer.buffer,
-                                                          indexBufferOffset: indexDraw.indexBuffer.offset)
-                        }
+                        encodeMeshDraw(commandEncoder: encoder, mesh: mesh)
                     }
                 }
             }
         }
     }
+    private func encodeMeshDraw(commandEncoder encoder: MTLRenderCommandEncoder, mesh: PNMesh) {
+        encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
+                                offset: mesh.vertexBuffer.offset,
+                                index: kAttributeOmniShadowVertexShaderBufferStageIn)
+        for pieceIndex in mesh.pieceDescriptions {
+            let indexDraw = pieceIndex.drawDescription
+            encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
+                                          indexCount: indexDraw.indexCount,
+                                          indexType: indexDraw.indexType,
+                                          indexBuffer: indexDraw.indexBuffer.buffer,
+                                          indexBufferOffset: indexDraw.indexBuffer.offset)
+        }
+    }
     private static var rotationMatrices: [simd_float4x4] {
-        return [
+        [
             simd_quatf.environment.positiveX.rotationMatrix,
             simd_quatf.environment.negativeX.rotationMatrix,
             simd_quatf.environment.positiveY.rotationMatrix,

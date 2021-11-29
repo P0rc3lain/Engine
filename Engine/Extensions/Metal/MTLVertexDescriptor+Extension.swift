@@ -2,8 +2,8 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import MetalKit
 import MetalBinding
+import MetalKit
 
 extension MTLVertexDescriptor {
     public static var vertex: MTLVertexDescriptor? {

@@ -2,8 +2,8 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import ModelIO
 import Metal
+import ModelIO
 
 public class PNISceneLoader: PNSceneLoader {
     private let assetLoader: PNAssetLoader
