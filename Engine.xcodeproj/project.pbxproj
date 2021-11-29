@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		560253D52726CA4800B3A13A /* PNIChronometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560253D42726CA4800B3A13A /* PNIChronometer.swift */; };
-		560253D72726CCCA00B3A13A /* Chronometer+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560253D62726CCCA00B3A13A /* Chronometer+Tests.swift */; };
+		560253D72726CCCA00B3A13A /* PNIChronometer+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560253D62726CCCA00B3A13A /* PNIChronometer+Tests.swift */; };
 		560A0BAA27540D9A005AE29D /* PNBufferStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560A0BA927540D9A005AE29D /* PNBufferStore.swift */; };
 		560A0BAD27541562005AE29D /* PNAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560A0BAC27541562005AE29D /* PNAnimator.swift */; };
 		560A0BAF275416E8005AE29D /* PNIAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560A0BAE275416E8005AE29D /* PNIAnimator.swift */; };
@@ -27,10 +27,9 @@
 		560C18D9273ACC0100459AEF /* PNOmniShadowJob+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560C18D8273ACC0100459AEF /* PNOmniShadowJob+Extension.swift */; };
 		56165BEA27440DA90025D58B /* PNEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BE827440DA90025D58B /* PNEntity.swift */; };
 		56165BEB27440DA90025D58B /* PNEntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BE927440DA90025D58B /* PNEntityType.swift */; };
-		56165BEE27443EAE0025D58B /* ArrangementController+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BED27443EAE0025D58B /* ArrangementController+Tests.swift */; };
 		56165BF02744401B0025D58B /* ModelUniforms+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BEF2744401B0025D58B /* ModelUniforms+Extension.swift */; };
 		56165BF2274441D90025D58B /* AmbientLight+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BF1274441D90025D58B /* AmbientLight+Extension.swift */; };
-		56165BF627444A680025D58B /* FlatTree+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BF527444A680025D58B /* FlatTree+Tests.swift */; };
+		56165BF627444A680025D58B /* PNFlatTree+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BF527444A680025D58B /* PNFlatTree+Tests.swift */; };
 		561666F82719E2CD000063B1 /* MTLVertexDescriptor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666802719E2CC000063B1 /* MTLVertexDescriptor+Extension.swift */; };
 		561666F92719E2CD000063B1 /* MDLMaterialProperty+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666812719E2CC000063B1 /* MDLMaterialProperty+Extension.swift */; };
 		561666FA2719E2CD000063B1 /* simd_float4+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666822719E2CC000063B1 /* simd_float4+Extension.swift */; };
@@ -185,7 +184,7 @@
 		568EBB3A273F0B88007C7D35 /* SSAOUniforms+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EBB39273F0B88007C7D35 /* SSAOUniforms+Extension.swift */; };
 		568EBB3D273F0DE1007C7D35 /* Hemisphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EBB3C273F0DE1007C7D35 /* Hemisphere.swift */; };
 		56924ACC271A00D900FF3E06 /* PNIAnimatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACB271A00D900FF3E06 /* PNIAnimatedValue.swift */; };
-		56924AD7271A07FD00FF3E06 /* AnimatedValue+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AD6271A07FD00FF3E06 /* AnimatedValue+Tests.swift */; };
+		56924AD7271A07FD00FF3E06 /* PNIAnimatedValue+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AD6271A07FD00FF3E06 /* PNIAnimatedValue+Tests.swift */; };
 		56924AD9271A07FD00FF3E06 /* Engine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5601396C255457D100FC1C45 /* Engine.framework */; };
 		56924AE4271A181600FF3E06 /* PNIAnimatedValue+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AE3271A181600FF3E06 /* PNIAnimatedValue+Alias.swift */; };
 		56924AE8271A187400FF3E06 /* AnimatedFloat3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AE7271A187400FF3E06 /* AnimatedFloat3+Extensions.swift */; };
@@ -250,7 +249,7 @@
 /* Begin PBXFileReference section */
 		5601396C255457D100FC1C45 /* Engine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Engine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		560253D42726CA4800B3A13A /* PNIChronometer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIChronometer.swift; sourceTree = "<group>"; };
-		560253D62726CCCA00B3A13A /* Chronometer+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chronometer+Tests.swift"; sourceTree = "<group>"; };
+		560253D62726CCCA00B3A13A /* PNIChronometer+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIChronometer+Tests.swift"; sourceTree = "<group>"; };
 		560A0BA927540D9A005AE29D /* PNBufferStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNBufferStore.swift; sourceTree = "<group>"; };
 		560A0BAC27541562005AE29D /* PNAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnimator.swift; sourceTree = "<group>"; };
 		560A0BAE275416E8005AE29D /* PNIAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIAnimator.swift; sourceTree = "<group>"; };
@@ -270,10 +269,9 @@
 		560C18D8273ACC0100459AEF /* PNOmniShadowJob+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNOmniShadowJob+Extension.swift"; sourceTree = "<group>"; };
 		56165BE827440DA90025D58B /* PNEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNEntity.swift; sourceTree = "<group>"; };
 		56165BE927440DA90025D58B /* PNEntityType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNEntityType.swift; sourceTree = "<group>"; };
-		56165BED27443EAE0025D58B /* ArrangementController+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArrangementController+Tests.swift"; sourceTree = "<group>"; };
 		56165BEF2744401B0025D58B /* ModelUniforms+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelUniforms+Extension.swift"; sourceTree = "<group>"; };
 		56165BF1274441D90025D58B /* AmbientLight+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AmbientLight+Extension.swift"; sourceTree = "<group>"; };
-		56165BF527444A680025D58B /* FlatTree+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FlatTree+Tests.swift"; sourceTree = "<group>"; };
+		56165BF527444A680025D58B /* PNFlatTree+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNFlatTree+Tests.swift"; sourceTree = "<group>"; };
 		561666802719E2CC000063B1 /* MTLVertexDescriptor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MTLVertexDescriptor+Extension.swift"; sourceTree = "<group>"; };
 		561666812719E2CC000063B1 /* MDLMaterialProperty+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MDLMaterialProperty+Extension.swift"; sourceTree = "<group>"; };
 		561666822719E2CC000063B1 /* simd_float4+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "simd_float4+Extension.swift"; sourceTree = "<group>"; };
@@ -436,7 +434,7 @@
 		568EBB3E273F110A007C7D35 /* LightingInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LightingInput.h; sourceTree = "<group>"; };
 		56924ACB271A00D900FF3E06 /* PNIAnimatedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIAnimatedValue.swift; sourceTree = "<group>"; };
 		56924AD4271A07FD00FF3E06 /* EngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		56924AD6271A07FD00FF3E06 /* AnimatedValue+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimatedValue+Tests.swift"; sourceTree = "<group>"; };
+		56924AD6271A07FD00FF3E06 /* PNIAnimatedValue+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIAnimatedValue+Tests.swift"; sourceTree = "<group>"; };
 		56924AD8271A07FD00FF3E06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56924AE3271A181600FF3E06 /* PNIAnimatedValue+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIAnimatedValue+Alias.swift"; sourceTree = "<group>"; };
 		56924AE7271A187400FF3E06 /* AnimatedFloat3+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimatedFloat3+Extensions.swift"; sourceTree = "<group>"; };
@@ -668,14 +666,6 @@
 				56165BE927440DA90025D58B /* PNEntityType.swift */,
 			);
 			path = Graph;
-			sourceTree = "<group>";
-		};
-		56165BEC27443E9F0025D58B /* Arrangement */ = {
-			isa = PBXGroup;
-			children = (
-				56165BED27443EAE0025D58B /* ArrangementController+Tests.swift */,
-			);
-			path = Arrangement;
 			sourceTree = "<group>";
 		};
 		5616667F2719E2CC000063B1 /* Extensions */ = {
@@ -924,7 +914,7 @@
 			isa = PBXGroup;
 			children = (
 				56416D7327400F66003C99C2 /* PNIDynamicBuffer+Tests.swift */,
-				56165BF527444A680025D58B /* FlatTree+Tests.swift */,
+				56165BF527444A680025D58B /* PNFlatTree+Tests.swift */,
 			);
 			path = DataStructures;
 			sourceTree = "<group>";
@@ -1201,8 +1191,8 @@
 		56924ADF271A081B00FF3E06 /* Animation */ = {
 			isa = PBXGroup;
 			children = (
-				56924AD6271A07FD00FF3E06 /* AnimatedValue+Tests.swift */,
-				560253D62726CCCA00B3A13A /* Chronometer+Tests.swift */,
+				56924AD6271A07FD00FF3E06 /* PNIAnimatedValue+Tests.swift */,
+				560253D62726CCCA00B3A13A /* PNIChronometer+Tests.swift */,
 			);
 			path = Animation;
 			sourceTree = "<group>";
@@ -1241,7 +1231,6 @@
 		56B65DED273ED4ED00DB927E /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				56165BEC27443E9F0025D58B /* Arrangement */,
 				56165BE1274405010025D58B /* Bounds */,
 			);
 			path = Scene;
@@ -1806,13 +1795,12 @@
 			files = (
 				566795B6274DC297005993D7 /* PNINodeInteractor+Tests.swift in Sources */,
 				56416D7B27413443003C99C2 /* simd_float4x4+Extension+Tests.swift in Sources */,
-				56924AD7271A07FD00FF3E06 /* AnimatedValue+Tests.swift in Sources */,
-				56165BEE27443EAE0025D58B /* ArrangementController+Tests.swift in Sources */,
+				56924AD7271A07FD00FF3E06 /* PNIAnimatedValue+Tests.swift in Sources */,
 				56D5085B27454B250097DEB2 /* OmniLight+Extension+Tests.swift in Sources */,
-				56165BF627444A680025D58B /* FlatTree+Tests.swift in Sources */,
+				56165BF627444A680025D58B /* PNFlatTree+Tests.swift in Sources */,
 				56416D7427400F66003C99C2 /* PNIDynamicBuffer+Tests.swift in Sources */,
 				56B65DEC273ED4CE00DB927E /* PNIBoundingBoxInteractor+Tests.swift in Sources */,
-				560253D72726CCCA00B3A13A /* Chronometer+Tests.swift in Sources */,
+				560253D72726CCCA00B3A13A /* PNIChronometer+Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
