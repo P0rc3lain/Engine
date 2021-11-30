@@ -203,8 +203,8 @@
 		56924AD7271A07FD00FF3E06 /* PNIAnimatedValue+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AD6271A07FD00FF3E06 /* PNIAnimatedValue+Tests.swift */; };
 		56924AD9271A07FD00FF3E06 /* Engine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5601396C255457D100FC1C45 /* Engine.framework */; };
 		56924AE4271A181600FF3E06 /* PNIAnimatedValue+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AE3271A181600FF3E06 /* PNIAnimatedValue+Alias.swift */; };
-		56924AE8271A187400FF3E06 /* AnimatedFloat3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AE7271A187400FF3E06 /* AnimatedFloat3+Extensions.swift */; };
-		56924AEA271A188700FF3E06 /* AnimatedQuatf+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AE9271A188700FF3E06 /* AnimatedQuatf+Extension.swift */; };
+		56924AE8271A187400FF3E06 /* PNAnimatedFloat3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AE7271A187400FF3E06 /* PNAnimatedFloat3+Extensions.swift */; };
+		56924AEA271A188700FF3E06 /* PNAnimatedQuatf+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AE9271A188700FF3E06 /* PNAnimatedQuatf+Extension.swift */; };
 		569D923D273DD594004FDFAC /* PNBound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D923C273DD594004FDFAC /* PNBound.swift */; };
 		569D9242273E7EED004FDFAC /* Color.metal in Sources */ = {isa = PBXBuildFile; fileRef = 569D9241273E7EED004FDFAC /* Color.metal */; };
 		569D9244273E81DD004FDFAC /* VertexP+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D9243273E81DD004FDFAC /* VertexP+Extension.swift */; };
@@ -469,8 +469,8 @@
 		56924AD6271A07FD00FF3E06 /* PNIAnimatedValue+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIAnimatedValue+Tests.swift"; sourceTree = "<group>"; };
 		56924AD8271A07FD00FF3E06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56924AE3271A181600FF3E06 /* PNIAnimatedValue+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIAnimatedValue+Alias.swift"; sourceTree = "<group>"; };
-		56924AE7271A187400FF3E06 /* AnimatedFloat3+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimatedFloat3+Extensions.swift"; sourceTree = "<group>"; };
-		56924AE9271A188700FF3E06 /* AnimatedQuatf+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimatedQuatf+Extension.swift"; sourceTree = "<group>"; };
+		56924AE7271A187400FF3E06 /* PNAnimatedFloat3+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNAnimatedFloat3+Extensions.swift"; sourceTree = "<group>"; };
+		56924AE9271A188700FF3E06 /* PNAnimatedQuatf+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNAnimatedQuatf+Extension.swift"; sourceTree = "<group>"; };
 		569D922B273DC03F004FDFAC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		569D922D273DC175004FDFAC /* 2021-11-06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2021-11-06.png"; sourceTree = "<group>"; };
 		569D922E273DC175004FDFAC /* 2021-11-07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2021-11-07.png"; sourceTree = "<group>"; };
@@ -1432,8 +1432,8 @@
 				561666AB2719E2CC000063B1 /* PNVignetteJob+Extension.swift */,
 				561666B22719E2CC000063B1 /* PNEnvironmentJob+Extension.swift */,
 				561666AF2719E2CC000063B1 /* PNGBufferJob+Extension.swift */,
-				56924AE7271A187400FF3E06 /* AnimatedFloat3+Extensions.swift */,
-				56924AE9271A188700FF3E06 /* AnimatedQuatf+Extension.swift */,
+				56924AE7271A187400FF3E06 /* PNAnimatedFloat3+Extensions.swift */,
+				56924AE9271A188700FF3E06 /* PNAnimatedQuatf+Extension.swift */,
 				56407B7C27206F5D00440CAC /* Vertex+Extension.swift */,
 				563BFC9927294AF70003EDB7 /* PNMesh+Extension.swift */,
 				566020E32734408C000F4CA7 /* PNSSAOJob+Extension.swift */,
@@ -1803,7 +1803,7 @@
 				569D9242273E7EED004FDFAC /* Color.metal in Sources */,
 				56D7ED5A274C605C00A6C25D /* PNCullingController.swift in Sources */,
 				569D9246273EA5F6004FDFAC /* PNBoundingBox.swift in Sources */,
-				56924AE8271A187400FF3E06 /* AnimatedFloat3+Extensions.swift in Sources */,
+				56924AE8271A187400FF3E06 /* PNAnimatedFloat3+Extensions.swift in Sources */,
 				566795B8274DC51E005993D7 /* PNMeshNode.swift in Sources */,
 				561666FA2719E2CD000063B1 /* simd_float4+Extension.swift in Sources */,
 				561667092719E2CD000063B1 /* MDLVertexDescriptor+Extension.swift in Sources */,
@@ -1835,7 +1835,7 @@
 				561667252719E2CD000063B1 /* PNGBufferJob+Extension.swift in Sources */,
 				568807462747EEC000C95F55 /* PNSkeleton.swift in Sources */,
 				56C47BAF275176EC0075C61B /* PNIBufferedValue.swift in Sources */,
-				56924AEA271A188700FF3E06 /* AnimatedQuatf+Extension.swift in Sources */,
+				56924AEA271A188700FF3E06 /* PNAnimatedQuatf+Extension.swift in Sources */,
 				566795C8274EB977005993D7 /* PNIRiggedMesh.swift in Sources */,
 				5616670D2719E2CD000063B1 /* MDLMeshBuffer+Extension.swift in Sources */,
 				563C9C24273882F60014CFF3 /* SpotLight.metal in Sources */,

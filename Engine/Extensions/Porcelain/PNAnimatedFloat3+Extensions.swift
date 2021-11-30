@@ -4,11 +4,11 @@
 
 import simd
 
-extension AnimatedFloat3 {
-    static public var defaultScale: AnimatedFloat3 {
+extension PNAnimatedFloat3 {
+    static public var defaultScale: PNAnimatedFloat3 {
         .static(from: .one)
     }
-    static public var defaultTranslation: AnimatedFloat3 {
+    static public var defaultTranslation: PNAnimatedFloat3 {
         .static(from: .zero)
     }
 }

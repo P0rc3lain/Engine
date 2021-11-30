@@ -4,7 +4,7 @@
 
 import simd
 
-public typealias AnimatedFloat3 = PNIAnimatedValue<simd_float3>
-public typealias AnimatedQuatf = PNIAnimatedValue<simd_quatf>
-public typealias AnimatedFloat3Array = PNIAnimatedValue<[simd_float3]>
-public typealias AnimatedQuatfArray = PNIAnimatedValue<[simd_quatf]>
+public typealias PNAnimatedFloat3 = PNIAnimatedValue<simd_float3>
+public typealias PNAnimatedQuatf = PNIAnimatedValue<simd_quatf>
+public typealias PNAnimatedFloat3Array = PNIAnimatedValue<[simd_float3]>
+public typealias PNAnimatedQuatfArray = PNIAnimatedValue<[simd_quatf]>
