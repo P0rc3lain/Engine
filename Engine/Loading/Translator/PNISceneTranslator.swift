@@ -100,7 +100,10 @@ public class PNISceneTranslator: PNSceneTranslator {
         var maxY = Float(0)
         var minZ = Float(0)
         var maxZ = Float(0)
-        buffer.withUnsafeBytes { (pointer: UnsafePointer<Vertex>) in
+        buffer.withUnsafeMutableBytes { mutablePointer in
+            guard let pointer = mutablePointer.bindMemory(to: Vertex.self).baseAddress else {
+                fatalError("Could not cast buffer to raw pointer")
+            }
             let firstVertex = pointer.pointee
             minX = firstVertex.position.x
             maxX = firstVertex.position.x
@@ -117,7 +120,6 @@ public class PNISceneTranslator: PNSceneTranslator {
                 minZ = min(vertex.position.z, minX)
                 maxZ = max(vertex.position.z, maxX)
             }
-
         }
         return PNBound(min: [minX, minY, minZ], max: [maxX, maxY, maxZ])
     }
