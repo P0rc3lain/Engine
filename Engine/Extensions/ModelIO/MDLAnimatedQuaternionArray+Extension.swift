@@ -5,9 +5,9 @@
 import ModelIO
 
 extension MDLAnimatedQuaternionArray {
-    var porcelain: AnimatedQuatfArray {
+    var porcelain: PNAnimatedQuatfArray {
         let times = keyTimes.map { TimeInterval(truncating: $0) }
         let keyFrames = times.map { floatQuaternionArray(atTime: $0) }
-        return AnimatedQuatfArray(keyFrames: keyFrames, times: times, maximumTime: maximumTime)
+        return PNAnimatedQuatfArray(keyFrames: keyFrames, times: times, maximumTime: maximumTime)
     }
 }
