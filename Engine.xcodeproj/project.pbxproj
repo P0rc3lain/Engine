@@ -210,6 +210,7 @@
 		569D9244273E81DD004FDFAC /* VertexP+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D9243273E81DD004FDFAC /* VertexP+Extension.swift */; };
 		569D9246273EA5F6004FDFAC /* PNBoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D9245273EA5F6004FDFAC /* PNBoundingBox.swift */; };
 		56A3728E273862300079A93D /* MTLOrigin+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A3728D273862300079A93D /* MTLOrigin+Extension.swift */; };
+		56A8CA7E275796120040DCF9 /* Shadow.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56A8CA7D275796120040DCF9 /* Shadow.metal */; };
 		56ADD2F4273707C500107E24 /* PNAmbientJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F3273707C500107E24 /* PNAmbientJob.swift */; };
 		56ADD2F6273707E200107E24 /* AmbientRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F5273707E200107E24 /* AmbientRenderer.metal */; };
 		56ADD2F8273709F400107E24 /* PNAmbientJob+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F7273709F400107E24 /* PNAmbientJob+Extension.swift */; };
@@ -492,6 +493,8 @@
 		569D9243273E81DD004FDFAC /* VertexP+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VertexP+Extension.swift"; sourceTree = "<group>"; };
 		569D9245273EA5F6004FDFAC /* PNBoundingBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNBoundingBox.swift; sourceTree = "<group>"; };
 		56A3728D273862300079A93D /* MTLOrigin+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLOrigin+Extension.swift"; sourceTree = "<group>"; };
+		56A8CA7C275796090040DCF9 /* Shadow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shadow.h; sourceTree = "<group>"; };
+		56A8CA7D275796120040DCF9 /* Shadow.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shadow.metal; sourceTree = "<group>"; };
 		56ADD2F1273705F800107E24 /* AmbientLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AmbientLight.h; sourceTree = "<group>"; };
 		56ADD2F3273707C500107E24 /* PNAmbientJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAmbientJob.swift; sourceTree = "<group>"; };
 		56ADD2F5273707E200107E24 /* AmbientRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = AmbientRenderer.metal; sourceTree = "<group>"; };
@@ -822,6 +825,8 @@
 				569D9240273E7EE6004FDFAC /* Color.h */,
 				569D9241273E7EED004FDFAC /* Color.metal */,
 				568EBB3E273F110A007C7D35 /* LightingInput.h */,
+				56A8CA7C275796090040DCF9 /* Shadow.h */,
+				56A8CA7D275796120040DCF9 /* Shadow.metal */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1717,6 +1722,7 @@
 				56C47BB32751B5C00075C61B /* PNManageableTransform.swift in Sources */,
 				563575F42728486A00CE4988 /* PNAnimationSample.swift in Sources */,
 				5670EC272736EA2400375194 /* PNPostprocessStage.swift in Sources */,
+				56A8CA7E275796120040DCF9 /* Shadow.metal in Sources */,
 				566795ED274FF235005993D7 /* PNRenderingCoordinatorFactory.swift in Sources */,
 				5616671C2719E2CD000063B1 /* MTLStencilDescriptor+Extension.swift in Sources */,
 				563BFC87272878180003EDB7 /* UnsafeMutableRawPointer+Extension.swift in Sources */,
