@@ -7,5 +7,6 @@ public protocol PNChronometer {
     var elapsedTime: TimeInterval { get }
     mutating func pause()
     mutating func resume()
+    mutating func toggle()
     mutating func reset()
 }

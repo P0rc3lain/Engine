@@ -55,6 +55,13 @@ struct PNIChronometer: PNChronometer {
             pauseTime = timeProducer()
         }
     }
+    mutating func toggle() {
+        if isPaused {
+            resume()
+        } else {
+            pause()
+        }
+    }
     mutating func resume() {
         if isPaused {
             timeAccumulator += pauseTime.timeIntervalSince(startTime)
