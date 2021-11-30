@@ -32,10 +32,13 @@ struct PNIRenderingCoordinator: PNRenderingCoordinator {
             return
         }
         pipeline.draw(commandBuffer: commandBuffer, supply: frameSupply)
+        commandBuffer.pushDebugGroup("Copy Pass")
         imageConverter.encode(commandBuffer: commandBuffer,
                               sourceTexture: pipeline.io.output.color[0],
                               destinationTexture: outputTexture)
+        commandBuffer.popDebugGroup()
         commandBuffer.present(drawable)
         commandBuffer.commit()
+        commandBuffer.waitUntilCompleted()
     }
 }
