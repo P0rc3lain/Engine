@@ -4,7 +4,7 @@
 
 import MetalBinding
 
-public struct PNIAmbientLightNode: PNAmbientLightNode {
+public class PNIAmbientLightNode: PNAmbientLightNode {
     public var light: PNAmbientLight
     public var transform: PNTransform
     public init(light: PNAmbientLight, transform: PNTransform) {

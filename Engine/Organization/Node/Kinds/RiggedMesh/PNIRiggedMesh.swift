@@ -2,11 +2,16 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-struct PNIRiggedMesh: PNRiggedMesh {
-    var mesh: PNMesh
-    var skeleton: PNSkeleton
-    var transform: PNTransform
-    func write(scene: PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
+public class PNIRiggedMesh: PNRiggedMesh {
+    public var mesh: PNMesh
+    public var skeleton: PNSkeleton
+    public var transform: PNTransform
+    public init(mesh: PNMesh, skeleton: PNSkeleton, transform: PNTransform) {
+        self.mesh = mesh
+        self.skeleton = skeleton
+        self.transform = transform
+    }
+    public func write(scene: PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
         let entity = PNEntity(type: .mesh,
                               referenceIdx: scene.meshes.count)
         scene.entities.add(parentIdx: parentIdx, data: entity)
