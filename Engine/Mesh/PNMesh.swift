@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-public struct PNMesh {
+public class PNMesh {
     public let boundingBox: PNBoundingBox
     public let vertexBuffer: PNDataBuffer
     public let pieceDescriptions: [PNPieceDescription]
