@@ -22,10 +22,10 @@ struct PNPostprocessStage: PNStage {
                           output: PNGPUSupply(color: [outputTexture]))
     }
     func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
+        commandBuffer.pushDebugGroup("Post Processing Pass")
         guard let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: postprocessRenderPassDescriptor) else {
             return
         }
-        commandBuffer.pushDebugGroup("Post Processing Pass")
         vignetteJob.draw(encoder: encoder, supply: supply)
         encoder.endEncoding()
         commandBuffer.popDebugGroup()

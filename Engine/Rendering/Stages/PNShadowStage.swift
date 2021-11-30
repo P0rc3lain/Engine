@@ -47,28 +47,28 @@ struct PNShadowStage: PNStage {
     }
     func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
         if !supply.scene.spotLights.isEmpty {
+            commandBuffer.pushDebugGroup("Spot Light Shadow Pass")
             guard let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: spotLightShadowRenderPassDescriptor) else {
                 return
             }
-            encoder.pushDebugGroup("Spot Light Shadow Pass")
             spotLightShadowJob.draw(encoder: encoder, supply: supply)
             encoder.endEncoding()
             commandBuffer.popDebugGroup()
         }
         if !supply.scene.omniLights.isEmpty {
+            commandBuffer.pushDebugGroup("Omni Light Shadow Pass")
             guard let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: omniLightShadowRenderPassDescriptor) else {
                 return
             }
-            encoder.pushDebugGroup("Omni Light Shadow Pass")
             omniLightShadowJob.draw(encoder: encoder, supply: supply)
             encoder.endEncoding()
             commandBuffer.popDebugGroup()
         }
         if !supply.scene.directionalLights.isEmpty {
+            commandBuffer.pushDebugGroup("Directional Light Shadow Pass")
             guard let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: directionalLightShadowRenderPassDescriptor) else {
                 return
             }
-            encoder.pushDebugGroup("Directional Light Shadow Pass")
             directionalLightShadowJob.draw(encoder: encoder, supply: supply)
             encoder.endEncoding()
             commandBuffer.popDebugGroup()
