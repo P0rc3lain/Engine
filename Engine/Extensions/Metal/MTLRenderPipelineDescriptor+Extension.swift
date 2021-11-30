@@ -38,6 +38,22 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexDescriptor = .vertexP
         return descriptor
     }
+    static func fogJob(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
+        let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.label = "Fog"
+        descriptor.vertexFunction = library.makeFunction(name: "fogVertexShader")
+        descriptor.fragmentFunction = library.makeFunction(name: "fogFragmentShader")
+        descriptor.colorAttachments[0].pixelFormat = .fogColor
+        descriptor.colorAttachments[0].pixelFormat = .directionalColor
+        descriptor.colorAttachments[0].rgbBlendOperation = .add
+        descriptor.colorAttachments[0].sourceRGBBlendFactor = .oneMinusSourceAlpha
+        descriptor.colorAttachments[0].destinationRGBBlendFactor = .sourceAlpha
+        descriptor.colorAttachments[0].isBlendingEnabled = true
+        descriptor.depthAttachmentPixelFormat = .fogDepthStencil
+        descriptor.stencilAttachmentPixelFormat = .fogDepthStencil
+        descriptor.vertexDescriptor = .vertexP
+        return descriptor
+    }
     static func gBufferRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.label = "GBuffer"

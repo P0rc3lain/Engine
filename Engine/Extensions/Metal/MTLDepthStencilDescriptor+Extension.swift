@@ -49,7 +49,16 @@ extension MTLDepthStencilDescriptor {
         let stencil = MTLStencilDescriptor.environmentRenderer
         let descriptor = MTLDepthStencilDescriptor()
         descriptor.depthCompareFunction = .always
-        descriptor.isDepthWriteEnabled = true
+        descriptor.isDepthWriteEnabled = false
+        descriptor.frontFaceStencil = stencil
+        descriptor.backFaceStencil = stencil
+        return descriptor
+    }
+    static var fogJob: MTLDepthStencilDescriptor {
+        let stencil = MTLStencilDescriptor.fogJob
+        let descriptor = MTLDepthStencilDescriptor()
+        descriptor.depthCompareFunction = .always
+        descriptor.isDepthWriteEnabled = false
         descriptor.frontFaceStencil = stencil
         descriptor.backFaceStencil = stencil
         return descriptor
