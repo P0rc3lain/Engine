@@ -21,7 +21,7 @@ struct PNITranscriber: PNTranscriber {
         let cameraBB = scene.boundingBoxes[scene.activeCameraIdx]
         for light in lights {
             let interactor = PNIBoundingBoxInteractor.default
-            let orientation = light.orientation.expanded
+            let orientation = simd.simd_float4x4.from(directionVector: light.direction)
             let orientationInverse = orientation.inverse
             let bound = interactor.bound(interactor.aabb(interactor.multiply(orientationInverse, cameraBB)))
             let projectionMatrix = simd_float4x4.orthographicProjection(left: bound.min.x,

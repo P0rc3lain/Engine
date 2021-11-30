@@ -5,7 +5,6 @@
 import simd
 
 public struct PNIDirectionalLight: PNDirectionalLight {
-    public let orientation: simd_float3x3
     public let color: simd_float3
     public let intensity: Float
     public let direction: simd_float3
@@ -13,6 +12,5 @@ public struct PNIDirectionalLight: PNDirectionalLight {
         self.color = color
         self.intensity = intensity
         self.direction = direction
-        self.orientation = .from(directionVector: direction)
     }
 }
