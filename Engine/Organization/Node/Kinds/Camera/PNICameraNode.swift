@@ -14,7 +14,6 @@ public class PNICameraNode: PNCameraNode {
     public func write(scene: PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
         scene.entities.add(parentIdx: parentIdx, data: PNEntity(type: .camera,
                                                                 referenceIdx: scene.cameras.count))
-        scene.skeletonReferences.append(.nil)
         scene.cameras.append(camera)
         let uniform = CameraUniforms(projectionMatrix: camera.projectionMatrix,
                                      index: Int32(scene.entities.count - 1))

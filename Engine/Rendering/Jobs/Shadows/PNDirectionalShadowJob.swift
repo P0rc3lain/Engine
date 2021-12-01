@@ -37,54 +37,48 @@ struct PNDirectionalShadowJob: PNRenderJob {
             encoder.setVertexBytes(&lIndex,
                                    length: MemoryLayout<Int>.size,
                                    index: kAttributeDirectionalShadowVertexShaderBufferInstanceId)
-            for index in scene.entities.indices {
-                let object = scene.entities[index].data
-                if object.type == .mesh && scene.skeletonReferences[index] != .nil {
-                    let mesh = scene.meshes[object.referenceIdx]
-                    encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
-                                            offset: mesh.vertexBuffer.offset,
-                                            index: kAttributeDirectionalShadowVertexShaderBufferStageIn)
-                    var mutableIndex = Int32(index)
-                    encoder.setVertexBytes(&mutableIndex,
-                                           length: MemoryLayout<Int32>.size,
-                                           index: kAttributeDirectionalShadowVertexShaderBufferObjectIndex)
-                    encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
-                                            index: kAttributeDirectionalShadowVertexShaderBufferModelUniforms)
-                    for pieceIndex in mesh.pieceDescriptions {
-                        encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
-                                                offset: scene.paletteOffset[index],
-                                                index: kAttributeDirectionalShadowVertexShaderBufferMatrixPalettes)
-                        let indexDraw = pieceIndex.drawDescription
-                        encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
-                                                      indexCount: indexDraw.indexCount,
-                                                      indexType: indexDraw.indexType,
-                                                      indexBuffer: indexDraw.indexBuffer.buffer,
-                                                      indexBufferOffset: indexDraw.indexBuffer.offset)
-                    }
+            for animatedModel in scene.animatedModels {
+                let mesh = scene.meshes[animatedModel.mesh]
+                encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
+                                        offset: mesh.vertexBuffer.offset,
+                                        index: kAttributeDirectionalShadowVertexShaderBufferStageIn)
+                var mutableIndex = Int32(animatedModel.idx)
+                encoder.setVertexBytes(&mutableIndex,
+                                       length: MemoryLayout<Int32>.size,
+                                       index: kAttributeDirectionalShadowVertexShaderBufferObjectIndex)
+                encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
+                                        index: kAttributeDirectionalShadowVertexShaderBufferModelUniforms)
+                for pieceIndex in mesh.pieceDescriptions {
+                    encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
+                                            offset: scene.paletteOffset[animatedModel.skeleton],
+                                            index: kAttributeDirectionalShadowVertexShaderBufferMatrixPalettes)
+                    let indexDraw = pieceIndex.drawDescription
+                    encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
+                                                  indexCount: indexDraw.indexCount,
+                                                  indexType: indexDraw.indexType,
+                                                  indexBuffer: indexDraw.indexBuffer.buffer,
+                                                  indexBufferOffset: indexDraw.indexBuffer.offset)
                 }
             }
             encoder.setRenderPipelineState(pipelineState)
-            for index in scene.entities.indices {
-                let object = scene.entities[index].data
-                if object.type == .mesh && scene.skeletonReferences[index] == .nil {
-                    let mesh = scene.meshes[object.referenceIdx]
-                    encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
-                                            offset: mesh.vertexBuffer.buffer.offset,
-                                            index: kAttributeDirectionalShadowVertexShaderBufferStageIn)
-                    var mutableIndex = Int32(index)
-                    encoder.setVertexBytes(&mutableIndex,
-                                           length: MemoryLayout<Int32>.size,
-                                           index: kAttributeDirectionalShadowVertexShaderBufferObjectIndex)
-                    encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
-                                            index: kAttributeDirectionalShadowVertexShaderBufferModelUniforms)
-                    for pieceIndex in mesh.pieceDescriptions {
-                        let indexDraw = pieceIndex.drawDescription
-                        encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
-                                                      indexCount: indexDraw.indexCount,
-                                                      indexType: indexDraw.indexType,
-                                                      indexBuffer: indexDraw.indexBuffer.buffer,
-                                                      indexBufferOffset: indexDraw.indexBuffer.offset)
-                    }
+            for model in scene.models {
+                let mesh = scene.meshes[model.mesh]
+                encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
+                                        offset: mesh.vertexBuffer.buffer.offset,
+                                        index: kAttributeDirectionalShadowVertexShaderBufferStageIn)
+                var mutableIndex = Int32(model.idx)
+                encoder.setVertexBytes(&mutableIndex,
+                                       length: MemoryLayout<Int32>.size,
+                                       index: kAttributeDirectionalShadowVertexShaderBufferObjectIndex)
+                encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
+                                        index: kAttributeDirectionalShadowVertexShaderBufferModelUniforms)
+                for pieceIndex in mesh.pieceDescriptions {
+                    let indexDraw = pieceIndex.drawDescription
+                    encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
+                                                  indexCount: indexDraw.indexCount,
+                                                  indexType: indexDraw.indexType,
+                                                  indexBuffer: indexDraw.indexBuffer.buffer,
+                                                  indexBufferOffset: indexDraw.indexBuffer.offset)
                 }
             }
         }

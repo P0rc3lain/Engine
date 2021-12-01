@@ -56,8 +56,15 @@ struct PNITranscriber: PNTranscriber {
             let index = scene.entities.count - (1 + i)
             let transform = scene.uniforms[index].modelMatrix
             switch scene.entities[index].data.type {
+            case .animatedMesh:
+                let modelIdx = scene.entities[index].data.referenceIdx
+                let meshIdx = scene.animatedModels[modelIdx].mesh
+                let boundingBox = interactor.aabb(interactor.multiply(transform, scene.meshes[meshIdx].boundingBox))
+                boundingBoxes.insert(boundingBox)
             case .mesh:
-                let boundingBox = interactor.aabb(interactor.multiply(transform, scene.meshes[scene.entities[index].data.referenceIdx].boundingBox))
+                let modelIdx = scene.entities[index].data.referenceIdx
+                let meshIdx = scene.models[modelIdx].mesh
+                let boundingBox = interactor.aabb(interactor.multiply(transform, scene.meshes[meshIdx].boundingBox))
                 boundingBoxes.insert(boundingBox)
             case .spotLight:
                 let boundingBox = interactor.aabb(interactor.multiply(transform, scene.spotLights[scene.entities[index].data.referenceIdx].boundingBox))
@@ -90,24 +97,20 @@ struct PNITranscriber: PNTranscriber {
         return boundingBoxes
     }
     private func updatePalettes(scene: PNSceneDescription) {
-        for index in scene.entities.indices {
+        for index in scene.animatedModels.indices {
             let palette = generatePalette(objectIdx: index, scene: scene)
             scene.paletteOffset.append(scene.palettes.count)
             scene.palettes.append(contentsOf: palette)
         }
     }
     private func generatePalette(objectIdx: Int, scene: PNSceneDescription) -> [simd_float4x4] {
-        if scene.skeletonReferences[objectIdx] == .nil {
+        let skeletonIdx = scene.animatedModels[objectIdx].skeleton
+        let skeleton = scene.skeletons[skeletonIdx]
+        let date = Date().timeIntervalSince1970
+        guard let animation = skeleton.animations.first else {
             return []
-        } else {
-            let skeletonIdx = scene.skeletonReferences[objectIdx]
-            let skeleton = scene.skeletons[skeletonIdx]
-            let date = Date().timeIntervalSince1970
-            guard let animation = skeleton.animations.first else {
-                return []
-            }
-            let transformations = animation.localTransformation(at: date, interpolator: PNIInterpolator())
-            return skeleton.calculatePose(animationPose: transformations)
         }
+        let transformations = animation.localTransformation(at: date, interpolator: PNIInterpolator())
+        return skeleton.calculatePose(animationPose: transformations)
     }
 }

@@ -11,7 +11,6 @@ public class PNISceneNode: PNSceneNode {
         let entity = PNEntity(type: .group,
                               referenceIdx: .nil)
         scene.entities.add(parentIdx: parentIdx, data: entity)
-        scene.skeletonReferences.append(.nil)
         return scene.entities.count - 1
     }
 }

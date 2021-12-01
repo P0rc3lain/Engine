@@ -44,41 +44,35 @@ struct PNOmniShadowJob: PNRenderJob {
                 encoder.setVertexBytes(&lIndex,
                                        length: MemoryLayout<Int>.size,
                                        index: kAttributeOmniShadowVertexShaderBufferInstanceId)
-                for index in supply.scene.entities.indices {
-                    if !supply.mask.omniLights[lightIndex][faceIndex][index] {
+                for animatedModel in supply.scene.animatedModels {
+                    if !supply.mask.omniLights[lightIndex][faceIndex][animatedModel.idx] {
                         continue
                     }
-                    let object = supply.scene.entities[index].data
-                    if object.type == .mesh && supply.scene.skeletonReferences[index] != .nil {
-                        encoder.setVertexBuffer(supply.bufferStore.matrixPalettes.buffer,
-                                                offset: supply.scene.paletteOffset[index],
-                                                index: kAttributeOmniShadowVertexShaderBufferMatrixPalettes)
-                        let mesh = supply.scene.meshes[object.referenceIdx]
-                        var mutableIndex = Int32(index)
-                        encoder.setVertexBytes(&mutableIndex,
-                                               length: MemoryLayout<Int32>.size,
-                                               index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
-                        encoder.setVertexBuffer(supply.bufferStore.modelCoordinateSystems,
-                                                index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
-                        encodeMeshDraw(commandEncoder: encoder, mesh: mesh)
-                    }
+                    encoder.setVertexBuffer(supply.bufferStore.matrixPalettes.buffer,
+                                            offset: supply.scene.paletteOffset[animatedModel.skeleton],
+                                            index: kAttributeOmniShadowVertexShaderBufferMatrixPalettes)
+                    let mesh = supply.scene.meshes[animatedModel.mesh]
+                    var mutableIndex = Int32(animatedModel.idx)
+                    encoder.setVertexBytes(&mutableIndex,
+                                           length: MemoryLayout<Int32>.size,
+                                           index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
+                    encoder.setVertexBuffer(supply.bufferStore.modelCoordinateSystems,
+                                            index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
+                    encodeMeshDraw(commandEncoder: encoder, mesh: mesh)
                 }
                 encoder.setRenderPipelineState(pipelineState)
-                for index in supply.scene.entities.indices {
-                    if !supply.mask.omniLights[lightIndex][faceIndex][index] {
+                for model in supply.scene.models {
+                    if !supply.mask.omniLights[lightIndex][faceIndex][model.idx] {
                         continue
                     }
-                    let object = supply.scene.entities[index].data
-                    if object.type == .mesh && supply.scene.skeletonReferences[index] == .nil {
-                        let mesh = supply.scene.meshes[object.referenceIdx]
-                        encoder.setVertexBuffer(supply.bufferStore.modelCoordinateSystems,
-                                                index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
-                        var mutableIndex = Int32(index)
-                        encoder.setVertexBytes(&mutableIndex,
-                                               length: MemoryLayout<Int32>.size,
-                                               index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
-                        encodeMeshDraw(commandEncoder: encoder, mesh: mesh)
-                    }
+                    let mesh = supply.scene.meshes[model.mesh]
+                    encoder.setVertexBuffer(supply.bufferStore.modelCoordinateSystems,
+                                            index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
+                    var mutableIndex = Int32(model.idx)
+                    encoder.setVertexBytes(&mutableIndex,
+                                           length: MemoryLayout<Int32>.size,
+                                           index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
+                    encodeMeshDraw(commandEncoder: encoder, mesh: mesh)
                 }
             }
         }

@@ -33,74 +33,68 @@ struct PNGBufferJob: PNRenderJob {
         encoder.setStencilReferenceValue(1)
         encoder.setRenderPipelineState(animatedPipelineState)
         let texturesRange = kAttributeGBufferFragmentShaderTextureAlbedo ... kAttributeGBufferFragmentShaderTextureMetallic
-        for index in scene.entities.indices {
-            let object = scene.entities[index].data
-            if object.type == .mesh && scene.skeletonReferences[index] != .nil {
-                if !mask[index] {
-                    continue
+        for animatedModel in scene.animatedModels {
+            if !mask[animatedModel.idx] {
+                continue
+            }
+            let mesh = scene.meshes[animatedModel.mesh]
+            encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
+                                    offset: mesh.vertexBuffer.offset,
+                                    index: kAttributeGBufferVertexShaderBufferStageIn)
+            var mutableIndex = Int32(animatedModel.idx)
+            encoder.setVertexBytes(&mutableIndex,
+                                   length: MemoryLayout<Int32>.size,
+                                   index: kAttributeGBufferVertexShaderBufferObjectIndex)
+            encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
+                                    index: kAttributeGBufferVertexShaderBufferModelUniforms)
+            for pieceIndex in mesh.pieceDescriptions {
+                encoder.setVertexBuffer(dataStore.matrixPalettes,
+                                        offset: scene.paletteOffset[animatedModel.skeleton],
+                                        index: kAttributeGBufferVertexShaderBufferMatrixPalettes)
+                if let material = pieceIndex.material {
+                    encoder.setFragmentTextures([material.albedo,
+                                                 material.roughness,
+                                                 material.normals,
+                                                 material.metallic],
+                                                range: texturesRange)
                 }
-                let mesh = scene.meshes[object.referenceIdx]
-                encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
-                                        offset: mesh.vertexBuffer.offset,
-                                        index: kAttributeGBufferVertexShaderBufferStageIn)
-                var mutableIndex = Int32(index)
-                encoder.setVertexBytes(&mutableIndex,
-                                       length: MemoryLayout<Int32>.size,
-                                       index: kAttributeGBufferVertexShaderBufferObjectIndex)
-                encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
-                                        index: kAttributeGBufferVertexShaderBufferModelUniforms)
-                for pieceIndex in mesh.pieceDescriptions {
-                    encoder.setVertexBuffer(dataStore.matrixPalettes,
-                                            offset: scene.paletteOffset[index],
-                                            index: kAttributeGBufferVertexShaderBufferMatrixPalettes)
-                    if let material = pieceIndex.material {
-                        encoder.setFragmentTextures([material.albedo,
-                                                     material.roughness,
-                                                     material.normals,
-                                                     material.metallic],
-                                                    range: texturesRange)
-                    }
-                    let indexDraw = pieceIndex.drawDescription
-                    encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
-                                                  indexCount: indexDraw.indexCount,
-                                                  indexType: indexDraw.indexType,
-                                                  indexBuffer: indexDraw.indexBuffer.buffer,
-                                                  indexBufferOffset: indexDraw.indexBuffer.offset)
-                }
+                let indexDraw = pieceIndex.drawDescription
+                encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
+                                              indexCount: indexDraw.indexCount,
+                                              indexType: indexDraw.indexType,
+                                              indexBuffer: indexDraw.indexBuffer.buffer,
+                                              indexBufferOffset: indexDraw.indexBuffer.offset)
             }
         }
         encoder.setRenderPipelineState(pipelineState)
-        for index in scene.entities.indices {
-            let object = scene.entities[index].data
-            if object.type == .mesh && scene.skeletonReferences[index] == .nil {
-                if !mask[index] {
-                    continue
+        for model in scene.models {
+            if !mask[model.idx] {
+                continue
+            }
+            let mesh = scene.meshes[model.mesh]
+            encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
+                                    offset: mesh.vertexBuffer.offset,
+                                    index: kAttributeGBufferVertexShaderBufferStageIn)
+            var mutableIndex = Int32(model.idx)
+            encoder.setVertexBytes(&mutableIndex,
+                                   length: MemoryLayout<Int32>.size,
+                                   index: kAttributeGBufferVertexShaderBufferObjectIndex)
+            encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
+                                    index: kAttributeGBufferVertexShaderBufferModelUniforms)
+            for pieceIndex in mesh.pieceDescriptions {
+                if let material = pieceIndex.material {
+                    encoder.setFragmentTextures([material.albedo,
+                                                 material.roughness,
+                                                 material.normals,
+                                                 material.metallic],
+                                                range: texturesRange)
                 }
-                let mesh = scene.meshes[object.referenceIdx]
-                encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
-                                        offset: mesh.vertexBuffer.offset,
-                                        index: kAttributeGBufferVertexShaderBufferStageIn)
-                var mutableIndex = Int32(index)
-                encoder.setVertexBytes(&mutableIndex,
-                                       length: MemoryLayout<Int32>.size,
-                                       index: kAttributeGBufferVertexShaderBufferObjectIndex)
-                encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
-                                        index: kAttributeGBufferVertexShaderBufferModelUniforms)
-                for pieceIndex in mesh.pieceDescriptions {
-                    if let material = pieceIndex.material {
-                        encoder.setFragmentTextures([material.albedo,
-                                                     material.roughness,
-                                                     material.normals,
-                                                     material.metallic],
-                                                    range: texturesRange)
-                    }
-                    let indexDraw = pieceIndex.drawDescription
-                    encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
-                                                  indexCount: indexDraw.indexCount,
-                                                  indexType: indexDraw.indexType,
-                                                  indexBuffer: indexDraw.indexBuffer.buffer,
-                                                  indexBufferOffset: indexDraw.indexBuffer.offset)
-                }
+                let indexDraw = pieceIndex.drawDescription
+                encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
+                                              indexCount: indexDraw.indexCount,
+                                              indexType: indexDraw.indexType,
+                                              indexBuffer: indexDraw.indexBuffer.buffer,
+                                              indexBufferOffset: indexDraw.indexBuffer.offset)
             }
         }
     }

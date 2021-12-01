@@ -14,7 +14,6 @@ public class PNISpotLightNode: PNSpotLightNode {
     public func write(scene: PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
         let entity = PNEntity(type: .spotLight, referenceIdx: scene.spotLights.count)
         scene.entities.add(parentIdx: parentIdx, data: entity)
-        scene.skeletonReferences.append(.nil)
         let underlyingLight = SpotLight.make(color: light.color,
                                              intensity: light.intensity,
                                              coneAngle: light.coneAngle,

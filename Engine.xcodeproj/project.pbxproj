@@ -20,6 +20,8 @@
 		560A0BC227542460005AE29D /* PNIAnimatedMeshNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560A0BC127542460005AE29D /* PNIAnimatedMeshNode.swift */; };
 		560A0BC527542557005AE29D /* PNAnimatedRiggedMesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560A0BC427542557005AE29D /* PNAnimatedRiggedMesh.swift */; };
 		560A0BC72754255F005AE29D /* PNIAnimatedRiggedMesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560A0BC62754255F005AE29D /* PNIAnimatedRiggedMesh.swift */; };
+		560B5DC32757CEB200C98F1A /* PNAnimatedModelReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560B5DC22757CEB200C98F1A /* PNAnimatedModelReference.swift */; };
+		560B5DC52757CEBB00C98F1A /* PNModelReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560B5DC42757CEBB00C98F1A /* PNModelReference.swift */; };
 		560C18D0273A832A00459AEF /* MTLFunctionConstantValues+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560C18CF273A832A00459AEF /* MTLFunctionConstantValues+Extension.swift */; };
 		560C18D3273ABDE700459AEF /* PNOmniShadowJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560C18D2273ABDE700459AEF /* PNOmniShadowJob.swift */; };
 		560C18D5273AC30800459AEF /* OmniLight.metal in Sources */ = {isa = PBXBuildFile; fileRef = 560C18D4273AC30800459AEF /* OmniLight.metal */; };
@@ -214,9 +216,9 @@
 		56A3728E273862300079A93D /* MTLOrigin+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A3728D273862300079A93D /* MTLOrigin+Extension.swift */; };
 		56A8CA7527569B080040DCF9 /* PNGrainJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A8CA7427569B080040DCF9 /* PNGrainJob.swift */; };
 		56A8CA7727569BCB0040DCF9 /* Grain.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56A8CA7627569BCB0040DCF9 /* Grain.metal */; };
-		56A8CA7E275796120040DCF9 /* Shadow.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56A8CA7D275796120040DCF9 /* Shadow.metal */; };
 		56A8CA792756D40C0040DCF9 /* Fog.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56A8CA782756D40C0040DCF9 /* Fog.metal */; };
 		56A8CA7B2756D4750040DCF9 /* PNFogJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A8CA7A2756D4750040DCF9 /* PNFogJob.swift */; };
+		56A8CA7E275796120040DCF9 /* Shadow.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56A8CA7D275796120040DCF9 /* Shadow.metal */; };
 		56ADD2F4273707C500107E24 /* PNAmbientJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F3273707C500107E24 /* PNAmbientJob.swift */; };
 		56ADD2F6273707E200107E24 /* AmbientRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F5273707E200107E24 /* AmbientRenderer.metal */; };
 		56ADD2F8273709F400107E24 /* PNAmbientJob+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F7273709F400107E24 /* PNAmbientJob+Extension.swift */; };
@@ -284,6 +286,8 @@
 		560A0BC127542460005AE29D /* PNIAnimatedMeshNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIAnimatedMeshNode.swift; sourceTree = "<group>"; };
 		560A0BC427542557005AE29D /* PNAnimatedRiggedMesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnimatedRiggedMesh.swift; sourceTree = "<group>"; };
 		560A0BC62754255F005AE29D /* PNIAnimatedRiggedMesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIAnimatedRiggedMesh.swift; sourceTree = "<group>"; };
+		560B5DC22757CEB200C98F1A /* PNAnimatedModelReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnimatedModelReference.swift; sourceTree = "<group>"; };
+		560B5DC42757CEBB00C98F1A /* PNModelReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNModelReference.swift; sourceTree = "<group>"; };
 		560C18CE273A819100459AEF /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		560C18CF273A832A00459AEF /* MTLFunctionConstantValues+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLFunctionConstantValues+Extension.swift"; sourceTree = "<group>"; };
 		560C18D2273ABDE700459AEF /* PNOmniShadowJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNOmniShadowJob.swift; sourceTree = "<group>"; };
@@ -505,10 +509,10 @@
 		56A3728D273862300079A93D /* MTLOrigin+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLOrigin+Extension.swift"; sourceTree = "<group>"; };
 		56A8CA7427569B080040DCF9 /* PNGrainJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNGrainJob.swift; sourceTree = "<group>"; };
 		56A8CA7627569BCB0040DCF9 /* Grain.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Grain.metal; sourceTree = "<group>"; };
-		56A8CA7C275796090040DCF9 /* Shadow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shadow.h; sourceTree = "<group>"; };
-		56A8CA7D275796120040DCF9 /* Shadow.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shadow.metal; sourceTree = "<group>"; };
 		56A8CA782756D40C0040DCF9 /* Fog.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Fog.metal; sourceTree = "<group>"; };
 		56A8CA7A2756D4750040DCF9 /* PNFogJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNFogJob.swift; sourceTree = "<group>"; };
+		56A8CA7C275796090040DCF9 /* Shadow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shadow.h; sourceTree = "<group>"; };
+		56A8CA7D275796120040DCF9 /* Shadow.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shadow.metal; sourceTree = "<group>"; };
 		56ADD2F1273705F800107E24 /* AmbientLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AmbientLight.h; sourceTree = "<group>"; };
 		56ADD2F3273707C500107E24 /* PNAmbientJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAmbientJob.swift; sourceTree = "<group>"; };
 		56ADD2F5273707E200107E24 /* AmbientRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = AmbientRenderer.metal; sourceTree = "<group>"; };
@@ -703,6 +707,15 @@
 			path = RiggedMesh;
 			sourceTree = "<group>";
 		};
+		560B5DC12757CEA400C98F1A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				560B5DC22757CEB200C98F1A /* PNAnimatedModelReference.swift */,
+				560B5DC42757CEBB00C98F1A /* PNModelReference.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		56165BE1274405010025D58B /* Bounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -789,6 +802,7 @@
 		561666CD2719E2CC000063B1 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				560B5DC12757CEA400C98F1A /* Model */,
 				56C47BB42751BF2C0075C61B /* Light */,
 				56D7ED58274C604E00A6C25D /* Culling */,
 				5688076627483F3400C95F55 /* Material */,
@@ -1841,10 +1855,12 @@
 				560A0BBD27542244005AE29D /* PNIAnimatedCameraNode.swift in Sources */,
 				569D9242273E7EED004FDFAC /* Color.metal in Sources */,
 				56D7ED5A274C605C00A6C25D /* PNCullingController.swift in Sources */,
+				560B5DC52757CEBB00C98F1A /* PNModelReference.swift in Sources */,
 				569D9246273EA5F6004FDFAC /* PNBoundingBox.swift in Sources */,
 				56924AE8271A187400FF3E06 /* PNAnimatedFloat3+Extensions.swift in Sources */,
 				566795B8274DC51E005993D7 /* PNMeshNode.swift in Sources */,
 				561666FA2719E2CD000063B1 /* simd_float4+Extension.swift in Sources */,
+				560B5DC32757CEB200C98F1A /* PNAnimatedModelReference.swift in Sources */,
 				561667092719E2CD000063B1 /* MDLVertexDescriptor+Extension.swift in Sources */,
 				56D7ED5E274C617200A6C25D /* ModelUniforms+Alias.swift in Sources */,
 				560A0BAF275416E8005AE29D /* PNIAnimator.swift in Sources */,

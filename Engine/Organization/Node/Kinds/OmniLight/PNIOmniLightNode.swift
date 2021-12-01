@@ -14,7 +14,6 @@ public class PNIOmniLightNode: PNOmniLightNode {
     public func write(scene: PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
         let entity = PNEntity(type: .omniLight, referenceIdx: scene.omniLights.count)
         scene.entities.add(parentIdx: parentIdx, data: entity)
-        scene.skeletonReferences.append(.nil)
         let underlyingLight = OmniLight.make(color: light.color,
                                              intensity: light.intensity,
                                              index: scene.entities.count - 1)

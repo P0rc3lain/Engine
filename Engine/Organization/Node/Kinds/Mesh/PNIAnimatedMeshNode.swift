@@ -16,9 +16,11 @@ public class PNIAnimatedMeshNode: PNAnimatedMeshNode {
     }
     public func write(scene: PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
         let entity = PNEntity(type: .mesh,
-                              referenceIdx: scene.meshes.count)
+                              referenceIdx: scene.models.count)
         scene.entities.add(parentIdx: parentIdx, data: entity)
-        scene.skeletonReferences.append(.nil)
+        let modelReference = PNModelReference(mesh: scene.meshes.count,
+                                              idx: scene.entities.count - 1)
+        scene.models.append(modelReference)
         scene.meshes.append(mesh)
         return scene.entities.count - 1
     }
