@@ -62,7 +62,13 @@ extension MTLPixelFormat {
     static var environmentRendererColor: MTLPixelFormat {
         lightenSceneColor
     }
+    static var fogColor: MTLPixelFormat {
+        lightenSceneColor
+    }
     static var environmentRendererDepthStencil: MTLPixelFormat {
+        lightenSceneDepthStencil
+    }
+    static var fogDepthStencil: MTLPixelFormat {
         lightenSceneDepthStencil
     }
     static var postprocessorRendererColor: MTLPixelFormat {

@@ -8,6 +8,7 @@ import Metal
 struct PNCombineStage: PNStage {
     var io: PNGPUIO
     private var environmentJob: PNRenderJob
+    private var fogJob: PNRenderJob
     private var omniJob: PNRenderJob
     private var ambientJob: PNRenderJob
     private var spotJob: PNRenderJob
@@ -38,7 +39,10 @@ struct PNCombineStage: PNStage {
               let spotJob = PNSpotJob.make(device: device,
                                            inputTextures: gBufferOutput.color,
                                            shadowMap: spotLightShadows,
-                                           drawableSize: renderingSize) else {
+                                           drawableSize: renderingSize),
+              let fogJob = PNFogJob.make(device: device,
+                                         drawableSize: renderingSize,
+                                         prTexture: gBufferOutput.color[2]) else {
             return nil
         }
         renderPassDescriptor = .lightenScene(device: device,
@@ -52,6 +56,7 @@ struct PNCombineStage: PNStage {
         self.environmentJob = environmentJob
         self.omniJob = omniJob
         self.spotJob = spotJob
+        self.fogJob = fogJob
         self.directionalJob = directionalJob
         self.io = PNGPUIO(input: PNGPUSupply(color: gBufferOutput.color + [ssaoTexture],
                                              stencil: gBufferOutput.stencil),
@@ -67,6 +72,7 @@ struct PNCombineStage: PNStage {
         spotJob.draw(encoder: encoder, supply: supply)
         directionalJob.draw(encoder: encoder, supply: supply)
         environmentJob.draw(encoder: encoder, supply: supply)
+        fogJob.draw(encoder: encoder, supply: supply)
         encoder.endEncoding()
         commandBuffer.popDebugGroup()
     }

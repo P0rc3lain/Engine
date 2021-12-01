@@ -15,6 +15,7 @@ struct PNITranscriber: PNTranscriber {
         sceneDescription.boundingBoxes = boundingBoxes(scene: sceneDescription)
         write(lights: scene.directionalLights, scene: sceneDescription)
         updatePalettes(scene: sceneDescription)
+        sceneDescription.skyMap = scene.environmentMap
         return sceneDescription
     }
     private func write(lights: [PNDirectionalLight], scene: PNSceneDescription) {

@@ -3,10 +3,12 @@
 //
 
 import simd
+import Metal
 
 public struct PNScene {
     public let rootNode: PNNode<PNSceneNode>
     public var directionalLights: [PNDirectionalLight]
+    public var environmentMap: MTLTexture?
     public init(rootNode: PNNode<PNSceneNode>, directionalLights: [PNDirectionalLight]) {
         self.rootNode = rootNode
         self.directionalLights = directionalLights

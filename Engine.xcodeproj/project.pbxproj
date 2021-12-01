@@ -215,6 +215,8 @@
 		56A8CA7527569B080040DCF9 /* PNGrainJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A8CA7427569B080040DCF9 /* PNGrainJob.swift */; };
 		56A8CA7727569BCB0040DCF9 /* Grain.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56A8CA7627569BCB0040DCF9 /* Grain.metal */; };
 		56A8CA7E275796120040DCF9 /* Shadow.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56A8CA7D275796120040DCF9 /* Shadow.metal */; };
+		56A8CA792756D40C0040DCF9 /* Fog.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56A8CA782756D40C0040DCF9 /* Fog.metal */; };
+		56A8CA7B2756D4750040DCF9 /* PNFogJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A8CA7A2756D4750040DCF9 /* PNFogJob.swift */; };
 		56ADD2F4273707C500107E24 /* PNAmbientJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F3273707C500107E24 /* PNAmbientJob.swift */; };
 		56ADD2F6273707E200107E24 /* AmbientRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F5273707E200107E24 /* AmbientRenderer.metal */; };
 		56ADD2F8273709F400107E24 /* PNAmbientJob+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F7273709F400107E24 /* PNAmbientJob+Extension.swift */; };
@@ -505,6 +507,8 @@
 		56A8CA7627569BCB0040DCF9 /* Grain.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Grain.metal; sourceTree = "<group>"; };
 		56A8CA7C275796090040DCF9 /* Shadow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shadow.h; sourceTree = "<group>"; };
 		56A8CA7D275796120040DCF9 /* Shadow.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shadow.metal; sourceTree = "<group>"; };
+		56A8CA782756D40C0040DCF9 /* Fog.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Fog.metal; sourceTree = "<group>"; };
+		56A8CA7A2756D4750040DCF9 /* PNFogJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNFogJob.swift; sourceTree = "<group>"; };
 		56ADD2F1273705F800107E24 /* AmbientLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AmbientLight.h; sourceTree = "<group>"; };
 		56ADD2F3273707C500107E24 /* PNAmbientJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAmbientJob.swift; sourceTree = "<group>"; };
 		56ADD2F5273707E200107E24 /* AmbientRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = AmbientRenderer.metal; sourceTree = "<group>"; };
@@ -806,6 +810,7 @@
 				561666D92719E2CC000063B1 /* Common */,
 				561666DF2719E2CC000063B1 /* EnvironmentMapper.metal */,
 				566020E127343280000F4CA7 /* SSAO.metal */,
+				56A8CA782756D40C0040DCF9 /* Fog.metal */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -1198,6 +1203,7 @@
 				561666EC2719E2CD000063B1 /* PNEnvironmentJob.swift */,
 				561666ED2719E2CD000063B1 /* DeferredRendering */,
 				56C47B9F27511EDB0075C61B /* PNRenderJob.swift */,
+				56A8CA7A2756D4750040DCF9 /* PNFogJob.swift */,
 			);
 			path = Jobs;
 			sourceTree = "<group>";
@@ -1786,6 +1792,7 @@
 				561667432719E2CD000063B1 /* PNCamera.swift in Sources */,
 				5616670C2719E2CD000063B1 /* MTLDevice+Extension.swift in Sources */,
 				563BFC9A27294AF70003EDB7 /* PNMesh+Extension.swift in Sources */,
+				56A8CA792756D40C0040DCF9 /* Fog.metal in Sources */,
 				561667362719E2CD000063B1 /* PNFlatTree+Alias.swift in Sources */,
 				5688074E274801EC00C95F55 /* PNStaticBuffer.swift in Sources */,
 				561667482719E2CD000063B1 /* Transformation.metal in Sources */,
@@ -1873,6 +1880,7 @@
 				563C9C24273882F60014CFF3 /* SpotLight.metal in Sources */,
 				5616674B2719E2CD000063B1 /* Vignette.metal in Sources */,
 				566795E9274FEE2B005993D7 /* PNWorkloadManager.swift in Sources */,
+				56A8CA7B2756D4750040DCF9 /* PNFogJob.swift in Sources */,
 				566795D1274ECD7D005993D7 /* PNIAmbientLightNode.swift in Sources */,
 				566020E42734408C000F4CA7 /* PNSSAOJob+Extension.swift in Sources */,
 				566795DF274FCB3E005993D7 /* PNTransformCalculator.swift in Sources */,

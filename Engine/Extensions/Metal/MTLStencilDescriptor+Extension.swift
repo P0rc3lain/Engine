@@ -8,9 +8,19 @@ extension MTLStencilDescriptor {
     static var environmentRenderer: MTLStencilDescriptor {
         let stencil = MTLStencilDescriptor()
         stencil.stencilCompareFunction = .equal
-        stencil.stencilFailureOperation = .replace
+        stencil.stencilFailureOperation = .keep
         stencil.depthFailureOperation = .keep
-        stencil.depthStencilPassOperation = .invert
+        stencil.depthStencilPassOperation = .keep
+        return stencil
+    }
+    static var fogJob: MTLStencilDescriptor {
+        let stencil = MTLStencilDescriptor()
+        stencil.stencilCompareFunction = .equal
+        stencil.readMask = 0x1
+        stencil.writeMask = 0x1
+        stencil.stencilFailureOperation = .keep
+        stencil.depthFailureOperation = .keep
+        stencil.depthStencilPassOperation = .replace
         return stencil
     }
     static var lightRenderer: MTLStencilDescriptor {

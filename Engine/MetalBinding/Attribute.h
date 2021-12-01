@@ -178,6 +178,17 @@ enum AttributeEnvironmentFragmentShaderTextureIndex {
     kAttributeEnvironmentFragmentShaderTextureCubeMap = 0
 };
 
+enum AttributeFogVertexShaderBufferIndex {
+    kAttributeFogVertexShaderBufferStageIn = 0,
+    kAttributeFogVertexShaderBufferModelUniforms,
+    kAttributeFogVertexShaderBufferCamera
+};
+
+enum AttributeFogFragmentShaderTextureIndex {
+    kAttributeFogFragmentShaderTextureCubeMap = 0,
+    kAttributeFogFragmentShaderTexturePR
+};
+
 enum AttributeVignetteVertexShaderBufferIndex {
     kAttributeVignetteVertexShaderBufferStageIn = 0
 };
