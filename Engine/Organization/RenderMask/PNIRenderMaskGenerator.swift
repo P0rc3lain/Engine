@@ -29,9 +29,10 @@ public struct PNIRenderMaskGenerator: PNRenderMaskGenerator {
         }
     }
     private func generateCameraRenderMask(scene: PNSceneDescription) -> [[Bool]] {
-        scene.cameras.indices.map { index in
-            let cameraTransform = scene.uniforms[index].modelMatrixInverse
-            let cameraBoundingBox = interactor.multiply(cameraTransform, scene.cameras[index].boundingBox)
+        scene.cameraUniforms.indices.map { cameraUniformIndex in
+            let cameraUniform = scene.cameraUniforms[cameraUniformIndex]
+            let cameraTransform = scene.uniforms[Int(cameraUniform.index)].modelMatrixInverse
+            let cameraBoundingBox = interactor.multiply(cameraTransform, scene.cameras[cameraUniformIndex].boundingBox)
             let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
             return cullingController.cullingMask(scene: scene,
                                                  boundingBox: cameraAlignedBoundingBox)
