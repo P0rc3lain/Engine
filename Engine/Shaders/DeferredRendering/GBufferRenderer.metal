@@ -71,8 +71,12 @@ fragment GBufferData fragmentGBuffer(RasterizerData in [[stage_in]],
     float3 normalEncoded = normals.sample(textureSampler, in.uv).xyz;
     float3 normalDecoded = (normalEncoded * 2) - 1;
     float3 normalWorldSpace = TBN * normalDecoded;
+    float4 color = albedo.sample(textureSampler, in.uv);
+    if (color.a == 0.0f) {
+        discard_fragment();
+    }
     return GBufferData {
-        float4(albedo.sample(textureSampler, in.uv).xyz, roughness.sample(textureSampler, in.uv).x),
+        float4(color.xyz, roughness.sample(textureSampler, in.uv).x),
         float4(normalWorldSpace, metallic.sample(textureSampler, in.uv).x),
         float4(in.cameraSpacePosition, 0.04)
     };
