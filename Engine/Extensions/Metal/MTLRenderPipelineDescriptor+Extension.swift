@@ -17,6 +17,16 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexDescriptor = .vertexPUV
         return descriptor
     }
+    static func grain(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
+        let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.label = "Grain"
+        descriptor.vertexFunction = library.makeFunction(name: "vertexGrain")
+        descriptor.fragmentFunction = library.makeFunction(name: "fragmentGrain")
+        descriptor.colorAttachments[0].pixelFormat = .grainColor
+        descriptor.vertexBuffers[0].mutability = .immutable
+        descriptor.vertexDescriptor = .vertexPUV
+        return descriptor
+    }
     static func environmentRenderer(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.label = "Environment"

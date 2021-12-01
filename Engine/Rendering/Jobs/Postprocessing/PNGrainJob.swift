@@ -6,7 +6,7 @@ import Metal
 import MetalBinding
 import simd
 
-struct PNVignetteJob: PNRenderJob {
+struct PNGrainJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let inputTexture: MTLTexture
     private let viewPort: MTLViewport
@@ -22,15 +22,32 @@ struct PNVignetteJob: PNRenderJob {
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         encoder.setFragmentTexture(inputTexture,
-                                   index: kAttributePostprocessingFragmentShaderTexture)
+                                   index: kAttributeGrainFragmentShaderTexture)
         encoder.setViewport(viewPort)
+        var time = Float(Date().timeIntervalSince1970.truncatingRemainder(dividingBy: 20))
+        encoder.setVertexBytes(&time,
+                               length: MemoryLayout<Float>.size,
+                               index: kAttributeGrainVertexShaderBufferTime)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
-                                index: kAttributePostprocessingVertexShaderBufferStageIn)
+                                index: kAttributeGrainVertexShaderBufferStageIn)
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
                                       indexType: plane.pieceDescriptions[0].drawDescription.indexType,
                                       indexBuffer: plane.pieceDescriptions[0].drawDescription.indexBuffer.buffer,
                                       indexBufferOffset: plane.pieceDescriptions[0].drawDescription.indexBuffer.offset)
+    }
+    static func make(device: MTLDevice,
+                     inputTexture: MTLTexture,
+                     canvasSize: CGSize) -> PNGrainJob? {
+        guard let library = device.makePorcelainLibrary(),
+              let pipelineState = device.makeRenderPipelineStateGrain(library: library),
+              let plane = PNMesh.screenSpacePlane(device: device) else {
+            return nil
+        }
+        return PNGrainJob(pipelineState: pipelineState,
+                          inputTexture: inputTexture,
+                          plane: plane,
+                          canvasSize: canvasSize)
     }
 }

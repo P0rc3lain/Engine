@@ -36,6 +36,9 @@ extension MTLDevice {
     func makeRenderPipelineStateVignette(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .vignette(library: library))
     }
+    func makeRenderPipelineStateGrain(library: MTLLibrary) -> MTLRenderPipelineState? {
+        try? makeRenderPipelineState(descriptor: .grain(library: library))
+    }
     func makeRenderPipelineStateSpotLightShadow(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .spotLightShadowRenderer(library: library))
     }

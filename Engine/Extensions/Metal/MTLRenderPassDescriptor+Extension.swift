@@ -98,11 +98,10 @@ extension MTLRenderPassDescriptor {
         descriptor.colorAttachments[0].storeAction = .store
         return descriptor
     }
-    static func postprocess(device: MTLDevice, size: CGSize) -> MTLRenderPassDescriptor {
+    static func postprocess(device: MTLDevice, texture: MTLTexture) -> MTLRenderPassDescriptor {
         let descriptor = MTLRenderPassDescriptor()
-        descriptor.colorAttachments[0].loadAction = .clear
-        descriptor.colorAttachments[0].texture = device.makeTextureBloomMergeColor(size: size)
-        descriptor.colorAttachments[0].clearColor = MTLClearColor()
+        descriptor.colorAttachments[0].loadAction = .load
+        descriptor.colorAttachments[0].texture = texture
         descriptor.colorAttachments[0].storeAction = .store
         return descriptor
     }
