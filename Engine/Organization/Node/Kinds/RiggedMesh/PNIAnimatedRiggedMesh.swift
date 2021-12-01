@@ -20,12 +20,15 @@ public class PNIAnimatedRiggedMesh: PNAnimatedRiggedMesh {
         self.animation = animation
     }
     public func write(scene: PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
-        let entity = PNEntity(type: .mesh,
-                              referenceIdx: scene.meshes.count)
+        let entity = PNEntity(type: .animatedMesh,
+                              referenceIdx: scene.animatedModels.count)
         scene.entities.add(parentIdx: parentIdx, data: entity)
+        let modelReference = PNAnimatedModelReference(skeleton: scene.skeletons.count,
+                                                      mesh: scene.meshes.count,
+                                                      idx: scene.entities.count - 1)
+        scene.animatedModels.append(modelReference)
         scene.meshes.append(mesh)
         scene.skeletons.append(skeleton)
-        scene.skeletonReferences.append(scene.skeletons.count - 1)
         return scene.entities.count - 1
     }
 }

@@ -2,8 +2,8 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import simd
 import Metal
+import simd
 
 public struct PNScene {
     public let rootNode: PNNode<PNSceneNode>

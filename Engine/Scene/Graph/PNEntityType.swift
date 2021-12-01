@@ -8,5 +8,6 @@ public enum PNEntityType {
     case spotLight
     case ambientLight
     case mesh
+    case animatedMesh
     case camera
 }
