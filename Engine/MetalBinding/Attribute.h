@@ -178,12 +178,21 @@ enum AttributeEnvironmentFragmentShaderTextureIndex {
     kAttributeEnvironmentFragmentShaderTextureCubeMap = 0
 };
 
-enum AttributePostprocessingVertexShaderBufferIndex {
-    kAttributePostprocessingVertexShaderBufferStageIn = 0
+enum AttributeVignetteVertexShaderBufferIndex {
+    kAttributeVignetteVertexShaderBufferStageIn = 0
 };
 
-enum AttributePostprocessingFragmentShaderTextureIndex {
-    kAttributePostprocessingFragmentShaderTexture = 0
+enum AttributeVignetteFragmentShaderTextureIndex {
+    kAttributeVignetteFragmentShaderTexture = 0
+};
+
+enum AttributeGrainVertexShaderBufferIndex {
+    kAttributeGrainVertexShaderBufferStageIn = 0,
+    kAttributeGrainVertexShaderBufferTime
+};
+
+enum AttributeGrainFragmentShaderTextureIndex {
+    kAttributeGrainFragmentShaderTexture = 0
 };
 
 #endif /* ATTRIBUTE_H */

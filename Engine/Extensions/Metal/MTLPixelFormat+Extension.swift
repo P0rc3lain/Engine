@@ -71,4 +71,7 @@ extension MTLPixelFormat {
     static var vignetteColor: MTLPixelFormat {
         .postprocessorRendererColor
     }
+    static var grainColor: MTLPixelFormat {
+        .postprocessorRendererColor
+    }
 }
