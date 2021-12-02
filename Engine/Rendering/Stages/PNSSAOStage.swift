@@ -20,7 +20,7 @@ struct PNSSAOStage: PNStage {
                                                 prTexture: prTexture,
                                                 nmTexture: nmTexture,
                                                 drawableSize: renderingSize,
-                                                maxNoiseCount: 16,
+                                                maxNoiseCount: 64,
                                                 maxSamplesCount: 64),
               let gaussTexture = device.makeTexture(descriptor: .ssaoColor(size: renderingSize)) else {
             return nil

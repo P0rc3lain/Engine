@@ -71,4 +71,29 @@ struct PNSSAOJob: PNRenderJob {
                                       indexBuffer: plane.pieceDescriptions[0].drawDescription.indexBuffer.buffer,
                                       indexBufferOffset: plane.pieceDescriptions[0].drawDescription.indexBuffer.offset)
     }
+    static func make(device: MTLDevice,
+                     prTexture: MTLTexture,
+                     nmTexture: MTLTexture,
+                     drawableSize: CGSize,
+                     maxNoiseCount: Int,
+                     maxSamplesCount: Int) -> PNSSAOJob? {
+        guard let library = device.makePorcelainLibrary(),
+              let pipelineState = device.makeRenderPipelineStateSsao(library: library),
+              let kernelBuffer = PNIStaticBuffer<simd_float3>(device: device, capacity: 64),
+              let noiseBuffer = PNIStaticBuffer<simd_float3>(device: device, capacity: 64),
+              let uniforms = PNIStaticBuffer<SSAOUniforms>(device: device, capacity: 1)
+        else {
+            return nil
+        }
+        return PNSSAOJob(pipelineState: pipelineState,
+                         prTexture: prTexture,
+                         nmTexture: nmTexture,
+                         device: device,
+                         drawableSize: drawableSize,
+                         kernelBuffer: PNAnyStaticBuffer(kernelBuffer),
+                         noiseBuffer: PNAnyStaticBuffer(noiseBuffer),
+                         uniforms: PNAnyStaticBuffer(uniforms),
+                         maxNoiseCount: maxNoiseCount,
+                         maxSamplesCount: maxSamplesCount)
+    }
 }

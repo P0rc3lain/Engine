@@ -35,14 +35,13 @@ fragment float4 fragmentSSAO(RasterizedData in [[stage_in]],
     constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
     float3 worldPosition = pr.sample(textureSampler, in.texcoord).xyz;
     float3 normal = normalize(nm.sample(textureSampler, in.texcoord)).xyz;
-    int2 accessCoordinates = int2(in.texcoord * 100);
-    float3 randomVector = noise[(accessCoordinates.x + accessCoordinates.y) % renderingUniforms.noiseCount];
-    float3 tangent   = normalize(randomVector - normal * dot(randomVector, normal));
+    float side = sqrt(float(renderingUniforms.noiseCount));
+    float3 randomVector = noise[int(side * in.texcoord.x + side * (side - 1) * in.texcoord.y)];
+    float3 tangent = normalize(randomVector - normal * dot(randomVector, normal));
     float3 bitangent = normalize(cross(normal, tangent));
     float3x3 TBN = float3x3(tangent, bitangent, normal);
     float occlusion = 0.0;
-    for(int i = 0; i < renderingUniforms.sampleCount; ++i)
-    {
+    for(int i = 0; i < renderingUniforms.sampleCount; ++i) {
         float3 neighbourWorldPosition = worldPosition + (TBN * samples[i]) * renderingUniforms.radius;
         float4 neighbourClipPosition = camera.projectionMatrix * float4(neighbourWorldPosition, 1);
         neighbourClipPosition /= neighbourClipPosition.w;
