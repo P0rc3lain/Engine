@@ -4,7 +4,7 @@
 
 import MetalBinding
 
-public class PNIOmniLightNode: PNOmniLightNode {
+public final class PNIOmniLightNode: PNOmniLightNode {
     public var light: PNOmniLight
     public var transform: PNTransform
     public init(light: PNOmniLight, transform: PNTransform) {

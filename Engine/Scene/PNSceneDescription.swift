@@ -5,7 +5,7 @@
 import Metal
 import MetalBinding
 
-public class PNSceneDescription {
+public final class PNSceneDescription {
     // MARK: - Capacity A
     public var entities = PNEntityTree()
     public var uniforms = [WModelUniforms]()

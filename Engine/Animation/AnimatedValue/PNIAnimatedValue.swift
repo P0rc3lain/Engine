@@ -4,7 +4,7 @@
 
 import Foundation
 
-public class PNIAnimatedValue<T>: PNAnimatedValue {
+public final class PNIAnimatedValue<T>: PNAnimatedValue {
     public var keyFrames: [T]
     public let times: [TimeInterval]
     public let maximumTime: TimeInterval

@@ -4,7 +4,7 @@
 
 import MetalBinding
 
-public class PNIAnimatedCameraNode: PNAnimatedCameraNode {
+public final class PNIAnimatedCameraNode: PNAnimatedCameraNode {
     public var camera: PNCamera
     public var animator: PNAnimator
     public var animation: PNAnimatedCoordinateSpace

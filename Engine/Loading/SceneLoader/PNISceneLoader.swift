@@ -5,7 +5,7 @@
 import Metal
 import ModelIO
 
-public class PNISceneLoader: PNSceneLoader {
+public final class PNISceneLoader: PNSceneLoader {
     private let assetLoader: PNAssetLoader
     private let translator: PNSceneTranslator
     public init(device: MTLDevice, assetLoader: PNAssetLoader, translator: PNSceneTranslator) {

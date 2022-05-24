@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-public class PNIRiggedMesh: PNRiggedMesh {
+public final class PNIRiggedMesh: PNRiggedMesh {
     public var mesh: PNMesh
     public var skeleton: PNSkeleton
     public var transform: PNTransform

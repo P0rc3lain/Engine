@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-class PNIBufferedValue<T>: PNBufferedValue {
+final class PNIBufferedValue<T>: PNBufferedValue {
     typealias DataType = T
     private var front: T
     private var back: T

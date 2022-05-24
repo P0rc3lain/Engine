@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-class PNAnyBufferedValue<T>: PNBufferedValue {
+final class PNAnyBufferedValue<T>: PNBufferedValue {
     typealias DataType = T
     var pull: T {
         pullProxy()

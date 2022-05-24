@@ -4,7 +4,7 @@
 
 import Metal
 
-public class PNIDynamicBuffer<T>: PNDynamicBuffer {
+final public class PNIDynamicBuffer<T>: PNDynamicBuffer {
     private let device: MTLDevice
     private(set) var buffer: MTLBuffer
     private(set) var count: Int

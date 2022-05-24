@@ -4,7 +4,7 @@
 
 import Metal
 
-class PNIStaticBuffer<T>: PNStaticBuffer {
+final class PNIStaticBuffer<T>: PNStaticBuffer {
     typealias DataType = T
     private(set) var buffer: MTLBuffer
     init?(device: MTLDevice, capacity: Int) {

@@ -4,7 +4,7 @@
 
 import MetalBinding
 
-public class PNIAmbientLightNode: PNAmbientLightNode {
+public final class PNIAmbientLightNode: PNAmbientLightNode {
     public var light: PNAmbientLight
     public var transform: PNTransform
     public init(light: PNAmbientLight, transform: PNTransform) {

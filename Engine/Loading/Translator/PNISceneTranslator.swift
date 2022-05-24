@@ -6,7 +6,7 @@ import Metal
 import MetalBinding
 import ModelIO
 
-public class PNISceneTranslator: PNSceneTranslator {
+public final class PNISceneTranslator: PNSceneTranslator {
     private let device: MTLDevice
     private var materialCache = [String: PNMaterial]()
     public init(device: MTLDevice) {

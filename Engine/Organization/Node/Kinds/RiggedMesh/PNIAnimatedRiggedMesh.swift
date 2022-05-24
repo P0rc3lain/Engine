@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-public class PNIAnimatedRiggedMesh: PNAnimatedRiggedMesh {
+public final class PNIAnimatedRiggedMesh: PNAnimatedRiggedMesh {
     public var mesh: PNMesh
     public var skeleton: PNSkeleton
     public var animator: PNAnimator

@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-public class PNIMeshNode: PNMeshNode {
+public final class PNIMeshNode: PNMeshNode {
     public var mesh: PNMesh
     public var transform: PNTransform
     public init(mesh: PNMesh, transform: PNTransform) {

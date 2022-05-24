@@ -4,7 +4,7 @@
 
 import MetalBinding
 
-public class PNICameraNode: PNCameraNode {
+public final class PNICameraNode: PNCameraNode {
     public var camera: PNCamera
     public var transform: PNTransform
     public init(camera: PNCamera, transform: PNTransform) {

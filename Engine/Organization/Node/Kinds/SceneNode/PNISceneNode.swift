@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-public class PNISceneNode: PNSceneNode {
+public final class PNISceneNode: PNSceneNode {
     public var transform: PNTransform
     public init(transform: PNTransform) {
         self.transform = transform

@@ -4,7 +4,7 @@
 
 import MetalBinding
 
-public class PNISpotLightNode: PNSpotLightNode {
+public final class PNISpotLightNode: PNSpotLightNode {
     public var light: PNSpotLight
     public var transform: PNTransform
     public init(light: PNSpotLight, transform: PNTransform) {

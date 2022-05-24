@@ -5,7 +5,10 @@
 import Metal
 
 extension PNDirectionalJob {
-    static func make(device: MTLDevice, inputTextures: [MTLTexture], shadowMap: MTLTexture, drawableSize: CGSize) -> PNDirectionalJob? {
+    static func make(device: MTLDevice,
+                     inputTextures: [MTLTexture],
+                     shadowMap: MTLTexture,
+                     drawableSize: CGSize) -> PNDirectionalJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRenderPipelineStateDirectionalRenderer(library: library),
               let depthStencilState = device.makeDepthStencilStateDirectionalPass() else {

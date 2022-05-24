@@ -18,8 +18,7 @@ extension PNMesh {
                                         indexCount: indices.length,
                                         indexType: .uint16,
                                         primitiveType: .triangle)
-        let pieceDescription = PNPieceDescription(material: nil,
-                                                  drawDescription: drawDescription)
+        let pieceDescription = PNPieceDescription(drawDescription: drawDescription)
         let boundingBox = PNIBoundingBoxInteractor.default.from(bound: PNBound(min: [-0.5, -0.5, -0.5],
                                                                                max: [0.5, 0.5, 0.5]))
         return PNMesh(boundingBox: boundingBox,
@@ -77,8 +76,7 @@ extension PNMesh {
                                         indexCount: indicesBuffer.length / MemoryLayout<UInt16>.stride,
                                         indexType: .uint16,
                                         primitiveType: .triangle)
-        let pieceDescription = PNPieceDescription(material: nil,
-                                                  drawDescription: drawDescription)
+        let pieceDescription = PNPieceDescription(drawDescription: drawDescription)
         let interactor = PNIBoundingBoxInteractor.default
         return PNMesh(boundingBox: interactor.from(bound: PNBound(min: [-1, -1, 0],
                                                                   max: [1, 1, 0])),

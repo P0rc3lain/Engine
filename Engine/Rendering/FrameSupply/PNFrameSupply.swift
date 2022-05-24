@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-public class PNFrameSupply {
+public final class PNFrameSupply {
     let scene: PNSceneDescription
     let bufferStore: PNBufferStore
     let mask: PNRenderMask

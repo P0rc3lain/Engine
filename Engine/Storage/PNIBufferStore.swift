@@ -6,7 +6,7 @@ import Metal
 import MetalBinding
 import simd
 
-public class PNIBufferStore: PNBufferStore {
+public final class PNIBufferStore: PNBufferStore {
     public var omniLights: PNAnyDynamicBuffer<OmniLight>
     public var ambientLights: PNAnyDynamicBuffer<AmbientLight>
     public var directionalLights: PNAnyDynamicBuffer<DirectionalLight>

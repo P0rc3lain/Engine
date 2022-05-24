@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-public class PNIAnimatedMeshNode: PNAnimatedMeshNode {
+public final class PNIAnimatedMeshNode: PNAnimatedMeshNode {
     public var mesh: PNMesh
     public var animator: PNAnimator
     public var animation: PNAnimatedCoordinateSpace

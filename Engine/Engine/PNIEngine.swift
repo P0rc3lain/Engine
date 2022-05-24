@@ -4,7 +4,7 @@
 
 import MetalKit
 
-public class PNIEngine: PNEngine {
+public final class PNIEngine: PNEngine {
     private let view: MTKView
     public var scene: PNScene
     private let renderMaskGenerator: PNRenderMaskGenerator
