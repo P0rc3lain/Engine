@@ -10,6 +10,6 @@ struct PNITransformCalculator: PNTransformCalculator {
         self.interpolator = interpolator
     }
     func transformation(node: PNSceneNode, parent: PNIndex, scene: PNSceneDescription) -> PNM2WTransform {
-        parent != .nil ? (scene.uniforms[parent].modelMatrix * node.transform) : node.transform
+        parent != .nil ? scene.uniforms[parent].modelMatrix * node.transform : node.transform
     }
 }
