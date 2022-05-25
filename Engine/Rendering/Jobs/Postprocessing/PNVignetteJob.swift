@@ -33,4 +33,17 @@ struct PNVignetteJob: PNRenderJob {
                                       indexBuffer: plane.pieceDescriptions[0].drawDescription.indexBuffer.buffer,
                                       indexBufferOffset: plane.pieceDescriptions[0].drawDescription.indexBuffer.offset)
     }
+    static func make(device: MTLDevice,
+                     inputTexture: MTLTexture,
+                     canvasSize: CGSize) -> PNVignetteJob? {
+        guard let library = device.makePorcelainLibrary(),
+              let pipelineState = device.makeRenderPipelineStateVignette(library: library),
+              let plane = PNMesh.screenSpacePlane(device: device) else {
+            return nil
+        }
+        return PNVignetteJob(pipelineState: pipelineState,
+                             inputTexture: inputTexture,
+                             plane: plane,
+                             canvasSize: canvasSize)
+    }
 }

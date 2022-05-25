@@ -60,4 +60,20 @@ struct PNDirectionalJob: PNRenderJob {
                                       indexBufferOffset: plane.pieceDescriptions[0].drawDescription.indexBuffer.offset,
                                       instanceCount: scene.directionalLights.count)
     }
+    static func make(device: MTLDevice,
+                     inputTextures: [MTLTexture],
+                     shadowMap: MTLTexture,
+                     drawableSize: CGSize) -> PNDirectionalJob? {
+        guard let library = device.makePorcelainLibrary(),
+              let pipelineState = device.makeRenderPipelineStateDirectionalRenderer(library: library),
+              let depthStencilState = device.makeDepthStencilStateDirectionalPass() else {
+            return nil
+        }
+        return PNDirectionalJob(pipelineState: pipelineState,
+                                inputTextures: inputTextures,
+                                shadowMap: shadowMap,
+                                device: device,
+                                depthStencilState: depthStencilState,
+                                drawableSize: drawableSize)
+    }
 }

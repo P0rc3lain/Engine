@@ -57,4 +57,20 @@ struct PNAmbientJob: PNRenderJob {
                                       indexBufferOffset: plane.pieceDescriptions[0].drawDescription.indexBuffer.offset,
                                       instanceCount: scene.ambientLights.count)
     }
+    static func make(device: MTLDevice,
+                     inputTextures: [MTLTexture],
+                     ssaoTexture: MTLTexture,
+                     drawableSize: CGSize) -> PNAmbientJob? {
+        guard let library = device.makePorcelainLibrary(),
+              let pipelineState = device.makeRenderPipelineStateAmbientRenderer(library: library),
+              let depthStencilState = device.makeDepthStencilStateAmbientPass() else {
+            return nil
+        }
+        return PNAmbientJob(pipelineState: pipelineState,
+                            inputTextures: inputTextures,
+                            ssaoTexture: ssaoTexture,
+                            device: device,
+                            depthStencilState: depthStencilState,
+                            drawableSize: drawableSize)
+    }
 }
