@@ -149,8 +149,8 @@ public final class PNISceneTranslator: PNSceneTranslator {
                     return
                 }
                 materialCache[material.name] = loadedMaterial
-                let description = PNPieceDescription(material: loadedMaterial,
-                                                     drawDescription: submesh)
+                let description = PNPieceDescription(drawDescription: submesh,
+                                                     material: loadedMaterial)
                 pieceDescriptions.append(description)
             }
 

@@ -3,11 +3,11 @@
 //
 
 public struct PNPieceDescription {
-    public let material: PNMaterial?
     public let drawDescription: PNSubmesh
-    public init(material: PNMaterial? = nil,
-                drawDescription: PNSubmesh) {
-        self.material = material
+    public let material: PNMaterial?
+    public init(drawDescription: PNSubmesh,
+                material: PNMaterial? = nil) {
         self.drawDescription = drawDescription
+        self.material = material
     }
 }
