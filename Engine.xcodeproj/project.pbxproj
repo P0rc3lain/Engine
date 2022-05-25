@@ -59,7 +59,6 @@
 		561667232719E2CD000063B1 /* MTLPixelFormat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666AD2719E2CC000063B1 /* MTLPixelFormat+Extension.swift */; };
 		561667252719E2CD000063B1 /* PNGBufferJob+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666AF2719E2CC000063B1 /* PNGBufferJob+Extension.swift */; };
 		561667272719E2CD000063B1 /* MTLRenderPassDescriptor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666B12719E2CC000063B1 /* MTLRenderPassDescriptor+Extension.swift */; };
-		561667282719E2CD000063B1 /* PNEnvironmentJob+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666B22719E2CC000063B1 /* PNEnvironmentJob+Extension.swift */; };
 		5616672D2719E2CD000063B1 /* PNFlatTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666B92719E2CC000063B1 /* PNFlatTree.swift */; };
 		5616672E2719E2CD000063B1 /* PNIDynamicBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666BA2719E2CC000063B1 /* PNIDynamicBuffer.swift */; };
 		561667362719E2CD000063B1 /* PNFlatTree+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666C42719E2CC000063B1 /* PNFlatTree+Alias.swift */; };
@@ -106,7 +105,6 @@
 		5620C82D27551AFC0098D6FA /* simd_float3+Extension+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C82C27551AFC0098D6FA /* simd_float3+Extension+Tests.swift */; };
 		5620C82F27551BE00098D6FA /* simd_float3x3+Extension+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C82E27551BE00098D6FA /* simd_float3x3+Extension+Tests.swift */; };
 		5620C832275528030098D6FA /* PNDirectionalShadowJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C831275528030098D6FA /* PNDirectionalShadowJob.swift */; };
-		5620C834275529490098D6FA /* PNDirectionalShadowJob+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C833275529490098D6FA /* PNDirectionalShadowJob+Extension.swift */; };
 		5620C83627552AF30098D6FA /* DirectionalLight.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5620C83527552AF30098D6FA /* DirectionalLight.metal */; };
 		56270167272B54EB00071620 /* PNAnimatedTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56270166272B54EB00071620 /* PNAnimatedTransform.swift */; };
 		56270169272B556500071620 /* PNAnimatedTransform+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56270168272B556500071620 /* PNAnimatedTransform+Alias.swift */; };
@@ -129,7 +127,6 @@
 		563C9C1F27387F6B0014CFF3 /* PNShadowStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563C9C1E27387F6B0014CFF3 /* PNShadowStage.swift */; };
 		563C9C2127387F8C0014CFF3 /* PNSpotShadowJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563C9C2027387F8C0014CFF3 /* PNSpotShadowJob.swift */; };
 		563C9C24273882F60014CFF3 /* SpotLight.metal in Sources */ = {isa = PBXBuildFile; fileRef = 563C9C23273882F60014CFF3 /* SpotLight.metal */; };
-		563C9C26273884700014CFF3 /* PNSpotShadowJob+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563C9C25273884700014CFF3 /* PNSpotShadowJob+Extension.swift */; };
 		563D0A2A2719F77000F77B40 /* OmniLight.h in Headers */ = {isa = PBXBuildFile; fileRef = 563D0A292719F76600F77B40 /* OmniLight.h */; };
 		563D0A2D2719F7A700F77B40 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 563D0A2B2719F79D00F77B40 /* Camera.h */; };
 		563D0A2E2719F7A700F77B40 /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = 563D0A2C2719F7A400F77B40 /* Model.h */; };
@@ -174,9 +171,7 @@
 		5670EC002735977900375194 /* PNBloomSplitJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EBFF2735977900375194 /* PNBloomSplitJob.swift */; };
 		5670EC052735A3EA00375194 /* BloomSplit.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC042735A3EA00375194 /* BloomSplit.metal */; };
 		5670EC072735A3F300375194 /* BloomMerge.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC062735A3F300375194 /* BloomMerge.metal */; };
-		5670EC092735AB0000375194 /* PNBloomSplitJob+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC082735AB0000375194 /* PNBloomSplitJob+Extension.swift */; };
 		5670EC0B2735D47900375194 /* PNBloomMergeJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC0A2735D47900375194 /* PNBloomMergeJob.swift */; };
-		5670EC0D2735D5BF00375194 /* PNBloomMergeJob+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC0C2735D5BF00375194 /* PNBloomMergeJob+Extension.swift */; };
 		5670EC122736A1BE00375194 /* PNStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC112736A1BE00375194 /* PNStage.swift */; };
 		5670EC142736A29100375194 /* PNGPUIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC132736A29100375194 /* PNGPUIO.swift */; };
 		5670EC162736A2AE00375194 /* PNGPUSupply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC152736A2AE00375194 /* PNGPUSupply.swift */; };
@@ -319,7 +314,6 @@
 		561666AD2719E2CC000063B1 /* MTLPixelFormat+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MTLPixelFormat+Extension.swift"; sourceTree = "<group>"; };
 		561666AF2719E2CC000063B1 /* PNGBufferJob+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PNGBufferJob+Extension.swift"; sourceTree = "<group>"; };
 		561666B12719E2CC000063B1 /* MTLRenderPassDescriptor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MTLRenderPassDescriptor+Extension.swift"; sourceTree = "<group>"; };
-		561666B22719E2CC000063B1 /* PNEnvironmentJob+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PNEnvironmentJob+Extension.swift"; sourceTree = "<group>"; };
 		561666B92719E2CC000063B1 /* PNFlatTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNFlatTree.swift; sourceTree = "<group>"; };
 		561666BA2719E2CC000063B1 /* PNIDynamicBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNIDynamicBuffer.swift; sourceTree = "<group>"; };
 		561666C42719E2CC000063B1 /* PNFlatTree+Alias.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PNFlatTree+Alias.swift"; sourceTree = "<group>"; };
@@ -368,7 +362,6 @@
 		5620C82C27551AFC0098D6FA /* simd_float3+Extension+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd_float3+Extension+Tests.swift"; sourceTree = "<group>"; };
 		5620C82E27551BE00098D6FA /* simd_float3x3+Extension+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd_float3x3+Extension+Tests.swift"; sourceTree = "<group>"; };
 		5620C831275528030098D6FA /* PNDirectionalShadowJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNDirectionalShadowJob.swift; sourceTree = "<group>"; };
-		5620C833275529490098D6FA /* PNDirectionalShadowJob+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNDirectionalShadowJob+Extension.swift"; sourceTree = "<group>"; };
 		5620C83527552AF30098D6FA /* DirectionalLight.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = DirectionalLight.metal; sourceTree = "<group>"; };
 		56270166272B54EB00071620 /* PNAnimatedTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnimatedTransform.swift; sourceTree = "<group>"; };
 		56270168272B556500071620 /* PNAnimatedTransform+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNAnimatedTransform+Alias.swift"; sourceTree = "<group>"; };
@@ -392,7 +385,6 @@
 		563C9C1E27387F6B0014CFF3 /* PNShadowStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNShadowStage.swift; sourceTree = "<group>"; };
 		563C9C2027387F8C0014CFF3 /* PNSpotShadowJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSpotShadowJob.swift; sourceTree = "<group>"; };
 		563C9C23273882F60014CFF3 /* SpotLight.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = SpotLight.metal; sourceTree = "<group>"; };
-		563C9C25273884700014CFF3 /* PNSpotShadowJob+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNSpotShadowJob+Extension.swift"; sourceTree = "<group>"; };
 		563D0A292719F76600F77B40 /* OmniLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OmniLight.h; sourceTree = "<group>"; };
 		563D0A2B2719F79D00F77B40 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		563D0A2C2719F7A400F77B40 /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
@@ -437,9 +429,7 @@
 		5670EBFF2735977900375194 /* PNBloomSplitJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNBloomSplitJob.swift; sourceTree = "<group>"; };
 		5670EC042735A3EA00375194 /* BloomSplit.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = BloomSplit.metal; sourceTree = "<group>"; };
 		5670EC062735A3F300375194 /* BloomMerge.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = BloomMerge.metal; sourceTree = "<group>"; };
-		5670EC082735AB0000375194 /* PNBloomSplitJob+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNBloomSplitJob+Extension.swift"; sourceTree = "<group>"; };
 		5670EC0A2735D47900375194 /* PNBloomMergeJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNBloomMergeJob.swift; sourceTree = "<group>"; };
-		5670EC0C2735D5BF00375194 /* PNBloomMergeJob+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNBloomMergeJob+Extension.swift"; sourceTree = "<group>"; };
 		5670EC112736A1BE00375194 /* PNStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNStage.swift; sourceTree = "<group>"; };
 		5670EC132736A29100375194 /* PNGPUIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNGPUIO.swift; sourceTree = "<group>"; };
 		5670EC152736A2AE00375194 /* PNGPUSupply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNGPUSupply.swift; sourceTree = "<group>"; };
@@ -1463,15 +1453,11 @@
 			isa = PBXGroup;
 			children = (
 				5627016A272B583F00071620 /* PNAnimatedSkeleton+Extension.swift */,
-				561666B22719E2CC000063B1 /* PNEnvironmentJob+Extension.swift */,
 				561666AF2719E2CC000063B1 /* PNGBufferJob+Extension.swift */,
 				56924AE7271A187400FF3E06 /* PNAnimatedFloat3+Extensions.swift */,
 				56924AE9271A188700FF3E06 /* PNAnimatedQuatf+Extension.swift */,
 				56407B7C27206F5D00440CAC /* Vertex+Extension.swift */,
 				563BFC9927294AF70003EDB7 /* PNMesh+Extension.swift */,
-				5670EC082735AB0000375194 /* PNBloomSplitJob+Extension.swift */,
-				5670EC0C2735D5BF00375194 /* PNBloomMergeJob+Extension.swift */,
-				563C9C25273884700014CFF3 /* PNSpotShadowJob+Extension.swift */,
 				56D8C4112739D404005E58E3 /* SpotLight+Extension.swift */,
 				560C18D6273AC71100459AEF /* OmniLight+Extension.swift */,
 				569D9243273E81DD004FDFAC /* VertexP+Extension.swift */,
@@ -1479,7 +1465,6 @@
 				56165BEF2744401B0025D58B /* ModelUniforms+Extension.swift */,
 				56165BF1274441D90025D58B /* AmbientLight+Extension.swift */,
 				5629FBED27492533005476AF /* PNAnimatedCoordinateSpace+Extension.swift */,
-				5620C833275529490098D6FA /* PNDirectionalShadowJob+Extension.swift */,
 			);
 			path = Porcelain;
 			sourceTree = "<group>";
@@ -1705,7 +1690,6 @@
 				568EBB3D273F0DE1007C7D35 /* PNISSAOHemisphere.swift in Sources */,
 				566795CA274EC066005993D7 /* PNTranscriber.swift in Sources */,
 				566795B2274DBE94005993D7 /* PNINodeInteractor.swift in Sources */,
-				561667282719E2CD000063B1 /* PNEnvironmentJob+Extension.swift in Sources */,
 				5670EC142736A29100375194 /* PNGPUIO.swift in Sources */,
 				561667412719E2CD000063B1 /* PNMaterial.swift in Sources */,
 				56C47BA527516BD20075C61B /* PNRenderMask.swift in Sources */,
@@ -1722,7 +1706,6 @@
 				56E8208F2727FD13002D58C3 /* Date+Extensioin.swift in Sources */,
 				566795EF274FF240005993D7 /* PNIRenderingCoordinatorFactory.swift in Sources */,
 				566795F9274FFE72005993D7 /* PNIWorkloadManagerFactory.swift in Sources */,
-				563C9C26273884700014CFF3 /* PNSpotShadowJob+Extension.swift in Sources */,
 				56D7ED45274C3AD400A6C25D /* PNIBoundingBoxInteractor.swift in Sources */,
 				5686BD9A273C1CD300329FA0 /* PNIStaticBuffer.swift in Sources */,
 				5620C8272754F7DF0098D6FA /* PNIOmniLightNode.swift in Sources */,
@@ -1770,9 +1753,7 @@
 				56D7ED52274C535F00A6C25D /* PNSceneLoader.swift in Sources */,
 				56D7ED5C274C611C00A6C25D /* PNBoundingBox+Alias.swift in Sources */,
 				56D7ED43274C381400A6C25D /* PNBoundingBoxInteractor.swift in Sources */,
-				5620C834275529490098D6FA /* PNDirectionalShadowJob+Extension.swift in Sources */,
 				563BFC91272898F20003EDB7 /* MDLAnimatedVector3Array+Extension.swift in Sources */,
-				5670EC0D2735D5BF00375194 /* PNBloomMergeJob+Extension.swift in Sources */,
 				5670EBDC273561FD00375194 /* Operator+Extension.swift in Sources */,
 				568807482747EFC800C95F55 /* simd_float4x4+Alias.swift in Sources */,
 				561667572719E2CD000063B1 /* PNIBufferStore.swift in Sources */,
@@ -1808,7 +1789,6 @@
 				566795BE274E9095005993D7 /* PNISceneNode.swift in Sources */,
 				56D7ED3F274C36F200A6C25D /* PNBoundInteractor.swift in Sources */,
 				561667462719E2CD000063B1 /* GBufferRenderer.metal in Sources */,
-				5670EC092735AB0000375194 /* PNBloomSplitJob+Extension.swift in Sources */,
 				561667142719E2CD000063B1 /* MDLAsset+Extension.swift in Sources */,
 				56ADD2F4273707C500107E24 /* PNAmbientJob.swift in Sources */,
 				5620C8192754F4FE0098D6FA /* PNIOmniLight.swift in Sources */,

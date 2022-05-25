@@ -39,4 +39,18 @@ struct PNBloomMergeJob: PNRenderJob {
                                       indexBuffer: plane.pieceDescriptions[0].drawDescription.indexBuffer.buffer,
                                       indexBufferOffset: plane.pieceDescriptions[0].drawDescription.indexBuffer.offset)
     }
+    static func make(device: MTLDevice,
+                     drawableSize: CGSize,
+                     unmodifiedSceneTexture: MTLTexture,
+                     brightAreasTexture: MTLTexture) -> PNBloomMergeJob? {
+        guard let library = device.makePorcelainLibrary(),
+              let pipelineState = device.makeRenderPipelineStateBloomMerge(library: library) else {
+            return nil
+        }
+        return PNBloomMergeJob(pipelineState: pipelineState,
+                               device: device,
+                               unmodifiedSceneTexture: unmodifiedSceneTexture,
+                               brightAreasTexture: brightAreasTexture,
+                               drawableSize: drawableSize)
+    }
 }
