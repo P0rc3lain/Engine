@@ -16,8 +16,8 @@ public struct PNCulling {
         self.winding = winding
     }
     public static func `none`(winding: MTLWinding) -> PNCulling {
-        return PNCulling(frontCulling: .none,
-                         backCulling: .none,
-                         winding: winding)
+        PNCulling(frontCulling: .none,
+                  backCulling: .none,
+                  winding: winding)
     }
 }

@@ -4,8 +4,8 @@
 
 import Cocoa
 import Metal
-import ModelIO
 import MetalBinding
+import ModelIO
 
 public struct PNITerrainLoader: PNTerrainLoader {
     private let device: MTLDevice
@@ -24,7 +24,7 @@ public struct PNITerrainLoader: PNTerrainLoader {
         return buffer
     }
     static func vertices(image: NSImage) -> [Vertex]? {
-        return vertices(image: image) { color in
+        vertices(image: image) { color in
             let avg = (color.redComponent + color.blueComponent + color.greenComponent) / 3
             return Float(avg * 100)
         }
@@ -57,7 +57,7 @@ public struct PNITerrainLoader: PNTerrainLoader {
     }
     static func vertices(image: NSImage, heightTransform: (NSColor) -> Float) -> [Vertex]? {
         guard let tiff = image.tiffRepresentation,
-              let bitmap = NSBitmapImageRep.init(data: tiff) else {
+              let bitmap = NSBitmapImageRep(data: tiff) else {
             return nil
         }
         var buffer = [Vertex]()
@@ -67,17 +67,17 @@ public struct PNITerrainLoader: PNTerrainLoader {
                     return nil
                 }
                 let height = heightTransform(color)
-                let u = Float(i)/Float(image.size.height)
-                let v = Float(j)/Float(image.size.width)
+                let u = Float(i) / Float(image.size.height)
+                let v = Float(j) / Float(image.size.width)
                 guard let normalVector = normal(bitmap: bitmap,
                                                 atX: i,
                                                 atY: j,
                                                 heightTransform: heightTransform) else {
                     return nil
                 }
-                buffer.append(Vertex(position: [-Float(image.size.height/2) + Float(i),
+                buffer.append(Vertex(position: [-Float(image.size.height / 2) + Float(i),
                                                 Float(height),
-                                                -Float(image.size.width)/2 + Float(j)],
+                                                -Float(image.size.width) / 2 + Float(j)],
                                       normal: normalVector,
                                       tangent: normalVector.randomPerpendicular(),
                                       textureUV: [u, v]))
@@ -94,8 +94,10 @@ public struct PNITerrainLoader: PNTerrainLoader {
         let idx = PNITerrainLoader.indices(width: image.size.width.int,
                                            height: image.size.height.int)
         for chunk in idx.chunked(into: Int(image.size.width * 2)) {
-            let idxBuf = device.makeBuffer(array: chunk)
-            let submesh = PNSubmesh(indexBuffer: PNDataBuffer(buffer: idxBuf!,
+            guard let indexBuffer = device.makeBuffer(array: chunk) else {
+                return nil
+            }
+            let submesh = PNSubmesh(indexBuffer: PNDataBuffer(buffer: indexBuffer,
                                                               length: chunk.count),
                                     indexCount: Int(image.size.width * 2),
                                     indexType: .uint32,

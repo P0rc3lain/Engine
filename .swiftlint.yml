@@ -64,7 +64,6 @@ opt_in_rules:
 - function_default_parameter_at_end
 - large_tuple
 - discouraged_optional_boolean
-- discouraged_optional_collection
 - literal_expression_end_indentation
 - no_extension_access_modifier
 - trailing_whitespace
@@ -84,5 +83,6 @@ opt_in_rules:
 disabled_rules:
 - todo
 - private_over_fileprivate
+- discouraged_optional_collection
 - let_var_whitespace
 - identifier_name
