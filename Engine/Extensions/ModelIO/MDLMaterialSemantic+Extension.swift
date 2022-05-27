@@ -26,11 +26,11 @@ extension MDLMaterialSemantic {
     var defaultColor: simd_float4 {
         switch self {
         case .baseColor:
-            return .deafultBaseColor
+            return .defaultBaseColor
         case .tangentSpaceNormal, .bump:
-            return .deafultNormalsColor
+            return .defaultNormalsColor
         case .roughness, .specularExponent:
-            return .deafultRoughnessColor
+            return .defaultRoughnessColor
         case .metallic:
             return .defaultMetallicColor
         default:
