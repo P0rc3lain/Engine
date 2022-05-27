@@ -12,4 +12,9 @@ extension MTLBuffer {
             return 0
         }
     }
+    func fill<T>(from array: Array<T>) {
+        _ = array.withUnsafeBytes { pointer in
+            memcpy(contents(), pointer.baseAddress, pointer.count)
+        }
+    }
 }
