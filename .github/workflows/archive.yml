@@ -6,7 +6,20 @@ on:
     - master
 
 jobs:
+  unittests:
+    runs-on: macOS-latest
+    steps:
+    - name: Run tests
+      uses: ./.github/workflows/swiftlint
+  swiftlint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Lint project
+      uses: ./.github/workflows/swiftlint
   archive:
+    needs:
+    - unittests
+    - swiftlint
     runs-on: macOS-latest
     steps:
     - name: Check Out Sources
