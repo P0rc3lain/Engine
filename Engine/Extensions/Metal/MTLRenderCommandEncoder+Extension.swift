@@ -50,4 +50,12 @@ extension MTLRenderCommandEncoder {
     func setFragmentTexture<T: RawRepresentable>(_ texture: MTLTexture?, index: T) where T.RawValue == UInt32 {
         setFragmentTexture(texture, index: Int(index.rawValue))
     }
+    func setBackCulling(_ culling: PNCulling) {
+        setCullMode(culling.backCulling)
+        setFrontFacing(culling.winding)
+    }
+    func setFrontCulling(_ culling: PNCulling) {
+        setCullMode(culling.frontCulling)
+        setFrontFacing(culling.winding)
+    }
 }
