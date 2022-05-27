@@ -9,9 +9,7 @@ jobs:
   tests:
     uses: ./.github/workflows/tests.yml
   archive:
-    needs:
-    - unittests
-    - swiftlint
+    needs: tests
     runs-on: macOS-latest
     steps:
     - name: Check Out Sources
