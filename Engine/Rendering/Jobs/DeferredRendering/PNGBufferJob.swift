@@ -26,8 +26,6 @@ struct PNGBufferJob: PNRenderJob {
         let mask = supply.mask.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx]
         encoder.setViewport(viewPort)
         encoder.setDepthStencilState(depthStencilState)
-        encoder.setCullMode(.back)
-        encoder.setFrontFacing(.counterClockwise)
         encoder.setVertexBuffer(dataStore.cameras.buffer,
                                 index: kAttributeGBufferVertexShaderBufferCameraUniforms)
         encoder.setStencilReferenceValue(1)
@@ -38,6 +36,7 @@ struct PNGBufferJob: PNRenderJob {
                 continue
             }
             let mesh = scene.meshes[animatedModel.mesh]
+            encoder.setBackCulling(mesh.culling)
             encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                     offset: mesh.vertexBuffer.offset,
                                     index: kAttributeGBufferVertexShaderBufferStageIn)
@@ -72,6 +71,7 @@ struct PNGBufferJob: PNRenderJob {
                 continue
             }
             let mesh = scene.meshes[model.mesh]
+            encoder.setBackCulling(mesh.culling)
             encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                     offset: mesh.vertexBuffer.offset,
                                     index: kAttributeGBufferVertexShaderBufferStageIn)
