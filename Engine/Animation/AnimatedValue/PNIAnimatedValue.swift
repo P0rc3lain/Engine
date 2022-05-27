@@ -29,7 +29,7 @@ public final class PNIAnimatedValue<T>: PNAnimatedValue {
         let current = next > 0 ? next - 1 : times.count - 1
         let timeRange = next > 0 ? times[next] - times[current] : maximumTime - times[current] + times[next]
         let timePosition = next > 0 ? clipped - times[current] : (clipped > times[current] ? clipped - times[current] : maximumTime - times[current] + clipped)
-        let ratio = (timePosition / timeRange).clamp(min: 0.0, max: 1.0)
+        let ratio = clamp(value: timePosition / timeRange, min: 0, max: 1)
         return PNAnimationSample(currentKeyFrame: keyFrames[current],
                                  upcomingKeyFrame: keyFrames[next],
                                  ratio: Float(ratio))

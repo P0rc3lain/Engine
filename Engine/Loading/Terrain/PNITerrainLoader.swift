@@ -30,8 +30,8 @@ public struct PNITerrainLoader: PNTerrainLoader {
         }
     }
     static func color(bitmap: NSBitmapImageRep, atX x: Int, atY y: Int) -> NSColor? {
-        let normalizedX = max(min(x, bitmap.size.width.int - 1), 0)
-        let normalizedY = max(min(y, bitmap.size.height.int - 1), 0)
+        let normalizedX = clamp(value: x, min: 0, max: bitmap.size.width.int - 1)
+        let normalizedY = clamp(value: y, min: 0, max: bitmap.size.height.int - 1)
         return bitmap.colorAt(x: normalizedX, y: normalizedY)
     }
     static func height(bitmap: NSBitmapImageRep,
