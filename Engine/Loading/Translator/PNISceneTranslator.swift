@@ -91,42 +91,11 @@ public final class PNISceneTranslator: PNSceneTranslator {
         }
         return PNIAnimatedNode(animator: PNIAnimator.default, animation: transfrom)
     }
-    private func getModelBounds(buffer: inout Data) -> PNBound {
-        let vertexCount = buffer.count / MemoryLayout<Vertex>.stride
-        assert(buffer.count % MemoryLayout<Vertex>.stride == 0, "Data must contain vertices")
-        var minX = Float(0)
-        var maxX = Float(0)
-        var minY = Float(0)
-        var maxY = Float(0)
-        var minZ = Float(0)
-        var maxZ = Float(0)
-        buffer.withUnsafeMutableBytes { mutablePointer in
-            guard let pointer = mutablePointer.bindMemory(to: Vertex.self).baseAddress else {
-                fatalError("Could not cast buffer to raw pointer")
-            }
-            let firstVertex = pointer.pointee
-            minX = firstVertex.position.x
-            maxX = firstVertex.position.x
-            minY = firstVertex.position.y
-            maxY = firstVertex.position.y
-            minZ = firstVertex.position.z
-            maxZ = firstVertex.position.z
-            for i in 1 ..< vertexCount {
-                let vertex = pointer.advanced(by: i).pointee
-                minX = min(vertex.position.x, minX)
-                maxX = max(vertex.position.x, maxX)
-                minY = min(vertex.position.y, minX)
-                maxY = max(vertex.position.y, maxX)
-                minZ = min(vertex.position.z, minX)
-                maxZ = max(vertex.position.z, maxX)
-            }
-        }
-        return PNBound(min: [minX, minY, minZ], max: [maxX, maxY, maxZ])
-    }
     private func convert(mesh: MDLMesh) -> PNMesh? {
-        assert(mesh.vertexBuffers.count == 1, "Only object that have a single buffer assigned are supported")
-        var buffer = mesh.vertexBuffers[0].rawData
-        let bounds = getModelBounds(buffer: &buffer)
+        assert(mesh.vertexBuffers.count == 1,
+               "Only object that have a single buffer assigned are supported")
+        let buffer = mesh.vertexBuffers[0].rawData
+        let bounds = PNIBoundEstimator().bound(vertexBuffer: buffer)
         guard let deviceBuffer = device.makeBuffer(data: buffer) else {
             return nil
         }
@@ -158,7 +127,10 @@ public final class PNISceneTranslator: PNSceneTranslator {
         let interactor = PNIBoundingBoxInteractor.default
         return PNMesh(boundingBox: interactor.from(bound: bounds),
                       vertexBuffer: dataBuffer,
-                      pieceDescriptions: pieceDescriptions)
+                      pieceDescriptions: pieceDescriptions,
+                      culling: PNCulling(frontCulling: .front,
+                                         backCulling: .back,
+                                         winding: .counterClockwise))
     }
     private func parentIndex(jointPaths: [String], jointPath: String) -> Int {
         let components = jointPath.components(separatedBy: "/")
