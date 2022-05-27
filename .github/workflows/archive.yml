@@ -7,15 +7,9 @@ on:
 
 jobs:
   unittests:
-    runs-on: macOS-latest
-    steps:
-    - name: Run tests
-      uses: ./.github/workflows/swiftlint
+    uses: ./.github/workflows/unittests
   swiftlint:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Lint project
-      uses: ./.github/workflows/swiftlint
+    uses: ./.github/workflows/swiftlint
   archive:
     needs:
     - unittests
