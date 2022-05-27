@@ -17,8 +17,6 @@ extension simd_float3 {
         self / norm
     }
     public func randomPerpendicular(length: Float = 1) -> simd_float3 {
-        let randomVector = simd_float3.random()
-        let dotProduct = dot(randomVector, self)
-        return (self - (self * dotProduct)).normalized * length
+        cross(self, simd_float3.random()).normalized * length
     }
 }
