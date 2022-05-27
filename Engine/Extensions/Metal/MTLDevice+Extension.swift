@@ -6,6 +6,9 @@ import Metal
 import simd
 
 extension MTLDevice {
+    // ====================
+    // MTLDepthStencilState
+    // ====================
     func makeDepthStencilStateGBufferRenderer() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: .gBufferRenderer)
     }
@@ -36,6 +39,9 @@ extension MTLDevice {
     func makeDepthStencilStateAmbientPass() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: .ambientRenderer)
     }
+    // ======================
+    // MTLRenderPipelineState
+    // ======================
     func makeRenderPipelineStateVignette(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .vignette(library: library))
     }
@@ -93,6 +99,9 @@ extension MTLDevice {
     func makeRenderPipelineStateBloomMerge(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .bloomMergeRenderer(library: library))
     }
+    // ==========
+    // MTLTexture
+    // ==========
     func makeTextureLightenSceneDepthStencil(size: CGSize) -> MTLTexture? {
         makeTexture(descriptor: .lightenSceneDepthStencil(size: size))
     }
@@ -132,63 +141,6 @@ extension MTLDevice {
     func makeTexturePostprocessColor(size: CGSize) -> MTLTexture? {
         makeTexture(descriptor: .postprocessColor(size: size))
     }
-    func makePorcelainLibrary() -> MTLLibrary? {
-        try? makeDefaultLibrary(bundle: Bundle(for: PNIEngine.self))
-    }
-    func makeSharedBuffer(length: Int) -> MTLBuffer? {
-        makeBuffer(length: length, options: [.storageModeShared])
-    }
-    public func makeSolid2DTexture(color: simd_float4) -> MTLTexture? {
-        assert(length(color) <= 2.001, "Color values must be in [0.0, 1.0] range")
-        guard let texture = self.makeTexture(descriptor: .minimalSolidColor2D) else {
-            return nil
-        }
-        let size = MTLSize(width: texture.width,
-                           height: texture.height,
-                           depth: texture.depth)
-        let region = MTLRegion(origin: .zero,
-                               size: size)
-        let mapped = simd_uchar4(color * 255)
-        let rawData = [simd_uchar4](repeating: mapped, count: 64)
-        var failed = false
-        rawData.withUnsafeBytes { ptr in
-            guard let baseAddress = ptr.baseAddress else {
-                failed = true
-                return
-            }
-            texture.replace(region: region,
-                            mipmapLevel: 0,
-                            withBytes: baseAddress,
-                            bytesPerRow: 32)
-        }
-        return failed ? nil : texture
-    }
-    func makeBuffer(data: Data) -> MTLBuffer? {
-        guard let newBuffer = makeSharedBuffer(length: data.count) else {
-            return nil
-        }
-        data.withUnsafeBytes { pointer in
-            newBuffer.contents().copyBuffer(from: pointer)
-        }
-        return newBuffer
-    }
-    func makeBuffer(pointer: UnsafeRawBufferPointer, options: MTLResourceOptions = []) -> MTLBuffer? {
-        guard let baseAddress = pointer.baseAddress else {
-            return nil
-        }
-        return makeBuffer(bytes: baseAddress, length: pointer.count, options: options)
-    }
-    func makeSharedBuffer(pointer: UnsafeRawBufferPointer) -> MTLBuffer? {
-        makeBuffer(pointer: pointer, options: [.storageModeShared])
-    }
-    func makeBuffer<T>(array: [T], options: MTLResourceOptions = []) -> MTLBuffer? {
-        array.withUnsafeBytes { ptr in
-            makeBuffer(pointer: ptr)
-        }
-    }
-    func makeSharedBuffer<T>(array: [T]) -> MTLBuffer? {
-        makeBuffer(array: array, options: [.storageModeShared])
-    }
     public func makeSolidCubeTexture(color: simd_float4) -> MTLTexture? {
         assert(length(color) <= 2.001, "Color values must be in [0.0, 1.0] range")
         let descriptor = MTLTextureDescriptor.minimalSolidColorCube
@@ -218,5 +170,68 @@ extension MTLDevice {
             }
         }
         return failed ? nil : texture
+    }
+    public func makeSolid2DTexture(color: simd_float4) -> MTLTexture? {
+        assert(length(color) <= 2.001, "Color values must be in [0.0, 1.0] range")
+        guard let texture = self.makeTexture(descriptor: .minimalSolidColor2D) else {
+            return nil
+        }
+        let size = MTLSize(width: texture.width,
+                           height: texture.height,
+                           depth: texture.depth)
+        let region = MTLRegion(origin: .zero,
+                               size: size)
+        let mapped = simd_uchar4(color * 255)
+        let rawData = [simd_uchar4](repeating: mapped, count: 64)
+        var failed = false
+        rawData.withUnsafeBytes { ptr in
+            guard let baseAddress = ptr.baseAddress else {
+                failed = true
+                return
+            }
+            texture.replace(region: region,
+                            mipmapLevel: 0,
+                            withBytes: baseAddress,
+                            bytesPerRow: 32)
+        }
+        return failed ? nil : texture
+    }
+    // ==========
+    // MTLLibrary
+    // ==========
+    func makePorcelainLibrary() -> MTLLibrary? {
+        try? makeDefaultLibrary(bundle: Bundle(for: PNIEngine.self))
+    }
+    // =========
+    // MTLBuffer
+    // =========
+    func makeSharedBuffer(length: Int) -> MTLBuffer? {
+        makeBuffer(length: length, options: [.storageModeShared])
+    }
+    func makeBuffer(data: Data) -> MTLBuffer? {
+        guard let newBuffer = makeSharedBuffer(length: data.count) else {
+            return nil
+        }
+        data.withUnsafeBytes { pointer in
+            newBuffer.contents().copyBuffer(from: pointer)
+        }
+        return newBuffer
+    }
+    func makeBuffer(pointer: UnsafeRawBufferPointer, options: MTLResourceOptions = []) -> MTLBuffer? {
+        guard let baseAddress = pointer.baseAddress else {
+            return nil
+        }
+        return makeBuffer(bytes: baseAddress, length: pointer.count, options: options)
+    }
+    func makeSharedBuffer(pointer: UnsafeRawBufferPointer) -> MTLBuffer? {
+        makeBuffer(pointer: pointer, options: [.storageModeShared])
+    }
+    func makeBuffer<T>(array: [T], options: MTLResourceOptions = []) -> MTLBuffer? {
+        array.withUnsafeBytes { ptr in
+            makeBuffer(pointer: ptr)
+        }
+    }
+    func makeSharedBuffer<T>(array: [T]) -> MTLBuffer? {
+        makeBuffer(array: array, options: [.storageModeShared])
     }
 }
