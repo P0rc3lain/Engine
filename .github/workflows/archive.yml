@@ -12,11 +12,18 @@ jobs:
     - name: Check Out Sources
       uses: actions/checkout@v1
     - name: Create Archive
-      run: xcodebuild -project Engine.xcodeproj 
+      run: xcodebuild build docbuild
+                      -project Engine.xcodeproj
                       -scheme Engine archive 
-                      -archivePath archive
-    - name: Upload the document
+                      -derivedDataPath /tmp/engine-build
+                      -configuration Release
+    - name: Upload the framework
       uses: actions/upload-artifact@v2
       with:
         name: Engine.framework
-        path: archive.xcarchive/Products/Library/Frameworks/Engine.framework
+        path: /tmp/engine-build/Build/Products/Release/Engine.framework
+    - name: Upload the documentation
+      uses: actions/upload-artifact@v2
+      with:
+        name: Engine.doccarchive
+        path: /tmp/engine-build/Build/Products/Release/Engine.doccarchive
