@@ -6,18 +6,22 @@ import Metal
 import MetalBinding
 
 extension MTLVertexBufferLayoutDescriptor {
+    convenience init(stride: Int,
+                     stepFunction: MTLVertexStepFunction,
+                     stepRate: Int) {
+        self.init()
+        self.stride = stride
+        self.stepFunction = stepFunction
+        self.stepRate = stepRate
+    }
     static var vertexP: MTLVertexBufferLayoutDescriptor {
-        let layout = MTLVertexBufferLayoutDescriptor()
-        layout.stepFunction = .perVertex
-        layout.stride = MemoryLayout<VertexP>.stride
-        layout.stepRate = 1
-        return layout
+        MTLVertexBufferLayoutDescriptor(stride: MemoryLayout<VertexP>.stride,
+                                        stepFunction: .perVertex,
+                                        stepRate: 1)
     }
     static var vertexPUV: MTLVertexBufferLayoutDescriptor {
-        let layout = MTLVertexBufferLayoutDescriptor()
-        layout.stepFunction = .perVertex
-        layout.stride = MemoryLayout<VertexPUV>.stride
-        layout.stepRate = 1
-        return layout
+        MTLVertexBufferLayoutDescriptor(stride: MemoryLayout<VertexPUV>.stride,
+                                        stepFunction: .perVertex,
+                                        stepRate: 1)
     }
 }

@@ -20,7 +20,7 @@ public struct PNIRenderMaskGenerator: PNRenderMaskGenerator {
     }
     private func generateSpotRenderMasks(scene: PNSceneDescription) -> [[Bool]] {
         scene.spotLights.count.naturalExclusive.map { i in
-            let cameraTransform = scene.uniforms[Int(scene.spotLights[i].idx)].modelMatrixInverse
+            let cameraTransform = scene.uniforms[scene.spotLights[i].idx.int].modelMatrixInverse
             let cameraBoundingBox = interactor.multiply(cameraTransform, scene.spotLights[i].boundingBox)
             let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
             let mask = cullingController.cullingMask(scene: scene,
@@ -31,7 +31,7 @@ public struct PNIRenderMaskGenerator: PNRenderMaskGenerator {
     private func generateCameraRenderMask(scene: PNSceneDescription) -> [[Bool]] {
         scene.cameraUniforms.indices.map { cameraUniformIndex in
             let cameraUniform = scene.cameraUniforms[cameraUniformIndex]
-            let cameraTransform = scene.uniforms[Int(cameraUniform.index)].modelMatrixInverse
+            let cameraTransform = scene.uniforms[cameraUniform.index.int].modelMatrixInverse
             let cameraBoundingBox = interactor.multiply(cameraTransform, scene.cameras[cameraUniformIndex].boundingBox)
             let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
             return cullingController.cullingMask(scene: scene,
@@ -42,7 +42,7 @@ public struct PNIRenderMaskGenerator: PNRenderMaskGenerator {
         scene.omniLights.count.naturalExclusive.map { lightIndex in
             var faceData = [[Bool]]()
             for faceIndex in 6.naturalExclusive {
-                let entityIndex = Int(scene.omniLights[lightIndex].idx)
+                let entityIndex = scene.omniLights[lightIndex].idx.int
                 let cameraTransform = scene.uniforms[entityIndex].modelMatrixInverse
                 let boundingBox = interactor.from(inverseProjection: scene.omniLights[lightIndex].projectionMatrixInverse)
                 let cameraBoundingBox = interactor.multiply(cubeRotations[faceIndex].rotationMatrix,

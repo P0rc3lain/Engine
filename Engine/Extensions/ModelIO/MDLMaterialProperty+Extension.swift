@@ -8,7 +8,8 @@ extension MDLMaterialProperty {
     var associatedTexture: MDLTexture? {
         if let sourceTexture = textureSamplerValue?.texture {
             return sourceTexture
-        } else if let stringValue = stringValue, let filename = stringValue.split(separator: "/").last {
+        } else if let stringValue = stringValue,
+                  let filename = stringValue.split(separator: "/").last {
             return MDLTexture(named: String(filename))
         }
         return nil

@@ -254,6 +254,8 @@
 		56E011BA28411C5D007859F2 /* PNITextureLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E011B928411C5D007859F2 /* PNITextureLoader.swift */; };
 		56E011BD28413218007859F2 /* PNTextureLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E011BC28413218007859F2 /* PNTextureLoader.swift */; };
 		56E011BF28413260007859F2 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E011BE28413260007859F2 /* CGRect+Extensions.swift */; };
+		56E011C428413EB0007859F2 /* Int32+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E011C328413EB0007859F2 /* Int32+Extension.swift */; };
+		56E011C628413F2B007859F2 /* UInt32+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E011C528413F2B007859F2 /* UInt32+Extension.swift */; };
 		56E8208F2727FD13002D58C3 /* Date+Extensioin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8208E2727FD13002D58C3 /* Date+Extensioin.swift */; };
 		56E8209D27284664002D58C3 /* PNPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8209C27284664002D58C3 /* PNPosition.swift */; };
 		56F59269273725FB008652C9 /* PNDirectionalJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F59268273725FB008652C9 /* PNDirectionalJob.swift */; };
@@ -550,6 +552,8 @@
 		56E011B928411C5D007859F2 /* PNITextureLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNITextureLoader.swift; sourceTree = "<group>"; };
 		56E011BC28413218007859F2 /* PNTextureLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNTextureLoader.swift; sourceTree = "<group>"; };
 		56E011BE28413260007859F2 /* CGRect+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Extensions.swift"; sourceTree = "<group>"; };
+		56E011C328413EB0007859F2 /* Int32+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int32+Extension.swift"; sourceTree = "<group>"; };
+		56E011C528413F2B007859F2 /* UInt32+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt32+Extension.swift"; sourceTree = "<group>"; };
 		56E8208E2727FD13002D58C3 /* Date+Extensioin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensioin.swift"; sourceTree = "<group>"; };
 		56E8209C27284664002D58C3 /* PNPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNPosition.swift; sourceTree = "<group>"; };
 		56F5926727372526008652C9 /* DirectionalLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DirectionalLight.h; sourceTree = "<group>"; };
@@ -1473,6 +1477,8 @@
 				56407B7A27204EEB00440CAC /* Array+Extension.swift */,
 				563BFC86272878180003EDB7 /* UnsafeMutableRawPointer+Extension.swift */,
 				5670EBDB273561FD00375194 /* Operator+Extension.swift */,
+				56E011C328413EB0007859F2 /* Int32+Extension.swift */,
+				56E011C528413F2B007859F2 /* UInt32+Extension.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -1772,6 +1778,7 @@
 				561667202719E2CD000063B1 /* MTLDepthStencilDescriptor+Extension.swift in Sources */,
 				561667022719E2CD000063B1 /* MDLCamera+Extension.swift in Sources */,
 				561667052719E2CD000063B1 /* simd_float4x4+Extension.swift in Sources */,
+				56E011C628413F2B007859F2 /* UInt32+Extension.swift in Sources */,
 				56D8C4122739D404005E58E3 /* SpotLight+Extension.swift in Sources */,
 				56D12AD027231DAD00550530 /* RawRepresentable+Extension.swift in Sources */,
 				5627016B272B583F00071620 /* PNAnimatedSkeleton+Extension.swift in Sources */,
@@ -1848,6 +1855,7 @@
 				5620C8252754F65B0098D6FA /* PNOmniLightNode.swift in Sources */,
 				5629FBEA2749201F005476AF /* PNInterpolator.swift in Sources */,
 				5616673E2719E2CD000063B1 /* PNSceneDescription.swift in Sources */,
+				56E011C428413EB0007859F2 /* Int32+Extension.swift in Sources */,
 				560A0BC027542458005AE29D /* PNAnimatedMeshNode.swift in Sources */,
 				566795F8274FFE72005993D7 /* PNWorkloadManagerFactory.swift in Sources */,
 				5616672D2719E2CD000063B1 /* PNFlatTree.swift in Sources */,

@@ -93,13 +93,14 @@ public struct PNITerrainLoader: PNTerrainLoader {
         var pieces = [PNPieceDescription]()
         let idx = PNITerrainLoader.indices(width: image.size.width.int,
                                            height: image.size.height.int)
-        for chunk in idx.chunked(into: Int(image.size.width * 2)) {
+        let chunksCount = Int(image.size.width * 2)
+        for chunk in idx.chunked(into: chunksCount) {
             guard let indexBuffer = device.makeBuffer(array: chunk) else {
                 return nil
             }
             let submesh = PNSubmesh(indexBuffer: PNDataBuffer(buffer: indexBuffer,
                                                               length: chunk.count),
-                                    indexCount: Int(image.size.width * 2),
+                                    indexCount: chunksCount,
                                     indexType: .uint32,
                                     primitiveType: .triangleStrip)
             pieces.append(PNPieceDescription(drawDescription: submesh, material: material))

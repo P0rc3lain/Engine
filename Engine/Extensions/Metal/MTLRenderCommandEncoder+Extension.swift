@@ -6,13 +6,13 @@ import Metal
 
 extension MTLRenderCommandEncoder {
     func setVertexBytes<T: RawRepresentable>(_ bytes: UnsafeRawPointer, length: Int, index: T) where T.RawValue == UInt32 {
-        setVertexBytes(bytes, length: length, index: Int(index.rawValue))
+        setVertexBytes(bytes, length: length, index: index.rawValue.int)
     }
     func setVertexBuffer<T: RawRepresentable>(_ buffer: MTLBuffer?, offset: Int, index: T) where T.RawValue == UInt32 {
-        setVertexBuffer(buffer, offset: offset, index: Int(index.rawValue))
+        setVertexBuffer(buffer, offset: offset, index: index.rawValue.int)
     }
     func setVertexBuffer<T: RawRepresentable>(_ buffer: MTLBuffer?, index: T) where T.RawValue == UInt32 {
-        setVertexBuffer(buffer, offset: 0, index: Int(index.rawValue))
+        setVertexBuffer(buffer, offset: 0, index: index.rawValue.int)
     }
     func setVertexBuffer<T: RawRepresentable, Z>(_ dynamicBuffer: PNAnyDynamicBuffer<Z>?, offset: Int, index: T) where T.RawValue == UInt32 {
         setVertexBuffer(dynamicBuffer?.buffer, offset: offset, index: index)
@@ -33,10 +33,10 @@ extension MTLRenderCommandEncoder {
         setFragmentBuffer(buffer, offset: 0, index: index)
     }
     func setFragmentBuffer<T: RawRepresentable>(_ buffer: MTLBuffer?, offset: Int, index: T) where T.RawValue == UInt32 {
-        setFragmentBuffer(buffer, offset: offset, index: Int(index.rawValue))
+        setFragmentBuffer(buffer, offset: offset, index: index.rawValue.int)
     }
     func setFragmentBuffer<T: RawRepresentable, Z>(_ dynamicBuffer: PNAnyDynamicBuffer<Z>?, offset: Int, index: T) where T.RawValue == UInt32 {
-        setFragmentBuffer(dynamicBuffer?.buffer, offset: offset, index: Int(index.rawValue))
+        setFragmentBuffer(dynamicBuffer?.buffer, offset: offset, index: index.rawValue.int)
     }
     func setFragmentBuffer<T: RawRepresentable, Z>(_ dynamicBuffer: PNAnyDynamicBuffer<Z>?, index: T) where T.RawValue == UInt32 {
         setFragmentBuffer(dynamicBuffer?.buffer, offset: 0, index: index)
@@ -45,10 +45,10 @@ extension MTLRenderCommandEncoder {
         setFragmentTextures(textures, range: Range(range))
     }
     func setFragmentTextures(_ textures: [MTLTexture?], range: ClosedRange<UInt32>) {
-        setFragmentTextures(textures, range: Int(range.lowerBound) ... Int(range.upperBound))
+        setFragmentTextures(textures, range: range.lowerBound.int ... range.upperBound.int)
     }
     func setFragmentTexture<T: RawRepresentable>(_ texture: MTLTexture?, index: T) where T.RawValue == UInt32 {
-        setFragmentTexture(texture, index: Int(index.rawValue))
+        setFragmentTexture(texture, index: index.rawValue.int)
     }
     func setBackCulling(_ culling: PNCulling) {
         setCullMode(culling.backCulling)
