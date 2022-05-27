@@ -2158,6 +2158,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.stompor.mateusz.porcelain.engine;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				RUN_DOCUMENTATION_COMPILER = NO;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Engine $(SRCROOT)/Types/Modules";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -2188,6 +2189,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.stompor.mateusz.porcelain.engine;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				RUN_DOCUMENTATION_COMPILER = YES;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Engine $(SRCROOT)/Types/Modules";
 				SWIFT_VERSION = 5.0;
 			};
