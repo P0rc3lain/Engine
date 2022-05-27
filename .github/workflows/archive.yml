@@ -7,9 +7,9 @@ on:
 
 jobs:
   unittests:
-    uses: ./.github/workflows/unittests
+    uses: ./.github/workflows/unittests.yml
   swiftlint:
-    uses: ./.github/workflows/swiftlint
+    uses: ./.github/workflows/swiftlint.yml
   archive:
     needs:
     - unittests
