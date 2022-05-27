@@ -17,9 +17,8 @@ jobs:
                       -scheme Engine archive 
                       -derivedDataPath /tmp/engine-build
                       -configuration Release
-    - name: Change directory
-      run: cd /tmp/engine-build/Build/Products/Release
     - name: Archive the documentation directory
+      working-directory: /tmp/engine-build/Build/Products/Release
       run: tar -czf Engine.doccarchive.tar.gz Engine.doccarchive
     - name: Upload the framework
       uses: actions/upload-artifact@v3
