@@ -20,4 +20,7 @@ extension Array {
             Array(self[$0 ..< Swift.min($0 + size, count)])
         }
     }
+    var bytesCount: Int {
+        MemoryLayout<Element>.stride * count
+    }
 }
