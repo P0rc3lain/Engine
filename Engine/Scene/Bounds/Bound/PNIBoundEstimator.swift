@@ -8,12 +8,12 @@ public struct PNIBoundEstimator: PNBoundEstimator {
     public func bound(vertexBuffer buffer: Data) -> PNBound {
         assert(buffer.count % MemoryLayout<Vertex>.stride == 0, "Data must contain vertices")
         return buffer.withUnsafeBytes { pointer in
-            return bound(vertexBuffer: pointer)
+            bound(vertexBuffer: pointer)
         }
     }
     public func bound(vertexBuffer: [Vertex]) -> PNBound {
         vertexBuffer.withUnsafeBytes { pointer in
-            return bound(vertexBuffer: pointer)
+            bound(vertexBuffer: pointer)
         }
     }
     public func bound(vertexBuffer: UnsafeRawBufferPointer) -> PNBound {

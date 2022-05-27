@@ -3,9 +3,9 @@
 //
 
 @testable import Engine
+import MetalBinding
 import simd
 import XCTest
-import MetalBinding
 
 class PNIBoundEstimatorTests: XCTestCase {
     func testSingleVertexArray() {
@@ -26,7 +26,8 @@ class PNIBoundEstimatorTests: XCTestCase {
             Vertex(position: .one,
                    normal: [0, 1, 0],
                    tangent: [1, 0, 0],
-                   textureUV: .zero)]
+                   textureUV: .zero)
+        ]
         let bound = PNIBoundEstimator().bound(vertexBuffer: vertices)
         XCTAssertEqual(bound.min, .zero)
         XCTAssertEqual(bound.max, .one)
@@ -48,7 +49,8 @@ class PNIBoundEstimatorTests: XCTestCase {
             Vertex(position: [1, 5, 3],
                    normal: [0, 1, 0],
                    tangent: [1, 0, 0],
-                   textureUV: .zero)]
+                   textureUV: .zero)
+        ]
         let bound = PNIBoundEstimator().bound(vertexBuffer: vertices)
         XCTAssertEqual(bound.min, [-4, -5, -6])
         XCTAssertEqual(bound.max, [4, 5, 6])
