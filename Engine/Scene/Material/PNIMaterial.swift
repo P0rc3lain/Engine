@@ -6,11 +6,11 @@ import Metal
 import ModelIO
 
 public struct PNIMaterial: PNMaterial {
-    public let name: String
-    public let albedo: MTLTexture
-    public let roughness: MTLTexture
-    public let normals: MTLTexture
-    public let metallic: MTLTexture
+    public var name: String
+    public var albedo: MTLTexture
+    public var roughness: MTLTexture
+    public var normals: MTLTexture
+    public var metallic: MTLTexture
     public init(name: String,
                 albedo: MTLTexture,
                 roughness: MTLTexture,
