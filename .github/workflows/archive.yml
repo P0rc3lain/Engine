@@ -18,12 +18,12 @@ jobs:
                       -derivedDataPath /tmp/engine-build
                       -configuration Release
     - name: Upload the framework
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Engine.framework
         path: /tmp/engine-build/Build/Products/Release/Engine.framework
     - name: Upload the documentation
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Engine.doccarchive
-        path: /tmp/engine-build/Build/Products/Release/Engine.doccarchive
+        path: /tmp/engine-build/Build/Products/Release/Engine.doccarchive/
