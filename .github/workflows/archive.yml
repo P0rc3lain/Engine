@@ -6,10 +6,8 @@ on:
     - master
 
 jobs:
-  unittests:
-    uses: ./.github/workflows/unittests.yml
-  swiftlint:
-    uses: ./.github/workflows/swiftlint.yml
+  tests:
+    uses: ./.github/workflows/tests.yml
   archive:
     needs:
     - unittests
