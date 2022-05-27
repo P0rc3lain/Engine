@@ -11,8 +11,7 @@ class PNIDynamicBufferTests: XCTestCase {
         guard let device = MTLCreateSystemDefaultDevice(),
               let dynamicBuffer = PNIDynamicBuffer<Int>(device: device,
                                                         initialCapacity: 1) else {
-            XCTFail("Could not initiate device")
-            return
+            throw XCTSkip("Could not initiate device")
         }
         XCTAssertEqual([], dynamicBuffer.pulled)
     }
@@ -20,8 +19,7 @@ class PNIDynamicBufferTests: XCTestCase {
         guard let device = MTLCreateSystemDefaultDevice(),
               let dynamicBuffer = PNIDynamicBuffer<Int>(device: device,
                                                         initialCapacity: 1) else {
-            XCTFail("Could not initiate device")
-            return
+            throw XCTSkip("Could not initiate device")
         }
         var data = [1, 2, 3]
         dynamicBuffer.upload(data: &data)
@@ -31,8 +29,7 @@ class PNIDynamicBufferTests: XCTestCase {
         guard let device = MTLCreateSystemDefaultDevice(),
               let dynamicBuffer = PNIDynamicBuffer<Int>(device: device,
                                                         initialCapacity: 1) else {
-            XCTFail("Could not initiate device")
-            return
+            throw XCTSkip("Could not initiate device")
         }
         XCTAssertEqual(dynamicBuffer.buffer.label, "PNIDynamicBuffer<Int>")
     }
@@ -40,8 +37,7 @@ class PNIDynamicBufferTests: XCTestCase {
         guard let device = MTLCreateSystemDefaultDevice(),
               let dynamicBuffer = PNIDynamicBuffer<Int>(device: device,
                                                         initialCapacity: 1) else {
-            XCTFail("Could not initiate device")
-            return
+            throw XCTSkip("Could not initiate device")
         }
         var data = [1, 2, 3]
         dynamicBuffer.upload(data: &data)
