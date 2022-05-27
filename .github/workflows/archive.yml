@@ -28,5 +28,5 @@ jobs:
     - name: Upload the documentation
       uses: actions/upload-artifact@v3
       with:
-        name: Engine.doccarchive
+        name: Engine.doccarchive.tar.gz
         path: /tmp/engine-build/Build/Products/Release/Engine.doccarchive.tar.gz
