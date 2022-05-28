@@ -8,7 +8,7 @@ extension MTLRenderPassDescriptor {
     static func lightenScene(device: MTLDevice, depthStencil: MTLTexture, size: CGSize) -> MTLRenderPassDescriptor {
         let descriptor = MTLRenderPassDescriptor()
         descriptor.colorAttachments[0].loadAction = .clear
-        descriptor.colorAttachments[0].texture = device.makeTextureLightenSceneColor(size: size)
+        descriptor.colorAttachments[0].texture = device.makeTextureLightenSceneC(size: size)
         descriptor.colorAttachments[0].clearColor = MTLClearColor()
         descriptor.colorAttachments[0].storeAction = .store
         descriptor.depthAttachment.texture = depthStencil
@@ -22,18 +22,18 @@ extension MTLRenderPassDescriptor {
     static func gBuffer(device: MTLDevice, size: CGSize) -> MTLRenderPassDescriptor {
         let descriptor = MTLRenderPassDescriptor()
         descriptor.colorAttachments[0].loadAction = .clear
-        descriptor.colorAttachments[0].texture = device.makeTextureGBufferAR(size: size)
+        descriptor.colorAttachments[0].texture = device.makeTextureGBufferARC(size: size)
         descriptor.colorAttachments[0].storeAction = .store
         descriptor.colorAttachments[0].clearColor = MTLClearColor()
         descriptor.colorAttachments[1].loadAction = .clear
-        descriptor.colorAttachments[1].texture = device.makeTextureGBufferNM(size: size)
+        descriptor.colorAttachments[1].texture = device.makeTextureGBufferNMC(size: size)
         descriptor.colorAttachments[1].clearColor = MTLClearColor()
         descriptor.colorAttachments[1].storeAction = .store
         descriptor.colorAttachments[2].loadAction = .clear
-        descriptor.colorAttachments[2].texture = device.makeTextureGBufferPR(size: size)
+        descriptor.colorAttachments[2].texture = device.makeTextureGBufferPRC(size: size)
         descriptor.colorAttachments[2].clearColor = MTLClearColor()
         descriptor.colorAttachments[2].storeAction = .store
-        let depthStencil = device.makeTextureGBufferDepthStencil(size: size)
+        let depthStencil = device.makeTextureGBufferDS(size: size)
         descriptor.depthAttachment.clearDepth = 1
         descriptor.depthAttachment.texture = depthStencil
         descriptor.depthAttachment.storeAction = .store
@@ -46,7 +46,7 @@ extension MTLRenderPassDescriptor {
     }
     static func spotLightShadow(device: MTLDevice, size: CGSize, layers: Int) -> MTLRenderPassDescriptor {
         let descriptor = MTLRenderPassDescriptor()
-        let texture = device.makeTextureSpotLightShadowDepthStencil(size: size, lightsCount: layers)
+        let texture = device.makeTextureSpotShadowDS(size: size, lightsCount: layers)
         descriptor.renderTargetArrayLength = layers
         descriptor.depthAttachment.clearDepth = 1
         descriptor.depthAttachment.texture = texture
@@ -56,7 +56,7 @@ extension MTLRenderPassDescriptor {
     }
     static func directionalLightShadow(device: MTLDevice, size: CGSize, layers: Int) -> MTLRenderPassDescriptor {
         let descriptor = MTLRenderPassDescriptor()
-        let texture = device.makeTextureDirectionalLightShadowDepthStencil(size: size, lightsCount: layers)
+        let texture = device.makeTextureDirectionalShadowDS(size: size, lightsCount: layers)
         descriptor.renderTargetArrayLength = layers
         descriptor.depthAttachment.clearDepth = 1
         descriptor.depthAttachment.texture = texture
@@ -66,7 +66,7 @@ extension MTLRenderPassDescriptor {
     }
     static func omniLightShadow(device: MTLDevice, size: CGSize, layers: Int) -> MTLRenderPassDescriptor {
         let descriptor = MTLRenderPassDescriptor()
-        let texture = device.makeTextureOmniLightShadowDepthStencil(size: size, lightsCount: layers)
+        let texture = device.makeTextureOmniShadowDS(size: size, lightsCount: layers)
         descriptor.renderTargetArrayLength = 6 * layers
         descriptor.depthAttachment.clearDepth = 1
         descriptor.depthAttachment.texture = texture
@@ -77,7 +77,7 @@ extension MTLRenderPassDescriptor {
     static func ssao(device: MTLDevice, size: CGSize) -> MTLRenderPassDescriptor {
         let descriptor = MTLRenderPassDescriptor()
         descriptor.colorAttachments[0].loadAction = .clear
-        descriptor.colorAttachments[0].texture = device.makeTextureSsao(size: size)
+        descriptor.colorAttachments[0].texture = device.makeTextureSSAOC(size: size)
         descriptor.colorAttachments[0].clearColor = MTLClearColor()
         descriptor.colorAttachments[0].storeAction = .store
         return descriptor
@@ -85,7 +85,7 @@ extension MTLRenderPassDescriptor {
     static func bloomSplit(device: MTLDevice, size: CGSize) -> MTLRenderPassDescriptor {
         let descriptor = MTLRenderPassDescriptor()
         descriptor.colorAttachments[0].loadAction = .clear
-        descriptor.colorAttachments[0].texture = device.makeTextureBloomSplitColor(size: size)
+        descriptor.colorAttachments[0].texture = device.makeTextureBloomSplitC(size: size)
         descriptor.colorAttachments[0].clearColor = MTLClearColor()
         descriptor.colorAttachments[0].storeAction = .store
         return descriptor
@@ -93,7 +93,7 @@ extension MTLRenderPassDescriptor {
     static func bloomMerge(device: MTLDevice, size: CGSize) -> MTLRenderPassDescriptor {
         let descriptor = MTLRenderPassDescriptor()
         descriptor.colorAttachments[0].loadAction = .clear
-        descriptor.colorAttachments[0].texture = device.makeTextureBloomMergeColor(size: size)
+        descriptor.colorAttachments[0].texture = device.makeTextureBloomMergeC(size: size)
         descriptor.colorAttachments[0].clearColor = MTLClearColor()
         descriptor.colorAttachments[0].storeAction = .store
         return descriptor

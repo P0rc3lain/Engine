@@ -102,64 +102,64 @@ extension MTLDevice {
     // ==========
     // MTLTexture
     // ==========
-    func makeTextureLightenSceneDepthStencil(size: CGSize) -> MTLTexture? {
-        let texture = makeTexture(descriptor: .lightenSceneDepthStencil(size: size))
+    func makeTextureLightenSceneDS(size: CGSize) -> MTLTexture? {
+        let texture = makeTexture(descriptor: .lightenSceneDS(size: size))
         return texture?.labeled("Lighten Scene Depth Stencil")
     }
-    func makeTextureLightenSceneColor(size: CGSize) -> MTLTexture? {
-        let texture = makeTexture(descriptor: .lightenSceneColor(size: size))
+    func makeTextureLightenSceneC(size: CGSize) -> MTLTexture? {
+        let texture = makeTexture(descriptor: .lightenSceneC(size: size))
         return texture?.labeled("Lighten Scene Color")
     }
-    func makeTextureGBufferAR(size: CGSize) -> MTLTexture? {
-        let texture = makeTexture(descriptor: .gBufferAR(size: size))
+    func makeTextureGBufferARC(size: CGSize) -> MTLTexture? {
+        let texture = makeTexture(descriptor: .gBufferARC(size: size))
         return texture?.labeled("GBuffer Albedo-Roughness")
     }
-    func makeTextureGBufferNM(size: CGSize) -> MTLTexture? {
-        let texture = makeTexture(descriptor: .gBufferNM(size: size))
+    func makeTextureGBufferNMC(size: CGSize) -> MTLTexture? {
+        let texture = makeTexture(descriptor: .gBufferNMC(size: size))
         return texture?.labeled("GBuffer Normal-Metallic")
     }
-    func makeTextureGBufferPR(size: CGSize) -> MTLTexture? {
-        let texture = makeTexture(descriptor: .gBufferPR(size: size))
+    func makeTextureGBufferPRC(size: CGSize) -> MTLTexture? {
+        let texture = makeTexture(descriptor: .gBufferPRC(size: size))
         return texture?.labeled("GBuffer Position-Reflectance")
     }
-    func makeTextureGBufferDepthStencil(size: CGSize) -> MTLTexture? {
-        let texture = makeTexture(descriptor: .gBufferDepthStencil(size: size))
+    func makeTextureGBufferDS(size: CGSize) -> MTLTexture? {
+        let texture = makeTexture(descriptor: .gBufferDS(size: size))
         return texture?.labeled("GBuffer Depth Stencil")
     }
-    func makeTextureSpotLightShadowDepthStencil(size: CGSize, lightsCount: Int) -> MTLTexture? {
+    func makeTextureSpotShadowDS(size: CGSize, lightsCount: Int) -> MTLTexture? {
         let texture = makeTexture(descriptor: .spotShadowDS(size: size,
                                                             lightsCount: lightsCount))
         return texture?.labeled("Spot Light Shadow Depth Stencil")
     }
-    func makeTextureDirectionalLightShadowDepthStencil(size: CGSize, lightsCount: Int) -> MTLTexture? {
+    func makeTextureDirectionalShadowDS(size: CGSize, lightsCount: Int) -> MTLTexture? {
         let texture = makeTexture(descriptor: .directionalShadowDS(size: size,
                                                                    lightsCount: lightsCount))
         return texture?.labeled("Directional Light Shadow Depth Stencil")
     }
-    func makeTextureOmniLightShadowDepthStencil(size: CGSize, lightsCount: Int) -> MTLTexture? {
+    func makeTextureOmniShadowDS(size: CGSize, lightsCount: Int) -> MTLTexture? {
         let texture = makeTexture(descriptor: .omniShadowDS(size: size,
                                                             lightsCount: lightsCount))
         return texture?.labeled("Omni Light Shadow Depth Stencil")
     }
-    func makeTextureSsao(size: CGSize) -> MTLTexture? {
-        let texture = makeTexture(descriptor: .ssaoColor(size: size))
+    func makeTextureSSAOC(size: CGSize) -> MTLTexture? {
+        let texture = makeTexture(descriptor: .ssaoC(size: size))
         return texture?.labeled("SSAO Color")
     }
-    func makeTextureBloomSplitColor(size: CGSize) -> MTLTexture? {
-        let texture = makeTexture(descriptor: .bloomSplitColor(size: size))
+    func makeTextureBloomSplitC(size: CGSize) -> MTLTexture? {
+        let texture = makeTexture(descriptor: .bloomSplitC(size: size))
         return texture?.labeled("Bloom Split Color")
     }
-    func makeTextureBloomMergeColor(size: CGSize) -> MTLTexture? {
-        let texture = makeTexture(descriptor: .bloomMergeColor(size: size))
+    func makeTextureBloomMergeC(size: CGSize) -> MTLTexture? {
+        let texture = makeTexture(descriptor: .bloomMergeC(size: size))
         return texture?.labeled("Bloom Merge Color")
     }
-    func makeTexturePostprocessColor(size: CGSize) -> MTLTexture? {
-        let texture = makeTexture(descriptor: .postprocessColor(size: size))
+    func makeTexturePostprocessC(size: CGSize) -> MTLTexture? {
+        let texture = makeTexture(descriptor: .postprocessC(size: size))
         return texture?.labeled("Postprocess Color")
     }
-    public func makeSolidCubeTexture(color: simd_float4) -> MTLTexture? {
+    public func makeTextureSolidCube(color: simd_float4) -> MTLTexture? {
         assert(length(color) <= 2.001, "Color values must be in [0.0, 1.0] range")
-        let descriptor = MTLTextureDescriptor.minimalSolidColorCube
+        let descriptor = MTLTextureDescriptor.solidCubeC
         guard let texture = self.makeTexture(descriptor: descriptor) else {
             return nil
         }
@@ -184,9 +184,9 @@ extension MTLDevice {
         }
         return failed ? nil : texture
     }
-    public func makeSolid2DTexture(color: simd_float4) -> MTLTexture? {
+    public func makeTextureSolid2D(color: simd_float4) -> MTLTexture? {
         assert(length(color) <= 2.001, "Color values must be in [0.0, 1.0] range")
-        guard let texture = makeTexture(descriptor: .minimalSolidColor2D) else {
+        guard let texture = makeTexture(descriptor: .solid2DC) else {
             return nil
         }
         let region = MTLRegion(origin: .zero,
@@ -234,16 +234,16 @@ extension MTLDevice {
             makeBuffer(pointer: ptr)
         }
     }
-    func makeSharedBuffer(data: Data) -> MTLBuffer? {
+    func makeBufferShared(data: Data) -> MTLBuffer? {
         makeBuffer(data: data, options: [.storageModeShared])
     }
-    func makeSharedBuffer(length: Int) -> MTLBuffer? {
+    func makeBufferShared(length: Int) -> MTLBuffer? {
         makeBuffer(length: length, options: [.storageModeShared])
     }
-    func makeSharedBuffer(pointer: UnsafeRawBufferPointer) -> MTLBuffer? {
+    func makeBufferShared(pointer: UnsafeRawBufferPointer) -> MTLBuffer? {
         makeBuffer(pointer: pointer, options: [.storageModeShared])
     }
-    func makeSharedBuffer<T>(array: [T]) -> MTLBuffer? {
+    func makeBufferShared<T>(array: [T]) -> MTLBuffer? {
         makeBuffer(array: array, options: [.storageModeShared])
     }
 }

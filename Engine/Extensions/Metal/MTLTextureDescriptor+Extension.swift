@@ -6,7 +6,7 @@ import Metal
 import simd
 
 extension MTLTextureDescriptor {
-    static var minimalSolidColor2D: MTLTextureDescriptor {
+    static var solid2DC: MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.width = 8
         descriptor.height = 8
@@ -21,7 +21,7 @@ extension MTLTextureDescriptor {
         descriptor.usage = .shaderRead
         return descriptor
     }
-    static var minimalSolidColorCube: MTLTextureDescriptor {
+    static var solidCubeC: MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.width = 8
         descriptor.height = 8
@@ -47,22 +47,22 @@ extension MTLTextureDescriptor {
         descriptor.usage = [.shaderRead, .renderTarget]
         return descriptor
     }
-    static func gBufferAR(size: CGSize) -> MTLTextureDescriptor {
+    static func gBufferARC(size: CGSize) -> MTLTextureDescriptor {
         // Mean to store albedo and roughness
         // 3 bytes for albedo and 1 for roughness
         gBufferAttachment(size: size, pixelFormat: .gBufferARC)
     }
-    static func gBufferNM(size: CGSize) -> MTLTextureDescriptor {
+    static func gBufferNMC(size: CGSize) -> MTLTextureDescriptor {
         // Mean to store normals and metallic
         // 3 bytes for normals and 1 for metallic
         gBufferAttachment(size: size, pixelFormat: .gBufferNMC)
     }
-    static func gBufferPR(size: CGSize) -> MTLTextureDescriptor {
+    static func gBufferPRC(size: CGSize) -> MTLTextureDescriptor {
         // Mean to store positions and reflectance
         // 3 bytes for positions and 1 for reflectance
         gBufferAttachment(size: size, pixelFormat: .gBufferPRC)
     }
-    static func gBufferDepthStencil(size: CGSize) -> MTLTextureDescriptor {
+    static func gBufferDS(size: CGSize) -> MTLTextureDescriptor {
         gBufferAttachment(size: size, pixelFormat: .gBufferDS)
     }
     static func directionalShadowDS(size: CGSize,
@@ -101,7 +101,7 @@ extension MTLTextureDescriptor {
         descriptor.usage = [.shaderRead, .renderTarget]
         return descriptor
     }
-    static func lightenSceneColor(size: CGSize) -> MTLTextureDescriptor {
+    static func lightenSceneC(size: CGSize) -> MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = .type2D
         descriptor.width = size.width.int
@@ -111,7 +111,7 @@ extension MTLTextureDescriptor {
         descriptor.usage = [.shaderRead, .renderTarget]
         return descriptor
     }
-    static func ssaoColor(size: CGSize) -> MTLTextureDescriptor {
+    static func ssaoC(size: CGSize) -> MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = .type2D
         descriptor.width = size.width.int
@@ -121,7 +121,7 @@ extension MTLTextureDescriptor {
         descriptor.usage = [.shaderRead, .renderTarget, .shaderWrite]
         return descriptor
     }
-    static func bloomSplitColor(size: CGSize) -> MTLTextureDescriptor {
+    static func bloomSplitC(size: CGSize) -> MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = .type2D
         descriptor.width = size.width.int
@@ -131,7 +131,7 @@ extension MTLTextureDescriptor {
         descriptor.usage = [.renderTarget, .shaderRead, .shaderWrite]
         return descriptor
     }
-    static func bloomMergeColor(size: CGSize) -> MTLTextureDescriptor {
+    static func bloomMergeC(size: CGSize) -> MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = .type2D
         descriptor.width = size.width.int
@@ -141,7 +141,7 @@ extension MTLTextureDescriptor {
         descriptor.usage = [.renderTarget, .shaderRead, .shaderWrite]
         return descriptor
     }
-    static func lightenSceneDepthStencil(size: CGSize) -> MTLTextureDescriptor {
+    static func lightenSceneDS(size: CGSize) -> MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = .type2D
         descriptor.width = size.width.int
@@ -151,7 +151,7 @@ extension MTLTextureDescriptor {
         descriptor.usage = .renderTarget
         return descriptor
     }
-    static func postprocessColor(size: CGSize) -> MTLTextureDescriptor {
+    static func postprocessC(size: CGSize) -> MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = .type2D
         descriptor.width = size.width.int

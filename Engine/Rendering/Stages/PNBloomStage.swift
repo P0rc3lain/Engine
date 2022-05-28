@@ -20,7 +20,7 @@ struct PNBloomStage: PNStage {
                                                        inputTexture: input,
                                                        drawableSize: renderingSize),
               let stageOutputTexture = bloomMergeRenderPassDescriptor.colorAttachments[0].texture,
-              let splitBlurredTexture = device.makeTexture(descriptor: .bloomSplitColor(size: renderingSize)),
+              let splitBlurredTexture = device.makeTexture(descriptor: .bloomSplitC(size: renderingSize)),
               let bloomMergeJob = PNBloomMergeJob.make(device: device,
                                                        drawableSize: renderingSize,
                                                        unmodifiedSceneTexture: input,

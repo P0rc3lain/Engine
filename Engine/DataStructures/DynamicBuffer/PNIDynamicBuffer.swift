@@ -17,7 +17,7 @@ final public class PNIDynamicBuffer<T>: PNDynamicBuffer {
     }
     init?(device: MTLDevice, initialCapacity: Int) {
         assert(initialCapacity >= 0, "Capacity must be a natural value")
-        guard let buffer = device.makeSharedBuffer(length: max(initialCapacity, 1) * MemoryLayout<T>.stride) else {
+        guard let buffer = device.makeBufferShared(length: max(initialCapacity, 1) * MemoryLayout<T>.stride) else {
             return nil
         }
         self.count = 0
@@ -30,7 +30,7 @@ final public class PNIDynamicBuffer<T>: PNDynamicBuffer {
         let requiredSpace = data.count * MemoryLayout<T>.stride
         if buffer.length < requiredSpace {
             let newSize = 2 * max(requiredSpace, buffer.length)
-            guard let newBuffer = device.makeSharedBuffer(length: newSize) else {
+            guard let newBuffer = device.makeBufferShared(length: newSize) else {
                 fatalError("Cannot extend buffer size")
             }
             buffer = newBuffer

@@ -9,7 +9,7 @@ final class PNIStaticBuffer<T>: PNStaticBuffer {
     private(set) var buffer: MTLBuffer
     init?(device: MTLDevice, capacity: Int) {
         assert(capacity > 0, "Buffer size must be greater than zero")
-        guard let buffer = device.makeSharedBuffer(length: capacity * MemoryLayout<T>.stride) else {
+        guard let buffer = device.makeBufferShared(length: capacity * MemoryLayout<T>.stride) else {
             return nil
         }
         self.buffer = buffer

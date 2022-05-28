@@ -96,7 +96,7 @@ public final class PNISceneTranslator: PNSceneTranslator {
                "Only object that have a single buffer assigned are supported")
         let buffer = mesh.vertexBuffers[0].rawData
         let bounds = PNIBoundEstimator().bound(vertexBuffer: buffer)
-        guard let deviceBuffer = device.makeSharedBuffer(data: buffer) else {
+        guard let deviceBuffer = device.makeBufferShared(data: buffer) else {
             return nil
         }
         let dataBuffer = PNDataBuffer(buffer: deviceBuffer, length: buffer.count)
@@ -106,7 +106,7 @@ public final class PNISceneTranslator: PNSceneTranslator {
         }
         submeshes.forEach {
             if let material = $0.material,
-               let submeshBuffer = device.makeSharedBuffer(data: $0.indexBuffer.rawData),
+               let submeshBuffer = device.makeBufferShared(data: $0.indexBuffer.rawData),
                let indexType = PNIndexBitDepth(modelIO: $0.indexType)?.metal,
                let geometryType = PNPrimitiveType(modelIO: $0.geometryType)?.metal {
                 let submesh = PNSubmesh(indexBuffer: PNDataBuffer(buffer: submeshBuffer,
