@@ -5,7 +5,7 @@
 import Metal
 
 extension MTLStencilDescriptor {
-    static var environmentRenderer: MTLStencilDescriptor {
+    static var environment: MTLStencilDescriptor {
         let stencil = MTLStencilDescriptor()
         stencil.stencilCompareFunction = .equal
         stencil.stencilFailureOperation = .keep
@@ -13,7 +13,7 @@ extension MTLStencilDescriptor {
         stencil.depthStencilPassOperation = .keep
         return stencil
     }
-    static var fogJob: MTLStencilDescriptor {
+    static var fog: MTLStencilDescriptor {
         let stencil = MTLStencilDescriptor()
         stencil.stencilCompareFunction = .equal
         stencil.readMask = 0x1
@@ -23,7 +23,7 @@ extension MTLStencilDescriptor {
         stencil.depthStencilPassOperation = .replace
         return stencil
     }
-    static var lightRenderer: MTLStencilDescriptor {
+    static var lighten: MTLStencilDescriptor {
         let stencil = MTLStencilDescriptor()
         stencil.stencilCompareFunction = .greaterEqual
         stencil.readMask = 0b00000000
@@ -33,16 +33,16 @@ extension MTLStencilDescriptor {
         stencil.depthStencilPassOperation = .replace
         return stencil
     }
-    static var spotRenderer: MTLStencilDescriptor {
-        lightRenderer
+    static var spot: MTLStencilDescriptor {
+        lighten
     }
-    static var ambientRenderer: MTLStencilDescriptor {
-        lightRenderer
+    static var ambient: MTLStencilDescriptor {
+        lighten
     }
-    static var directionalRenderer: MTLStencilDescriptor {
-        lightRenderer
+    static var directional: MTLStencilDescriptor {
+        lighten
     }
-    static var gBufferRenderer: MTLStencilDescriptor {
+    static var gBuffer: MTLStencilDescriptor {
         let stencil = MTLStencilDescriptor()
         stencil.stencilCompareFunction = .greaterEqual
         stencil.readMask = 0b00000000

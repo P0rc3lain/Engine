@@ -5,75 +5,67 @@
 import Metal
 
 extension MTLDepthStencilDescriptor {
-    static var gBufferRenderer: MTLDepthStencilDescriptor {
-        let stencil = MTLStencilDescriptor.gBufferRenderer
+    func labeled(_ label: String) -> MTLDepthStencilDescriptor {
+        self.label = label
+        return self
+    }
+    static var gBuffer: MTLDepthStencilDescriptor {
+        let stencil = MTLStencilDescriptor.gBuffer
         let descriptor = MTLDepthStencilDescriptor()
-        descriptor.label = "GBuffer Renderer Depth Stencil"
+        descriptor.label = "GBuffer Depth Stencil"
         descriptor.depthCompareFunction = .lessEqual
         descriptor.isDepthWriteEnabled = true
         descriptor.frontFaceStencil = stencil
         return descriptor
     }
-    static private var lightRenderer: MTLDepthStencilDescriptor {
+    static private var lighten: MTLDepthStencilDescriptor {
         // descriptor.label set in objects utilizing the variable
-        let stencil = MTLStencilDescriptor.lightRenderer
+        let stencil = MTLStencilDescriptor.lighten
         let descriptor = MTLDepthStencilDescriptor()
         descriptor.depthCompareFunction = .lessEqual
         descriptor.isDepthWriteEnabled = true
         descriptor.frontFaceStencil = stencil
         return descriptor
     }
-    static var omniRenderer: MTLDepthStencilDescriptor {
-        let descriptor = lightRenderer
-        descriptor.label = "Omni Light Renderer Depth Stencil"
-        return descriptor
+    static var omni: MTLDepthStencilDescriptor {
+        lighten.labeled("Omni Depth Stencil")
     }
-    static var ambientRenderer: MTLDepthStencilDescriptor {
-        let descriptor = lightRenderer
-        descriptor.label = "Ambient Light Renderer Depth Stencil"
-        return descriptor
+    static var ambient: MTLDepthStencilDescriptor {
+        lighten.labeled("Ambient Depth Stencil")
     }
-    static var directionalRenderer: MTLDepthStencilDescriptor {
-        let descriptor = lightRenderer
-        descriptor.label = "Directional Light Renderer Depth Stencil"
-        return descriptor
+    static var directional: MTLDepthStencilDescriptor {
+        lighten.labeled("Directional Depth Stencil")
     }
-    static var spotRenderer: MTLDepthStencilDescriptor {
-        let descriptor = lightRenderer
-        descriptor.label = "Spot Light Renderer Depth Stencil"
-        return descriptor
+    static var spot: MTLDepthStencilDescriptor {
+        lighten.labeled("Spot Depth Stencil")
     }
-    static var spotShadowRenderer: MTLDepthStencilDescriptor {
+    static var spotShadow: MTLDepthStencilDescriptor {
         let descriptor = MTLDepthStencilDescriptor()
         descriptor.depthCompareFunction = .lessEqual
-        descriptor.label = "Spot Shadow Renderer Depth Stencil"
+        descriptor.label = "Spot Shadow Depth Stencil"
         descriptor.isDepthWriteEnabled = true
         return descriptor
     }
-    static var directionalShadowRenderer: MTLDepthStencilDescriptor {
-        let descriptor = spotShadowRenderer
-        descriptor.label = "Directional Shadow Renderer Depth Stencil"
-        return descriptor
+    static var directionalShadow: MTLDepthStencilDescriptor {
+        spotShadow.labeled("Directional Shadow Depth Stencil")
     }
-    static var omniShadowRenderer: MTLDepthStencilDescriptor {
-        let descriptor = spotShadowRenderer
-        descriptor.label = "Omni Shadow Renderer Depth Stencil"
-        return descriptor
+    static var omniShadow: MTLDepthStencilDescriptor {
+        spotShadow.labeled("Omni Shadow Depth Stencil")
     }
-    static var environmentRenderer: MTLDepthStencilDescriptor {
-        let stencil = MTLStencilDescriptor.environmentRenderer
+    static var environment: MTLDepthStencilDescriptor {
+        let stencil = MTLStencilDescriptor.environment
         let descriptor = MTLDepthStencilDescriptor()
-        descriptor.label = "Environmental Renderer Depth Stencil"
+        descriptor.label = "Environmental Depth Stencil"
         descriptor.depthCompareFunction = .always
         descriptor.isDepthWriteEnabled = false
         descriptor.frontFaceStencil = stencil
         descriptor.backFaceStencil = stencil
         return descriptor
     }
-    static var fogJob: MTLDepthStencilDescriptor {
-        let stencil = MTLStencilDescriptor.fogJob
+    static var fog: MTLDepthStencilDescriptor {
+        let stencil = MTLStencilDescriptor.fog
         let descriptor = MTLDepthStencilDescriptor()
-        descriptor.label = "Fog Job Depth Stencil"
+        descriptor.label = "Fog Depth Stencil"
         descriptor.depthCompareFunction = .always
         descriptor.isDepthWriteEnabled = false
         descriptor.frontFaceStencil = stencil

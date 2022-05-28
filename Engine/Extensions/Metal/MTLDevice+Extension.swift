@@ -10,34 +10,34 @@ extension MTLDevice {
     // MTLDepthStencilState
     // ====================
     func makeDepthStencilStateGBufferRenderer() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .gBufferRenderer)
+        makeDepthStencilState(descriptor: .gBuffer)
     }
     func makeDepthStencilStateSpotLightShadowRenderer() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .spotShadowRenderer)
+        makeDepthStencilState(descriptor: .spotShadow)
     }
     func makeDepthStencilStateOmniLightShadowRenderer() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .omniShadowRenderer)
+        makeDepthStencilState(descriptor: .omniShadow)
     }
     func makeDepthStencilStateDirectionalLightShadowRenderer() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .directionalShadowRenderer)
+        makeDepthStencilState(descriptor: .directionalShadow)
     }
     func makeDepthStencilStateEnvironmentRenderer() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .environmentRenderer)
+        makeDepthStencilState(descriptor: .environment)
     }
     func makeDepthStencilStateFogJob() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .fogJob)
+        makeDepthStencilState(descriptor: .fog)
     }
     func makeDepthStencilStateOmniPass() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .omniRenderer)
+        makeDepthStencilState(descriptor: .omni)
     }
     func makeDepthStencilStateDirectionalPass() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .directionalRenderer)
+        makeDepthStencilState(descriptor: .directional)
     }
     func makeDepthStencilStateSpotPass() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .spotRenderer)
+        makeDepthStencilState(descriptor: .spot)
     }
     func makeDepthStencilStateAmbientPass() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .ambientRenderer)
+        makeDepthStencilState(descriptor: .ambient)
     }
     // ======================
     // MTLRenderPipelineState
