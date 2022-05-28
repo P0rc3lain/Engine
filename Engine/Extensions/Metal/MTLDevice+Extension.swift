@@ -173,7 +173,7 @@ extension MTLDevice {
     }
     public func makeSolid2DTexture(color: simd_float4) -> MTLTexture? {
         assert(length(color) <= 2.001, "Color values must be in [0.0, 1.0] range")
-        guard let texture = self.makeTexture(descriptor: .minimalSolidColor2D) else {
+        guard let texture = makeTexture(descriptor: .minimalSolidColor2D) else {
             return nil
         }
         let size = MTLSize(width: texture.width,
@@ -206,9 +206,6 @@ extension MTLDevice {
     // =========
     // MTLBuffer
     // =========
-    func makeSharedBuffer(length: Int) -> MTLBuffer? {
-        makeBuffer(length: length, options: [.storageModeShared])
-    }
     func makeBuffer(data: Data) -> MTLBuffer? {
         guard let newBuffer = makeSharedBuffer(length: data.count) else {
             return nil
@@ -218,19 +215,23 @@ extension MTLDevice {
         }
         return newBuffer
     }
-    func makeBuffer(pointer: UnsafeRawBufferPointer, options: MTLResourceOptions = []) -> MTLBuffer? {
+    func makeBuffer(pointer: UnsafeRawBufferPointer,
+                    options: MTLResourceOptions = []) -> MTLBuffer? {
         guard let baseAddress = pointer.baseAddress else {
             return nil
         }
         return makeBuffer(bytes: baseAddress, length: pointer.count, options: options)
     }
-    func makeSharedBuffer(pointer: UnsafeRawBufferPointer) -> MTLBuffer? {
-        makeBuffer(pointer: pointer, options: [.storageModeShared])
-    }
     func makeBuffer<T>(array: [T], options: MTLResourceOptions = []) -> MTLBuffer? {
         array.withUnsafeBytes { ptr in
             makeBuffer(pointer: ptr)
         }
+    }
+    func makeSharedBuffer(length: Int) -> MTLBuffer? {
+        makeBuffer(length: length, options: [.storageModeShared])
+    }
+    func makeSharedBuffer(pointer: UnsafeRawBufferPointer) -> MTLBuffer? {
+        makeBuffer(pointer: pointer, options: [.storageModeShared])
     }
     func makeSharedBuffer<T>(array: [T]) -> MTLBuffer? {
         makeBuffer(array: array, options: [.storageModeShared])
