@@ -31,7 +31,7 @@ class SimdFloat3Tests: XCTestCase {
         let baseVector: simd_float3 = [0, 1, 0]
         let perpendicular = baseVector.randomPerpendicular(length: 2)
         XCTAssertEqual(dot(baseVector, perpendicular), .zero)
-        XCTAssertEqual(perpendicular.norm, 2)
+        XCTAssertEqual(perpendicular.norm, 2, accuracy: 0.00001)
         XCTAssertNotEqual(perpendicular, .zero)
     }
 }
