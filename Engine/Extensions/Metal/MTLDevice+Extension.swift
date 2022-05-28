@@ -216,14 +216,11 @@ extension MTLDevice {
     // =========
     // MTLBuffer
     // =========
-    func makeBuffer(data: Data) -> MTLBuffer? {
-        guard let newBuffer = makeSharedBuffer(length: data.count) else {
-            return nil
-        }
+    func makeBuffer(data: Data,
+                    options: MTLResourceOptions = []) -> MTLBuffer? {
         data.withUnsafeBytes { pointer in
-            newBuffer.contents().copyBuffer(from: pointer)
+            makeBuffer(pointer: pointer, options: options)
         }
-        return newBuffer
     }
     func makeBuffer(pointer: UnsafeRawBufferPointer,
                     options: MTLResourceOptions = []) -> MTLBuffer? {
@@ -236,6 +233,9 @@ extension MTLDevice {
         array.withUnsafeBytes { ptr in
             makeBuffer(pointer: ptr)
         }
+    }
+    func makeSharedBuffer(data: Data) -> MTLBuffer? {
+        makeBuffer(data: data, options: [.storageModeShared])
     }
     func makeSharedBuffer(length: Int) -> MTLBuffer? {
         makeBuffer(length: length, options: [.storageModeShared])
