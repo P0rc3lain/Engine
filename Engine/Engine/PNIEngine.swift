@@ -50,12 +50,14 @@ public final class PNIEngine: PNEngine {
                                  renderingSize: CGSize,
                                  scene: PNScene) -> PNIEngine? {
         let interactor = PNIBoundingBoxInteractor.default
+        let cullingController = PNICullingController(interactor: interactor)
+        let maskGenerator = PNIRenderMaskGenerator(cullingController: cullingController,
+                                                   interactor: interactor)
         return PNIEngine(view: view,
                          renderingSize: renderingSize,
                          scene: scene,
                          coordinatorFactory: PNIRenderingCoordinatorFactory(view: view),
                          workloadManagerFactory: PNIWorkloadManagerFactory(),
-                         renderMaskGenerator: PNIRenderMaskGenerator(cullingController: PNICullingController(interactor: interactor),
-                                                                     interactor: interactor))
+                         renderMaskGenerator: maskGenerator)
     }
 }
