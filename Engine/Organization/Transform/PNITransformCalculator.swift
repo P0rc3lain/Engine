@@ -5,7 +5,7 @@
 import simd
 
 struct PNITransformCalculator: PNTransformCalculator {
-    let interpolator: PNInterpolator
+    private let interpolator: PNInterpolator
     init(interpolator: PNInterpolator) {
         self.interpolator = interpolator
     }
