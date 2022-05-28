@@ -14,7 +14,7 @@ public final class PNSceneDescription {
     public var models = [PNModelReference]()
     // MARK: - Capacity C
     public var animatedModels = [PNAnimatedModelReference]()
-    public var paletteOffset = [Int]()
+    public var paletteOffset = [PNIndex]()
     // MARK: - Capacity D
     public var meshes = [PNMesh]()
     // MARK: - Capacity E
@@ -34,5 +34,5 @@ public final class PNSceneDescription {
     public var spotLights = [SpotLight]()
     // MARK: - Capacity L
     public var skyMap: MTLTexture?
-    public var activeCameraIdx = Int.nil
+    public var activeCameraIdx = PNIndex.nil
 }

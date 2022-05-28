@@ -10,7 +10,7 @@ struct PNISkeleton: PNSkeleton {
     var animations: [PNAnimatedSkeleton]
     var parentIndices: [PNIndex]
     init(bindTransforms: [PNBLTransform],
-         parentIndices: [Int],
+         parentIndices: [PNIndex],
          animations: [PNAnimatedSkeleton]) {
         assert(parentIndices.count == bindTransforms.count,
                "Each transform must have a reference to its parent")
