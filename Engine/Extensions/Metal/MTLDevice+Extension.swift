@@ -200,7 +200,8 @@ extension MTLDevice {
     // MTLLibrary
     // ==========
     func makePorcelainLibrary() -> MTLLibrary? {
-        try? makeDefaultLibrary(bundle: Bundle(for: PNIEngine.self))
+        let library = try? makeDefaultLibrary(bundle: Bundle.porcelain)
+        return library?.labeled("Default Library")
     }
     // =========
     // MTLBuffer
