@@ -147,11 +147,8 @@ extension MTLDevice {
         guard let texture = self.makeTexture(descriptor: descriptor) else {
             return nil
         }
-        let size = MTLSize(width: texture.width,
-                           height: texture.height,
-                           depth: texture.depth)
         let region = MTLRegion(origin: .zero,
-                               size: size)
+                               size: texture.size)
         let mapped = simd_uchar4(color * 255)
         let rawData = [simd_uchar4](repeating: mapped, count: 64)
         var failed = false
@@ -176,11 +173,8 @@ extension MTLDevice {
         guard let texture = makeTexture(descriptor: .minimalSolidColor2D) else {
             return nil
         }
-        let size = MTLSize(width: texture.width,
-                           height: texture.height,
-                           depth: texture.depth)
         let region = MTLRegion(origin: .zero,
-                               size: size)
+                               size: texture.size)
         let mapped = simd_uchar4(color * 255)
         let rawData = [simd_uchar4](repeating: mapped, count: 64)
         var failed = false
