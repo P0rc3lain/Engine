@@ -49,97 +49,113 @@ extension MTLDevice {
         try? makeRenderPipelineState(descriptor: .grain(library: library))
     }
     func makeRenderPipelineStateSpotLightShadow(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .spotLightShadowRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .spotShadow(library: library))
     }
     func makeRenderPipelineStateSpotLightShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .spotLightShadowAnimatedRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .spotShadowAnimated(library: library))
     }
     func makeRenderPipelineStateDirectionalLightShadow(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .directionalLightShadowRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .directionalShadow(library: library))
     }
     func makeRenderPipelineStateDirectionalLightShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .directionalLightShadowAnimatedRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .directionalShadowAnimated(library: library))
     }
     func makeRenderPipelineStateOmniLightShadow(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .omniLightShadowRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .omniShadow(library: library))
     }
     func makeRenderPipelineStateOmniLightShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .omniLightShadowAnimatedRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .omniShadowAnimated(library: library))
     }
     func makeRenderPipelineStateEnvironmentRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .environmentRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .environment(library: library))
     }
     func makeRenderPipelineStateFogJob(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .fogJob(library: library))
+        try? makeRenderPipelineState(descriptor: .fog(library: library))
     }
     func makeRenderPipelineStateGBufferRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .gBufferRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .gBuffer(library: library))
     }
     func makeRenderPipelineStateGBufferAnimatedRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .gBufferAnimatedRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .gBufferAnimated(library: library))
     }
     func makeRenderPipelineStateOmniRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .omniRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .omni(library: library))
     }
     func makeRenderPipelineStateDirectionalRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .directionalRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .directional(library: library))
     }
     func makeRenderPipelineStateSpotRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .spotRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .spot(library: library))
     }
     func makeRenderPipelineStateAmbientRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .ambientRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .ambient(library: library))
     }
     func makeRenderPipelineStateSsao(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .ssaoRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .ssao(library: library))
     }
     func makeRenderPipelineStateBloomSplit(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .bloomSplitRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .bloomSplit(library: library))
     }
     func makeRenderPipelineStateBloomMerge(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .bloomMergeRenderer(library: library))
+        try? makeRenderPipelineState(descriptor: .bloomMerge(library: library))
     }
     // ==========
     // MTLTexture
     // ==========
     func makeTextureLightenSceneDepthStencil(size: CGSize) -> MTLTexture? {
-        makeTexture(descriptor: .lightenSceneDepthStencil(size: size))
+        let texture = makeTexture(descriptor: .lightenSceneDepthStencil(size: size))
+        return texture?.labeled("Lighten Scene Depth Stencil")
     }
     func makeTextureLightenSceneColor(size: CGSize) -> MTLTexture? {
-        makeTexture(descriptor: .lightenSceneColor(size: size))
+        let texture = makeTexture(descriptor: .lightenSceneColor(size: size))
+        return texture?.labeled("Lighten Scene Color")
     }
     func makeTextureGBufferAR(size: CGSize) -> MTLTexture? {
-        makeTexture(descriptor: .gBufferAR(size: size))
+        let texture = makeTexture(descriptor: .gBufferAR(size: size))
+        return texture?.labeled("GBuffer Albedo-Roughness")
     }
     func makeTextureGBufferNM(size: CGSize) -> MTLTexture? {
-        makeTexture(descriptor: .gBufferNM(size: size))
+        let texture = makeTexture(descriptor: .gBufferNM(size: size))
+        return texture?.labeled("GBuffer Normal-Metallic")
     }
     func makeTextureGBufferPR(size: CGSize) -> MTLTexture? {
-        makeTexture(descriptor: .gBufferPR(size: size))
+        let texture = makeTexture(descriptor: .gBufferPR(size: size))
+        return texture?.labeled("GBuffer Position-Reflectance")
     }
     func makeTextureGBufferDepthStencil(size: CGSize) -> MTLTexture? {
-        makeTexture(descriptor: .gBufferDepthStencil(size: size))
+        let texture = makeTexture(descriptor: .gBufferDepthStencil(size: size))
+        return texture?.labeled("GBuffer Depth Stencil")
     }
     func makeTextureSpotLightShadowDepthStencil(size: CGSize, lightsCount: Int) -> MTLTexture? {
-        makeTexture(descriptor: .spotLightShadowDepthStencil(size: size, lightsCount: lightsCount))
+        let texture = makeTexture(descriptor: .spotShadowDS(size: size,
+                                                            lightsCount: lightsCount))
+        return texture?.labeled("Spot Light Shadow Depth Stencil")
     }
     func makeTextureDirectionalLightShadowDepthStencil(size: CGSize, lightsCount: Int) -> MTLTexture? {
-        makeTexture(descriptor: .directionalLightShadowDepthStencil(size: size, lightsCount: lightsCount))
+        let texture = makeTexture(descriptor: .directionalShadowDS(size: size,
+                                                                   lightsCount: lightsCount))
+        return texture?.labeled("Directional Light Shadow Depth Stencil")
     }
     func makeTextureOmniLightShadowDepthStencil(size: CGSize, lightsCount: Int) -> MTLTexture? {
-        makeTexture(descriptor: .omniLightShadowDepthStencil(size: size, lightsCount: lightsCount))
+        let texture = makeTexture(descriptor: .omniShadowDS(size: size,
+                                                            lightsCount: lightsCount))
+        return texture?.labeled("Omni Light Shadow Depth Stencil")
     }
     func makeTextureSsao(size: CGSize) -> MTLTexture? {
-        makeTexture(descriptor: .ssaoColor(size: size))
+        let texture = makeTexture(descriptor: .ssaoColor(size: size))
+        return texture?.labeled("SSAO Color")
     }
     func makeTextureBloomSplitColor(size: CGSize) -> MTLTexture? {
-        makeTexture(descriptor: .bloomSplitColor(size: size))
+        let texture = makeTexture(descriptor: .bloomSplitColor(size: size))
+        return texture?.labeled("Bloom Split Color")
     }
     func makeTextureBloomMergeColor(size: CGSize) -> MTLTexture? {
-        makeTexture(descriptor: .bloomMergeColor(size: size))
+        let texture = makeTexture(descriptor: .bloomMergeColor(size: size))
+        return texture?.labeled("Bloom Merge Color")
     }
     func makeTexturePostprocessColor(size: CGSize) -> MTLTexture? {
-        makeTexture(descriptor: .postprocessColor(size: size))
+        let texture = makeTexture(descriptor: .postprocessColor(size: size))
+        return texture?.labeled("Postprocess Color")
     }
     public func makeSolidCubeTexture(color: simd_float4) -> MTLTexture? {
         assert(length(color) <= 2.001, "Color values must be in [0.0, 1.0] range")

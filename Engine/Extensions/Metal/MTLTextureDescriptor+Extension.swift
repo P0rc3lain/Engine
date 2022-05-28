@@ -36,7 +36,8 @@ extension MTLTextureDescriptor {
         descriptor.usage = .shaderRead
         return descriptor
     }
-    private static func gBufferAttachment(size: CGSize, pixelFormat: MTLPixelFormat) -> MTLTextureDescriptor {
+    private static func gBufferAttachment(size: CGSize,
+                                          pixelFormat: MTLPixelFormat) -> MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = .type2D
         descriptor.width = size.width.int
@@ -49,51 +50,54 @@ extension MTLTextureDescriptor {
     static func gBufferAR(size: CGSize) -> MTLTextureDescriptor {
         // Mean to store albedo and roughness
         // 3 bytes for albedo and 1 for roughness
-        gBufferAttachment(size: size, pixelFormat: .gBufferAR)
+        gBufferAttachment(size: size, pixelFormat: .gBufferARC)
     }
     static func gBufferNM(size: CGSize) -> MTLTextureDescriptor {
         // Mean to store normals and metallic
         // 3 bytes for normals and 1 for metallic
-        gBufferAttachment(size: size, pixelFormat: .gBufferNM)
+        gBufferAttachment(size: size, pixelFormat: .gBufferNMC)
     }
     static func gBufferPR(size: CGSize) -> MTLTextureDescriptor {
         // Mean to store positions and reflectance
         // 3 bytes for positions and 1 for reflectance
-        gBufferAttachment(size: size, pixelFormat: .gBufferPR)
+        gBufferAttachment(size: size, pixelFormat: .gBufferPRC)
     }
     static func gBufferDepthStencil(size: CGSize) -> MTLTextureDescriptor {
-        gBufferAttachment(size: size, pixelFormat: .gBufferDepthStencil)
+        gBufferAttachment(size: size, pixelFormat: .gBufferDS)
     }
-    static func directionalLightShadowDepthStencil(size: CGSize, lightsCount: Int) -> MTLTextureDescriptor {
+    static func directionalShadowDS(size: CGSize,
+                                    lightsCount: Int) -> MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = .type2DArray
         descriptor.width = size.width.int
         descriptor.height = size.height.int
         descriptor.arrayLength = lightsCount
         descriptor.storageMode = .private
-        descriptor.pixelFormat = .directionalShadowDepthStencil
+        descriptor.pixelFormat = .directionalShadowDS
         descriptor.usage = [.shaderRead, .renderTarget]
         return descriptor
     }
-    static func spotLightShadowDepthStencil(size: CGSize, lightsCount: Int) -> MTLTextureDescriptor {
+    static func spotShadowDS(size: CGSize,
+                             lightsCount: Int) -> MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = .type2DArray
         descriptor.width = size.width.int
         descriptor.height = size.height.int
         descriptor.arrayLength = lightsCount
         descriptor.storageMode = .private
-        descriptor.pixelFormat = .spotShadowDepthStencil
+        descriptor.pixelFormat = .spotShadowDS
         descriptor.usage = [.shaderRead, .renderTarget]
         return descriptor
     }
-    static func omniLightShadowDepthStencil(size: CGSize, lightsCount: Int) -> MTLTextureDescriptor {
+    static func omniShadowDS(size: CGSize,
+                             lightsCount: Int) -> MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = .typeCubeArray
         descriptor.width = size.width.int
         descriptor.height = size.height.int
         descriptor.arrayLength = lightsCount
         descriptor.storageMode = .private
-        descriptor.pixelFormat = .omniShadowDepthStencil
+        descriptor.pixelFormat = .omniShadowDS
         descriptor.usage = [.shaderRead, .renderTarget]
         return descriptor
     }
@@ -103,7 +107,7 @@ extension MTLTextureDescriptor {
         descriptor.width = size.width.int
         descriptor.height = size.height.int
         descriptor.storageMode = .private
-        descriptor.pixelFormat = .lightenSceneColor
+        descriptor.pixelFormat = .lightenSceneC
         descriptor.usage = [.shaderRead, .renderTarget]
         return descriptor
     }
@@ -113,7 +117,7 @@ extension MTLTextureDescriptor {
         descriptor.width = size.width.int
         descriptor.height = size.height.int
         descriptor.storageMode = .private
-        descriptor.pixelFormat = .ssaoColor
+        descriptor.pixelFormat = .ssaoC
         descriptor.usage = [.shaderRead, .renderTarget, .shaderWrite]
         return descriptor
     }
@@ -123,7 +127,7 @@ extension MTLTextureDescriptor {
         descriptor.width = size.width.int
         descriptor.height = size.height.int
         descriptor.storageMode = .private
-        descriptor.pixelFormat = .bloomSplitColor
+        descriptor.pixelFormat = .bloomSplitC
         descriptor.usage = [.renderTarget, .shaderRead, .shaderWrite]
         return descriptor
     }
@@ -133,7 +137,7 @@ extension MTLTextureDescriptor {
         descriptor.width = size.width.int
         descriptor.height = size.height.int
         descriptor.storageMode = .private
-        descriptor.pixelFormat = .bloomMergeColor
+        descriptor.pixelFormat = .bloomMergeC
         descriptor.usage = [.renderTarget, .shaderRead, .shaderWrite]
         return descriptor
     }
@@ -143,7 +147,7 @@ extension MTLTextureDescriptor {
         descriptor.width = size.width.int
         descriptor.height = size.height.int
         descriptor.storageMode = .private
-        descriptor.pixelFormat = .lightenSceneDepthStencil
+        descriptor.pixelFormat = .lightenSceneDS
         descriptor.usage = .renderTarget
         return descriptor
     }
@@ -153,7 +157,7 @@ extension MTLTextureDescriptor {
         descriptor.width = size.width.int
         descriptor.height = size.height.int
         descriptor.storageMode = .private
-        descriptor.pixelFormat = .postprocessorRendererColor
+        descriptor.pixelFormat = .postprocessorC
         descriptor.usage = [.renderTarget, .shaderRead]
         return descriptor
     }

@@ -10,4 +10,8 @@ extension MTLTexture {
                 height: height,
                 depth: depth)
     }
+    func labeled(_ label: String) -> MTLTexture {
+        self.label = label
+        return self
+    }
 }

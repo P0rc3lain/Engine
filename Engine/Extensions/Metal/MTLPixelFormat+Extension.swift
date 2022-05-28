@@ -5,79 +5,79 @@
 import Metal
 
 extension MTLPixelFormat {
-    static var gBufferAR: MTLPixelFormat {
+    static var gBufferARC: MTLPixelFormat {
         .rgba16Float
     }
-    static var gBufferNM: MTLPixelFormat {
+    static var gBufferNMC: MTLPixelFormat {
         .rgba16Float
     }
-    static var gBufferPR: MTLPixelFormat {
+    static var gBufferPRC: MTLPixelFormat {
         .rgba16Float
     }
-    static var gBufferDepthStencil: MTLPixelFormat {
+    static var gBufferDS: MTLPixelFormat {
         .depth32Float_stencil8
     }
-    static var spotShadowDepthStencil: MTLPixelFormat {
+    static var spotShadowDS: MTLPixelFormat {
         .depth32Float
     }
-    static var directionalShadowDepthStencil: MTLPixelFormat {
+    static var directionalShadowDS: MTLPixelFormat {
         .depth32Float
     }
-    static var omniShadowDepthStencil: MTLPixelFormat {
+    static var omniShadowDS: MTLPixelFormat {
         .depth32Float
     }
-    static var ambientColor: MTLPixelFormat {
+    static var ambientC: MTLPixelFormat {
         .rgba16Float
     }
-    static var directionalColor: MTLPixelFormat {
+    static var directionalC: MTLPixelFormat {
         .rgba16Float
     }
-    static var spotColor: MTLPixelFormat {
+    static var spotC: MTLPixelFormat {
         .rgba16Float
     }
-    static var lightenSceneColor: MTLPixelFormat {
+    static var lightenSceneC: MTLPixelFormat {
         .rgba16Float
     }
-    static var ssaoColor: MTLPixelFormat {
+    static var ssaoC: MTLPixelFormat {
         .r16Float
     }
-    static var lightenSceneDepthStencil: MTLPixelFormat {
+    static var lightenSceneDS: MTLPixelFormat {
         .depth32Float_stencil8
     }
-    static var directionalDepthStencil: MTLPixelFormat {
+    static var directionalDS: MTLPixelFormat {
         .depth32Float_stencil8
     }
-    static var ambientDepthStencil: MTLPixelFormat {
+    static var ambientDS: MTLPixelFormat {
         .depth32Float_stencil8
     }
-    static var spotDepthStencil: MTLPixelFormat {
+    static var spotDS: MTLPixelFormat {
         .depth32Float_stencil8
     }
-    static var bloomSplitColor: MTLPixelFormat {
+    static var bloomSplitC: MTLPixelFormat {
         .rgba16Float
     }
-    static var bloomMergeColor: MTLPixelFormat {
+    static var bloomMergeC: MTLPixelFormat {
         .rgba16Float
     }
-    static var environmentRendererColor: MTLPixelFormat {
-        lightenSceneColor
+    static var environmentC: MTLPixelFormat {
+        lightenSceneC
     }
-    static var fogColor: MTLPixelFormat {
-        lightenSceneColor
+    static var fogC: MTLPixelFormat {
+        lightenSceneC
     }
-    static var environmentRendererDepthStencil: MTLPixelFormat {
-        lightenSceneDepthStencil
+    static var environmentDS: MTLPixelFormat {
+        lightenSceneDS
     }
-    static var fogDepthStencil: MTLPixelFormat {
-        lightenSceneDepthStencil
+    static var fogDS: MTLPixelFormat {
+        lightenSceneDS
     }
-    static var postprocessorRendererColor: MTLPixelFormat {
+    static var postprocessorC: MTLPixelFormat {
         .rgba16Float
     }
-    static var vignetteColor: MTLPixelFormat {
-        .postprocessorRendererColor
+    static var vignetteC: MTLPixelFormat {
+        .postprocessorC
     }
-    static var grainColor: MTLPixelFormat {
-        .postprocessorRendererColor
+    static var grainC: MTLPixelFormat {
+        .postprocessorC
     }
 }
