@@ -3,5 +3,5 @@
 //
 
 public protocol PNWorkloadManager {
-    mutating func draw(sceneGraph: inout PNScene)
+    func draw(sceneGraph: inout PNScene)
 }

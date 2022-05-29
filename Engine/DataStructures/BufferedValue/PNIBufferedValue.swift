@@ -14,6 +14,12 @@ final class PNIBufferedValue<T>: PNBufferedValue {
         lock.unlock()
         return copied
     }
+    var pullInactive: T {
+        lock.lock()
+        let copied = renderFront ? back : front
+        lock.unlock()
+        return copied
+    }
     init(_ front: T, _ back: T, renderFront: Bool = true) {
         self.front = front
         self.back = back

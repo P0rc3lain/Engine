@@ -5,6 +5,7 @@
 protocol PNBufferedValue {
     associatedtype DataType
     var pull: DataType { get }
+    var pullInactive: DataType { get }
     func push(_ value: DataType)
     func swap()
 }
