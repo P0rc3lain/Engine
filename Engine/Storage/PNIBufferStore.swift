@@ -15,13 +15,13 @@ public final class PNIBufferStore: PNBufferStore {
     public var modelCoordinateSystems: PNAnyDynamicBuffer<ModelUniforms>
     public var matrixPalettes: PNAnyDynamicBuffer<PNBLTransform>
     init?(device: MTLDevice) {
-        guard let omniLights = PNIDynamicBuffer<OmniLight>(device: device, initialCapacity: 1),
-              let cameras = PNIDynamicBuffer<CameraUniforms>(device: device, initialCapacity: 1),
-              let modelCoordinateSystems = PNIDynamicBuffer<ModelUniforms>(device: device, initialCapacity: 1),
-              let matrixPalettes = PNIDynamicBuffer<PNBLTransform>(device: device, initialCapacity: 1),
-              let ambientLights = PNIDynamicBuffer<AmbientLight>(device: device, initialCapacity: 1),
-              let directionalLights = PNIDynamicBuffer<DirectionalLight>(device: device, initialCapacity: 1),
-              let spotLights = PNIDynamicBuffer<SpotLight>(device: device, initialCapacity: 1) else {
+        guard let omniLights = PNIDynamicBuffer<OmniLight>(device: device),
+              let cameras = PNIDynamicBuffer<CameraUniforms>(device: device),
+              let modelCoordinateSystems = PNIDynamicBuffer<ModelUniforms>(device: device),
+              let matrixPalettes = PNIDynamicBuffer<PNBLTransform>(device: device),
+              let ambientLights = PNIDynamicBuffer<AmbientLight>(device: device),
+              let directionalLights = PNIDynamicBuffer<DirectionalLight>(device: device),
+              let spotLights = PNIDynamicBuffer<SpotLight>(device: device) else {
                   return nil
         }
         self.omniLights = PNAnyDynamicBuffer(omniLights)
