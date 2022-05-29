@@ -7,11 +7,16 @@ final class PNAnyBufferedValue<T>: PNBufferedValue {
     var pull: T {
         pullProxy()
     }
+    var pullInactive: T {
+        pullInactiveProxy()
+    }
     private let pullProxy: () -> T
+    private let pullInactiveProxy: () -> T
     private var pushProxy: (T) -> Void
     private var swapProxy: () -> Void
     init<V: PNBufferedValue>(_ value: V) where V.DataType == T {
         pullProxy = { value.pull }
+        pullInactiveProxy = { value.pullInactive }
         pushProxy = value.push(_:)
         swapProxy = value.swap
     }

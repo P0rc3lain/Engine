@@ -11,36 +11,37 @@ public final class PNIEngine: PNEngine {
     private let coordinatorFactory: PNRenderingCoordinatorFactory
     private let workloadManagerFactory: PNWorkloadManagerFactory
     private var workloadManager: PNWorkloadManager
-    private var bufferStore: PNBufferStore
+    private let bufferStoreFactory: PNBufferStoreFactory
     public init?(view: MTKView,
                  renderingSize: CGSize,
                  scene: PNScene,
                  coordinatorFactory: PNRenderingCoordinatorFactory,
                  workloadManagerFactory: PNWorkloadManagerFactory,
+                 bufferStoreFactory: PNBufferStoreFactory,
                  renderMaskGenerator: PNRenderMaskGenerator) {
         guard let coordinator = coordinatorFactory.new(drawableSize: renderingSize),
-              let device = view.device,
-              let bufferStore = PNIBufferStore(device: device) else {
+              let workloadManager = workloadManagerFactory.new(bufferStoreFactory: bufferStoreFactory,
+                                                               renderingCoordinator: coordinator,
+                                                               renderMaskGenerator: renderMaskGenerator) else {
             assert(false, "Could not create coordinator")
             return nil
         }
         self.view = view
+        self.bufferStoreFactory = bufferStoreFactory
         self.coordinatorFactory = coordinatorFactory
         self.scene = scene
-        self.bufferStore = bufferStore
         self.workloadManagerFactory = workloadManagerFactory
+        self.workloadManager = workloadManager
         self.renderMaskGenerator = renderMaskGenerator
-        self.workloadManager = workloadManagerFactory.new(bufferStore: bufferStore,
-                                                          renderingCoordinator: coordinator,
-                                                          renderMaskGenerator: renderMaskGenerator)
     }
     public func update(drawableSize: CGSize) -> Bool {
-        guard let updated = coordinatorFactory.new(drawableSize: drawableSize) else {
+        guard let updated = coordinatorFactory.new(drawableSize: drawableSize),
+              let workloadManager = workloadManagerFactory.new(bufferStoreFactory: bufferStoreFactory,
+                                                               renderingCoordinator: updated,
+                                                               renderMaskGenerator: renderMaskGenerator) else {
             return false
         }
-        workloadManager = workloadManagerFactory.new(bufferStore: bufferStore,
-                                                     renderingCoordinator: updated,
-                                                     renderMaskGenerator: renderMaskGenerator)
+        self.workloadManager = workloadManager
         return true
     }
     public func draw() {
@@ -48,7 +49,11 @@ public final class PNIEngine: PNEngine {
     }
     public static func `default`(view: MTKView,
                                  renderingSize: CGSize,
-                                 scene: PNScene) -> PNIEngine? {
+                                 scene: PNScene,
+                                 threaded: Bool) -> PNIEngine? {
+        guard let device = view.device else {
+            return nil
+        }
         let interactor = PNIBoundingBoxInteractor.default
         let cullingController = PNICullingController(interactor: interactor)
         let maskGenerator = PNIRenderMaskGenerator(cullingController: cullingController,
@@ -57,7 +62,15 @@ public final class PNIEngine: PNEngine {
                          renderingSize: renderingSize,
                          scene: scene,
                          coordinatorFactory: PNIRenderingCoordinatorFactory(view: view),
-                         workloadManagerFactory: PNIWorkloadManagerFactory(),
+                         workloadManagerFactory: workloadManagerFactory(threaded: threaded),
+                         bufferStoreFactory: PNIBufferStoreFactory(device: device),
                          renderMaskGenerator: maskGenerator)
+    }
+    static func workloadManagerFactory(threaded: Bool) -> PNWorkloadManagerFactory {
+        if threaded {
+            return PNIThreadedWorkloadManagerFactory()
+        } else {
+            return PNIWorkloadManagerFactory()
+        }
     }
 }
