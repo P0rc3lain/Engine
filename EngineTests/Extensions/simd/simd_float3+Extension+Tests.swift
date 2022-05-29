@@ -24,7 +24,7 @@ class SimdFloat3Tests: XCTestCase {
     func testRandomPerpendicular() throws {
         let baseVector: simd_float3 = .one
         let perpendicular = baseVector.randomPerpendicular()
-        XCTAssertEqual(dot(baseVector, perpendicular), .zero)
+        XCTAssertEqual(dot(baseVector, perpendicular), .zero, accuracy: 0.000_1)
         XCTAssertNotEqual(perpendicular, .zero)
     }
     func testRandomPerpendicularDifferentLength() throws {
