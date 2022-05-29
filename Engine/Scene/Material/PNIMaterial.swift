@@ -23,10 +23,14 @@ public struct PNIMaterial: PNMaterial {
         self.metallic = metallic
     }
     public static func `default`(device: MTLDevice) -> PNIMaterial? {
-        let normals = MDLTexture.solid2D(color: .defaultNormalsColor, name: "Default Normals")
-        let metallic = MDLTexture.solid2D(color: .defaultMetallicColor, name: "Default Metallic")
-        let roughness = MDLTexture.solid2D(color: .defaultRoughnessColor, name: "Default Roughness")
-        let albedo = MDLTexture.solid2D(color: .defaultBaseColor, name: "Default Albedo")
+        let normals = MDLTexture.solid2D(color: .defaultNormalsColor,
+                                         name: "Default Normals")
+        let metallic = MDLTexture.solid2D(color: .defaultMetallicColor,
+                                          name: "Default Metallic")
+        let roughness = MDLTexture.solid2D(color: .defaultRoughnessColor,
+                                           name: "Default Roughness")
+        let albedo = MDLTexture.solid2D(color: .defaultBaseColor,
+                                        name: "Default Albedo")
         guard let uN = normals.upload(device: device),
               let uM = metallic.upload(device: device),
               let uR = roughness.upload(device: device),

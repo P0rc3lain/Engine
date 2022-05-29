@@ -113,4 +113,9 @@ struct PNITranscriber: PNTranscriber {
         let transformations = animation.localTransformation(at: date, interpolator: PNIInterpolator())
         return skeleton.calculatePose(animationPose: transformations)
     }
+    static var `default`: PNITranscriber {
+        let interpolator = PNIInterpolator()
+        let transformCalculator = PNITransformCalculator(interpolator: interpolator)
+        return PNITranscriber(transformCalculator: transformCalculator)
+    }
 }

@@ -9,6 +9,7 @@ public struct PNIWorkloadManagerFactory: PNWorkloadManagerFactory {
                     renderMaskGenerator: PNRenderMaskGenerator) -> PNWorkloadManager {
         PNIWorkloadManager(bufferStore: bufferStore,
                            renderingCoordinator: renderingCoordinator,
-                           renderMaskGenerator: renderMaskGenerator)
+                           renderMaskGenerator: renderMaskGenerator,
+                           transcriber: PNITranscriber.default)
     }
 }
