@@ -25,12 +25,7 @@ struct PNITranscriber: PNTranscriber {
             let orientation = simd.simd_float4x4.from(directionVector: light.direction)
             let orientationInverse = orientation.inverse
             let bound = interactor.bound(interactor.aabb(interactor.multiply(orientationInverse, cameraBB)))
-            let projectionMatrix = simd_float4x4.orthographicProjection(left: bound.min.x,
-                                                                        right: bound.max.x,
-                                                                        top: bound.max.y,
-                                                                        bottom: bound.min.y,
-                                                                        near: bound.min.z,
-                                                                        far: bound.max.z)
+            let projectionMatrix = simd_float4x4.orthographicProjection(bound: bound)
             scene.directionalLights.append(DirectionalLight(color: light.color,
                                                             intensity: light.intensity,
                                                             rotationMatrix: orientation,

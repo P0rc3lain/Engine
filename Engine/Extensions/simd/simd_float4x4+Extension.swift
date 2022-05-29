@@ -55,16 +55,24 @@ extension simd_float4x4 {
                                        bottom: Float,
                                        near: Float,
                                        far: Float) -> simd_float4x4 {
-        let sLength: Float = 1.0 / (right - left)
-        let aLength: Float = right + left
-        let sHeight: Float = 1.0 / (top - bottom)
-        let aHeight: Float = top + bottom
-        let sDepth: Float  = 1.0 / (far - near)
+        let sLength = 1.0 / (right - left)
+        let aLength = right + left
+        let sHeight = 1.0 / (top - bottom)
+        let aHeight = top + bottom
+        let sDepth = 1.0 / (far - near)
         let p = simd_float4(2 * sLength, 0, 0, 0)
         let q = simd_float4(0, 2 * sHeight, 0, 0)
         let r = simd_float4(0, 0, -sDepth, 0)
         let s = simd_float4(-aLength * sLength, -aHeight * sHeight, -near * sDepth, 1)
         return float4x4(p, q, r, s)
+    }
+    static func orthographicProjection(bound: PNBound) -> simd_float4x4 {
+        orthographicProjection(left: bound.min.x,
+                               right: bound.max.x,
+                               top: bound.max.y,
+                               bottom: bound.min.y,
+                               near: bound.min.z,
+                               far: bound.max.z)
     }
     public static func from(directionVector: simd_float3) -> simd_float4x4 {
         simd_float3x3.from(directionVector: directionVector).expanded
