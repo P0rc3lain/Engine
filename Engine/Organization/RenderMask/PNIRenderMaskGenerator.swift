@@ -40,19 +40,17 @@ public struct PNIRenderMaskGenerator: PNRenderMaskGenerator {
     }
     private func generateRenderMasks(scene: PNSceneDescription) -> [[[Bool]]] {
         scene.omniLights.count.naturalExclusive.map { lightIndex in
-            var faceData = [[Bool]]()
-            for faceIndex in 6.naturalExclusive {
+            6.naturalExclusive.map { faceIndex in
                 let entityIndex = scene.omniLights[lightIndex].idx.int
                 let cameraTransform = scene.uniforms[entityIndex].modelMatrixInverse
-                let boundingBox = interactor.from(inverseProjection: scene.omniLights[lightIndex].projectionMatrixInverse)
+                let projectionInverse = scene.omniLights[lightIndex].projectionMatrixInverse
+                let boundingBox = interactor.from(inverseProjection: projectionInverse)
                 let cameraBoundingBox = interactor.multiply(cubeRotations[faceIndex].rotationMatrix,
                                                             interactor.multiply(cameraTransform, boundingBox))
                 let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
-                let mask = cullingController.cullingMask(scene: scene,
-                                                         boundingBox: cameraAlignedBoundingBox)
-                faceData.append(mask)
+                return cullingController.cullingMask(scene: scene,
+                                                     boundingBox: cameraAlignedBoundingBox)
             }
-            return faceData
         }
     }
 }
