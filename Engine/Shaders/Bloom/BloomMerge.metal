@@ -14,7 +14,7 @@ struct RasterizedData {
     float2 texcoord;
 };
 
-vertex RasterizedData  vertexBloomMerge(VertexPUV in [[stage_in]]) {
+vertex RasterizedData  vertexBloomMerge(Vertex in [[stage_in]]) {
     return RasterizedData {
         float4(in.position, 1),
         in.textureUV

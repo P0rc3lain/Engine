@@ -17,7 +17,7 @@ struct RasterizedData {
     float2 texcoord;
 };
 
-vertex RasterizedData vertexSSAO(VertexPUV in [[stage_in]]) {
+vertex RasterizedData vertexSSAO(Vertex in [[stage_in]]) {
     return RasterizedData {
         float4(in.position, 1),
         in.textureUV

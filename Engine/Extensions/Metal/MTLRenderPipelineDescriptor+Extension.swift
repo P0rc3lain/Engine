@@ -14,7 +14,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentVignette")
         descriptor.colorAttachments[0].pixelFormat = .vignetteC
         descriptor.vertexBuffers[0].mutability = .immutable
-        descriptor.vertexDescriptor = .vertexPUV
+        descriptor.vertexDescriptor = .vertex
         return descriptor
     }
     static func grain(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -24,7 +24,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentGrain")
         descriptor.colorAttachments[0].pixelFormat = .grainC
         descriptor.vertexBuffers[0].mutability = .immutable
-        descriptor.vertexDescriptor = .vertexPUV
+        descriptor.vertexDescriptor = .vertex
         return descriptor
     }
     static func environment(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -123,7 +123,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.colorAttachments[0].alphaBlendOperation = .max
         descriptor.depthAttachmentPixelFormat = .lightenSceneDS
         descriptor.stencilAttachmentPixelFormat = .lightenSceneDS
-        descriptor.vertexDescriptor = .vertexPUV
+        descriptor.vertexDescriptor = .vertex
         return descriptor
     }
     static func ambient(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -139,7 +139,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.colorAttachments[0].alphaBlendOperation = .max
         descriptor.depthAttachmentPixelFormat = .ambientDS
         descriptor.stencilAttachmentPixelFormat = .ambientDS
-        descriptor.vertexDescriptor = .vertexPUV
+        descriptor.vertexDescriptor = .vertex
         return descriptor
     }
     static func directional(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -155,7 +155,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.colorAttachments[0].alphaBlendOperation = .max
         descriptor.depthAttachmentPixelFormat = .directionalDS
         descriptor.stencilAttachmentPixelFormat = .directionalDS
-        descriptor.vertexDescriptor = .vertexPUV
+        descriptor.vertexDescriptor = .vertex
         return descriptor
     }
     static func spot(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -171,7 +171,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.colorAttachments[0].alphaBlendOperation = .max
         descriptor.depthAttachmentPixelFormat = .spotDS
         descriptor.stencilAttachmentPixelFormat = .spotDS
-        descriptor.vertexDescriptor = .vertexPUV
+        descriptor.vertexDescriptor = .vertex
         return descriptor
     }
     static func ssao(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -180,7 +180,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexFunction = library.makeFunction(name: "vertexSSAO")
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentSSAO")
         descriptor.colorAttachments[0].pixelFormat = .ssaoC
-        descriptor.vertexDescriptor = .vertexPUV
+        descriptor.vertexDescriptor = .vertex
         return descriptor
     }
     static func bloomSplit(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -189,7 +189,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexFunction = library.makeFunction(name: "vertexBloomSplit")
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentBloomSplit")
         descriptor.colorAttachments[0].pixelFormat = .bloomSplitC
-        descriptor.vertexDescriptor = .vertexPUV
+        descriptor.vertexDescriptor = .vertex
         return descriptor
     }
     static func bloomMerge(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -198,7 +198,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexFunction = library.makeFunction(name: "vertexBloomMerge")
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentBloomMerge")
         descriptor.colorAttachments[0].pixelFormat = .bloomSplitC
-        descriptor.vertexDescriptor = .vertexPUV
+        descriptor.vertexDescriptor = .vertex
         return descriptor
     }
     static func omniShadow(library: MTLLibrary) -> MTLRenderPipelineDescriptor {

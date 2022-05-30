@@ -21,7 +21,7 @@ struct RasterizerData {
     uint instanceId [[flat]];
 };
 
-vertex RasterizerData vertexDeferredLight(VertexPUV in [[stage_in]],
+vertex RasterizerData vertexDeferredLight(Vertex in [[stage_in]],
                                           uint instanceId [[instance_id]]) {
     return RasterizerData {
         float4(in.position, 1),
