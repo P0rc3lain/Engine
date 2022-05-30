@@ -42,11 +42,7 @@ struct PNFogJob: PNRenderJob {
                                    index: kAttributeFogFragmentShaderTextureCubeMap)
         encoder.setFragmentTexture(prTexture,
                                    index: kAttributeFogFragmentShaderTexturePR)
-        encoder.drawIndexedPrimitives(type: .triangle,
-                                      indexCount: cube.pieceDescriptions[0].drawDescription.indexBuffer.length / MemoryLayout<UInt16>.size,
-                                      indexType: .uint16,
-                                      indexBuffer: cube.pieceDescriptions[0].drawDescription.indexBuffer.buffer,
-                                      indexBufferOffset: 0)
+        encoder.drawIndexedPrimitives(submesh: cube.pieceDescriptions[0].drawDescription)
     }
     static func make(device: MTLDevice, drawableSize: CGSize, prTexture: MTLTexture) -> PNFogJob? {
         guard let library = device.makePorcelainLibrary(),

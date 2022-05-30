@@ -43,7 +43,11 @@ struct PNDirectionalShadowJob: PNRenderJob {
                      mesh: scene.meshes[animatedModel.mesh],
                      uniformReference: animatedModel.idx)
             }
-            encoder.setRenderPipelineState(pipelineState)
+        }
+        encoder.setRenderPipelineState(pipelineState)
+        for lightIndex in scene.directionalLights.count.naturalExclusive {
+            encoder.setVertexBytes(value: lightIndex,
+                                   index: kAttributeDirectionalShadowVertexShaderBufferInstanceId)
             for model in scene.models {
                 draw(encoder: encoder,
                      mesh: scene.meshes[model.mesh],
