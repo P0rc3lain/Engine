@@ -5,6 +5,10 @@
 import Metal
 
 extension MTLRenderCommandEncoder {
+    func setVertexBytes<T: RawRepresentable, P>(value: P, index: T) where T.RawValue == UInt32 {
+        var tmp = value
+        setVertexBytes(&tmp, length: MemoryLayout<P>.size, index: index)
+    }
     func setVertexBytes<T: RawRepresentable>(_ bytes: UnsafeRawPointer, length: Int, index: T) where T.RawValue == UInt32 {
         setVertexBytes(bytes, length: length, index: index.rawValue.int)
     }

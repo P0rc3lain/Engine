@@ -31,9 +31,7 @@ struct PNDirectionalShadowJob: PNRenderJob {
         encoder.setVertexBuffer(dataStore.directionalLights,
                                 index: kAttributeDirectionalShadowVertexShaderBufferDirectionalLights)
         for lightIndex in scene.directionalLights.count.naturalExclusive {
-            var lIndex = lightIndex
-            encoder.setVertexBytes(&lIndex,
-                                   length: MemoryLayout<Int>.size,
+            encoder.setVertexBytes(value: lightIndex,
                                    index: kAttributeDirectionalShadowVertexShaderBufferInstanceId)
             for animatedModel in scene.animatedModels {
                 let mesh = scene.meshes[animatedModel.mesh]
