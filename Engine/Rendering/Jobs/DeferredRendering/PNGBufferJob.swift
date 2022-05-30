@@ -11,6 +11,8 @@ struct PNGBufferJob: PNRenderJob {
     private let animatedPipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport
+    private let textureRange = kAttributeGBufferFragmentShaderTextureAlbedo ...
+                               kAttributeGBufferFragmentShaderTextureMetallic
     init(pipelineState: MTLRenderPipelineState,
          animatedPipelineState: MTLRenderPipelineState,
          depthStencilState: MTLDepthStencilState,
@@ -32,54 +34,43 @@ struct PNGBufferJob: PNRenderJob {
         encoder.setRenderPipelineState(animatedPipelineState)
         encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
                                 index: kAttributeGBufferVertexShaderBufferModelUniforms)
-        let texturesRange = kAttributeGBufferFragmentShaderTextureAlbedo ... kAttributeGBufferFragmentShaderTextureMetallic
         for animatedModel in scene.animatedModels {
             if !mask[animatedModel.idx] {
                 continue
             }
-            let mesh = scene.meshes[animatedModel.mesh]
-            encoder.setBackCulling(mesh.culling)
-            encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
-                                    offset: mesh.vertexBuffer.offset,
-                                    index: kAttributeGBufferVertexShaderBufferStageIn)
-            encoder.setVertexBytes(value: Int32(animatedModel.idx),
-                                   index: kAttributeGBufferVertexShaderBufferObjectIndex)
             encoder.setVertexBuffer(dataStore.matrixPalettes,
                                     offset: scene.paletteOffset[animatedModel.skeleton],
                                     index: kAttributeGBufferVertexShaderBufferMatrixPalettes)
-            for pieceDescription in mesh.pieceDescriptions {
-                if let material = pieceDescription.material {
-                    encoder.setFragmentTextures([material.albedo,
-                                                 material.roughness,
-                                                 material.normals,
-                                                 material.metallic],
-                                                range: texturesRange)
-                }
-                encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
-            }
+            draw(encoder: encoder,
+                 mesh: scene.meshes[animatedModel.mesh],
+                 uniformReference: animatedModel.idx)
         }
         encoder.setRenderPipelineState(pipelineState)
         for model in scene.models {
             if !mask[model.idx] {
                 continue
             }
-            let mesh = scene.meshes[model.mesh]
-            encoder.setBackCulling(mesh.culling)
-            encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
-                                    offset: mesh.vertexBuffer.offset,
-                                    index: kAttributeGBufferVertexShaderBufferStageIn)
-            encoder.setVertexBytes(value: Int32(model.idx),
-                                   index: kAttributeGBufferVertexShaderBufferObjectIndex)
-            for pieceDescription in mesh.pieceDescriptions {
-                if let material = pieceDescription.material {
-                    encoder.setFragmentTextures([material.albedo,
-                                                 material.roughness,
-                                                 material.normals,
-                                                 material.metallic],
-                                                range: texturesRange)
-                }
-                encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
+            draw(encoder: encoder,
+                 mesh: scene.meshes[model.mesh],
+                 uniformReference: model.idx)
+        }
+    }
+    private func draw(encoder: MTLRenderCommandEncoder, mesh: PNMesh, uniformReference: PNIndex) {
+        encoder.setBackCulling(mesh.culling)
+        encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
+                                offset: mesh.vertexBuffer.offset,
+                                index: kAttributeGBufferVertexShaderBufferStageIn)
+        encoder.setVertexBytes(value: Int32(uniformReference),
+                               index: kAttributeGBufferVertexShaderBufferObjectIndex)
+        for pieceDescription in mesh.pieceDescriptions {
+            if let material = pieceDescription.material {
+                encoder.setFragmentTextures([material.albedo,
+                                             material.roughness,
+                                             material.normals,
+                                             material.metallic],
+                                            range: textureRange)
             }
+            encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
         }
     }
 }

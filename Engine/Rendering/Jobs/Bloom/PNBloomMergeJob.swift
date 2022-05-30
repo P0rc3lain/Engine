@@ -31,8 +31,10 @@ struct PNBloomMergeJob: PNRenderJob {
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
                                 index: kAttributeBloomSplitVertexShaderBufferStageIn)
-        encoder.setFragmentTexture(unmodifiedSceneTexture, index: kAttributeBloomMergeFragmentShaderTextureOriginal)
-        encoder.setFragmentTexture(brightAreasTexture, index: kAttributeBloomMergeFragmentShaderTextureBrightAreas)
+        encoder.setFragmentTexture(unmodifiedSceneTexture,
+                                   index: kAttributeBloomMergeFragmentShaderTextureOriginal)
+        encoder.setFragmentTexture(brightAreasTexture,
+                                   index: kAttributeBloomMergeFragmentShaderTextureBrightAreas)
         encoder.drawIndexedPrimitives(submesh: plane.pieceDescriptions[0].drawDescription)
     }
     static func make(device: MTLDevice,

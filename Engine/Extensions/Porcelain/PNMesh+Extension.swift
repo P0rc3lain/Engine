@@ -15,7 +15,7 @@ extension PNMesh {
         let verticesBuffer = PNDataBuffer(wholeBuffer: vertices)
         let indicesBuffer = PNDataBuffer(wholeBuffer: indices)
         let drawDescription = PNSubmesh(indexBuffer: indicesBuffer,
-                                        indexCount: indices.length,
+                                        indexCount: indices.length / MemoryLayout<UInt16>.stride,
                                         indexType: .uint16,
                                         primitiveType: .triangle)
         let pieceDescription = PNPieceDescription(drawDescription: drawDescription)

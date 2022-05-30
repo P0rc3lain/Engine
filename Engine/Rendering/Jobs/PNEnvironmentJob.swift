@@ -37,11 +37,7 @@ struct PNEnvironmentJob: PNRenderJob {
                                 index: kAttributeEnvironmentVertexShaderBufferCamera)
         encoder.setFragmentTexture(skyMap,
                                    index: kAttributeEnvironmentFragmentShaderTextureCubeMap)
-        encoder.drawIndexedPrimitives(type: .triangle,
-                                      indexCount: cube.pieceDescriptions[0].drawDescription.indexBuffer.length / MemoryLayout<UInt16>.size,
-                                      indexType: .uint16,
-                                      indexBuffer: cube.pieceDescriptions[0].drawDescription.indexBuffer.buffer,
-                                      indexBufferOffset: 0)
+        encoder.drawIndexedPrimitives(submesh: cube.pieceDescriptions[0].drawDescription)
     }
     static func make(device: MTLDevice, drawableSize: CGSize) -> PNEnvironmentJob? {
         guard let library = device.makePorcelainLibrary(),
