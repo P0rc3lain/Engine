@@ -40,7 +40,7 @@ struct PNBloomSplitJob: PNRenderJob {
                      inputTexture: MTLTexture,
                      drawableSize: CGSize) -> PNBloomSplitJob? {
         guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRenderPipelineStateBloomSplit(library: library) else {
+              let pipelineState = device.makeRPSBloomSplit(library: library) else {
             return nil
         }
         return PNBloomSplitJob(pipelineState: pipelineState,

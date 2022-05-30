@@ -86,9 +86,9 @@ struct PNDirectionalShadowJob: PNRenderJob {
     static func make(device: MTLDevice,
                      renderingSize: CGSize) -> PNDirectionalShadowJob? {
         guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRenderPipelineStateDirectionalLightShadow(library: library),
+              let pipelineState = device.makeRPSDirectionalShadow(library: library),
               let depthStencilState = device.makeDepthStencilStateDirectionalLightShadowRenderer(),
-              let animatedPipelineState = device.makeRenderPipelineStateDirectionalLightShadowAnimated(library: library) else {
+              let animatedPipelineState = device.makeRPSDirectionalShadowAnimated(library: library) else {
             return nil
         }
         return PNDirectionalShadowJob(pipelineState: pipelineState,

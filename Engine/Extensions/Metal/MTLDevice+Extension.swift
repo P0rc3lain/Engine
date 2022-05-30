@@ -9,10 +9,10 @@ extension MTLDevice {
     // ====================
     // MTLDepthStencilState
     // ====================
-    func makeDepthStencilStateGBufferRenderer() -> MTLDepthStencilState? {
+    func makeDSSGBuffer() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: .gBuffer)
     }
-    func makeDepthStencilStateSpotLightShadowRenderer() -> MTLDepthStencilState? {
+    func makeDSSSpotShadow() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: .spotShadow)
     }
     func makeDepthStencilStateOmniLightShadowRenderer() -> MTLDepthStencilState? {
@@ -42,61 +42,61 @@ extension MTLDevice {
     // ======================
     // MTLRenderPipelineState
     // ======================
-    func makeRenderPipelineStateVignette(library: MTLLibrary) -> MTLRenderPipelineState? {
+    func makeRPSVignette(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .vignette(library: library))
     }
-    func makeRenderPipelineStateGrain(library: MTLLibrary) -> MTLRenderPipelineState? {
+    func makeRPSGrain(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .grain(library: library))
     }
-    func makeRenderPipelineStateSpotLightShadow(library: MTLLibrary) -> MTLRenderPipelineState? {
+    func makeRPSSpotShadow(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .spotShadow(library: library))
     }
-    func makeRenderPipelineStateSpotLightShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
+    func makeRPSSpotShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .spotShadowAnimated(library: library))
     }
-    func makeRenderPipelineStateDirectionalLightShadow(library: MTLLibrary) -> MTLRenderPipelineState? {
+    func makeRPSDirectionalShadow(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .directionalShadow(library: library))
     }
-    func makeRenderPipelineStateDirectionalLightShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
+    func makeRPSDirectionalShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .directionalShadowAnimated(library: library))
     }
-    func makeRenderPipelineStateOmniLightShadow(library: MTLLibrary) -> MTLRenderPipelineState? {
+    func makeRPSOmniShadow(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .omniShadow(library: library))
     }
-    func makeRenderPipelineStateOmniLightShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
+    func makeRPSOmniShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .omniShadowAnimated(library: library))
     }
-    func makeRenderPipelineStateEnvironmentRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
+    func makeRPSEnvironment(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .environment(library: library))
     }
-    func makeRenderPipelineStateFogJob(library: MTLLibrary) -> MTLRenderPipelineState? {
+    func makeRPSFog(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .fog(library: library))
     }
-    func makeRenderPipelineStateGBufferRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
+    func makeRPSGBuffer(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .gBuffer(library: library))
     }
-    func makeRenderPipelineStateGBufferAnimatedRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
+    func makeRPSGBufferAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .gBufferAnimated(library: library))
     }
-    func makeRenderPipelineStateOmniRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
+    func makeRPSOmni(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .omni(library: library))
     }
-    func makeRenderPipelineStateDirectionalRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
+    func makeRPSDirectional(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .directional(library: library))
     }
-    func makeRenderPipelineStateSpotRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
+    func makeRPSSpot(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .spot(library: library))
     }
-    func makeRenderPipelineStateAmbientRenderer(library: MTLLibrary) -> MTLRenderPipelineState? {
+    func makeRPSAmbient(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .ambient(library: library))
     }
-    func makeRenderPipelineStateSsao(library: MTLLibrary) -> MTLRenderPipelineState? {
+    func makeRPSSSAO(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .ssao(library: library))
     }
-    func makeRenderPipelineStateBloomSplit(library: MTLLibrary) -> MTLRenderPipelineState? {
+    func makeRPSBloomSplit(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .bloomSplit(library: library))
     }
-    func makeRenderPipelineStateBloomMerge(library: MTLLibrary) -> MTLRenderPipelineState? {
+    func makeRPSBloomMerge(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .bloomMerge(library: library))
     }
     // ==========

@@ -37,7 +37,7 @@ struct PNVignetteJob: PNRenderJob {
                      inputTexture: MTLTexture,
                      canvasSize: CGSize) -> PNVignetteJob? {
         guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRenderPipelineStateVignette(library: library),
+              let pipelineState = device.makeRPSVignette(library: library),
               let plane = PNMesh.screenSpacePlane(device: device) else {
             return nil
         }

@@ -103,9 +103,9 @@ struct PNOmniShadowJob: PNRenderJob {
     static func make(device: MTLDevice,
                      renderingSize: CGSize) -> PNOmniShadowJob? {
         guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRenderPipelineStateOmniLightShadow(library: library),
+              let pipelineState = device.makeRPSOmniShadow(library: library),
               let depthStencilState = device.makeDepthStencilStateOmniLightShadowRenderer(),
-              let animatedPipelineState = device.makeRenderPipelineStateOmniLightShadowAnimated(library: library),
+              let animatedPipelineState = device.makeRPSOmniShadowAnimated(library: library),
               let rotationsBuffer = PNIStaticBuffer<simd_float4x4>(device: device, capacity: 6) else {
             return nil
         }

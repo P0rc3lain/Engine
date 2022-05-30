@@ -93,9 +93,9 @@ struct PNSpotShadowJob: PNRenderJob {
     static func make(device: MTLDevice,
                      renderingSize: CGSize) -> PNSpotShadowJob? {
         guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRenderPipelineStateSpotLightShadow(library: library),
-              let depthStencilState = device.makeDepthStencilStateSpotLightShadowRenderer(),
-              let animatedPipelineState = device.makeRenderPipelineStateSpotLightShadowAnimated(library: library) else {
+              let pipelineState = device.makeRPSSpotShadow(library: library),
+              let depthStencilState = device.makeDSSSpotShadow(),
+              let animatedPipelineState = device.makeRPSSpotShadowAnimated(library: library) else {
             return nil
         }
         return PNSpotShadowJob(pipelineState: pipelineState,

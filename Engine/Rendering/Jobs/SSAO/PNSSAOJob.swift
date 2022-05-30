@@ -78,7 +78,7 @@ struct PNSSAOJob: PNRenderJob {
                      maxNoiseCount: Int,
                      maxSamplesCount: Int) -> PNSSAOJob? {
         guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRenderPipelineStateSsao(library: library),
+              let pipelineState = device.makeRPSSSAO(library: library),
               let kernelBuffer = PNIStaticBuffer<simd_float3>(device: device, capacity: 64),
               let noiseBuffer = PNIStaticBuffer<simd_float3>(device: device, capacity: 64),
               let uniforms = PNIStaticBuffer<SSAOUniforms>(device: device, capacity: 1)

@@ -65,7 +65,7 @@ struct PNOmniJob: PNRenderJob {
                      shadowMaps: MTLTexture,
                      drawableSize: CGSize) -> PNOmniJob? {
         guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRenderPipelineStateOmniRenderer(library: library),
+              let pipelineState = device.makeRPSOmni(library: library),
               let depthStencilState = device.makeDepthStencilStateOmniPass() else {
             return nil
         }

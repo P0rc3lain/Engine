@@ -41,7 +41,7 @@ struct PNGrainJob: PNRenderJob {
                      inputTexture: MTLTexture,
                      canvasSize: CGSize) -> PNGrainJob? {
         guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRenderPipelineStateGrain(library: library),
+              let pipelineState = device.makeRPSGrain(library: library),
               let plane = PNMesh.screenSpacePlane(device: device) else {
             return nil
         }

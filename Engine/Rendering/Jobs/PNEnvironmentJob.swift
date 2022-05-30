@@ -45,7 +45,7 @@ struct PNEnvironmentJob: PNRenderJob {
     }
     static func make(device: MTLDevice, drawableSize: CGSize) -> PNEnvironmentJob? {
         guard let library = device.makePorcelainLibrary(),
-              let environmentPipelineState = device.makeRenderPipelineStateEnvironmentRenderer(library: library),
+              let environmentPipelineState = device.makeRPSEnvironment(library: library),
               let depthStencilState = device.makeDepthStencilStateEnvironmentRenderer(),
               let cube = PNMesh.cube(device: device) else {
             return nil

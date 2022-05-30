@@ -44,7 +44,7 @@ struct PNBloomMergeJob: PNRenderJob {
                      unmodifiedSceneTexture: MTLTexture,
                      brightAreasTexture: MTLTexture) -> PNBloomMergeJob? {
         guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRenderPipelineStateBloomMerge(library: library) else {
+              let pipelineState = device.makeRPSBloomMerge(library: library) else {
             return nil
         }
         return PNBloomMergeJob(pipelineState: pipelineState,
