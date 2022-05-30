@@ -42,9 +42,7 @@ struct PNGBufferJob: PNRenderJob {
             encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                     offset: mesh.vertexBuffer.offset,
                                     index: kAttributeGBufferVertexShaderBufferStageIn)
-            var mutableIndex = Int32(animatedModel.idx)
-            encoder.setVertexBytes(&mutableIndex,
-                                   length: MemoryLayout<Int32>.size,
+            encoder.setVertexBytes(value: Int32(animatedModel.idx),
                                    index: kAttributeGBufferVertexShaderBufferObjectIndex)
             encoder.setVertexBuffer(dataStore.matrixPalettes,
                                     offset: scene.paletteOffset[animatedModel.skeleton],
@@ -70,9 +68,7 @@ struct PNGBufferJob: PNRenderJob {
             encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                     offset: mesh.vertexBuffer.offset,
                                     index: kAttributeGBufferVertexShaderBufferStageIn)
-            var mutableIndex = Int32(model.idx)
-            encoder.setVertexBytes(&mutableIndex,
-                                   length: MemoryLayout<Int32>.size,
+            encoder.setVertexBytes(value: Int32(model.idx),
                                    index: kAttributeGBufferVertexShaderBufferObjectIndex)
             for pieceDescription in mesh.pieceDescriptions {
                 if let material = pieceDescription.material {

@@ -24,9 +24,8 @@ struct PNGrainJob: PNRenderJob {
         encoder.setFragmentTexture(inputTexture,
                                    index: kAttributeGrainFragmentShaderTexture)
         encoder.setViewport(viewPort)
-        var time = Float(Date().timeIntervalSince1970.truncatingRemainder(dividingBy: 20))
-        encoder.setVertexBytes(&time,
-                               length: MemoryLayout<Float>.size,
+        let time = Float(Date().timeIntervalSince1970.truncatingRemainder(dividingBy: 20))
+        encoder.setVertexBytes(value: time,
                                index: kAttributeGrainVertexShaderBufferTime)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,

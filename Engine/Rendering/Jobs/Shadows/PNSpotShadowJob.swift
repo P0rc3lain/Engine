@@ -34,9 +34,7 @@ struct PNSpotShadowJob: PNRenderJob {
                                 index: kAttributeSpotShadowVertexShaderBufferModelUniforms)
         let masks = supply.mask.spotLights
         for lightIndex in scene.spotLights.count.naturalExclusive {
-            var lIndex = lightIndex
-            encoder.setVertexBytes(&lIndex,
-                                   length: MemoryLayout<Int>.size,
+            encoder.setVertexBytes(value: lightIndex,
                                    index: kAttributeSpotShadowVertexShaderBufferInstanceId)
             for animatedModel in scene.animatedModels {
                 if !masks[lightIndex][animatedModel.idx] {
@@ -47,9 +45,7 @@ struct PNSpotShadowJob: PNRenderJob {
                 encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                         offset: mesh.vertexBuffer.offset,
                                         index: kAttributeSpotShadowVertexShaderBufferStageIn)
-                var mutableIndex = Int32(animatedModel.idx)
-                encoder.setVertexBytes(&mutableIndex,
-                                       length: MemoryLayout<Int32>.size,
+                encoder.setVertexBytes(value: Int32(animatedModel.idx),
                                        index: kAttributeSpotShadowVertexShaderBufferObjectIndex)
                 encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
                                         offset: scene.paletteOffset[animatedModel.skeleton],
@@ -68,9 +64,7 @@ struct PNSpotShadowJob: PNRenderJob {
                 encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                         offset: mesh.vertexBuffer.buffer.offset,
                                         index: kAttributeSpotShadowVertexShaderBufferStageIn)
-                var mutableIndex = Int32(model.idx)
-                encoder.setVertexBytes(&mutableIndex,
-                                       length: MemoryLayout<Int32>.size,
+                encoder.setVertexBytes(value: Int32(model.idx),
                                        index: kAttributeSpotShadowVertexShaderBufferObjectIndex)
                 for pieceDescription in mesh.pieceDescriptions {
                     encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)

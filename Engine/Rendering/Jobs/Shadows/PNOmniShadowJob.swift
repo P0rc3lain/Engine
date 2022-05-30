@@ -40,9 +40,7 @@ struct PNOmniShadowJob: PNRenderJob {
                                 index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
         for lightIndex in supply.scene.omniLights.count.naturalExclusive {
             for faceIndex in 6.naturalExclusive {
-                var lIndex = lightIndex + faceIndex
-                encoder.setVertexBytes(&lIndex,
-                                       length: MemoryLayout<Int>.size,
+                encoder.setVertexBytes(value: lightIndex + faceIndex,
                                        index: kAttributeOmniShadowVertexShaderBufferInstanceId)
                 for animatedModel in supply.scene.animatedModels {
                     if !supply.mask.omniLights[lightIndex][faceIndex][animatedModel.idx] {
@@ -53,9 +51,7 @@ struct PNOmniShadowJob: PNRenderJob {
                                             index: kAttributeOmniShadowVertexShaderBufferMatrixPalettes)
                     let mesh = supply.scene.meshes[animatedModel.mesh]
                     encoder.setFrontCulling(mesh.culling)
-                    var mutableIndex = Int32(animatedModel.idx)
-                    encoder.setVertexBytes(&mutableIndex,
-                                           length: MemoryLayout<Int32>.size,
+                    encoder.setVertexBytes(value: Int32(animatedModel.idx),
                                            index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
                     encodeMeshDraw(commandEncoder: encoder, mesh: mesh)
                 }
@@ -66,9 +62,7 @@ struct PNOmniShadowJob: PNRenderJob {
                     }
                     let mesh = supply.scene.meshes[model.mesh]
                     encoder.setFrontCulling(mesh.culling)
-                    var mutableIndex = Int32(model.idx)
-                    encoder.setVertexBytes(&mutableIndex,
-                                           length: MemoryLayout<Int32>.size,
+                    encoder.setVertexBytes(value: Int32(model.idx),
                                            index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
                     encodeMeshDraw(commandEncoder: encoder, mesh: mesh)
                 }

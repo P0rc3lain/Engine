@@ -56,9 +56,7 @@ struct PNDirectionalShadowJob: PNRenderJob {
         encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                 offset: mesh.vertexBuffer.buffer.offset,
                                 index: kAttributeDirectionalShadowVertexShaderBufferStageIn)
-        var mutableIndex = Int32(uniformReference)
-        encoder.setVertexBytes(&mutableIndex,
-                               length: MemoryLayout<Int32>.size,
+        encoder.setVertexBytes(value: Int32(uniformReference),
                                index: kAttributeDirectionalShadowVertexShaderBufferObjectIndex)
         for pieceDescription in mesh.pieceDescriptions {
             encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
