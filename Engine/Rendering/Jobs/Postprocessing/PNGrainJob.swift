@@ -31,11 +31,7 @@ struct PNGrainJob: PNRenderJob {
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
                                 index: kAttributeGrainVertexShaderBufferStageIn)
-        encoder.drawIndexedPrimitives(type: .triangle,
-                                      indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
-                                      indexType: plane.pieceDescriptions[0].drawDescription.indexType,
-                                      indexBuffer: plane.pieceDescriptions[0].drawDescription.indexBuffer.buffer,
-                                      indexBufferOffset: plane.pieceDescriptions[0].drawDescription.indexBuffer.offset)
+        encoder.drawIndexedPrimitives(submesh: plane.pieceDescriptions[0].drawDescription)
     }
     static func make(device: MTLDevice,
                      inputTexture: MTLTexture,

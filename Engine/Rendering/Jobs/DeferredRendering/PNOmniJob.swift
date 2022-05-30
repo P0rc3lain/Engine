@@ -53,11 +53,7 @@ struct PNOmniJob: PNRenderJob {
                                   index: kAttributeLightingFragmentShaderBufferLightUniforms)
         encoder.setFragmentTextures([arTexture, nmTexture, prTexture, shadowMaps],
                                     range: kAttributeLightingFragmentShaderTextureAR ... kAttributeLightingFragmentShaderTextureShadowMaps)
-        encoder.drawIndexedPrimitives(type: .triangle,
-                                      indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
-                                      indexType: plane.pieceDescriptions[0].drawDescription.indexType,
-                                      indexBuffer: plane.pieceDescriptions[0].drawDescription.indexBuffer.buffer,
-                                      indexBufferOffset: plane.pieceDescriptions[0].drawDescription.indexBuffer.offset,
+        encoder.drawIndexedPrimitives(submesh: plane.pieceDescriptions[0].drawDescription,
                                       instanceCount: scene.omniLights.count)
     }
     static func make(device: MTLDevice,

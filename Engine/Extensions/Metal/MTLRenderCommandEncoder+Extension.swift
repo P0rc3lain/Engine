@@ -62,4 +62,12 @@ extension MTLRenderCommandEncoder {
         setCullMode(culling.frontCulling)
         setFrontFacing(culling.winding)
     }
+    func drawIndexedPrimitives(submesh indexDraw: PNSubmesh, instanceCount: Int = 1) {
+        drawIndexedPrimitives(type: indexDraw.primitiveType,
+                              indexCount: indexDraw.indexCount,
+                              indexType: indexDraw.indexType,
+                              indexBuffer: indexDraw.indexBuffer.buffer,
+                              indexBufferOffset: indexDraw.indexBuffer.offset,
+                              instanceCount: instanceCount)
+    }
 }
