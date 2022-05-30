@@ -30,6 +30,8 @@ struct PNGBufferJob: PNRenderJob {
                                 index: kAttributeGBufferVertexShaderBufferCameraUniforms)
         encoder.setStencilReferenceValue(1)
         encoder.setRenderPipelineState(animatedPipelineState)
+        encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
+                                index: kAttributeGBufferVertexShaderBufferModelUniforms)
         let texturesRange = kAttributeGBufferFragmentShaderTextureAlbedo ... kAttributeGBufferFragmentShaderTextureMetallic
         for animatedModel in scene.animatedModels {
             if !mask[animatedModel.idx] {
@@ -40,29 +42,20 @@ struct PNGBufferJob: PNRenderJob {
             encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                     offset: mesh.vertexBuffer.offset,
                                     index: kAttributeGBufferVertexShaderBufferStageIn)
-            var mutableIndex = Int32(animatedModel.idx)
-            encoder.setVertexBytes(&mutableIndex,
-                                   length: MemoryLayout<Int32>.size,
+            encoder.setVertexBytes(value: Int32(animatedModel.idx),
                                    index: kAttributeGBufferVertexShaderBufferObjectIndex)
-            encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
-                                    index: kAttributeGBufferVertexShaderBufferModelUniforms)
-            for pieceIndex in mesh.pieceDescriptions {
-                encoder.setVertexBuffer(dataStore.matrixPalettes,
-                                        offset: scene.paletteOffset[animatedModel.skeleton],
-                                        index: kAttributeGBufferVertexShaderBufferMatrixPalettes)
-                if let material = pieceIndex.material {
+            encoder.setVertexBuffer(dataStore.matrixPalettes,
+                                    offset: scene.paletteOffset[animatedModel.skeleton],
+                                    index: kAttributeGBufferVertexShaderBufferMatrixPalettes)
+            for pieceDescription in mesh.pieceDescriptions {
+                if let material = pieceDescription.material {
                     encoder.setFragmentTextures([material.albedo,
                                                  material.roughness,
                                                  material.normals,
                                                  material.metallic],
                                                 range: texturesRange)
                 }
-                let indexDraw = pieceIndex.drawDescription
-                encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
-                                              indexCount: indexDraw.indexCount,
-                                              indexType: indexDraw.indexType,
-                                              indexBuffer: indexDraw.indexBuffer.buffer,
-                                              indexBufferOffset: indexDraw.indexBuffer.offset)
+                encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
             }
         }
         encoder.setRenderPipelineState(pipelineState)
@@ -75,26 +68,17 @@ struct PNGBufferJob: PNRenderJob {
             encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                     offset: mesh.vertexBuffer.offset,
                                     index: kAttributeGBufferVertexShaderBufferStageIn)
-            var mutableIndex = Int32(model.idx)
-            encoder.setVertexBytes(&mutableIndex,
-                                   length: MemoryLayout<Int32>.size,
+            encoder.setVertexBytes(value: Int32(model.idx),
                                    index: kAttributeGBufferVertexShaderBufferObjectIndex)
-            encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
-                                    index: kAttributeGBufferVertexShaderBufferModelUniforms)
-            for pieceIndex in mesh.pieceDescriptions {
-                if let material = pieceIndex.material {
+            for pieceDescription in mesh.pieceDescriptions {
+                if let material = pieceDescription.material {
                     encoder.setFragmentTextures([material.albedo,
                                                  material.roughness,
                                                  material.normals,
                                                  material.metallic],
                                                 range: texturesRange)
                 }
-                let indexDraw = pieceIndex.drawDescription
-                encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
-                                              indexCount: indexDraw.indexCount,
-                                              indexType: indexDraw.indexType,
-                                              indexBuffer: indexDraw.indexBuffer.buffer,
-                                              indexBufferOffset: indexDraw.indexBuffer.offset)
+                encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
             }
         }
     }

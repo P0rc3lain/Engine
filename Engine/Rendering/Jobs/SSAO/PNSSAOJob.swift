@@ -65,11 +65,7 @@ struct PNSSAOJob: PNRenderJob {
         let range = kAttributeSsaoFragmentShaderTextureNM ... kAttributeSsaoFragmentShaderTexturePR
         encoder.setFragmentTextures([nmTexture, prTexture],
                                     range: range)
-        encoder.drawIndexedPrimitives(type: .triangle,
-                                      indexCount: plane.pieceDescriptions[0].drawDescription.indexCount,
-                                      indexType: plane.pieceDescriptions[0].drawDescription.indexType,
-                                      indexBuffer: plane.pieceDescriptions[0].drawDescription.indexBuffer.buffer,
-                                      indexBufferOffset: plane.pieceDescriptions[0].drawDescription.indexBuffer.offset)
+        encoder.drawIndexedPrimitives(submesh: plane.pieceDescriptions[0].drawDescription)
     }
     static func make(device: MTLDevice,
                      prTexture: MTLTexture,

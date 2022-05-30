@@ -30,11 +30,11 @@ struct PNSpotShadowJob: PNRenderJob {
         encoder.setRenderPipelineState(animatedPipelineState)
         encoder.setVertexBuffer(dataStore.spotLights,
                                 index: kAttributeSpotShadowVertexShaderBufferSpotLights)
+        encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
+                                index: kAttributeSpotShadowVertexShaderBufferModelUniforms)
         let masks = supply.mask.spotLights
         for lightIndex in scene.spotLights.count.naturalExclusive {
-            var lIndex = lightIndex
-            encoder.setVertexBytes(&lIndex,
-                                   length: MemoryLayout<Int>.size,
+            encoder.setVertexBytes(value: lightIndex,
                                    index: kAttributeSpotShadowVertexShaderBufferInstanceId)
             for animatedModel in scene.animatedModels {
                 if !masks[lightIndex][animatedModel.idx] {
@@ -45,22 +45,13 @@ struct PNSpotShadowJob: PNRenderJob {
                 encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                         offset: mesh.vertexBuffer.offset,
                                         index: kAttributeSpotShadowVertexShaderBufferStageIn)
-                var mutableIndex = Int32(animatedModel.idx)
-                encoder.setVertexBytes(&mutableIndex,
-                                       length: MemoryLayout<Int32>.size,
+                encoder.setVertexBytes(value: Int32(animatedModel.idx),
                                        index: kAttributeSpotShadowVertexShaderBufferObjectIndex)
-                encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
-                                        index: kAttributeSpotShadowVertexShaderBufferModelUniforms)
-                for pieceIndex in mesh.pieceDescriptions {
-                    encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
-                                            offset: scene.paletteOffset[animatedModel.skeleton],
-                                            index: kAttributeSpotShadowVertexShaderBufferMatrixPalettes)
-                    let indexDraw = pieceIndex.drawDescription
-                    encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
-                                                  indexCount: indexDraw.indexCount,
-                                                  indexType: indexDraw.indexType,
-                                                  indexBuffer: indexDraw.indexBuffer.buffer,
-                                                  indexBufferOffset: indexDraw.indexBuffer.offset)
+                encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
+                                        offset: scene.paletteOffset[animatedModel.skeleton],
+                                        index: kAttributeSpotShadowVertexShaderBufferMatrixPalettes)
+                for pieceDescription in mesh.pieceDescriptions {
+                    encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
                 }
             }
             encoder.setRenderPipelineState(pipelineState)
@@ -73,19 +64,10 @@ struct PNSpotShadowJob: PNRenderJob {
                 encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                         offset: mesh.vertexBuffer.buffer.offset,
                                         index: kAttributeSpotShadowVertexShaderBufferStageIn)
-                var mutableIndex = Int32(model.idx)
-                encoder.setVertexBytes(&mutableIndex,
-                                       length: MemoryLayout<Int32>.size,
+                encoder.setVertexBytes(value: Int32(model.idx),
                                        index: kAttributeSpotShadowVertexShaderBufferObjectIndex)
-                encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
-                                        index: kAttributeSpotShadowVertexShaderBufferModelUniforms)
-                for pieceIndex in mesh.pieceDescriptions {
-                    let indexDraw = pieceIndex.drawDescription
-                    encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
-                                                  indexCount: indexDraw.indexCount,
-                                                  indexType: indexDraw.indexType,
-                                                  indexBuffer: indexDraw.indexBuffer.buffer,
-                                                  indexBufferOffset: indexDraw.indexBuffer.offset)
+                for pieceDescription in mesh.pieceDescriptions {
+                    encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
                 }
             }
         }

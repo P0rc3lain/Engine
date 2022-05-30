@@ -36,11 +36,11 @@ struct PNOmniShadowJob: PNRenderJob {
                                 index: kAttributeOmniShadowVertexShaderBufferRotations)
         encoder.setVertexBuffer(supply.bufferStore.omniLights,
                                 index: kAttributeOmniShadowVertexShaderBufferOmniLights)
+        encoder.setVertexBuffer(supply.bufferStore.modelCoordinateSystems,
+                                index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
         for lightIndex in supply.scene.omniLights.count.naturalExclusive {
             for faceIndex in 6.naturalExclusive {
-                var lIndex = lightIndex + faceIndex
-                encoder.setVertexBytes(&lIndex,
-                                       length: MemoryLayout<Int>.size,
+                encoder.setVertexBytes(value: lightIndex + faceIndex,
                                        index: kAttributeOmniShadowVertexShaderBufferInstanceId)
                 for animatedModel in supply.scene.animatedModels {
                     if !supply.mask.omniLights[lightIndex][faceIndex][animatedModel.idx] {
@@ -51,12 +51,8 @@ struct PNOmniShadowJob: PNRenderJob {
                                             index: kAttributeOmniShadowVertexShaderBufferMatrixPalettes)
                     let mesh = supply.scene.meshes[animatedModel.mesh]
                     encoder.setFrontCulling(mesh.culling)
-                    var mutableIndex = Int32(animatedModel.idx)
-                    encoder.setVertexBytes(&mutableIndex,
-                                           length: MemoryLayout<Int32>.size,
+                    encoder.setVertexBytes(value: Int32(animatedModel.idx),
                                            index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
-                    encoder.setVertexBuffer(supply.bufferStore.modelCoordinateSystems,
-                                            index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
                     encodeMeshDraw(commandEncoder: encoder, mesh: mesh)
                 }
                 encoder.setRenderPipelineState(pipelineState)
@@ -66,11 +62,7 @@ struct PNOmniShadowJob: PNRenderJob {
                     }
                     let mesh = supply.scene.meshes[model.mesh]
                     encoder.setFrontCulling(mesh.culling)
-                    encoder.setVertexBuffer(supply.bufferStore.modelCoordinateSystems,
-                                            index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
-                    var mutableIndex = Int32(model.idx)
-                    encoder.setVertexBytes(&mutableIndex,
-                                           length: MemoryLayout<Int32>.size,
+                    encoder.setVertexBytes(value: Int32(model.idx),
                                            index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
                     encodeMeshDraw(commandEncoder: encoder, mesh: mesh)
                 }
@@ -81,13 +73,8 @@ struct PNOmniShadowJob: PNRenderJob {
         encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                 offset: mesh.vertexBuffer.offset,
                                 index: kAttributeOmniShadowVertexShaderBufferStageIn)
-        for pieceIndex in mesh.pieceDescriptions {
-            let indexDraw = pieceIndex.drawDescription
-            encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
-                                          indexCount: indexDraw.indexCount,
-                                          indexType: indexDraw.indexType,
-                                          indexBuffer: indexDraw.indexBuffer.buffer,
-                                          indexBufferOffset: indexDraw.indexBuffer.offset)
+        for pieceDescription in mesh.pieceDescriptions {
+            encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
         }
     }
     private static var rotationMatrices: [simd_float4x4] {
