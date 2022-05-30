@@ -66,7 +66,7 @@ struct PNDirectionalJob: PNRenderJob {
                      drawableSize: CGSize) -> PNDirectionalJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSDirectional(library: library),
-              let depthStencilState = device.makeDepthStencilStateDirectionalPass() else {
+              let depthStencilState = device.makeDSSDirectional() else {
             return nil
         }
         return PNDirectionalJob(pipelineState: pipelineState,

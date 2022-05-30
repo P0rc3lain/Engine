@@ -15,28 +15,28 @@ extension MTLDevice {
     func makeDSSSpotShadow() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: .spotShadow)
     }
-    func makeDepthStencilStateOmniLightShadowRenderer() -> MTLDepthStencilState? {
+    func makeDSSOmniLightShadow() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: .omniShadow)
     }
-    func makeDepthStencilStateDirectionalLightShadowRenderer() -> MTLDepthStencilState? {
+    func makeDSSDirectionalLightShadow() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: .directionalShadow)
     }
-    func makeDepthStencilStateEnvironmentRenderer() -> MTLDepthStencilState? {
+    func makeDSSEnvironment() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: .environment)
     }
-    func makeDepthStencilStateFogJob() -> MTLDepthStencilState? {
+    func makeDSSFog() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: .fog)
     }
-    func makeDepthStencilStateOmniPass() -> MTLDepthStencilState? {
+    func makeDSSOmni() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: .omni)
     }
-    func makeDepthStencilStateDirectionalPass() -> MTLDepthStencilState? {
+    func makeDSSDirectional() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: .directional)
     }
-    func makeDepthStencilStateSpotPass() -> MTLDepthStencilState? {
+    func makeDSSSpot() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: .spot)
     }
-    func makeDepthStencilStateAmbientPass() -> MTLDepthStencilState? {
+    func makeDSSAmbient() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: .ambient)
     }
     // ======================

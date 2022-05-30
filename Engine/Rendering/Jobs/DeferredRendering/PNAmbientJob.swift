@@ -63,7 +63,7 @@ struct PNAmbientJob: PNRenderJob {
                      drawableSize: CGSize) -> PNAmbientJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSAmbient(library: library),
-              let depthStencilState = device.makeDepthStencilStateAmbientPass() else {
+              let depthStencilState = device.makeDSSAmbient() else {
             return nil
         }
         return PNAmbientJob(pipelineState: pipelineState,

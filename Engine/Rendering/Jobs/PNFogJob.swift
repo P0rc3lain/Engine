@@ -51,7 +51,7 @@ struct PNFogJob: PNRenderJob {
     static func make(device: MTLDevice, drawableSize: CGSize, prTexture: MTLTexture) -> PNFogJob? {
         guard let library = device.makePorcelainLibrary(),
               let fogPipelineState = device.makeRPSFog(library: library),
-              let depthStencilState = device.makeDepthStencilStateFogJob(),
+              let depthStencilState = device.makeDSSFog(),
               let cube = PNMesh.cube(device: device) else {
             return nil
         }

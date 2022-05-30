@@ -66,7 +66,7 @@ struct PNSpotJob: PNRenderJob {
                      drawableSize: CGSize) -> PNSpotJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSSpot(library: library),
-              let depthStencilState = device.makeDepthStencilStateSpotPass() else {
+              let depthStencilState = device.makeDSSSpot() else {
             return nil
         }
         return PNSpotJob(pipelineState: pipelineState,
