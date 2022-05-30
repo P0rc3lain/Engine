@@ -12,8 +12,8 @@ extension PNMesh {
               let indices = device.makeBuffer(array: cubeIndices) else {
             return nil
         }
-        let verticesBuffer = PNDataBuffer(buffer: vertices, length: vertices.length)
-        let indicesBuffer = PNDataBuffer(buffer: indices, length: indices.length)
+        let verticesBuffer = PNDataBuffer(wholeBuffer: vertices)
+        let indicesBuffer = PNDataBuffer(wholeBuffer: indices)
         let drawDescription = PNSubmesh(indexBuffer: indicesBuffer,
                                         indexCount: indices.length,
                                         indexType: .uint16,
@@ -73,8 +73,8 @@ extension PNMesh {
               let vertices = device.makeBuffer(array: planeVertices) else {
             return nil
         }
-        let indicesBuffer = PNDataBuffer(buffer: indices, length: indices.length, offset: indices.offset)
-        let verticesBuffer = PNDataBuffer(buffer: vertices, length: vertices.length, offset: vertices.offset)
+        let indicesBuffer = PNDataBuffer(wholeBuffer: indices)
+        let verticesBuffer = PNDataBuffer(wholeBuffer: vertices)
         let drawDescription = PNSubmesh(indexBuffer: indicesBuffer,
                                         indexCount: indicesBuffer.length / MemoryLayout<UInt16>.stride,
                                         indexType: .uint16,
