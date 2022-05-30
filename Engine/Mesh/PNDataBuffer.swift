@@ -15,7 +15,7 @@ public struct PNDataBuffer {
     }
     public init(wholeBuffer buffer: MTLBuffer) {
         self.buffer = buffer
-        self.length =  buffer.length
+        self.length = buffer.length
         self.offset = buffer.offset
     }
 }
