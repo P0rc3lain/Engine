@@ -37,7 +37,7 @@ struct PNGrainJob: PNRenderJob {
                      canvasSize: CGSize) -> PNGrainJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSGrain(library: library),
-              let plane = PNMesh.screenSpacePlane(device: device) else {
+              let plane = PNMesh.plane(device: device) else {
             return nil
         }
         return PNGrainJob(pipelineState: pipelineState,

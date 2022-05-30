@@ -18,7 +18,7 @@ struct PNAmbientJob: PNRenderJob {
           device: MTLDevice,
           depthStencilState: MTLDepthStencilState,
           drawableSize: CGSize) {
-        guard let plane = PNMesh.screenSpacePlane(device: device) else {
+        guard let plane = PNMesh.plane(device: device) else {
             return nil
         }
         self.pipelineState = pipelineState

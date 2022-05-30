@@ -68,7 +68,7 @@ extension PNMesh {
         VertexP(0.5, 0.5, -0.5),
         VertexP(0.5, 0.5, 0.5)
     ]
-    static func screenSpacePlane(device: MTLDevice) -> PNMesh? {
+    static func plane(device: MTLDevice) -> PNMesh? {
         guard let indices = device.makeBuffer(array: planeIndices),
               let vertices = device.makeBuffer(array: planeVertices) else {
             return nil
@@ -89,15 +89,23 @@ extension PNMesh {
                                          backCulling: .back,
                                          winding: .counterClockwise))
     }
-    private static var planeVertices: [VertexPUV] = [
-        VertexPUV(position: simd_float3(-1, -1, 0),
-                  textureUV: simd_float2(0, 1)),
-        VertexPUV(position: simd_float3(1, -1, 0),
-                  textureUV: simd_float2(1, 1)),
-        VertexPUV(position: simd_float3(-1, 1, 0),
-                  textureUV: simd_float2(0, 0)),
-        VertexPUV(position: simd_float3(1, 1, 0),
-                  textureUV: simd_float2(1, 0))
+    private static var planeVertices: [Vertex] = [
+        Vertex(position: simd_float3(-1, -1, 0),
+               normal: [0, 0, -1],
+               tangent: [0, 1, 0],
+               textureUV: simd_float2(0, 1)),
+        Vertex(position: simd_float3(1, -1, 0),
+               normal: [0, 0, -1],
+               tangent: [0, 1, 0],
+               textureUV: simd_float2(1, 1)),
+        Vertex(position: simd_float3(-1, 1, 0),
+               normal: [0, 0, -1],
+               tangent: [0, 1, 0],
+               textureUV: simd_float2(0, 0)),
+        Vertex(position: simd_float3(1, 1, 0),
+               normal: [0, 0, -1],
+               tangent: [0, 1, 0],
+               textureUV: simd_float2(1, 0))
     ]
     private static var planeIndices: [UInt16] = [
         0, 1, 2,

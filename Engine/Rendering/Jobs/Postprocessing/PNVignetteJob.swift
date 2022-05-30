@@ -34,7 +34,7 @@ struct PNVignetteJob: PNRenderJob {
                      canvasSize: CGSize) -> PNVignetteJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSVignette(library: library),
-              let plane = PNMesh.screenSpacePlane(device: device) else {
+              let plane = PNMesh.plane(device: device) else {
             return nil
         }
         return PNVignetteJob(pipelineState: pipelineState,

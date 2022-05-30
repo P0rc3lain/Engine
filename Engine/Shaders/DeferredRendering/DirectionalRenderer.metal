@@ -27,7 +27,7 @@ struct RasterizerData {
     uint instanceId [[flat]];
 };
 
-vertex RasterizerData vertexDirectionalLight(VertexPUV in [[stage_in]],
+vertex RasterizerData vertexDirectionalLight(Vertex in [[stage_in]],
                                              uint instanceId [[instance_id]]) {
     return RasterizerData {
         float4(in.position, 1),

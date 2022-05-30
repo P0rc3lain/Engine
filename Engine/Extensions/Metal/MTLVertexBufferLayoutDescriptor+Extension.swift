@@ -19,9 +19,4 @@ extension MTLVertexBufferLayoutDescriptor {
                                         stepFunction: .perVertex,
                                         stepRate: 1)
     }
-    static var vertexPUV: MTLVertexBufferLayoutDescriptor {
-        MTLVertexBufferLayoutDescriptor(stride: MemoryLayout<VertexPUV>.stride,
-                                        stepFunction: .perVertex,
-                                        stepRate: 1)
-    }
 }

@@ -25,7 +25,7 @@ struct PNSSAOJob: PNRenderJob {
           uniforms: PNAnyStaticBuffer<SSAOUniforms>,
           maxNoiseCount: Int,
           maxSamplesCount: Int) {
-        guard let plane = PNMesh.screenSpacePlane(device: device) else {
+        guard let plane = PNMesh.plane(device: device) else {
             return nil
         }
         self.pipelineState = pipelineState

@@ -19,12 +19,13 @@ struct RasterizerData {
     uint instanceId [[flat]];
 };
 
-vertex RasterizerData vertexAmbientLight(VertexPUV in [[stage_in]], uint instanceId  [[instance_id]]) {
-    RasterizerData out;
-    out.position = float4(in.position, 1);
-    out.texcoord = in.textureUV;
-    out.instanceId = instanceId;
-    return out;
+vertex RasterizerData vertexAmbientLight(Vertex in [[stage_in]],
+                                         uint instanceId [[instance_id]]) {
+    return RasterizerData {
+        float4(in.position, 1),
+        in.textureUV,
+        instanceId
+    };
 }
 
 fragment float4 fragmentAmbientLight(RasterizerData in [[stage_in]],

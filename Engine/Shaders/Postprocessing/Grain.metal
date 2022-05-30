@@ -23,7 +23,7 @@ struct RasterizerData {
     float time;
 };
 
-vertex RasterizerData vertexGrain(VertexPUV in [[stage_in]],
+vertex RasterizerData vertexGrain(Vertex in [[stage_in]],
                                   constant float & time [[buffer(kAttributeGrainVertexShaderBufferTime)]]) {
     return RasterizerData {
         float4(in.position, 1),
