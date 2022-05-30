@@ -45,7 +45,7 @@ public final class PNIEngine: PNEngine {
         return true
     }
     public func draw() {
-        workloadManager.draw(sceneGraph: &scene)
+        workloadManager.draw(sceneGraph: scene)
     }
     public static func `default`(view: MTKView,
                                  renderingSize: CGSize,

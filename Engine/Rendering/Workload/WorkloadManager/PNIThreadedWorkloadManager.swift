@@ -23,26 +23,26 @@ public class PNIThreadedWorkloadManager: PNWorkloadManager {
                                                        bufferStore: bufferStores.1,
                                                        mask: .empty))
     }
-    public func draw(sceneGraph: inout PNScene) {
+    public func draw(sceneGraph: PNScene) {
         dispatchGroup.enter()
         dispatchQueue.async { [unowned self] in
-            self.renderingCoordinator.draw(frameSupply: self.frameSupplies.pull)
-            self.dispatchGroup.leave()
+            let scene = transcriber.transcribe(scene: sceneGraph)
+            let inactive = frameSupplies.pullInactive
+            inactive.bufferStore.matrixPalettes.upload(data: &scene.palettes)
+            inactive.bufferStore.matrixPalettes.upload(data: &scene.palettes)
+            inactive.bufferStore.ambientLights.upload(data: &scene.ambientLights)
+            inactive.bufferStore.omniLights.upload(data: &scene.omniLights)
+            inactive.bufferStore.directionalLights.upload(data: &scene.directionalLights)
+            inactive.bufferStore.spotLights.upload(data: &scene.spotLights)
+            inactive.bufferStore.cameras.upload(data: &scene.cameraUniforms)
+            inactive.bufferStore.modelCoordinateSystems.upload(data: &scene.uniforms)
+            let frameSupply = PNFrameSupply(scene: scene,
+                                            bufferStore: inactive.bufferStore,
+                                            mask: renderMaskGenerator.generate(scene: scene))
+            frameSupplies.push(frameSupply)
+            dispatchGroup.leave()
         }
-        let scene = transcriber.transcribe(scene: sceneGraph)
-        let inactive = frameSupplies.pullInactive
-        inactive.bufferStore.matrixPalettes.upload(data: &scene.palettes)
-        inactive.bufferStore.matrixPalettes.upload(data: &scene.palettes)
-        inactive.bufferStore.ambientLights.upload(data: &scene.ambientLights)
-        inactive.bufferStore.omniLights.upload(data: &scene.omniLights)
-        inactive.bufferStore.directionalLights.upload(data: &scene.directionalLights)
-        inactive.bufferStore.spotLights.upload(data: &scene.spotLights)
-        inactive.bufferStore.cameras.upload(data: &scene.cameraUniforms)
-        inactive.bufferStore.modelCoordinateSystems.upload(data: &scene.uniforms)
-        let frameSupply = PNFrameSupply(scene: scene,
-                                        bufferStore: inactive.bufferStore,
-                                        mask: renderMaskGenerator.generate(scene: scene))
-        frameSupplies.push(frameSupply)
+        renderingCoordinator.draw(frameSupply: frameSupplies.pull)
         dispatchGroup.wait()
         frameSupplies.swap()
     }
