@@ -30,6 +30,8 @@ struct PNSpotShadowJob: PNRenderJob {
         encoder.setRenderPipelineState(animatedPipelineState)
         encoder.setVertexBuffer(dataStore.spotLights,
                                 index: kAttributeSpotShadowVertexShaderBufferSpotLights)
+        encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
+                                index: kAttributeSpotShadowVertexShaderBufferModelUniforms)
         let masks = supply.mask.spotLights
         for lightIndex in scene.spotLights.count.naturalExclusive {
             var lIndex = lightIndex
@@ -49,18 +51,11 @@ struct PNSpotShadowJob: PNRenderJob {
                 encoder.setVertexBytes(&mutableIndex,
                                        length: MemoryLayout<Int32>.size,
                                        index: kAttributeSpotShadowVertexShaderBufferObjectIndex)
-                encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
-                                        index: kAttributeSpotShadowVertexShaderBufferModelUniforms)
-                for pieceIndex in mesh.pieceDescriptions {
-                    encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
-                                            offset: scene.paletteOffset[animatedModel.skeleton],
-                                            index: kAttributeSpotShadowVertexShaderBufferMatrixPalettes)
-                    let indexDraw = pieceIndex.drawDescription
-                    encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
-                                                  indexCount: indexDraw.indexCount,
-                                                  indexType: indexDraw.indexType,
-                                                  indexBuffer: indexDraw.indexBuffer.buffer,
-                                                  indexBufferOffset: indexDraw.indexBuffer.offset)
+                encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
+                                        offset: scene.paletteOffset[animatedModel.skeleton],
+                                        index: kAttributeSpotShadowVertexShaderBufferMatrixPalettes)
+                for pieceDescription in mesh.pieceDescriptions {
+                    encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
                 }
             }
             encoder.setRenderPipelineState(pipelineState)
@@ -77,15 +72,8 @@ struct PNSpotShadowJob: PNRenderJob {
                 encoder.setVertexBytes(&mutableIndex,
                                        length: MemoryLayout<Int32>.size,
                                        index: kAttributeSpotShadowVertexShaderBufferObjectIndex)
-                encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
-                                        index: kAttributeSpotShadowVertexShaderBufferModelUniforms)
-                for pieceIndex in mesh.pieceDescriptions {
-                    let indexDraw = pieceIndex.drawDescription
-                    encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
-                                                  indexCount: indexDraw.indexCount,
-                                                  indexType: indexDraw.indexType,
-                                                  indexBuffer: indexDraw.indexBuffer.buffer,
-                                                  indexBufferOffset: indexDraw.indexBuffer.offset)
+                for pieceDescription in mesh.pieceDescriptions {
+                    encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
                 }
             }
         }

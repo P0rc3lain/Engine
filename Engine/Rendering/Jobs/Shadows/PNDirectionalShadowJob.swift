@@ -30,55 +30,38 @@ struct PNDirectionalShadowJob: PNRenderJob {
         encoder.setRenderPipelineState(animatedPipelineState)
         encoder.setVertexBuffer(dataStore.directionalLights,
                                 index: kAttributeDirectionalShadowVertexShaderBufferDirectionalLights)
+        encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
+                                index: kAttributeDirectionalShadowVertexShaderBufferModelUniforms)
         for lightIndex in scene.directionalLights.count.naturalExclusive {
             encoder.setVertexBytes(value: lightIndex,
                                    index: kAttributeDirectionalShadowVertexShaderBufferInstanceId)
             for animatedModel in scene.animatedModels {
-                let mesh = scene.meshes[animatedModel.mesh]
-                encoder.setFrontCulling(mesh.culling)
-                encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
-                                        offset: mesh.vertexBuffer.offset,
-                                        index: kAttributeDirectionalShadowVertexShaderBufferStageIn)
-                var mutableIndex = Int32(animatedModel.idx)
-                encoder.setVertexBytes(&mutableIndex,
-                                       length: MemoryLayout<Int32>.size,
-                                       index: kAttributeDirectionalShadowVertexShaderBufferObjectIndex)
-                encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
-                                        index: kAttributeDirectionalShadowVertexShaderBufferModelUniforms)
-                for pieceIndex in mesh.pieceDescriptions {
-                    encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
-                                            offset: scene.paletteOffset[animatedModel.skeleton],
-                                            index: kAttributeDirectionalShadowVertexShaderBufferMatrixPalettes)
-                    let indexDraw = pieceIndex.drawDescription
-                    encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
-                                                  indexCount: indexDraw.indexCount,
-                                                  indexType: indexDraw.indexType,
-                                                  indexBuffer: indexDraw.indexBuffer.buffer,
-                                                  indexBufferOffset: indexDraw.indexBuffer.offset)
-                }
+                encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
+                                        offset: scene.paletteOffset[animatedModel.skeleton],
+                                        index: kAttributeDirectionalShadowVertexShaderBufferMatrixPalettes)
+                draw(encoder: encoder,
+                     mesh: scene.meshes[animatedModel.mesh],
+                     uniformReference: animatedModel.idx)
             }
             encoder.setRenderPipelineState(pipelineState)
             for model in scene.models {
-                let mesh = scene.meshes[model.mesh]
-                encoder.setFrontCulling(mesh.culling)
-                encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
-                                        offset: mesh.vertexBuffer.buffer.offset,
-                                        index: kAttributeDirectionalShadowVertexShaderBufferStageIn)
-                var mutableIndex = Int32(model.idx)
-                encoder.setVertexBytes(&mutableIndex,
-                                       length: MemoryLayout<Int32>.size,
-                                       index: kAttributeDirectionalShadowVertexShaderBufferObjectIndex)
-                encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
-                                        index: kAttributeDirectionalShadowVertexShaderBufferModelUniforms)
-                for pieceIndex in mesh.pieceDescriptions {
-                    let indexDraw = pieceIndex.drawDescription
-                    encoder.drawIndexedPrimitives(type: indexDraw.primitiveType,
-                                                  indexCount: indexDraw.indexCount,
-                                                  indexType: indexDraw.indexType,
-                                                  indexBuffer: indexDraw.indexBuffer.buffer,
-                                                  indexBufferOffset: indexDraw.indexBuffer.offset)
-                }
+                draw(encoder: encoder,
+                     mesh: scene.meshes[model.mesh],
+                     uniformReference: model.idx)
             }
+        }
+    }
+    private func draw(encoder: MTLRenderCommandEncoder, mesh: PNMesh, uniformReference: PNIndex) {
+        encoder.setFrontCulling(mesh.culling)
+        encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
+                                offset: mesh.vertexBuffer.buffer.offset,
+                                index: kAttributeDirectionalShadowVertexShaderBufferStageIn)
+        var mutableIndex = Int32(uniformReference)
+        encoder.setVertexBytes(&mutableIndex,
+                               length: MemoryLayout<Int32>.size,
+                               index: kAttributeDirectionalShadowVertexShaderBufferObjectIndex)
+        for pieceDescription in mesh.pieceDescriptions {
+            encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
         }
     }
     static func make(device: MTLDevice,
