@@ -13,6 +13,7 @@ struct PNCombineStage: PNStage {
     private var ambientJob: PNRenderJob
     private var spotJob: PNRenderJob
     private var directionalJob: PNRenderJob
+    private var translucentJob: PNTranslucentJob
     private var renderPassDescriptor: MTLRenderPassDescriptor
     private var ssaoTexture: MTLTexture
     init?(device: MTLDevice,
@@ -40,13 +41,16 @@ struct PNCombineStage: PNStage {
                                            inputTextures: gBufferOutput.color,
                                            shadowMap: spotLightShadows,
                                            drawableSize: renderingSize),
+              let translucentJob = PNTranslucentJob.make(device: device,
+                                                         drawableSize: renderingSize),
               let fogJob = PNFogJob.make(device: device,
                                          drawableSize: renderingSize,
                                          prTexture: gBufferOutput.color[2]) else {
             return nil
         }
         renderPassDescriptor = .lightenScene(device: device,
-                                             depthStencil: gBufferOutput.stencil[0],
+                                             stencil: gBufferOutput.stencil[0],
+                                             depth: gBufferOutput.depth[0],
                                              size: renderingSize)
         guard let outputTexture = renderPassDescriptor.colorAttachments[0].texture else {
             return nil
@@ -57,6 +61,7 @@ struct PNCombineStage: PNStage {
         self.omniJob = omniJob
         self.spotJob = spotJob
         self.fogJob = fogJob
+        self.translucentJob = translucentJob
         self.directionalJob = directionalJob
         self.io = PNGPUIO(input: PNGPUSupply(color: gBufferOutput.color + [ssaoTexture],
                                              stencil: gBufferOutput.stencil),
@@ -72,6 +77,7 @@ struct PNCombineStage: PNStage {
         spotJob.draw(encoder: encoder, supply: supply)
         directionalJob.draw(encoder: encoder, supply: supply)
         environmentJob.draw(encoder: encoder, supply: supply)
+        translucentJob.draw(encoder: encoder, supply: supply)
         fogJob.draw(encoder: encoder, supply: supply)
         encoder.endEncoding()
         commandBuffer.popDebugGroup()

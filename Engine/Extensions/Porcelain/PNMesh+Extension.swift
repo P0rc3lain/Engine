@@ -68,7 +68,7 @@ extension PNMesh {
         VertexP(0.5, 0.5, -0.5),
         VertexP(0.5, 0.5, 0.5)
     ]
-    static func plane(device: MTLDevice) -> PNMesh? {
+    public static func plane(device: MTLDevice, material: PNMaterial? = nil) -> PNMesh? {
         guard let indices = device.makeBuffer(array: planeIndices),
               let vertices = device.makeBuffer(array: planeVertices) else {
             return nil
@@ -79,7 +79,8 @@ extension PNMesh {
                                         indexCount: indicesBuffer.length / MemoryLayout<UInt16>.stride,
                                         indexType: .uint16,
                                         primitiveType: .triangle)
-        let pieceDescription = PNPieceDescription(drawDescription: drawDescription)
+        let pieceDescription = PNPieceDescription(drawDescription: drawDescription,
+                                                  material: material)
         let interactor = PNIBoundingBoxInteractor.default
         return PNMesh(boundingBox: interactor.from(bound: PNBound(min: [-1, -1, 0],
                                                                   max: [1, 1, 0])),

@@ -74,6 +74,9 @@ struct PNOmniShadowJob: PNRenderJob {
                                 offset: mesh.vertexBuffer.offset,
                                 index: kAttributeOmniShadowVertexShaderBufferStageIn)
         for pieceDescription in mesh.pieceDescriptions {
+            if let material = pieceDescription.material, material.isTranslucent {
+                continue
+            }
             encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
         }
     }

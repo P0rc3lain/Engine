@@ -10,21 +10,19 @@ extension MTLDepthStencilDescriptor {
         return self
     }
     static var gBuffer: MTLDepthStencilDescriptor {
-        let stencil = MTLStencilDescriptor.gBuffer
         let descriptor = MTLDepthStencilDescriptor()
         descriptor.label = "GBuffer Depth Stencil"
         descriptor.depthCompareFunction = .lessEqual
         descriptor.isDepthWriteEnabled = true
-        descriptor.frontFaceStencil = stencil
+        descriptor.frontFaceStencil = .gBuffer
         return descriptor
     }
     static private var lighten: MTLDepthStencilDescriptor {
         // descriptor.label set in objects utilizing the variable
-        let stencil = MTLStencilDescriptor.lighten
         let descriptor = MTLDepthStencilDescriptor()
         descriptor.depthCompareFunction = .lessEqual
-        descriptor.isDepthWriteEnabled = true
-        descriptor.frontFaceStencil = stencil
+        descriptor.isDepthWriteEnabled = false
+        descriptor.frontFaceStencil = .lighten
         return descriptor
     }
     static var omni: MTLDepthStencilDescriptor {
@@ -53,23 +51,29 @@ extension MTLDepthStencilDescriptor {
         spotShadow.labeled("Omni Shadow Depth Stencil")
     }
     static var environment: MTLDepthStencilDescriptor {
-        let stencil = MTLStencilDescriptor.environment
         let descriptor = MTLDepthStencilDescriptor()
         descriptor.label = "Environmental Depth Stencil"
         descriptor.depthCompareFunction = .always
         descriptor.isDepthWriteEnabled = false
-        descriptor.frontFaceStencil = stencil
-        descriptor.backFaceStencil = stencil
+        descriptor.frontFaceStencil = .environment
+        descriptor.backFaceStencil = .environment
         return descriptor
     }
     static var fog: MTLDepthStencilDescriptor {
-        let stencil = MTLStencilDescriptor.fog
         let descriptor = MTLDepthStencilDescriptor()
         descriptor.label = "Fog Depth Stencil"
         descriptor.depthCompareFunction = .always
         descriptor.isDepthWriteEnabled = false
-        descriptor.frontFaceStencil = stencil
-        descriptor.backFaceStencil = stencil
+        descriptor.frontFaceStencil = .fog
+        descriptor.backFaceStencil = .fog
+        return descriptor
+    }
+    static var translucent: MTLDepthStencilDescriptor {
+        let descriptor = MTLDepthStencilDescriptor()
+        descriptor.label = "Translucent Depth Stencil"
+        descriptor.depthCompareFunction = .lessEqual
+        descriptor.isDepthWriteEnabled = true
+        descriptor.frontFaceStencil = .translucent
         return descriptor
     }
 }

@@ -14,6 +14,12 @@ extension MTLPixelFormat {
     static var gBufferPRC: MTLPixelFormat {
         .rgba16Float
     }
+    static var translucentC: MTLPixelFormat {
+        .rgba16Float
+    }
+    static var translucentDS: MTLPixelFormat {
+        .depth32Float_stencil8
+    }
     static var gBufferDS: MTLPixelFormat {
         .depth32Float_stencil8
     }

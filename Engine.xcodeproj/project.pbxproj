@@ -133,6 +133,8 @@
 		56407B7D27206F5D00440CAC /* Vertex+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56407B7C27206F5D00440CAC /* Vertex+Extension.swift */; };
 		56416D7427400F66003C99C2 /* PNIDynamicBuffer+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56416D7327400F66003C99C2 /* PNIDynamicBuffer+Tests.swift */; };
 		56416D7B27413443003C99C2 /* simd_float4x4+Extension+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56416D7A27413443003C99C2 /* simd_float4x4+Extension+Tests.swift */; };
+		56484BA62846162F004DFF36 /* PNTranslucentJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56484BA52846162F004DFF36 /* PNTranslucentJob.swift */; };
+		56484BA8284616F6004DFF36 /* Translucent.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56484BA7284616F6004DFF36 /* Translucent.metal */; };
 		564DE040284169B9005C2029 /* Comparable+Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE03F284169B9005C2029 /* Comparable+Global.swift */; };
 		564DE04728427595005C2029 /* MTLLibrary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE04628427595005C2029 /* MTLLibrary+Extension.swift */; };
 		564DE04928427689005C2029 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE04828427689005C2029 /* Bundle+Extension.swift */; };
@@ -410,6 +412,8 @@
 		56407B7C27206F5D00440CAC /* Vertex+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vertex+Extension.swift"; sourceTree = "<group>"; };
 		56416D7327400F66003C99C2 /* PNIDynamicBuffer+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIDynamicBuffer+Tests.swift"; sourceTree = "<group>"; };
 		56416D7A27413443003C99C2 /* simd_float4x4+Extension+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd_float4x4+Extension+Tests.swift"; sourceTree = "<group>"; };
+		56484BA52846162F004DFF36 /* PNTranslucentJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNTranslucentJob.swift; sourceTree = "<group>"; };
+		56484BA7284616F6004DFF36 /* Translucent.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Translucent.metal; sourceTree = "<group>"; };
 		564DE03F284169B9005C2029 /* Comparable+Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Global.swift"; sourceTree = "<group>"; };
 		564DE04628427595005C2029 /* MTLLibrary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLLibrary+Extension.swift"; sourceTree = "<group>"; };
 		564DE04828427689005C2029 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
@@ -833,6 +837,7 @@
 				561666DF2719E2CC000063B1 /* EnvironmentMapper.metal */,
 				566020E127343280000F4CA7 /* SSAO.metal */,
 				56A8CA782756D40C0040DCF9 /* Fog.metal */,
+				56484BA7284616F6004DFF36 /* Translucent.metal */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -1263,6 +1268,7 @@
 				561666ED2719E2CD000063B1 /* DeferredRendering */,
 				56C47B9F27511EDB0075C61B /* PNRenderJob.swift */,
 				56A8CA7A2756D4750040DCF9 /* PNFogJob.swift */,
+				56484BA52846162F004DFF36 /* PNTranslucentJob.swift */,
 			);
 			path = Jobs;
 			sourceTree = "<group>";
@@ -1767,6 +1773,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				568EBB3A273F0B88007C7D35 /* SSAOUniforms+Extension.swift in Sources */,
+				56484BA8284616F6004DFF36 /* Translucent.metal in Sources */,
 				56C47BAA27516C800075C61B /* PNIRenderMaskGenerator.swift in Sources */,
 				561DF41727246F1800D95ACC /* MTLViewport+Extension.swift in Sources */,
 				56270167272B54EB00071620 /* PNAnimatedTransform.swift in Sources */,
@@ -1954,6 +1961,7 @@
 				568807462747EEC000C95F55 /* PNSkeleton.swift in Sources */,
 				56C47BAF275176EC0075C61B /* PNIBufferedValue.swift in Sources */,
 				56924AEA271A188700FF3E06 /* PNAnimatedQuatf+Extension.swift in Sources */,
+				56484BA62846162F004DFF36 /* PNTranslucentJob.swift in Sources */,
 				566795C8274EB977005993D7 /* PNIRiggedMesh.swift in Sources */,
 				5616670D2719E2CD000063B1 /* MDLMeshBuffer+Extension.swift in Sources */,
 				563C9C24273882F60014CFF3 /* SpotLight.metal in Sources */,

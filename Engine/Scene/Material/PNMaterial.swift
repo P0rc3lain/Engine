@@ -9,4 +9,5 @@ public protocol PNMaterial {
     var roughness: MTLTexture { get }
     var normals: MTLTexture { get }
     var metallic: MTLTexture { get }
+    var isTranslucent: Bool { get }
 }

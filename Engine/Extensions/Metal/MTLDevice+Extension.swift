@@ -39,6 +39,9 @@ extension MTLDevice {
     func makeDSSAmbient() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: .ambient)
     }
+    func makeDSSTranslucent() -> MTLDepthStencilState? {
+        makeDepthStencilState(descriptor: .translucent)
+    }
     // ======================
     // MTLRenderPipelineState
     // ======================
@@ -53,6 +56,12 @@ extension MTLDevice {
     }
     func makeRPSSpotShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .spotShadowAnimated(library: library))
+    }
+    func makeRPSTranslucent(library: MTLLibrary) -> MTLRenderPipelineState? {
+        try? makeRenderPipelineState(descriptor: .translucent(library: library))
+    }
+    func makeRPSTranslucentAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
+        try? makeRenderPipelineState(descriptor: .translucentAnimated(library: library))
     }
     func makeRPSDirectionalShadow(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .directionalShadow(library: library))

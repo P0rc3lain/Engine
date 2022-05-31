@@ -1,18 +1,16 @@
 //
-//  Copyright © 2021 Mateusz Stompór. All rights reserved.
+//  Copyright © 2022 Mateusz Stompór. All rights reserved.
 //
 
 import MetalBinding
 import MetalKit
 import simd
 
-struct PNGBufferJob: PNRenderJob {
+struct PNTranslucentJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let animatedPipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport
-    private let textureRange = kAttributeGBufferFragmentShaderTextureAlbedo ...
-                               kAttributeGBufferFragmentShaderTextureMetallic
     init(pipelineState: MTLRenderPipelineState,
          animatedPipelineState: MTLRenderPipelineState,
          depthStencilState: MTLDepthStencilState,
@@ -29,18 +27,18 @@ struct PNGBufferJob: PNRenderJob {
         encoder.setViewport(viewPort)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setVertexBuffer(dataStore.cameras.buffer,
-                                index: kAttributeGBufferVertexShaderBufferCameraUniforms)
+                                index: kAttributeTranslucentVertexShaderBufferCameraUniforms)
         encoder.setStencilReferenceValue(1)
         encoder.setRenderPipelineState(animatedPipelineState)
         encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
-                                index: kAttributeGBufferVertexShaderBufferModelUniforms)
+                                index: kAttributeTranslucentVertexShaderBufferModelUniforms)
         for animatedModel in scene.animatedModels {
             if !mask[animatedModel.idx] {
                 continue
             }
             encoder.setVertexBuffer(dataStore.matrixPalettes,
                                     offset: scene.paletteOffset[animatedModel.skeleton],
-                                    index: kAttributeGBufferVertexShaderBufferMatrixPalettes)
+                                    index: kAttributeTranslucentVertexShaderBufferMatrixPalettes)
             draw(encoder: encoder,
                  mesh: scene.meshes[animatedModel.mesh],
                  uniformReference: animatedModel.idx)
@@ -56,35 +54,34 @@ struct PNGBufferJob: PNRenderJob {
         }
     }
     private func draw(encoder: MTLRenderCommandEncoder, mesh: PNMesh, uniformReference: PNIndex) {
-        encoder.setBackCulling(mesh.culling)
         encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                 offset: mesh.vertexBuffer.offset,
-                                index: kAttributeGBufferVertexShaderBufferStageIn)
+                                index: kAttributeTranslucentVertexShaderBufferStageIn)
         encoder.setVertexBytes(value: Int32(uniformReference),
-                               index: kAttributeGBufferVertexShaderBufferObjectIndex)
+                               index: kAttributeTranslucentVertexShaderBufferObjectIndex)
         for pieceDescription in mesh.pieceDescriptions {
             guard let material = pieceDescription.material,
-                  !material.isTranslucent else {
+                  material.isTranslucent else {
                 continue
             }
-            encoder.setFragmentTextures([material.albedo,
-                                         material.roughness,
-                                         material.normals,
-                                         material.metallic],
-                                        range: textureRange)
+            encoder.setFragmentTexture(material.albedo,
+                                       index: kAttributeTranslucentFragmentShaderTextureAlbedo)
+            encoder.setFrontCulling(mesh.culling)
+            encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
+            encoder.setBackCulling(mesh.culling)
             encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
         }
     }
-    static func make(device: MTLDevice, drawableSize: CGSize) -> PNGBufferJob? {
+    static func make(device: MTLDevice, drawableSize: CGSize) -> PNTranslucentJob? {
         guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRPSGBuffer(library: library),
-              let animatedPipelineState = device.makeRPSGBufferAnimated(library: library),
-              let depthStencilState = device.makeDSSGBuffer() else {
+              let pipelineState = device.makeRPSTranslucent(library: library),
+              let animatedPipelineState = device.makeRPSTranslucentAnimated(library: library),
+              let depthStencilState = device.makeDSSTranslucent() else {
             return nil
         }
-        return PNGBufferJob(pipelineState: pipelineState,
-                            animatedPipelineState: animatedPipelineState,
-                            depthStencilState: depthStencilState,
-                            drawableSize: drawableSize)
+        return PNTranslucentJob(pipelineState: pipelineState,
+                                animatedPipelineState: animatedPipelineState,
+                                depthStencilState: depthStencilState,
+                                drawableSize: drawableSize)
     }
 }
