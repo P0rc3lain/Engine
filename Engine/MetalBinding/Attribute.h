@@ -66,6 +66,18 @@ enum AttributeGBufferFragmentShaderTextureIndex {
     kAttributeGBufferFragmentShaderTextureMetallic
 };
 
+enum AttributeTranslucentVertexShaderBufferIndex {
+    kAttributeTranslucentVertexShaderBufferStageIn = 0,
+    kAttributeTranslucentVertexShaderBufferCameraUniforms,
+    kAttributeTranslucentVertexShaderBufferModelUniforms,
+    kAttributeTranslucentVertexShaderBufferMatrixPalettes,
+    kAttributeTranslucentVertexShaderBufferObjectIndex,
+};
+
+enum AttributeTranslucentFragmentShaderTextureIndex {
+    kAttributeTranslucentFragmentShaderTextureAlbedo = 0,
+};
+
 enum AttributeSsaoVertexShaderBufferIndex {
     kAttributeSsaoVertexShaderBufferStageIn = 0
 };

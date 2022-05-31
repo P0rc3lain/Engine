@@ -5,18 +5,18 @@
 import Metal
 
 extension MTLRenderPassDescriptor {
-    static func lightenScene(device: MTLDevice, depthStencil: MTLTexture, size: CGSize) -> MTLRenderPassDescriptor {
+    static func lightenScene(device: MTLDevice, stencil: MTLTexture, depth: MTLTexture, size: CGSize) -> MTLRenderPassDescriptor {
         let descriptor = MTLRenderPassDescriptor()
         descriptor.colorAttachments[0].loadAction = .clear
         descriptor.colorAttachments[0].texture = device.makeTextureLightenSceneC(size: size)
         descriptor.colorAttachments[0].clearColor = MTLClearColor()
         descriptor.colorAttachments[0].storeAction = .store
-        descriptor.depthAttachment.texture = depthStencil
-        descriptor.depthAttachment.storeAction = .dontCare
+        descriptor.depthAttachment.texture = stencil
+        descriptor.depthAttachment.storeAction = .store
         descriptor.depthAttachment.loadAction = .load
-        descriptor.stencilAttachment.texture = depthStencil
+        descriptor.stencilAttachment.texture = depth
         descriptor.stencilAttachment.loadAction = .load
-        descriptor.stencilAttachment.storeAction = .dontCare
+        descriptor.stencilAttachment.storeAction = .store
         return descriptor
     }
     static func gBuffer(device: MTLDevice, size: CGSize) -> MTLRenderPassDescriptor {

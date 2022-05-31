@@ -15,13 +15,15 @@ struct PNGBufferStage: PNStage {
               let arTexture = gBufferRenderPassDescriptor.colorAttachments[0].texture,
               let nmTexture = gBufferRenderPassDescriptor.colorAttachments[1].texture,
               let prTexture = gBufferRenderPassDescriptor.colorAttachments[2].texture,
-              let stencil = gBufferRenderPassDescriptor.stencilAttachment.texture else {
+              let stencil = gBufferRenderPassDescriptor.stencilAttachment.texture,
+              let depth = gBufferRenderPassDescriptor.depthAttachment.texture else {
             return nil
         }
         self.gBufferJob = gBufferJob
         self.io = PNGPUIO(input: .empty,
                           output: PNGPUSupply(color: [arTexture, nmTexture, prTexture],
-                                              stencil: [stencil]))
+                                              stencil: [stencil],
+                                              depth: [depth]))
     }
     func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
         commandBuffer.pushDebugGroup("G-Buffer Renderer Pass")

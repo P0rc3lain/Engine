@@ -67,6 +67,9 @@ struct PNSpotShadowJob: PNRenderJob {
                 encoder.setVertexBytes(value: Int32(model.idx),
                                        index: kAttributeSpotShadowVertexShaderBufferObjectIndex)
                 for pieceDescription in mesh.pieceDescriptions {
+                    if let material = pieceDescription.material, material.isTranslucent {
+                        continue
+                    }
                     encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
                 }
             }

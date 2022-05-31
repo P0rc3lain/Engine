@@ -11,6 +11,7 @@ public struct PNIMaterial: PNMaterial {
     public var roughness: MTLTexture
     public var normals: MTLTexture
     public var metallic: MTLTexture
+    public var isTranslucent: Bool = false
     public init(name: String,
                 albedo: MTLTexture,
                 roughness: MTLTexture,
@@ -33,7 +34,7 @@ public struct PNIMaterial: PNMaterial {
         let albedo = MDLTexture.solid2D(color: albedo, name: "Albedo")
         let metallic = MDLTexture.solid2D(color: simd_float4(simd_float3(repeating: metallicValue), 1),
                                           name: "Metallic")
-        let roughness = MDLTexture.solid2D(color: simd_float4(simd_float3(repeating:roughnessValue), 1),
+        let roughness = MDLTexture.solid2D(color: simd_float4(simd_float3(repeating: roughnessValue), 1),
                                            name: "Roughness")
         guard let uN = normals.upload(device: device),
               let uM = metallic.upload(device: device),

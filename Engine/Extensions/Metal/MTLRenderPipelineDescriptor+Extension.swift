@@ -74,6 +74,29 @@ extension MTLRenderPipelineDescriptor {
                                                               constantValues: .bool(true, index: 0))
         return descriptor
     }
+    static func translucent(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
+        let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.label = "Translucent"
+        descriptor.vertexFunction = try? library.makeFunction(name: "vertexTranslucent",
+                                                              constantValues: .bool(false, index: 0))
+        descriptor.fragmentFunction = library.makeFunction(name: "fragmentTranslucent")
+        descriptor.colorAttachments[0].pixelFormat = .translucentC
+        descriptor.colorAttachments[0].rgbBlendOperation = .add
+        descriptor.colorAttachments[0].sourceRGBBlendFactor = .sourceAlpha
+        descriptor.colorAttachments[0].destinationRGBBlendFactor = .oneMinusSourceAlpha
+        descriptor.colorAttachments[0].isBlendingEnabled = true
+        descriptor.depthAttachmentPixelFormat = .translucentDS
+        descriptor.stencilAttachmentPixelFormat = .translucentDS
+        descriptor.vertexDescriptor = .vertex
+        return descriptor
+    }
+    static func translucentAnimated(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
+        let descriptor = MTLRenderPipelineDescriptor.translucent(library: library)
+        descriptor.label = "Translucent Animated"
+        descriptor.vertexFunction = try? library.makeFunction(name: "vertexTranslucent",
+                                                              constantValues: .bool(true, index: 0))
+        return descriptor
+    }
     static func spotShadow(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.label = "Spot Shadows"

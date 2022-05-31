@@ -34,7 +34,7 @@ vertex RasterizerData vertexGBuffer(Vertex in [[stage_in]],
                                     constant CameraUniforms & cameraUniforms [[buffer(kAttributeGBufferVertexShaderBufferCameraUniforms)]],
                                     constant ModelUniforms * modelUniforms [[buffer(kAttributeGBufferVertexShaderBufferModelUniforms)]],
                                     constant simd_float4x4 * matrixPalettes [[buffer(kAttributeGBufferVertexShaderBufferMatrixPalettes)]],
-                                    constant int & index [[ buffer(kAttributeGBufferVertexShaderBufferObjectIndex) ]]) {
+                                    constant int & index [[buffer(kAttributeGBufferVertexShaderBufferObjectIndex)]]) {
     Pose pose = hasSkeleton ? calculatePose(in, matrixPalettes) : Pose{float4(in.position, 1), in.normal, in.tangent};
     matrix_float3x3 rotation = extract_rotation(modelUniforms[index].modelMatrix);
     float3 rotatedNormal = rotation * pose.normal;
@@ -62,8 +62,7 @@ fragment GBufferData fragmentGBuffer(RasterizerData in [[stage_in]],
                                      texture2d<float> albedo [[texture(kAttributeGBufferFragmentShaderTextureAlbedo)]],
                                      texture2d<float> roughness [[texture(kAttributeGBufferFragmentShaderTextureRoughness)]],
                                      texture2d<float> normals [[texture(kAttributeGBufferFragmentShaderTextureNormals)]],
-                                     texture2d<float> metallic [[texture(kAttributeGBufferFragmentShaderTextureMetallic)]],
-                                     constant CameraUniforms & cameraUniforms [[buffer(kAttributeGBufferVertexShaderBufferCameraUniforms)]]) {
+                                     texture2d<float> metallic [[texture(kAttributeGBufferFragmentShaderTextureMetallic)]]) {
     constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear, address::mirrored_repeat);
     simd_float3x3 TBN(in.t, in.b, in.n);
     // 0.04 is reflactance for common materials
