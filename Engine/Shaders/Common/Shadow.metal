@@ -25,3 +25,14 @@ float pcfDepth(metal::depth2d_array<float> shadowMaps,
     }
     return result / float((samples.x * 2 + 1) * (samples.y * 2 + 1));
 }
+
+float pcfDepth(metal::depthcube_array<float> shadowMaps,
+               uint layer,
+               float3 sampleCoordinate,
+               int2 samples,
+               float countedDepth,
+               float bias) {
+    constexpr sampler sampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
+    float depth = shadowMaps.sample(sampler, sampleCoordinate, layer);
+    return countedDepth - bias > depth ? 1 : 0;
+}
