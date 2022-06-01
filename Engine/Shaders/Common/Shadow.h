@@ -18,8 +18,9 @@ float pcfDepth(metal::depth2d_array<float> shadowMaps,
 float pcfDepth(metal::depthcube_array<float> shadowMaps,
                uint layer,
                float3 sampleCoordinate,
-               int2 samples,
+               int3 samples,
                float countedDepth,
-               float bias);
+               float bias,
+               float offset);
 
 #endif /* SHADOW_H */
