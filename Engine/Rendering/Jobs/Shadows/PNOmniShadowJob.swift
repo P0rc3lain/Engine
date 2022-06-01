@@ -84,8 +84,8 @@ struct PNOmniShadowJob: PNRenderJob {
         [
             simd_quatf.environment.positiveX.rotationMatrix,
             simd_quatf.environment.negativeX.rotationMatrix,
-            simd_quatf.environment.positiveY.rotationMatrix,
             simd_quatf.environment.negativeY.rotationMatrix,
+            simd_quatf.environment.positiveY.rotationMatrix,
             simd_quatf.environment.positiveZ.rotationMatrix,
             simd_quatf.environment.negativeZ.rotationMatrix
         ]
