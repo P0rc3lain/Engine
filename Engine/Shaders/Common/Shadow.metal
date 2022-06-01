@@ -29,10 +29,19 @@ float pcfDepth(metal::depth2d_array<float> shadowMaps,
 float pcfDepth(metal::depthcube_array<float> shadowMaps,
                uint layer,
                float3 sampleCoordinate,
-               int2 samples,
+               int3 samples,
                float countedDepth,
-               float bias) {
+               float bias,
+               float offset) {
     constexpr sampler sampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
-    float depth = shadowMaps.sample(sampler, sampleCoordinate, layer);
-    return countedDepth - bias > depth ? 1 : 0;
+    float shadow = 0.0f;
+    for (float i = -offset; i < offset; i += offset / float(samples.x) * 0.5f) {
+        for (float j = -offset; j < offset; j += offset / float(samples.y) * 0.5f) {
+            for (float k = -offset; k < offset; k += offset / float(samples.z) * 0.5f) {
+                float depth = shadowMaps.sample(sampler, sampleCoordinate + float3(i, j, k), layer);
+                shadow += countedDepth - bias > depth ? 1.0f : 0.0f;
+            }
+        }
+    }
+    return clamp(shadow / float(samples.x * samples.y * samples.z), 0.0f, 1.0f);
 }

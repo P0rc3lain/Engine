@@ -61,9 +61,10 @@ fragment float4 fragmentDeferredLight(RasterizerData in [[stage_in]],
     float shadowInfluence = pcfDepth(shadows,
                                      in.instanceId,
                                      sampleVector,
-                                     int2{2, 2},
+                                     int3{3, 3, 3},
                                      currentDistance,
-                                     bias);
+                                     bias,
+                                     0.01);
     float3 color = lighting(l,
                             eye,
                             input,
