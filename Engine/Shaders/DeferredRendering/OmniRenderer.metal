@@ -6,6 +6,7 @@
 #include <metal_stdlib>
 
 #include "../Common/PBR.h"
+#include "../Common/Shadow.h"
 #include "../Common/LightingInput.h"
 #include "../../MetalBinding/Model.h"
 #include "../../MetalBinding/Vertex.h"
@@ -44,29 +45,29 @@ fragment float4 fragmentDeferredLight(RasterizerData in [[stage_in]],
     float3 eye = normalize(-input.fragmentPosition);
     
     OmniLight light = omniLights[in.instanceId];
-    float3 lightPosition = (lightUniforms[camera.index].modelMatrix * lightUniforms[light.idx].modelMatrix * float4(0, 0, 0, 1)).xyz;
+    float4x4 transformation = lightUniforms[camera.index].modelMatrix * lightUniforms[light.idx].modelMatrix;
+    float3 lightPosition = (transformation * float4(float3(0), 1)).xyz;
     float3 l = normalize(lightPosition - input.fragmentPosition);
-    if (dot(input.n, l) < 0) {
+    if (dot(input.n, l) < 0)
         discard_fragment();
-    }
     
     // Shadow
     float4 lightSpacesFragmentPosition = lightUniforms[light.idx].modelMatrixInverse * lightUniforms[camera.index].modelMatrixInverse * float4(input.fragmentPosition, 1);
     float currentDistance = length(lightSpacesFragmentPosition.xyz)/100;
     float3 sampleVector = normalize(lightSpacesFragmentPosition.xyz);
-    sampleVector.x = -sampleVector.x;
-    sampleVector.y = -sampleVector.y;
-    sampleVector.z = -sampleVector.z;
-    float existingDistance = shadows.sample(textureSampler, sampleVector, in.instanceId);
+    sampleVector = -sampleVector;
     float bias = max(0.0001 * (1.0 - dot(input.n, l)), 0.00001);
-    bool inShadow = currentDistance - bias > existingDistance;
-    if (inShadow) {
-        discard_fragment();
-    }
     
-    return float4(lighting(l,
-                           eye,
-                           input,
-                           omniLights[in.instanceId].color,
-                           omniLights[in.instanceId].intensity), 1);
+    float shadowInfluence = pcfDepth(shadows,
+                                     in.instanceId,
+                                     sampleVector,
+                                     int2{2, 2},
+                                     currentDistance,
+                                     bias);
+    float3 color = lighting(l,
+                            eye,
+                            input,
+                            omniLights[in.instanceId].color,
+                            omniLights[in.instanceId].intensity);
+    return  float4((1 - shadowInfluence) * color, 1);
 }
