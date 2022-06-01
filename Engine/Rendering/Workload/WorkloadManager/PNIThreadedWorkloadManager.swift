@@ -29,7 +29,6 @@ public class PNIThreadedWorkloadManager: PNWorkloadManager {
             let scene = transcriber.transcribe(scene: sceneGraph)
             let inactive = frameSupplies.pullInactive
             inactive.bufferStore.matrixPalettes.upload(data: &scene.palettes)
-            inactive.bufferStore.matrixPalettes.upload(data: &scene.palettes)
             inactive.bufferStore.ambientLights.upload(data: &scene.ambientLights)
             inactive.bufferStore.omniLights.upload(data: &scene.omniLights)
             inactive.bufferStore.directionalLights.upload(data: &scene.directionalLights)
