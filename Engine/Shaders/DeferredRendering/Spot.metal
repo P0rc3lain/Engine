@@ -5,13 +5,14 @@
 #include <simd/simd.h>
 #include <metal_stdlib>
 
-#include "../Common/PBR.h"
-#include "../Common/LightingInput.h"
-#include "../../MetalBinding/Model.h"
-#include "../../MetalBinding/Vertex.h"
-#include "../../MetalBinding/Camera.h"
-#include "../../MetalBinding/Attribute.h"
-#include "../../MetalBinding/Light/SpotLight.h"
+#include "Shaders/Common/PBR.h"
+#include "Shaders/Common/LightingInput.h"
+
+#include "MetalBinding/Model.h"
+#include "MetalBinding/Vertex.h"
+#include "MetalBinding/Camera.h"
+#include "MetalBinding/Light/SpotLight.h"
+#include "MetalBinding/Attribute/Bridge.h"
 
 using namespace metal;
 

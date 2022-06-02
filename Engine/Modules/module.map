@@ -7,11 +7,19 @@ module MetalBinding {
     header "../MetalBinding/Vertex.h"
     header "../MetalBinding/Camera.h"
     header "../MetalBinding/Constant.h"
-    header "../MetalBinding/Attribute.h"
+    
     header "../MetalBinding/Light/OmniLight.h"
     header "../MetalBinding/Light/SpotLight.h"
     header "../MetalBinding/Light/AmbientLight.h"
     header "../MetalBinding/Light/DirectionalLight.h"
+    
     header "../MetalBinding/Rendering/SSAO.h"
+    
+    header "../MetalBinding/Attribute/Bridge.h"
+    header "../MetalBinding/Attribute/Attribute.h"
+    header "../MetalBinding/Attribute/VertexShader/VertexBufferIndex.h"
+    header "../MetalBinding/Attribute/FragmentShader/FragmentBufferIndex.h"
+    header "../MetalBinding/Attribute/FragmentShader/FragmentTextureIndex.h"
+    
     export *
 }

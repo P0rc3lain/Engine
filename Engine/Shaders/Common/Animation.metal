@@ -3,8 +3,9 @@
 //
 
 #include "Animation.h"
-#include "../../MetalBinding/Vertex.h"
-#include "../../MetalBinding/Constant.h"
+
+#include "MetalBinding/Vertex.h"
+#include "MetalBinding/Constant.h"
 
 using namespace metal;
 

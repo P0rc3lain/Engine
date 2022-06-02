@@ -4,8 +4,9 @@
 
 #include <metal_stdlib>
 
-#include "../Common/Color.h"
-#include "../../MetalBinding/Vertex.h"
+#include "Shaders/Common/Color.h"
+
+#include "MetalBinding/Vertex.h"
 
 using namespace metal;
 

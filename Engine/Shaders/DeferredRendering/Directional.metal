@@ -5,14 +5,15 @@
 #include <simd/simd.h>
 #include <metal_stdlib>
 
-#include "../Common/PBR.h"
-#include "../Common/Shadow.h"
-#include "../Common/LightingInput.h"
-#include "../../MetalBinding/Model.h"
-#include "../../MetalBinding/Vertex.h"
-#include "../../MetalBinding/Camera.h"
-#include "../../MetalBinding/Attribute.h"
-#include "../../MetalBinding/Light/DirectionalLight.h"
+#include "Shaders/Common/PBR.h"
+#include "Shaders/Common/Shadow.h"
+#include "Shaders/Common/LightingInput.h"
+
+#include "MetalBinding/Model.h"
+#include "MetalBinding/Vertex.h"
+#include "MetalBinding/Camera.h"
+#include "MetalBinding/Attribute/Bridge.h"
+#include "MetalBinding/Light/DirectionalLight.h"
 
 #define PCF_VERTICAL_SAMPELS 2
 #define PCF_HORIZONTAL_SAMPLES 2

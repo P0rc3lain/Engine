@@ -4,12 +4,13 @@
 
 #include <metal_stdlib>
 
-#include "../Common/PBR.h"
-#include "../Common/Animation.h"
-#include "../Common/Transformation.h"
-#include "../../MetalBinding/Model.h"
-#include "../../MetalBinding/Vertex.h"
-#include "../../MetalBinding/Camera.h"
+#include "Shaders/Common/PBR.h"
+#include "Shaders/Common/Animation.h"
+#include "Shaders/Common/Transformation.h"
+
+#include "MetalBinding/Model.h"
+#include "MetalBinding/Vertex.h"
+#include "MetalBinding/Camera.h"
 
 using namespace metal;
 

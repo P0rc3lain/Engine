@@ -396,6 +396,11 @@
 		5629FBEB2749209C005476AF /* PNIInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIInterpolator.swift; sourceTree = "<group>"; };
 		5629FBED27492533005476AF /* PNAnimatedCoordinateSpace+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNAnimatedCoordinateSpace+Extension.swift"; sourceTree = "<group>"; };
 		562B8F42272599FF00363CE8 /* MTLRenderCommandEncoder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLRenderCommandEncoder+Extension.swift"; sourceTree = "<group>"; };
+		562C738628493FE100E51606 /* VertexBufferIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VertexBufferIndex.h; sourceTree = "<group>"; };
+		562C7387284940E900E51606 /* Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bridge.h; sourceTree = "<group>"; };
+		562C73882849415300E51606 /* Attribute.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Attribute.h; sourceTree = "<group>"; };
+		562C738C284941A000E51606 /* FragmentTextureIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FragmentTextureIndex.h; sourceTree = "<group>"; };
+		562C738D2849442800E51606 /* FragmentBufferIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FragmentBufferIndex.h; sourceTree = "<group>"; };
 		563575F32728486A00CE4988 /* PNAnimationSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnimationSample.swift; sourceTree = "<group>"; };
 		563BFC80272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MDLObjectContainerComponent+Extension.swift"; sourceTree = "<group>"; };
 		563BFC8427285F100003EDB7 /* MTLBuffer+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MTLBuffer+Extension.swift"; sourceTree = "<group>"; };
@@ -533,7 +538,6 @@
 		56C4CD4F2737FF24000A994E /* SpotLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpotLight.h; sourceTree = "<group>"; };
 		56C4CD502737FFDD000A994E /* PNSpotJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSpotJob.swift; sourceTree = "<group>"; };
 		56C4CD52273800E4000A994E /* Spot.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Spot.metal; sourceTree = "<group>"; };
-		56D12ACE2723167800550530 /* Attribute.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Attribute.h; sourceTree = "<group>"; };
 		56D12ACF27231DAD00550530 /* RawRepresentable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RawRepresentable+Extension.swift"; sourceTree = "<group>"; };
 		56D50857274542EA0097DEB2 /* simd_quatf+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd_quatf+Extension.swift"; sourceTree = "<group>"; };
 		56D5085A27454B250097DEB2 /* OmniLight+Extension+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OmniLight+Extension+Tests.swift"; sourceTree = "<group>"; };
@@ -901,13 +905,13 @@
 		561666E52719E2CD000063B1 /* MetalBinding */ = {
 			isa = PBXGroup;
 			children = (
+				562C738428493FBB00E51606 /* Attribute */,
 				568EBB37273F099B007C7D35 /* Rendering */,
 				56ADD2F22737077700107E24 /* Light */,
 				561666E62719E2CD000063B1 /* Compatibility.h */,
 				561666E72719E2CD000063B1 /* Vertex.h */,
 				563D0A2B2719F79D00F77B40 /* Camera.h */,
 				563D0A2C2719F7A400F77B40 /* Model.h */,
-				56D12ACE2723167800550530 /* Attribute.h */,
 				560C18CE273A819100459AEF /* Constant.h */,
 			);
 			path = MetalBinding;
@@ -1016,6 +1020,34 @@
 				5629FBEB2749209C005476AF /* PNIInterpolator.swift */,
 			);
 			path = Interpolation;
+			sourceTree = "<group>";
+		};
+		562C738428493FBB00E51606 /* Attribute */ = {
+			isa = PBXGroup;
+			children = (
+				562C738B2849418100E51606 /* FragmentShader */,
+				562C738A2849417A00E51606 /* VertexShader */,
+				562C73882849415300E51606 /* Attribute.h */,
+				562C7387284940E900E51606 /* Bridge.h */,
+			);
+			path = Attribute;
+			sourceTree = "<group>";
+		};
+		562C738A2849417A00E51606 /* VertexShader */ = {
+			isa = PBXGroup;
+			children = (
+				562C738628493FE100E51606 /* VertexBufferIndex.h */,
+			);
+			path = VertexShader;
+			sourceTree = "<group>";
+		};
+		562C738B2849418100E51606 /* FragmentShader */ = {
+			isa = PBXGroup;
+			children = (
+				562C738C284941A000E51606 /* FragmentTextureIndex.h */,
+				562C738D2849442800E51606 /* FragmentBufferIndex.h */,
+			);
+			path = FragmentShader;
 			sourceTree = "<group>";
 		};
 		563C9C22273882EB0014CFF3 /* Shadows */ = {
@@ -2195,6 +2227,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_COMPILER_FLAGS = "-D__METAL__";
+				MTL_HEADER_SEARCH_PATHS = "$(SRCROOT)/Engine";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stompor.mateusz.porcelain.engine;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2226,6 +2259,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_COMPILER_FLAGS = "-D__METAL__";
+				MTL_HEADER_SEARCH_PATHS = "$(SRCROOT)/Engine";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stompor.mateusz.porcelain.engine;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

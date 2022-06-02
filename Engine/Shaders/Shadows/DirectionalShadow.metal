@@ -4,12 +4,13 @@
 
 #include <metal_stdlib>
 
-#include "../Common/Animation.h"
-#include "../../MetalBinding/Model.h"
-#include "../../MetalBinding/Vertex.h"
-#include "../../MetalBinding/Constant.h"
-#include "../../MetalBinding/Attribute.h"
-#include "../../MetalBinding/Light/DirectionalLight.h"
+#include "Shaders/Common/Animation.h"
+
+#include "MetalBinding/Model.h"
+#include "MetalBinding/Vertex.h"
+#include "MetalBinding/Constant.h"
+#include "MetalBinding/Attribute/Bridge.h"
+#include "MetalBinding/Light/DirectionalLight.h"
 
 using namespace metal;
 
