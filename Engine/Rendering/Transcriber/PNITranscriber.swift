@@ -6,8 +6,11 @@ import MetalBinding
 
 struct PNITranscriber: PNTranscriber {
     private let transformCalculator: PNTransformCalculator
-    init(transformCalculator: PNTransformCalculator) {
+    private let interactor: PNBoundingBoxInteractor
+    init(transformCalculator: PNTransformCalculator,
+         boundingBoxInteractor: PNBoundingBoxInteractor) {
         self.transformCalculator = transformCalculator
+        self.interactor = boundingBoxInteractor
     }
     func transcribe(scene: PNScene) -> PNSceneDescription {
         let sceneDescription = PNSceneDescription()
@@ -21,7 +24,6 @@ struct PNITranscriber: PNTranscriber {
     private func write(lights: [PNDirectionalLight], scene: PNSceneDescription) {
         let cameraBB = scene.boundingBoxes[scene.activeCameraIdx]
         for light in lights {
-            let interactor = PNIBoundingBoxInteractor.default
             let orientation = simd.simd_float4x4.from(directionVector: light.direction)
             let orientationInverse = orientation.inverse
             let bound = interactor.bound(interactor.aabb(interactor.multiply(orientationInverse, cameraBB)))
@@ -40,13 +42,12 @@ struct PNITranscriber: PNTranscriber {
                                                            parent: parentIndex,
                                                            scene: scene)
         scene.uniforms.append(ModelUniforms.from(transform: transform))
-        for child in node.children {
-            write(node: child, scene: scene, parentIndex: index)
+        node.children.forEach {
+            write(node: $0, scene: scene, parentIndex: index)
         }
     }
     private func boundingBoxes(scene: PNSceneDescription) -> [PNBoundingBox] {
         var boundingBoxes = [PNBoundingBox](minimalCapacity: scene.entities.count)
-        let interactor = PNIBoundingBoxInteractor.default
         for i in scene.entities.indices {
             let index = scene.entities.count - (1 + i)
             let transform = scene.uniforms[index].modelMatrix
@@ -83,7 +84,6 @@ struct PNITranscriber: PNTranscriber {
                     let boundingBox = interactor.aabb(interactor.multiply(transform, interactor.from(bound: PNBound(min: .zero, max: .zero))))
                     boundingBoxes.insert(boundingBox)
                 }
-
             case .camera:
                 let boundingBox = interactor.aabb(interactor.multiply(transform.inverse, scene.cameras[scene.entities[index].data.referenceIdx].boundingBox))
                 boundingBoxes.insert(boundingBox)
@@ -111,6 +111,8 @@ struct PNITranscriber: PNTranscriber {
     static var `default`: PNITranscriber {
         let interpolator = PNIInterpolator()
         let transformCalculator = PNITransformCalculator(interpolator: interpolator)
-        return PNITranscriber(transformCalculator: transformCalculator)
+        let boundingBoxInteractor = PNIBoundingBoxInteractor.default
+        return PNITranscriber(transformCalculator: transformCalculator,
+                              boundingBoxInteractor: boundingBoxInteractor)
     }
 }
