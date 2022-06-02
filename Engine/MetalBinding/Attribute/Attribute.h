@@ -16,8 +16,3 @@ enum VertexAttribute {
 enum VertexPAttribute {
     kVertexPAttributePositionIndex = 0,
 };
-
-enum VertexPUVAttribute {
-    kVertexPUVAttributePositionIndex = 0,
-    kVertexPUVAttributeTextureUV,
-};
