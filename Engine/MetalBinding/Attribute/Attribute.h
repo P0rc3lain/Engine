@@ -4,15 +4,15 @@
 
 #pragma once
 
-enum VertexAttribute {
-    kVertexAttributePositionIndex = 0,
-    kVertexAttributeNormalIndex,
-    kVertexAttributeTangentIndex,
+enum VertexAttributeIndex {
+    kVertexAttributePosition = 0,
+    kVertexAttributeNormal,
+    kVertexAttributeTangent,
     kVertexAttributeTextureUV,
     kVertexAttributeJointIndices,
     kVertexAttributeJointWeights
 };
 
-enum VertexPAttribute {
-    kVertexPAttributePositionIndex = 0,
+enum VertexPAttributeIndex {
+    kVertexPAttributePosition = 0,
 };
