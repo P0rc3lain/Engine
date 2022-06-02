@@ -23,10 +23,10 @@ constant bool hasSkeleton [[ function_constant(0) ]];
 
 vertex RasterizerData vertexOmniLightShadow(Vertex in [[stage_in]],
                                             constant uint & instanceId [[buffer(kAttributeOmniShadowVertexShaderBufferInstanceId)]],
-                                            constant OmniLight * omniLights [[buffer(kAttributeSpotShadowVertexShaderBufferSpotLights)]],
-                                            constant ModelUniforms * modelUniforms [[buffer(kAttributeSpotShadowVertexShaderBufferModelUniforms)]],
-                                            constant simd_float4x4 * matrixPalettes [[buffer(kAttributeSpotShadowVertexShaderBufferMatrixPalettes)]],
-                                            constant int & index [[buffer(kAttributeSpotShadowVertexShaderBufferObjectIndex)]],
+                                            constant OmniLight * omniLights [[buffer(kAttributeOmniShadowVertexShaderBufferOmniLights)]],
+                                            constant ModelUniforms * modelUniforms [[buffer(kAttributeOmniShadowVertexShaderBufferModelUniforms)]],
+                                            constant simd_float4x4 * matrixPalettes [[buffer(kAttributeOmniShadowVertexShaderBufferMatrixPalettes)]],
+                                            constant int & index [[buffer(kAttributeOmniShadowVertexShaderBufferObjectIndex)]],
                                             constant simd_float4x4 * rotations [[buffer(kAttributeOmniShadowVertexShaderBufferRotations)]]) {
     float4 totalPosition = hasSkeleton ? totalPosition = calculatePosition(in, matrixPalettes) : float4(in.position, 1);
     float4 worldPosition = modelUniforms[index].modelMatrix * totalPosition;
