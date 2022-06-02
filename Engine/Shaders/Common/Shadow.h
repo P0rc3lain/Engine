@@ -2,8 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-#ifndef SHADOW_H
-#define SHADOW_H
+#pragma once
 
 #include <simd/simd.h>
 #include <metal_stdlib>
@@ -22,5 +21,3 @@ float pcfDepth(metal::depthcube_array<float> shadowMaps,
                float countedDepth,
                float bias,
                float offset);
-
-#endif /* SHADOW_H */

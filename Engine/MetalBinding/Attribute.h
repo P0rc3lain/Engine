@@ -2,8 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-#ifndef ATTRIBUTE_H
-#define ATTRIBUTE_H
+#pragma once
 
 enum VertexAttribute {
     kVertexAttributePositionIndex = 0,
@@ -217,5 +216,3 @@ enum AttributeGrainVertexShaderBufferIndex {
 enum AttributeGrainFragmentShaderTextureIndex {
     kAttributeGrainFragmentShaderTexture = 0
 };
-
-#endif /* ATTRIBUTE_H */

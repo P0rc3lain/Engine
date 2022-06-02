@@ -2,8 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-#ifndef VERTEX_H
-#define VERTEX_H
+#pragma once
 
 #include <simd/simd.h>
 
@@ -22,5 +21,3 @@ struct Vertex {
 struct VertexP {
     simd_float3 position metal_only([[attribute(kVertexPAttributePositionIndex)]]);
 };
-
-#endif /* VERTEX_H */

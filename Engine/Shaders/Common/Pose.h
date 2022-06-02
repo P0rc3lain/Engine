@@ -2,8 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-#ifndef POSE_H
-#define POSE_H
+#pragma once
 
 #include <simd/simd.h>
 
@@ -12,5 +11,3 @@ struct Pose {
     float3 normal;
     float3 tangent;
 };
-
-#endif /* POSE_H */

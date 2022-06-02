@@ -2,8 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-#ifndef SSAO_H
-#define SSAO_H
+#pragma once
 
 struct SSAOUniforms {
     int sampleCount;
@@ -12,5 +11,3 @@ struct SSAOUniforms {
     float bias;
     float power;
 };
-
-#endif /* SSAO_H */

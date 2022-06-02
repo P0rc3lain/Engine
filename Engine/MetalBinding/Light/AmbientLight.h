@@ -2,8 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-#ifndef AMBIENT_LIGHT_H
-#define AMBIENT_LIGHT_H
+#pragma once
 
 struct AmbientLight {
     float diameter;
@@ -11,5 +10,3 @@ struct AmbientLight {
     float intensity;
     int idx;
 };
-
-#endif /* AMBIENT_LIGHT_H */

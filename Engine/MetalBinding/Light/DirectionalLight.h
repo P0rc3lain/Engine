@@ -2,8 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-#ifndef DIRECTIONAL_LIGHT_H
-#define DIRECTIONAL_LIGHT_H
+#pragma once
 
 struct DirectionalLight {
     simd_float3 color;
@@ -13,5 +12,3 @@ struct DirectionalLight {
     simd_float4x4 projectionMatrix;
     simd_float4x4 projectionMatrixInverse;
 };
-
-#endif /* DIRECTIONAL_LIGHT_H */

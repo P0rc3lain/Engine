@@ -2,8 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-#ifndef LIGHTING_INPUT_H
-#define LIGHTING_INPUT_H
+#pragma once
 
 #include <simd/simd.h>
 #include <metal_stdlib>
@@ -33,5 +32,3 @@ struct LightingInput {
         };
     }
 };
-
-#endif /* LIGHTING_INPUT_H */

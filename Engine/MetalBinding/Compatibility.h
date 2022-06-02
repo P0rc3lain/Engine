@@ -2,8 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-#ifndef COMPATIBILITY_H
-#define COMPATIBILITY_H
+#pragma once
 
 #ifdef __METAL__
 #include <metal_stdlib>
@@ -11,5 +10,3 @@
 #else
 #define metal_only(expression)
 #endif
-
-#endif /* COMPATIBILITY_H */
