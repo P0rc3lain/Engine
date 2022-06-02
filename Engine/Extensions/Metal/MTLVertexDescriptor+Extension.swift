@@ -13,7 +13,7 @@ extension MTLVertexDescriptor {
         return MTKMetalVertexDescriptorFromModelIO(mdlVertexDescriptor)
     }
     static var vertexP: MTLVertexDescriptor? {
-        guard let positionOffset = MemoryLayout<VertexP>.offset(of: \VertexP.position) else {
+        guard let positionOffset = MemoryLayout.offset(of: \VertexP.position) else {
             return nil
         }
         let descriptor = MTLVertexDescriptor()
