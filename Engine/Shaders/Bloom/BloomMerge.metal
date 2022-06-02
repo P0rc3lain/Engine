@@ -4,8 +4,8 @@
 
 #include <metal_stdlib>
 
-#include "../../MetalBinding/Vertex.h"
-#include "../../MetalBinding/Attribute.h"
+#include "MetalBinding/Vertex.h"
+#include "MetalBinding/Attribute/Bridge.h"
 
 using namespace metal;
 

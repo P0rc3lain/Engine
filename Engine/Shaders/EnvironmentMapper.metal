@@ -5,11 +5,12 @@
 #include <simd/simd.h>
 #include <metal_stdlib>
 
-#include "Common/Transformation.h"
-#include "../MetalBinding/Model.h"
-#include "../MetalBinding/Vertex.h"
-#include "../MetalBinding/Camera.h"
-#include "../MetalBinding/Attribute.h"
+#include "Shaders/Common/Transformation.h"
+
+#include "MetalBinding/Model.h"
+#include "MetalBinding/Vertex.h"
+#include "MetalBinding/Camera.h"
+#include "MetalBinding/Attribute/Bridge.h"
 
 using namespace metal;
 

@@ -6,8 +6,8 @@
 
 #include <simd/simd.h>
 
-#include "Attribute.h"
 #include "Compatibility.h"
+#include "Attribute/Bridge.h"
 
 struct Vertex {
     simd_float3 position metal_only([[attribute(kVertexAttributePositionIndex)]]);
