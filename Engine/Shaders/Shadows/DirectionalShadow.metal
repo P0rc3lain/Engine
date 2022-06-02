@@ -22,10 +22,10 @@ struct RasterizerData {
 constant bool hasSkeleton [[function_constant(0)]];
 
 vertex RasterizerData vertexDirectionalLightShadow(Vertex in [[stage_in]],
-                                                   constant uint & instanceId [[buffer(kAttributeSpotShadowVertexShaderBufferInstanceId)]],
-                                                   constant DirectionalLight * directionalLights [[buffer(kAttributeSpotShadowVertexShaderBufferSpotLights)]],
-                                                   constant ModelUniforms * modelUniforms [[buffer(kAttributeSpotShadowVertexShaderBufferModelUniforms)]],
-                                                   constant simd_float4x4 * matrixPalettes [[buffer(kAttributeSpotShadowVertexShaderBufferMatrixPalettes)]],
+                                                   constant uint & instanceId [[buffer(kAttributeDirectionalShadowVertexShaderBufferInstanceId)]],
+                                                   constant DirectionalLight * directionalLights [[buffer(kAttributeDirectionalShadowVertexShaderBufferDirectionalLights)]],
+                                                   constant ModelUniforms * modelUniforms [[buffer(kAttributeDirectionalShadowVertexShaderBufferModelUniforms)]],
+                                                   constant simd_float4x4 * matrixPalettes [[buffer(kAttributeDirectionalShadowVertexShaderBufferMatrixPalettes)]],
                                                    constant int & index [[buffer(kAttributeSpotShadowVertexShaderBufferObjectIndex)]]) {
     float4 totalPosition = hasSkeleton ? calculatePosition(in, matrixPalettes) : float4(in.position, 1);
     float4 worldPosition = modelUniforms[index].modelMatrix * totalPosition;
