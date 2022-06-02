@@ -34,7 +34,7 @@ struct PNEnvironmentJob: PNRenderJob {
                                 index: kAttributeEnvironmentVertexShaderBufferModelUniforms)
         encoder.setVertexBuffer(supply.bufferStore.cameras,
                                 offset: supply.scene.entities[supply.scene.activeCameraIdx].data.referenceIdx * MemoryLayout<CameraUniforms>.stride,
-                                index: kAttributeEnvironmentVertexShaderBufferCamera)
+                                index: kAttributeEnvironmentVertexShaderBufferCameraUniforms)
         encoder.setFragmentTexture(skyMap,
                                    index: kAttributeEnvironmentFragmentShaderTextureCubeMap)
         encoder.drawIndexedPrimitives(submesh: cube.pieceDescriptions[0].drawDescription)

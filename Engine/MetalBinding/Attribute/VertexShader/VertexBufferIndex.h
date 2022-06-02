@@ -34,7 +34,7 @@ enum AttributeGBufferVertexShaderBufferIndex {
 enum AttributeFogVertexShaderBufferIndex {
     kAttributeFogVertexShaderBufferStageIn = 0,
     kAttributeFogVertexShaderBufferModelUniforms,
-    kAttributeFogVertexShaderBufferCamera
+    kAttributeFogVertexShaderBufferCameraUniforms
 };
 
 enum AttributeVignetteVertexShaderBufferIndex {
@@ -49,7 +49,7 @@ enum AttributeGrainVertexShaderBufferIndex {
 enum AttributeEnvironmentVertexShaderBufferIndex {
     kAttributeEnvironmentVertexShaderBufferStageIn = 0,
     kAttributeEnvironmentVertexShaderBufferModelUniforms,
-    kAttributeEnvironmentVertexShaderBufferCamera
+    kAttributeEnvironmentVertexShaderBufferCameraUniforms
 };
 
 enum AttributeSpotShadowVertexShaderBufferIndex {

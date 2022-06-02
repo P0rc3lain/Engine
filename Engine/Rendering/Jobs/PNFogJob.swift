@@ -37,7 +37,7 @@ struct PNFogJob: PNRenderJob {
                                 index: kAttributeFogVertexShaderBufferModelUniforms)
         encoder.setVertexBuffer(supply.bufferStore.cameras,
                                 offset: supply.scene.entities[supply.scene.activeCameraIdx].data.referenceIdx * MemoryLayout<CameraUniforms>.stride,
-                                index: kAttributeFogVertexShaderBufferCamera)
+                                index: kAttributeFogVertexShaderBufferCameraUniforms)
         encoder.setFragmentTexture(skyMap,
                                    index: kAttributeFogFragmentShaderTextureCubeMap)
         encoder.setFragmentTexture(prTexture,
