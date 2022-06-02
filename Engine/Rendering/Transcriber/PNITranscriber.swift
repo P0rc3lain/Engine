@@ -87,6 +87,13 @@ struct PNITranscriber: PNTranscriber {
             case .camera:
                 let boundingBox = interactor.aabb(interactor.multiply(transform.inverse, scene.cameras[scene.entities[index].data.referenceIdx].boundingBox))
                 boundingBoxes.insert(boundingBox)
+            case .particle:
+                let particleSystemIndex = scene.entities[index].data.referenceIdx
+                let rules = scene.particles[particleSystemIndex].positioningRules
+                let boundingBox = interactor.aabb(interactor.multiply(transform,
+                                                                      interactor.from(bound: rules.bound)))
+
+                boundingBoxes.insert(boundingBox)
             }
         }
         return boundingBoxes

@@ -5,6 +5,7 @@
 import MetalKit
 
 public final class PNIEngine: PNEngine {
+    public var taskQueue: PNRepeatableTaskQueue
     private let view: MTKView
     public var scene: PNScene
     private let renderMaskGenerator: PNRenderMaskGenerator
@@ -18,7 +19,8 @@ public final class PNIEngine: PNEngine {
                  coordinatorFactory: PNRenderingCoordinatorFactory,
                  workloadManagerFactory: PNWorkloadManagerFactory,
                  bufferStoreFactory: PNBufferStoreFactory,
-                 renderMaskGenerator: PNRenderMaskGenerator) {
+                 renderMaskGenerator: PNRenderMaskGenerator,
+                 taskQueue: PNRepeatableTaskQueue) {
         guard let coordinator = coordinatorFactory.new(drawableSize: renderingSize),
               let workloadManager = workloadManagerFactory.new(bufferStoreFactory: bufferStoreFactory,
                                                                renderingCoordinator: coordinator,
@@ -32,6 +34,7 @@ public final class PNIEngine: PNEngine {
         self.scene = scene
         self.workloadManagerFactory = workloadManagerFactory
         self.workloadManager = workloadManager
+        self.taskQueue = taskQueue
         self.renderMaskGenerator = renderMaskGenerator
     }
     public func update(drawableSize: CGSize) -> Bool {
@@ -45,7 +48,7 @@ public final class PNIEngine: PNEngine {
         return true
     }
     public func draw() {
-        workloadManager.draw(sceneGraph: scene)
+        workloadManager.draw(sceneGraph: scene, taskQueue: taskQueue)
     }
     public static func `default`(view: MTKView,
                                  renderingSize: CGSize,
@@ -64,7 +67,8 @@ public final class PNIEngine: PNEngine {
                          coordinatorFactory: PNIRenderingCoordinatorFactory(view: view),
                          workloadManagerFactory: workloadManagerFactory(threaded: threaded),
                          bufferStoreFactory: PNIBufferStoreFactory(device: device),
-                         renderMaskGenerator: maskGenerator)
+                         renderMaskGenerator: maskGenerator,
+                         taskQueue: PNIRepeatableTaskQueue())
     }
     static func workloadManagerFactory(threaded: Bool) -> PNWorkloadManagerFactory {
         if threaded {

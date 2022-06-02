@@ -23,9 +23,10 @@ public class PNIThreadedWorkloadManager: PNWorkloadManager {
                                                        bufferStore: bufferStores.1,
                                                        mask: .empty))
     }
-    public func draw(sceneGraph: PNScene) {
+    public func draw(sceneGraph: PNScene, taskQueue: PNRepeatableTaskQueue) {
         dispatchGroup.enter()
         dispatchQueue.async { [unowned self] in
+            taskQueue.execute()
             let scene = transcriber.transcribe(scene: sceneGraph)
             let inactive = frameSupplies.pullInactive
             inactive.bufferStore.matrixPalettes.upload(data: &scene.palettes)

@@ -91,3 +91,11 @@ enum AttributeBloomSplitVertexShaderBufferIndex {
 enum AttributeAmbientVertexShaderBufferIndex {
     kAttributeAmbientVertexShaderBufferStageIn = 0
 };
+
+enum AttributeParticleVertexShaderBufferIndex {
+    kAttributeParticleVertexShaderBufferStageIn = 0,
+    kAttributeParticleVertexShaderBufferModelUniforms,
+    kAttributeParticleVertexShaderBufferCameraUniforms,
+    kAttributeParticleVertexShaderBufferSystemIndex
+};
+

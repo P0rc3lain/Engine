@@ -10,4 +10,5 @@ public enum PNEntityType {
     case mesh
     case animatedMesh
     case camera
+    case particle
 }

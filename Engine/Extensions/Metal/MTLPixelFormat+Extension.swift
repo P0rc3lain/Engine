@@ -20,6 +20,12 @@ extension MTLPixelFormat {
     static var translucentDS: MTLPixelFormat {
         .depth32Float_stencil8
     }
+    static var particleC: MTLPixelFormat {
+        .rgba16Float
+    }
+    static var particleDS: MTLPixelFormat {
+        .depth32Float_stencil8
+    }
     static var gBufferDS: MTLPixelFormat {
         .depth32Float_stencil8
     }

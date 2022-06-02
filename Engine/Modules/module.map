@@ -7,6 +7,7 @@ module MetalBinding {
     header "../MetalBinding/Vertex.h"
     header "../MetalBinding/Camera.h"
     header "../MetalBinding/Constant.h"
+    header "../MetalBinding/FrozenParticle.h"
     
     header "../MetalBinding/Light/OmniLight.h"
     header "../MetalBinding/Light/SpotLight.h"

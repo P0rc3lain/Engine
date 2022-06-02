@@ -90,6 +90,21 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexDescriptor = .vertex
         return descriptor
     }
+    static func particle(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
+        let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.label = "Particle"
+        descriptor.vertexFunction = library.makeFunction(name: "vertexParticle")
+        descriptor.fragmentFunction = library.makeFunction(name: "fragmentParticle")
+        descriptor.colorAttachments[0].pixelFormat = .particleC
+        descriptor.colorAttachments[0].rgbBlendOperation = .add
+        descriptor.colorAttachments[0].sourceRGBBlendFactor = .sourceAlpha
+        descriptor.colorAttachments[0].destinationRGBBlendFactor = .oneMinusSourceAlpha
+        descriptor.colorAttachments[0].isBlendingEnabled = true
+        descriptor.depthAttachmentPixelFormat = .particleDS
+        descriptor.stencilAttachmentPixelFormat = .particleDS
+        descriptor.vertexDescriptor = .particle
+        return descriptor
+    }
     static func translucentAnimated(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor.translucent(library: library)
         descriptor.label = "Translucent Animated"

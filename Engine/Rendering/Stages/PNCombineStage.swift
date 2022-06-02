@@ -12,6 +12,7 @@ struct PNCombineStage: PNStage {
     private var omniJob: PNRenderJob
     private var ambientJob: PNRenderJob
     private var spotJob: PNRenderJob
+    private var particleJob: PNRenderJob
     private var directionalJob: PNRenderJob
     private var translucentJob: PNTranslucentJob
     private var renderPassDescriptor: MTLRenderPassDescriptor
@@ -41,6 +42,8 @@ struct PNCombineStage: PNStage {
                                            inputTextures: gBufferOutput.color,
                                            shadowMap: spotLightShadows,
                                            drawableSize: renderingSize),
+              let particleJob = PNParticleJob.make(device: device,
+                                                   drawableSize: renderingSize),
               let translucentJob = PNTranslucentJob.make(device: device,
                                                          drawableSize: renderingSize),
               let fogJob = PNFogJob.make(device: device,
@@ -62,6 +65,7 @@ struct PNCombineStage: PNStage {
         self.spotJob = spotJob
         self.fogJob = fogJob
         self.translucentJob = translucentJob
+        self.particleJob = particleJob
         self.directionalJob = directionalJob
         self.io = PNGPUIO(input: PNGPUSupply(color: gBufferOutput.color + [ssaoTexture],
                                              stencil: gBufferOutput.stencil),
@@ -78,6 +82,7 @@ struct PNCombineStage: PNStage {
         directionalJob.draw(encoder: encoder, supply: supply)
         environmentJob.draw(encoder: encoder, supply: supply)
         translucentJob.draw(encoder: encoder, supply: supply)
+        particleJob.draw(encoder: encoder, supply: supply)
         fogJob.draw(encoder: encoder, supply: supply)
         encoder.endEncoding()
         commandBuffer.popDebugGroup()
