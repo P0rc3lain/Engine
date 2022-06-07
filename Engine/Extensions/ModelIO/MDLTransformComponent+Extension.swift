@@ -14,7 +14,7 @@ extension MDLTransformComponent {
         var scales = [simd_float3]()
         var orientations = [simd_quatf]()
         for fraction in times {
-            let transform = localTransform?(atTime: fraction) ?? matrix_identity_float4x4
+            let transform = localTransform?(atTime: fraction) ?? .identity
             translations.append(transform.translation)
             orientations.append(simd_quatf(transform))
             scales.append(transform.scale)

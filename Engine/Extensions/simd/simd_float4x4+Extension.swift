@@ -5,6 +5,9 @@
 import simd
 
 extension simd_float4x4 {
+    public static var identity: simd_float4x4 {
+        matrix_identity_float4x4
+    }
     public var translation: simd_float3 {
         columns.3.xyz
     }

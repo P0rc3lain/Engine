@@ -33,7 +33,7 @@ struct PNISkeleton: PNSkeleton {
                "There must be a parent index assigned to each transform")
         var transforms = [PNB2MTransform]()
         for index in bindTransforms.indices {
-            let parentTransform = parentIndices[index] == .nil ? matrix_identity_float4x4 : transforms[parentIndices[index]]
+            let parentTransform = parentIndices[index] == .nil ? .identity : transforms[parentIndices[index]]
             transforms.append(parentTransform * bindTransforms[index])
         }
         return transforms

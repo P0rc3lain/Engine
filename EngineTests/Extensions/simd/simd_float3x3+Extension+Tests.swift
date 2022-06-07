@@ -8,7 +8,7 @@ import XCTest
 
 class SimdFloat3x3Tests: XCTestCase {
     func testExpand() throws {
-        XCTAssertEqual(matrix_identity_float3x3.expanded, matrix_identity_float4x4)
+        XCTAssertEqual(simd_float3x3.identity.expanded, .identity)
     }
     func testRotationMatrixFromDirection() throws {
         let basis = simd_float3x3.from(directionVector: [1, 0, 0])

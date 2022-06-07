@@ -15,7 +15,7 @@ public class PNScene {
         self.directionalLights = directionalLights
     }
     public static var `default`: PNScene {
-        let groupNode = PNISceneNode(transform: matrix_identity_float4x4)
+        let groupNode = PNISceneNode(transform: .identity)
         return PNScene(rootNode: PNNode(data: groupNode),
                        directionalLights: [])
     }

@@ -5,6 +5,9 @@
 import simd
 
 extension simd_float3x3 {
+    public static var identity: simd_float3x3 {
+        matrix_identity_float3x3
+    }
     public static func from(directionVector binormal: simd_float3) -> simd_float3x3 {
         var normal = simd_float3.random().normalized
         normal = (normal - dot(binormal, normal)).normalized
