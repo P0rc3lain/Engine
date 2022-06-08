@@ -42,9 +42,15 @@ extension MTLDevice {
     func makeDSSTranslucent() -> MTLDepthStencilState? {
         makeDepthStencilState(descriptor: .translucent)
     }
+    func makeDSSParticle() -> MTLDepthStencilState? {
+        makeDepthStencilState(descriptor: .particle)
+    }
     // ======================
     // MTLRenderPipelineState
     // ======================
+    func makeRPSParticle(library: MTLLibrary) -> MTLRenderPipelineState? {
+        try? makeRenderPipelineState(descriptor: .particle(library: library))
+    }
     func makeRPSVignette(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .vignette(library: library))
     }

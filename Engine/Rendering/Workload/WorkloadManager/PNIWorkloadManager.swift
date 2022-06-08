@@ -16,7 +16,8 @@ public class PNIWorkloadManager: PNWorkloadManager {
         self.transcriber = transcriber
         self.renderMaskGenerator = renderMaskGenerator
     }
-    public func draw(sceneGraph: PNScene) {
+    public func draw(sceneGraph: PNScene, taskQueue: PNRepeatableTaskQueue) {
+        taskQueue.execute()
         let scene = transcriber.transcribe(scene: sceneGraph)
         bufferStore.matrixPalettes.upload(data: &scene.palettes)
         bufferStore.ambientLights.upload(data: &scene.ambientLights)

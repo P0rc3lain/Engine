@@ -33,6 +33,8 @@ public final class PNSceneDescription {
     // MARK: - Capacity K
     public var spotLights = [SpotLight]()
     // MARK: - Capacity L
+    public var particles = [PNParticleSystem]()
+    // MARK: - Capacity M
     public var skyMap: MTLTexture?
     public var activeCameraIdx = PNIndex.nil
 }

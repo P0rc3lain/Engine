@@ -19,4 +19,9 @@ extension MTLVertexBufferLayoutDescriptor {
                                         stepFunction: .perVertex,
                                         stepRate: 1)
     }
+    static var particle: MTLVertexBufferLayoutDescriptor {
+        MTLVertexBufferLayoutDescriptor(stride: MemoryLayout<FrozenParticle>.stride,
+                                        stepFunction: .perVertex,
+                                        stepRate: 1)
+    }
 }

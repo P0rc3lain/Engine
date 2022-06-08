@@ -73,3 +73,7 @@ enum AttributeDirectionalFragmentShaderTextureIndex {
     kAttributeDirectionalFragmentShaderTexturePR,
     kAttributeDirectionalFragmentShaderTextureShadowMaps
 };
+
+enum AttributeParticleFragmentShaderTextureIndex {
+    kAttributeParticleFragmentShaderAtlas = 0,
+};

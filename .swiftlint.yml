@@ -17,6 +17,7 @@ file_length:
     warning: 300
     error: 500
     ignore_comment_only_lines: true
+cyclomatic_complexity: 12
 
 opt_in_rules:
 - opening_brace

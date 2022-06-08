@@ -16,3 +16,10 @@ enum VertexAttributeIndex {
 enum VertexPAttributeIndex {
     kVertexPAttributePosition = 0,
 };
+
+enum FrozenParticleAttribute {
+    kFrozenParticleAttributePosition = 0,
+    kFrozenParticleAttributeLife,
+    kFrozenParticleAttributeLifespan,
+    kFrozenParticleAttributeScale
+};

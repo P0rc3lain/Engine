@@ -115,6 +115,18 @@
 		5629FBEC2749209C005476AF /* PNIInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBEB2749209C005476AF /* PNIInterpolator.swift */; };
 		5629FBEE27492533005476AF /* PNAnimatedCoordinateSpace+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBED27492533005476AF /* PNAnimatedCoordinateSpace+Extension.swift */; };
 		562B8F43272599FF00363CE8 /* MTLRenderCommandEncoder+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562B8F42272599FF00363CE8 /* MTLRenderCommandEncoder+Extension.swift */; };
+		562C739028494FE000E51606 /* Particle.metal in Sources */ = {isa = PBXBuildFile; fileRef = 562C738F28494FE000E51606 /* Particle.metal */; };
+		562C73922849506400E51606 /* FrozenParticle.h in Headers */ = {isa = PBXBuildFile; fileRef = 562C73912849506400E51606 /* FrozenParticle.h */; };
+		562C739A284950F300E51606 /* PNIParticleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C7398284950F200E51606 /* PNIParticleNode.swift */; };
+		562C739B284950F300E51606 /* PNParticleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C7399284950F200E51606 /* PNParticleNode.swift */; };
+		562C73A92849510900E51606 /* PNParticleGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C739F2849510900E51606 /* PNParticleGenerator.swift */; };
+		562C73AB2849510900E51606 /* PNParticleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C73A12849510900E51606 /* PNParticleController.swift */; };
+		562C73AC2849510900E51606 /* PNParticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C73A22849510900E51606 /* PNParticle.swift */; };
+		562C73AD2849510900E51606 /* PNRenderableParticlesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C73A32849510900E51606 /* PNRenderableParticlesProvider.swift */; };
+		562C73AE2849510900E51606 /* PNEmissionRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C73A52849510900E51606 /* PNEmissionRules.swift */; };
+		562C73AF2849510900E51606 /* PNPositioningRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C73A62849510900E51606 /* PNPositioningRules.swift */; };
+		562C73B02849510900E51606 /* PNEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C73A72849510900E51606 /* PNEmitter.swift */; };
+		562C73B22849513000E51606 /* PNParticleJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C73B12849513000E51606 /* PNParticleJob.swift */; };
 		563575F42728486A00CE4988 /* PNAnimationSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563575F32728486A00CE4988 /* PNAnimationSample.swift */; };
 		563BFC81272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563BFC80272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift */; };
 		563BFC8527285F100003EDB7 /* MTLBuffer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563BFC8427285F100003EDB7 /* MTLBuffer+Extension.swift */; };
@@ -201,6 +213,8 @@
 		5688076827483F4600C95F55 /* PNIMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5688076727483F4600C95F55 /* PNIMaterial.swift */; };
 		5688999E2757AB7D00D24EB1 /* Math.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5688999D2757AB7D00D24EB1 /* Math.metal */; };
 		568899A12757AC6E00D24EB1 /* Layer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 568899A02757AC6E00D24EB1 /* Layer.metal */; };
+		568C4EFF284F664500C6F128 /* PNRepeatableTaskQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568C4EFE284F664500C6F128 /* PNRepeatableTaskQueue.swift */; };
+		568C4F01284F687900C6F128 /* PNIRepeatableTaskQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568C4F00284F687900C6F128 /* PNIRepeatableTaskQueue.swift */; };
 		568EBB3A273F0B88007C7D35 /* SSAOUniforms+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EBB39273F0B88007C7D35 /* SSAOUniforms+Extension.swift */; };
 		568EBB3D273F0DE1007C7D35 /* PNISSAOHemisphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EBB3C273F0DE1007C7D35 /* PNISSAOHemisphere.swift */; };
 		56924ACC271A00D900FF3E06 /* PNIAnimatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924ACB271A00D900FF3E06 /* PNIAnimatedValue.swift */; };
@@ -223,6 +237,7 @@
 		56A8CA7E275796120040DCF9 /* Shadow.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56A8CA7D275796120040DCF9 /* Shadow.metal */; };
 		56ADD2F4273707C500107E24 /* PNAmbientJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F3273707C500107E24 /* PNAmbientJob.swift */; };
 		56ADD2F6273707E200107E24 /* Ambient.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F5273707E200107E24 /* Ambient.metal */; };
+		56B32FE728496D3200190D6A /* PNParticleSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B32FE628496D3200190D6A /* PNParticleSystem.swift */; };
 		56B65DEC273ED4CE00DB927E /* PNIBoundingBoxInteractor+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B65DEB273ED4CE00DB927E /* PNIBoundingBoxInteractor+Tests.swift */; };
 		56B65DEF273EE06300DB927E /* PNICullingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B65DEE273EE06300DB927E /* PNICullingController.swift */; };
 		56C47B9E27511E9C0075C61B /* PNFrameSupply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C47B9D27511E9B0075C61B /* PNFrameSupply.swift */; };
@@ -266,8 +281,10 @@
 		56E011BF28413260007859F2 /* CGRect+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E011BE28413260007859F2 /* CGRect+Extension.swift */; };
 		56E011C428413EB0007859F2 /* Int32+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E011C328413EB0007859F2 /* Int32+Extension.swift */; };
 		56E011C628413F2B007859F2 /* UInt32+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E011C528413F2B007859F2 /* UInt32+Extension.swift */; };
+		56E2A22C285096DC00D64A44 /* PNTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2A22B285096DC00D64A44 /* PNTask.swift */; };
 		56E8208F2727FD13002D58C3 /* Date+Extensioin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8208E2727FD13002D58C3 /* Date+Extensioin.swift */; };
 		56E8209D27284664002D58C3 /* PNPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8209C27284664002D58C3 /* PNPosition.swift */; };
+		56F0FB46284986570004D212 /* PNTextureAtlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F0FB45284986570004D212 /* PNTextureAtlas.swift */; };
 		56F59269273725FB008652C9 /* PNDirectionalJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F59268273725FB008652C9 /* PNDirectionalJob.swift */; };
 		56F5926D2737276D008652C9 /* Directional.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56F5926C2737276D008652C9 /* Directional.metal */; };
 /* End PBXBuildFile section */
@@ -401,6 +418,18 @@
 		562C73882849415300E51606 /* Attribute.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Attribute.h; sourceTree = "<group>"; };
 		562C738C284941A000E51606 /* FragmentTextureIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FragmentTextureIndex.h; sourceTree = "<group>"; };
 		562C738D2849442800E51606 /* FragmentBufferIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FragmentBufferIndex.h; sourceTree = "<group>"; };
+		562C738F28494FE000E51606 /* Particle.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Particle.metal; sourceTree = "<group>"; };
+		562C73912849506400E51606 /* FrozenParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrozenParticle.h; sourceTree = "<group>"; };
+		562C7398284950F200E51606 /* PNIParticleNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNIParticleNode.swift; sourceTree = "<group>"; };
+		562C7399284950F200E51606 /* PNParticleNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNParticleNode.swift; sourceTree = "<group>"; };
+		562C739F2849510900E51606 /* PNParticleGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNParticleGenerator.swift; sourceTree = "<group>"; };
+		562C73A12849510900E51606 /* PNParticleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNParticleController.swift; sourceTree = "<group>"; };
+		562C73A22849510900E51606 /* PNParticle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNParticle.swift; sourceTree = "<group>"; };
+		562C73A32849510900E51606 /* PNRenderableParticlesProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNRenderableParticlesProvider.swift; sourceTree = "<group>"; };
+		562C73A52849510900E51606 /* PNEmissionRules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNEmissionRules.swift; sourceTree = "<group>"; };
+		562C73A62849510900E51606 /* PNPositioningRules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNPositioningRules.swift; sourceTree = "<group>"; };
+		562C73A72849510900E51606 /* PNEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNEmitter.swift; sourceTree = "<group>"; };
+		562C73B12849513000E51606 /* PNParticleJob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNParticleJob.swift; sourceTree = "<group>"; };
 		563575F32728486A00CE4988 /* PNAnimationSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnimationSample.swift; sourceTree = "<group>"; };
 		563BFC80272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MDLObjectContainerComponent+Extension.swift"; sourceTree = "<group>"; };
 		563BFC8427285F100003EDB7 /* MTLBuffer+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MTLBuffer+Extension.swift"; sourceTree = "<group>"; };
@@ -492,6 +521,8 @@
 		5688999D2757AB7D00D24EB1 /* Math.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Math.metal; sourceTree = "<group>"; };
 		5688999F2757AC6400D24EB1 /* Layer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Layer.h; sourceTree = "<group>"; };
 		568899A02757AC6E00D24EB1 /* Layer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Layer.metal; sourceTree = "<group>"; };
+		568C4EFE284F664500C6F128 /* PNRepeatableTaskQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNRepeatableTaskQueue.swift; sourceTree = "<group>"; };
+		568C4F00284F687900C6F128 /* PNIRepeatableTaskQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIRepeatableTaskQueue.swift; sourceTree = "<group>"; };
 		568EBB38273F09BC007C7D35 /* SSAO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSAO.h; sourceTree = "<group>"; };
 		568EBB39273F0B88007C7D35 /* SSAOUniforms+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SSAOUniforms+Extension.swift"; sourceTree = "<group>"; };
 		568EBB3C273F0DE1007C7D35 /* PNISSAOHemisphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNISSAOHemisphere.swift; sourceTree = "<group>"; };
@@ -522,6 +553,7 @@
 		56ADD2F1273705F800107E24 /* AmbientLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AmbientLight.h; sourceTree = "<group>"; };
 		56ADD2F3273707C500107E24 /* PNAmbientJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAmbientJob.swift; sourceTree = "<group>"; };
 		56ADD2F5273707E200107E24 /* Ambient.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Ambient.metal; sourceTree = "<group>"; };
+		56B32FE628496D3200190D6A /* PNParticleSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNParticleSystem.swift; sourceTree = "<group>"; };
 		56B65DEB273ED4CE00DB927E /* PNIBoundingBoxInteractor+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIBoundingBoxInteractor+Tests.swift"; sourceTree = "<group>"; };
 		56B65DEE273EE06300DB927E /* PNICullingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNICullingController.swift; sourceTree = "<group>"; };
 		56C47B9D27511E9B0075C61B /* PNFrameSupply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNFrameSupply.swift; sourceTree = "<group>"; };
@@ -566,8 +598,10 @@
 		56E011BE28413260007859F2 /* CGRect+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Extension.swift"; sourceTree = "<group>"; };
 		56E011C328413EB0007859F2 /* Int32+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int32+Extension.swift"; sourceTree = "<group>"; };
 		56E011C528413F2B007859F2 /* UInt32+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt32+Extension.swift"; sourceTree = "<group>"; };
+		56E2A22B285096DC00D64A44 /* PNTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNTask.swift; sourceTree = "<group>"; };
 		56E8208E2727FD13002D58C3 /* Date+Extensioin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensioin.swift"; sourceTree = "<group>"; };
 		56E8209C27284664002D58C3 /* PNPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNPosition.swift; sourceTree = "<group>"; };
+		56F0FB45284986570004D212 /* PNTextureAtlas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNTextureAtlas.swift; sourceTree = "<group>"; };
 		56F5926727372526008652C9 /* DirectionalLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DirectionalLight.h; sourceTree = "<group>"; };
 		56F59268273725FB008652C9 /* PNDirectionalJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNDirectionalJob.swift; sourceTree = "<group>"; };
 		56F5926C2737276D008652C9 /* Directional.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Directional.metal; sourceTree = "<group>"; };
@@ -617,6 +651,7 @@
 		5601396E255457D100FC1C45 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				568C4EFD284F663500C6F128 /* Task */,
 				564DE04128416A73005C2029 /* Global */,
 				566795A7274D9891005993D7 /* Organization */,
 				563D0A2F2719FF5800F77B40 /* Animation */,
@@ -667,6 +702,7 @@
 		560A0BB727541BC3005AE29D /* Kinds */ = {
 			isa = PBXGroup;
 			children = (
+				562C7397284950F200E51606 /* Particle */,
 				5620C8222754F6130098D6FA /* OmniLight */,
 				5620C81F2754F5C60098D6FA /* SpotLight */,
 				5620C81E2754F5BE0098D6FA /* AmbientLight */,
@@ -822,6 +858,7 @@
 		561666CD2719E2CC000063B1 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				562C739C2849510900E51606 /* Particles */,
 				560B5DC12757CEA400C98F1A /* Model */,
 				56C47BB42751BF2C0075C61B /* Light */,
 				56D7ED58274C604E00A6C25D /* Culling */,
@@ -844,6 +881,7 @@
 				561666D92719E2CC000063B1 /* Common */,
 				561666DF2719E2CC000063B1 /* EnvironmentMapper.metal */,
 				566020E127343280000F4CA7 /* SSAO.metal */,
+				562C738F28494FE000E51606 /* Particle.metal */,
 				56A8CA782756D40C0040DCF9 /* Fog.metal */,
 				56484BA7284616F6004DFF36 /* Translucent.metal */,
 			);
@@ -911,6 +949,7 @@
 				561666E62719E2CD000063B1 /* Compatibility.h */,
 				561666E72719E2CD000063B1 /* Vertex.h */,
 				563D0A2B2719F79D00F77B40 /* Camera.h */,
+				562C73912849506400E51606 /* FrozenParticle.h */,
 				563D0A2C2719F7A400F77B40 /* Model.h */,
 				560C18CE273A819100459AEF /* Constant.h */,
 			);
@@ -920,6 +959,7 @@
 		561666EB2719E2CD000063B1 /* Rendering */ = {
 			isa = PBXGroup;
 			children = (
+				56F0FB442849864D0004D212 /* Types */,
 				56C47BA1275124A70075C61B /* FrameSupply */,
 				566795E7274FEE1A005993D7 /* Workload */,
 				566795E4274FED58005993D7 /* Coordination */,
@@ -1048,6 +1088,38 @@
 				562C738D2849442800E51606 /* FragmentBufferIndex.h */,
 			);
 			path = FragmentShader;
+			sourceTree = "<group>";
+		};
+		562C7397284950F200E51606 /* Particle */ = {
+			isa = PBXGroup;
+			children = (
+				562C7398284950F200E51606 /* PNIParticleNode.swift */,
+				562C7399284950F200E51606 /* PNParticleNode.swift */,
+			);
+			path = Particle;
+			sourceTree = "<group>";
+		};
+		562C739C2849510900E51606 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				562C739F2849510900E51606 /* PNParticleGenerator.swift */,
+				562C73A12849510900E51606 /* PNParticleController.swift */,
+				562C73A22849510900E51606 /* PNParticle.swift */,
+				562C73A32849510900E51606 /* PNRenderableParticlesProvider.swift */,
+				562C73A42849510900E51606 /* Rules */,
+				562C73A72849510900E51606 /* PNEmitter.swift */,
+				56B32FE628496D3200190D6A /* PNParticleSystem.swift */,
+			);
+			path = Particles;
+			sourceTree = "<group>";
+		};
+		562C73A42849510900E51606 /* Rules */ = {
+			isa = PBXGroup;
+			children = (
+				562C73A52849510900E51606 /* PNEmissionRules.swift */,
+				562C73A62849510900E51606 /* PNPositioningRules.swift */,
+			);
+			path = Rules;
 			sourceTree = "<group>";
 		};
 		563C9C22273882EB0014CFF3 /* Shadows */ = {
@@ -1306,6 +1378,7 @@
 				561666ED2719E2CD000063B1 /* DeferredRendering */,
 				56C47B9F27511EDB0075C61B /* PNRenderJob.swift */,
 				56A8CA7A2756D4750040DCF9 /* PNFogJob.swift */,
+				562C73B12849513000E51606 /* PNParticleJob.swift */,
 				56484BA52846162F004DFF36 /* PNTranslucentJob.swift */,
 			);
 			path = Jobs;
@@ -1356,6 +1429,16 @@
 				5688076727483F4600C95F55 /* PNIMaterial.swift */,
 			);
 			path = Material;
+			sourceTree = "<group>";
+		};
+		568C4EFD284F663500C6F128 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				568C4EFE284F664500C6F128 /* PNRepeatableTaskQueue.swift */,
+				568C4F00284F687900C6F128 /* PNIRepeatableTaskQueue.swift */,
+				56E2A22B285096DC00D64A44 /* PNTask.swift */,
+			);
+			path = Task;
 			sourceTree = "<group>";
 		};
 		568EBB37273F099B007C7D35 /* Rendering */ = {
@@ -1694,6 +1777,14 @@
 			path = Texture;
 			sourceTree = "<group>";
 		};
+		56F0FB442849864D0004D212 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				56F0FB45284986570004D212 /* PNTextureAtlas.swift */,
+			);
+			path = Types;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1704,6 +1795,7 @@
 				563D0A2A2719F77000F77B40 /* OmniLight.h in Headers */,
 				5616674F2719E2CD000063B1 /* Vertex.h in Headers */,
 				561667472719E2CD000063B1 /* PBR.h in Headers */,
+				562C73922849506400E51606 /* FrozenParticle.h in Headers */,
 				563D0A2D2719F7A700F77B40 /* Camera.h in Headers */,
 				561667582719E2CD000063B1 /* Engine.h in Headers */,
 				561667492719E2CD000063B1 /* Transformation.h in Headers */,
@@ -1856,6 +1948,7 @@
 				5688075427480D1A00C95F55 /* PNDynamicBuffer.swift in Sources */,
 				5616673B2719E2CD000063B1 /* PNDataBuffer.swift in Sources */,
 				569D923D273DD594004FDFAC /* PNBound.swift in Sources */,
+				56E2A22C285096DC00D64A44 /* PNTask.swift in Sources */,
 				566CEB2928439AFA00DA6227 /* PNIThreadedWorkloadManagerFactory.swift in Sources */,
 				5620C8212754F5DD0098D6FA /* PNSpotLightNode.swift in Sources */,
 				566CEB23284383F800DA6227 /* PNIThreadedWorkloadManager.swift in Sources */,
@@ -1870,8 +1963,11 @@
 				566795D4274EEA23005993D7 /* PNChronometer.swift in Sources */,
 				56C47BB32751B5C00075C61B /* PNManageableTransform.swift in Sources */,
 				564DE04928427689005C2029 /* Bundle+Extension.swift in Sources */,
+				562C73AC2849510900E51606 /* PNParticle.swift in Sources */,
 				563575F42728486A00CE4988 /* PNAnimationSample.swift in Sources */,
 				5670EC272736EA2400375194 /* PNPostprocessStage.swift in Sources */,
+				568C4F01284F687900C6F128 /* PNIRepeatableTaskQueue.swift in Sources */,
+				568C4EFF284F664500C6F128 /* PNRepeatableTaskQueue.swift in Sources */,
 				56A8CA7E275796120040DCF9 /* Shadow.metal in Sources */,
 				566795ED274FF235005993D7 /* PNRenderingCoordinatorFactory.swift in Sources */,
 				5616671C2719E2CD000063B1 /* MTLStencilDescriptor+Extension.swift in Sources */,
@@ -1889,14 +1985,17 @@
 				5616673D2719E2CD000063B1 /* PNSubmesh.swift in Sources */,
 				566795CF274ECD75005993D7 /* PNAmbientLightNode.swift in Sources */,
 				566795C2274EA016005993D7 /* PNICameraNode.swift in Sources */,
+				562C739B284950F300E51606 /* PNParticleNode.swift in Sources */,
 				56ADD2F6273707E200107E24 /* Ambient.metal in Sources */,
 				560253D52726CA4800B3A13A /* PNIChronometer.swift in Sources */,
 				56C47B9E27511E9C0075C61B /* PNFrameSupply.swift in Sources */,
 				561667392719E2CD000063B1 /* PNPieceDescription.swift in Sources */,
 				564DE04728427595005C2029 /* MTLLibrary+Extension.swift in Sources */,
+				56F0FB46284986570004D212 /* PNTextureAtlas.swift in Sources */,
 				560A0BC72754255F005AE29D /* PNIAnimatedRiggedMesh.swift in Sources */,
 				560A0BB627541BBA005AE29D /* PNIAnimatedNode.swift in Sources */,
 				566CEB252843940C00DA6227 /* PNBufferStoreFactory.swift in Sources */,
+				562C73AF2849510900E51606 /* PNPositioningRules.swift in Sources */,
 				56407B7D27206F5D00440CAC /* Vertex+Extension.swift in Sources */,
 				561667272719E2CD000063B1 /* MTLRenderPassDescriptor+Extension.swift in Sources */,
 				561667382719E2CD000063B1 /* PNMesh.swift in Sources */,
@@ -1914,8 +2013,10 @@
 				563BFC9A27294AF70003EDB7 /* PNMesh+Extension.swift in Sources */,
 				56A8CA792756D40C0040DCF9 /* Fog.metal in Sources */,
 				561667362719E2CD000063B1 /* PNFlatTree+Alias.swift in Sources */,
+				562C73AD2849510900E51606 /* PNRenderableParticlesProvider.swift in Sources */,
 				5688074E274801EC00C95F55 /* PNStaticBuffer.swift in Sources */,
 				561667482719E2CD000063B1 /* Transformation.metal in Sources */,
+				562C73B22849513000E51606 /* PNParticleJob.swift in Sources */,
 				561667062719E2CD000063B1 /* MDLMaterialSemantic+Extension.swift in Sources */,
 				56165BEB27440DA90025D58B /* PNEntityType.swift in Sources */,
 				56C47BA027511EDB0075C61B /* PNRenderJob.swift in Sources */,
@@ -1923,6 +2024,7 @@
 				56C47BAC2751769A0075C61B /* PNBufferedValue.swift in Sources */,
 				56924AE4271A181600FF3E06 /* PNIAnimatedValue+Alias.swift in Sources */,
 				5620C8252754F65B0098D6FA /* PNOmniLightNode.swift in Sources */,
+				562C739028494FE000E51606 /* Particle.metal in Sources */,
 				5629FBEA2749201F005476AF /* PNInterpolator.swift in Sources */,
 				5616673E2719E2CD000063B1 /* PNSceneDescription.swift in Sources */,
 				56E011C428413EB0007859F2 /* Int32+Extension.swift in Sources */,
@@ -1930,6 +2032,7 @@
 				566795F8274FFE72005993D7 /* PNWorkloadManagerFactory.swift in Sources */,
 				5616672D2719E2CD000063B1 /* PNFlatTree.swift in Sources */,
 				560C18D3273ABDE700459AEF /* PNOmniShadowJob.swift in Sources */,
+				562C739A284950F300E51606 /* PNIParticleNode.swift in Sources */,
 				5688999E2757AB7D00D24EB1 /* Math.metal in Sources */,
 				569D9244273E81DD004FDFAC /* VertexP+Extension.swift in Sources */,
 				56407B7B27204EEB00440CAC /* Array+Extension.swift in Sources */,
@@ -1938,6 +2041,7 @@
 				566020E02734314C000F4CA7 /* PNSSAOJob.swift in Sources */,
 				5616671F2719E2CD000063B1 /* MTLRenderPipelineDescriptor+Extension.swift in Sources */,
 				5670EC122736A1BE00375194 /* PNStage.swift in Sources */,
+				562C73AB2849510900E51606 /* PNParticleController.swift in Sources */,
 				568807512748088400C95F55 /* PNAnyStaticBuffer.swift in Sources */,
 				566795BE274E9095005993D7 /* PNISceneNode.swift in Sources */,
 				56E0118D28410A42007859F2 /* PNCulling.swift in Sources */,
@@ -1970,6 +2074,7 @@
 				566795B8274DC51E005993D7 /* PNMeshNode.swift in Sources */,
 				561666FA2719E2CD000063B1 /* simd_float4+Extension.swift in Sources */,
 				560B5DC32757CEB200C98F1A /* PNAnimatedModelReference.swift in Sources */,
+				562C73AE2849510900E51606 /* PNEmissionRules.swift in Sources */,
 				561667092719E2CD000063B1 /* MDLVertexDescriptor+Extension.swift in Sources */,
 				56D7ED5E274C617200A6C25D /* ModelUniforms+Alias.swift in Sources */,
 				560A0BAF275416E8005AE29D /* PNIAnimator.swift in Sources */,
@@ -1999,6 +2104,7 @@
 				5629FBEC2749209C005476AF /* PNIInterpolator.swift in Sources */,
 				568807462747EEC000C95F55 /* PNSkeleton.swift in Sources */,
 				56C47BAF275176EC0075C61B /* PNIBufferedValue.swift in Sources */,
+				56B32FE728496D3200190D6A /* PNParticleSystem.swift in Sources */,
 				56924AEA271A188700FF3E06 /* PNAnimatedQuatf+Extension.swift in Sources */,
 				569F10FE2847A6D4005046CC /* simd_float3+Alias.swift in Sources */,
 				56484BA62846162F004DFF36 /* PNTranslucentJob.swift in Sources */,
@@ -2014,6 +2120,7 @@
 				56E011872840E179007859F2 /* PNIBoundEstimator.swift in Sources */,
 				56E011BA28411C5D007859F2 /* PNITextureLoader.swift in Sources */,
 				562B8F43272599FF00363CE8 /* MTLRenderCommandEncoder+Extension.swift in Sources */,
+				562C73B02849510900E51606 /* PNEmitter.swift in Sources */,
 				5620C83627552AF30098D6FA /* DirectionalShadow.metal in Sources */,
 				5616672E2719E2CD000063B1 /* PNIDynamicBuffer.swift in Sources */,
 				566795A9274D98A1005993D7 /* PNScene.swift in Sources */,
@@ -2026,6 +2133,7 @@
 				566795E1274FCBDF005993D7 /* PNITransformCalculator.swift in Sources */,
 				56A8CA7727569BCB0040DCF9 /* Grain.metal in Sources */,
 				561666FF2719E2CD000063B1 /* simd_float3+Extension.swift in Sources */,
+				562C73A92849510900E51606 /* PNParticleGenerator.swift in Sources */,
 				560A0BBB2754223B005AE29D /* PNAnimatedCameraNode.swift in Sources */,
 				56E011852840E07A007859F2 /* PNBoundEstimator.swift in Sources */,
 				56C47BB1275177B70075C61B /* PNAnyBufferedValue.swift in Sources */,

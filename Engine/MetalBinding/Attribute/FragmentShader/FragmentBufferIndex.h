@@ -35,3 +35,8 @@ enum AttributeAmbientFragmentShaderBufferIndex {
     kAttributeAmbientFragmentShaderBufferAmbientLights,
     kAttributeAmbientFragmentShaderBufferModelUniforms
 };
+
+enum AttributeParticleFragmentShaderBufferIndex {
+    kAttributeParticleFragmentShaderBufferUseableTiles = 0,
+    kAttributeParticleFragmentShaderBufferGrid
+};

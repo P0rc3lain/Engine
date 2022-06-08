@@ -62,4 +62,14 @@ extension MTLStencilDescriptor {
         stencil.depthStencilPassOperation = .replace
         return stencil
     }
+    static var particle: MTLStencilDescriptor {
+        let stencil = MTLStencilDescriptor()
+        stencil.stencilCompareFunction = .greaterEqual
+        stencil.readMask = 0b00000000
+        stencil.writeMask = 0xFF
+        stencil.stencilFailureOperation = .keep
+        stencil.depthFailureOperation = .keep
+        stencil.depthStencilPassOperation = .replace
+        return stencil
+    }
 }
