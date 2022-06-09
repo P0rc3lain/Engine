@@ -6,6 +6,8 @@
 
 #include "Attribute.h"
 
+#include "FunctionConstant.h"
+
 #include "VertexShader/VertexBufferIndex.h"
 
 #include "FragmentShader/FragmentBufferIndex.h"

@@ -19,7 +19,7 @@ struct RasterizerData {
     uint layer [[render_target_array_index]];
 };
 
-constant bool hasSkeleton [[ function_constant(0) ]];
+constant bool hasSkeleton [[function_constant(kFunctionConstantOmniShadowHasSkeleton)]];
 
 vertex RasterizerData vertexOmniLightShadow(Vertex in [[stage_in]],
                                             constant uint & instanceId [[buffer(kAttributeOmniShadowVertexShaderBufferInstanceId)]],

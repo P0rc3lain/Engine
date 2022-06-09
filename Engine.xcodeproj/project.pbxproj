@@ -534,6 +534,7 @@
 		56924AE3271A181600FF3E06 /* PNIAnimatedValue+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIAnimatedValue+Alias.swift"; sourceTree = "<group>"; };
 		56924AE7271A187400FF3E06 /* PNAnimatedFloat3+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNAnimatedFloat3+Extension.swift"; sourceTree = "<group>"; };
 		56924AE9271A188700FF3E06 /* PNAnimatedQuatf+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNAnimatedQuatf+Extension.swift"; sourceTree = "<group>"; };
+		5698B00728521B8E0045296C /* FunctionConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FunctionConstant.h; sourceTree = "<group>"; };
 		569D922B273DC03F004FDFAC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		569D923A273DC17E004FDFAC /* code_stats.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = code_stats.sh; sourceTree = "<group>"; };
 		569D923C273DD594004FDFAC /* PNBound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNBound.swift; sourceTree = "<group>"; };
@@ -1069,6 +1070,7 @@
 				562C738A2849417A00E51606 /* VertexShader */,
 				562C73882849415300E51606 /* Attribute.h */,
 				562C7387284940E900E51606 /* Bridge.h */,
+				5698B00728521B8E0045296C /* FunctionConstant.h */,
 			);
 			path = Attribute;
 			sourceTree = "<group>";

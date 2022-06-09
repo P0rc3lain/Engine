@@ -12,7 +12,7 @@
 
 using namespace metal;
 
-constant bool hasSkeleton [[function_constant(0)]];
+constant bool hasSkeleton [[function_constant(kFunctionConstantTranslucentHasSkeleton)]];
 
 struct RasterizerData {
     float4 clipSpacePosition [[position]];

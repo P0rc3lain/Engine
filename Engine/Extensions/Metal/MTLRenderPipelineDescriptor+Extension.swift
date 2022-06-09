@@ -3,6 +3,7 @@
 //
 
 import Metal
+import MetalBinding
 import MetalKit
 import ModelIO
 
@@ -57,7 +58,7 @@ extension MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.label = "GBuffer"
         descriptor.vertexFunction = try? library.makeFunction(name: "vertexGBuffer",
-                                                              constantValues: .bool(false, index: 0))
+                                                              constantValues: .bool(false, index: kFunctionConstantGBufferHasSkeleton.int))
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentGBuffer")
         descriptor.colorAttachments[0].pixelFormat = .gBufferARC
         descriptor.colorAttachments[1].pixelFormat = .gBufferNMC
@@ -71,14 +72,14 @@ extension MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor.gBuffer(library: library)
         descriptor.label = "GBuffer Animated"
         descriptor.vertexFunction = try? library.makeFunction(name: "vertexGBuffer",
-                                                              constantValues: .bool(true, index: 0))
+                                                              constantValues: .bool(true, index: kFunctionConstantGBufferHasSkeleton.int))
         return descriptor
     }
     static func translucent(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.label = "Translucent"
         descriptor.vertexFunction = try? library.makeFunction(name: "vertexTranslucent",
-                                                              constantValues: .bool(false, index: 0))
+                                                              constantValues: .bool(false, index: kFunctionConstantTranslucentHasSkeleton.int))
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentTranslucent")
         descriptor.colorAttachments[0].pixelFormat = .translucentC
         descriptor.colorAttachments[0].rgbBlendOperation = .add
@@ -109,14 +110,14 @@ extension MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor.translucent(library: library)
         descriptor.label = "Translucent Animated"
         descriptor.vertexFunction = try? library.makeFunction(name: "vertexTranslucent",
-                                                              constantValues: .bool(true, index: 0))
+                                                              constantValues: .bool(true, index: kFunctionConstantTranslucentHasSkeleton.int))
         return descriptor
     }
     static func spotShadow(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.label = "Spot Shadows"
         descriptor.vertexFunction = try? library.makeFunction(name: "vertexSpotLightShadow",
-                                                              constantValues: .bool(false, index: 0))
+                                                              constantValues: .bool(false, index: kFunctionConstantSpotShadowHasSkeleton.int))
         descriptor.depthAttachmentPixelFormat = .spotShadowDS
         descriptor.vertexDescriptor = .vertex
         descriptor.sampleCount = 1
@@ -127,14 +128,14 @@ extension MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor.spotShadow(library: library)
         descriptor.label = "Spot Shadows Animated"
         descriptor.vertexFunction = try? library.makeFunction(name: "vertexSpotLightShadow",
-                                                              constantValues: .bool(true, index: 0))
+                                                              constantValues: .bool(true, index: kFunctionConstantSpotShadowHasSkeleton.int))
         return descriptor
     }
     static func directionalShadow(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.label = "Directional Shadows"
         descriptor.vertexFunction = try? library.makeFunction(name: "vertexDirectionalLightShadow",
-                                                              constantValues: .bool(false, index: 0))
+                                                              constantValues: .bool(false, index: kFunctionConstantDirectionalShadowHasSkeleton.int))
         descriptor.depthAttachmentPixelFormat = .directionalShadowDS
         descriptor.vertexDescriptor = .vertex
         descriptor.sampleCount = 1
@@ -145,7 +146,7 @@ extension MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor.spotShadow(library: library)
         descriptor.label = "Directional Shadows Animated"
         descriptor.vertexFunction = try? library.makeFunction(name: "vertexDirectionalLightShadow",
-                                                              constantValues: .bool(true, index: 0))
+                                                              constantValues: .bool(true, index: kFunctionConstantDirectionalShadowHasSkeleton.int))
         return descriptor
     }
     static func omni(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
@@ -243,7 +244,7 @@ extension MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.label = "Omni Shadows"
         descriptor.vertexFunction = try? library.makeFunction(name: "vertexOmniLightShadow",
-                                                              constantValues: .bool(false, index: 0))
+                                                              constantValues: .bool(false, index: kFunctionConstantOmniShadowHasSkeleton.int))
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentOmniLightShadow")
         descriptor.depthAttachmentPixelFormat = .omniShadowDS
         descriptor.vertexDescriptor = .vertex
@@ -254,7 +255,7 @@ extension MTLRenderPipelineDescriptor {
     static func omniShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor.omniShadow(library: library)
         descriptor.vertexFunction = try? library.makeFunction(name: "vertexOmniLightShadow",
-                                                              constantValues: .bool(true, index: 0))
+                                                              constantValues: .bool(true, index: kFunctionConstantOmniShadowHasSkeleton.int))
         descriptor.label = "Omni Shadows Animated"
         return descriptor
     }

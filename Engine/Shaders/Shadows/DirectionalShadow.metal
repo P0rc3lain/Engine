@@ -19,7 +19,7 @@ struct RasterizerData {
     uint layer [[render_target_array_index]];
 };
 
-constant bool hasSkeleton [[function_constant(0)]];
+constant bool hasSkeleton [[function_constant(kFunctionConstantDirectionalShadowHasSkeleton)]];
 
 vertex RasterizerData vertexDirectionalLightShadow(Vertex in [[stage_in]],
                                                    constant uint & instanceId [[buffer(kAttributeDirectionalShadowVertexShaderBufferInstanceId)]],
