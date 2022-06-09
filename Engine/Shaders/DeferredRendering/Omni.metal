@@ -66,10 +66,12 @@ fragment float4 fragmentDeferredLight(RasterizerData in [[stage_in]],
                                      currentDistance,
                                      bias,
                                      0.01);
+    if (shadowInfluence == 1)
+        discard_fragment();
     float3 color = lighting(l,
                             eye,
                             input,
-                            omniLights[in.instanceId].color,
-                            omniLights[in.instanceId].intensity);
+                            light.color,
+                            light.intensity);
     return  float4((1 - shadowInfluence) * color, 1);
 }

@@ -71,6 +71,6 @@ fragment float4 fragmentSpotLight(RasterizerData in [[stage_in]],
     return float4(lighting(l,
                            eye,
                            input,
-                           spotLights[in.instanceId].color,
-                           spotLights[in.instanceId].intensity), 1);
+                           light.color,
+                           light.intensity), 1);
 }
