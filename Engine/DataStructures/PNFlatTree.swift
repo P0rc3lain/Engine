@@ -42,4 +42,8 @@ public struct PNFlatTree<T> {
     public func children(of idx: PNIndex) -> [PNIndex] {
         objects.indices.filter { objects[$0].parentIdx == idx }
     }
+    public func descendants(of idx: PNIndex) -> [PNIndex] {
+        let nearChildren = children(of: idx)
+        return nearChildren + nearChildren.map { descendants(of: $0) }.flatMap({ $0 })
+    }
 }
