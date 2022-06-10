@@ -4,7 +4,6 @@
 
 #include <metal_stdlib>
 
-#include "Shaders/Common/PBR.h"
 #include "Shaders/Common/Animation.h"
 #include "Shaders/Common/Transformation.h"
 
