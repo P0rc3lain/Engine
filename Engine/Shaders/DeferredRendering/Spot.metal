@@ -7,6 +7,7 @@
 
 #include "Shaders/Common/PBR.h"
 #include "Shaders/Common/LightingInput.h"
+#include "Shaders/Common/Transformation.h"
 
 #include "MetalBinding/Model.h"
 #include "MetalBinding/Vertex.h"
@@ -42,12 +43,12 @@ fragment float4 fragmentSpotLight(RasterizerData in [[stage_in]],
     constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
     LightingInput input = LightingInput::fromTextures(ar, nm, pr, textureSampler, in.texcoord);
     
-    float3 cameraPosition = float3(0, 0, 0);
+    float3 cameraPosition = float3(0);
     float3 eye = normalize(cameraPosition - input.fragmentPosition);
     SpotLight light = spotLights[in.instanceId];
     int id = light.idx;
     float4x4 lightTransformation = modelUniforms[camera.index].modelMatrix * modelUniforms[id].modelMatrix;
-    float3 lightPosition = (lightTransformation * float4(float3(0), 1)).xyz;
+    float3 lightPosition = extract_position(lightTransformation).xyz;
     float3 forwardDirection = normalize(lightTransformation.columns[2].xyz);
     float3 l = normalize(lightPosition - input.fragmentPosition);
     float theta = acos(dot(forwardDirection, l));

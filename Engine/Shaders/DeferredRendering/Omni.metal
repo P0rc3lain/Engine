@@ -8,6 +8,7 @@
 #include "Shaders/Common/PBR.h"
 #include "Shaders/Common/Shadow.h"
 #include "Shaders/Common/LightingInput.h"
+#include "Shaders/Common/Transformation.h"
 
 #include "MetalBinding/Model.h"
 #include "MetalBinding/Vertex.h"
@@ -47,7 +48,7 @@ fragment float4 fragmentDeferredLight(RasterizerData in [[stage_in]],
     
     OmniLight light = omniLights[in.instanceId];
     float4x4 transformation = lightUniforms[camera.index].modelMatrix * lightUniforms[light.idx].modelMatrix;
-    float3 lightPosition = (transformation * float4(float3(0), 1)).xyz;
+    float3 lightPosition = extract_position(transformation).xyz;
     float3 l = normalize(lightPosition - input.fragmentPosition);
     if (dot(input.n, l) < 0)
         discard_fragment();
