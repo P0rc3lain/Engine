@@ -18,6 +18,7 @@ module MetalBinding {
     
     header "../MetalBinding/Attribute/Bridge.h"
     header "../MetalBinding/Attribute/Attribute.h"
+    header "../MetalBinding/Attribute/Attachment.h"
     header "../MetalBinding/Attribute/FunctionConstant.h"
     header "../MetalBinding/Attribute/VertexShader/VertexBufferIndex.h"
     header "../MetalBinding/Attribute/FragmentShader/FragmentBufferIndex.h"

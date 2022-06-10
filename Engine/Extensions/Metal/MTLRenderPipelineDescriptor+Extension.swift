@@ -60,9 +60,9 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexFunction = try? library.makeFunction(name: "vertexGBuffer",
                                                               constantValues: .bool(false, index: kFunctionConstantGBufferHasSkeleton.int))
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentGBuffer")
-        descriptor.colorAttachments[0].pixelFormat = .gBufferARC
-        descriptor.colorAttachments[1].pixelFormat = .gBufferNMC
-        descriptor.colorAttachments[2].pixelFormat = .gBufferPRC
+        descriptor.colorAttachments[kColorAttachmentGBufferAlbedoRoughness.int].pixelFormat = .gBufferARC
+        descriptor.colorAttachments[kColorAttachmentGBufferNormalMetallic.int].pixelFormat = .gBufferNMC
+        descriptor.colorAttachments[kColorAttachmentGBufferPositionReflectance.int].pixelFormat = .gBufferPRC
         descriptor.depthAttachmentPixelFormat = .gBufferDS
         descriptor.stencilAttachmentPixelFormat = .gBufferDS
         descriptor.vertexDescriptor = .vertex

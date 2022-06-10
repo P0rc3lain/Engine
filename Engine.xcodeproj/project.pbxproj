@@ -602,6 +602,7 @@
 		56E2A22B285096DC00D64A44 /* PNTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNTask.swift; sourceTree = "<group>"; };
 		56E8208E2727FD13002D58C3 /* Date+Extensioin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensioin.swift"; sourceTree = "<group>"; };
 		56E8209C27284664002D58C3 /* PNPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNPosition.swift; sourceTree = "<group>"; };
+		56F0D4EB2853697300FBDB33 /* Attachment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Attachment.h; sourceTree = "<group>"; };
 		56F0FB45284986570004D212 /* PNTextureAtlas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNTextureAtlas.swift; sourceTree = "<group>"; };
 		56F5926727372526008652C9 /* DirectionalLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DirectionalLight.h; sourceTree = "<group>"; };
 		56F59268273725FB008652C9 /* PNDirectionalJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNDirectionalJob.swift; sourceTree = "<group>"; };
@@ -1071,6 +1072,7 @@
 				562C73882849415300E51606 /* Attribute.h */,
 				562C7387284940E900E51606 /* Bridge.h */,
 				5698B00728521B8E0045296C /* FunctionConstant.h */,
+				56F0D4EB2853697300FBDB33 /* Attachment.h */,
 			);
 			path = Attribute;
 			sourceTree = "<group>";
