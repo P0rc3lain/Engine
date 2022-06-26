@@ -7,4 +7,5 @@ import Metal
 protocol PNDynamicTexture: PNTextureProvider {
     var descriptor: MTLTextureDescriptor? { set get }
     var texture: MTLTexture? { get }
+    func updateDescriptor(descriptor: MTLTextureDescriptor?) -> Bool
 }

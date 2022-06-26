@@ -4,51 +4,66 @@
 
 import Metal
 
-struct PNShadowStage: PNStage {
+class PNShadowStage: PNStage {
     var io: PNGPUIO
+    private let device: MTLDevice
     private var omniShadowRPD: MTLRenderPassDescriptor
     private var spotShadowRPD: MTLRenderPassDescriptor
     private var directionalShadowRPD: MTLRenderPassDescriptor
+    private var spotRenderingTexture: PNDynamicTexture
+    private var omniRenderingTexture: PNDynamicTexture
+    private var directionalRenderingTexture: PNDynamicTexture
     private var omniShadowJob: PNOmniShadowJob
     private var spotShadowJob: PNSpotShadowJob
+    private let renderingSize: CGSize
     private var directionalShadowJob: PNDirectionalShadowJob
     init?(device: MTLDevice,
-          omniShadowTextureSideSize: Float,
-          spotShadowTextureSideSize: Float,
-          directionalShadowTextureSideSize: Float,
-          spotLightsNumber: Int,
-          omniLightsNumber: Int,
-          directionalLightsNumber: Int) {
-        let spotRenderingSize = CGSize(side: CGFloat(spotShadowTextureSideSize))
-        let omniRenderingSize = CGSize(side: CGFloat(omniShadowTextureSideSize))
-        let directionalRenderingSize = CGSize(side: CGFloat(directionalShadowTextureSideSize))
+          shadowTextureSideSize: Int) {
+        self.renderingSize = CGSize(side: CGFloat(shadowTextureSideSize))
+        spotRenderingTexture = PNIDynamicTexture(device: device)
+        omniRenderingTexture = PNIDynamicTexture(device: device)
+        directionalRenderingTexture = PNIDynamicTexture(device: device)
         spotShadowRPD = .spotLightShadow(device: device,
-                                         size: spotRenderingSize,
-                                         layers: spotLightsNumber)
+                                         texture: spotRenderingTexture.texture)
         omniShadowRPD = .omniLightShadow(device: device,
-                                         size: omniRenderingSize,
-                                         layers: omniLightsNumber)
+                                         texture: omniRenderingTexture.texture)
         directionalShadowRPD = .directionalLightShadow(device: device,
-                                                       size: directionalRenderingSize,
-                                                       layers: directionalLightsNumber)
-        guard let spotLightTextures = spotShadowRPD.depthAttachment.texture,
-              let omniLightTextures = omniShadowRPD.depthAttachment.texture,
-              let directionalLightTextures = directionalShadowRPD.depthAttachment.texture,
-              let spotLightShadowJob = PNSpotShadowJob.make(device: device,
-                                                            renderingSize: spotRenderingSize),
+                                                       texture: directionalRenderingTexture.texture)
+        self.device = device
+        guard let spotLightShadowJob = PNSpotShadowJob.make(device: device,
+                                                            renderingSize: renderingSize),
               let omniLightShadowJob = PNOmniShadowJob.make(device: device,
-                                                            renderingSize: omniRenderingSize),
+                                                            renderingSize: renderingSize),
               let directionalLightShadowJob = PNDirectionalShadowJob.make(device: device,
-                                                                          renderingSize: directionalRenderingSize) else {
+                                                                          renderingSize: renderingSize) else {
             return nil
         }
         self.io = PNGPUIO(input: .empty,
-                          output: PNGPUSupply(depth: [spotLightTextures, omniLightTextures, directionalLightTextures]))
+                          output: PNGPUSupply(depth: [spotRenderingTexture, omniRenderingTexture, directionalRenderingTexture]))
         self.spotShadowJob = spotLightShadowJob
         self.omniShadowJob = omniLightShadowJob
         self.directionalShadowJob = directionalLightShadowJob
     }
+    func updateTextures(supply: PNFrameSupply) -> Bool {
+        let spotCount = supply.scene.spotLights.count
+        let spotDescriptor: MTLTextureDescriptor? = spotCount > 0 ? .spotShadowDS(size: renderingSize, lightsCount: spotCount) : nil
+        let omniCount = supply.scene.omniLights.count
+        let omniDescriptor: MTLTextureDescriptor? = omniCount > 0 ? .omniShadowDS(size: renderingSize, lightsCount: omniCount) : nil
+        let directionalCount = supply.scene.directionalLights.count
+        let directionalDescriptor: MTLTextureDescriptor? = directionalCount > 0 ? .directionalShadowDS(size: renderingSize, lightsCount: directionalCount) : nil
+        return spotRenderingTexture.updateDescriptor(descriptor: spotDescriptor) ||
+               omniRenderingTexture.updateDescriptor(descriptor: omniDescriptor) ||
+               directionalRenderingTexture.updateDescriptor(descriptor: directionalDescriptor)
+    }
     func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
+        if updateTextures(supply: supply)  {
+            spotShadowRPD = .spotLightShadow(device: device,
+                                             texture: spotRenderingTexture.texture)
+            omniShadowRPD = .omniLightShadow(device: device,
+                                             texture: omniRenderingTexture.texture)
+            directionalShadowRPD = .directionalLightShadow(device: device,
+                                                           texture: directionalRenderingTexture.texture)
+        }
         if !supply.scene.spotLights.isEmpty {
             commandBuffer.pushDebugGroup("Spot Light Shadow Pass")
             guard let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: spotShadowRPD) else {

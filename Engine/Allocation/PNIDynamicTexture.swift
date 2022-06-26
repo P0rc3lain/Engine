@@ -4,7 +4,7 @@
 
 import Metal
 
-struct PNIDynamicTexture: PNDynamicTexture {
+class PNIDynamicTexture: PNDynamicTexture {
     var texture: MTLTexture?
     private let device: MTLDevice
     private var descriptorValue: MTLTextureDescriptor?
@@ -25,5 +25,10 @@ struct PNIDynamicTexture: PNDynamicTexture {
         self.descriptorValue = nil
         self.device = device
         self.descriptor = descriptor
+    }
+    func updateDescriptor(descriptor: MTLTextureDescriptor?) -> Bool {
+        var before = descriptorValue
+        self.descriptor = descriptor
+        return before != descriptorValue
     }
 }

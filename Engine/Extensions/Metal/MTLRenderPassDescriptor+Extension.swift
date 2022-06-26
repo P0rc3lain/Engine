@@ -44,30 +44,27 @@ extension MTLRenderPassDescriptor {
         descriptor.stencilAttachment.storeAction = .store
         return descriptor
     }
-    static func spotLightShadow(device: MTLDevice, size: CGSize, layers: Int) -> MTLRenderPassDescriptor {
+    static func spotLightShadow(device: MTLDevice, texture: MTLTexture?) -> MTLRenderPassDescriptor {
         let descriptor = MTLRenderPassDescriptor()
-        let texture = device.makeTextureSpotShadowDS(size: size, lightsCount: layers)
-        descriptor.renderTargetArrayLength = layers
+        descriptor.renderTargetArrayLength = texture?.arrayLength ?? 0
         descriptor.depthAttachment.clearDepth = 1
         descriptor.depthAttachment.texture = texture
         descriptor.depthAttachment.storeAction = .store
         descriptor.depthAttachment.loadAction = .clear
         return descriptor
     }
-    static func directionalLightShadow(device: MTLDevice, size: CGSize, layers: Int) -> MTLRenderPassDescriptor {
+    static func directionalLightShadow(device: MTLDevice, texture: MTLTexture?) -> MTLRenderPassDescriptor {
         let descriptor = MTLRenderPassDescriptor()
-        let texture = device.makeTextureDirectionalShadowDS(size: size, lightsCount: layers)
-        descriptor.renderTargetArrayLength = layers
+        descriptor.renderTargetArrayLength = texture?.arrayLength ?? 0
         descriptor.depthAttachment.clearDepth = 1
         descriptor.depthAttachment.texture = texture
         descriptor.depthAttachment.storeAction = .store
         descriptor.depthAttachment.loadAction = .clear
         return descriptor
     }
-    static func omniLightShadow(device: MTLDevice, size: CGSize, layers: Int) -> MTLRenderPassDescriptor {
+    static func omniLightShadow(device: MTLDevice, texture: MTLTexture?) -> MTLRenderPassDescriptor {
         let descriptor = MTLRenderPassDescriptor()
-        let texture = device.makeTextureOmniShadowDS(size: size, lightsCount: layers)
-        descriptor.renderTargetArrayLength = 6 * layers
+        descriptor.renderTargetArrayLength = 6 * (texture?.arrayLength ?? 0)
         descriptor.depthAttachment.clearDepth = 1
         descriptor.depthAttachment.texture = texture
         descriptor.depthAttachment.storeAction = .store
