@@ -34,7 +34,7 @@ struct PNIRenderingCoordinator: PNRenderingCoordinator {
         pipeline.draw(commandBuffer: commandBuffer, supply: frameSupply)
         commandBuffer.pushDebugGroup("Copy Pass")
         imageConverter.encode(commandBuffer: commandBuffer,
-                              sourceTexture: pipeline.io.output.color[0],
+                              sourceTexture: pipeline.io.output.color[0].texture!,
                               destinationTexture: outputTexture)
         commandBuffer.popDebugGroup()
         commandBuffer.present(drawable)

@@ -58,8 +58,14 @@ extension MTLRenderCommandEncoder {
     func setFragmentTextures(_ textures: [MTLTexture?], range: ClosedRange<UInt32>) {
         setFragmentTextures(textures, range: range.lowerBound.int ... range.upperBound.int)
     }
+    func setFragmentTextures(_ textureProviders: [PNTextureProvider], range: ClosedRange<UInt32>) {
+        setFragmentTextures(textureProviders.map({ $0.texture }), range: range)
+    }
     func setFragmentTexture<T: RawRepresentable>(_ texture: MTLTexture?, index: T) where T.RawValue == UInt32 {
         setFragmentTexture(texture, index: index.rawValue.int)
+    }
+    func setFragmentTexture<T: RawRepresentable>(_ textureProvider: PNTextureProvider, index: T) where T.RawValue == UInt32 {
+        setFragmentTexture(textureProvider.texture, index: index.rawValue.int)
     }
     func setBackCulling(_ culling: PNCulling) {
         setCullMode(culling.backCulling)

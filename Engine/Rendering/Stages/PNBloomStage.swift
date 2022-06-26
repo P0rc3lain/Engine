@@ -13,7 +13,7 @@ struct PNBloomStage: PNStage {
     private let splitBlurredTexture: MTLTexture
     private var bloomSplitRenderPassDescriptor: MTLRenderPassDescriptor
     private let bloomMergeRenderPassDescriptor: MTLRenderPassDescriptor
-    init?(input: MTLTexture, device: MTLDevice, renderingSize: CGSize) {
+    init?(input: PNTextureProvider, device: MTLDevice, renderingSize: CGSize) {
         bloomSplitRenderPassDescriptor = .bloomSplit(device: device, size: renderingSize)
         bloomMergeRenderPassDescriptor = .bloomMerge(device: device, size: renderingSize)
         guard let bloomSplitJob = PNBloomSplitJob.make(device: device,
@@ -24,7 +24,7 @@ struct PNBloomStage: PNStage {
               let bloomMergeJob = PNBloomMergeJob.make(device: device,
                                                        drawableSize: renderingSize,
                                                        unmodifiedSceneTexture: input,
-                                                       brightAreasTexture: splitBlurredTexture) else {
+                                                       brightAreasTexture: PNStaticTexture(splitBlurredTexture)) else {
             return nil
         }
         self.gaussianBlurJob = MPSImageGaussianBlur(device: device, sigma: 2)
@@ -32,7 +32,7 @@ struct PNBloomStage: PNStage {
         self.bloomMergeJob = bloomMergeJob
         self.splitBlurredTexture = splitBlurredTexture
         self.io = PNGPUIO(input: PNGPUSupply(color: [input]),
-                          output: PNGPUSupply(color: [stageOutputTexture]))
+                          output: PNGPUSupply(color: [PNStaticTexture(stageOutputTexture)]))
     }
     func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
         commandBuffer.pushDebugGroup("Bloom Pass")

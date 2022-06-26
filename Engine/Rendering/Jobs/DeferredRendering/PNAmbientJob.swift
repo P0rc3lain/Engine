@@ -9,12 +9,12 @@ struct PNAmbientJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport
-    private let inputTextures: [MTLTexture]
-    private let ssaoTexture: MTLTexture
+    private let inputTextures: [PNTextureProvider]
+    private let ssaoTexture: PNTextureProvider
     private let plane: PNMesh
     init?(pipelineState: MTLRenderPipelineState,
-          inputTextures: [MTLTexture],
-          ssaoTexture: MTLTexture,
+          inputTextures: [PNTextureProvider],
+          ssaoTexture: PNTextureProvider,
           device: MTLDevice,
           depthStencilState: MTLDepthStencilState,
           drawableSize: CGSize) {
@@ -54,8 +54,8 @@ struct PNAmbientJob: PNRenderJob {
                                       instanceCount: scene.ambientLights.count)
     }
     static func make(device: MTLDevice,
-                     inputTextures: [MTLTexture],
-                     ssaoTexture: MTLTexture,
+                     inputTextures: [PNTextureProvider],
+                     ssaoTexture: PNTextureProvider,
                      drawableSize: CGSize) -> PNAmbientJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSAmbient(library: library),

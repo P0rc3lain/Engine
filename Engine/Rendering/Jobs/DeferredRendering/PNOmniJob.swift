@@ -10,12 +10,12 @@ struct PNOmniJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport
-    private let inputTextures: [MTLTexture]
-    private let shadowMaps: MTLTexture
+    private let inputTextures: [PNTextureProvider]
+    private let shadowMaps: PNTextureProvider
     private let plane: PNMesh
     init?(pipelineState: MTLRenderPipelineState,
-          inputTextures: [MTLTexture],
-          shadowMaps: MTLTexture,
+          inputTextures: [PNTextureProvider],
+          shadowMaps: PNTextureProvider,
           device: MTLDevice,
           depthStencilState: MTLDepthStencilState,
           drawableSize: CGSize) {
@@ -57,8 +57,8 @@ struct PNOmniJob: PNRenderJob {
                                       instanceCount: scene.omniLights.count)
     }
     static func make(device: MTLDevice,
-                     inputTextures: [MTLTexture],
-                     shadowMaps: MTLTexture,
+                     inputTextures: [PNTextureProvider],
+                     shadowMaps: PNTextureProvider,
                      drawableSize: CGSize) -> PNOmniJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSOmni(library: library),

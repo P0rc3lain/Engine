@@ -10,10 +10,10 @@ import simd
 struct PNBloomSplitJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let viewPort: MTLViewport
-    private let inputTexture: MTLTexture
+    private let inputTexture: PNTextureProvider
     private let plane: PNMesh
     init?(pipelineState: MTLRenderPipelineState,
-          inputTexture: MTLTexture,
+          inputTexture: PNTextureProvider,
           device: MTLDevice,
           drawableSize: CGSize) {
         guard let plane = PNMesh.plane(device: device) else {
@@ -33,7 +33,7 @@ struct PNBloomSplitJob: PNRenderJob {
         encoder.drawIndexedPrimitives(submesh: plane.pieceDescriptions[0].drawDescription)
     }
     static func make(device: MTLDevice,
-                     inputTexture: MTLTexture,
+                     inputTexture: PNTextureProvider,
                      drawableSize: CGSize) -> PNBloomSplitJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSBloomSplit(library: library) else {

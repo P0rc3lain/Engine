@@ -10,8 +10,8 @@ struct PNPostprocessStage: PNStage {
     private var vignetteJob: PNVignetteJob
     private var grainJob: PNGrainJob
     private var postprocessRenderPassDescriptor: MTLRenderPassDescriptor
-    init?(device: MTLDevice, inputTexture: MTLTexture, renderingSize: CGSize) {
-        self.postprocessRenderPassDescriptor = .postprocess(device: device, texture: inputTexture)
+    init?(device: MTLDevice, inputTexture: PNTextureProvider, renderingSize: CGSize) {
+        self.postprocessRenderPassDescriptor = .postprocess(device: device, texture: inputTexture.texture!)
         guard let vignetteJob = PNVignetteJob.make(device: device,
                                                    inputTexture: inputTexture,
                                                    canvasSize: renderingSize),

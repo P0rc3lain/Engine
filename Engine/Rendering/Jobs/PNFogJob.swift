@@ -10,11 +10,11 @@ struct PNFogJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let depthStentilState: MTLDepthStencilState
     private let viewPort: MTLViewport
-    private let prTexture: MTLTexture
+    private let prTexture: PNTextureProvider
     private let cube: PNMesh
     init(pipelineState: MTLRenderPipelineState,
          depthStentilState: MTLDepthStencilState,
-         prTexture: MTLTexture,
+         prTexture: PNTextureProvider,
          drawableSize: CGSize,
          cube: PNMesh) {
         self.pipelineState = pipelineState
@@ -44,7 +44,9 @@ struct PNFogJob: PNRenderJob {
                                    index: kAttributeFogFragmentShaderTexturePR)
         encoder.drawIndexedPrimitives(submesh: cube.pieceDescriptions[0].drawDescription)
     }
-    static func make(device: MTLDevice, drawableSize: CGSize, prTexture: MTLTexture) -> PNFogJob? {
+    static func make(device: MTLDevice,
+                     drawableSize: CGSize,
+                     prTexture: PNTextureProvider) -> PNFogJob? {
         guard let library = device.makePorcelainLibrary(),
               let fogPipelineState = device.makeRPSFog(library: library),
               let depthStencilState = device.makeDSSFog(),

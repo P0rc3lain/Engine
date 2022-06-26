@@ -10,12 +10,12 @@ struct PNBloomMergeJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let viewPort: MTLViewport
     private let plane: PNMesh
-    private let unmodifiedSceneTexture: MTLTexture
-    private let brightAreasTexture: MTLTexture
+    private let unmodifiedSceneTexture: PNTextureProvider
+    private let brightAreasTexture: PNTextureProvider
     init?(pipelineState: MTLRenderPipelineState,
           device: MTLDevice,
-          unmodifiedSceneTexture: MTLTexture,
-          brightAreasTexture: MTLTexture,
+          unmodifiedSceneTexture: PNTextureProvider,
+          brightAreasTexture: PNTextureProvider,
           drawableSize: CGSize) {
         guard let plane = PNMesh.plane(device: device) else {
             return nil
@@ -39,8 +39,8 @@ struct PNBloomMergeJob: PNRenderJob {
     }
     static func make(device: MTLDevice,
                      drawableSize: CGSize,
-                     unmodifiedSceneTexture: MTLTexture,
-                     brightAreasTexture: MTLTexture) -> PNBloomMergeJob? {
+                     unmodifiedSceneTexture: PNTextureProvider,
+                     brightAreasTexture: PNTextureProvider) -> PNBloomMergeJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSBloomMerge(library: library) else {
             return nil

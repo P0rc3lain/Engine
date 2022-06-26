@@ -10,14 +10,14 @@ struct PNSSAOJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let viewPort: MTLViewport
     private let plane: PNMesh
-    private let prTexture: MTLTexture
-    private let nmTexture: MTLTexture
+    private let prTexture: PNTextureProvider
+    private let nmTexture: PNTextureProvider
     private var kernelBuffer: PNAnyStaticBuffer<simd_float3>
     private var noiseBuffer: PNAnyStaticBuffer<simd_float3>
     private var uniforms: PNAnyStaticBuffer<SSAOUniforms>
     init?(pipelineState: MTLRenderPipelineState,
-          prTexture: MTLTexture,
-          nmTexture: MTLTexture,
+          prTexture: PNTextureProvider,
+          nmTexture: PNTextureProvider,
           device: MTLDevice,
           drawableSize: CGSize,
           kernelBuffer: PNAnyStaticBuffer<simd_float3>,
@@ -68,8 +68,8 @@ struct PNSSAOJob: PNRenderJob {
         encoder.drawIndexedPrimitives(submesh: plane.pieceDescriptions[0].drawDescription)
     }
     static func make(device: MTLDevice,
-                     prTexture: MTLTexture,
-                     nmTexture: MTLTexture,
+                     prTexture: PNTextureProvider,
+                     nmTexture: PNTextureProvider,
                      drawableSize: CGSize,
                      maxNoiseCount: Int,
                      maxSamplesCount: Int) -> PNSSAOJob? {

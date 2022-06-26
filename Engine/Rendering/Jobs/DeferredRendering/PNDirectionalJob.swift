@@ -10,12 +10,12 @@ struct PNDirectionalJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
     private let viewPort: MTLViewport
-    private let inputTextures: [MTLTexture]
-    private let shadowMap: MTLTexture
+    private let inputTextures: [PNTextureProvider]
+    private let shadowMap: PNTextureProvider
     private let plane: PNMesh
     init?(pipelineState: MTLRenderPipelineState,
-          inputTextures: [MTLTexture],
-          shadowMap: MTLTexture,
+          inputTextures: [PNTextureProvider],
+          shadowMap: PNTextureProvider,
           device: MTLDevice,
           depthStencilState: MTLDepthStencilState,
           drawableSize: CGSize) {
@@ -57,8 +57,8 @@ struct PNDirectionalJob: PNRenderJob {
                                       instanceCount: scene.directionalLights.count)
     }
     static func make(device: MTLDevice,
-                     inputTextures: [MTLTexture],
-                     shadowMap: MTLTexture,
+                     inputTextures: [PNTextureProvider],
+                     shadowMap: PNTextureProvider,
                      drawableSize: CGSize) -> PNDirectionalJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSDirectional(library: library),

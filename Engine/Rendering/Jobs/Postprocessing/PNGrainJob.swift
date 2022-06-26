@@ -8,11 +8,11 @@ import simd
 
 struct PNGrainJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
-    private let inputTexture: MTLTexture
+    private let inputTexture: PNTextureProvider
     private let viewPort: MTLViewport
     private let plane: PNMesh
     init(pipelineState: MTLRenderPipelineState,
-         inputTexture: MTLTexture,
+         inputTexture: PNTextureProvider,
          plane: PNMesh,
          canvasSize: CGSize) {
         self.inputTexture = inputTexture
@@ -33,7 +33,7 @@ struct PNGrainJob: PNRenderJob {
         encoder.drawIndexedPrimitives(submesh: plane.pieceDescriptions[0].drawDescription)
     }
     static func make(device: MTLDevice,
-                     inputTexture: MTLTexture,
+                     inputTexture: PNTextureProvider,
                      canvasSize: CGSize) -> PNGrainJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSGrain(library: library),

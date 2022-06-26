@@ -16,14 +16,14 @@ struct PNCombineStage: PNStage {
     private var directionalJob: PNRenderJob
     private var translucentJob: PNTranslucentJob
     private var renderPassDescriptor: MTLRenderPassDescriptor
-    private var ssaoTexture: MTLTexture
+    private var ssaoTexture: PNTextureProvider
     init?(device: MTLDevice,
           renderingSize: CGSize,
           gBufferOutput: PNGPUSupply,
-          ssaoTexture: MTLTexture,
-          spotLightShadows: MTLTexture,
-          pointLightsShadows: MTLTexture,
-          directionalLightsShadows: MTLTexture) {
+          ssaoTexture: PNTextureProvider,
+          spotLightShadows: PNTextureProvider,
+          pointLightsShadows: PNTextureProvider,
+          directionalLightsShadows: PNTextureProvider) {
         guard let environmentJob = PNEnvironmentJob.make(device: device,
                                                          drawableSize: renderingSize),
               let omniJob = PNOmniJob.make(device: device,
@@ -52,8 +52,8 @@ struct PNCombineStage: PNStage {
             return nil
         }
         renderPassDescriptor = .lightenScene(device: device,
-                                             stencil: gBufferOutput.stencil[0],
-                                             depth: gBufferOutput.depth[0],
+                                             stencil: gBufferOutput.stencil[0].texture!,
+                                             depth: gBufferOutput.depth[0].texture!,
                                              size: renderingSize)
         guard let outputTexture = renderPassDescriptor.colorAttachments[0].texture else {
             return nil
@@ -69,7 +69,7 @@ struct PNCombineStage: PNStage {
         self.directionalJob = directionalJob
         self.io = PNGPUIO(input: PNGPUSupply(color: gBufferOutput.color + [ssaoTexture],
                                              stencil: gBufferOutput.stencil),
-                          output: PNGPUSupply(color: [outputTexture]))
+                          output: PNGPUSupply(color: [PNStaticTexture(outputTexture)]))
     }
     func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
         commandBuffer.pushDebugGroup("Light Pass")

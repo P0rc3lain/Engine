@@ -13,8 +13,8 @@ struct PNSSAOStage: PNStage {
     private var ssaoRenderer: PNRenderJob
     init?(device: MTLDevice,
           renderingSize: CGSize,
-          prTexture: MTLTexture,
-          nmTexture: MTLTexture,
+          prTexture: PNTextureProvider,
+          nmTexture: PNTextureProvider,
           blurSigma: Float) {
         guard let ssaoRenderer = PNSSAOJob.make(device: device,
                                                 prTexture: prTexture,
@@ -28,7 +28,7 @@ struct PNSSAOStage: PNStage {
         self.ssaoRenderer = ssaoRenderer
         self.ssaoRenderPassDescriptor = .ssao(device: device, size: renderingSize)
         self.io = PNGPUIO(input: PNGPUSupply(color: [prTexture, nmTexture]),
-                          output: PNGPUSupply(color: [gaussTexture]))
+                          output: PNGPUSupply(color: [PNStaticTexture(gaussTexture)]))
         self.gaussianBlur = MPSImageGaussianBlur(device: device,
                                                  sigma: blurSigma)
         self.gaussTexture = gaussTexture
