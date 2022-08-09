@@ -62,7 +62,7 @@ struct PNSpotShadowJob: PNRenderJob {
                 let mesh = scene.meshes[model.mesh]
                 encoder.setFrontCulling(mesh.culling)
                 encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
-                                        offset: mesh.vertexBuffer.buffer.offset,
+                                        offset: mesh.vertexBuffer.offset,
                                         index: kAttributeSpotShadowVertexShaderBufferStageIn)
                 encoder.setVertexBytes(value: Int32(model.idx),
                                        index: kAttributeSpotShadowVertexShaderBufferObjectIndex)

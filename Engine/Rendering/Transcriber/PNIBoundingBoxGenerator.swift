@@ -8,53 +8,37 @@ struct PNIBoundingBoxGenerator: PNBoundingBoxGenerator {
         self.interactor = interactor
     }
     func boundingBoxes(scene: PNSceneDescription) -> [PNBoundingBox] {
-        var boundingBoxes = [PNBoundingBox](minimalCapacity: scene.entities.count)
-        for i in scene.entities.indices {
-            let index = scene.entities.count - (1 + i)
-            let transform = scene.uniforms[index].modelMatrix
-            switch scene.entities[index].data.type {
+        var boundingBoxes = [PNBoundingBox](repeating: .zero, count: scene.entities.count)
+        for i in scene.entities.indices.reversed() {
+            let transform = scene.uniforms[i].modelMatrix
+            switch scene.entities[i].data.type {
             case .animatedMesh:
-                let modelIdx = scene.entities[index].data.referenceIdx
+                let modelIdx = scene.entities[i].data.referenceIdx
                 let meshIdx = scene.animatedModels[modelIdx].mesh
-                let boundingBox = interactor.aabb(interactor.multiply(transform, scene.meshes[meshIdx].boundingBox))
-                boundingBoxes.insert(boundingBox)
+                boundingBoxes[i] = interactor.aabb(interactor.multiply(transform, scene.meshes[meshIdx].boundingBox))
             case .mesh:
-                let modelIdx = scene.entities[index].data.referenceIdx
+                let modelIdx = scene.entities[i].data.referenceIdx
                 let meshIdx = scene.models[modelIdx].mesh
-                let boundingBox = interactor.aabb(interactor.multiply(transform, scene.meshes[meshIdx].boundingBox))
-                boundingBoxes.insert(boundingBox)
+                boundingBoxes[i] = interactor.aabb(interactor.multiply(transform, scene.meshes[meshIdx].boundingBox))
             case .spotLight:
-                let boundingBox = interactor.aabb(interactor.multiply(transform, scene.spotLights[scene.entities[index].data.referenceIdx].boundingBox))
-                boundingBoxes.insert(boundingBox)
+                boundingBoxes[i] = interactor.aabb(interactor.multiply(transform, scene.spotLights[scene.entities[i].data.referenceIdx].boundingBox))
             case .omniLight:
-                let boundingBox = interactor.aabb(interactor.multiply(transform, scene.omniLights[scene.entities[index].data.referenceIdx].boundingBox))
-                boundingBoxes.insert(boundingBox)
+                boundingBoxes[i] = interactor.aabb(interactor.multiply(transform, scene.omniLights[scene.entities[i].data.referenceIdx].boundingBox))
             case .ambientLight:
-                let boundingBox = interactor.aabb(interactor.multiply(transform, scene.ambientLights[scene.entities[index].data.referenceIdx].boundingBox))
-                boundingBoxes.insert(boundingBox)
+                boundingBoxes[i] = interactor.aabb(interactor.multiply(transform, scene.ambientLights[scene.entities[i].data.referenceIdx].boundingBox))
             case .group:
-                let children = scene.entities.children(of: index)
-                if let firstChild = children.first {
-                    let offset = -scene.entities.count + i
-                    var mergedBox = boundingBoxes[firstChild + offset]
-                    for childIndex in children.dropFirst() {
-                        mergedBox = interactor.merge(mergedBox, boundingBoxes[childIndex + offset])
-                    }
-                    boundingBoxes.insert(mergedBox)
-                } else {
-                    let boundingBox = interactor.aabb(interactor.multiply(transform, interactor.from(bound: PNBound(min: .zero, max: .zero))))
-                    boundingBoxes.insert(boundingBox)
-                }
+                // implicit size
+                break
             case .camera:
-                let boundingBox = interactor.aabb(interactor.multiply(transform.inverse, scene.cameras[scene.entities[index].data.referenceIdx].boundingBox))
-                boundingBoxes.insert(boundingBox)
+                boundingBoxes[i] = interactor.aabb(interactor.multiply(transform.inverse, scene.cameras[scene.entities[i].data.referenceIdx].boundingBox))
             case .particle:
-                let particleSystemIndex = scene.entities[index].data.referenceIdx
+                let particleSystemIndex = scene.entities[i].data.referenceIdx
                 let rules = scene.particles[particleSystemIndex].positioningRules
-                let boundingBox = interactor.aabb(interactor.multiply(transform,
-                                                                      interactor.from(bound: rules.bound)))
-
-                boundingBoxes.insert(boundingBox)
+                boundingBoxes[i] = interactor.aabb(interactor.multiply(transform,
+                                                                       interactor.from(bound: rules.bound)))
+            }
+            if let mergedBox = scene.entities.children(of: i).map({ boundingBoxes[$0] }).reduce(interactor.merge) {
+                boundingBoxes[i] = interactor.merge(mergedBox, boundingBoxes[i])
             }
         }
         return boundingBoxes

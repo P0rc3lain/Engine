@@ -76,10 +76,13 @@ extension MTLRenderCommandEncoder {
         setFrontFacing(culling.winding)
     }
     func drawIndexedPrimitives(submesh indexDraw: PNSubmesh, instanceCount: Int = 1) {
+        guard let buffer = indexDraw.indexBuffer.buffer else {
+            fatalError("Buffer not set")
+        }
         drawIndexedPrimitives(type: indexDraw.primitiveType,
                               indexCount: indexDraw.indexCount,
                               indexType: indexDraw.indexType,
-                              indexBuffer: indexDraw.indexBuffer.buffer,
+                              indexBuffer: buffer,
                               indexBufferOffset: indexDraw.indexBuffer.offset,
                               instanceCount: instanceCount)
     }
