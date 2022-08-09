@@ -51,7 +51,7 @@ class PNIBoundingBoxGeneratorTests: XCTestCase {
         XCTAssertTrue(boundInteractor.isEqual(boundingBoxInteractor.bound(scene.boundingBoxes[0]), PNBound(min: [0, 0, 0],
                                                                                                            max: [1, 1, 1])))
     }
-    func testNestedMeshes() {
+    func testChildGreaterThanParentNestedMeshes() {
         let scene = PNSceneDescription()
         // First mesh
         scene.meshes.append(PNMesh(boundingBox: PNIBoundingBoxInteractor.default.from(bound: PNBound(min: [0, 0, 0],
@@ -80,5 +80,35 @@ class PNIBoundingBoxGeneratorTests: XCTestCase {
                                               boundingBoxInteractor.bound(scene.boundingBoxes[1])))
         XCTAssertTrue(boundInteractor.isEqual(boundingBoxInteractor.bound(scene.boundingBoxes[1]), PNBound(min: [-10, -20, -30],
                                                                                                            max: [10, 20, 30])))
+    }
+    func testParentGreaterThanChildNestedMeshes() {
+        let scene = PNSceneDescription()
+        // First mesh
+        scene.meshes.append(PNMesh(boundingBox: PNIBoundingBoxInteractor.default.from(bound: PNBound(min: [-10, -20, -30],
+                                                                                                     max: [10, 20, 30])),
+                                   vertexBuffer: PNDataBuffer(wholeBuffer: nil),
+                                   pieceDescriptions: [],
+                                   culling: .none(winding: .clockwise)))
+        scene.entities.add(parentIdx: .nil, data: PNEntity(type: .mesh, referenceIdx: 0))
+        scene.models.append(PNModelReference(mesh: 0, idx: 0))
+        scene.uniforms.append(WModelUniforms(modelMatrix: .identity, modelMatrixInverse: .identity))
+        // Add second
+        scene.meshes.append(PNMesh(boundingBox: PNIBoundingBoxInteractor.default.from(bound: PNBound(min: [0, 1, 2],
+                                                                                                     max: [3, 4, 5])),
+                                   vertexBuffer: PNDataBuffer(wholeBuffer: nil),
+                                   pieceDescriptions: [],
+                                   culling: .none(winding: .clockwise)))
+        scene.entities.add(parentIdx: 0, data: PNEntity(type: .mesh, referenceIdx: 1))
+        scene.models.append(PNModelReference(mesh: 1, idx: 1))
+        scene.uniforms.append(WModelUniforms(modelMatrix: .identity, modelMatrixInverse: .identity))
+        // Generate bounding boxes
+        scene.boundingBoxes = generator.boundingBoxes(scene: scene)
+        assert(validate(scene: scene), "Scene improperly formed")
+        XCTAssertEqual(scene.boundingBoxes.count, 2)
+        // Parent bounding box should have implicit size of child plus its own
+        XCTAssertEqual(boundingBoxInteractor.bound(scene.boundingBoxes[0]).min, [-10, -20, -30])
+        XCTAssertEqual(boundingBoxInteractor.bound(scene.boundingBoxes[0]).max, [10, 20, 30])
+        XCTAssertEqual(boundingBoxInteractor.bound(scene.boundingBoxes[1]).min, [0, 1, 2])
+        XCTAssertEqual(boundingBoxInteractor.bound(scene.boundingBoxes[1]).max, [3, 4, 5])
     }
 }
