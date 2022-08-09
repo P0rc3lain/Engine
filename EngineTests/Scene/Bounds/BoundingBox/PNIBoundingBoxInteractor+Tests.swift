@@ -86,4 +86,30 @@ class PNIBoundingBoxInteractorTests: XCTestCase {
         XCTAssertEqual(result.min, [1, 2, 3])
         XCTAssertEqual(result.max, [3, 4, 5])
     }
+    func testOverlaping() throws {
+        let boxA = interactor.from(bound: PNBound(min: [0, 0, 0],
+                                                  max: [2, 2, 2]))
+        let boxB = interactor.from(bound: PNBound(min: [-2, -2, -2],
+                                                  max: [0.1, 0.1, 0.1]))
+        XCTAssertTrue(interactor.overlap(boxA, boxB))
+    }
+    func testNotOverlaping() throws {
+        let boxA = interactor.from(bound: PNBound(min: [0, 0, 0],
+                                                  max: [2, 2, 2]))
+        let boxB = interactor.from(bound: PNBound(min: [-2, -2, -2],
+                                                  max: [-0.1, -0.1, -0.1]))
+        XCTAssertFalse(interactor.overlap(boxA, boxB))
+    }
+    func testIsEqualSameObject() throws {
+        let box = PNBoundingBox.zero
+        XCTAssertTrue(interactor.isEqual(box, box))
+    }
+    func testIsEqualDifferentObjects() throws {
+        XCTAssertTrue(interactor.isEqual(.zero, .zero))
+    }
+    func testNotEqual() throws {
+        let boxA = PNBoundingBox.zero
+        let boxB = interactor.from(bound: PNBound(min: [1, 1, 1], max: [3, 3, 3]))
+        XCTAssertFalse(interactor.isEqual(boxA, boxB))
+    }
 }
