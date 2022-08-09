@@ -27,6 +27,7 @@ struct PNITranscriber: PNTranscriber {
         sceneDescription.palettes = palettes.palettes
         sceneDescription.paletteOffset = palettes.offsets
         sceneDescription.skyMap = scene.environmentMap
+        assert(validate(scene: sceneDescription), "Scene improperly formed")
         return sceneDescription
     }
     private func write(lights: [PNDirectionalLight], scene: PNSceneDescription) {

@@ -248,6 +248,8 @@
 		56B6AFAA28A254CE00266421 /* PNIBoundingBoxGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B6AFA928A254CE00266421 /* PNIBoundingBoxGenerator.swift */; };
 		56B6AFAC28A259C800266421 /* PNPaletteGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B6AFAB28A259C800266421 /* PNPaletteGenerator.swift */; };
 		56B6AFAE28A259D300266421 /* PNIPaletteGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B6AFAD28A259D300266421 /* PNIPaletteGenerator.swift */; };
+		56B6AFB228A2613B00266421 /* PNIBoundingBoxGenerator+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B6AFB128A2613B00266421 /* PNIBoundingBoxGenerator+Tests.swift */; };
+		56B6AFB428A269BC00266421 /* PNSceneValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B6AFB328A269BC00266421 /* PNSceneValidator.swift */; };
 		56C47B9E27511E9C0075C61B /* PNFrameSupply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C47B9D27511E9B0075C61B /* PNFrameSupply.swift */; };
 		56C47BA027511EDB0075C61B /* PNRenderJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C47B9F27511EDB0075C61B /* PNRenderJob.swift */; };
 		56C47BA527516BD20075C61B /* PNRenderMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C47BA427516BD20075C61B /* PNRenderMask.swift */; };
@@ -573,6 +575,8 @@
 		56B6AFA928A254CE00266421 /* PNIBoundingBoxGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIBoundingBoxGenerator.swift; sourceTree = "<group>"; };
 		56B6AFAB28A259C800266421 /* PNPaletteGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNPaletteGenerator.swift; sourceTree = "<group>"; };
 		56B6AFAD28A259D300266421 /* PNIPaletteGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIPaletteGenerator.swift; sourceTree = "<group>"; };
+		56B6AFB128A2613B00266421 /* PNIBoundingBoxGenerator+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIBoundingBoxGenerator+Tests.swift"; sourceTree = "<group>"; };
+		56B6AFB328A269BC00266421 /* PNSceneValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSceneValidator.swift; sourceTree = "<group>"; };
 		56C47B9D27511E9B0075C61B /* PNFrameSupply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNFrameSupply.swift; sourceTree = "<group>"; };
 		56C47B9F27511EDB0075C61B /* PNRenderJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNRenderJob.swift; sourceTree = "<group>"; };
 		56C47BA427516BD20075C61B /* PNRenderMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNRenderMask.swift; sourceTree = "<group>"; };
@@ -886,6 +890,7 @@
 				56416D872743F728003C99C2 /* Bounds */,
 				561666CE2719E2CC000063B1 /* PNSceneDescription.swift */,
 				561666D32719E2CC000063B1 /* PNCamera.swift */,
+				56B6AFB328A269BC00266421 /* PNSceneValidator.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -1488,6 +1493,7 @@
 		56924AD5271A07FD00FF3E06 /* EngineTests */ = {
 			isa = PBXGroup;
 			children = (
+				56B6AFAF28A2612000266421 /* Rendering */,
 				56E0119628410A8F007859F2 /* Loading */,
 				566795B3274DC281005993D7 /* Organization */,
 				56416D7827413429003C99C2 /* Extensions */,
@@ -1544,6 +1550,22 @@
 				56165BE1274405010025D58B /* Bounds */,
 			);
 			path = Scene;
+			sourceTree = "<group>";
+		};
+		56B6AFAF28A2612000266421 /* Rendering */ = {
+			isa = PBXGroup;
+			children = (
+				56B6AFB028A2612900266421 /* Transcriber */,
+			);
+			path = Rendering;
+			sourceTree = "<group>";
+		};
+		56B6AFB028A2612900266421 /* Transcriber */ = {
+			isa = PBXGroup;
+			children = (
+				56B6AFB128A2613B00266421 /* PNIBoundingBoxGenerator+Tests.swift */,
+			);
+			path = Transcriber;
 			sourceTree = "<group>";
 		};
 		56C47BA1275124A70075C61B /* FrameSupply */ = {
@@ -2178,6 +2200,7 @@
 				561666FF2719E2CD000063B1 /* simd_float3+Extension.swift in Sources */,
 				562C73A92849510900E51606 /* PNParticleGenerator.swift in Sources */,
 				560A0BBB2754223B005AE29D /* PNAnimatedCameraNode.swift in Sources */,
+				56B6AFB428A269BC00266421 /* PNSceneValidator.swift in Sources */,
 				56E011852840E07A007859F2 /* PNBoundEstimator.swift in Sources */,
 				56C47BB1275177B70075C61B /* PNAnyBufferedValue.swift in Sources */,
 				5670EC252736E1EF00375194 /* PNCombineStage.swift in Sources */,
@@ -2212,6 +2235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56E0119828410A8F007859F2 /* PNITerrainLoader+Tests.swift in Sources */,
+				56B6AFB228A2613B00266421 /* PNIBoundingBoxGenerator+Tests.swift in Sources */,
 				5620C82F27551BE00098D6FA /* simd_float3x3+Extension+Tests.swift in Sources */,
 				566795B6274DC297005993D7 /* PNINodeInteractor+Tests.swift in Sources */,
 				56E0118B2840FE9B007859F2 /* PNIBoundEstimator+Tests.swift in Sources */,
