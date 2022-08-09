@@ -15,4 +15,3 @@ extension MTLTexture {
         return self
     }
 }
-

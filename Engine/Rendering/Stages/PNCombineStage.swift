@@ -48,12 +48,14 @@ struct PNCombineStage: PNStage {
                                                          drawableSize: renderingSize),
               let fogJob = PNFogJob.make(device: device,
                                          drawableSize: renderingSize,
-                                         prTexture: gBufferOutput.color[2]) else {
+                                         prTexture: gBufferOutput.color[2]),
+              let stencil = gBufferOutput.stencil[0].texture,
+              let depth = gBufferOutput.depth[0].texture else {
             return nil
         }
         renderPassDescriptor = .lightenScene(device: device,
-                                             stencil: gBufferOutput.stencil[0].texture!,
-                                             depth: gBufferOutput.depth[0].texture!,
+                                             stencil: stencil,
+                                             depth: depth,
                                              size: renderingSize)
         guard let outputTexture = renderPassDescriptor.colorAttachments[0].texture else {
             return nil

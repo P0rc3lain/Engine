@@ -28,13 +28,14 @@ struct PNIRenderingCoordinator: PNRenderingCoordinator {
         guard frameSupply.scene.activeCameraIdx != .nil,
               let commandBuffer = commandQueue.makeCommandBuffer(),
               let drawable = view.currentDrawable,
-              let outputTexture = view.currentRenderPassDescriptor?.colorAttachments[0].texture else {
+              let outputTexture = view.currentRenderPassDescriptor?.colorAttachments[0].texture,
+              let sourceTexture = pipeline.io.output.color[0].texture else {
             return
         }
         pipeline.draw(commandBuffer: commandBuffer, supply: frameSupply)
         commandBuffer.pushDebugGroup("Copy Pass")
         imageConverter.encode(commandBuffer: commandBuffer,
-                              sourceTexture: pipeline.io.output.color[0].texture!,
+                              sourceTexture: sourceTexture,
                               destinationTexture: outputTexture)
         commandBuffer.popDebugGroup()
         commandBuffer.present(drawable)

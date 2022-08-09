@@ -9,15 +9,15 @@ class PNIDynamicTexture: PNDynamicTexture {
     private let device: MTLDevice
     private var descriptorValue: MTLTextureDescriptor?
     var descriptor: MTLTextureDescriptor? {
-        set {
+        get {
+            descriptorValue
+        } set {
             if newValue != descriptorValue {
                 descriptorValue = newValue
                 if let newDescriptor = newValue {
                     texture = device.makeTexture(descriptor: newDescriptor)
                 }
             }
-        } get {
-            return descriptorValue
         }
     }
     init(device: MTLDevice, descriptor: MTLTextureDescriptor? = nil) {
@@ -27,7 +27,7 @@ class PNIDynamicTexture: PNDynamicTexture {
         self.descriptor = descriptor
     }
     func updateDescriptor(descriptor: MTLTextureDescriptor?) -> Bool {
-        var before = descriptorValue
+        let before = descriptorValue
         self.descriptor = descriptor
         return before != descriptorValue
     }
