@@ -20,7 +20,7 @@ public final class PNSceneDescription {
     // MARK: - Capacity E
     public var skeletons = [PNSkeleton]()
     // MARK: - Capacity F
-    public var palettes = [PNM2WTransform]()
+    public var palettes = [PNBLTransform]()
     // MARK: - Capacity G
     public var cameras = [PNCamera]()
     public var cameraUniforms = [CameraUniforms]()
