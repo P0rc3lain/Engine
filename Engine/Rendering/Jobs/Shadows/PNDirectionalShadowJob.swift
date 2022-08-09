@@ -58,7 +58,7 @@ struct PNDirectionalShadowJob: PNRenderJob {
     private func draw(encoder: MTLRenderCommandEncoder, mesh: PNMesh, uniformReference: PNIndex) {
         encoder.setFrontCulling(mesh.culling)
         encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
-                                offset: mesh.vertexBuffer.buffer.offset,
+                                offset: mesh.vertexBuffer.offset,
                                 index: kAttributeDirectionalShadowVertexShaderBufferStageIn)
         encoder.setVertexBytes(value: Int32(uniformReference),
                                index: kAttributeDirectionalShadowVertexShaderBufferObjectIndex)
