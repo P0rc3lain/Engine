@@ -265,6 +265,7 @@
 		56C4CD512737FFDD000A994E /* PNSpotJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C4CD502737FFDD000A994E /* PNSpotJob.swift */; };
 		56C4CD53273800E4000A994E /* Spot.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56C4CD52273800E4000A994E /* Spot.metal */; };
 		56D12AD027231DAD00550530 /* RawRepresentable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D12ACF27231DAD00550530 /* RawRepresentable+Extension.swift */; };
+		56D45D1A28A3178B007C1210 /* Array+Extension+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D45D1928A3178B007C1210 /* Array+Extension+Tests.swift */; };
 		56D50858274542EA0097DEB2 /* simd_quatf+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D50857274542EA0097DEB2 /* simd_quatf+Extension.swift */; };
 		56D5085B27454B250097DEB2 /* OmniLight+Extension+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D5085A27454B250097DEB2 /* OmniLight+Extension+Tests.swift */; };
 		56D7ED3F274C36F200A6C25D /* PNBoundInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7ED3E274C36F200A6C25D /* PNBoundInteractor.swift */; };
@@ -594,6 +595,7 @@
 		56C4CD502737FFDD000A994E /* PNSpotJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSpotJob.swift; sourceTree = "<group>"; };
 		56C4CD52273800E4000A994E /* Spot.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Spot.metal; sourceTree = "<group>"; };
 		56D12ACF27231DAD00550530 /* RawRepresentable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RawRepresentable+Extension.swift"; sourceTree = "<group>"; };
+		56D45D1928A3178B007C1210 /* Array+Extension+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension+Tests.swift"; sourceTree = "<group>"; };
 		56D50857274542EA0097DEB2 /* simd_quatf+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd_quatf+Extension.swift"; sourceTree = "<group>"; };
 		56D5085A27454B250097DEB2 /* OmniLight+Extension+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OmniLight+Extension+Tests.swift"; sourceTree = "<group>"; };
 		56D7ED3E274C36F200A6C25D /* PNBoundInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNBoundInteractor.swift; sourceTree = "<group>"; };
@@ -1192,6 +1194,7 @@
 		56416D7827413429003C99C2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				56D45D1828A3177D007C1210 /* Swift */,
 				562471C628A311A900EC9A10 /* Foundation */,
 				56D5085927454B130097DEB2 /* Porcelain */,
 				56416D7927413430003C99C2 /* simd */,
@@ -1729,6 +1732,14 @@
 			path = simd;
 			sourceTree = "<group>";
 		};
+		56D45D1828A3177D007C1210 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				56D45D1928A3178B007C1210 /* Array+Extension+Tests.swift */,
+			);
+			path = Swift;
+			sourceTree = "<group>";
+		};
 		56D5085927454B130097DEB2 /* Porcelain */ = {
 			isa = PBXGroup;
 			children = (
@@ -2251,6 +2262,7 @@
 				566795B6274DC297005993D7 /* PNINodeInteractor+Tests.swift in Sources */,
 				56E0118B2840FE9B007859F2 /* PNIBoundEstimator+Tests.swift in Sources */,
 				562471C828A311BD00EC9A10 /* Data+Extension+Tests.swift in Sources */,
+				56D45D1A28A3178B007C1210 /* Array+Extension+Tests.swift in Sources */,
 				56416D7B27413443003C99C2 /* simd_float4x4+Extension+Tests.swift in Sources */,
 				56924AD7271A07FD00FF3E06 /* PNIAnimatedValue+Tests.swift in Sources */,
 				5620C82D27551AFC0098D6FA /* simd_float3+Extension+Tests.swift in Sources */,

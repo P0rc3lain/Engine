@@ -3,8 +3,8 @@
 //
 
 @testable import Engine
-import XCTest
 import simd
+import XCTest
 
 class DataExtensionTests: XCTestCase {
     func testSolid2DTexture() throws {
