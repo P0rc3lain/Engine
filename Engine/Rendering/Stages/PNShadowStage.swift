@@ -56,7 +56,7 @@ class PNShadowStage: PNStage {
                directionalRenderingTexture.updateDescriptor(descriptor: directionalDescriptor)
     }
     func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
-        if updateTextures(supply: supply)  {
+        if updateTextures(supply: supply) {
             spotShadowRPD = .spotLightShadow(device: device,
                                              texture: spotRenderingTexture.texture)
             omniShadowRPD = .omniLightShadow(device: device,
