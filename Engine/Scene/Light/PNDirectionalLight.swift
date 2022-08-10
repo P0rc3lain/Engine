@@ -5,7 +5,7 @@
 import simd
 
 public protocol PNDirectionalLight {
-    var color: simd_float3 { get }
+    var color: PNColorRGB { get }
     var intensity: Float { get }
     var direction: simd_float3 { get }
 }

@@ -6,9 +6,11 @@ import simd
 
 public struct PNIAmbientLight: PNAmbientLight {
     public var diameter: Float
-    public var color: simd_float3
+    public var color: PNColorRGB
     public var intensity: Float
-    public init(diameter: Float, color: simd_float3, intensity: Float) {
+    public init(diameter: Float,
+                color: PNColorRGB,
+                intensity: Float) {
         self.diameter = diameter
         self.color = color
         self.intensity = intensity

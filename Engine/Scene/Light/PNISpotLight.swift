@@ -5,11 +5,12 @@
 import simd
 
 public struct PNISpotLight: PNSpotLight {
-    public var color: simd_float3
+    public var color: PNColorRGB
     public var intensity: Float
-    public var coneAngle: Float
-    // Angle measured in radians
-    public init(color: simd_float3, intensity: Float, coneAngle: Float) {
+    public var coneAngle: Radians
+    public init(color: PNColorRGB,
+                intensity: Float,
+                coneAngle: Radians) {
         self.color = color
         self.intensity = intensity
         self.coneAngle = coneAngle

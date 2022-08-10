@@ -299,6 +299,7 @@
 		56F0FB46284986570004D212 /* PNTextureAtlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F0FB45284986570004D212 /* PNTextureAtlas.swift */; };
 		56F59269273725FB008652C9 /* PNDirectionalJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F59268273725FB008652C9 /* PNDirectionalJob.swift */; };
 		56F5926D2737276D008652C9 /* Directional.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56F5926C2737276D008652C9 /* Directional.metal */; };
+		56FC107428A43CA3002C7A14 /* Float+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FC107328A43CA3002C7A14 /* Float+Alias.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -631,6 +632,7 @@
 		56F5926727372526008652C9 /* DirectionalLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DirectionalLight.h; sourceTree = "<group>"; };
 		56F59268273725FB008652C9 /* PNDirectionalJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNDirectionalJob.swift; sourceTree = "<group>"; };
 		56F5926C2737276D008652C9 /* Directional.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Directional.metal; sourceTree = "<group>"; };
+		56FC107328A43CA3002C7A14 /* Float+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Alias.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1303,6 +1305,7 @@
 			children = (
 				568807492747F10700C95F55 /* Int+Alias.swift */,
 				566795DB274FC5C9005993D7 /* Bool+Alias.swift */,
+				56FC107328A43CA3002C7A14 /* Float+Alias.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -2117,6 +2120,7 @@
 				560C18D3273ABDE700459AEF /* PNOmniShadowJob.swift in Sources */,
 				562C739A284950F300E51606 /* PNIParticleNode.swift in Sources */,
 				5688999E2757AB7D00D24EB1 /* Math.metal in Sources */,
+				56FC107428A43CA3002C7A14 /* Float+Alias.swift in Sources */,
 				569D9244273E81DD004FDFAC /* VertexP+Extension.swift in Sources */,
 				56407B7B27204EEB00440CAC /* Array+Extension.swift in Sources */,
 				568899A12757AC6E00D24EB1 /* Layer.metal in Sources */,
