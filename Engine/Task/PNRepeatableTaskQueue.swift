@@ -3,7 +3,7 @@
 //
 
 public protocol PNRepeatableTaskQueue: AnyObject {
-    func schedule(_ task: @escaping () -> Bool)
+    func schedule(_ task: @escaping () -> ShouldContinueExecuting)
     func schedule(_ task: PNTask)
     func execute()
 }

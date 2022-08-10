@@ -3,3 +3,4 @@
 //
 
 public typealias Suceeded = Bool
+public typealias ShouldContinueExecuting = Bool

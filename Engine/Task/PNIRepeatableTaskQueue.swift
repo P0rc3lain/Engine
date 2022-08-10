@@ -3,8 +3,8 @@
 //
 
 class PNIRepeatableTaskQueue: PNRepeatableTaskQueue {
-    private var tasks = [() -> Bool]()
-    func schedule(_ task: @escaping () -> Bool) {
+    private var tasks = [() -> ShouldContinueExecuting]()
+    func schedule(_ task: @escaping () -> ShouldContinueExecuting) {
         tasks.append(task)
     }
     func schedule(_ task: PNTask) {
