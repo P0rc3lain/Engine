@@ -5,7 +5,7 @@
 import simd
 
 public protocol PNSpotLight {
-    var color: simd_float3 { get }
+    var color: PNColorRGB { get }
     var intensity: Float { get }
-    var coneAngle: Float { get }
+    var coneAngle: Radians { get }
 }

@@ -18,7 +18,7 @@ public struct PNIBoundEstimator: PNBoundEstimator {
     }
     public func bound(vertexBuffer: UnsafeRawBufferPointer) -> PNBound {
         guard let pointer = vertexBuffer.bindMemory(to: Vertex.self).baseAddress else {
-            fatalError("Could not cast buffer to raw pointer")
+            fatalError("Could not cast buffer to a raw pointer")
         }
         let elementsCount = Int(vertexBuffer.count / MemoryLayout<Vertex>.stride)
         let firstVertex = pointer.pointee

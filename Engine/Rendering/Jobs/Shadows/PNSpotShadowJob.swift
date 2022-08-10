@@ -64,7 +64,7 @@ struct PNSpotShadowJob: PNRenderJob {
                 encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                         offset: mesh.vertexBuffer.offset,
                                         index: kAttributeSpotShadowVertexShaderBufferStageIn)
-                encoder.setVertexBytes(value: Int32(model.idx),
+                encoder.setVertexBytes(value: model.idx,
                                        index: kAttributeSpotShadowVertexShaderBufferObjectIndex)
                 for pieceDescription in mesh.pieceDescriptions {
                     if let material = pieceDescription.material, material.isTranslucent {

@@ -5,6 +5,6 @@
 import simd
 
 public protocol PNOmniLight {
-    var color: simd_float3 { get }
+    var color: PNColorRGB { get }
     var intensity: Float { get }
 }
