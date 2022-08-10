@@ -3,5 +3,5 @@
 //
 
 public protocol PNTask: AnyObject {
-    func execute() -> Bool
+    func execute() -> ShouldContinueExecuting
 }
