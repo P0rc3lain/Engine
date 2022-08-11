@@ -4,3 +4,5 @@
 
 public typealias Degress = Float
 public typealias Radians = Float
+public typealias Ratio = Float
+public typealias Average = Float

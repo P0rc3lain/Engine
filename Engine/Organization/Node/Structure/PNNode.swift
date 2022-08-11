@@ -15,6 +15,11 @@ public final class PNNode<T> {
         child.parent = self
         children.append(child)
     }
+    public func add(children: PNNode<T>...) {
+        for child in children {
+            add(child: child)
+        }
+    }
     public func add(children: [PNNode<T>]) {
         for child in children {
             add(child: child)

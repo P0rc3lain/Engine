@@ -25,8 +25,7 @@ public struct PNITerrainLoader: PNTerrainLoader {
     }
     static func vertices(image: NSImage) -> [Vertex]? {
         vertices(image: image) { color in
-            let avg = (color.redComponent + color.blueComponent + color.greenComponent) / 3
-            return Float(avg * 100)
+            Float(color.rgbAverage * 100)
         }
     }
     static func color(bitmap: NSBitmapImageRep, atX x: Int, atY y: Int) -> NSColor? {

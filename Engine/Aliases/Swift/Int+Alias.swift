@@ -3,3 +3,5 @@
 //
 
 public typealias PNIndex = Int
+public typealias PNNewlyWrittenIndex = Int
+public typealias PNParentIndex = Int

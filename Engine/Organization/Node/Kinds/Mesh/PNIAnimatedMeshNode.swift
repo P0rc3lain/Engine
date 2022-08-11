@@ -9,12 +9,14 @@ public final class PNIAnimatedMeshNode: PNAnimatedMeshNode {
     public var transform: PNTransform {
         animator.transform(coordinateSpace: animation)
     }
-    public init(mesh: PNMesh, animator: PNAnimator, animation: PNAnimatedCoordinateSpace) {
+    public init(mesh: PNMesh,
+                animator: PNAnimator,
+                animation: PNAnimatedCoordinateSpace) {
         self.mesh = mesh
         self.animator = animator
         self.animation = animation
     }
-    public func write(scene: PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
+    public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
         let entity = PNEntity(type: .mesh,
                               referenceIdx: scene.models.count)
         scene.entities.add(parentIdx: parentIdx, data: entity)
