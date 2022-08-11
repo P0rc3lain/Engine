@@ -23,9 +23,8 @@ public struct PNIRenderMaskGenerator: PNRenderMaskGenerator {
             let cameraTransform = scene.uniforms[scene.spotLights[i].idx.int].modelMatrixInverse
             let cameraBoundingBox = interactor.multiply(cameraTransform, scene.spotLights[i].boundingBox)
             let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
-            let mask = cullingController.cullingMask(scene: scene,
-                                                     boundingBox: cameraAlignedBoundingBox)
-            return mask
+            return cullingController.cullingMask(scene: scene,
+                                                 boundingBox: cameraAlignedBoundingBox)
         }
     }
     private func generateCameraRenderMask(scene: PNSceneDescription) -> [[Bool]] {
