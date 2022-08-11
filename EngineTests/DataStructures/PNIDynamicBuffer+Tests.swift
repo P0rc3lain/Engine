@@ -30,7 +30,7 @@ class PNIDynamicBufferTests: XCTestCase {
                                                         initialCapacity: 1) else {
             throw XCTSkip("Could not initiate device")
         }
-        XCTAssertEqual(dynamicBuffer.buffer.label, "PNIDynamicBuffer<Int>")
+        XCTAssertEqual("PNIDynamicBuffer<Int>", dynamicBuffer.buffer.label)
     }
     func testExtending() throws {
         guard let device = MTLCreateSystemDefaultDevice(),
