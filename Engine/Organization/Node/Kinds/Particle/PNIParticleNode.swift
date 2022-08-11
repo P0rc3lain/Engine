@@ -10,7 +10,7 @@ public final class PNIParticleNode: PNParticleNode {
         self.provider = provider
         self.transform = transform
     }
-    public func write(scene: PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
+    public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
         let entity = PNEntity(type: .particle,
                               referenceIdx: scene.particles.count)
         scene.entities.add(parentIdx: parentIdx, data: entity)

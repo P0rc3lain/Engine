@@ -6,6 +6,7 @@ import simd
 
 extension simd_quatf {
     struct Environment {
+        // TODO: Change it to a struct containing array
         let positiveX: simd_quatf
         let negativeX: simd_quatf
         let positiveY: simd_quatf

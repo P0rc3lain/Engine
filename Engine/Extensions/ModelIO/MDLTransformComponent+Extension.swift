@@ -19,9 +19,15 @@ extension MDLTransformComponent {
             orientations.append(simd_quatf(transform))
             scales.append(transform.scale)
         }
-        let scaleAnimation = PNAnimatedFloat3(keyFrames: scales, times: times, maximumTime: maximumTime)
-        let translationAnimation = PNAnimatedFloat3(keyFrames: translations, times: times, maximumTime: maximumTime)
-        let orientationAnimation = PNAnimatedQuatf(keyFrames: orientations, times: times, maximumTime: maximumTime)
+        let scaleAnimation = PNAnimatedFloat3(keyFrames: scales,
+                                              times: times,
+                                              maximumTime: maximumTime)
+        let translationAnimation = PNAnimatedFloat3(keyFrames: translations,
+                                                    times: times,
+                                                    maximumTime: maximumTime)
+        let orientationAnimation = PNAnimatedQuatf(keyFrames: orientations,
+                                                   times: times,
+                                                   maximumTime: maximumTime)
         return PNAnimatedCoordinateSpace(translation: PNAnyAnimatedValue(translationAnimation),
                                          rotation: PNAnyAnimatedValue(orientationAnimation),
                                          scale: PNAnyAnimatedValue(scaleAnimation))

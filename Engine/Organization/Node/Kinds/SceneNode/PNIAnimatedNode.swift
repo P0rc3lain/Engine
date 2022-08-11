@@ -12,7 +12,7 @@ public final class PNIAnimatedNode: PNAnimatedNode {
         self.animator = animator
         self.animation = animation
     }
-    public func write(scene: PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
+    public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
         let entity = PNEntity(type: .group,
                               referenceIdx: .nil)
         scene.entities.add(parentIdx: parentIdx, data: entity)

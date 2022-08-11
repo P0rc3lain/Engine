@@ -11,7 +11,7 @@ public final class PNICameraNode: PNCameraNode {
         self.camera = camera
         self.transform = transform
     }
-    public func write(scene: PNSceneDescription, parentIdx: PNIndex) -> PNIndex {
+    public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
         scene.entities.add(parentIdx: parentIdx, data: PNEntity(type: .camera,
                                                                 referenceIdx: scene.cameras.count))
         scene.cameras.append(camera)

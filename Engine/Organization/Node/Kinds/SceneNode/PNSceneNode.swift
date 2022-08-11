@@ -4,5 +4,5 @@
 
 public protocol PNSceneNode: AnyObject {
     var transform: PNTransform { get }
-    func write(scene: PNSceneDescription, parentIdx: PNIndex) -> PNIndex
+    func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex
 }
