@@ -4,15 +4,31 @@
 
 import simd
 
-struct PNSurroundings {
-    // TODO: Change it to a struct containing array
-    let positiveX: simd_quatf
-    let negativeX: simd_quatf
-    let positiveY: simd_quatf
-    let negativeY: simd_quatf
-    let positiveZ: simd_quatf
-    let negativeZ: simd_quatf
-    public subscript(index: Int) -> simd_quatf {
+public struct PNSurroundings {
+    private init() {
+        // empty, no need for instantiation
+    }
+    // Quaternions
+    static let positiveXq = simd_quatf(angle: Float(180).radians,
+                                       axis: [0, 0, 1]) * simd_quatf(angle: Float(-90).radians, axis: [0, 1, 0])
+    static let negativeXq = simd_quatf(angle: Float(180).radians,
+                                       axis: [0, 0, 1]) * simd_quatf(angle: Float(90).radians, axis: [0, 1, 0])
+    static let positiveYq = simd_quatf(angle: Float(90).radians,
+                                       axis: [1, 0, 0]) * simd_quatf(angle: Float(-180).radians, axis: [0, 0, 1])
+    static let negativeYq = simd_quatf(angle: Float(-90).radians,
+                                       axis: [1, 0, 0]) * simd_quatf(angle: Float(-180).radians, axis: [0, 0, 1])
+    static let positiveZq = simd_quatf(angle: Float(180).radians,
+                                       axis: [0, 0, 1])
+    static let negativeZq = simd_quatf(angle: Float(180).radians,
+                                       axis: [0, 0, 1]) * simd_quatf(angle: Float(180).radians, axis: [0, 1, 0])
+    // Matrices
+    static let positiveX = positiveXq.rotationMatrix
+    static let negativeX = negativeXq.rotationMatrix
+    static let positiveY = positiveYq.rotationMatrix
+    static let negativeY = negativeYq.rotationMatrix
+    static let positiveZ = positiveZq.rotationMatrix
+    static let negativeZ = negativeZq.rotationMatrix
+    public static subscript(index: Int) -> simd_float4x4 {
         switch index {
         case 0:
             return positiveX
@@ -30,23 +46,12 @@ struct PNSurroundings {
             fatalError("Index out of bounds")
         }
     }
-    static var environment: PNSurroundings {
-        let xPlus = simd_quatf(angle: Float(180).radians, axis: [0, 0, 1]) * simd_quatf(angle: Float(-90).radians, axis: [0, 1, 0])
-        let xMinus = simd_quatf(angle: Float(180).radians, axis: [0, 0, 1]) * simd_quatf(angle: Float(90).radians, axis: [0, 1, 0])
-        let yPlus = simd_quatf(angle: Float(90).radians, axis: [1, 0, 0]) * simd_quatf(angle: Float(-180).radians, axis: [0, 0, 1])
-        let yMinus = simd_quatf(angle: Float(-90).radians, axis: [1, 0, 0]) * simd_quatf(angle: Float(-180).radians, axis: [0, 0, 1])
-        let zPlus = simd_quatf(angle: Float(180).radians, axis: [0, 0, 1])
-        let zMinus = simd_quatf(angle: Float(180).radians, axis: [0, 0, 1]) * simd_quatf(angle: Float(180).radians, axis: [0, 1, 0])
-        return PNSurroundings(positiveX: xPlus, negativeX: xMinus, positiveY: yPlus, negativeY: yMinus, positiveZ: zPlus, negativeZ: zMinus)
-    }
-    var rotationMatrices: [simd_float4x4] {
-        [
-            PNSurroundings.environment.positiveX.rotationMatrix,
-            PNSurroundings.environment.negativeX.rotationMatrix,
-            PNSurroundings.environment.negativeY.rotationMatrix,
-            PNSurroundings.environment.positiveY.rotationMatrix,
-            PNSurroundings.environment.positiveZ.rotationMatrix,
-            PNSurroundings.environment.negativeZ.rotationMatrix
-        ]
-    }
+    public static let rotationMatrices = [
+        positiveX,
+        negativeX,
+        negativeY,
+        positiveY,
+        positiveZ,
+        negativeZ
+    ]
 }

@@ -22,19 +22,19 @@ extension OmniLight {
         let interactor = PNIBoundingBoxInteractor.default
         let projectionBoundingBox = interactor.from(inverseProjection: projectionMatrixInverse)
         // X
-        let xPositive = interactor.aabb(interactor.multiply(PNSurroundings.environment.positiveX.rotationMatrix,
+        let xPositive = interactor.aabb(interactor.multiply(PNSurroundings.positiveX,
                                                             projectionBoundingBox))
-        let xNegative = interactor.aabb(interactor.multiply(PNSurroundings.environment.negativeX.rotationMatrix,
+        let xNegative = interactor.aabb(interactor.multiply(PNSurroundings.negativeX,
                                                             projectionBoundingBox))
         // Y
-        let yPositive = interactor.aabb(interactor.multiply(PNSurroundings.environment.positiveY.rotationMatrix,
+        let yPositive = interactor.aabb(interactor.multiply(PNSurroundings.positiveY,
                                                             projectionBoundingBox))
-        let yNegative = interactor.aabb(interactor.multiply(PNSurroundings.environment.negativeY.rotationMatrix,
+        let yNegative = interactor.aabb(interactor.multiply(PNSurroundings.negativeY,
                                                             projectionBoundingBox))
         // Z
-        let zPositive = interactor.aabb(interactor.multiply(PNSurroundings.environment.positiveZ.rotationMatrix,
+        let zPositive = interactor.aabb(interactor.multiply(PNSurroundings.positiveZ,
                                                             projectionBoundingBox))
-        let zNegative = interactor.aabb(interactor.multiply(PNSurroundings.environment.negativeZ.rotationMatrix,
+        let zNegative = interactor.aabb(interactor.multiply(PNSurroundings.negativeZ,
                                                             projectionBoundingBox))
         let zMerged = interactor.merge(zPositive, zNegative)
         let yMerged = interactor.merge(yPositive, yNegative)

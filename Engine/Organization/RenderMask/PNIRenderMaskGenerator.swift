@@ -7,7 +7,6 @@ import simd
 public struct PNIRenderMaskGenerator: PNRenderMaskGenerator {
     private let cullingController: PNCullingController
     private let interactor: PNBoundingBoxInteractor
-    private let cubeRotations = PNSurroundings.environment
     init(cullingController: PNCullingController,
          interactor: PNBoundingBoxInteractor) {
         self.cullingController = cullingController
@@ -44,7 +43,7 @@ public struct PNIRenderMaskGenerator: PNRenderMaskGenerator {
                 let cameraTransform = scene.uniforms[entityIndex].modelMatrixInverse
                 let projectionInverse = scene.omniLights[lightIndex].projectionMatrixInverse
                 let boundingBox = interactor.from(inverseProjection: projectionInverse)
-                let cameraBoundingBox = interactor.multiply(cubeRotations[faceIndex].rotationMatrix,
+                let cameraBoundingBox = interactor.multiply(PNSurroundings[faceIndex],
                                                             interactor.multiply(cameraTransform, boundingBox))
                 let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
                 return cullingController.cullingMask(scene: scene,
