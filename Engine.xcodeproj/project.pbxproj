@@ -190,6 +190,7 @@
 		566CEB272843944000DA6227 /* PNIBufferStoreFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566CEB262843944000DA6227 /* PNIBufferStoreFactory.swift */; };
 		566CEB2928439AFA00DA6227 /* PNIThreadedWorkloadManagerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566CEB2828439AFA00DA6227 /* PNIThreadedWorkloadManagerFactory.swift */; };
 		566F16C028A57F2700FDF1B5 /* NSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566F16BF28A57F2700FDF1B5 /* NSColor+Extension.swift */; };
+		566F16C428A59C5B00FDF1B5 /* PNSurroundings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566F16C328A59C5B00FDF1B5 /* PNSurroundings.swift */; };
 		5670EBDC273561FD00375194 /* Operator+Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EBDB273561FD00375194 /* Operator+Global.swift */; };
 		5670EC002735977900375194 /* PNBloomSplitJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EBFF2735977900375194 /* PNBloomSplitJob.swift */; };
 		5670EC052735A3EA00375194 /* BloomSplit.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC042735A3EA00375194 /* BloomSplit.metal */; };
@@ -508,6 +509,7 @@
 		566CEB2828439AFA00DA6227 /* PNIThreadedWorkloadManagerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIThreadedWorkloadManagerFactory.swift; sourceTree = "<group>"; };
 		566CEB2C2843A03F00DA6227 /* Progress */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Progress; sourceTree = "<group>"; };
 		566F16BF28A57F2700FDF1B5 /* NSColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extension.swift"; sourceTree = "<group>"; };
+		566F16C328A59C5B00FDF1B5 /* PNSurroundings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSurroundings.swift; sourceTree = "<group>"; };
 		5670EBDB273561FD00375194 /* Operator+Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Operator+Global.swift"; sourceTree = "<group>"; };
 		5670EBFF2735977900375194 /* PNBloomSplitJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNBloomSplitJob.swift; sourceTree = "<group>"; };
 		5670EC042735A3EA00375194 /* BloomSplit.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = BloomSplit.metal; sourceTree = "<group>"; };
@@ -1340,6 +1342,7 @@
 			children = (
 				566795DE274FCB3E005993D7 /* PNTransformCalculator.swift */,
 				566795E0274FCBDF005993D7 /* PNITransformCalculator.swift */,
+				566F16C328A59C5B00FDF1B5 /* PNSurroundings.swift */,
 			);
 			path = Transform;
 			sourceTree = "<group>";
@@ -2250,6 +2253,7 @@
 				566795E6274FED66005993D7 /* PNRenderingCoordinator.swift in Sources */,
 				560C18D7273AC71100459AEF /* OmniLight+Extension.swift in Sources */,
 				5620C8112754E8740098D6FA /* PNSSAOHemisphere.swift in Sources */,
+				566F16C428A59C5B00FDF1B5 /* PNSurroundings.swift in Sources */,
 				566795AE274DBE0E005993D7 /* PNSceneNode.swift in Sources */,
 				5616673C2719E2CD000063B1 /* PNIndexBitDepth.swift in Sources */,
 				563BFC9527289A3B0003EDB7 /* MDLAnimatedQuaternionArray+Extension.swift in Sources */,

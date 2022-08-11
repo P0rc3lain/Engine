@@ -7,7 +7,7 @@ import simd
 public struct PNIRenderMaskGenerator: PNRenderMaskGenerator {
     private let cullingController: PNCullingController
     private let interactor: PNBoundingBoxInteractor
-    private let cubeRotations = simd_quatf.environment
+    private let cubeRotations = PNSurroundings.environment
     init(cullingController: PNCullingController,
          interactor: PNBoundingBoxInteractor) {
         self.cullingController = cullingController

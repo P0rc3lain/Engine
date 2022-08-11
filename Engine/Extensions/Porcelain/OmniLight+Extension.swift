@@ -22,19 +22,19 @@ extension OmniLight {
         let interactor = PNIBoundingBoxInteractor.default
         let projectionBoundingBox = interactor.from(inverseProjection: projectionMatrixInverse)
         // X
-        let xPositive = interactor.aabb(interactor.multiply(simd_quatf.environment.positiveX.rotationMatrix,
+        let xPositive = interactor.aabb(interactor.multiply(PNSurroundings.environment.positiveX.rotationMatrix,
                                                             projectionBoundingBox))
-        let xNegative = interactor.aabb(interactor.multiply(simd_quatf.environment.negativeX.rotationMatrix,
+        let xNegative = interactor.aabb(interactor.multiply(PNSurroundings.environment.negativeX.rotationMatrix,
                                                             projectionBoundingBox))
         // Y
-        let yPositive = interactor.aabb(interactor.multiply(simd_quatf.environment.positiveY.rotationMatrix,
+        let yPositive = interactor.aabb(interactor.multiply(PNSurroundings.environment.positiveY.rotationMatrix,
                                                             projectionBoundingBox))
-        let yNegative = interactor.aabb(interactor.multiply(simd_quatf.environment.negativeY.rotationMatrix,
+        let yNegative = interactor.aabb(interactor.multiply(PNSurroundings.environment.negativeY.rotationMatrix,
                                                             projectionBoundingBox))
         // Z
-        let zPositive = interactor.aabb(interactor.multiply(simd_quatf.environment.positiveZ.rotationMatrix,
+        let zPositive = interactor.aabb(interactor.multiply(PNSurroundings.environment.positiveZ.rotationMatrix,
                                                             projectionBoundingBox))
-        let zNegative = interactor.aabb(interactor.multiply(simd_quatf.environment.negativeZ.rotationMatrix,
+        let zNegative = interactor.aabb(interactor.multiply(PNSurroundings.environment.negativeZ.rotationMatrix,
                                                             projectionBoundingBox))
         let zMerged = interactor.merge(zPositive, zNegative)
         let yMerged = interactor.merge(yPositive, yNegative)
