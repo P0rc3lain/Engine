@@ -50,8 +50,7 @@ public class PNParticleGenerator: PNRenderableParticlesProvider, PNTask {
         for _ in emissionRate.naturalExclusive {
             newParticles.append(emitter.emit(rules: rules))
         }
-        var frozen = frozenParticles
-        provider.upload(data: &frozen)
+        provider.upload(data: frozenParticles)
         particles = newParticles
         previousUpdate = Date()
         return true

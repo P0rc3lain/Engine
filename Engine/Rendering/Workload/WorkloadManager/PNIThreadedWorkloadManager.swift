@@ -29,17 +29,16 @@ public class PNIThreadedWorkloadManager: PNWorkloadManager {
             taskQueue.execute()
             let scene = transcriber.transcribe(scene: sceneGraph)
             let inactive = frameSupplies.pullInactive
-            inactive.bufferStore.matrixPalettes.upload(data: &scene.palettes)
-            inactive.bufferStore.ambientLights.upload(data: &scene.ambientLights)
-            inactive.bufferStore.omniLights.upload(data: &scene.omniLights)
-            inactive.bufferStore.directionalLights.upload(data: &scene.directionalLights)
-            inactive.bufferStore.spotLights.upload(data: &scene.spotLights)
-            inactive.bufferStore.cameras.upload(data: &scene.cameraUniforms)
-            inactive.bufferStore.modelCoordinateSystems.upload(data: &scene.uniforms)
-            let frameSupply = PNFrameSupply(scene: scene,
-                                            bufferStore: inactive.bufferStore,
-                                            mask: renderMaskGenerator.generate(scene: scene))
-            frameSupplies.push(frameSupply)
+            inactive.bufferStore.matrixPalettes.upload(data: scene.palettes)
+            inactive.bufferStore.ambientLights.upload(data: scene.ambientLights)
+            inactive.bufferStore.omniLights.upload(data: scene.omniLights)
+            inactive.bufferStore.directionalLights.upload(data: scene.directionalLights)
+            inactive.bufferStore.spotLights.upload(data: scene.spotLights)
+            inactive.bufferStore.cameras.upload(data: scene.cameraUniforms)
+            inactive.bufferStore.modelCoordinateSystems.upload(data: scene.uniforms)
+            frameSupplies.push(PNFrameSupply(scene: scene,
+                                             bufferStore: inactive.bufferStore,
+                                             mask: renderMaskGenerator.generate(scene: scene)))
             dispatchGroup.leave()
         }
         renderingCoordinator.draw(frameSupply: frameSupplies.pull)

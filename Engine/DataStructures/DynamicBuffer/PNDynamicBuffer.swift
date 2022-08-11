@@ -9,5 +9,6 @@ protocol PNDynamicBuffer {
     var buffer: MTLBuffer { get }
     var pulled: [DataType] { get }
     var count: Int { get }
-    func upload(data: inout  [DataType])
+    func upload(data: [DataType])
+    func upload(data: DataType)
 }

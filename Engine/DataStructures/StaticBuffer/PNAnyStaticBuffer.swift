@@ -7,8 +7,8 @@ import Metal
 struct PNAnyStaticBuffer<T>: PNStaticBuffer {
     typealias DataType = T
     private let bufferRetriever: () -> MTLBuffer
-    private let uploadArray: (inout [T]) -> Void
-    private let uploadValue: (inout T) -> Void
+    private let uploadArray: ([T]) -> Void
+    private let uploadValue: (T) -> Void
     var buffer: MTLBuffer {
         bufferRetriever()
     }
@@ -17,10 +17,10 @@ struct PNAnyStaticBuffer<T>: PNStaticBuffer {
         uploadValue = delegatee.upload(value:)
         uploadArray = delegatee.upload(data:)
     }
-    func upload(data: inout [T]) {
-        uploadArray(&data)
+    func upload(data: [T]) {
+        uploadArray(data)
     }
-    func upload(value: inout T) {
-        uploadValue(&value)
+    func upload(value: T) {
+        uploadValue(value)
     }
 }

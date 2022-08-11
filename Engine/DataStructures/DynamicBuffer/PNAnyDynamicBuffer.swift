@@ -9,7 +9,8 @@ public struct PNAnyDynamicBuffer<T>: PNDynamicBuffer {
     private let bufferRetriever: () -> MTLBuffer
     private let pulledValueRetriever: () -> [T]
     private let countRetriever: () -> Int
-    private let uploadArray: (inout [T]) -> Void
+    private let uploadArray: ([T]) -> Void
+    private let uploadValue: (T) -> Void
     var buffer: MTLBuffer {
         bufferRetriever()
     }
@@ -24,8 +25,12 @@ public struct PNAnyDynamicBuffer<T>: PNDynamicBuffer {
         bufferRetriever = { delegatee.buffer }
         uploadArray = delegatee.upload(data:)
         countRetriever = { delegatee.count }
+        uploadValue = delegatee.upload(data:)
     }
-    func upload(data: inout [T]) {
-        uploadArray(&data)
+    func upload(data: [T]) {
+        uploadArray(data)
+    }
+    func upload(data: T) {
+        uploadValue(data)
     }
 }
