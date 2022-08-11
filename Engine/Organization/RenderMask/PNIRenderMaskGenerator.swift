@@ -7,7 +7,6 @@ import simd
 public struct PNIRenderMaskGenerator: PNRenderMaskGenerator {
     private let cullingController: PNCullingController
     private let interactor: PNBoundingBoxInteractor
-    private let cubeRotations = simd_quatf.environment
     init(cullingController: PNCullingController,
          interactor: PNBoundingBoxInteractor) {
         self.cullingController = cullingController
@@ -23,9 +22,8 @@ public struct PNIRenderMaskGenerator: PNRenderMaskGenerator {
             let cameraTransform = scene.uniforms[scene.spotLights[i].idx.int].modelMatrixInverse
             let cameraBoundingBox = interactor.multiply(cameraTransform, scene.spotLights[i].boundingBox)
             let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
-            let mask = cullingController.cullingMask(scene: scene,
-                                                     boundingBox: cameraAlignedBoundingBox)
-            return mask
+            return cullingController.cullingMask(scene: scene,
+                                                 boundingBox: cameraAlignedBoundingBox)
         }
     }
     private func generateCameraRenderMask(scene: PNSceneDescription) -> [[Bool]] {
@@ -45,7 +43,7 @@ public struct PNIRenderMaskGenerator: PNRenderMaskGenerator {
                 let cameraTransform = scene.uniforms[entityIndex].modelMatrixInverse
                 let projectionInverse = scene.omniLights[lightIndex].projectionMatrixInverse
                 let boundingBox = interactor.from(inverseProjection: projectionInverse)
-                let cameraBoundingBox = interactor.multiply(cubeRotations[faceIndex].rotationMatrix,
+                let cameraBoundingBox = interactor.multiply(PNSurroundings[faceIndex],
                                                             interactor.multiply(cameraTransform, boundingBox))
                 let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
                 return cullingController.cullingMask(scene: scene,

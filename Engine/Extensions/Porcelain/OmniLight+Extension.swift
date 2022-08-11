@@ -19,26 +19,19 @@ extension OmniLight {
                          projectionMatrixInverse: projectionMatrix.inverse)
     }
     var boundingBox: PNBoundingBox {
+        // TODO: Ensure that calling aabb(interactor.multiply(axis, projection)) is not needed
         let interactor = PNIBoundingBoxInteractor.default
         let projectionBoundingBox = interactor.from(inverseProjection: projectionMatrixInverse)
-        // X
-        let xPositive = interactor.aabb(interactor.multiply(simd_quatf.environment.positiveX.rotationMatrix,
-                                                            projectionBoundingBox))
-        let xNegative = interactor.aabb(interactor.multiply(simd_quatf.environment.negativeX.rotationMatrix,
-                                                            projectionBoundingBox))
-        // Y
-        let yPositive = interactor.aabb(interactor.multiply(simd_quatf.environment.positiveY.rotationMatrix,
-                                                            projectionBoundingBox))
-        let yNegative = interactor.aabb(interactor.multiply(simd_quatf.environment.negativeY.rotationMatrix,
-                                                            projectionBoundingBox))
-        // Z
-        let zPositive = interactor.aabb(interactor.multiply(simd_quatf.environment.positiveZ.rotationMatrix,
-                                                            projectionBoundingBox))
-        let zNegative = interactor.aabb(interactor.multiply(simd_quatf.environment.negativeZ.rotationMatrix,
-                                                            projectionBoundingBox))
-        let zMerged = interactor.merge(zPositive, zNegative)
-        let yMerged = interactor.merge(yPositive, yNegative)
-        let xMerged = interactor.merge(xPositive, xNegative)
-        return interactor.merge(interactor.merge(xMerged, yMerged), zMerged)
+        guard let boundingBox = [
+            interactor.multiply(PNSurroundings.positiveX, projectionBoundingBox),
+            interactor.multiply(PNSurroundings.negativeX, projectionBoundingBox),
+            interactor.multiply(PNSurroundings.positiveY, projectionBoundingBox),
+            interactor.multiply(PNSurroundings.negativeY, projectionBoundingBox),
+            interactor.multiply(PNSurroundings.positiveZ, projectionBoundingBox),
+            interactor.multiply(PNSurroundings.negativeZ, projectionBoundingBox)
+        ].reduce(interactor.merge) else {
+            fatalError("Reduce returned nil even if it never should in this circumstances")
+        }
+        return boundingBox
     }
 }

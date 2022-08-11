@@ -22,7 +22,7 @@ struct PNOmniShadowJob: PNRenderJob {
         self.depthStencilState = depthStencilState
         self.viewPort = viewPort
         self.rotationsBuffer = rotationsBuffer
-        var rotations = PNOmniShadowJob.rotationMatrices
+        var rotations = PNSurroundings.rotationMatrices
         self.rotationsBuffer.upload(data: &rotations)
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
@@ -79,16 +79,6 @@ struct PNOmniShadowJob: PNRenderJob {
             }
             encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
         }
-    }
-    private static var rotationMatrices: [simd_float4x4] {
-        [
-            simd_quatf.environment.positiveX.rotationMatrix,
-            simd_quatf.environment.negativeX.rotationMatrix,
-            simd_quatf.environment.negativeY.rotationMatrix,
-            simd_quatf.environment.positiveY.rotationMatrix,
-            simd_quatf.environment.positiveZ.rotationMatrix,
-            simd_quatf.environment.negativeZ.rotationMatrix
-        ]
     }
     static func make(device: MTLDevice,
                      renderingSize: CGSize) -> PNOmniShadowJob? {
