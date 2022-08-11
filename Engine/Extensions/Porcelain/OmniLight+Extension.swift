@@ -19,6 +19,7 @@ extension OmniLight {
                          projectionMatrixInverse: projectionMatrix.inverse)
     }
     var boundingBox: PNBoundingBox {
+        // TODO: Rotations from PNSurroundings are axis-aligned, why to call aabb?
         let interactor = PNIBoundingBoxInteractor.default
         let projectionBoundingBox = interactor.from(inverseProjection: projectionMatrixInverse)
         // X
