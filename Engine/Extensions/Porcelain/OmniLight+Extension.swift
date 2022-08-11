@@ -19,16 +19,16 @@ extension OmniLight {
                          projectionMatrixInverse: projectionMatrix.inverse)
     }
     var boundingBox: PNBoundingBox {
-        // TODO: Rotations from PNSurroundings are axis-aligned, why to call aabb?
+        // TODO: Ensure that calling aabb(interactor.multiply(axis, projection)) is not needed
         let interactor = PNIBoundingBoxInteractor.default
         let projectionBoundingBox = interactor.from(inverseProjection: projectionMatrixInverse)
         guard let boundingBox = [
-            interactor.aabb(interactor.multiply(PNSurroundings.positiveX, projectionBoundingBox)),
-            interactor.aabb(interactor.multiply(PNSurroundings.negativeX, projectionBoundingBox)),
-            interactor.aabb(interactor.multiply(PNSurroundings.positiveY, projectionBoundingBox)),
-            interactor.aabb(interactor.multiply(PNSurroundings.negativeY, projectionBoundingBox)),
-            interactor.aabb(interactor.multiply(PNSurroundings.positiveZ, projectionBoundingBox)),
-            interactor.aabb(interactor.multiply(PNSurroundings.negativeZ, projectionBoundingBox))
+            interactor.multiply(PNSurroundings.positiveX, projectionBoundingBox),
+            interactor.multiply(PNSurroundings.negativeX, projectionBoundingBox),
+            interactor.multiply(PNSurroundings.positiveY, projectionBoundingBox),
+            interactor.multiply(PNSurroundings.negativeY, projectionBoundingBox),
+            interactor.multiply(PNSurroundings.positiveZ, projectionBoundingBox),
+            interactor.multiply(PNSurroundings.negativeZ, projectionBoundingBox)
         ].reduce(interactor.merge) else {
             fatalError("Reduce returned nil even if it never should in this circumstances")
         }
