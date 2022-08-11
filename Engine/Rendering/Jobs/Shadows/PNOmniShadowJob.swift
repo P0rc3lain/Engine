@@ -23,7 +23,7 @@ struct PNOmniShadowJob: PNRenderJob {
         self.viewPort = viewPort
         self.rotationsBuffer = rotationsBuffer
         var rotations = PNSurroundings.rotationMatrices
-        self.rotationsBuffer.upload(data: &rotations)
+        self.rotationsBuffer.upload(data: PNSurroundings.rotationMatrices)
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         guard !supply.scene.omniLights.isEmpty else {

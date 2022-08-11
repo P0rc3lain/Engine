@@ -25,7 +25,7 @@ final public class PNIDynamicBuffer<T>: PNDynamicBuffer {
         self.buffer = buffer
         self.buffer.label = bufferName
     }
-    func upload(data: inout [T]) {
+    func upload(data: [T]) {
         count = data.count
         let requiredSpace = data.count * MemoryLayout<T>.stride
         if buffer.length < requiredSpace {
@@ -38,5 +38,8 @@ final public class PNIDynamicBuffer<T>: PNDynamicBuffer {
         data.withUnsafeBytes { pointer in
             buffer.contents().copyBuffer(from: pointer)
         }
+    }
+    func upload(data: T) {
+        upload(data: [data])
     }
 }

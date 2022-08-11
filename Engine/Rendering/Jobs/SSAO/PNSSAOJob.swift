@@ -36,15 +36,9 @@ struct PNSSAOJob: PNRenderJob {
         self.kernelBuffer = kernelBuffer
         self.noiseBuffer = noiseBuffer
         self.uniforms = uniforms
-        var kernel = PNISSAOHemisphere().samples(size: maxSamplesCount)
-        var noise = PNISSAOHemisphere().noise(count: maxNoiseCount)
-        var uniforms = SSAOUniforms.default
-        self.kernelBuffer.upload(data: &kernel)
-        self.noiseBuffer.upload(data: &noise)
-        self.uniforms.upload(value: &uniforms)
-    }
-    private mutating func updateUniforms(_ uniforms: inout SSAOUniforms) {
-        self.uniforms.upload(value: &uniforms)
+        self.kernelBuffer.upload(data: PNISSAOHemisphere().samples(size: maxSamplesCount))
+        self.noiseBuffer.upload(data: PNISSAOHemisphere().noise(count: maxNoiseCount))
+        self.uniforms.upload(value: .default)
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         let bufferStore = supply.bufferStore

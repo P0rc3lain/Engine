@@ -15,16 +15,15 @@ final class PNIStaticBuffer<T>: PNStaticBuffer {
         self.buffer = buffer
         self.buffer.label = bufferName
     }
-    func upload(data: inout [T]) {
+    func upload(data: [T]) {
         assert(data.count == buffer.length / MemoryLayout<T>.stride,
                "Sizes of allocated and provided buffers must match")
         data.withUnsafeBytes { pointer in
             buffer.contents().copyBuffer(from: pointer)
         }
     }
-    func upload(value: inout T) {
-        var data = [value]
-        upload(data: &data)
+    func upload(value: T) {
+        upload(data: [value])
     }
     private var bufferName: String {
         "\(Self.self)"
