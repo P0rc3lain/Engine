@@ -22,7 +22,6 @@ struct PNOmniShadowJob: PNRenderJob {
         self.depthStencilState = depthStencilState
         self.viewPort = viewPort
         self.rotationsBuffer = rotationsBuffer
-        var rotations = PNSurroundings.rotationMatrices
         self.rotationsBuffer.upload(data: PNSurroundings.rotationMatrices)
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
