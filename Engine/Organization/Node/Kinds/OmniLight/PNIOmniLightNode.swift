@@ -12,13 +12,11 @@ public final class PNIOmniLightNode: PNOmniLightNode {
         self.transform = transform
     }
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
-        let entity = PNEntity(type: .omniLight, referenceIdx: scene.omniLights.count)
+        let entity = PNEntity(type: .omniLight,
+                              referenceIdx: scene.omniLights.count)
         scene.entities.add(parentIdx: parentIdx, data: entity)
-        let underlyingLight = OmniLight.make(color: light.color,
-                                             intensity: light.intensity,
-                                             castsShadows: light.castsShadows,
-                                             index: scene.entities.count - 1)
-        scene.omniLights.append(underlyingLight)
+        scene.omniLights.append(OmniLight.make(light: light,
+                                               index: scene.entities.count - 1))
         return scene.entities.count - 1
     }
 }

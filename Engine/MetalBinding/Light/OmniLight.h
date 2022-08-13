@@ -10,5 +10,5 @@ struct OmniLight {
     int32_t idx;
     simd_float4x4 projectionMatrix;
     simd_float4x4 projectionMatrixInverse;
-    int8_t castsShadows;
+    uint8_t castsShadows;
 };
