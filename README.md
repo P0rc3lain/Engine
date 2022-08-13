@@ -6,6 +6,11 @@
 
 Prestigious yet delicate
 
+#### 2022-08-13
+<p align="center">
+    <img src="./Progress/2022-08-13.jpg" width="100%"/>
+</p>
+
 #### 2022-05-31
 <p align="center">
     <img src="./Progress/2022-05-31.jpg" width="100%"/>
