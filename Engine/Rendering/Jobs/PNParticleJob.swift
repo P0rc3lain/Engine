@@ -40,7 +40,7 @@ struct PNParticleJob: PNRenderJob {
                                      index: kAttributeParticleFragmentShaderBufferUseableTiles)
             encoder.setFragmentBytes(value: particleSystem.atlas.grid,
                                      index: kAttributeParticleFragmentShaderBufferGrid)
-            encoder.setVertexBytes(value: Int32(particleSystem.index),
+            encoder.setVertexBytes(value: particleSystem.index,
                                    index: kAttributeParticleVertexShaderBufferSystemIndex)
             encoder.setVertexBuffer(particleSystem.particles.buffer,
                                     index: kAttributeParticleVertexShaderBufferStageIn)

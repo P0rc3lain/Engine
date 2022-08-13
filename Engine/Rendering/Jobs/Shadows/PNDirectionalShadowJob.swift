@@ -60,7 +60,7 @@ struct PNDirectionalShadowJob: PNRenderJob {
         encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                 offset: mesh.vertexBuffer.offset,
                                 index: kAttributeDirectionalShadowVertexShaderBufferStageIn)
-        encoder.setVertexBytes(value: Int32(uniformReference),
+        encoder.setVertexBytes(value: uniformReference,
                                index: kAttributeDirectionalShadowVertexShaderBufferObjectIndex)
         for pieceDescription in mesh.pieceDescriptions {
             if let material = pieceDescription.material, material.isTranslucent {

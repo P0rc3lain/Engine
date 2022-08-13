@@ -60,7 +60,7 @@ struct PNGBufferJob: PNRenderJob {
         encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                 offset: mesh.vertexBuffer.offset,
                                 index: kAttributeGBufferVertexShaderBufferStageIn)
-        encoder.setVertexBytes(value: Int32(uniformReference),
+        encoder.setVertexBytes(value: uniformReference,
                                index: kAttributeGBufferVertexShaderBufferObjectIndex)
         for pieceDescription in mesh.pieceDescriptions {
             guard let material = pieceDescription.material,

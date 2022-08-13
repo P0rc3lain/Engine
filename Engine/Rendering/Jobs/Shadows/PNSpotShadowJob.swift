@@ -45,7 +45,7 @@ struct PNSpotShadowJob: PNRenderJob {
                 encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                         offset: mesh.vertexBuffer.offset,
                                         index: kAttributeSpotShadowVertexShaderBufferStageIn)
-                encoder.setVertexBytes(value: Int32(animatedModel.idx),
+                encoder.setVertexBytes(value: animatedModel.idx,
                                        index: kAttributeSpotShadowVertexShaderBufferObjectIndex)
                 encoder.setVertexBuffer(dataStore.matrixPalettes.buffer,
                                         offset: scene.paletteOffset[animatedModel.skeleton],

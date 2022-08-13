@@ -50,7 +50,7 @@ struct PNOmniShadowJob: PNRenderJob {
                                             index: kAttributeOmniShadowVertexShaderBufferMatrixPalettes)
                     let mesh = supply.scene.meshes[animatedModel.mesh]
                     encoder.setFrontCulling(mesh.culling)
-                    encoder.setVertexBytes(value: Int32(animatedModel.idx),
+                    encoder.setVertexBytes(value: animatedModel.idx,
                                            index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
                     encodeMeshDraw(commandEncoder: encoder, mesh: mesh)
                 }
@@ -61,7 +61,7 @@ struct PNOmniShadowJob: PNRenderJob {
                     }
                     let mesh = supply.scene.meshes[model.mesh]
                     encoder.setFrontCulling(mesh.culling)
-                    encoder.setVertexBytes(value: Int32(model.idx),
+                    encoder.setVertexBytes(value: model.idx,
                                            index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
                     encodeMeshDraw(commandEncoder: encoder, mesh: mesh)
                 }

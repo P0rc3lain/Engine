@@ -57,7 +57,7 @@ struct PNTranslucentJob: PNRenderJob {
         encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                 offset: mesh.vertexBuffer.offset,
                                 index: kAttributeTranslucentVertexShaderBufferStageIn)
-        encoder.setVertexBytes(value: Int32(uniformReference),
+        encoder.setVertexBytes(value: uniformReference,
                                index: kAttributeTranslucentVertexShaderBufferObjectIndex)
         for pieceDescription in mesh.pieceDescriptions {
             guard let material = pieceDescription.material,
