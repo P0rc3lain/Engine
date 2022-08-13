@@ -28,6 +28,12 @@ struct PNOmniShadowJob: PNRenderJob {
         guard !supply.scene.omniLights.isEmpty else {
             return
         }
+        let shadowCasterIndices = supply.scene.omniLights.indices.filter {
+            supply.scene.omniLights[$0].castsShadows == 1
+        }
+        guard !shadowCasterIndices.isEmpty else {
+            return
+        }
         encoder.setViewport(viewPort)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setRenderPipelineState(animatedPipelineState)
@@ -37,9 +43,9 @@ struct PNOmniShadowJob: PNRenderJob {
                                 index: kAttributeOmniShadowVertexShaderBufferOmniLights)
         encoder.setVertexBuffer(supply.bufferStore.modelCoordinateSystems,
                                 index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
-        for lightIndex in supply.scene.omniLights.count.naturalExclusive {
+        for lightIndex in shadowCasterIndices {
             for faceIndex in 6.naturalExclusive {
-                encoder.setVertexBytes(value: lightIndex + faceIndex,
+                encoder.setVertexBytes(value: 6 * lightIndex + faceIndex,
                                        index: kAttributeOmniShadowVertexShaderBufferInstanceId)
                 for animatedModel in supply.scene.animatedModels {
                     if !supply.mask.omniLights[lightIndex][faceIndex][animatedModel.idx] {

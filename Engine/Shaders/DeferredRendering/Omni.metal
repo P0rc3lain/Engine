@@ -26,7 +26,7 @@ struct RasterizerData {
 
 vertex RasterizerData vertexDeferredLight(Vertex in [[stage_in]],
                                           uint instanceId [[instance_id]]) {
-    return RasterizerData {
+    return {
         float4(in.position, 1),
         in.textureUV,
         instanceId
@@ -53,26 +53,30 @@ fragment float4 fragmentDeferredLight(RasterizerData in [[stage_in]],
     if (dot(input.n, l) < 0)
         discard_fragment();
     
-    // Shadow
-    float4 lightSpacesFragmentPosition = lightUniforms[light.idx].modelMatrixInverse * lightUniforms[camera.index].modelMatrixInverse * float4(input.fragmentPosition, 1);
-    float currentDistance = length(lightSpacesFragmentPosition.xyz)/100;
-    float3 sampleVector = normalize(lightSpacesFragmentPosition.xyz);
-    sampleVector = -sampleVector;
-    float bias = max(0.0001 * (1.0 - dot(input.n, l)), 0.00001);
-    
-    float shadowInfluence = pcfDepth(shadows,
-                                     in.instanceId,
-                                     sampleVector,
-                                     int3{3, 3, 3},
-                                     currentDistance,
-                                     bias,
-                                     0.01);
-    if (shadowInfluence == 1)
-        discard_fragment();
+    float shadowInfluence = 0;
+    if (light.castsShadows) {
+        // Shadow
+        float4 lightSpacesFragmentPosition = lightUniforms[light.idx].modelMatrixInverse *
+                                             lightUniforms[camera.index].modelMatrixInverse *
+                                             float4(input.fragmentPosition, 1);
+        float currentDistance = length(lightSpacesFragmentPosition.xyz)/100;
+        float3 sampleVector = normalize(lightSpacesFragmentPosition.xyz);
+        sampleVector = -sampleVector;
+        float bias = max(0.0001 * (1.0 - dot(input.n, l)), 0.00001);
+        float shadowInfluence = pcfDepth(shadows,
+                                         in.instanceId,
+                                         sampleVector,
+                                         int3{3, 3, 3},
+                                         currentDistance,
+                                         bias,
+                                         0.01);
+        if (shadowInfluence == 1)
+            discard_fragment();
+    }
     float3 color = lighting(l,
                             eye,
                             input,
                             light.color,
                             light.intensity);
-    return  float4((1 - shadowInfluence) * color, 1);
+    return float4((1 - shadowInfluence) * color, 1);
 }

@@ -7,4 +7,5 @@ import simd
 public protocol PNOmniLight {
     var color: PNColorRGB { get }
     var intensity: Float { get }
+    var castsShadows: Bool { get }
 }
