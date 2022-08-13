@@ -11,4 +11,5 @@ struct DirectionalLight {
     simd_float4x4 rotationMatrixInverse;
     simd_float4x4 projectionMatrix;
     simd_float4x4 projectionMatrixInverse;
+    uint8_t castsShadows;
 };

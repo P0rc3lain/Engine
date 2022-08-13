@@ -42,7 +42,8 @@ struct PNITranscriber: PNTranscriber {
                                                             rotationMatrix: orientation,
                                                             rotationMatrixInverse: orientationInverse,
                                                             projectionMatrix: projectionMatrix,
-                                                            projectionMatrixInverse: projectionMatrix.inverse))
+                                                            projectionMatrixInverse: projectionMatrix.inverse,
+                                                            castsShadows: light.castsShadows ? 1 : 0))
         }
     }
     private func write(node: PNNode<PNSceneNode>, scene: PNSceneDescription, parentIndex: PNIndex) {

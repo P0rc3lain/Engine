@@ -25,9 +25,6 @@ struct PNOmniShadowJob: PNRenderJob {
         self.rotationsBuffer.upload(data: PNSurroundings.rotationMatrices)
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
-        guard !supply.scene.omniLights.isEmpty else {
-            return
-        }
         let shadowCasterIndices = supply.scene.omniLights.indices.filter {
             supply.scene.omniLights[$0].castsShadows == 1
         }

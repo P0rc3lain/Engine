@@ -30,7 +30,7 @@ struct RasterizerData {
 
 vertex RasterizerData vertexDirectionalLight(Vertex in [[stage_in]],
                                              uint instanceId [[instance_id]]) {
-    return RasterizerData {
+    return {
         float4(in.position, 1),
         in.textureUV,
         instanceId
@@ -53,23 +53,28 @@ fragment float4 fragmentDirectionalLight(RasterizerData in [[stage_in]],
     float3 l = normalize(lightDirection);
     if (dot(input.n, l) < 0)
         discard_fragment();
-    float4 lightSpacesFragmentPosition = light.rotationMatrixInverse * modelUniforms[camera.index].modelMatrixInverse * float4(input.fragmentPosition, 1);
-    float4 lightProjectedPosition = light.projectionMatrix * lightSpacesFragmentPosition;
-    lightProjectedPosition.xy = lightProjectedPosition.xy * 0.5 + 0.5;
-    lightProjectedPosition.y = 1.0 - lightProjectedPosition.y;
-    float bias = max(BIAS_MAX * (1.0 - dot(input.n, l)), BIAS_MIN);
-    float shadow = pcfDepth(shadowMaps,
-                            in.instanceId,
-                            lightProjectedPosition.xy,
-                            int2(PCF_HORIZONTAL_SAMPLES, PCF_VERTICAL_SAMPLES),
-                            lightProjectedPosition.z,
-                            bias);
-    if (shadow == 1)
-        discard_fragment();
+    float shadowInfluence{0};
+    if (light.castsShadows) {
+        float4 lightSpacesFragmentPosition = light.rotationMatrixInverse *
+                                             modelUniforms[camera.index].modelMatrixInverse *
+                                             float4(input.fragmentPosition, 1);
+        float4 lightProjectedPosition = light.projectionMatrix * lightSpacesFragmentPosition;
+        lightProjectedPosition.xy = lightProjectedPosition.xy * 0.5 + 0.5;
+        lightProjectedPosition.y = 1.0 - lightProjectedPosition.y;
+        float bias = max(BIAS_MAX * (1.0 - dot(input.n, l)), BIAS_MIN);
+        shadowInfluence = pcfDepth(shadowMaps,
+                                   in.instanceId,
+                                   lightProjectedPosition.xy,
+                                   int2(PCF_HORIZONTAL_SAMPLES, PCF_VERTICAL_SAMPLES),
+                                   lightProjectedPosition.z,
+                                   bias);
+        if (shadowInfluence == 1)
+            discard_fragment();
+    }
     float3 color = lighting(l,
                             eye,
                             input,
                             light.color,
                             light.intensity);
-    return (1 - shadow) * float4(color, 1);
+    return (1 - shadowInfluence) * float4(color, 1);
 }
