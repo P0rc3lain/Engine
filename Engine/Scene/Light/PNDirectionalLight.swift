@@ -8,4 +8,5 @@ public protocol PNDirectionalLight {
     var color: PNColorRGB { get }
     var intensity: Float { get }
     var direction: simd_float3 { get }
+    var castsShadows: Bool { get }
 }

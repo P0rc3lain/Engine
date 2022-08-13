@@ -22,7 +22,10 @@ struct PNDirectionalShadowJob: PNRenderJob {
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         let scene = supply.scene
         let dataStore = supply.bufferStore
-        guard !scene.directionalLights.isEmpty else {
+        let shadowCasterIndices = supply.scene.directionalLights.indices.filter {
+            supply.scene.directionalLights[$0].castsShadows == 1
+        }
+        guard !shadowCasterIndices.isEmpty else {
             return
         }
         encoder.setViewport(viewPort)
@@ -32,7 +35,7 @@ struct PNDirectionalShadowJob: PNRenderJob {
                                 index: kAttributeDirectionalShadowVertexShaderBufferDirectionalLights)
         encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
                                 index: kAttributeDirectionalShadowVertexShaderBufferModelUniforms)
-        for lightIndex in scene.directionalLights.count.naturalExclusive {
+        for lightIndex in shadowCasterIndices {
             encoder.setVertexBytes(value: lightIndex,
                                    index: kAttributeDirectionalShadowVertexShaderBufferInstanceId)
             for animatedModel in scene.animatedModels {
