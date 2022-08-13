@@ -176,6 +176,7 @@ extension MTLDevice {
         assert(length(color) <= 2.001, "Color values must be in [0.0, 1.0] range")
         let descriptor = MTLTextureDescriptor.solidCubeC
         guard let texture = self.makeTexture(descriptor: descriptor) else {
+            assertionFailure("Texture creation has failed")
             return nil
         }
         let region = MTLRegion(origin: .zero,
@@ -202,6 +203,7 @@ extension MTLDevice {
     public func makeTextureSolid2D(color: simd_float4) -> MTLTexture? {
         assert(length(color) <= 2.001, "Color values must be in [0.0, 1.0] range")
         guard let texture = makeTexture(descriptor: .solid2DC) else {
+            assertionFailure("Texture creation has failed")
             return nil
         }
         let region = MTLRegion(origin: .zero,
@@ -240,6 +242,7 @@ extension MTLDevice {
     func makeBuffer(pointer: UnsafeRawBufferPointer,
                     options: MTLResourceOptions = []) -> MTLBuffer? {
         guard let baseAddress = pointer.baseAddress else {
+            assertionFailure("Could not retrieve base address of buffer")
             return nil
         }
         return makeBuffer(bytes: baseAddress, length: pointer.count, options: options)

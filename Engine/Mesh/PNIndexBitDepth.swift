@@ -12,6 +12,7 @@ public enum PNIndexBitDepth: UInt {
     case uInt32 = 32
     public init?(modelIO: MDLIndexBitDepth) {
         guard let indexBitDepth = PNIndexBitDepth(rawValue: modelIO.rawValue) else {
+            assertionFailure("Could not convert bit depth")
             return nil
         }
         self = indexBitDepth

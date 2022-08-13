@@ -11,6 +11,7 @@ extension MDLMaterial {
               let roughness = defaultTexture(for: .roughness).upload(device: device),
               let normals = defaultTexture(for: .tangentSpaceNormal).upload(device: device),
               let metallic = defaultTexture(for: .metallic).upload(device: device) else {
+            assertionFailure("Textures creation has failed")
                   return nil
         }
         return PNIMaterial(name: name,
@@ -20,7 +21,9 @@ extension MDLMaterial {
                            metallic: metallic)
     }
     private func storedTexture(for semantic: MDLMaterialSemantic) -> MDLTexture? {
-        guard let materialProperty = property(with: semantic) else { return nil }
+        guard let materialProperty = property(with: semantic) else {
+            return nil
+        }
         return materialProperty.associatedTexture
     }
     private func defaultTexture(for semantic: MDLMaterialSemantic) -> MDLTexture {

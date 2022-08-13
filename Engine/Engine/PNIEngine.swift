@@ -25,7 +25,7 @@ public final class PNIEngine: PNEngine {
               let workloadManager = workloadManagerFactory.new(bufferStoreFactory: bufferStoreFactory,
                                                                renderingCoordinator: coordinator,
                                                                renderMaskGenerator: renderMaskGenerator) else {
-            assert(false, "Could not create coordinator")
+            assertionFailure("Could not create coordinator")
             return nil
         }
         self.view = view
@@ -55,6 +55,7 @@ public final class PNIEngine: PNEngine {
                                  scene: PNScene,
                                  threaded: Bool) -> PNIEngine? {
         guard let device = view.device else {
+            assertionFailure("Could not retrieve device from the view")
             return nil
         }
         let interactor = PNIBoundingBoxInteractor.default

@@ -25,6 +25,8 @@ extension Array {
     }
     public func reduce( _ nextPartialResult: (Element, Element) throws -> Element) rethrows -> Element? {
         guard let first = first else {
+            // allowed
+            // no assertion needed
             return nil
         }
         return try dropFirst().reduce(first, nextPartialResult)

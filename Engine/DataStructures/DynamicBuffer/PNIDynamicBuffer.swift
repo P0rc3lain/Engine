@@ -17,7 +17,9 @@ final public class PNIDynamicBuffer<T>: PNDynamicBuffer {
     }
     init?(device: MTLDevice, initialCapacity: Int = 0) {
         assert(initialCapacity >= 0, "Capacity must be a natural value")
-        guard let buffer = device.makeBufferShared(length: max(initialCapacity, 1) * MemoryLayout<T>.stride) else {
+        let length = max(initialCapacity, 1) * MemoryLayout<T>.stride
+        guard let buffer = device.makeBufferShared(length: length) else {
+            assertionFailure("Could not create buffer")
             return nil
         }
         self.count = 0

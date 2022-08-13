@@ -10,6 +10,7 @@ extension PNMesh {
     static func cube(device: MTLDevice) -> PNMesh? {
         guard let vertices = device.makeBuffer(array: cubeVertices),
               let indices = device.makeBuffer(array: cubeIndices) else {
+            assertionFailure("Could not create buffers for the mesh")
             return nil
         }
         let verticesBuffer = PNDataBuffer(wholeBuffer: vertices)
@@ -71,6 +72,7 @@ extension PNMesh {
     public static func plane(device: MTLDevice, material: PNMaterial? = nil) -> PNMesh? {
         guard let indices = device.makeBuffer(array: planeIndices),
               let vertices = device.makeBuffer(array: planeVertices) else {
+            assertionFailure("Could not create buffers for the mesh")
             return nil
         }
         let indicesBuffer = PNDataBuffer(wholeBuffer: indices)

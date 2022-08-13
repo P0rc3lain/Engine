@@ -9,6 +9,7 @@ public enum PNPrimitiveType: Int {
     case triangles = 2
     public init?(modelIO: MDLGeometryType) {
         guard let primitiveType = PNPrimitiveType(rawValue: modelIO.rawValue) else {
+            assertionFailure("Could not convert primitive")
             return nil
         }
         self = primitiveType

@@ -14,6 +14,7 @@ extension MDLVertexDescriptor {
               let textureUVOffset = MemoryLayout.offset(of: \Vertex.textureUV),
               let jointIndices = MemoryLayout.offset(of: \Vertex.jointIndices),
               let jointWeights = MemoryLayout.offset(of: \Vertex.jointWeights) else {
+            assertionFailure("Could not retrieve offsets")
             return nil
         }
         let descriptor = MDLVertexDescriptor()

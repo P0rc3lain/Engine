@@ -11,11 +11,8 @@ public struct PNITextureLoader: PNTextureLoader {
         self.device = device
     }
     public func load(image: NSImage) -> MTLTexture? {
-        var rect = CGRect(width: image.size.width,
-                          height: image.size.height)
-        guard let cgImage = image.cgImage(forProposedRect: &rect,
-                                          context: nil,
-                                          hints: nil) else {
+        guard let cgImage = image.cgImage else {
+            assertionFailure("Could not convert NSImage to CGImage")
             return nil
         }
         return try? MTKTextureLoader(device: device).newTexture(cgImage: cgImage)

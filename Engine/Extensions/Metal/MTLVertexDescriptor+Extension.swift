@@ -8,12 +8,14 @@ import MetalKit
 extension MTLVertexDescriptor {
     public static var vertex: MTLVertexDescriptor? {
         guard let mdlVertexDescriptor = MDLVertexDescriptor.porcelain else {
+            assertionFailure("Cannot convert vertex descriptor")
             return nil
         }
         return MTKMetalVertexDescriptorFromModelIO(mdlVertexDescriptor)
     }
     static var vertexP: MTLVertexDescriptor? {
         guard let positionOffset = MemoryLayout.offset(of: \VertexP.position) else {
+            assertionFailure("Could not retrieve offset")
             return nil
         }
         let descriptor = MTLVertexDescriptor()
@@ -28,6 +30,7 @@ extension MTLVertexDescriptor {
               let lifeOffset = MemoryLayout.offset(of: \FrozenParticle.life),
               let lifespanOffset = MemoryLayout.offset(of: \FrozenParticle.lifespan),
               let scaleOffset = MemoryLayout.offset(of: \FrozenParticle.scale) else {
+            assertionFailure("Could not retrieve offsets")
             return nil
         }
         let descriptor = MTLVertexDescriptor()

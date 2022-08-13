@@ -204,6 +204,7 @@
 		5670EC1D2736B8BC00375194 /* PNGBufferStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC1C2736B8BC00375194 /* PNGBufferStage.swift */; };
 		5670EC252736E1EF00375194 /* PNCombineStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC232736DD6100375194 /* PNCombineStage.swift */; };
 		5670EC272736EA2400375194 /* PNPostprocessStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC262736EA2400375194 /* PNPostprocessStage.swift */; };
+		567F5C3D28A7AC3000AD0A6C /* NSImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F5C3C28A7AC3000AD0A6C /* NSImage+Extension.swift */; };
 		5686BD9A273C1CD300329FA0 /* PNIStaticBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5686BD99273C1CD300329FA0 /* PNIStaticBuffer.swift */; };
 		5686BD9D273D78B700329FA0 /* Animation.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5686BD9C273D78B700329FA0 /* Animation.metal */; };
 		568807462747EEC000C95F55 /* PNSkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568807452747EEC000C95F55 /* PNSkeleton.swift */; };
@@ -523,6 +524,7 @@
 		5670EC1C2736B8BC00375194 /* PNGBufferStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNGBufferStage.swift; sourceTree = "<group>"; };
 		5670EC232736DD6100375194 /* PNCombineStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCombineStage.swift; sourceTree = "<group>"; };
 		5670EC262736EA2400375194 /* PNPostprocessStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNPostprocessStage.swift; sourceTree = "<group>"; };
+		567F5C3C28A7AC3000AD0A6C /* NSImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extension.swift"; sourceTree = "<group>"; };
 		5686BD99273C1CD300329FA0 /* PNIStaticBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIStaticBuffer.swift; sourceTree = "<group>"; };
 		5686BD9B273D78A900329FA0 /* Animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		5686BD9C273D78B700329FA0 /* Animation.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Animation.metal; sourceTree = "<group>"; };
@@ -1391,6 +1393,7 @@
 			isa = PBXGroup;
 			children = (
 				566F16BF28A57F2700FDF1B5 /* NSColor+Extension.swift */,
+				567F5C3C28A7AC3000AD0A6C /* NSImage+Extension.swift */,
 			);
 			path = AppKit;
 			sourceTree = "<group>";
@@ -2159,6 +2162,7 @@
 				561667112719E2CD000063B1 /* CGSize+Extension.swift in Sources */,
 				5620C82B275517E80098D6FA /* simd_float3x3+Extension.swift in Sources */,
 				560C18D0273A832A00459AEF /* MTLFunctionConstantValues+Extension.swift in Sources */,
+				567F5C3D28A7AC3000AD0A6C /* NSImage+Extension.swift in Sources */,
 				5688076827483F4600C95F55 /* PNIMaterial.swift in Sources */,
 				566795DA274FC561005993D7 /* PNEngine.swift in Sources */,
 				564DE040284169B9005C2029 /* Comparable+Global.swift in Sources */,
