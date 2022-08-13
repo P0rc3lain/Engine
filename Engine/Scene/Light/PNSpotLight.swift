@@ -8,4 +8,5 @@ public protocol PNSpotLight {
     var color: PNColorRGB { get }
     var intensity: Float { get }
     var coneAngle: Radians { get }
+    var castsShadows: Bool { get }
 }

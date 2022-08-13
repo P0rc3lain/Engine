@@ -11,4 +11,5 @@ struct SpotLight {
     simd_float4x4 projectionMatrixInverse;
     float coneAngle;
     int idx;
+    uint8_t castsShadows;
 };

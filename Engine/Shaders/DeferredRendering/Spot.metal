@@ -55,19 +55,20 @@ fragment float4 fragmentSpotLight(RasterizerData in [[stage_in]],
     if (theta > light.coneAngle/2) {
         discard_fragment();
     }
-    
-    float4 lightSpacesFragmentPosition = modelUniforms[id].modelMatrixInverse * modelUniforms[camera.index].modelMatrixInverse * float4(input.fragmentPosition, 1);
-    float4 lightProjectedPosition = light.projectionMatrix * lightSpacesFragmentPosition;
-    lightProjectedPosition /= lightProjectedPosition.w;
-    lightProjectedPosition.xy = lightProjectedPosition.xy * 0.5 + 0.5;
-    lightProjectedPosition.y = 1.0 - lightProjectedPosition.y;
-    float existingDepth = shadowMaps.sample(textureSampler, lightProjectedPosition.xy, in.instanceId);
-    float4 reconstructedPosition = light.projectionMatrixInverse * float4(lightProjectedPosition.xy, existingDepth, 1.0);
-    reconstructedPosition /= reconstructedPosition.w;
-    float bias = max(0.05 * (1.0 - dot(input.n, l)), 0.005);
+    if (light.castsShadows) {
+        float4 lightSpacesFragmentPosition = modelUniforms[id].modelMatrixInverse * modelUniforms[camera.index].modelMatrixInverse * float4(input.fragmentPosition, 1);
+        float4 lightProjectedPosition = light.projectionMatrix * lightSpacesFragmentPosition;
+        lightProjectedPosition /= lightProjectedPosition.w;
+        lightProjectedPosition.xy = lightProjectedPosition.xy * 0.5 + 0.5;
+        lightProjectedPosition.y = 1.0 - lightProjectedPosition.y;
+        float existingDepth = shadowMaps.sample(textureSampler, lightProjectedPosition.xy, in.instanceId);
+        float4 reconstructedPosition = light.projectionMatrixInverse * float4(lightProjectedPosition.xy, existingDepth, 1.0);
+        reconstructedPosition /= reconstructedPosition.w;
+        float bias = max(0.05 * (1.0 - dot(input.n, l)), 0.005);
 
-    if (lightSpacesFragmentPosition.z < reconstructedPosition.z - bias) {
-        discard_fragment();
+        if (lightSpacesFragmentPosition.z < reconstructedPosition.z - bias) {
+            discard_fragment();
+        }
     }
     return float4(lighting(l,
                            eye,
