@@ -22,7 +22,10 @@ struct PNSpotShadowJob: PNRenderJob {
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         let scene = supply.scene
         let dataStore = supply.bufferStore
-        guard !scene.spotLights.isEmpty else {
+        let shadowCasterIndices = supply.scene.spotLights.indices.filter {
+            supply.scene.spotLights[$0].castsShadows == 1
+        }
+        guard !shadowCasterIndices.isEmpty else {
             return
         }
         encoder.setViewport(viewPort)
@@ -33,7 +36,7 @@ struct PNSpotShadowJob: PNRenderJob {
         encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
                                 index: kAttributeSpotShadowVertexShaderBufferModelUniforms)
         let masks = supply.mask.spotLights
-        for lightIndex in scene.spotLights.count.naturalExclusive {
+        for lightIndex in shadowCasterIndices {
             encoder.setVertexBytes(value: lightIndex,
                                    index: kAttributeSpotShadowVertexShaderBufferInstanceId)
             for animatedModel in scene.animatedModels {
