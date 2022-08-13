@@ -7,10 +7,10 @@ import MetalBinding
 extension OmniLight {
     public static func make(light: PNOmniLight,
                             index: Int) -> OmniLight {
-        return make(color: light.color,
-                    intensity: light.intensity,
-                    castsShadows: light.castsShadows,
-                    index: index)
+        make(color: light.color,
+             intensity: light.intensity,
+             castsShadows: light.castsShadows,
+             index: index)
     }
     public static func make(color: simd_float3,
                             intensity: Float,
