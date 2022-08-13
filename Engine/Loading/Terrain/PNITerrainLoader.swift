@@ -77,9 +77,9 @@ public struct PNITerrainLoader: PNTerrainLoader {
                 buffer.append(Vertex(position: [-Float(image.size.height / 2) + Float(i),
                                                 Float(height),
                                                 -Float(image.size.width) / 2 + Float(j)],
-                                      normal: normalVector,
-                                      tangent: normalVector.randomPerpendicular(),
-                                      textureUV: [u, v]))
+                                     normal: normalVector,
+                                     tangent: normalVector.randomPerpendicular(),
+                                     textureUV: [u, v]))
             }
         }
         return buffer
