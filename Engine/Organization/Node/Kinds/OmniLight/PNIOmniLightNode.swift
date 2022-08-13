@@ -16,6 +16,7 @@ public final class PNIOmniLightNode: PNOmniLightNode {
         scene.entities.add(parentIdx: parentIdx, data: entity)
         let underlyingLight = OmniLight.make(color: light.color,
                                              intensity: light.intensity,
+                                             castsShadows: light.castsShadows,
                                              index: scene.entities.count - 1)
         scene.omniLights.append(underlyingLight)
         return scene.entities.count - 1

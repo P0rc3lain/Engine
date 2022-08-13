@@ -7,6 +7,7 @@ import MetalBinding
 extension OmniLight {
     public static func make(color: simd_float3,
                             intensity: Float,
+                            castsShadows: Bool,
                             index: Int) -> OmniLight {
         let projectionMatrix = simd_float4x4.perspectiveProjectionRightHand(fovyRadians: Float(90).radians,
                                                                             aspect: 1,
@@ -16,7 +17,8 @@ extension OmniLight {
                          intensity: intensity,
                          idx: Int32(index),
                          projectionMatrix: projectionMatrix,
-                         projectionMatrixInverse: projectionMatrix.inverse)
+                         projectionMatrixInverse: projectionMatrix.inverse,
+                         castsShadows: castsShadows ? 1 : 0)
     }
     var boundingBox: PNBoundingBox {
         // TODO: Ensure that calling aabb(interactor.multiply(axis, projection)) is not needed
