@@ -31,6 +31,9 @@ struct PNITranscriber: PNTranscriber {
         return sceneDescription
     }
     private func write(lights: [PNDirectionalLight], scene: PNSceneDescription) {
+        guard scene.activeCameraIdx != .nil else {
+            return
+        }
         let cameraBB = scene.boundingBoxes[scene.activeCameraIdx]
         for light in lights {
             let orientation = simd.simd_float4x4.from(directionVector: light.direction)
