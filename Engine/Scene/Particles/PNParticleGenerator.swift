@@ -47,7 +47,7 @@ public class PNParticleGenerator: PNRenderableParticlesProvider, PNTask {
         let delta = now.timeIntervalSince1970 - previousUpdate.timeIntervalSince1970
         var newParticles = controller.updated(particles: particles,
                                               timeSincePreviousUpdate: delta)
-        for _ in emissionRate.naturalExclusive {
+        for _ in emissionRate.exclusiveON {
             newParticles.append(emitter.emit(rules: rules))
         }
         provider.upload(data: frozenParticles)

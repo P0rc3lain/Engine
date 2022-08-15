@@ -14,9 +14,9 @@ public struct PNITerrainLoader: PNTerrainLoader {
     }
     static func indices(width: Int, height: Int) -> [UInt32] {
         var buffer = [UInt32]()
-        for i in (height - 1).naturalExclusive {
-            for j in width.naturalExclusive {
-                for k in 2.naturalExclusive {
+        for i in (height - 1).exclusiveON {
+            for j in width.exclusiveON {
+                for k in 2.exclusiveON {
                     buffer.append(UInt32(j + width * (i + k)))
                 }
             }
