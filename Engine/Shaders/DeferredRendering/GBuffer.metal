@@ -46,7 +46,7 @@ vertex RasterizerData vertexGBuffer(Vertex in [[stage_in]],
                             normalize(cross(rotatedTangent, rotatedNormal)),
                             normalize(rotatedNormal));
     float3x3 cameraTBN = cameraRotation * TBN;
-    return RasterizerData {
+    return {
         cameraUniforms.projectionMatrix * cameraSpacePosition,
         cameraSpacePosition.xyz,
         cameraTBN.columns[0],
@@ -61,7 +61,10 @@ fragment GBufferData fragmentGBuffer(RasterizerData in [[stage_in]],
                                      texture2d<float> roughness [[texture(kAttributeGBufferFragmentShaderTextureRoughness)]],
                                      texture2d<float> normals [[texture(kAttributeGBufferFragmentShaderTextureNormals)]],
                                      texture2d<float> metallic [[texture(kAttributeGBufferFragmentShaderTextureMetallic)]]) {
-    constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear, address::mirrored_repeat);
+    constexpr sampler textureSampler(mag_filter::linear,
+                                     min_filter::linear,
+                                     mip_filter::linear,
+                                     address::mirrored_repeat);
     simd_float3x3 TBN(in.t, in.b, in.n);
     // 0.04 is reflactance for common materials
     // should be possible to configure it
@@ -69,10 +72,9 @@ fragment GBufferData fragmentGBuffer(RasterizerData in [[stage_in]],
     float3 normalDecoded = (normalEncoded * 2) - 1;
     float3 normalWorldSpace = TBN * normalDecoded;
     float4 color = albedo.sample(textureSampler, in.uv);
-    if (color.a == 0.0f) {
+    if (color.a == 0.0f)
         discard_fragment();
-    }
-    return GBufferData {
+    return {
         float4(color.xyz, roughness.sample(textureSampler, in.uv).x),
         float4(normalWorldSpace, metallic.sample(textureSampler, in.uv).x),
         float4(in.cameraSpacePosition, 0.04)
