@@ -30,11 +30,23 @@ struct GBufferData {
     float4 positionReflectance [[color(2)]];
 };
 
+// Vertex function
+#define bCameraUniformsVertex buffer(kAttributeGBufferVertexShaderBufferCameraUniforms)
+#define bModelUniformsVertex buffer(kAttributeGBufferVertexShaderBufferModelUniforms)
+#define bMatrixPalettesVertex buffer(kAttributeGBufferVertexShaderBufferMatrixPalettes)
+#define bIndexVertex buffer(kAttributeGBufferVertexShaderBufferObjectIndex)
+
+// Fragment function
+#define tAlbedoFragment texture(kAttributeGBufferFragmentShaderTextureAlbedo)
+#define tRoughnessFragment texture(kAttributeGBufferFragmentShaderTextureRoughness)
+#define tNormalsFragment texture(kAttributeGBufferFragmentShaderTextureNormals)
+#define tMetallicFragment texture(kAttributeGBufferFragmentShaderTextureMetallic)
+
 vertex RasterizerData vertexGBuffer(Vertex in [[stage_in]],
-                                    constant CameraUniforms & cameraUniforms [[buffer(kAttributeGBufferVertexShaderBufferCameraUniforms)]],
-                                    constant ModelUniforms * modelUniforms [[buffer(kAttributeGBufferVertexShaderBufferModelUniforms)]],
-                                    constant simd_float4x4 * matrixPalettes [[buffer(kAttributeGBufferVertexShaderBufferMatrixPalettes)]],
-                                    constant int & index [[buffer(kAttributeGBufferVertexShaderBufferObjectIndex)]]) {
+                                    constant CameraUniforms & cameraUniforms [[bCameraUniformsVertex]],
+                                    constant ModelUniforms * modelUniforms [[bModelUniformsVertex]],
+                                    constant simd_float4x4 * matrixPalettes [[bMatrixPalettesVertex]],
+                                    constant int & index [[bIndexVertex]]) {
     Pose pose = hasSkeleton ? calculatePose(in, matrixPalettes) : Pose{float4(in.position, 1), in.normal, in.tangent};
     matrix_float3x3 rotation = extract_rotation(modelUniforms[index].modelMatrix);
     float3 rotatedNormal = rotation * pose.normal;
@@ -42,25 +54,21 @@ vertex RasterizerData vertexGBuffer(Vertex in [[stage_in]],
     float4 worldPosition = modelUniforms[index].modelMatrix * pose.position;
     float4 cameraSpacePosition = modelUniforms[cameraUniforms.index].modelMatrix * worldPosition;
     float3x3 cameraRotation = extract_rotation(modelUniforms[cameraUniforms.index].modelMatrix);
-    float3x3 TBN = float3x3(normalize(rotatedTangent),
-                            normalize(cross(rotatedTangent, rotatedNormal)),
-                            normalize(rotatedNormal));
-    float3x3 cameraTBN = cameraRotation * TBN;
     return {
         cameraUniforms.projectionMatrix * cameraSpacePosition,
         cameraSpacePosition.xyz,
-        cameraTBN.columns[0],
-        cameraTBN.columns[1],
-        cameraTBN.columns[2],
+        cameraRotation * normalize(rotatedTangent),
+        cameraRotation * normalize(cross(rotatedTangent, rotatedNormal)),
+        cameraRotation * normalize(rotatedNormal),
         in.textureUV
     };
 }
 
 fragment GBufferData fragmentGBuffer(RasterizerData in [[stage_in]],
-                                     texture2d<float> albedo [[texture(kAttributeGBufferFragmentShaderTextureAlbedo)]],
-                                     texture2d<float> roughness [[texture(kAttributeGBufferFragmentShaderTextureRoughness)]],
-                                     texture2d<float> normals [[texture(kAttributeGBufferFragmentShaderTextureNormals)]],
-                                     texture2d<float> metallic [[texture(kAttributeGBufferFragmentShaderTextureMetallic)]]) {
+                                     texture2d<float> albedo [[tAlbedoFragment]],
+                                     texture2d<float> roughness [[tRoughnessFragment]],
+                                     texture2d<float> normals [[tNormalsFragment]],
+                                     texture2d<float> metallic [[tMetallicFragment]]) {
     constexpr sampler textureSampler(mag_filter::linear,
                                      min_filter::linear,
                                      mip_filter::linear,
@@ -69,10 +77,10 @@ fragment GBufferData fragmentGBuffer(RasterizerData in [[stage_in]],
     // 0.04 is reflactance for common materials
     // should be possible to configure it
     float3 normalEncoded = normals.sample(textureSampler, in.uv).xyz;
-    float3 normalDecoded = (normalEncoded * 2) - 1;
+    float3 normalDecoded = normalEncoded * 2 - 1;
     float3 normalWorldSpace = TBN * normalDecoded;
     float4 color = albedo.sample(textureSampler, in.uv);
-    if (color.a == 0.0f)
+    if (!color.a)
         discard_fragment();
     return {
         float4(color.xyz, roughness.sample(textureSampler, in.uv).x),
