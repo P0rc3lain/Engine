@@ -29,7 +29,7 @@ struct PNParticleJob: PNRenderJob {
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
                                 index: kAttributeParticleVertexShaderBufferModelUniforms)
-        for index in scene.particles.count.naturalExclusive {
+        for index in scene.particles.count.exclusiveON {
             if !mask[index] {
                 continue
             }

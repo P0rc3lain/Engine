@@ -189,7 +189,7 @@ extension MTLDevice {
                 failed = true
                 return
             }
-            for slice in 6.naturalExclusive {
+            for slice in 6.exclusiveON {
                 texture.replace(region: region,
                                 mipmapLevel: 0,
                                 slice: slice,

@@ -6,10 +6,12 @@ extension Int {
     public static var `nil`: Int {
         -1
     }
-    var naturalInclusive: ClosedRange<Int> {
+    public var inclusiveON: ClosedRange<Int> {
+        // inclusive range from 0 to N
         0 ... self
     }
-    var naturalExclusive: Range<Int> {
+    public var exclusiveON: Range<Int> {
+        // exclusive range from 0 to N
         0 ..< self
     }
 }

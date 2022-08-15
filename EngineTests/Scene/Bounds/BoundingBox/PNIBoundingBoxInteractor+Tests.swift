@@ -66,7 +66,7 @@ class PNIBoundingBoxInteractorTests: XCTestCase {
         let boundingBox = interactor.from(bound: minimalBound)
         let box = interactor.merge(boundingBox, boundingBox)
         let corners = interactor.corners(box)
-        for i in 8.naturalExclusive {
+        for i in 8.exclusiveON {
             XCTAssertEqual(corners[i], [0, 0, 0])
         }
     }

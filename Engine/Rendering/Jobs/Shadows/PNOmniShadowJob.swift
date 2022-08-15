@@ -41,7 +41,7 @@ struct PNOmniShadowJob: PNRenderJob {
         encoder.setVertexBuffer(supply.bufferStore.modelCoordinateSystems,
                                 index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
         for lightIndex in shadowCasterIndices {
-            for faceIndex in 6.naturalExclusive {
+            for faceIndex in 6.exclusiveON {
                 encoder.setVertexBytes(value: 6 * lightIndex + faceIndex,
                                        index: kAttributeOmniShadowVertexShaderBufferInstanceId)
                 for animatedModel in supply.scene.animatedModels {
