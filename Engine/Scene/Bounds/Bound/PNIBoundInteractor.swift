@@ -34,9 +34,6 @@ struct PNIBoundInteractor: PNBoundInteractor {
         let t6 = (bound.max.z - ray.origin.z) * ray.inverseDirection.z
         let tmin = max(max(min(t1, t2), min(t3, t4)), min(t5, t6))
         let tmax = min(min(max(t1, t2), max(t3, t4)), max(t5, t6))
-        if tmax < 0 {
-            return false
-        }
-        return tmin <= tmax
+        return tmax < 0 ? false : tmin <= tmax
     }
 }
