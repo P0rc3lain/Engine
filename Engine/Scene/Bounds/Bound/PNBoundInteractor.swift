@@ -7,4 +7,5 @@ protocol PNBoundInteractor {
     func overlap(_ lhs: PNBound, _ rhs: PNBound) -> Bool
     func merge(_ lhs: PNBound, rhs: PNBound) -> PNBound
     func isEqual(_ lhs: PNBound, _ rhs: PNBound) -> Bool
+    func intersect(_ bound: PNBound, ray: PNRay) -> Bool
 }
