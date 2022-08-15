@@ -51,9 +51,17 @@ public final class PNIEngine: PNEngine {
         workloadManager.draw(sceneGraph: scene, taskQueue: taskQueue)
     }
     public static func `default`(view: MTKView,
+                                 scene: PNScene = .default,
+                                 threaded: Bool = true) -> PNIEngine? {
+        .default(view: view,
+                 renderingSize: view.drawableSize,
+                 scene: scene,
+                 threaded: threaded)
+    }
+    public static func `default`(view: MTKView,
                                  renderingSize: CGSize,
-                                 scene: PNScene,
-                                 threaded: Bool) -> PNIEngine? {
+                                 scene: PNScene = .default,
+                                 threaded: Bool = true) -> PNIEngine? {
         guard let device = view.device else {
             assertionFailure("Could not retrieve device from the view")
             return nil
