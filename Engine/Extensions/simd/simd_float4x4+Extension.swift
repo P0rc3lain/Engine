@@ -89,6 +89,10 @@ extension simd_float4x4 {
     public static func compose(translation: simd_float3,
                                rotation: simd_quatf,
                                scale: simd_float3) -> simd_float4x4 {
-        .translation(vector: translation) * matrix_float4x4(rotation) * .scale(scale)
+        .translation(vector: translation) * rotation.rotationMatrix * .scale(scale)
+    }
+    public static func compose(translation: simd_float3,
+                               scale: simd_float3) -> simd_float4x4 {
+        .translation(vector: translation) * .scale(scale)
     }
 }
