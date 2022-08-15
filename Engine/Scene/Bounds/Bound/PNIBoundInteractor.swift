@@ -25,4 +25,18 @@ struct PNIBoundInteractor: PNBoundInteractor {
                       Swift.max(lhs.max.y, rhs.max.y),
                       Swift.max(lhs.max.z, rhs.max.z)])
     }
+    func intersect(_ bound: PNBound, ray: PNRay) -> Bool {
+        let t1 = (bound.min.x - ray.origin.x) * ray.inverseDirection.x
+        let t2 = (bound.max.x - ray.origin.x) * ray.inverseDirection.x
+        let t3 = (bound.min.y - ray.origin.y) * ray.inverseDirection.y
+        let t4 = (bound.max.y - ray.origin.y) * ray.inverseDirection.y
+        let t5 = (bound.min.z - ray.origin.z) * ray.inverseDirection.z
+        let t6 = (bound.max.z - ray.origin.z) * ray.inverseDirection.z
+        let tmin = max(max(min(t1, t2), min(t3, t4)), min(t5, t6))
+        let tmax = min(min(max(t1, t2), max(t3, t4)), max(t5, t6))
+        if tmax < 0 {
+            return false
+        }
+        return tmin <= tmax
+    }
 }

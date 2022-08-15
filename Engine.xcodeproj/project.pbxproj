@@ -152,6 +152,8 @@
 		564DE04728427595005C2029 /* MTLLibrary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE04628427595005C2029 /* MTLLibrary+Extension.swift */; };
 		564DE04928427689005C2029 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE04828427689005C2029 /* Bundle+Extension.swift */; };
 		564DE04B28427A1E005C2029 /* MTLTexture+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE04A28427A1E005C2029 /* MTLTexture+Extension.swift */; };
+		565D37E928AA9234000ECCC7 /* PNRay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D37E828AA9234000ECCC7 /* PNRay.swift */; };
+		565D37EB28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D37EA28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift */; };
 		566020E02734314C000F4CA7 /* PNSSAOJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566020DF2734314C000F4CA7 /* PNSSAOJob.swift */; };
 		566020E227343280000F4CA7 /* SSAO.metal in Sources */ = {isa = PBXBuildFile; fileRef = 566020E127343280000F4CA7 /* SSAO.metal */; };
 		566795A9274D98A1005993D7 /* PNScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566795A8274D98A1005993D7 /* PNScene.swift */; };
@@ -473,6 +475,8 @@
 		564DE04628427595005C2029 /* MTLLibrary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLLibrary+Extension.swift"; sourceTree = "<group>"; };
 		564DE04828427689005C2029 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		564DE04A28427A1E005C2029 /* MTLTexture+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLTexture+Extension.swift"; sourceTree = "<group>"; };
+		565D37E828AA9234000ECCC7 /* PNRay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNRay.swift; sourceTree = "<group>"; };
+		565D37EA28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIBoundInteractor+Tests.swift"; sourceTree = "<group>"; };
 		566020DF2734314C000F4CA7 /* PNSSAOJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSSAOJob.swift; sourceTree = "<group>"; };
 		566020E127343280000F4CA7 /* SSAO.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = SSAO.metal; sourceTree = "<group>"; };
 		566795A8274D98A1005993D7 /* PNScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNScene.swift; sourceTree = "<group>"; };
@@ -899,6 +903,7 @@
 		561666CD2719E2CC000063B1 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				565D37E728AA91EF000ECCC7 /* Ray */,
 				562C739C2849510900E51606 /* Particles */,
 				560B5DC12757CEA400C98F1A /* Model */,
 				56C47BB42751BF2C0075C61B /* Light */,
@@ -1250,6 +1255,14 @@
 				564DE03F284169B9005C2029 /* Comparable+Global.swift */,
 			);
 			path = Swift;
+			sourceTree = "<group>";
+		};
+		565D37E728AA91EF000ECCC7 /* Ray */ = {
+			isa = PBXGroup;
+			children = (
+				565D37E828AA9234000ECCC7 /* PNRay.swift */,
+			);
+			path = Ray;
 			sourceTree = "<group>";
 		};
 		566795A7274D9891005993D7 /* Organization */ = {
@@ -1852,6 +1865,7 @@
 			isa = PBXGroup;
 			children = (
 				56E0118A2840FE9B007859F2 /* PNIBoundEstimator+Tests.swift */,
+				565D37EA28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift */,
 			);
 			path = Bound;
 			sourceTree = "<group>";
@@ -2168,6 +2182,7 @@
 				56D7ED3F274C36F200A6C25D /* PNBoundInteractor.swift in Sources */,
 				561667462719E2CD000063B1 /* GBuffer.metal in Sources */,
 				561667142719E2CD000063B1 /* MDLAsset+Extension.swift in Sources */,
+				565D37E928AA9234000ECCC7 /* PNRay.swift in Sources */,
 				56ADD2F4273707C500107E24 /* PNAmbientJob.swift in Sources */,
 				5620C8192754F4FE0098D6FA /* PNIOmniLight.swift in Sources */,
 				566795C0274E9F98005993D7 /* PNCameraNode.swift in Sources */,
@@ -2311,6 +2326,7 @@
 				56416D7427400F66003C99C2 /* PNIDynamicBuffer+Tests.swift in Sources */,
 				56B65DEC273ED4CE00DB927E /* PNIBoundingBoxInteractor+Tests.swift in Sources */,
 				560253D72726CCCA00B3A13A /* PNIChronometer+Tests.swift in Sources */,
+				565D37EB28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
