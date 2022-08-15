@@ -5,7 +5,7 @@
 public final class PNMesh {
     public let boundingBox: PNBoundingBox
     public let vertexBuffer: PNDataBuffer
-    public let pieceDescriptions: [PNPieceDescription]
+    public var pieceDescriptions: [PNPieceDescription]
     public let culling: PNCulling
     public init(boundingBox: PNBoundingBox,
                 vertexBuffer: PNDataBuffer,
