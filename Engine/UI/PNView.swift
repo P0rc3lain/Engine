@@ -14,6 +14,27 @@ public class PNView: NSView, MTKViewDelegate {
             metalView.device = newValue
         }
     }
+    public var preferredFramesPerSecond: Int {
+        get {
+            metalView.preferredFramesPerSecond
+        } set {
+            metalView.preferredFramesPerSecond = newValue
+        }
+    }
+    public var autoResizeDrawable: Bool {
+        get {
+            metalView.autoResizeDrawable
+        } set {
+            metalView.autoResizeDrawable = newValue
+        }
+    }
+    public var drawableSize: CGSize {
+        get {
+            metalView.drawableSize
+        } set {
+            metalView.drawableSize = newValue
+        }
+    }
     public override init(frame frameRect: NSRect) {
         metalView = MTKView(frame: frameRect)
         metalView.device = MTLCreateSystemDefaultDevice()
@@ -30,21 +51,18 @@ public class PNView: NSView, MTKViewDelegate {
     }
     private func commonInitializer() {
         addSubview(metalView)
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[subview]-0-|",
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[v]-0-|",
                                                       options: .directionLeadingToTrailing,
                                                       metrics: nil,
-                                                      views: ["subview": metalView]))
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[subview]-0-|",
+                                                      views: ["v": metalView]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[v]-0-|",
                                                       options: .directionLeadingToTrailing,
                                                       metrics: nil,
-                                                      views: ["subview": metalView]))
+                                                      views: ["v": metalView]))
         metalView.translatesAutoresizingMaskIntoConstraints = false
         metalView.delegate = self
         metalView.colorPixelFormat = .bgra8Unorm
         metalView.framebufferOnly = false
-        metalView.autoResizeDrawable = false
-        metalView.drawableSize = CGSize(width: 1_440, height: 900)
-        metalView.preferredFramesPerSecond = 60
     }
     // MTKViewDelegate
     public func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
