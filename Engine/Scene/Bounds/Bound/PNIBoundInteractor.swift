@@ -18,22 +18,22 @@ struct PNIBoundInteractor: PNBoundInteractor {
         lhs.min.z < rhs.max.z
     }
     func merge(_ lhs: PNBound, rhs: PNBound) -> PNBound {
-        PNBound(min: [Swift.min(lhs.min.x, rhs.min.x),
-                      Swift.min(lhs.min.y, rhs.min.y),
-                      Swift.min(lhs.min.z, rhs.min.z)],
-                max: [Swift.max(lhs.max.x, rhs.max.x),
-                      Swift.max(lhs.max.y, rhs.max.y),
-                      Swift.max(lhs.max.z, rhs.max.z)])
+        PNBound(min: [min(lhs.min.x, rhs.min.x),
+                      min(lhs.min.y, rhs.min.y),
+                      min(lhs.min.z, rhs.min.z)],
+                max: [max(lhs.max.x, rhs.max.x),
+                      max(lhs.max.y, rhs.max.y),
+                      max(lhs.max.z, rhs.max.z)])
     }
     func intersect(_ bound: PNBound, ray: PNRay) -> Bool {
-        let t1 = (bound.min.x - ray.origin.x) * ray.inverseDirection.x
-        let t2 = (bound.max.x - ray.origin.x) * ray.inverseDirection.x
-        let t3 = (bound.min.y - ray.origin.y) * ray.inverseDirection.y
-        let t4 = (bound.max.y - ray.origin.y) * ray.inverseDirection.y
-        let t5 = (bound.min.z - ray.origin.z) * ray.inverseDirection.z
-        let t6 = (bound.max.z - ray.origin.z) * ray.inverseDirection.z
-        let tmin = max(max(min(t1, t2), min(t3, t4)), min(t5, t6))
-        let tmax = min(min(max(t1, t2), max(t3, t4)), max(t5, t6))
-        return tmax < 0 ? false : tmin <= tmax
+        let minX = (bound.min.x - ray.origin.x) * ray.inverseDirection.x
+        let maxX = (bound.max.x - ray.origin.x) * ray.inverseDirection.x
+        let minY = (bound.min.y - ray.origin.y) * ray.inverseDirection.y
+        let maxY = (bound.max.y - ray.origin.y) * ray.inverseDirection.y
+        let minZ = (bound.min.z - ray.origin.z) * ray.inverseDirection.z
+        let maxZ = (bound.max.z - ray.origin.z) * ray.inverseDirection.z
+        let tMin = max(max(min(minX, maxX), min(minY, maxY)), min(minZ, maxZ))
+        let tMax = min(min(max(minX, maxX), max(minY, maxY)), max(minZ, maxZ))
+        return tMax < 0 ? false : tMin <= tMax
     }
 }
