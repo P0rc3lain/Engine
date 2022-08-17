@@ -49,7 +49,7 @@ struct PNITranscriber: PNTranscriber {
                                                             castsShadows: light.castsShadows ? 1 : 0))
         }
     }
-    private func write(node: PNNode<PNSceneNode>, scene: PNSceneDescription, parentIndex: PNIndex) {
+    private func write(node: PNScenePiece, scene: PNSceneDescription, parentIndex: PNIndex) {
         let index = node.data.write(scene: scene, parentIdx: parentIndex)
         let transform = transformCalculator.transformation(node: node.data,
                                                            parent: parentIndex,

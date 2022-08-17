@@ -14,7 +14,7 @@ public final class PNISceneTranslator: PNSceneTranslator {
     }
     public func process(asset: MDLAsset) -> PNScene? {
         let scene = PNScene.default
-        asset.walk(handler: { (object: MDLObject, passedValue: PNNode<PNSceneNode>?) in
+        asset.walk(handler: { (object: MDLObject, passedValue: PNScenePiece?) in
             if let object = object as? MDLCamera {
                 let node = PNNode(data: cameraNode(camera: object.porcelain, transform: object.transform), parent: passedValue)
                 passedValue?.children.append(node)
