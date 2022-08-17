@@ -4,7 +4,7 @@
 
 public class PNWeakRef<T: AnyObject> {
     public weak var reference: T?
-    init(_ reference: T?) {
+    public init(_ reference: T?) {
         self.reference = reference
     }
 }
