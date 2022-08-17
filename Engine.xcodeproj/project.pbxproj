@@ -308,6 +308,7 @@
 		56F5926D2737276D008652C9 /* Directional.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56F5926C2737276D008652C9 /* Directional.metal */; };
 		56FA634228AD161900D857A6 /* PNNode+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FA634128AD161900D857A6 /* PNNode+Alias.swift */; };
 		56FA634528AD1E8200D857A6 /* PNWeakRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FA634428AD1E8200D857A6 /* PNWeakRef.swift */; };
+		56FA634828AD272400D857A6 /* CurrentValueSubject+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FA634728AD272400D857A6 /* CurrentValueSubject+Alias.swift */; };
 		56FC107428A43CA3002C7A14 /* Float+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FC107328A43CA3002C7A14 /* Float+Alias.swift */; };
 /* End PBXBuildFile section */
 
@@ -650,6 +651,7 @@
 		56F5926C2737276D008652C9 /* Directional.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Directional.metal; sourceTree = "<group>"; };
 		56FA634128AD161900D857A6 /* PNNode+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNNode+Alias.swift"; sourceTree = "<group>"; };
 		56FA634428AD1E8200D857A6 /* PNWeakRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNWeakRef.swift; sourceTree = "<group>"; };
+		56FA634728AD272400D857A6 /* CurrentValueSubject+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentValueSubject+Alias.swift"; sourceTree = "<group>"; };
 		56FC107328A43CA3002C7A14 /* Float+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Alias.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -884,6 +886,7 @@
 		561666BE2719E2CC000063B1 /* Aliases */ = {
 			isa = PBXGroup;
 			children = (
+				56FA634628AD271500D857A6 /* Combine */,
 				566795D8274F9C9F005993D7 /* Porcelain */,
 				566795D7274F9C8F005993D7 /* simd */,
 				566795D6274F9C86005993D7 /* Swift */,
@@ -1927,6 +1930,14 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		56FA634628AD271500D857A6 /* Combine */ = {
+			isa = PBXGroup;
+			children = (
+				56FA634728AD272400D857A6 /* CurrentValueSubject+Alias.swift */,
+			);
+			path = Combine;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -2207,6 +2218,7 @@
 				5620C81B2754F52C0098D6FA /* PNISpotLight.swift in Sources */,
 				561667112719E2CD000063B1 /* CGSize+Extension.swift in Sources */,
 				5620C82B275517E80098D6FA /* simd_float3x3+Extension.swift in Sources */,
+				56FA634828AD272400D857A6 /* CurrentValueSubject+Alias.swift in Sources */,
 				560C18D0273A832A00459AEF /* MTLFunctionConstantValues+Extension.swift in Sources */,
 				567F5C3D28A7AC3000AD0A6C /* NSImage+Extension.swift in Sources */,
 				5688076827483F4600C95F55 /* PNIMaterial.swift in Sources */,
