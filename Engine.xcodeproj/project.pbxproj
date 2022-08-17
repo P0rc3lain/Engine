@@ -306,6 +306,7 @@
 		56F0FB46284986570004D212 /* PNTextureAtlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F0FB45284986570004D212 /* PNTextureAtlas.swift */; };
 		56F59269273725FB008652C9 /* PNDirectionalJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F59268273725FB008652C9 /* PNDirectionalJob.swift */; };
 		56F5926D2737276D008652C9 /* Directional.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56F5926C2737276D008652C9 /* Directional.metal */; };
+		56FA634228AD161900D857A6 /* PNNode+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FA634128AD161900D857A6 /* PNNode+Alias.swift */; };
 		56FC107428A43CA3002C7A14 /* Float+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FC107328A43CA3002C7A14 /* Float+Alias.swift */; };
 /* End PBXBuildFile section */
 
@@ -646,6 +647,7 @@
 		56F5926727372526008652C9 /* DirectionalLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DirectionalLight.h; sourceTree = "<group>"; };
 		56F59268273725FB008652C9 /* PNDirectionalJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNDirectionalJob.swift; sourceTree = "<group>"; };
 		56F5926C2737276D008652C9 /* Directional.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Directional.metal; sourceTree = "<group>"; };
+		56FA634128AD161900D857A6 /* PNNode+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNNode+Alias.swift"; sourceTree = "<group>"; };
 		56FC107328A43CA3002C7A14 /* Float+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Alias.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1353,6 +1355,7 @@
 				56270168272B556500071620 /* PNAnimatedTransform+Alias.swift */,
 				56D7ED5B274C611C00A6C25D /* PNBoundingBox+Alias.swift */,
 				56D7ED5D274C617200A6C25D /* ModelUniforms+Alias.swift */,
+				56FA634128AD161900D857A6 /* PNNode+Alias.swift */,
 			);
 			path = Porcelain;
 			sourceTree = "<group>";
@@ -2062,6 +2065,7 @@
 				563C9C1F27387F6B0014CFF3 /* PNShadowStage.swift in Sources */,
 				561667202719E2CD000063B1 /* MTLDepthStencilDescriptor+Extension.swift in Sources */,
 				561667022719E2CD000063B1 /* MDLCamera+Extension.swift in Sources */,
+				56FA634228AD161900D857A6 /* PNNode+Alias.swift in Sources */,
 				561667052719E2CD000063B1 /* simd_float4x4+Extension.swift in Sources */,
 				56E011C628413F2B007859F2 /* UInt32+Extension.swift in Sources */,
 				56D8C4122739D404005E58E3 /* SpotLight+Extension.swift in Sources */,
