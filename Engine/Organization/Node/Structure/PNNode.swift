@@ -29,7 +29,7 @@ public final class PNNode<T> {
             childrenSubject.send(newValue)
         }
     }
-    public init(data: T, parent: PNNode? = nil, children: [PNNode] = []) {
+    init(data: T, parent: PNNode? = nil, children: [PNNode] = []) {
         parentSubject = CurrentValueSubject<PNWeakRef<PNNode>, Error>(PNWeakRef(parent))
         dataSubject = CurrentValueSubject<T, Error>(data)
         childrenSubject = CurrentValueSubject<[PNNode], Error>(children)
