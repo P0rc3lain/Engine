@@ -5,15 +5,12 @@
 import MetalBinding
 
 struct PNITranscriber: PNTranscriber {
-    private let transformCalculator: PNTransformCalculator
     private let interactor: PNBoundingBoxInteractor
     private let boundingBoxGenerator: PNBoundingBoxGenerator
     private let paletteGenerator: PNPaletteGenerator
-    init(transformCalculator: PNTransformCalculator,
-         boundingBoxInteractor: PNBoundingBoxInteractor,
+    init(boundingBoxInteractor: PNBoundingBoxInteractor,
          boundingBoxGenerator: PNBoundingBoxGenerator,
          paletteGenerator: PNPaletteGenerator) {
-        self.transformCalculator = transformCalculator
         self.interactor = boundingBoxInteractor
         self.boundingBoxGenerator = boundingBoxGenerator
         self.paletteGenerator = paletteGenerator
@@ -52,21 +49,15 @@ struct PNITranscriber: PNTranscriber {
     private func write(node: PNScenePiece, scene: PNSceneDescription, parentIndex: PNIndex) {
         node.data.update()
         let index = node.data.write(scene: scene, parentIdx: parentIndex)
-        let transform = transformCalculator.transformation(node: node.data,
-                                                           parent: parentIndex,
-                                                           scene: scene)
-        scene.uniforms.append(ModelUniforms.from(transform: transform))
+        scene.uniforms.append(ModelUniforms.from(transform: node.data.worldTransform.value))
         node.children.forEach {
             write(node: $0, scene: scene, parentIndex: index)
         }
     }
     static var `default`: PNITranscriber {
-        let interpolator = PNIInterpolator()
-        let transformCalculator = PNITransformCalculator(interpolator: interpolator)
         let boundingBoxInteractor = PNIBoundingBoxInteractor.default
         let boundingBoxGenerator = PNIBoundingBoxGenerator(interactor: boundingBoxInteractor)
-        return PNITranscriber(transformCalculator: transformCalculator,
-                              boundingBoxInteractor: boundingBoxInteractor,
+        return PNITranscriber(boundingBoxInteractor: boundingBoxInteractor,
                               boundingBoxGenerator: boundingBoxGenerator,
                               paletteGenerator: PNIPaletteGenerator())
     }
