@@ -6,10 +6,13 @@ import MetalBinding
 
 public final class PNISpotLightNode: PNSpotLightNode {
     public var light: PNSpotLight
-    public var transform: PNSubject<PNLTransform>
-    public init(light: PNSpotLight, transform: PNLTransform) {
+    public let transform: PNSubject<PNLTransform>
+    public let enclosingNode: PNScenePieceSubject
+    public init(light: PNSpotLight,
+                transform: PNLTransform) {
         self.light = light
         self.transform = PNSubject(transform)
+        self.enclosingNode = PNSubject(PNWeakRef(nil))
     }
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
         let entity = PNEntity(type: .spotLight, referenceIdx: scene.spotLights.count)

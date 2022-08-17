@@ -9,6 +9,7 @@ public final class PNIAnimatedCameraNode: PNAnimatedCameraNode {
     public var animator: PNAnimator
     public var animation: PNAnimatedCoordinateSpace
     public let transform: PNSubject<PNLTransform>
+    public let enclosingNode: PNScenePieceSubject
     public init(camera: PNCamera,
                 animator: PNAnimator,
                 animation: PNAnimatedCoordinateSpace) {
@@ -16,6 +17,7 @@ public final class PNIAnimatedCameraNode: PNAnimatedCameraNode {
         self.animator = animator
         self.animation = animation
         self.transform = PNSubject(animator.transform(coordinateSpace: animation))
+        self.enclosingNode = PNSubject(PNWeakRef(nil))
     }
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
         scene.entities.add(parentIdx: parentIdx, data: PNEntity(type: .camera,

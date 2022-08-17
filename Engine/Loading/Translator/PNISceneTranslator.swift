@@ -16,7 +16,8 @@ public final class PNISceneTranslator: PNSceneTranslator {
         let scene = PNScene.default
         asset.walk(handler: { (object: MDLObject, passedValue: PNScenePiece?) in
             if let object = object as? MDLCamera {
-                let node = PNNode(data: cameraNode(camera: object.porcelain, transform: object.transform), parent: passedValue)
+                let node = PNScenePiece.make(data: cameraNode(camera: object.porcelain, transform: object.transform),
+                                             parent: passedValue)
                 passedValue?.children.append(node)
                 return node
             } /* else if let object = object as? MDLLight {
@@ -28,21 +29,23 @@ public final class PNISceneTranslator: PNSceneTranslator {
                 if let component = object.componentConforming(to: MDLComponent.self),
                    let animation = component as? MDLAnimationBindComponent {
                     let skeleton = convert(animation: animation)
-                    let node = PNNode(data: riggedMeshNode(mesh: mesh,
-                                                           skeleton: skeleton,
-                                                           transform: object.transform),
-                                      parent: passedValue)
+                    let node = PNScenePiece.make(data: riggedMeshNode(mesh: mesh,
+                                                                      skeleton: skeleton,
+                                                                      transform: object.transform),
+                                                 parent: passedValue)
+                    node.data.enclosingNode.send(PNWeakRef(node))
                     passedValue?.children.append(node)
                     return node
                 } else {
-                    let node = PNNode(data: meshNode(mesh: mesh,
-                                                     transform: object.transform),
-                                      parent: passedValue)
+                    let node = PNScenePiece.make(data: meshNode(mesh: mesh,
+                                                                transform: object.transform),
+                                                 parent: passedValue)
                     passedValue?.children.append(node)
                     return node
                 }
             } else {
-                let node = PNNode(data: groupNode(transfrom: object.transform), parent: passedValue)
+                let node = PNScenePiece.make(data: groupNode(transfrom: object.transform),
+                                             parent: passedValue)
                 passedValue?.children.append(node)
                 return node
             }

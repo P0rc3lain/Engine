@@ -6,12 +6,14 @@ public final class PNIRiggedMesh: PNRiggedMesh {
     public var mesh: PNMesh
     public var skeleton: PNSkeleton
     public let transform: PNSubject<PNLTransform>
+    public let enclosingNode: PNScenePieceSubject
     public init(mesh: PNMesh,
                 skeleton: PNSkeleton,
                 transform: PNLTransform) {
         self.mesh = mesh
         self.skeleton = skeleton
         self.transform = PNSubject(transform)
+        self.enclosingNode = PNSubject(PNWeakRef(nil))
     }
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
         let entity = PNEntity(type: .animatedMesh,

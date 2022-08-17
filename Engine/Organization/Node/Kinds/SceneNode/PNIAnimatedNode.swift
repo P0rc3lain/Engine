@@ -6,10 +6,13 @@ public final class PNIAnimatedNode: PNAnimatedNode {
     public var animator: PNAnimator
     public var animation: PNAnimatedCoordinateSpace
     public let transform: PNSubject<PNLTransform>
-    public init(animator: PNAnimator, animation: PNAnimatedCoordinateSpace) {
+    public let enclosingNode: PNScenePieceSubject
+    public init(animator: PNAnimator,
+                animation: PNAnimatedCoordinateSpace) {
         self.animator = animator
         self.animation = animation
         self.transform = PNSubject(animator.transform(coordinateSpace: animation))
+        self.enclosingNode = PNSubject(PNWeakRef(nil))
     }
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
         let entity = PNEntity(type: .group,

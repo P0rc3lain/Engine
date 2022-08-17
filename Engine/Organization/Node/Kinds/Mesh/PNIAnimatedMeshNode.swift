@@ -6,7 +6,8 @@ public final class PNIAnimatedMeshNode: PNAnimatedMeshNode {
     public var mesh: PNMesh
     public var animator: PNAnimator
     public var animation: PNAnimatedCoordinateSpace
-    public var transform: PNSubject<PNLTransform>
+    public let transform: PNSubject<PNLTransform>
+    public let enclosingNode: PNScenePieceSubject
     public init(mesh: PNMesh,
                 animator: PNAnimator,
                 animation: PNAnimatedCoordinateSpace) {
@@ -14,6 +15,7 @@ public final class PNIAnimatedMeshNode: PNAnimatedMeshNode {
         self.animator = animator
         self.animation = animation
         self.transform = PNSubject(animator.transform(coordinateSpace: animation))
+        self.enclosingNode = PNSubject(PNWeakRef(nil))
     }
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
         let entity = PNEntity(type: .mesh,

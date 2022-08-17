@@ -6,10 +6,13 @@ import MetalBinding
 
 public final class PNIOmniLightNode: PNOmniLightNode {
     public var light: PNOmniLight
-    public var transform: PNSubject<PNLTransform>
-    public init(light: PNOmniLight, transform: PNLTransform) {
+    public let transform: PNSubject<PNLTransform>
+    public let enclosingNode: PNScenePieceSubject
+    public init(light: PNOmniLight,
+                transform: PNLTransform) {
         self.light = light
         self.transform = PNSubject(transform)
+        self.enclosingNode = PNSubject(PNWeakRef(nil))
     }
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
         let entity = PNEntity(type: .omniLight,

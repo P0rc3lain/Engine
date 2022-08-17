@@ -5,10 +5,12 @@
 public final class PNIParticleNode: PNParticleNode {
     public var provider: PNRenderableParticlesProvider
     public let transform: PNSubject<PNLTransform>
+    public let enclosingNode: PNScenePieceSubject
     public init(provider: PNRenderableParticlesProvider,
                 transform: PNLTransform) {
         self.provider = provider
         self.transform = PNSubject(transform)
+        self.enclosingNode = PNSubject(PNWeakRef(nil))
     }
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
         let entity = PNEntity(type: .particle,

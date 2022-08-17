@@ -3,9 +3,11 @@
 //
 
 public final class PNISceneNode: PNSceneNode {
-    public var transform: PNSubject<PNLTransform>
+    public let transform: PNSubject<PNLTransform>
+    public let enclosingNode: PNScenePieceSubject
     public init(transform: PNLTransform) {
         self.transform = PNSubject(transform)
+        self.enclosingNode = PNSubject(PNWeakRef(nil))
     }
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
         let entity = PNEntity(type: .group,
@@ -17,3 +19,4 @@ public final class PNISceneNode: PNSceneNode {
         // Empty
     }
 }
+
