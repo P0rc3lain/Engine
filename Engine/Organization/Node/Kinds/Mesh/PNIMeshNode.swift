@@ -4,10 +4,10 @@
 
 public final class PNIMeshNode: PNMeshNode {
     public var mesh: PNMesh
-    public var transform: PNTransform
+    public var transform: PNSubject<PNTransform>
     public init(mesh: PNMesh, transform: PNTransform) {
         self.mesh = mesh
-        self.transform = transform
+        self.transform = PNSubject(transform)
     }
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
         let entity = PNEntity(type: .mesh,
@@ -18,5 +18,8 @@ public final class PNIMeshNode: PNMeshNode {
         scene.models.append(modelReference)
         scene.meshes.append(mesh)
         return scene.entities.count - 1
+    }
+    public func update() {
+        // Empty
     }
 }

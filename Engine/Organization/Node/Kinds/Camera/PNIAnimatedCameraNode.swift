@@ -8,15 +8,14 @@ public final class PNIAnimatedCameraNode: PNAnimatedCameraNode {
     public var camera: PNCamera
     public var animator: PNAnimator
     public var animation: PNAnimatedCoordinateSpace
-    public var transform: PNTransform {
-        animator.transform(coordinateSpace: animation)
-    }
+    public let transform: PNSubject<PNTransform>
     public init(camera: PNCamera,
                 animator: PNAnimator,
                 animation: PNAnimatedCoordinateSpace) {
         self.camera = camera
         self.animator = animator
         self.animation = animation
+        self.transform = PNSubject(animator.transform(coordinateSpace: animation))
     }
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
         scene.entities.add(parentIdx: parentIdx, data: PNEntity(type: .camera,
@@ -27,5 +26,9 @@ public final class PNIAnimatedCameraNode: PNAnimatedCameraNode {
         scene.cameraUniforms.append(uniform)
         scene.activeCameraIdx = scene.entities.count - 1
         return scene.entities.count - 1
+    }
+    public func update() {
+        let t = animator.transform(coordinateSpace: animation)
+        transform.send(t)
     }
 }

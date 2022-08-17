@@ -6,15 +6,14 @@ public final class PNIAnimatedMeshNode: PNAnimatedMeshNode {
     public var mesh: PNMesh
     public var animator: PNAnimator
     public var animation: PNAnimatedCoordinateSpace
-    public var transform: PNTransform {
-        animator.transform(coordinateSpace: animation)
-    }
+    public var transform: PNSubject<PNTransform>
     public init(mesh: PNMesh,
                 animator: PNAnimator,
                 animation: PNAnimatedCoordinateSpace) {
         self.mesh = mesh
         self.animator = animator
         self.animation = animation
+        self.transform = PNSubject(animator.transform(coordinateSpace: animation))
     }
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
         let entity = PNEntity(type: .mesh,
@@ -25,5 +24,9 @@ public final class PNIAnimatedMeshNode: PNAnimatedMeshNode {
         scene.models.append(modelReference)
         scene.meshes.append(mesh)
         return scene.entities.count - 1
+    }
+    public func update() {
+        let t = animator.transform(coordinateSpace: animation)
+        transform.send(t)
     }
 }

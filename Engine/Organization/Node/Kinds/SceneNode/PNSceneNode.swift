@@ -3,6 +3,7 @@
 //
 
 public protocol PNSceneNode: AnyObject {
-    var transform: PNTransform { get }
+    var transform: PNSubject<PNTransform> { get }
+    func update()
     func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex
 }

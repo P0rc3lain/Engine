@@ -4,11 +4,11 @@
 
 public final class PNIParticleNode: PNParticleNode {
     public var provider: PNRenderableParticlesProvider
-    public var transform: PNTransform
+    public let transform: PNSubject<PNTransform>
     public init(provider: PNRenderableParticlesProvider,
                 transform: PNTransform) {
         self.provider = provider
-        self.transform = transform
+        self.transform = PNSubject(transform)
     }
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
         let entity = PNEntity(type: .particle,
@@ -19,5 +19,8 @@ public final class PNIParticleNode: PNParticleNode {
                                                 particles: provider.provider,
                                                 positioningRules: provider.positioningRules))
         return scene.entities.count - 1
+    }
+    public func update() {
+        // Empty
     }
 }

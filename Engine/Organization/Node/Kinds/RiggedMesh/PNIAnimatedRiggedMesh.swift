@@ -7,9 +7,7 @@ public final class PNIAnimatedRiggedMesh: PNAnimatedRiggedMesh {
     public var skeleton: PNSkeleton
     public var animator: PNAnimator
     public var animation: PNAnimatedCoordinateSpace
-    public var transform: PNTransform {
-        animator.transform(coordinateSpace: animation)
-    }
+    public var transform: PNSubject<PNTransform>
     public init(mesh: PNMesh,
                 skeleton: PNSkeleton,
                 animator: PNAnimator,
@@ -18,6 +16,7 @@ public final class PNIAnimatedRiggedMesh: PNAnimatedRiggedMesh {
         self.skeleton = skeleton
         self.animator = animator
         self.animation = animation
+        self.transform = PNSubject(animator.transform(coordinateSpace: animation))
     }
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
         let entity = PNEntity(type: .animatedMesh,
@@ -30,5 +29,9 @@ public final class PNIAnimatedRiggedMesh: PNAnimatedRiggedMesh {
         scene.meshes.append(mesh)
         scene.skeletons.append(skeleton)
         return scene.entities.count - 1
+    }
+    public func update() {
+        let t = animator.transform(coordinateSpace: animation)
+        transform.send(t)
     }
 }

@@ -50,6 +50,7 @@ struct PNITranscriber: PNTranscriber {
         }
     }
     private func write(node: PNScenePiece, scene: PNSceneDescription, parentIndex: PNIndex) {
+        node.data.update()
         let index = node.data.write(scene: scene, parentIdx: parentIndex)
         let transform = transformCalculator.transformation(node: node.data,
                                                            parent: parentIndex,

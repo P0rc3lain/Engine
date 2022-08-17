@@ -6,10 +6,10 @@ import MetalBinding
 
 public final class PNIOmniLightNode: PNOmniLightNode {
     public var light: PNOmniLight
-    public var transform: PNTransform
+    public var transform: PNSubject<PNTransform>
     public init(light: PNOmniLight, transform: PNTransform) {
         self.light = light
-        self.transform = transform
+        self.transform = PNSubject(transform)
     }
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
         let entity = PNEntity(type: .omniLight,
@@ -18,5 +18,8 @@ public final class PNIOmniLightNode: PNOmniLightNode {
         scene.omniLights.append(OmniLight.make(light: light,
                                                index: scene.entities.count - 1))
         return scene.entities.count - 1
+    }
+    public func update() {
+        // Empty
     }
 }

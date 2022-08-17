@@ -6,10 +6,10 @@ import MetalBinding
 
 public final class PNICameraNode: PNCameraNode {
     public var camera: PNCamera
-    public var transform: PNTransform
+    public var transform: PNSubject<PNTransform>
     public init(camera: PNCamera, transform: PNTransform) {
         self.camera = camera
-        self.transform = transform
+        self.transform = PNSubject(transform)
     }
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
         scene.entities.add(parentIdx: parentIdx, data: PNEntity(type: .camera,
@@ -20,5 +20,8 @@ public final class PNICameraNode: PNCameraNode {
         scene.cameraUniforms.append(uniform)
         scene.activeCameraIdx = scene.entities.count - 1
         return scene.entities.count - 1
+    }
+    public func update() {
+        // Empty
     }
 }
