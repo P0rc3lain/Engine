@@ -10,6 +10,7 @@ class PNIRefreshController {
     private var parentSubscription: AnyCancellable?
     private var nodeTransformSubscription: AnyCancellable?
     private var parentTransformSubscription: AnyCancellable?
+    private var modelUniformsSubscription: AnyCancellable?
     init() {
         // empty
     }
@@ -20,6 +21,12 @@ class PNIRefreshController {
             guard let scenePiece = scenePiece.reference else {
                 return
             }
+            self?.modelUniformsSubscription = node.worldTransform.sink(receiveCompletion: { _ in
+                return
+            }, receiveValue: { transform in
+                node.modelUniforms.send(WModelUniforms(modelMatrix: transform,
+                                                       modelMatrixInverse: transform.inverse))
+            })
             self?.parentSubscription = scenePiece.parentSubject.sink { [weak self] completion in
                 self?.parentTransformSubscription?.cancel()
                 self?.nodeTransformSubscription?.cancel()

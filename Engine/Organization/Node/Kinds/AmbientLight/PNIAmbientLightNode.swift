@@ -9,6 +9,7 @@ public final class PNIAmbientLightNode: PNAmbientLightNode {
     public let transform: PNSubject<PNLTransform>
     public let worldTransform: PNSubject<PNM2WTransform>
     public let enclosingNode: PNScenePieceSubject
+    public let modelUniforms: PNSubject<WModelUniforms>
     private let refreshController = PNIRefreshController()
     public init(light: PNAmbientLight,
                 transform: PNLTransform) {
@@ -16,6 +17,7 @@ public final class PNIAmbientLightNode: PNAmbientLightNode {
         self.transform = PNSubject(transform)
         self.worldTransform = PNSubject(.identity)
         self.enclosingNode = PNSubject(PNWeakRef(nil))
+        self.modelUniforms = PNSubject(.identity)
         self.refreshController.setup(self)
     }
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {

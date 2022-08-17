@@ -49,7 +49,7 @@ struct PNITranscriber: PNTranscriber {
     private func write(node: PNScenePiece, scene: PNSceneDescription, parentIndex: PNIndex) {
         node.data.update()
         let index = node.data.write(scene: scene, parentIdx: parentIndex)
-        scene.uniforms.append(ModelUniforms.from(transform: node.data.worldTransform.value))
+        scene.uniforms.append(node.data.modelUniforms.value)
         node.children.forEach {
             write(node: $0, scene: scene, parentIndex: index)
         }

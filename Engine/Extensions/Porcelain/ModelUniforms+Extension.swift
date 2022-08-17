@@ -12,4 +12,8 @@ extension ModelUniforms: Equatable {
     static func from(transform: PNTransform) -> ModelUniforms {
         ModelUniforms(modelMatrix: transform, modelMatrixInverse: transform.inverse)
     }
+    static var identity: ModelUniforms {
+        ModelUniforms(modelMatrix: .identity,
+                      modelMatrixInverse: .identity)
+    }
 }
