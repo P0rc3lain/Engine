@@ -307,6 +307,7 @@
 		56F59269273725FB008652C9 /* PNDirectionalJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F59268273725FB008652C9 /* PNDirectionalJob.swift */; };
 		56F5926D2737276D008652C9 /* Directional.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56F5926C2737276D008652C9 /* Directional.metal */; };
 		56FA634228AD161900D857A6 /* PNNode+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FA634128AD161900D857A6 /* PNNode+Alias.swift */; };
+		56FA634528AD1E8200D857A6 /* PNWeakRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FA634428AD1E8200D857A6 /* PNWeakRef.swift */; };
 		56FC107428A43CA3002C7A14 /* Float+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FC107328A43CA3002C7A14 /* Float+Alias.swift */; };
 /* End PBXBuildFile section */
 
@@ -648,6 +649,7 @@
 		56F59268273725FB008652C9 /* PNDirectionalJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNDirectionalJob.swift; sourceTree = "<group>"; };
 		56F5926C2737276D008652C9 /* Directional.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Directional.metal; sourceTree = "<group>"; };
 		56FA634128AD161900D857A6 /* PNNode+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNNode+Alias.swift"; sourceTree = "<group>"; };
+		56FA634428AD1E8200D857A6 /* PNWeakRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNWeakRef.swift; sourceTree = "<group>"; };
 		56FC107328A43CA3002C7A14 /* Float+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Alias.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -695,6 +697,7 @@
 		5601396E255457D100FC1C45 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				56FA634328AD1E7400D857A6 /* Utilities */,
 				56BB949A28A90F790034D4AB /* UI */,
 				56A0CD2928576D1400EBB890 /* Allocation */,
 				568C4EFD284F663500C6F128 /* Task */,
@@ -1916,6 +1919,14 @@
 			path = Types;
 			sourceTree = "<group>";
 		};
+		56FA634328AD1E7400D857A6 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				56FA634428AD1E8200D857A6 /* PNWeakRef.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -2125,6 +2136,7 @@
 				56C47B9E27511E9C0075C61B /* PNFrameSupply.swift in Sources */,
 				561667392719E2CD000063B1 /* PNPieceDescription.swift in Sources */,
 				564DE04728427595005C2029 /* MTLLibrary+Extension.swift in Sources */,
+				56FA634528AD1E8200D857A6 /* PNWeakRef.swift in Sources */,
 				56F0FB46284986570004D212 /* PNTextureAtlas.swift in Sources */,
 				560A0BC72754255F005AE29D /* PNIAnimatedRiggedMesh.swift in Sources */,
 				560A0BB627541BBA005AE29D /* PNIAnimatedNode.swift in Sources */,
