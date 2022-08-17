@@ -120,7 +120,7 @@ extension MTLRenderPipelineDescriptor {
                                                               constantValues: .bool(false, index: kFunctionConstantSpotShadowHasSkeleton.int))
         descriptor.depthAttachmentPixelFormat = .spotShadowDS
         descriptor.vertexDescriptor = .vertex
-        descriptor.sampleCount = 1
+        descriptor.rasterSampleCount = 1
         descriptor.inputPrimitiveTopology = .triangle
         return descriptor
     }
@@ -138,7 +138,7 @@ extension MTLRenderPipelineDescriptor {
                                                               constantValues: .bool(false, index: kFunctionConstantDirectionalShadowHasSkeleton.int))
         descriptor.depthAttachmentPixelFormat = .directionalShadowDS
         descriptor.vertexDescriptor = .vertex
-        descriptor.sampleCount = 1
+        descriptor.rasterSampleCount = 1
         descriptor.inputPrimitiveTopology = .triangle
         return descriptor
     }
@@ -248,7 +248,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.fragmentFunction = library.makeFunction(name: "fragmentOmniLightShadow")
         descriptor.depthAttachmentPixelFormat = .omniShadowDS
         descriptor.vertexDescriptor = .vertex
-        descriptor.sampleCount = 1
+        descriptor.rasterSampleCount = 1
         descriptor.inputPrimitiveTopology = .triangle
         return descriptor
     }
