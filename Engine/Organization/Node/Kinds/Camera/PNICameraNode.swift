@@ -6,8 +6,8 @@ import MetalBinding
 
 public final class PNICameraNode: PNCameraNode {
     public var camera: PNCamera
-    public var transform: PNSubject<PNTransform>
-    public init(camera: PNCamera, transform: PNTransform) {
+    public var transform: PNSubject<PNLTransform>
+    public init(camera: PNCamera, transform: PNLTransform) {
         self.camera = camera
         self.transform = PNSubject(transform)
     }

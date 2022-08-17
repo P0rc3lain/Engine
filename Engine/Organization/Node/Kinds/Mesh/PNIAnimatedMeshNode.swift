@@ -6,7 +6,7 @@ public final class PNIAnimatedMeshNode: PNAnimatedMeshNode {
     public var mesh: PNMesh
     public var animator: PNAnimator
     public var animation: PNAnimatedCoordinateSpace
-    public var transform: PNSubject<PNTransform>
+    public var transform: PNSubject<PNLTransform>
     public init(mesh: PNMesh,
                 animator: PNAnimator,
                 animation: PNAnimatedCoordinateSpace) {

@@ -3,8 +3,8 @@
 //
 
 public final class PNISceneNode: PNSceneNode {
-    public var transform: PNSubject<PNTransform>
-    public init(transform: PNTransform) {
+    public var transform: PNSubject<PNLTransform>
+    public init(transform: PNLTransform) {
         self.transform = PNSubject(transform)
     }
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {

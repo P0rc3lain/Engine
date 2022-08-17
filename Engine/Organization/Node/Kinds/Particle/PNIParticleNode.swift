@@ -4,9 +4,9 @@
 
 public final class PNIParticleNode: PNParticleNode {
     public var provider: PNRenderableParticlesProvider
-    public let transform: PNSubject<PNTransform>
+    public let transform: PNSubject<PNLTransform>
     public init(provider: PNRenderableParticlesProvider,
-                transform: PNTransform) {
+                transform: PNLTransform) {
         self.provider = provider
         self.transform = PNSubject(transform)
     }

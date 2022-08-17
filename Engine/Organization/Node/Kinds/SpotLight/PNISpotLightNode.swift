@@ -6,8 +6,8 @@ import MetalBinding
 
 public final class PNISpotLightNode: PNSpotLightNode {
     public var light: PNSpotLight
-    public var transform: PNSubject<PNTransform>
-    public init(light: PNSpotLight, transform: PNTransform) {
+    public var transform: PNSubject<PNLTransform>
+    public init(light: PNSpotLight, transform: PNLTransform) {
         self.light = light
         self.transform = PNSubject(transform)
     }

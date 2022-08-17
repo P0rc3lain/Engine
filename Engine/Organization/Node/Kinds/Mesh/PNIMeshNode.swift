@@ -4,8 +4,8 @@
 
 public final class PNIMeshNode: PNMeshNode {
     public var mesh: PNMesh
-    public var transform: PNSubject<PNTransform>
-    public init(mesh: PNMesh, transform: PNTransform) {
+    public var transform: PNSubject<PNLTransform>
+    public init(mesh: PNMesh, transform: PNLTransform) {
         self.mesh = mesh
         self.transform = PNSubject(transform)
     }

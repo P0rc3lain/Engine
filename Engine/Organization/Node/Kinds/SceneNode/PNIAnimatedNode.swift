@@ -5,7 +5,7 @@
 public final class PNIAnimatedNode: PNAnimatedNode {
     public var animator: PNAnimator
     public var animation: PNAnimatedCoordinateSpace
-    public let transform: PNSubject<PNTransform>
+    public let transform: PNSubject<PNLTransform>
     public init(animator: PNAnimator, animation: PNAnimatedCoordinateSpace) {
         self.animator = animator
         self.animation = animation

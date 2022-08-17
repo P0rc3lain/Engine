@@ -5,10 +5,10 @@
 public final class PNIRiggedMesh: PNRiggedMesh {
     public var mesh: PNMesh
     public var skeleton: PNSkeleton
-    public let transform: PNSubject<PNTransform>
+    public let transform: PNSubject<PNLTransform>
     public init(mesh: PNMesh,
                 skeleton: PNSkeleton,
-                transform: PNTransform) {
+                transform: PNLTransform) {
         self.mesh = mesh
         self.skeleton = skeleton
         self.transform = PNSubject(transform)

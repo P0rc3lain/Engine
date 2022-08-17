@@ -8,7 +8,7 @@ public final class PNIAnimatedCameraNode: PNAnimatedCameraNode {
     public var camera: PNCamera
     public var animator: PNAnimator
     public var animation: PNAnimatedCoordinateSpace
-    public let transform: PNSubject<PNTransform>
+    public let transform: PNSubject<PNLTransform>
     public init(camera: PNCamera,
                 animator: PNAnimator,
                 animation: PNAnimatedCoordinateSpace) {

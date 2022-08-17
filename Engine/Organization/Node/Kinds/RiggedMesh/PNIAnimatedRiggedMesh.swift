@@ -7,7 +7,7 @@ public final class PNIAnimatedRiggedMesh: PNAnimatedRiggedMesh {
     public var skeleton: PNSkeleton
     public var animator: PNAnimator
     public var animation: PNAnimatedCoordinateSpace
-    public var transform: PNSubject<PNTransform>
+    public var transform: PNSubject<PNLTransform>
     public init(mesh: PNMesh,
                 skeleton: PNSkeleton,
                 animator: PNAnimator,
