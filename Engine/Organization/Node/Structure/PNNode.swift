@@ -35,17 +35,30 @@ public final class PNNode<T> {
         childrenSubject = CurrentValueSubject<[PNNode], Error>(children)
     }
     public func add(child: PNNode<T>) {
+        assert(!contains(node: child), "Nodes must be unique")
+        assert(child.parent == nil, "Child must not have parent")
         child.parent = self
         children.append(child)
     }
     public func add(children: PNNode<T>...) {
+        assert(!contains(anyNode: children), "Nodes must be unique")
         for child in children {
             add(child: child)
         }
     }
     public func add(children: [PNNode<T>]) {
+        assert(!contains(anyNode: children), "Nodes must be unique")
         for child in children {
             add(child: child)
         }
+    }
+    public func contains(node: PNNode<T>) -> Bool {
+        if self === node {
+            return true
+        }
+        return children.map { $0.contains(node: node) }.filter { $0 }.first ?? false
+    }
+    public func contains(anyNode: [PNNode<T>]) -> Bool {
+        return anyNode.map{ contains(node: $0) }.filter { $0 }.first ?? false
     }
 }

@@ -155,6 +155,7 @@
 		564DE04728427595005C2029 /* MTLLibrary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE04628427595005C2029 /* MTLLibrary+Extension.swift */; };
 		564DE04928427689005C2029 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE04828427689005C2029 /* Bundle+Extension.swift */; };
 		564DE04B28427A1E005C2029 /* MTLTexture+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE04A28427A1E005C2029 /* MTLTexture+Extension.swift */; };
+		56502D2228AEE13E003F28BF /* PNNode+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56502D2128AEE13E003F28BF /* PNNode+Tests.swift */; };
 		565D37E928AA9234000ECCC7 /* PNRay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D37E828AA9234000ECCC7 /* PNRay.swift */; };
 		565D37EB28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D37EA28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift */; };
 		566020E02734314C000F4CA7 /* PNSSAOJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566020DF2734314C000F4CA7 /* PNSSAOJob.swift */; };
@@ -482,6 +483,7 @@
 		564DE04628427595005C2029 /* MTLLibrary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLLibrary+Extension.swift"; sourceTree = "<group>"; };
 		564DE04828427689005C2029 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		564DE04A28427A1E005C2029 /* MTLTexture+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLTexture+Extension.swift"; sourceTree = "<group>"; };
+		56502D2128AEE13E003F28BF /* PNNode+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNNode+Tests.swift"; sourceTree = "<group>"; };
 		565D37E828AA9234000ECCC7 /* PNRay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNRay.swift; sourceTree = "<group>"; };
 		565D37EA28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIBoundInteractor+Tests.swift"; sourceTree = "<group>"; };
 		566020DF2734314C000F4CA7 /* PNSSAOJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSSAOJob.swift; sourceTree = "<group>"; };
@@ -1275,6 +1277,14 @@
 			path = Swift;
 			sourceTree = "<group>";
 		};
+		56502D2028AEE130003F28BF /* Structure */ = {
+			isa = PBXGroup;
+			children = (
+				56502D2128AEE13E003F28BF /* PNNode+Tests.swift */,
+			);
+			path = Structure;
+			sourceTree = "<group>";
+		};
 		565D37E728AA91EF000ECCC7 /* Ray */ = {
 			isa = PBXGroup;
 			children = (
@@ -1317,6 +1327,7 @@
 		566795B4274DC289005993D7 /* Node */ = {
 			isa = PBXGroup;
 			children = (
+				56502D2028AEE130003F28BF /* Structure */,
 				566795B5274DC297005993D7 /* PNINodeInteractor+Tests.swift */,
 			);
 			path = Node;
@@ -2361,6 +2372,7 @@
 				56924AD7271A07FD00FF3E06 /* PNIAnimatedValue+Tests.swift in Sources */,
 				56BB949E28A914CE0034D4AB /* PNITranscriber+Tests.swift in Sources */,
 				5620C82D27551AFC0098D6FA /* simd_float3+Extension+Tests.swift in Sources */,
+				56502D2228AEE13E003F28BF /* PNNode+Tests.swift in Sources */,
 				56D5085B27454B250097DEB2 /* OmniLight+Extension+Tests.swift in Sources */,
 				56165BF627444A680025D58B /* PNFlatTree+Tests.swift in Sources */,
 				56416D7427400F66003C99C2 /* PNIDynamicBuffer+Tests.swift in Sources */,
