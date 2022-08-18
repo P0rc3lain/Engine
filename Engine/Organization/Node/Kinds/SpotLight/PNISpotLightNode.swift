@@ -10,7 +10,6 @@ public final class PNISpotLightNode: PNSpotLightNode {
     public let worldTransform: PNSubject<PNM2WTransform>
     public let enclosingNode: PNScenePieceSubject
     public let modelUniforms: PNSubject<WModelUniforms>
-    public let boundingBox: PNSubject<PNBoundingBox?>
     private let refreshController = PNIRefreshController()
     public init(light: PNSpotLight,
                 transform: PNLTransform) {
@@ -19,7 +18,6 @@ public final class PNISpotLightNode: PNSpotLightNode {
         self.worldTransform = PNSubject(.identity)
         self.enclosingNode = PNSubject(PNWeakRef(nil))
         self.modelUniforms = PNSubject(.identity)
-        self.boundingBox = PNSubject(nil)
         self.refreshController.setup(self)
     }
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
