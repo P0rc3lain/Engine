@@ -12,7 +12,11 @@ struct PNICullingController: PNCullingController {
     func cullingMask(scene: PNSceneDescription,
                      boundingBox: PNWBoundingBox) -> [Bool] {
         scene.boundingBoxes.indices.map {
-            interactor.overlap(scene.boundingBoxes[$0], boundingBox)
+            if let box = scene.boundingBoxes[$0] {
+                return interactor.overlap(box, boundingBox)
+            } else {
+                return true
+            }
         }
     }
 }

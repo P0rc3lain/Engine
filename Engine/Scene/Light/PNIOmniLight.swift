@@ -5,14 +5,42 @@
 import simd
 
 public struct PNIOmniLight: PNOmniLight {
-    public var color: PNColorRGB
-    public var intensity: Float
-    public var castsShadows: Bool
+    public let color: PNColorRGB
+    public let intensity: Float
+    public let castsShadows: Bool
+    public let projectionMatrix: simd_float4x4
+    public let projectionMatrixInverse: simd_float4x4
+    public let boundingBox: PNBoundingBox
     public init(color: PNColorRGB,
                 intensity: Float,
                 castsShadows: Bool) {
         self.color = color
         self.intensity = intensity
         self.castsShadows = castsShadows
+        self.projectionMatrix = PNIOmniLight.projectionMatrix
+        self.projectionMatrixInverse = projectionMatrix.inverse
+        self.boundingBox = PNIOmniLight.boundingBox(projectionMatrixInverse: projectionMatrixInverse)
+    }
+    private static var projectionMatrix: simd_float4x4 {
+        simd_float4x4.perspectiveProjectionRightHand(fovyRadians: Float(90).radians,
+                                                     aspect: 1,
+                                                     nearZ: 0.01,
+                                                     farZ: 100)
+    }
+    private static func boundingBox(projectionMatrixInverse: simd_float4x4) -> PNBoundingBox {
+        // TODO: Ensure that calling aabb(interactor.multiply(axis, projection)) is not needed
+        let interactor = PNIBoundingBoxInteractor.default
+        let projectionBoundingBox = interactor.from(inverseProjection: projectionMatrixInverse)
+        guard let boundingBox = [
+            interactor.multiply(PNSurroundings.positiveX, projectionBoundingBox),
+            interactor.multiply(PNSurroundings.negativeX, projectionBoundingBox),
+            interactor.multiply(PNSurroundings.positiveY, projectionBoundingBox),
+            interactor.multiply(PNSurroundings.negativeY, projectionBoundingBox),
+            interactor.multiply(PNSurroundings.positiveZ, projectionBoundingBox),
+            interactor.multiply(PNSurroundings.negativeZ, projectionBoundingBox)
+        ].reduce(interactor.merge) else {
+            fatalError("Reduce returned nil even if it never should in this circumstances")
+        }
+        return boundingBox
     }
 }

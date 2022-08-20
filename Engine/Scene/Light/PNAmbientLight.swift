@@ -5,7 +5,8 @@
 import simd
 
 public protocol PNAmbientLight {
-    var diameter: Float { get set }
-    var color: PNColorRGB { get set }
-    var intensity: Float { get set }
+    var diameter: Float { get }
+    var color: PNColorRGB { get }
+    var intensity: Float { get }
+    var boundingBox: PNBoundingBox { get }
 }

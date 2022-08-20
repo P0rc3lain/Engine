@@ -47,7 +47,7 @@ fragment float4 fragmentDeferredLight(RasterizerData in [[stage_in]],
     float3 eye = normalize(-input.fragmentPosition);
     
     OmniLight light = omniLights[in.instanceId];
-    float4x4 transformation = lightUniforms[camera.index].modelMatrix * lightUniforms[light.idx].modelMatrix;
+    float4x4 transformation = lightUniforms[camera.index].modelMatrixInverse * lightUniforms[light.idx].modelMatrix;
     float3 lightPosition = extract_position(transformation).xyz;
     float3 l = normalize(lightPosition - input.fragmentPosition);
     if (dot(input.n, l) < 0)
@@ -57,7 +57,7 @@ fragment float4 fragmentDeferredLight(RasterizerData in [[stage_in]],
     if (light.castsShadows) {
         // Shadow
         float4 lightSpacesFragmentPosition = lightUniforms[light.idx].modelMatrixInverse *
-                                             lightUniforms[camera.index].modelMatrixInverse *
+                                             lightUniforms[camera.index].modelMatrix *
                                              float4(input.fragmentPosition, 1);
         float currentDistance = length(lightSpacesFragmentPosition.xyz)/100;
         float3 sampleVector = normalize(lightSpacesFragmentPosition.xyz);

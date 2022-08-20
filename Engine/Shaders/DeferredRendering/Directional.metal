@@ -56,7 +56,7 @@ fragment float4 fragmentDirectionalLight(RasterizerData in [[stage_in]],
     float shadowInfluence{0};
     if (light.castsShadows) {
         float4 lightSpacesFragmentPosition = light.rotationMatrixInverse *
-                                             modelUniforms[camera.index].modelMatrixInverse *
+                                             modelUniforms[camera.index].modelMatrix *
                                              float4(input.fragmentPosition, 1);
         float4 lightProjectedPosition = light.projectionMatrix * lightSpacesFragmentPosition;
         lightProjectedPosition.xy = lightProjectedPosition.xy * 0.5 + 0.5;

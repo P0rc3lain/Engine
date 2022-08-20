@@ -8,6 +8,12 @@ public final class PNIParticleNode: PNParticleNode {
     public let worldTransform: PNSubject<PNM2WTransform>
     public let enclosingNode: PNScenePieceSubject
     public let modelUniforms: PNSubject<WModelUniforms>
+    public let localBoundingBox: PNSubject<PNBoundingBox?>
+    public let worldBoundingBox: PNSubject<PNBoundingBox?>
+    public let childrenMergedBoundingBox: PNSubject<PNBoundingBox?>
+    public var intrinsicBoundingBox: PNBoundingBox? {
+        PNIBoundingBoxInteractor.default.from(bound: provider.positioningRules.bound)
+    }
     private let refreshController = PNIRefreshController()
     public init(provider: PNRenderableParticlesProvider,
                 transform: PNLTransform) {
@@ -16,6 +22,9 @@ public final class PNIParticleNode: PNParticleNode {
         self.worldTransform = PNSubject(.identity)
         self.enclosingNode = PNSubject(PNWeakRef(nil))
         self.modelUniforms = PNSubject(.identity)
+        self.localBoundingBox = PNSubject(nil)
+        self.worldBoundingBox = PNSubject(nil)
+        self.childrenMergedBoundingBox = PNSubject(nil)
         self.refreshController.setup(self)
     }
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {

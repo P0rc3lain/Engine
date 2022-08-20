@@ -21,6 +21,10 @@ class ArrayExtensionTests: XCTestCase {
     func testReduceEmpty() throws {
         XCTAssertNil([Int]().reduce(+))
     }
+    func testReduceSingleValue() throws {
+        let values: [Int] = [1]
+        XCTAssertEqual(values.reduce(+), Optional(1))
+    }
     func testReduceNonEmpty() throws {
         XCTAssertEqual([1, 2, 3].reduce(+), Optional(Int(6)))
     }

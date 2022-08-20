@@ -5,14 +5,22 @@
 import simd
 
 public struct PNIAmbientLight: PNAmbientLight {
-    public var diameter: Float
-    public var color: PNColorRGB
-    public var intensity: Float
+    public let diameter: Float
+    public let color: PNColorRGB
+    public let intensity: Float
+    public let boundingBox: PNBoundingBox
     public init(diameter: Float,
                 color: PNColorRGB,
                 intensity: Float) {
         self.diameter = diameter
         self.color = color
         self.intensity = intensity
+        self.boundingBox = PNIAmbientLight.boundingBox(diameter: diameter)
+    }
+    private static func boundingBox(diameter: Float) -> PNBoundingBox {
+        let radius = diameter / 2
+        let bound = PNBound(min: [-radius, -radius, -radius],
+                            max: [radius, radius, radius])
+        return PNIBoundingBoxInteractor.default.from(bound: bound)
     }
 }

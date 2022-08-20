@@ -9,4 +9,7 @@ public protocol PNSpotLight {
     var intensity: Float { get }
     var coneAngle: Radians { get }
     var castsShadows: Bool { get }
+    var projectionMatrix: simd_float4x4 { get }
+    var projectionMatrixInverse: simd_float4x4 { get }
+    var boundingBox: PNBoundingBox { get }
 }

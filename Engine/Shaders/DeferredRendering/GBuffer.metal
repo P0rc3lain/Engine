@@ -52,8 +52,9 @@ vertex RasterizerData vertexGBuffer(Vertex in [[stage_in]],
     float3 rotatedNormal = rotation * pose.normal;
     float3 rotatedTangent = rotation * pose.tangent;
     float4 worldPosition = modelUniforms[index].modelMatrix * pose.position;
-    float4 cameraSpacePosition = modelUniforms[cameraUniforms.index].modelMatrix * worldPosition;
-    float3x3 cameraRotation = extract_rotation(modelUniforms[cameraUniforms.index].modelMatrix);
+    float4x4 cameraTransform = modelUniforms[cameraUniforms.index].modelMatrixInverse;
+    float4 cameraSpacePosition = cameraTransform * worldPosition;
+    float3x3 cameraRotation = extract_rotation(cameraTransform);
     return {
         cameraUniforms.projectionMatrix * cameraSpacePosition,
         cameraSpacePosition.xyz,

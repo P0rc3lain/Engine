@@ -28,7 +28,7 @@ vertex RasterizerData vertexParticle(FrozenParticle in
                                      constant ModelUniforms * modelUniforms
                                      [[buffer(kAttributeParticleVertexShaderBufferModelUniforms)]]) {
     float4 worldSpacePosition = modelUniforms[index].modelMatrix * float4(in.position, 1);
-    float4 cameraSpacePosition = modelUniforms[cameraUniforms.index].modelMatrix * worldSpacePosition;
+    float4 cameraSpacePosition = modelUniforms[cameraUniforms.index].modelMatrixInverse * worldSpacePosition;
     float4 clipSpacePosition = cameraUniforms.projectionMatrix * cameraSpacePosition;
     return RasterizerData{clipSpacePosition, in.scale, in.life, in.lifespan};
 }

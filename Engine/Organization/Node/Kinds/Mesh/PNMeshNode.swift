@@ -3,5 +3,5 @@
 //
 
 public protocol PNMeshNode: PNSceneNode {
-    var mesh: PNMesh { get set }
+    var mesh: PNMesh { get }
 }

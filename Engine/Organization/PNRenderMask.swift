@@ -5,7 +5,7 @@
 public struct PNRenderMask {
     let cameras: [[Bool]]
     let spotLights: [[Bool]]
-    let omniLights: [[[Bool]]]
+    let omniLights: [[Bool]]
     static var empty: PNRenderMask {
         PNRenderMask(cameras: [],
                      spotLights: [],

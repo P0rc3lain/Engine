@@ -6,19 +6,15 @@ import MetalBinding
 
 struct PNITranscriber: PNTranscriber {
     private let interactor: PNBoundingBoxInteractor
-    private let boundingBoxGenerator: PNBoundingBoxGenerator
     private let paletteGenerator: PNPaletteGenerator
     init(boundingBoxInteractor: PNBoundingBoxInteractor,
-         boundingBoxGenerator: PNBoundingBoxGenerator,
          paletteGenerator: PNPaletteGenerator) {
         self.interactor = boundingBoxInteractor
-        self.boundingBoxGenerator = boundingBoxGenerator
         self.paletteGenerator = paletteGenerator
     }
     func transcribe(scene: PNScene) -> PNSceneDescription {
         let sceneDescription = PNSceneDescription()
         write(node: scene.rootNode, scene: sceneDescription, parentIndex: .nil)
-        sceneDescription.boundingBoxes = boundingBoxGenerator.boundingBoxes(scene: sceneDescription)
         write(lights: scene.directionalLights, scene: sceneDescription)
         let palettes = paletteGenerator.palettes(scene: sceneDescription)
         sceneDescription.palettes = palettes.palettes
@@ -35,7 +31,7 @@ struct PNITranscriber: PNTranscriber {
         for light in lights {
             let orientation = simd.simd_float4x4.from(directionVector: light.direction)
             let orientationInverse = orientation.inverse
-            let bound = interactor.bound(interactor.aabb(interactor.multiply(orientationInverse, cameraBB)))
+            let bound = interactor.bound(interactor.aabb(interactor.multiply(orientationInverse, cameraBB!)))
             let projectionMatrix = simd_float4x4.orthographicProjection(bound: bound)
             scene.directionalLights.append(DirectionalLight(color: light.color,
                                                             intensity: light.intensity,
@@ -50,15 +46,14 @@ struct PNITranscriber: PNTranscriber {
         node.data.update()
         let index = node.data.write(scene: scene, parentIdx: parentIndex)
         scene.uniforms.append(node.data.modelUniforms.value)
+        scene.boundingBoxes.append(node.data.worldBoundingBox.value)
         node.children.forEach {
             write(node: $0, scene: scene, parentIndex: index)
         }
     }
     static var `default`: PNITranscriber {
         let boundingBoxInteractor = PNIBoundingBoxInteractor.default
-        let boundingBoxGenerator = PNIBoundingBoxGenerator(interactor: boundingBoxInteractor)
         return PNITranscriber(boundingBoxInteractor: boundingBoxInteractor,
-                              boundingBoxGenerator: boundingBoxGenerator,
                               paletteGenerator: PNIPaletteGenerator())
     }
 }
