@@ -4,7 +4,7 @@
 
 import simd
 
-protocol PNBoundingBoxInteractor {
+public protocol PNBoundingBoxInteractor {
     func aabb(_ boundingBox: PNBoundingBox) -> PNBoundingBox
     func bound(_ boundingBox: PNBoundingBox) -> PNBound
     func merge(_ lhs: PNBoundingBox, _ rhs: PNBoundingBox) -> PNBoundingBox

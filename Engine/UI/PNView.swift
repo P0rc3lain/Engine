@@ -6,6 +6,7 @@ import MetalKit
 
 public class PNView: NSView, MTKViewDelegate {
     public let engine: PNEngine?
+    public let interactor: PNScreenInteractor
     private let metalView: MTKView
     public var device: MTLDevice? {
         get {
@@ -38,6 +39,7 @@ public class PNView: NSView, MTKViewDelegate {
     public override init(frame frameRect: NSRect) {
         metalView = MTKView(frame: frameRect)
         metalView.device = MTLCreateSystemDefaultDevice()
+        interactor = PNIScreenInteractor.default
         engine = PNIEngine.default(view: metalView)
         super.init(frame: frameRect)
         commonInitializer()
@@ -45,9 +47,13 @@ public class PNView: NSView, MTKViewDelegate {
     public required init?(coder: NSCoder) {
         metalView = MTKView(coder: coder)
         metalView.device = MTLCreateSystemDefaultDevice()
+        interactor = PNIScreenInteractor.default
         engine = PNIEngine.default(view: metalView)
         super.init(coder: coder)
         commonInitializer()
+    }
+    public override func mouseDown(with event: NSEvent) {
+        super.mouseDown(with: event)
     }
     private func commonInitializer() {
         addSubview(metalView)

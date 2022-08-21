@@ -5,9 +5,9 @@
 import simd
 
 public struct PNCamera {
-    let projectionMatrix: matrix_float4x4
-    let projectionMatrixInverse: matrix_float4x4
-    let boundingBox: PNBoundingBox
+    public let projectionMatrix: matrix_float4x4
+    public let projectionMatrixInverse: matrix_float4x4
+    public let boundingBox: PNBoundingBox
     public init(nearPlane: Float,
                 farPlane: Float,
                 fovRadians: Float,
