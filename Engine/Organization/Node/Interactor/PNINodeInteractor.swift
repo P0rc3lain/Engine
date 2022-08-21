@@ -16,4 +16,16 @@ public struct PNINodeInteractor: PNNodeInteractor {
             forEach(node: $0, passingClosure: passingClosure, initial: value)
         }
     }
+    public func deepSearch<T>(from node: PNNode<T>, closure passes: (PNNode<T>) -> Bool) -> [PNNode<T>] {
+        var total = [PNNode<T>]()
+        if passes(node) {
+            if !node.children.isEmpty {
+                total += node.children.flatMap({ deepSearch(from: $0, closure: passes) })
+            }
+            total += total.isEmpty ? [node] : []
+        } else if let parent = node.parent, passes(parent) {
+            total += [parent]
+        }
+        return total
+    }
 }

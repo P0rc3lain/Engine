@@ -209,6 +209,8 @@
 		5670EC1D2736B8BC00375194 /* PNGBufferStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC1C2736B8BC00375194 /* PNGBufferStage.swift */; };
 		5670EC252736E1EF00375194 /* PNCombineStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC232736DD6100375194 /* PNCombineStage.swift */; };
 		5670EC272736EA2400375194 /* PNPostprocessStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC262736EA2400375194 /* PNPostprocessStage.swift */; };
+		5675C46628B2AD6500EEC58D /* PNScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5675C46528B2AD6500EEC58D /* PNScreenInteractor.swift */; };
+		5675C46A28B2B81900EEC58D /* PNIScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5675C46928B2B81900EEC58D /* PNIScreenInteractor.swift */; };
 		567F5C3D28A7AC3000AD0A6C /* NSImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F5C3C28A7AC3000AD0A6C /* NSImage+Extension.swift */; };
 		5686BD9A273C1CD300329FA0 /* PNIStaticBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5686BD99273C1CD300329FA0 /* PNIStaticBuffer.swift */; };
 		5686BD9D273D78B700329FA0 /* Animation.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5686BD9C273D78B700329FA0 /* Animation.metal */; };
@@ -222,6 +224,7 @@
 		5688076827483F4600C95F55 /* PNIMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5688076727483F4600C95F55 /* PNIMaterial.swift */; };
 		5688999E2757AB7D00D24EB1 /* Math.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5688999D2757AB7D00D24EB1 /* Math.metal */; };
 		568899A12757AC6E00D24EB1 /* Layer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 568899A02757AC6E00D24EB1 /* Layer.metal */; };
+		568C05B928B2D6AA007607E6 /* simd_float2+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568C05B828B2D6AA007607E6 /* simd_float2+Alias.swift */; };
 		568C4EFF284F664500C6F128 /* PNRepeatableTaskQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568C4EFE284F664500C6F128 /* PNRepeatableTaskQueue.swift */; };
 		568C4F01284F687900C6F128 /* PNIRepeatableTaskQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568C4F00284F687900C6F128 /* PNIRepeatableTaskQueue.swift */; };
 		568EBB3A273F0B88007C7D35 /* SSAOUniforms+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EBB39273F0B88007C7D35 /* SSAOUniforms+Extension.swift */; };
@@ -536,6 +539,8 @@
 		5670EC1C2736B8BC00375194 /* PNGBufferStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNGBufferStage.swift; sourceTree = "<group>"; };
 		5670EC232736DD6100375194 /* PNCombineStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCombineStage.swift; sourceTree = "<group>"; };
 		5670EC262736EA2400375194 /* PNPostprocessStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNPostprocessStage.swift; sourceTree = "<group>"; };
+		5675C46528B2AD6500EEC58D /* PNScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNScreenInteractor.swift; sourceTree = "<group>"; };
+		5675C46928B2B81900EEC58D /* PNIScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIScreenInteractor.swift; sourceTree = "<group>"; };
 		567F5C3C28A7AC3000AD0A6C /* NSImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extension.swift"; sourceTree = "<group>"; };
 		5686BD99273C1CD300329FA0 /* PNIStaticBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIStaticBuffer.swift; sourceTree = "<group>"; };
 		5686BD9B273D78A900329FA0 /* Animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
@@ -553,6 +558,7 @@
 		5688999D2757AB7D00D24EB1 /* Math.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Math.metal; sourceTree = "<group>"; };
 		5688999F2757AC6400D24EB1 /* Layer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Layer.h; sourceTree = "<group>"; };
 		568899A02757AC6E00D24EB1 /* Layer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Layer.metal; sourceTree = "<group>"; };
+		568C05B828B2D6AA007607E6 /* simd_float2+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd_float2+Alias.swift"; sourceTree = "<group>"; };
 		568C4EFE284F664500C6F128 /* PNRepeatableTaskQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNRepeatableTaskQueue.swift; sourceTree = "<group>"; };
 		568C4F00284F687900C6F128 /* PNIRepeatableTaskQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIRepeatableTaskQueue.swift; sourceTree = "<group>"; };
 		568EBB38273F09BC007C7D35 /* SSAO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSAO.h; sourceTree = "<group>"; };
@@ -1356,8 +1362,8 @@
 		566795B4274DC289005993D7 /* Node */ = {
 			isa = PBXGroup;
 			children = (
+				5675C45D28B297D300EEC58D /* Interactor */,
 				56502D2028AEE130003F28BF /* Structure */,
-				566795B5274DC297005993D7 /* PNINodeInteractor+Tests.swift */,
 			);
 			path = Node;
 			sourceTree = "<group>";
@@ -1398,6 +1404,7 @@
 				568807472747EFC800C95F55 /* simd_float4x4+Alias.swift */,
 				569F10FD2847A6D4005046CC /* simd_float3+Alias.swift */,
 				569F10FF2847A722005046CC /* simd_float4+Alias.swift */,
+				568C05B828B2D6AA007607E6 /* simd_float2+Alias.swift */,
 			);
 			path = simd;
 			sourceTree = "<group>";
@@ -1531,6 +1538,14 @@
 				569772AC2868B18100DB9CCA /* PNTextureProvider.swift */,
 			);
 			path = IO;
+			sourceTree = "<group>";
+		};
+		5675C45D28B297D300EEC58D /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				566795B5274DC297005993D7 /* PNINodeInteractor+Tests.swift */,
+			);
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 		568807442747EEB300C95F55 /* Skeleton */ = {
@@ -1682,6 +1697,8 @@
 			isa = PBXGroup;
 			children = (
 				56BB949B28A90F8A0034D4AB /* PNView.swift */,
+				5675C46528B2AD6500EEC58D /* PNScreenInteractor.swift */,
+				5675C46928B2B81900EEC58D /* PNIScreenInteractor.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2215,6 +2232,7 @@
 				568807482747EFC800C95F55 /* simd_float4x4+Alias.swift in Sources */,
 				561667572719E2CD000063B1 /* PNIBufferStore.swift in Sources */,
 				561667432719E2CD000063B1 /* PNCamera.swift in Sources */,
+				5675C46628B2AD6500EEC58D /* PNScreenInteractor.swift in Sources */,
 				5616670C2719E2CD000063B1 /* MTLDevice+Extension.swift in Sources */,
 				563BFC9A27294AF70003EDB7 /* PNMesh+Extension.swift in Sources */,
 				56A8CA792756D40C0040DCF9 /* Fog.metal in Sources */,
@@ -2233,6 +2251,7 @@
 				5620C8252754F65B0098D6FA /* PNOmniLightNode.swift in Sources */,
 				562C739028494FE000E51606 /* Particle.metal in Sources */,
 				5629FBEA2749201F005476AF /* PNInterpolator.swift in Sources */,
+				5675C46A28B2B81900EEC58D /* PNIScreenInteractor.swift in Sources */,
 				5616673E2719E2CD000063B1 /* PNSceneDescription.swift in Sources */,
 				56E011C428413EB0007859F2 /* Int32+Extension.swift in Sources */,
 				560A0BC027542458005AE29D /* PNAnimatedMeshNode.swift in Sources */,
@@ -2370,6 +2389,7 @@
 				56270169272B556500071620 /* PNAnimatedTransform+Alias.swift in Sources */,
 				563C9C1D27387B940014CFF3 /* PNPipeline.swift in Sources */,
 				5620C81D2754F5480098D6FA /* PNIDirectionalLight.swift in Sources */,
+				568C05B928B2D6AA007607E6 /* simd_float2+Alias.swift in Sources */,
 				5629FBDF27491A78005476AF /* PNAnimatedValue.swift in Sources */,
 				560A0BAA27540D9A005AE29D /* PNBufferStore.swift in Sources */,
 				561667522719E2CD000063B1 /* PNEnvironmentJob.swift in Sources */,

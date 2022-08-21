@@ -5,8 +5,8 @@
 import MetalBinding
 
 struct PNICullingController: PNCullingController {
-    private let interactor: PNIBoundingBoxInteractor
-    init(interactor: PNIBoundingBoxInteractor) {
+    private let interactor: PNBoundingBoxInteractor
+    init(interactor: PNBoundingBoxInteractor) {
         self.interactor = interactor
     }
     func cullingMask(scene: PNSceneDescription,
