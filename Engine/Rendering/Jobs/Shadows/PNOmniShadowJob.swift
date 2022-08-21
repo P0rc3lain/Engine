@@ -45,7 +45,7 @@ struct PNOmniShadowJob: PNRenderJob {
                 encoder.setVertexBytes(value: 6 * lightIndex + faceIndex,
                                        index: kAttributeOmniShadowVertexShaderBufferInstanceId)
                 for animatedModel in supply.scene.animatedModels {
-                    if !supply.mask.omniLights[lightIndex][faceIndex][animatedModel.idx] {
+                    if !supply.mask.omniLights[lightIndex][animatedModel.idx] {
                         continue
                     }
                     encoder.setVertexBuffer(supply.bufferStore.matrixPalettes.buffer,
@@ -59,7 +59,7 @@ struct PNOmniShadowJob: PNRenderJob {
                 }
                 encoder.setRenderPipelineState(pipelineState)
                 for model in supply.scene.models {
-                    if !supply.mask.omniLights[lightIndex][faceIndex][model.idx] {
+                    if !supply.mask.omniLights[lightIndex][model.idx] {
                         continue
                     }
                     let mesh = supply.scene.meshes[model.mesh]

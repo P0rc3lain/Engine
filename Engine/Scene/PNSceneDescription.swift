@@ -9,7 +9,7 @@ public final class PNSceneDescription {
     // MARK: - Capacity A
     public var entities = PNEntityTree()
     public var uniforms = [WModelUniforms]()
-    public var boundingBoxes = [PNWBoundingBox]()
+    public var boundingBoxes = [PNWBoundingBox?]()
     // MARK: - Capacity B
     public var models = [PNModelReference]()
     // MARK: - Capacity C

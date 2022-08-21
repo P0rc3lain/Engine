@@ -3,5 +3,5 @@
 //
 
 public protocol PNRiggedMesh: PNMeshNode {
-    var skeleton: PNSkeleton { get set }
+    var skeleton: PNSkeleton { get }
 }

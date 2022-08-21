@@ -22,7 +22,7 @@ struct RasterizedData {
 vertex RasterizedData environmentVertexShader(VertexP in [[stage_in]],
                                               constant CameraUniforms & camera [[buffer(kAttributeEnvironmentVertexShaderBufferCameraUniforms)]],
                                               constant ModelUniforms * modelUniforms [[buffer(kAttributeEnvironmentVertexShaderBufferModelUniforms)]]) {
-    float3x3 extractedRotation = extract_rotation(modelUniforms[camera.index].modelMatrix);
+    float3x3 extractedRotation = extract_rotation(modelUniforms[camera.index].modelMatrixInverse);
     return RasterizedData {
         camera.projectionMatrix * float4(extractedRotation * in.position, 1),
         in.position

@@ -51,9 +51,11 @@ class PNShadowStage: PNStage {
         let omniDescriptor: MTLTextureDescriptor? = omniCount > 0 ? .omniShadowDS(size: renderingSize, lightsCount: omniCount) : nil
         let directionalCount = supply.scene.directionalLights.count
         let directionalDescriptor: MTLTextureDescriptor? = directionalCount > 0 ? .directionalShadowDS(size: renderingSize, lightsCount: directionalCount) : nil
-        return spotRenderingTexture.updateDescriptor(descriptor: spotDescriptor) ||
-               omniRenderingTexture.updateDescriptor(descriptor: omniDescriptor) ||
-               directionalRenderingTexture.updateDescriptor(descriptor: directionalDescriptor)
+        let spotUpdated = spotRenderingTexture.updateDescriptor(descriptor: spotDescriptor)
+        let omniUpdated = omniRenderingTexture.updateDescriptor(descriptor: omniDescriptor)
+        let directionalUpdated = directionalRenderingTexture.updateDescriptor(descriptor: directionalDescriptor)
+        return spotUpdated || omniUpdated || directionalUpdated
+               
     }
     func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
         if updateTextures(supply: supply) {

@@ -15,40 +15,27 @@ public struct PNIRenderMaskGenerator: PNRenderMaskGenerator {
     public func generate(scene: PNSceneDescription) -> PNRenderMask {
         PNRenderMask(cameras: generateCameraRenderMask(scene: scene),
                      spotLights: generateSpotRenderMasks(scene: scene),
-                     omniLights: generateRenderMasks(scene: scene))
+                     omniLights: generateOmniRenderMasks(scene: scene))
     }
     private func generateSpotRenderMasks(scene: PNSceneDescription) -> [[Bool]] {
-        scene.spotLights.count.exclusiveON.map { i in
-            let cameraTransform = scene.uniforms[scene.spotLights[i].idx.int].modelMatrixInverse
-            let cameraBoundingBox = interactor.multiply(cameraTransform, scene.spotLights[i].boundingBox)
-            let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
-            return cullingController.cullingMask(scene: scene,
-                                                 boundingBox: cameraAlignedBoundingBox)
+        scene.spotLights.map { light in
+            mask(scene: scene, for: light.idx.int)
         }
     }
     private func generateCameraRenderMask(scene: PNSceneDescription) -> [[Bool]] {
-        scene.cameraUniforms.indices.map { cameraUniformIndex in
-            let cameraUniform = scene.cameraUniforms[cameraUniformIndex]
-            let cameraTransform = scene.uniforms[cameraUniform.index.int].modelMatrixInverse
-            let cameraBoundingBox = interactor.multiply(cameraTransform, scene.cameras[cameraUniformIndex].boundingBox)
-            let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
-            return cullingController.cullingMask(scene: scene,
-                                                 boundingBox: cameraAlignedBoundingBox)
+        scene.cameraUniforms.map { cameraUniform in
+            mask(scene: scene, for: cameraUniform.index.int)
         }
     }
-    private func generateRenderMasks(scene: PNSceneDescription) -> [[[Bool]]] {
-        scene.omniLights.count.exclusiveON.map { lightIndex in
-            6.exclusiveON.map { faceIndex in
-                let entityIndex = scene.omniLights[lightIndex].idx.int
-                let cameraTransform = scene.uniforms[entityIndex].modelMatrixInverse
-                let projectionInverse = scene.omniLights[lightIndex].projectionMatrixInverse
-                let boundingBox = interactor.from(inverseProjection: projectionInverse)
-                let cameraBoundingBox = interactor.multiply(PNSurroundings[faceIndex],
-                                                            interactor.multiply(cameraTransform, boundingBox))
-                let cameraAlignedBoundingBox = interactor.aabb(cameraBoundingBox)
-                return cullingController.cullingMask(scene: scene,
-                                                     boundingBox: cameraAlignedBoundingBox)
-            }
+    private func generateOmniRenderMasks(scene: PNSceneDescription) -> [[Bool]] {
+        scene.omniLights.map { light in
+            mask(scene: scene, for: light.idx.int)
         }
+    }
+    private func mask(scene: PNSceneDescription, for index: Int) -> [Bool] {
+        guard let bb = scene.boundingBoxes[index] else {
+            return Array<Bool>(repeating: false, count: scene.boundingBoxes.count)
+        }
+        return cullingController.cullingMask(scene: scene, boundingBox: bb)
     }
 }

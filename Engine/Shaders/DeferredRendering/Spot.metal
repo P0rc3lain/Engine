@@ -47,7 +47,7 @@ fragment float4 fragmentSpotLight(RasterizerData in [[stage_in]],
     float3 eye = normalize(cameraPosition - input.fragmentPosition);
     SpotLight light = spotLights[in.instanceId];
     int id = light.idx;
-    float4x4 lightTransformation = modelUniforms[camera.index].modelMatrix * modelUniforms[id].modelMatrix;
+    float4x4 lightTransformation = modelUniforms[camera.index].modelMatrixInverse * modelUniforms[id].modelMatrix;
     float3 lightPosition = extract_position(lightTransformation).xyz;
     float3 forwardDirection = normalize(lightTransformation.columns[2].xyz);
     float3 l = normalize(lightPosition - input.fragmentPosition);
@@ -56,7 +56,7 @@ fragment float4 fragmentSpotLight(RasterizerData in [[stage_in]],
         discard_fragment();
     }
     if (light.castsShadows) {
-        float4 lightSpacesFragmentPosition = modelUniforms[id].modelMatrixInverse * modelUniforms[camera.index].modelMatrixInverse * float4(input.fragmentPosition, 1);
+        float4 lightSpacesFragmentPosition = modelUniforms[id].modelMatrixInverse * modelUniforms[camera.index].modelMatrix * float4(input.fragmentPosition, 1);
         float4 lightProjectedPosition = light.projectionMatrix * lightSpacesFragmentPosition;
         lightProjectedPosition /= lightProjectedPosition.w;
         lightProjectedPosition.xy = lightProjectedPosition.xy * 0.5 + 0.5;

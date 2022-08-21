@@ -26,7 +26,7 @@ vertex RasterizerData vertexTranslucent(Vertex in [[stage_in]],
                                        constant int & index [[buffer(kAttributeTranslucentVertexShaderBufferObjectIndex)]]) {
     Pose pose = hasSkeleton ? calculatePose(in, matrixPalettes) : Pose{float4(in.position, 1), in.normal, in.tangent};
     float4 worldPosition = modelUniforms[index].modelMatrix * pose.position;
-    float4 cameraSpacePosition = modelUniforms[cameraUniforms.index].modelMatrix * worldPosition;
+    float4 cameraSpacePosition = modelUniforms[cameraUniforms.index].modelMatrixInverse * worldPosition;
     return RasterizerData {
         cameraUniforms.projectionMatrix * cameraSpacePosition,
         in.textureUV
