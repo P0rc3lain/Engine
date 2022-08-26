@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		560253D52726CA4800B3A13A /* PNIChronometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560253D42726CA4800B3A13A /* PNIChronometer.swift */; };
 		560253D72726CCCA00B3A13A /* PNIChronometer+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560253D62726CCCA00B3A13A /* PNIChronometer+Tests.swift */; };
+		5609459C28B6BFA3005C8F73 /* Random.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5609459B28B6BFA3005C8F73 /* Random.metal */; };
+		5609459E28B6BFB9005C8F73 /* Random.h in Sources */ = {isa = PBXBuildFile; fileRef = 5609459D28B6BFB9005C8F73 /* Random.h */; };
 		560A0BAA27540D9A005AE29D /* PNBufferStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560A0BA927540D9A005AE29D /* PNBufferStore.swift */; };
 		560A0BAD27541562005AE29D /* PNAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560A0BAC27541562005AE29D /* PNAnimator.swift */; };
 		560A0BAF275416E8005AE29D /* PNIAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560A0BAE275416E8005AE29D /* PNIAnimator.swift */; };
@@ -329,6 +331,8 @@
 		5601396C255457D100FC1C45 /* Engine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Engine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		560253D42726CA4800B3A13A /* PNIChronometer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIChronometer.swift; sourceTree = "<group>"; };
 		560253D62726CCCA00B3A13A /* PNIChronometer+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIChronometer+Tests.swift"; sourceTree = "<group>"; };
+		5609459B28B6BFA3005C8F73 /* Random.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Random.metal; sourceTree = "<group>"; };
+		5609459D28B6BFB9005C8F73 /* Random.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Random.h; sourceTree = "<group>"; };
 		560A0BA927540D9A005AE29D /* PNBufferStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNBufferStore.swift; sourceTree = "<group>"; };
 		560A0BAC27541562005AE29D /* PNAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnimator.swift; sourceTree = "<group>"; };
 		560A0BAE275416E8005AE29D /* PNIAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIAnimator.swift; sourceTree = "<group>"; };
@@ -981,6 +985,8 @@
 				5688999D2757AB7D00D24EB1 /* Math.metal */,
 				5688999F2757AC6400D24EB1 /* Layer.h */,
 				568899A02757AC6E00D24EB1 /* Layer.metal */,
+				5609459D28B6BFB9005C8F73 /* Random.h */,
+				5609459B28B6BFA3005C8F73 /* Random.metal */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2144,6 +2150,7 @@
 				5670EC072735A3F300375194 /* BloomMerge.metal in Sources */,
 				568EBB3D273F0DE1007C7D35 /* PNISSAOHemisphere.swift in Sources */,
 				566795CA274EC066005993D7 /* PNTranscriber.swift in Sources */,
+				5609459C28B6BFA3005C8F73 /* Random.metal in Sources */,
 				566795B2274DBE94005993D7 /* PNINodeInteractor.swift in Sources */,
 				5670EC142736A29100375194 /* PNGPUIO.swift in Sources */,
 				561667412719E2CD000063B1 /* PNMaterial.swift in Sources */,
@@ -2180,6 +2187,7 @@
 				5670EC002735977900375194 /* PNBloomSplitJob.swift in Sources */,
 				566795BA274DC7F1005993D7 /* PNSceneTranslator.swift in Sources */,
 				56E011BF28413260007859F2 /* CGRect+Extension.swift in Sources */,
+				5609459E28B6BFB9005C8F73 /* Random.h in Sources */,
 				56D7ED4D274C52E000A6C25D /* PNAssetLoader.swift in Sources */,
 				5688074A2747F10700C95F55 /* Int+Alias.swift in Sources */,
 				566795D4274EEA23005993D7 /* PNChronometer.swift in Sources */,
