@@ -46,6 +46,9 @@ extension simd_float4x4 {
     public static func scale(_ factors: simd_float3) -> simd_float4x4 {
         simd_float4x4(diagonal: simd_float4(factors, 1))
     }
+    public static func scale(factor: Float) -> simd_float4x4 {
+        simd_float4x4(diagonal: simd_float4([factor, factor, factor], 1))
+    }
     public static func perspectiveProjectionRightHand(fovyRadians: simd_float1,
                                                       aspect: simd_float1,
                                                       nearZ: simd_float1,
