@@ -12,7 +12,8 @@ public final class PNISceneNode: PNSceneNode {
     public let childrenMergedBoundingBox: PNSubject<PNBoundingBox?>
     public let intrinsicBoundingBox: PNBoundingBox?
     private let refreshController = PNIRefreshController()
-    public init(transform: PNLTransform, boundingBox: PNBoundingBox? = nil) {
+    public init(transform: PNLTransform = .identity,
+                boundingBox: PNBoundingBox? = nil) {
         self.transform = PNSubject(transform)
         self.worldTransform = PNSubject(.identity)
         self.enclosingNode = PNSubject(PNWeakRef(nil))
