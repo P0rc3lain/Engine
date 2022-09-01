@@ -20,8 +20,8 @@ class PNIRefreshController {
     init() {
         // Empty
     }
-    func setup(_ node: PNSceneNode) {
-        childrenMergedBoundingBox = node.childrenMergedBoundingBox.receive(on: scheduler).sink(receiveValue: { mergedChildren in
+    private func setupMergedChildrenSubscription(_ node: PNSceneNode) -> AnyCancellable? {
+        return node.childrenMergedBoundingBox.receive(on: scheduler).sink(receiveValue: { mergedChildren in
             if let bb = node.intrinsicBoundingBox {
                 if let childrenBB = mergedChildren {
                     let merged = self.interactor.merge(bb, childrenBB)
@@ -40,7 +40,9 @@ class PNIRefreshController {
                 }
             }
         })
-        nodeTransformSubscription = node.transform.receive(on: scheduler).sink(receiveValue: { value in
+    }
+    private func setupNodeTransformSubscription(_ node: PNSceneNode) -> AnyCancellable? {
+        return node.transform.receive(on: self.scheduler).sink(receiveValue: { value in
             if let parent = node.enclosingNode.value.reference?.parent {
                 let parentTransform = parent.data.worldTransform.value
                 node.worldTransform.send(parentTransform * value)
@@ -65,9 +67,47 @@ class PNIRefreshController {
                 }
             }
         })
-        modelUniformsSubscription = node.worldTransform.receive(on: scheduler).sink(receiveValue: { transform in
+    }
+    private func setupModelUniformsSubscription(_ node: PNSceneNode) -> AnyCancellable? {
+        node.worldTransform.receive(on: scheduler).sink(receiveValue: { transform in
             node.modelUniforms.send(WModelUniforms.from(transform: transform))
         })
+    }
+    private func setupLocalBoundingBoxSubscription(_ node: PNSceneNode) -> AnyCancellable? {
+        return node.localBoundingBox.receive(on: scheduler).sink(receiveValue: { [weak self] value in
+            guard let self = self else {
+                return
+            }
+            guard let boundingBox = value else {
+                node.worldBoundingBox.send(nil)
+                return
+            }
+            guard let parent = node.enclosingNode.value.reference?.parent else {
+                node.worldBoundingBox.send(boundingBox)
+                return
+            }
+            let parentTransform = parent.data.worldTransform.value
+            let transformed = self.interactor.multiply(parentTransform, boundingBox)
+            node.worldBoundingBox.send(self.interactor.aabb(transformed))
+        })
+    }
+    private func setupChildrenSubscription(_ node: PNSceneNode, _ piece: PNScenePiece) -> AnyCancellable? {
+        piece.childrenSubject.sink(receiveCompletion: { [weak self] _ in
+            self?.childrenBoundingBoxSubscription.forEach { $0?.cancel() }
+            self?.childrenBoundingBoxSubscription = []
+        }, receiveValue: { children in
+            self.childrenBoundingBoxSubscription = children.map { $0.data.localBoundingBox.sink { _ in
+                let bbs = children.map { $0.data.localBoundingBox.value } .filter { $0 != nil }.map { $0! }
+                let merged = bbs.reduce(self.interactor.merge(_:_:))
+                node.childrenMergedBoundingBox.send(merged)
+            }}
+        })
+    }
+    func setup(_ node: PNSceneNode) {
+        childrenMergedBoundingBox = setupMergedChildrenSubscription(node)
+        localBoundingBoxSubscription = setupLocalBoundingBoxSubscription(node)
+        nodeTransformSubscription = setupNodeTransformSubscription(node)
+        modelUniformsSubscription = setupModelUniformsSubscription(node)
         enclosingNodeSubscription = node.enclosingNode.receive(on: scheduler).sink { [weak self] completion in
             self?.parentSubscription?.cancel()
             self?.childrenSubscription?.cancel()
@@ -76,47 +116,30 @@ class PNIRefreshController {
                   let self = self else {
                 return
             }
-            self.childrenSubscription = scenePiece.childrenSubject.sink(receiveCompletion: { [weak self] completion in
-                self?.childrenBoundingBoxSubscription.forEach { $0?.cancel() }
-                self?.childrenBoundingBoxSubscription = []
-            }, receiveValue: { children in
-                guard let self = self else {
-                    return
-                }
-                self.childrenBoundingBoxSubscription = children.map { $0.data.localBoundingBox.sink { _ in
-                    let bbs = children.map { $0.data.localBoundingBox.value } .filter { $0 != nil }.map { $0! }
-                    let merged = bbs.reduce(self.interactor.merge(_:_:))
-                    node.childrenMergedBoundingBox.send(merged)
-                }}
-            })
+            self.childrenSubscription = self.setupChildrenSubscription(node, scenePiece)
             self.parentSubscription = scenePiece.parentSubject.receive(on: self.scheduler)
-                                                              .sink { [weak self] completion in
+                                                              .sink { [weak self] parent in
                 self?.parentTransformSubscription?.cancel()
                 self?.nodeTransformSubscription?.cancel()
+                self?.localBoundingBoxSubscription?.cancel()
             } receiveValue: { [weak self] parent in
                 self?.parentTransformSubscription = parent.reference?.data.worldTransform.sink(receiveValue: { value in
-                    node.worldTransform.send(value * node.transform.value)
-                })
-                guard let self = self else {
-                    return
-                }
-                self.localBoundingBoxSubscription = node.localBoundingBox.receive(on: self.scheduler)
-                                                                         .sink(receiveValue: { [weak self] value in
-                    guard let self = self else {
+                    guard let `self` = self else {
                         return
                     }
-                    if let bb = value {
-                        if let parent = node.enclosingNode.value.reference?.parent {
-                            let parentTransform = parent.data.worldTransform.value
-                            let transformed = self.interactor.multiply(parentTransform, bb)
-                            node.worldBoundingBox.send(self.interactor.aabb(transformed))
-                        } else {
-                            node.worldBoundingBox.send(bb)
-                        }
+                    node.worldTransform.send(value * node.transform.value)
+                    if let localBB = node.localBoundingBox.value {
+                        let aabb = self.interactor.aabb(self.interactor.multiply(value, localBB))
+                        node.worldBoundingBox.send(aabb)
                     } else {
                         node.worldBoundingBox.send(nil)
                     }
                 })
+                guard let self = self else {
+                    return
+                }
+                self.nodeTransformSubscription = self.setupNodeTransformSubscription(node)
+                self.localBoundingBoxSubscription = self.setupLocalBoundingBoxSubscription(node)
             }
         }
     }
