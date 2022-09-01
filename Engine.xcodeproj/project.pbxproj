@@ -213,6 +213,12 @@
 		5670EC272736EA2400375194 /* PNPostprocessStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EC262736EA2400375194 /* PNPostprocessStage.swift */; };
 		5675C46628B2AD6500EEC58D /* PNScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5675C46528B2AD6500EEC58D /* PNScreenInteractor.swift */; };
 		5675C46A28B2B81900EEC58D /* PNIScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5675C46928B2B81900EEC58D /* PNIScreenInteractor.swift */; };
+		5677AD2928C1505000BF822C /* simd_float3+Extension+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677AD2028C1505000BF822C /* simd_float3+Extension+Tests.swift */; };
+		5677AD2A28C1505000BF822C /* simd_float4x4+Extension+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677AD2128C1505000BF822C /* simd_float4x4+Extension+Tests.swift */; };
+		5677AD2B28C1505000BF822C /* simd_float3x3+Extension+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677AD2228C1505000BF822C /* simd_float3x3+Extension+Tests.swift */; };
+		5677AD2C28C1505000BF822C /* Data+Extension+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677AD2428C1505000BF822C /* Data+Extension+Tests.swift */; };
+		5677AD2D28C1505000BF822C /* Array+Extension+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677AD2628C1505000BF822C /* Array+Extension+Tests.swift */; };
+		5677AD2E28C1505000BF822C /* OmniLight+Extension+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677AD2828C1505000BF822C /* OmniLight+Extension+Tests.swift */; };
 		567F5C3D28A7AC3000AD0A6C /* NSImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F5C3C28A7AC3000AD0A6C /* NSImage+Extension.swift */; };
 		5686BD9A273C1CD300329FA0 /* PNIStaticBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5686BD99273C1CD300329FA0 /* PNIStaticBuffer.swift */; };
 		5686BD9D273D78B700329FA0 /* Animation.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5686BD9C273D78B700329FA0 /* Animation.metal */; };
@@ -545,6 +551,12 @@
 		5670EC262736EA2400375194 /* PNPostprocessStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNPostprocessStage.swift; sourceTree = "<group>"; };
 		5675C46528B2AD6500EEC58D /* PNScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNScreenInteractor.swift; sourceTree = "<group>"; };
 		5675C46928B2B81900EEC58D /* PNIScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIScreenInteractor.swift; sourceTree = "<group>"; };
+		5677AD2028C1505000BF822C /* simd_float3+Extension+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "simd_float3+Extension+Tests.swift"; sourceTree = "<group>"; };
+		5677AD2128C1505000BF822C /* simd_float4x4+Extension+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "simd_float4x4+Extension+Tests.swift"; sourceTree = "<group>"; };
+		5677AD2228C1505000BF822C /* simd_float3x3+Extension+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "simd_float3x3+Extension+Tests.swift"; sourceTree = "<group>"; };
+		5677AD2428C1505000BF822C /* Data+Extension+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Extension+Tests.swift"; sourceTree = "<group>"; };
+		5677AD2628C1505000BF822C /* Array+Extension+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension+Tests.swift"; sourceTree = "<group>"; };
+		5677AD2828C1505000BF822C /* OmniLight+Extension+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OmniLight+Extension+Tests.swift"; sourceTree = "<group>"; };
 		567F5C3C28A7AC3000AD0A6C /* NSImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extension.swift"; sourceTree = "<group>"; };
 		5686BD99273C1CD300329FA0 /* PNIStaticBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIStaticBuffer.swift; sourceTree = "<group>"; };
 		5686BD9B273D78A900329FA0 /* Animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
@@ -1554,6 +1566,51 @@
 			path = Interactor;
 			sourceTree = "<group>";
 		};
+		5677AD1E28C1505000BF822C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5677AD1F28C1505000BF822C /* simd */,
+				5677AD2328C1505000BF822C /* Foundation */,
+				5677AD2528C1505000BF822C /* Swift */,
+				5677AD2728C1505000BF822C /* Porcelain */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5677AD1F28C1505000BF822C /* simd */ = {
+			isa = PBXGroup;
+			children = (
+				5677AD2028C1505000BF822C /* simd_float3+Extension+Tests.swift */,
+				5677AD2128C1505000BF822C /* simd_float4x4+Extension+Tests.swift */,
+				5677AD2228C1505000BF822C /* simd_float3x3+Extension+Tests.swift */,
+			);
+			path = simd;
+			sourceTree = "<group>";
+		};
+		5677AD2328C1505000BF822C /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				5677AD2428C1505000BF822C /* Data+Extension+Tests.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		5677AD2528C1505000BF822C /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				5677AD2628C1505000BF822C /* Array+Extension+Tests.swift */,
+			);
+			path = Swift;
+			sourceTree = "<group>";
+		};
+		5677AD2728C1505000BF822C /* Porcelain */ = {
+			isa = PBXGroup;
+			children = (
+				5677AD2828C1505000BF822C /* OmniLight+Extension+Tests.swift */,
+			);
+			path = Porcelain;
+			sourceTree = "<group>";
+		};
 		568807442747EEB300C95F55 /* Skeleton */ = {
 			isa = PBXGroup;
 			children = (
@@ -1623,6 +1680,7 @@
 		56924AD5271A07FD00FF3E06 /* EngineTests */ = {
 			isa = PBXGroup;
 			children = (
+				5677AD1E28C1505000BF822C /* Extensions */,
 				56B6AFAF28A2612000266421 /* Rendering */,
 				56E0119628410A8F007859F2 /* Loading */,
 				566795B3274DC281005993D7 /* Organization */,
@@ -2413,7 +2471,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5677AD2D28C1505000BF822C /* Array+Extension+Tests.swift in Sources */,
 				56E0119828410A8F007859F2 /* PNITerrainLoader+Tests.swift in Sources */,
+				5677AD2C28C1505000BF822C /* Data+Extension+Tests.swift in Sources */,
 				5620C82F27551BE00098D6FA /* simd_float3x3+Extension+Tests.swift in Sources */,
 				566795B6274DC297005993D7 /* PNINodeInteractor+Tests.swift in Sources */,
 				56E0118B2840FE9B007859F2 /* PNIBoundEstimator+Tests.swift in Sources */,
@@ -2422,8 +2482,12 @@
 				56458F6128B131F400FE1823 /* PNISceneNode+Tests.swift in Sources */,
 				56416D7B27413443003C99C2 /* simd_float4x4+Extension+Tests.swift in Sources */,
 				56924AD7271A07FD00FF3E06 /* PNIAnimatedValue+Tests.swift in Sources */,
+				5677AD2E28C1505000BF822C /* OmniLight+Extension+Tests.swift in Sources */,
+				5677AD2928C1505000BF822C /* simd_float3+Extension+Tests.swift in Sources */,
+				5677AD2A28C1505000BF822C /* simd_float4x4+Extension+Tests.swift in Sources */,
 				56BB949E28A914CE0034D4AB /* PNITranscriber+Tests.swift in Sources */,
 				5620C82D27551AFC0098D6FA /* simd_float3+Extension+Tests.swift in Sources */,
+				5677AD2B28C1505000BF822C /* simd_float3x3+Extension+Tests.swift in Sources */,
 				56502D2228AEE13E003F28BF /* PNNode+Tests.swift in Sources */,
 				56D5085B27454B250097DEB2 /* OmniLight+Extension+Tests.swift in Sources */,
 				56165BF627444A680025D58B /* PNFlatTree+Tests.swift in Sources */,
