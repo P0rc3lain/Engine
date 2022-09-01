@@ -247,6 +247,7 @@
 		56A0CD2B28576D2600EBB890 /* PNDynamicTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A0CD2A28576D2600EBB890 /* PNDynamicTexture.swift */; };
 		56A0CD2D28576F9D00EBB890 /* PNIDynamicTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A0CD2C28576F9D00EBB890 /* PNIDynamicTexture.swift */; };
 		56A3728E273862300079A93D /* MTLOrigin+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A3728D273862300079A93D /* MTLOrigin+Extension.swift */; };
+		56A88EAE28C169F50060F131 /* PNRay+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A88EAD28C169F50060F131 /* PNRay+Tests.swift */; };
 		56A8CA7527569B080040DCF9 /* PNGrainJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A8CA7427569B080040DCF9 /* PNGrainJob.swift */; };
 		56A8CA7727569BCB0040DCF9 /* Grain.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56A8CA7627569BCB0040DCF9 /* Grain.metal */; };
 		56A8CA792756D40C0040DCF9 /* Fog.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56A8CA782756D40C0040DCF9 /* Fog.metal */; };
@@ -590,6 +591,7 @@
 		56A0CD2A28576D2600EBB890 /* PNDynamicTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNDynamicTexture.swift; sourceTree = "<group>"; };
 		56A0CD2C28576F9D00EBB890 /* PNIDynamicTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIDynamicTexture.swift; sourceTree = "<group>"; };
 		56A3728D273862300079A93D /* MTLOrigin+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLOrigin+Extension.swift"; sourceTree = "<group>"; };
+		56A88EAD28C169F50060F131 /* PNRay+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PNRay+Tests.swift"; sourceTree = "<group>"; };
 		56A8CA7427569B080040DCF9 /* PNGrainJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNGrainJob.swift; sourceTree = "<group>"; };
 		56A8CA7627569BCB0040DCF9 /* Grain.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Grain.metal; sourceTree = "<group>"; };
 		56A8CA782756D40C0040DCF9 /* Fog.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Fog.metal; sourceTree = "<group>"; };
@@ -1675,6 +1677,14 @@
 			path = Allocation;
 			sourceTree = "<group>";
 		};
+		56A88EAC28C169F50060F131 /* Ray */ = {
+			isa = PBXGroup;
+			children = (
+				56A88EAD28C169F50060F131 /* PNRay+Tests.swift */,
+			);
+			path = Ray;
+			sourceTree = "<group>";
+		};
 		56A8CA7327569AF90040DCF9 /* Postprocessing */ = {
 			isa = PBXGroup;
 			children = (
@@ -1698,6 +1708,7 @@
 		56B65DED273ED4ED00DB927E /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				56A88EAC28C169F50060F131 /* Ray */,
 				56458F5D28B131D600FE1823 /* Organization */,
 				56165BE1274405010025D58B /* Bounds */,
 			);
@@ -2422,6 +2433,7 @@
 				566795B6274DC297005993D7 /* PNINodeInteractor+Tests.swift in Sources */,
 				56E0118B2840FE9B007859F2 /* PNIBoundEstimator+Tests.swift in Sources */,
 				56458F6128B131F400FE1823 /* PNISceneNode+Tests.swift in Sources */,
+				56A88EAE28C169F50060F131 /* PNRay+Tests.swift in Sources */,
 				56924AD7271A07FD00FF3E06 /* PNIAnimatedValue+Tests.swift in Sources */,
 				5677AD2A28C1505000BF822C /* simd_float4x4+Extension+Tests.swift in Sources */,
 				56BB949E28A914CE0034D4AB /* PNITranscriber+Tests.swift in Sources */,
