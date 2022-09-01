@@ -16,7 +16,7 @@ class PNIScreenInteractor: PNScreenInteractor {
               point: PNPoint2D) -> [PNScenePiece] {
         let inverseProjection = cameraNode.camera.projectionMatrixInverse
         let direction = inverseProjection * simd_float4(point.x, point.y, 1, 1)
-        let rayEye = PNRay(origin: .zero, direction: direction.xyz)
+        let rayEye = PNRay(origin: .zero, direction: direction.xyz.normalized)
         let rayWorld = cameraNode.worldTransform.value * rayEye
         return nodeInteractor.deepSearch(from: scene.rootNode) { node in
             guard let value = node.data.worldBoundingBox.value else {

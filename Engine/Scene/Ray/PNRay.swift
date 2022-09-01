@@ -9,6 +9,7 @@ public struct PNRay {
     public let direction: simd_float3
     let inverseDirection: simd_float3
     public init(origin: simd_float3, direction: simd_float3) {
+        assert(direction.norm, 0.01, "Direction vector must be normalized")
         self.origin = origin
         self.direction = direction
         self.inverseDirection = 1 / direction

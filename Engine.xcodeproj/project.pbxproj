@@ -248,6 +248,7 @@
 		56A0CD2D28576F9D00EBB890 /* PNIDynamicTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A0CD2C28576F9D00EBB890 /* PNIDynamicTexture.swift */; };
 		56A3728E273862300079A93D /* MTLOrigin+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A3728D273862300079A93D /* MTLOrigin+Extension.swift */; };
 		56A88EAE28C169F50060F131 /* PNRay+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A88EAD28C169F50060F131 /* PNRay+Tests.swift */; };
+		56A88EB128C179B30060F131 /* Assert+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A88EB028C179B30060F131 /* Assert+Extension.swift */; };
 		56A8CA7527569B080040DCF9 /* PNGrainJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A8CA7427569B080040DCF9 /* PNGrainJob.swift */; };
 		56A8CA7727569BCB0040DCF9 /* Grain.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56A8CA7627569BCB0040DCF9 /* Grain.metal */; };
 		56A8CA792756D40C0040DCF9 /* Fog.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56A8CA782756D40C0040DCF9 /* Fog.metal */; };
@@ -592,6 +593,7 @@
 		56A0CD2C28576F9D00EBB890 /* PNIDynamicTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIDynamicTexture.swift; sourceTree = "<group>"; };
 		56A3728D273862300079A93D /* MTLOrigin+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLOrigin+Extension.swift"; sourceTree = "<group>"; };
 		56A88EAD28C169F50060F131 /* PNRay+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PNRay+Tests.swift"; sourceTree = "<group>"; };
+		56A88EB028C179B30060F131 /* Assert+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assert+Extension.swift"; sourceTree = "<group>"; };
 		56A8CA7427569B080040DCF9 /* PNGrainJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNGrainJob.swift; sourceTree = "<group>"; };
 		56A8CA7627569BCB0040DCF9 /* Grain.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Grain.metal; sourceTree = "<group>"; };
 		56A8CA782756D40C0040DCF9 /* Fog.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Fog.metal; sourceTree = "<group>"; };
@@ -1856,6 +1858,7 @@
 				563BFC86272878180003EDB7 /* UnsafeMutableRawPointer+Extension.swift */,
 				56E011C328413EB0007859F2 /* Int32+Extension.swift */,
 				56E011C528413F2B007859F2 /* UInt32+Extension.swift */,
+				56A88EB028C179B30060F131 /* Assert+Extension.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -2157,6 +2160,7 @@
 				561667182719E2CD000063B1 /* PNISkeleton.swift in Sources */,
 				563BFC8527285F100003EDB7 /* MTLBuffer+Extension.swift in Sources */,
 				5629FBE127491ABF005476AF /* PNAnyAnimatedValue.swift in Sources */,
+				56A88EB128C179B30060F131 /* Assert+Extension.swift in Sources */,
 				561666FD2719E2CD000063B1 /* MTLTextureDescriptor+Extension.swift in Sources */,
 				5629FBEE27492533005476AF /* PNAnimatedCoordinateSpace+Extension.swift in Sources */,
 				561666FB2719E2CD000063B1 /* MDLTransformComponent+Extension.swift in Sources */,
