@@ -5,11 +5,10 @@
 import simd
 import XCTest
 
-
 func XCTAssertEqual(_ expression1: SIMD3<Float>,
                     _ expression2: SIMD3<Float>,
-                    accuracy: Float, _
-                    message: String = "",
+                    accuracy: Float,
+                    _ message: String = "",
                     file: StaticString = #filePath,
                     line: UInt = #line) throws {
     for i in 0 ..< 3 {
@@ -24,8 +23,8 @@ func XCTAssertEqual(_ expression1: SIMD3<Float>,
 
 func XCTAssertEqual(_ expression1: SIMD4<Float>,
                     _ expression2: SIMD4<Float>,
-                    accuracy: Float, _
-                    message: String = "",
+                    accuracy: Float,
+                    _ message: String = "",
                     file: StaticString = #filePath,
                     line: UInt = #line) {
     for i in 0 ..< 4 {

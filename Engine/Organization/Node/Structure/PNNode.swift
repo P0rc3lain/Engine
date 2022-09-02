@@ -56,10 +56,10 @@ public final class PNNode<T> {
         if self === node {
             return true
         }
-        return children.map { $0.contains(node: node) }.filter { $0 }.first ?? false
+        return children.map { $0.contains(node: node) }.first(where: { $0 }) ?? false
     }
     public func contains(anyNode: [PNNode<T>]) -> Bool {
-        return anyNode.map{ contains(node: $0) }.filter { $0 }.first ?? false
+        anyNode.map { contains(node: $0) }.first(where: { $0 }) ?? false
     }
     public func removeSubtree() -> PNNode<T> {
         guard let parent = parent else {

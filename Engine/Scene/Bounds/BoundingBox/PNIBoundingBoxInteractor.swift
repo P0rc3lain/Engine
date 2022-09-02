@@ -78,6 +78,12 @@ public struct PNIBoundingBoxInteractor: PNBoundingBoxInteractor {
         return PNBound(min: simd_float3(minX, minY, minZ),
                        max: simd_float3(maxX, maxY, maxZ))
     }
+    public func safeBound(_ boundingBox: PNBoundingBox?) -> PNBound? {
+        guard let boundingBox = boundingBox else {
+            return nil
+        }
+        return bound(boundingBox)
+    }
     public func aabb(_ boundingBox: PNBoundingBox) -> PNBoundingBox {
         from(bound: bound(boundingBox))
     }

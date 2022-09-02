@@ -7,6 +7,7 @@ import simd
 public protocol PNBoundingBoxInteractor {
     func aabb(_ boundingBox: PNBoundingBox) -> PNBoundingBox
     func bound(_ boundingBox: PNBoundingBox) -> PNBound
+    func safeBound(_ boundingBox: PNBoundingBox?) -> PNBound?
     func merge(_ lhs: PNBoundingBox, _ rhs: PNBoundingBox) -> PNBoundingBox
     func overlap(_ lhs: PNBoundingBox, _ rhs: PNBoundingBox) -> Bool
     func from(bound: PNBound) -> PNBoundingBox

@@ -55,7 +55,6 @@ class PNShadowStage: PNStage {
         let omniUpdated = omniRenderingTexture.updateDescriptor(descriptor: omniDescriptor)
         let directionalUpdated = directionalRenderingTexture.updateDescriptor(descriptor: directionalDescriptor)
         return spotUpdated || omniUpdated || directionalUpdated
-               
     }
     func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
         if updateTextures(supply: supply) {
