@@ -34,7 +34,7 @@ public struct PNIRenderMaskGenerator: PNRenderMaskGenerator {
     }
     private func mask(scene: PNSceneDescription, for index: Int) -> [Bool] {
         guard let bb = scene.boundingBoxes[index] else {
-            return Array<Bool>(repeating: false, count: scene.boundingBoxes.count)
+            return Array(repeating: false, count: scene.boundingBoxes.count)
         }
         return cullingController.cullingMask(scene: scene, boundingBox: bb)
     }
