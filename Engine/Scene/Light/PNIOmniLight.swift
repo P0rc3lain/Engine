@@ -20,15 +20,15 @@ public struct PNIOmniLight: PNOmniLight {
         self.intensity = intensity
         self.influenceRadius = influenceRadius
         self.castsShadows = castsShadows
-        self.projectionMatrix = PNIOmniLight.projectionMatrix
+        self.projectionMatrix = PNIOmniLight.projectionMatrix(influenceRadius: influenceRadius)
         self.projectionMatrixInverse = projectionMatrix.inverse
         self.boundingBox = PNIOmniLight.boundingBox(projectionMatrixInverse: projectionMatrixInverse)
     }
-    private static var projectionMatrix: simd_float4x4 {
+    private static func projectionMatrix(influenceRadius: Float) -> simd_float4x4 {
         simd_float4x4.perspectiveProjectionRightHand(fovyRadians: Float(90).radians,
                                                      aspect: 1,
                                                      nearZ: 0.01,
-                                                     farZ: 100)
+                                                     farZ: influenceRadius)
     }
     private static func boundingBox(projectionMatrixInverse: simd_float4x4) -> PNBoundingBox {
         // TODO: Ensure that calling aabb(interactor.multiply(axis, projection)) is not needed

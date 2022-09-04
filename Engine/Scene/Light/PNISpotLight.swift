@@ -23,14 +23,15 @@ public struct PNISpotLight: PNSpotLight {
         self.influenceRadius = influenceRadius
         self.coneAngle = coneAngle
         self.castsShadows = castsShadows
-        self.projectionMatrix = PNISpotLight.projectionMatrix(coneAngle: coneAngle)
+        self.projectionMatrix = PNISpotLight.projectionMatrix(coneAngle: coneAngle,
+                                                              influenceRadius: influenceRadius)
         self.projectionMatrixInverse = projectionMatrix.inverse
         self.boundingBox = PNIBoundingBoxInteractor.default.from(inverseProjection: projectionMatrixInverse)
     }
-    static func projectionMatrix(coneAngle: Radians) -> simd_float4x4 {
+    static func projectionMatrix(coneAngle: Radians, influenceRadius: Float) -> simd_float4x4 {
         simd_float4x4.perspectiveProjectionRightHand(fovyRadians: coneAngle,
                                                      aspect: 1,
                                                      nearZ: 0.01,
-                                                     farZ: 1_000)
+                                                     farZ: influenceRadius)
     }
 }
