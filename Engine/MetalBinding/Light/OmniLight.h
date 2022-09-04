@@ -7,6 +7,7 @@
 struct OmniLight {
     simd_float3 color;
     float intensity;
+    float influenceRadius;
     int32_t idx;
     simd_float4x4 projectionMatrix;
     simd_float4x4 projectionMatrixInverse;

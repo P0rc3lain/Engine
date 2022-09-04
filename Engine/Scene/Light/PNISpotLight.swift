@@ -7,6 +7,7 @@ import simd
 public struct PNISpotLight: PNSpotLight {
     public let color: PNColorRGB
     public let intensity: Float
+    public var influenceRadius: Float
     public let coneAngle: Radians
     public let castsShadows: Bool
     public let projectionMatrix: simd_float4x4
@@ -14,10 +15,12 @@ public struct PNISpotLight: PNSpotLight {
     public let boundingBox: PNBoundingBox
     public init(color: PNColorRGB,
                 intensity: Float,
+                influenceRadius: Float,
                 coneAngle: Radians,
                 castsShadows: Bool) {
         self.color = color
         self.intensity = intensity
+        self.influenceRadius = influenceRadius
         self.coneAngle = coneAngle
         self.castsShadows = castsShadows
         self.projectionMatrix = PNISpotLight.projectionMatrix(coneAngle: coneAngle)

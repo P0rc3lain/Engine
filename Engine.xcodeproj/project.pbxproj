@@ -31,6 +31,7 @@
 		561340B228C26A3600D36F89 /* simd_float3+Extension+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677AD2028C1505000BF822C /* simd_float3+Extension+Tests.swift */; };
 		561340B328C26A4B00D36F89 /* Data+Extension+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677AD2428C1505000BF822C /* Data+Extension+Tests.swift */; };
 		561340B428C26A4F00D36F89 /* Array+Extension+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677AD2628C1505000BF822C /* Array+Extension+Tests.swift */; };
+		561340B628C5105A00D36F89 /* Attenuation.h in Sources */ = {isa = PBXBuildFile; fileRef = 561340B528C4DA7800D36F89 /* Attenuation.h */; };
 		56165BEA27440DA90025D58B /* PNEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BE827440DA90025D58B /* PNEntity.swift */; };
 		56165BEB27440DA90025D58B /* PNEntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BE927440DA90025D58B /* PNEntityType.swift */; };
 		56165BF02744401B0025D58B /* ModelUniforms+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BEF2744401B0025D58B /* ModelUniforms+Extension.swift */; };
@@ -353,6 +354,7 @@
 		560C18D2273ABDE700459AEF /* PNOmniShadowJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNOmniShadowJob.swift; sourceTree = "<group>"; };
 		560C18D4273AC30800459AEF /* OmniShadow.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = OmniShadow.metal; sourceTree = "<group>"; };
 		560C18D6273AC71100459AEF /* OmniLight+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OmniLight+Extension.swift"; sourceTree = "<group>"; };
+		561340B528C4DA7800D36F89 /* Attenuation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Attenuation.h; sourceTree = "<group>"; };
 		56165BE827440DA90025D58B /* PNEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNEntity.swift; sourceTree = "<group>"; };
 		56165BE927440DA90025D58B /* PNEntityType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNEntityType.swift; sourceTree = "<group>"; };
 		56165BEF2744401B0025D58B /* ModelUniforms+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelUniforms+Extension.swift"; sourceTree = "<group>"; };
@@ -1706,6 +1708,7 @@
 				56ADD2F1273705F800107E24 /* AmbientLight.h */,
 				56F5926727372526008652C9 /* DirectionalLight.h */,
 				56C4CD4F2737FF24000A994E /* SpotLight.h */,
+				561340B528C4DA7800D36F89 /* Attenuation.h */,
 			);
 			path = Light;
 			sourceTree = "<group>";
@@ -2236,6 +2239,7 @@
 				5616674A2719E2CD000063B1 /* PBR.metal in Sources */,
 				5620C832275528030098D6FA /* PNDirectionalShadowJob.swift in Sources */,
 				5616673D2719E2CD000063B1 /* PNSubmesh.swift in Sources */,
+				561340B628C5105A00D36F89 /* Attenuation.h in Sources */,
 				566795CF274ECD75005993D7 /* PNAmbientLightNode.swift in Sources */,
 				566795C2274EA016005993D7 /* PNICameraNode.swift in Sources */,
 				562C739B284950F300E51606 /* PNParticleNode.swift in Sources */,
