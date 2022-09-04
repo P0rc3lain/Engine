@@ -15,6 +15,7 @@
 #include "MetalBinding/Camera.h"
 #include "MetalBinding/Light/OmniLight.h"
 #include "MetalBinding/Attribute/Bridge.h"
+#include "MetalBinding/Light/Attenuation.h"
 
 using namespace metal;
 
@@ -49,8 +50,11 @@ fragment float4 fragmentDeferredLight(RasterizerData in [[stage_in]],
     OmniLight light = omniLights[in.instanceId];
     float4x4 transformation = lightUniforms[camera.index].modelMatrixInverse * lightUniforms[light.idx].modelMatrix;
     float3 lightPosition = extract_position(transformation).xyz;
-    float3 l = normalize(lightPosition - input.fragmentPosition);
-    if (dot(input.n, l) < 0)
+    float3 fragmentToLight = lightPosition - input.fragmentPosition;
+    float attenuationFactor = falloffAttenuation(length_squared(fragmentToLight),
+                                                 light.influenceRadius);
+    float3 l = normalize(fragmentToLight);
+    if (dot(input.n, l) < 0 || attenuationFactor == 0)
         discard_fragment();
     
     float shadowInfluence = 0;
@@ -78,5 +82,5 @@ fragment float4 fragmentDeferredLight(RasterizerData in [[stage_in]],
                             input,
                             light.color,
                             light.intensity);
-    return float4((1 - shadowInfluence) * color, 1);
+    return float4(attenuationFactor * (1 - shadowInfluence) * color, 1);
 }

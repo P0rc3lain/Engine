@@ -8,6 +8,7 @@ extension SpotLight {
     public static func make(light: PNSpotLight, index: Int) -> SpotLight {
         SpotLight(color: light.color,
                   intensity: light.intensity,
+                  influenceRadius: light.influenceRadius,
                   projectionMatrix: light.projectionMatrix,
                   projectionMatrixInverse: light.projectionMatrixInverse,
                   coneAngle: light.coneAngle,

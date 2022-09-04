@@ -7,15 +7,18 @@ import simd
 public struct PNIOmniLight: PNOmniLight {
     public let color: PNColorRGB
     public let intensity: Float
+    public var influenceRadius: Float
     public let castsShadows: Bool
     public let projectionMatrix: simd_float4x4
     public let projectionMatrixInverse: simd_float4x4
     public let boundingBox: PNBoundingBox
     public init(color: PNColorRGB,
                 intensity: Float,
+                influenceRadius: Float,
                 castsShadows: Bool) {
         self.color = color
         self.intensity = intensity
+        self.influenceRadius = influenceRadius
         self.castsShadows = castsShadows
         self.projectionMatrix = PNIOmniLight.projectionMatrix
         self.projectionMatrixInverse = projectionMatrix.inverse

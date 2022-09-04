@@ -9,6 +9,7 @@ extension OmniLight {
                             index: Int) -> OmniLight {
         OmniLight(color: light.color,
                   intensity: light.intensity,
+                  influenceRadius: light.influenceRadius,
                   idx: Int32(index),
                   projectionMatrix: light.projectionMatrix,
                   projectionMatrixInverse: light.projectionMatrix.inverse,

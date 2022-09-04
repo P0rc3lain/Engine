@@ -14,6 +14,7 @@
 #include "MetalBinding/Camera.h"
 #include "MetalBinding/Light/SpotLight.h"
 #include "MetalBinding/Attribute/Bridge.h"
+#include "MetalBinding/Light/Attenuation.h"
 
 using namespace metal;
 
@@ -25,7 +26,7 @@ struct RasterizerData {
 
 vertex RasterizerData vertexSpotLight(Vertex in [[stage_in]],
                                       uint instanceId [[instance_id]]) {
-    return RasterizerData {
+    return {
         float4(in.position, 1),
         in.textureUV,
         instanceId
@@ -50,9 +51,12 @@ fragment float4 fragmentSpotLight(RasterizerData in [[stage_in]],
     float4x4 lightTransformation = modelUniforms[camera.index].modelMatrixInverse * modelUniforms[id].modelMatrix;
     float3 lightPosition = extract_position(lightTransformation).xyz;
     float3 forwardDirection = normalize(lightTransformation.columns[2].xyz);
-    float3 l = normalize(lightPosition - input.fragmentPosition);
+    float3 fragmentToLight = lightPosition - input.fragmentPosition;
+    float attenuationFactor = falloffAttenuation(length_squared(fragmentToLight),
+                                                 light.influenceRadius);
+    float3 l = normalize(fragmentToLight);
     float theta = acos(dot(forwardDirection, l));
-    if (theta > light.coneAngle/2) {
+    if (theta > light.coneAngle/2 || attenuationFactor == 0) {
         discard_fragment();
     }
     if (light.castsShadows) {
@@ -70,9 +74,9 @@ fragment float4 fragmentSpotLight(RasterizerData in [[stage_in]],
             discard_fragment();
         }
     }
-    return float4(lighting(l,
-                           eye,
-                           input,
-                           light.color,
-                           light.intensity), 1);
+    return float4(attenuationFactor * lighting(l,
+                                               eye,
+                                               input,
+                                               light.color,
+                                               light.intensity), 1);
 }
