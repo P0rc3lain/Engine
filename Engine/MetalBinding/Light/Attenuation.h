@@ -5,7 +5,6 @@
 #pragma once
 
 #include <metal_stdlib>
-#include <simd/simd.h>
 
 inline float falloffAttenuation(float fragmentToLightDistanceSquared, float lightInfluenceRadius) {
     float dQuadrupled = fragmentToLightDistanceSquared;
