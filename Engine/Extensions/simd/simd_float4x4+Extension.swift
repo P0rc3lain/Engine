@@ -9,7 +9,11 @@ extension simd_float4x4 {
         matrix_identity_float4x4
     }
     public var translation: simd_float3 {
-        columns.3.xyz
+        get {
+            columns.3.xyz
+        } set {
+            columns.3 = simd_float4(newValue, columns.3.w)
+        }
     }
     public var rotation: simd_quatf {
         simd_quatf(self)
