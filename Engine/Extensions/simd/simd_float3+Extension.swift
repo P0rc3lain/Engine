@@ -6,7 +6,7 @@ import simd
 
 extension simd_float3 {
     public var norm: Float {
-        sqrtf(dot(self, self))
+        length(self)
     }
     public static func random(componentRange: Range<Float> = 0 ..< 1) -> simd_float3 {
         simd_float3(.random(in: componentRange),

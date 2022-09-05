@@ -5,6 +5,9 @@
 import simd
 
 extension simd_float4 {
+    public var norm: Float {
+        length(self)
+    }
     public var xyz: simd_float3 {
         simd_float3(x, y, z)
     }
