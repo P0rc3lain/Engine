@@ -18,11 +18,11 @@ public func assert(value: Float,
                   line: line)
 }
 
-public func assertZeroOneUnit(_ value: Float,
-                              allowedError: Float = 0,
-                              message: String = "",
-                              file: StaticString = #file,
-                              line: UInt = #line) {
+public func assertZeroOne(_ value: Float,
+                          allowedError: Float = 0,
+                          message: String = "",
+                          file: StaticString = #file,
+                          line: UInt = #line) {
     assertInBound(value: value,
                   min: 0,
                   max: 1,
@@ -60,7 +60,7 @@ public func assertValid(color: PNColor4,
                         file: StaticString = #file,
                         line: UInt = #line) {
     assertValid(color: color.xyz, message: message, file: file, line: line)
-    assertZeroOneUnit(color.w, message: message, file: file, line: line)
+    assertZeroOne(color.w, message: message, file: file, line: line)
 }
 
 public func assertValid(color: PNColor3,
@@ -68,7 +68,7 @@ public func assertValid(color: PNColor3,
                         accuracy: Float = 0.001,
                         file: StaticString = #file,
                         line: UInt = #line) {
-    assertZeroOneUnit(color.x, message: message, file: file, line: line)
-    assertZeroOneUnit(color.y, message: message, file: file, line: line)
-    assertZeroOneUnit(color.z, message: message, file: file, line: line)
+    assertZeroOne(color.x, message: message, file: file, line: line)
+    assertZeroOne(color.y, message: message, file: file, line: line)
+    assertZeroOne(color.z, message: message, file: file, line: line)
 }

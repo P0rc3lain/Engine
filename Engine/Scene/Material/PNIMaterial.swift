@@ -28,8 +28,8 @@ public struct PNIMaterial: PNMaterial {
                  metallic metallicValue: Float,
                  roughness roughnessValue: Float,
                  name: String = "") {
-        assert(metallicValue >= 0 && metallicValue <= 1, "Metallic must be in range [0, 1]")
-        assert(roughnessValue >= 0 && roughnessValue <= 1, "Roughness must be in range [0, 1]")
+        assertZeroOne(roughnessValue)
+        assertZeroOne(metallicValue)
         let normals = MDLTexture.solid2D(color: .defaultNormalsColor, name: "Normals")
         let albedo = MDLTexture.solid2D(color: albedo, name: "Albedo")
         let metallic = MDLTexture.solid2D(color: simd_float4(simd_float3(repeating: metallicValue), 1),

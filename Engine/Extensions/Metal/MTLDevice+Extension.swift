@@ -172,8 +172,8 @@ extension MTLDevice {
         let texture = makeTexture(descriptor: .postprocessC(size: size))
         return texture?.labeled("Postprocess Color")
     }
-    public func makeTextureSolidCube(color: simd_float4) -> MTLTexture? {
-        assert(length(color) <= 2.001, "Color values must be in [0.0, 1.0] range")
+    public func makeTextureSolidCube(color: PNColor4) -> MTLTexture? {
+        assertValid(color: color)
         let descriptor = MTLTextureDescriptor.solidCubeC
         guard let texture = self.makeTexture(descriptor: descriptor) else {
             assertionFailure("Texture creation has failed")
@@ -200,8 +200,8 @@ extension MTLDevice {
         }
         return failed ? nil : texture
     }
-    public func makeTextureSolid2D(color: simd_float4) -> MTLTexture? {
-        assert(length(color) <= 2.001, "Color values must be in [0.0, 1.0] range")
+    public func makeTextureSolid2D(color: PNColor4) -> MTLTexture? {
+        assertValid(color: color)
         guard let texture = makeTexture(descriptor: .solid2DC) else {
             assertionFailure("Texture creation has failed")
             return nil
