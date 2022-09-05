@@ -11,5 +11,6 @@ public protocol PNBoundInteractor {
     func width(_ bound: PNBound) -> Float
     func height(_ bound: PNBound) -> Float
     func depth(_ bound: PNBound) -> Float
+    func volume(_ bound: PNBound) -> Float
     func center(_ bound: PNBound) -> PNPoint3D
 }

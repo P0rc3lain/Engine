@@ -28,4 +28,9 @@ class PNIBoundInteractorGeneral: XCTestCase {
         XCTAssertEqual(interactor.center(PNBound(min: [-1, -2, -3], max: [-0.5, -1, 0])), [-0.75, -1.5, -1.5])
         XCTAssertEqual(interactor.center(PNBound(min: [1, 2, 3], max: [5, 6, 9])), [3, 4, 6])
     }
+    func testVolume() throws {
+        XCTAssertEqual(interactor.volume(PNBound(min: [-1, -2, -3], max: [1, 2, 3])), 48)
+        XCTAssertEqual(interactor.volume(PNBound(min: [0, 0, 0], max: [1, 1, 1])), 1)
+        XCTAssertEqual(interactor.volume(PNBound(min: [0, 0, 0], max: [1, 2, 3])), 6)
+    }
 }
