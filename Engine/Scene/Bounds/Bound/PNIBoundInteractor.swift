@@ -23,6 +23,9 @@ public struct PNIBoundInteractor: PNBoundInteractor {
                       max(lhs.max.z, rhs.max.z)])
     }
     public func intersect(_ bound: PNBound, ray: PNRay) -> Bool {
+        intersectionPoint(bound, ray: ray) != nil
+    }
+    public func intersectionPoint(_ bound: PNBound, ray: PNRay) -> PNPoint3D? {
         let minX = (bound.min.x - ray.origin.x) * ray.inverseDirection.x
         let maxX = (bound.max.x - ray.origin.x) * ray.inverseDirection.x
         let minY = (bound.min.y - ray.origin.y) * ray.inverseDirection.y
@@ -31,7 +34,13 @@ public struct PNIBoundInteractor: PNBoundInteractor {
         let maxZ = (bound.max.z - ray.origin.z) * ray.inverseDirection.z
         let tMin = max(max(min(minX, maxX), min(minY, maxY)), min(minZ, maxZ))
         let tMax = min(min(max(minX, maxX), max(minY, maxY)), max(minZ, maxZ))
-        return tMax < 0 ? false : tMin <= tMax
+        if tMax >= 0 && tMin <= tMax {
+            let factor = tMin > 0 && tMax > 0 ? min(tMax, tMin) : max(tMin, tMax)
+            return PNPoint3D(factor * ray.direction.x + ray.origin.x,
+                             factor * ray.direction.y + ray.origin.y,
+                             factor * ray.direction.z + ray.origin.z)
+        }
+        return nil
     }
     public func width(_ bound: PNBound) -> Float {
         abs(bound.max.x - bound.min.x)
