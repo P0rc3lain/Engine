@@ -3,6 +3,9 @@
 //
 
 public struct PNIBoundInteractor: PNBoundInteractor {
+    public init() {
+        // Default
+    }
     public func isEqual(_ lhs: PNBound, _ rhs: PNBound) -> Bool {
         lhs.min == rhs.min && lhs.max == rhs.max
     }
