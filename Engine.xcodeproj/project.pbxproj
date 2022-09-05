@@ -318,6 +318,8 @@
 		56FA634528AD1E8200D857A6 /* PNWeakRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FA634428AD1E8200D857A6 /* PNWeakRef.swift */; };
 		56FA634828AD272400D857A6 /* CurrentValueSubject+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FA634728AD272400D857A6 /* CurrentValueSubject+Alias.swift */; };
 		56FA6EE128C6425200803314 /* Math+Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FA6EE028C6425200803314 /* Math+Global.swift */; };
+		56FA6EE428C66C7000803314 /* PNIBoundInteractorIntersectionPoint+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FA6EE328C66C7000803314 /* PNIBoundInteractorIntersectionPoint+Tests.swift */; };
+		56FA6EE628C66C8F00803314 /* PNIBoundInteractorIntersection+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FA6EE528C66C8F00803314 /* PNIBoundInteractorIntersection+Tests.swift */; };
 		56FC107428A43CA3002C7A14 /* Float+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FC107328A43CA3002C7A14 /* Float+Alias.swift */; };
 /* End PBXBuildFile section */
 
@@ -670,6 +672,8 @@
 		56FA634428AD1E8200D857A6 /* PNWeakRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNWeakRef.swift; sourceTree = "<group>"; };
 		56FA634728AD272400D857A6 /* CurrentValueSubject+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentValueSubject+Alias.swift"; sourceTree = "<group>"; };
 		56FA6EE028C6425200803314 /* Math+Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Math+Global.swift"; sourceTree = "<group>"; };
+		56FA6EE328C66C7000803314 /* PNIBoundInteractorIntersectionPoint+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIBoundInteractorIntersectionPoint+Tests.swift"; sourceTree = "<group>"; };
+		56FA6EE528C66C8F00803314 /* PNIBoundInteractorIntersection+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIBoundInteractorIntersection+Tests.swift"; sourceTree = "<group>"; };
 		56FC107328A43CA3002C7A14 /* Float+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Alias.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1972,8 +1976,8 @@
 		56E011892840FE90007859F2 /* Bound */ = {
 			isa = PBXGroup;
 			children = (
+				56FA6EE228C66C4C00803314 /* PNIBoundInteractor */,
 				56E0118A2840FE9B007859F2 /* PNIBoundEstimator+Tests.swift */,
-				565D37EA28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift */,
 			);
 			path = Bound;
 			sourceTree = "<group>";
@@ -2035,6 +2039,16 @@
 				56FA634728AD272400D857A6 /* CurrentValueSubject+Alias.swift */,
 			);
 			path = Combine;
+			sourceTree = "<group>";
+		};
+		56FA6EE228C66C4C00803314 /* PNIBoundInteractor */ = {
+			isa = PBXGroup;
+			children = (
+				565D37EA28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift */,
+				56FA6EE328C66C7000803314 /* PNIBoundInteractorIntersectionPoint+Tests.swift */,
+				56FA6EE528C66C8F00803314 /* PNIBoundInteractorIntersection+Tests.swift */,
+			);
+			path = PNIBoundInteractor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2445,6 +2459,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56E0119828410A8F007859F2 /* PNITerrainLoader+Tests.swift in Sources */,
+				56FA6EE628C66C8F00803314 /* PNIBoundInteractorIntersection+Tests.swift in Sources */,
 				566795B6274DC297005993D7 /* PNINodeInteractor+Tests.swift in Sources */,
 				56E0118B2840FE9B007859F2 /* PNIBoundEstimator+Tests.swift in Sources */,
 				56458F6128B131F400FE1823 /* PNISceneNode+Tests.swift in Sources */,
@@ -2459,6 +2474,7 @@
 				56416D7427400F66003C99C2 /* PNIDynamicBuffer+Tests.swift in Sources */,
 				561340B328C26A4B00D36F89 /* Data+Extension+Tests.swift in Sources */,
 				56B65DEC273ED4CE00DB927E /* PNIBoundingBoxInteractor+Tests.swift in Sources */,
+				56FA6EE428C66C7000803314 /* PNIBoundInteractorIntersectionPoint+Tests.swift in Sources */,
 				5677AD3128C151CA00BF822C /* XCTest+Extension.swift in Sources */,
 				560253D72726CCCA00B3A13A /* PNIChronometer+Tests.swift in Sources */,
 				565D37EB28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift in Sources */,

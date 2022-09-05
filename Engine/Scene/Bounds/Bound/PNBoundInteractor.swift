@@ -7,6 +7,7 @@ public protocol PNBoundInteractor {
     func merge(_ lhs: PNBound, rhs: PNBound) -> PNBound
     func isEqual(_ lhs: PNBound, _ rhs: PNBound) -> Bool
     func intersect(_ bound: PNBound, ray: PNRay) -> Bool
+    func intersectionPoint(_ bound: PNBound, ray: PNRay) -> PNPoint3D?
     func width(_ bound: PNBound) -> Float
     func height(_ bound: PNBound) -> Float
     func depth(_ bound: PNBound) -> Float
