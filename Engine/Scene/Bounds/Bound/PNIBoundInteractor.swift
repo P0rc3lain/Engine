@@ -3,9 +3,6 @@
 //
 
 public struct PNIBoundInteractor: PNBoundInteractor {
-    public var zero: PNBound {
-        PNBound(min: .zero, max: .zero)
-    }
     public func isEqual(_ lhs: PNBound, _ rhs: PNBound) -> Bool {
         lhs.min == rhs.min && lhs.max == rhs.max
     }
@@ -36,7 +33,18 @@ public struct PNIBoundInteractor: PNBoundInteractor {
         let tMax = min(min(max(minX, maxX), max(minY, maxY)), max(minZ, maxZ))
         return tMax < 0 ? false : tMin <= tMax
     }
-    public static var `default`: PNBoundInteractor {
-        PNIBoundInteractor()
+    public func width(_ bound: PNBound) -> Float {
+        abs(bound.max.x - bound.min.x)
+    }
+    public func height(_ bound: PNBound) -> Float {
+        abs(bound.max.y - bound.min.y)
+    }
+    public func depth(_ bound: PNBound) -> Float {
+        abs(bound.max.z - bound.min.z)
+    }
+    public func center(_ bound: PNBound) -> PNPoint3D {
+        [avg(bound.min.x, bound.max.x),
+         avg(bound.min.y, bound.max.y),
+         avg(bound.min.z, bound.max.z)]
     }
 }

@@ -317,6 +317,7 @@
 		56FA634228AD161900D857A6 /* PNNode+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FA634128AD161900D857A6 /* PNNode+Alias.swift */; };
 		56FA634528AD1E8200D857A6 /* PNWeakRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FA634428AD1E8200D857A6 /* PNWeakRef.swift */; };
 		56FA634828AD272400D857A6 /* CurrentValueSubject+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FA634728AD272400D857A6 /* CurrentValueSubject+Alias.swift */; };
+		56FA6EE128C6425200803314 /* Math+Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FA6EE028C6425200803314 /* Math+Global.swift */; };
 		56FC107428A43CA3002C7A14 /* Float+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FC107328A43CA3002C7A14 /* Float+Alias.swift */; };
 /* End PBXBuildFile section */
 
@@ -668,6 +669,7 @@
 		56FA634128AD161900D857A6 /* PNNode+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNNode+Alias.swift"; sourceTree = "<group>"; };
 		56FA634428AD1E8200D857A6 /* PNWeakRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNWeakRef.swift; sourceTree = "<group>"; };
 		56FA634728AD272400D857A6 /* CurrentValueSubject+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentValueSubject+Alias.swift"; sourceTree = "<group>"; };
+		56FA6EE028C6425200803314 /* Math+Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Math+Global.swift"; sourceTree = "<group>"; };
 		56FC107328A43CA3002C7A14 /* Float+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Alias.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1291,6 +1293,7 @@
 			children = (
 				5670EBDB273561FD00375194 /* Operator+Global.swift */,
 				564DE03F284169B9005C2029 /* Comparable+Global.swift */,
+				56FA6EE028C6425200803314 /* Math+Global.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -2231,6 +2234,7 @@
 				563BFC87272878180003EDB7 /* UnsafeMutableRawPointer+Extension.swift in Sources */,
 				5686BD9D273D78B700329FA0 /* Animation.metal in Sources */,
 				561667562719E2CD000063B1 /* PNIRenderingCoordinator.swift in Sources */,
+				56FA6EE128C6425200803314 /* Math+Global.swift in Sources */,
 				56C4CD512737FFDD000A994E /* PNSpotJob.swift in Sources */,
 				5616674D2719E2CD000063B1 /* PNIEngine.swift in Sources */,
 				5688075627480D2700C95F55 /* PNAnyDynamicBuffer.swift in Sources */,

@@ -5,7 +5,7 @@
 import simd
 
 class PNIScreenInteractor: PNScreenInteractor {
-    private let boundInteractor = PNIBoundInteractor.default
+    private let boundInteractor = PNIBoundInteractor()
     private let boundingBoxInteractor = PNIBoundingBoxInteractor.default
     private let nodeInteractor = PNINodeInteractor()
     private init() {
