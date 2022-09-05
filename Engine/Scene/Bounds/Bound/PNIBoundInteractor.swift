@@ -51,6 +51,9 @@ public struct PNIBoundInteractor: PNBoundInteractor {
     public func depth(_ bound: PNBound) -> Float {
         abs(bound.max.z - bound.min.z)
     }
+    public func volume(_ bound: PNBound) -> Float {
+        return width(bound) * height(bound) * depth(bound)
+    }
     public func center(_ bound: PNBound) -> PNPoint3D {
         [avg(bound.min.x, bound.max.x),
          avg(bound.min.y, bound.max.y),
