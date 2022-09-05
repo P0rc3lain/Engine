@@ -7,6 +7,6 @@ import simd
 public protocol PNDirectionalLight {
     var color: PNColorRGB { get }
     var intensity: Float { get }
-    var direction: simd_float3 { get }
+    var direction: PNDirection3DN { get }
     var castsShadows: Bool { get }
 }
