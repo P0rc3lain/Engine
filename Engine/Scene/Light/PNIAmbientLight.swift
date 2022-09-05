@@ -12,6 +12,7 @@ public struct PNIAmbientLight: PNAmbientLight {
     public init(diameter: Float,
                 color: PNColorRGB,
                 intensity: Float) {
+        assertValid(color: color)
         self.diameter = diameter
         self.color = color
         self.intensity = intensity

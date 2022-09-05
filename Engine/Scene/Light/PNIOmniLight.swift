@@ -16,6 +16,7 @@ public struct PNIOmniLight: PNOmniLight {
                 intensity: Float,
                 influenceRadius: Float,
                 castsShadows: Bool) {
+        assertValid(color: color)
         self.color = color
         self.intensity = intensity
         self.influenceRadius = influenceRadius

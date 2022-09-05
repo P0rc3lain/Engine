@@ -13,6 +13,8 @@ public struct PNIDirectionalLight: PNDirectionalLight {
                 intensity: Float,
                 direction: PNDirection3DN,
                 castsShadows: Bool) {
+        assertUnit(vector: direction)
+        assertValid(color: color)
         self.color = color
         self.intensity = intensity
         self.direction = direction

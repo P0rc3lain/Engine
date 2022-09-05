@@ -18,6 +18,7 @@ public struct PNISpotLight: PNSpotLight {
                 influenceRadius: Float,
                 coneAngle: Radians,
                 castsShadows: Bool) {
+        assertValid(color: color)
         self.color = color
         self.intensity = intensity
         self.influenceRadius = influenceRadius
