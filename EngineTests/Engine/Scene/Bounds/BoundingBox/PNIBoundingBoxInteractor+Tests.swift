@@ -62,7 +62,7 @@ class PNIBoundingBoxInteractorTests: XCTestCase {
         XCTAssertEqual(corners[7], [2, 4, 3])
     }
     func testMergeTheSameBox() throws {
-        let minimalBound = boundInteractor.zero
+        let minimalBound = PNBound(min: [0, 0, 0], max: [0, 0, 0])
         let boundingBox = interactor.from(bound: minimalBound)
         let box = interactor.merge(boundingBox, boundingBox)
         let corners = interactor.corners(box)
@@ -101,14 +101,17 @@ class PNIBoundingBoxInteractorTests: XCTestCase {
         XCTAssertFalse(interactor.overlap(boxA, boxB))
     }
     func testIsEqualSameObject() throws {
-        let box = PNBoundingBox.zero
+        let box = interactor.from(bound: PNBound(min: [0, 0, 0], max: [0, 0, 0]))
         XCTAssertTrue(interactor.isEqual(box, box))
     }
     func testIsEqualDifferentObjects() throws {
-        XCTAssertTrue(interactor.isEqual(.zero, .zero))
+        let objA = interactor.from(bound: PNBound(min: [0, 0, 0], max: [0, 0, 0]))
+        let objB = interactor.from(bound: PNBound(min: [0, 0, 0], max: [0, 0, 0]))
+        XCTAssertTrue(interactor.isEqual(objA, objB))
     }
     func testNotEqual() throws {
-        let boxA = PNBoundingBox.zero
+        let boxA =
+        interactor.from(bound: PNBound(min: [0, 0, 0], max: [0, 0, 0]))
         let boxB = interactor.from(bound: PNBound(min: [1, 1, 1], max: [3, 3, 3]))
         XCTAssertFalse(interactor.isEqual(boxA, boxB))
     }
