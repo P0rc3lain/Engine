@@ -156,6 +156,8 @@
 		56484BA8284616F6004DFF36 /* Translucent.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56484BA7284616F6004DFF36 /* Translucent.metal */; };
 		564852F228C7CB6400BA4CC0 /* PNOrthographicCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564852F128C7CB6400BA4CC0 /* PNOrthographicCamera.swift */; };
 		564852F428C7CBDE00BA4CC0 /* PNCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564852F328C7CBDE00BA4CC0 /* PNCamera.swift */; };
+		5648530728C7E71700BA4CC0 /* PNNodeTrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648530628C7E71700BA4CC0 /* PNNodeTrace.swift */; };
+		5648530928C7E8D200BA4CC0 /* PNINodeTrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648530828C7E8D200BA4CC0 /* PNINodeTrace.swift */; };
 		564DE040284169B9005C2029 /* Comparable+Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE03F284169B9005C2029 /* Comparable+Global.swift */; };
 		564DE04728427595005C2029 /* MTLLibrary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE04628427595005C2029 /* MTLLibrary+Extension.swift */; };
 		564DE04928427689005C2029 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE04828427689005C2029 /* Bundle+Extension.swift */; };
@@ -495,6 +497,8 @@
 		56484BA7284616F6004DFF36 /* Translucent.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Translucent.metal; sourceTree = "<group>"; };
 		564852F128C7CB6400BA4CC0 /* PNOrthographicCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNOrthographicCamera.swift; sourceTree = "<group>"; };
 		564852F328C7CBDE00BA4CC0 /* PNCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCamera.swift; sourceTree = "<group>"; };
+		5648530628C7E71700BA4CC0 /* PNNodeTrace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNNodeTrace.swift; sourceTree = "<group>"; };
+		5648530828C7E8D200BA4CC0 /* PNINodeTrace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNINodeTrace.swift; sourceTree = "<group>"; };
 		564DE03F284169B9005C2029 /* Comparable+Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Global.swift"; sourceTree = "<group>"; };
 		564DE04628427595005C2029 /* MTLLibrary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLLibrary+Extension.swift"; sourceTree = "<group>"; };
 		564DE04828427689005C2029 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
@@ -731,6 +735,7 @@
 		5601396E255457D100FC1C45 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				5648530528C7E70200BA4CC0 /* Debug */,
 				56FA634328AD1E7400D857A6 /* Utilities */,
 				56BB949A28A90F790034D4AB /* UI */,
 				56A0CD2928576D1400EBB890 /* Allocation */,
@@ -1302,6 +1307,15 @@
 				564852F328C7CBDE00BA4CC0 /* PNCamera.swift */,
 			);
 			path = Camera;
+			sourceTree = "<group>";
+		};
+		5648530528C7E70200BA4CC0 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				5648530628C7E71700BA4CC0 /* PNNodeTrace.swift */,
+				5648530828C7E8D200BA4CC0 /* PNINodeTrace.swift */,
+			);
+			path = Debug;
 			sourceTree = "<group>";
 		};
 		564DE04128416A73005C2029 /* Global */ = {
@@ -2217,6 +2231,7 @@
 				56A88EB128C179B30060F131 /* Assert+Extension.swift in Sources */,
 				561666FD2719E2CD000063B1 /* MTLTextureDescriptor+Extension.swift in Sources */,
 				5629FBEE27492533005476AF /* PNAnimatedCoordinateSpace+Extension.swift in Sources */,
+				5648530928C7E8D200BA4CC0 /* PNINodeTrace.swift in Sources */,
 				561666FB2719E2CD000063B1 /* MDLTransformComponent+Extension.swift in Sources */,
 				5616673A2719E2CD000063B1 /* PNPrimitiveType.swift in Sources */,
 				56165BEA27440DA90025D58B /* PNEntity.swift in Sources */,
@@ -2486,6 +2501,7 @@
 				561667532719E2CD000063B1 /* PNOmniJob.swift in Sources */,
 				561667042719E2CD000063B1 /* MDLTexture+Extension.swift in Sources */,
 				56F5926D2737276D008652C9 /* Directional.metal in Sources */,
+				5648530728C7E71700BA4CC0 /* PNNodeTrace.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
