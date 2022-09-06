@@ -175,7 +175,7 @@ extension MTLDevice {
     public func makeTextureSolidCube(color: PNColor4) -> MTLTexture? {
         assertValid(color: color)
         let descriptor = MTLTextureDescriptor.solidCubeC
-        guard let texture = self.makeTexture(descriptor: descriptor) else {
+        guard let texture = makeTexture(descriptor: descriptor) else {
             assertionFailure("Texture creation has failed")
             return nil
         }
