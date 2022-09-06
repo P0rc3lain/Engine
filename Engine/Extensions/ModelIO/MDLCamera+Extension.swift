@@ -6,9 +6,9 @@ import ModelIO
 
 extension MDLCamera {
     var porcelain: PNCamera {
-        PNCamera(nearPlane: nearVisibilityDistance,
-                 farPlane: farVisibilityDistance,
-                 fovRadians: fieldOfView.radians,
-                 aspectRatio: sensorAspect)
+        PNPerspectiveCamera(nearPlane: nearVisibilityDistance,
+                            farPlane: farVisibilityDistance,
+                            fovRadians: fieldOfView.radians,
+                            aspectRatio: sensorAspect)
     }
 }

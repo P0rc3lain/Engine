@@ -74,7 +74,7 @@
 		5616673D2719E2CD000063B1 /* PNSubmesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666CC2719E2CC000063B1 /* PNSubmesh.swift */; };
 		5616673E2719E2CD000063B1 /* PNSceneDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666CE2719E2CC000063B1 /* PNSceneDescription.swift */; };
 		561667412719E2CD000063B1 /* PNMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666D12719E2CC000063B1 /* PNMaterial.swift */; };
-		561667432719E2CD000063B1 /* PNCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666D32719E2CC000063B1 /* PNCamera.swift */; };
+		561667432719E2CD000063B1 /* PNPerspectiveCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666D32719E2CC000063B1 /* PNPerspectiveCamera.swift */; };
 		561667452719E2CD000063B1 /* Omni.metal in Sources */ = {isa = PBXBuildFile; fileRef = 561666D72719E2CC000063B1 /* Omni.metal */; };
 		561667462719E2CD000063B1 /* GBuffer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 561666D82719E2CC000063B1 /* GBuffer.metal */; };
 		561667472719E2CD000063B1 /* PBR.h in Headers */ = {isa = PBXBuildFile; fileRef = 561666DA2719E2CC000063B1 /* PBR.h */; };
@@ -154,6 +154,8 @@
 		56458F6428B137EE00FE1823 /* Publisher+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56458F6328B137EE00FE1823 /* Publisher+Extension.swift */; };
 		56484BA62846162F004DFF36 /* PNTranslucentJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56484BA52846162F004DFF36 /* PNTranslucentJob.swift */; };
 		56484BA8284616F6004DFF36 /* Translucent.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56484BA7284616F6004DFF36 /* Translucent.metal */; };
+		564852F228C7CB6400BA4CC0 /* PNOrthographicCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564852F128C7CB6400BA4CC0 /* PNOrthographicCamera.swift */; };
+		564852F428C7CBDE00BA4CC0 /* PNCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564852F328C7CBDE00BA4CC0 /* PNCamera.swift */; };
 		564DE040284169B9005C2029 /* Comparable+Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE03F284169B9005C2029 /* Comparable+Global.swift */; };
 		564DE04728427595005C2029 /* MTLLibrary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE04628427595005C2029 /* MTLLibrary+Extension.swift */; };
 		564DE04928427689005C2029 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE04828427689005C2029 /* Bundle+Extension.swift */; };
@@ -403,7 +405,7 @@
 		561666CC2719E2CC000063B1 /* PNSubmesh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNSubmesh.swift; sourceTree = "<group>"; };
 		561666CE2719E2CC000063B1 /* PNSceneDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNSceneDescription.swift; sourceTree = "<group>"; };
 		561666D12719E2CC000063B1 /* PNMaterial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNMaterial.swift; sourceTree = "<group>"; };
-		561666D32719E2CC000063B1 /* PNCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNCamera.swift; sourceTree = "<group>"; };
+		561666D32719E2CC000063B1 /* PNPerspectiveCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNPerspectiveCamera.swift; sourceTree = "<group>"; };
 		561666D72719E2CC000063B1 /* Omni.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Omni.metal; sourceTree = "<group>"; };
 		561666D82719E2CC000063B1 /* GBuffer.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = GBuffer.metal; sourceTree = "<group>"; };
 		561666DA2719E2CC000063B1 /* PBR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBR.h; sourceTree = "<group>"; };
@@ -491,6 +493,8 @@
 		56458F6328B137EE00FE1823 /* Publisher+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Extension.swift"; sourceTree = "<group>"; };
 		56484BA52846162F004DFF36 /* PNTranslucentJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNTranslucentJob.swift; sourceTree = "<group>"; };
 		56484BA7284616F6004DFF36 /* Translucent.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Translucent.metal; sourceTree = "<group>"; };
+		564852F128C7CB6400BA4CC0 /* PNOrthographicCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNOrthographicCamera.swift; sourceTree = "<group>"; };
+		564852F328C7CBDE00BA4CC0 /* PNCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCamera.swift; sourceTree = "<group>"; };
 		564DE03F284169B9005C2029 /* Comparable+Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Global.swift"; sourceTree = "<group>"; };
 		564DE04628427595005C2029 /* MTLLibrary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLLibrary+Extension.swift"; sourceTree = "<group>"; };
 		564DE04828427689005C2029 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
@@ -940,6 +944,7 @@
 		561666CD2719E2CC000063B1 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				564852F028C7CB4600BA4CC0 /* Camera */,
 				565D37E728AA91EF000ECCC7 /* Ray */,
 				562C739C2849510900E51606 /* Particles */,
 				560B5DC12757CEA400C98F1A /* Model */,
@@ -949,7 +954,6 @@
 				56165BE727440DA90025D58B /* Graph */,
 				56416D872743F728003C99C2 /* Bounds */,
 				561666CE2719E2CC000063B1 /* PNSceneDescription.swift */,
-				561666D32719E2CC000063B1 /* PNCamera.swift */,
 				56B6AFB328A269BC00266421 /* PNSceneValidator.swift */,
 			);
 			path = Scene;
@@ -1288,6 +1292,16 @@
 				56458F6328B137EE00FE1823 /* Publisher+Extension.swift */,
 			);
 			path = Combine;
+			sourceTree = "<group>";
+		};
+		564852F028C7CB4600BA4CC0 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				561666D32719E2CC000063B1 /* PNPerspectiveCamera.swift */,
+				564852F128C7CB6400BA4CC0 /* PNOrthographicCamera.swift */,
+				564852F328C7CBDE00BA4CC0 /* PNCamera.swift */,
+			);
+			path = Camera;
 			sourceTree = "<group>";
 		};
 		564DE04128416A73005C2029 /* Global */ = {
@@ -2237,6 +2251,7 @@
 				5688075427480D1A00C95F55 /* PNDynamicBuffer.swift in Sources */,
 				5616673B2719E2CD000063B1 /* PNDataBuffer.swift in Sources */,
 				569D923D273DD594004FDFAC /* PNBound.swift in Sources */,
+				564852F228C7CB6400BA4CC0 /* PNOrthographicCamera.swift in Sources */,
 				56E2A22C285096DC00D64A44 /* PNTask.swift in Sources */,
 				566CEB2928439AFA00DA6227 /* PNIThreadedWorkloadManagerFactory.swift in Sources */,
 				5620C8212754F5DD0098D6FA /* PNSpotLightNode.swift in Sources */,
@@ -2274,6 +2289,7 @@
 				56C47BB62751BF390075C61B /* PNAmbientLight.swift in Sources */,
 				5616674A2719E2CD000063B1 /* PBR.metal in Sources */,
 				5620C832275528030098D6FA /* PNDirectionalShadowJob.swift in Sources */,
+				564852F428C7CBDE00BA4CC0 /* PNCamera.swift in Sources */,
 				5616673D2719E2CD000063B1 /* PNSubmesh.swift in Sources */,
 				561340B628C5105A00D36F89 /* Attenuation.h in Sources */,
 				566795CF274ECD75005993D7 /* PNAmbientLightNode.swift in Sources */,
@@ -2302,7 +2318,7 @@
 				56E0119228410A5A007859F2 /* PNITerrainLoader.swift in Sources */,
 				568807482747EFC800C95F55 /* simd_float4x4+Alias.swift in Sources */,
 				561667572719E2CD000063B1 /* PNIBufferStore.swift in Sources */,
-				561667432719E2CD000063B1 /* PNCamera.swift in Sources */,
+				561667432719E2CD000063B1 /* PNPerspectiveCamera.swift in Sources */,
 				5675C46628B2AD6500EEC58D /* PNScreenInteractor.swift in Sources */,
 				5616670C2719E2CD000063B1 /* MTLDevice+Extension.swift in Sources */,
 				563BFC9A27294AF70003EDB7 /* PNMesh+Extension.swift in Sources */,
