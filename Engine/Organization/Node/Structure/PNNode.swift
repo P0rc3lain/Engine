@@ -36,7 +36,7 @@ public final class PNNode<T> {
     }
     public func add(child: PNNode<T>) {
         assert(!contains(node: child), "Nodes must be unique")
-        assert(child.parent == nil, "Child must not have parent")
+        assertNil(child.parent, "Child must not have parent")
         child.parent = self
         children.append(child)
     }
@@ -51,6 +51,13 @@ public final class PNNode<T> {
         for child in children {
             add(child: child)
         }
+    }
+    public func findNode(where closure: (PNNode<T>) -> Bool) -> PNNode<T>? {
+        closure(self) ? self : children.compactMap { $0.findNode(where: closure) }.first
+    }
+    public func findAllNodes(where closure: (PNNode<T>) -> Bool) -> [PNNode<T>] {
+        let result = closure(self) ? [self] : []
+        return result + children.map { $0.findAllNodes(where: closure) }.reduce([], +)
     }
     public func contains(node: PNNode<T>) -> Bool {
         if self === node {

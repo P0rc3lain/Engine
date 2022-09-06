@@ -10,9 +10,8 @@ public final class PNIAnimatedValue<T>: PNAnimatedValue {
     public let maximumTime: TimeInterval
     public init(keyFrames: [T], times: [TimeInterval], maximumTime: TimeInterval) {
         assert(times.count == keyFrames.count)
-        assert(times.sorted() == times)
-        assert(!times.isEmpty)
-        assert(times.sorted() == times)
+        assertSorted(times)
+        assertNotEmpty(times)
         assert(times[times.count - 1] <= maximumTime)
         self.keyFrames = keyFrames
         self.times = times
