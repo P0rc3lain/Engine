@@ -44,12 +44,12 @@ public func assertUnit(vector: simd_float3,
            line: line)
 }
 
-public func assertInBound(value: Float,
-                          min: Float,
-                          max: Float,
-                          message: String = "Value out of bounds",
-                          file: StaticString = #file,
-                          line: UInt = #line) {
+public func assertInBound<T: Comparable>(value: T,
+                                         min: T,
+                                         max: T,
+                                         message: String = "Value out of bounds",
+                                         file: StaticString = #file,
+                                         line: UInt = #line) {
     assert(value >= min, message, file: file, line: line)
     assert(value <= max, message, file: file, line: line)
 }
