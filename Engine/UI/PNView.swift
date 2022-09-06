@@ -39,7 +39,7 @@ public class PNView: NSView, MTKViewDelegate {
     public override init(frame frameRect: NSRect) {
         metalView = MTKView(frame: frameRect)
         metalView.device = MTLCreateSystemDefaultDevice()
-        interactor = PNIScreenInteractor.default
+        interactor = PNIScreenInteractor()
         engine = PNIEngine.default(view: metalView)
         super.init(frame: frameRect)
         commonInitializer()
@@ -47,7 +47,7 @@ public class PNView: NSView, MTKViewDelegate {
     public required init?(coder: NSCoder) {
         metalView = MTKView(coder: coder)
         metalView.device = MTLCreateSystemDefaultDevice()
-        interactor = PNIScreenInteractor.default
+        interactor = PNIScreenInteractor()
         engine = PNIEngine.default(view: metalView)
         super.init(coder: coder)
         commonInitializer()

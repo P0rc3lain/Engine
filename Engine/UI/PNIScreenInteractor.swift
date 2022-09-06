@@ -8,7 +8,7 @@ class PNIScreenInteractor: PNScreenInteractor {
     private let boundInteractor = PNIBoundInteractor()
     private let boundingBoxInteractor = PNIBoundingBoxInteractor.default
     private let nodeInteractor = PNINodeInteractor()
-    private init() {
+    public init() {
         // Default
     }
     func pick(camera cameraNode: PNCameraNode,
@@ -24,8 +24,5 @@ class PNIScreenInteractor: PNScreenInteractor {
             }
             return boundInteractor.intersect(boundingBoxInteractor.bound(value), ray: rayWorld)
         }
-    }
-    static var `default`: PNIScreenInteractor {
-        PNIScreenInteractor()
     }
 }
