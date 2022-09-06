@@ -8,7 +8,9 @@ import ModelIO
 public final class PNISceneLoader: PNSceneLoader {
     private let assetLoader: PNAssetLoader
     private let translator: PNSceneTranslator
-    public init(device: MTLDevice, assetLoader: PNAssetLoader, translator: PNSceneTranslator) {
+    public init(device: MTLDevice,
+                assetLoader: PNAssetLoader,
+                translator: PNSceneTranslator) {
         self.translator = translator
         self.assetLoader = assetLoader
     }
@@ -23,5 +25,10 @@ public final class PNISceneLoader: PNSceneLoader {
             return nil
         }
         return translator.process(asset: asset)
+    }
+    public static func `default`(device: MTLDevice) -> PNISceneLoader {
+        PNISceneLoader(device: device,
+                       assetLoader: PNIAssetLoader(),
+                       translator: PNISceneTranslator(device: device))
     }
 }
