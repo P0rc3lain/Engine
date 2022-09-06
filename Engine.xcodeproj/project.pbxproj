@@ -159,6 +159,9 @@
 		564DE04928427689005C2029 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE04828427689005C2029 /* Bundle+Extension.swift */; };
 		564DE04B28427A1E005C2029 /* MTLTexture+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE04A28427A1E005C2029 /* MTLTexture+Extension.swift */; };
 		56502D2228AEE13E003F28BF /* PNNode+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56502D2128AEE13E003F28BF /* PNNode+Tests.swift */; };
+		56532DF728C7AD7B005476F2 /* PNColorTemperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56532DF628C7AD7B005476F2 /* PNColorTemperature.swift */; };
+		56532DF928C7ADD1005476F2 /* PNIColorTemperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56532DF828C7ADD1005476F2 /* PNIColorTemperature.swift */; };
+		56532DFC28C7B37D005476F2 /* PNIColorTemperature+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56532DFB28C7B37C005476F2 /* PNIColorTemperature+Tests.swift */; };
 		565D37E928AA9234000ECCC7 /* PNRay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D37E828AA9234000ECCC7 /* PNRay.swift */; };
 		565D37EB28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D37EA28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift */; };
 		566020E02734314C000F4CA7 /* PNSSAOJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566020DF2734314C000F4CA7 /* PNSSAOJob.swift */; };
@@ -493,6 +496,9 @@
 		564DE04828427689005C2029 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		564DE04A28427A1E005C2029 /* MTLTexture+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLTexture+Extension.swift"; sourceTree = "<group>"; };
 		56502D2128AEE13E003F28BF /* PNNode+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNNode+Tests.swift"; sourceTree = "<group>"; };
+		56532DF628C7AD7B005476F2 /* PNColorTemperature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNColorTemperature.swift; sourceTree = "<group>"; };
+		56532DF828C7ADD1005476F2 /* PNIColorTemperature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIColorTemperature.swift; sourceTree = "<group>"; };
+		56532DFB28C7B37C005476F2 /* PNIColorTemperature+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIColorTemperature+Tests.swift"; sourceTree = "<group>"; };
 		565D37E828AA9234000ECCC7 /* PNRay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNRay.swift; sourceTree = "<group>"; };
 		565D37EA28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIBoundInteractor+Tests.swift"; sourceTree = "<group>"; };
 		566020DF2734314C000F4CA7 /* PNSSAOJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSSAOJob.swift; sourceTree = "<group>"; };
@@ -1310,6 +1316,14 @@
 			path = Structure;
 			sourceTree = "<group>";
 		};
+		56532DFA28C7B371005476F2 /* Material */ = {
+			isa = PBXGroup;
+			children = (
+				56532DFB28C7B37C005476F2 /* PNIColorTemperature+Tests.swift */,
+			);
+			path = Material;
+			sourceTree = "<group>";
+		};
 		565D37E728AA91EF000ECCC7 /* Ray */ = {
 			isa = PBXGroup;
 			children = (
@@ -1630,6 +1644,8 @@
 			children = (
 				561666D12719E2CC000063B1 /* PNMaterial.swift */,
 				5688076727483F4600C95F55 /* PNIMaterial.swift */,
+				56532DF628C7AD7B005476F2 /* PNColorTemperature.swift */,
+				56532DF828C7ADD1005476F2 /* PNIColorTemperature.swift */,
 			);
 			path = Material;
 			sourceTree = "<group>";
@@ -1723,6 +1739,7 @@
 		56B65DED273ED4ED00DB927E /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				56532DFA28C7B371005476F2 /* Material */,
 				56A88EAC28C169F50060F131 /* Ray */,
 				56458F5D28B131D600FE1823 /* Organization */,
 				56165BE1274405010025D58B /* Bounds */,
@@ -2242,6 +2259,7 @@
 				5635176F28AD557700807BDA /* PNSubject+Alias.swift in Sources */,
 				568C4F01284F687900C6F128 /* PNIRepeatableTaskQueue.swift in Sources */,
 				568C4EFF284F664500C6F128 /* PNRepeatableTaskQueue.swift in Sources */,
+				56532DF728C7AD7B005476F2 /* PNColorTemperature.swift in Sources */,
 				56A8CA7E275796120040DCF9 /* Shadow.metal in Sources */,
 				566795ED274FF235005993D7 /* PNRenderingCoordinatorFactory.swift in Sources */,
 				5616671C2719E2CD000063B1 /* MTLStencilDescriptor+Extension.swift in Sources */,
@@ -2374,6 +2392,7 @@
 				566795EB274FEE37005993D7 /* PNIWorkloadManager.swift in Sources */,
 				563C9C2127387F8C0014CFF3 /* PNSpotShadowJob.swift in Sources */,
 				560C18D5273AC30800459AEF /* OmniShadow.metal in Sources */,
+				56532DF928C7ADD1005476F2 /* PNIColorTemperature.swift in Sources */,
 				56E011BD28413218007859F2 /* PNTextureLoader.swift in Sources */,
 				56D50858274542EA0097DEB2 /* simd_quatf+Extension.swift in Sources */,
 				5616674C2719E2CD000063B1 /* EnvironmentMapper.metal in Sources */,
@@ -2468,6 +2487,7 @@
 				561340B228C26A3600D36F89 /* simd_float3+Extension+Tests.swift in Sources */,
 				5677AD2A28C1505000BF822C /* simd_float4x4+Extension+Tests.swift in Sources */,
 				56BB949E28A914CE0034D4AB /* PNITranscriber+Tests.swift in Sources */,
+				56532DFC28C7B37D005476F2 /* PNIColorTemperature+Tests.swift in Sources */,
 				5677AD2B28C1505000BF822C /* simd_float3x3+Extension+Tests.swift in Sources */,
 				56502D2228AEE13E003F28BF /* PNNode+Tests.swift in Sources */,
 				56165BF627444A680025D58B /* PNFlatTree+Tests.swift in Sources */,
