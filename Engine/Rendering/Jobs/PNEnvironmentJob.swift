@@ -9,22 +9,18 @@ import simd
 struct PNEnvironmentJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let depthStentilState: MTLDepthStencilState
-    private let viewPort: MTLViewport
     private let cube: PNMesh
     init(pipelineState: MTLRenderPipelineState,
          depthStentilState: MTLDepthStencilState,
-         drawableSize: CGSize,
          cube: PNMesh) {
         self.pipelineState = pipelineState
         self.depthStentilState = depthStentilState
         self.cube = cube
-        self.viewPort = .porcelain(size: drawableSize)
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         guard let skyMap = supply.scene.skyMap else {
             return
         }
-        encoder.setViewport(viewPort)
         encoder.setStencilReferenceValue(0)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStentilState)
@@ -39,7 +35,7 @@ struct PNEnvironmentJob: PNRenderJob {
                                    index: kAttributeEnvironmentFragmentShaderTextureCubeMap)
         encoder.drawIndexedPrimitives(submesh: cube.pieceDescriptions[0].drawDescription)
     }
-    static func make(device: MTLDevice, drawableSize: CGSize) -> PNEnvironmentJob? {
+    static func make(device: MTLDevice) -> PNEnvironmentJob? {
         guard let library = device.makePorcelainLibrary(),
               let environmentPipelineState = device.makeRPSEnvironment(library: library),
               let depthStencilState = device.makeDSSEnvironment(),
@@ -48,7 +44,6 @@ struct PNEnvironmentJob: PNRenderJob {
         }
         return PNEnvironmentJob(pipelineState: environmentPipelineState,
                                 depthStentilState: depthStencilState,
-                                drawableSize: drawableSize,
                                 cube: cube)
     }
 }

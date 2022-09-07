@@ -8,26 +8,22 @@ import simd
 
 struct PNBloomMergeJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
-    private let viewPort: MTLViewport
     private let plane: PNMesh
     private let unmodifiedSceneTexture: PNTextureProvider
     private let brightAreasTexture: PNTextureProvider
     init?(pipelineState: MTLRenderPipelineState,
           device: MTLDevice,
           unmodifiedSceneTexture: PNTextureProvider,
-          brightAreasTexture: PNTextureProvider,
-          drawableSize: CGSize) {
+          brightAreasTexture: PNTextureProvider) {
         guard let plane = PNMesh.plane(device: device) else {
             return nil
         }
         self.pipelineState = pipelineState
         self.plane = plane
-        self.viewPort = .porcelain(size: drawableSize)
         self.unmodifiedSceneTexture = unmodifiedSceneTexture
         self.brightAreasTexture = brightAreasTexture
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
-        encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
                                 index: kAttributeBloomSplitVertexShaderBufferStageIn)
@@ -38,7 +34,6 @@ struct PNBloomMergeJob: PNRenderJob {
         encoder.drawIndexedPrimitives(submesh: plane.pieceDescriptions[0].drawDescription)
     }
     static func make(device: MTLDevice,
-                     drawableSize: CGSize,
                      unmodifiedSceneTexture: PNTextureProvider,
                      brightAreasTexture: PNTextureProvider) -> PNBloomMergeJob? {
         guard let library = device.makePorcelainLibrary(),
@@ -48,7 +43,6 @@ struct PNBloomMergeJob: PNRenderJob {
         return PNBloomMergeJob(pipelineState: pipelineState,
                                device: device,
                                unmodifiedSceneTexture: unmodifiedSceneTexture,
-                               brightAreasTexture: brightAreasTexture,
-                               drawableSize: drawableSize)
+                               brightAreasTexture: brightAreasTexture)
     }
 }

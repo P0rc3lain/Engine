@@ -9,25 +9,21 @@ import simd
 struct PNFogJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let depthStentilState: MTLDepthStencilState
-    private let viewPort: MTLViewport
     private let prTexture: PNTextureProvider
     private let cube: PNMesh
     init(pipelineState: MTLRenderPipelineState,
          depthStentilState: MTLDepthStencilState,
          prTexture: PNTextureProvider,
-         drawableSize: CGSize,
          cube: PNMesh) {
         self.pipelineState = pipelineState
         self.depthStentilState = depthStentilState
         self.cube = cube
         self.prTexture = prTexture
-        self.viewPort = .porcelain(size: drawableSize)
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         guard let skyMap = supply.scene.skyMap else {
             return
         }
-        encoder.setViewport(viewPort)
         encoder.setStencilReferenceValue(0x1)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStentilState)
@@ -45,7 +41,6 @@ struct PNFogJob: PNRenderJob {
         encoder.drawIndexedPrimitives(submesh: cube.pieceDescriptions[0].drawDescription)
     }
     static func make(device: MTLDevice,
-                     drawableSize: CGSize,
                      prTexture: PNTextureProvider) -> PNFogJob? {
         guard let library = device.makePorcelainLibrary(),
               let fogPipelineState = device.makeRPSFog(library: library),
@@ -56,7 +51,6 @@ struct PNFogJob: PNRenderJob {
         return PNFogJob(pipelineState: fogPipelineState,
                         depthStentilState: depthStencilState,
                         prTexture: prTexture,
-                        drawableSize: drawableSize,
                         cube: cube)
     }
 }

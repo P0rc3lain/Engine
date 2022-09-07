@@ -9,15 +9,12 @@ struct PNSpotShadowJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let animatedPipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
-    private let viewPort: MTLViewport
     init(pipelineState: MTLRenderPipelineState,
          animatedPipelineState: MTLRenderPipelineState,
-         depthStencilState: MTLDepthStencilState,
-         viewPort: MTLViewport) {
+         depthStencilState: MTLDepthStencilState) {
         self.pipelineState = pipelineState
         self.animatedPipelineState = animatedPipelineState
         self.depthStencilState = depthStencilState
-        self.viewPort = viewPort
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         let scene = supply.scene
@@ -28,7 +25,6 @@ struct PNSpotShadowJob: PNRenderJob {
         guard !shadowCasterIndices.isEmpty else {
             return
         }
-        encoder.setViewport(viewPort)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setRenderPipelineState(animatedPipelineState)
         encoder.setVertexBuffer(dataStore.spotLights,
@@ -78,8 +74,7 @@ struct PNSpotShadowJob: PNRenderJob {
             }
         }
     }
-    static func make(device: MTLDevice,
-                     renderingSize: CGSize) -> PNSpotShadowJob? {
+    static func make(device: MTLDevice) -> PNSpotShadowJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSSpotShadow(library: library),
               let depthStencilState = device.makeDSSSpotShadow(),
@@ -88,7 +83,6 @@ struct PNSpotShadowJob: PNRenderJob {
         }
         return PNSpotShadowJob(pipelineState: pipelineState,
                                animatedPipelineState: animatedPipelineState,
-                               depthStencilState: depthStencilState,
-                               viewPort: .porcelain(size: renderingSize))
+                               depthStencilState: depthStencilState)
     }
 }

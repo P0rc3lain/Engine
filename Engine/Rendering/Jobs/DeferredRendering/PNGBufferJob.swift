@@ -10,23 +10,19 @@ struct PNGBufferJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let animatedPipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
-    private let viewPort: MTLViewport
     private let textureRange = kAttributeGBufferFragmentShaderTextureAlbedo ...
                                kAttributeGBufferFragmentShaderTextureMetallic
     init(pipelineState: MTLRenderPipelineState,
          animatedPipelineState: MTLRenderPipelineState,
-         depthStencilState: MTLDepthStencilState,
-         drawableSize: CGSize) {
+         depthStencilState: MTLDepthStencilState) {
         self.pipelineState = pipelineState
         self.animatedPipelineState = animatedPipelineState
         self.depthStencilState = depthStencilState
-        self.viewPort = .porcelain(size: drawableSize)
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         let scene = supply.scene
         let dataStore = supply.bufferStore
         let mask = supply.mask.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx]
-        encoder.setViewport(viewPort)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setVertexBuffer(dataStore.cameras.buffer,
                                 index: kAttributeGBufferVertexShaderBufferCameraUniforms)
@@ -75,7 +71,7 @@ struct PNGBufferJob: PNRenderJob {
             encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
         }
     }
-    static func make(device: MTLDevice, drawableSize: CGSize) -> PNGBufferJob? {
+    static func make(device: MTLDevice) -> PNGBufferJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSGBuffer(library: library),
               let animatedPipelineState = device.makeRPSGBufferAnimated(library: library),
@@ -84,7 +80,6 @@ struct PNGBufferJob: PNRenderJob {
         }
         return PNGBufferJob(pipelineState: pipelineState,
                             animatedPipelineState: animatedPipelineState,
-                            depthStencilState: depthStencilState,
-                            drawableSize: drawableSize)
+                            depthStencilState: depthStencilState)
     }
 }

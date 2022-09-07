@@ -9,7 +9,6 @@ import simd
 struct PNOmniJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
-    private let viewPort: MTLViewport
     private let inputTextures: [PNTextureProvider]
     private let shadowMaps: PNTextureProvider
     private let plane: PNMesh
@@ -17,8 +16,7 @@ struct PNOmniJob: PNRenderJob {
           inputTextures: [PNTextureProvider],
           shadowMaps: PNTextureProvider,
           device: MTLDevice,
-          depthStencilState: MTLDepthStencilState,
-          drawableSize: CGSize) {
+          depthStencilState: MTLDepthStencilState) {
         guard let plane = PNMesh.plane(device: device) else {
             return nil
         }
@@ -27,7 +25,6 @@ struct PNOmniJob: PNRenderJob {
         self.depthStencilState = depthStencilState
         self.inputTextures = inputTextures
         self.plane = plane
-        self.viewPort = .porcelain(size: drawableSize)
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         let scene = supply.scene
@@ -38,7 +35,6 @@ struct PNOmniJob: PNRenderJob {
         let arTexture = inputTextures[0]
         let nmTexture = inputTextures[1]
         let prTexture = inputTextures[2]
-        encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
@@ -58,8 +54,7 @@ struct PNOmniJob: PNRenderJob {
     }
     static func make(device: MTLDevice,
                      inputTextures: [PNTextureProvider],
-                     shadowMaps: PNTextureProvider,
-                     drawableSize: CGSize) -> PNOmniJob? {
+                     shadowMaps: PNTextureProvider) -> PNOmniJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSOmni(library: library),
               let depthStencilState = device.makeDSSOmni() else {
@@ -69,7 +64,6 @@ struct PNOmniJob: PNRenderJob {
                          inputTextures: inputTextures,
                          shadowMaps: shadowMaps,
                          device: device,
-                         depthStencilState: depthStencilState,
-                         drawableSize: drawableSize)
+                         depthStencilState: depthStencilState)
     }
 }

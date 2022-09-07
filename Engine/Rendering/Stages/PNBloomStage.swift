@@ -17,12 +17,10 @@ struct PNBloomStage: PNStage {
         bloomSplitRenderPassDescriptor = .bloomSplit(device: device, size: renderingSize)
         bloomMergeRenderPassDescriptor = .bloomMerge(device: device, size: renderingSize)
         guard let bloomSplitJob = PNBloomSplitJob.make(device: device,
-                                                       inputTexture: input,
-                                                       drawableSize: renderingSize),
+                                                       inputTexture: input),
               let stageOutputTexture = bloomMergeRenderPassDescriptor.colorAttachments[0].texture,
               let splitBlurredTexture = device.makeTexture(descriptor: .bloomSplitC(size: renderingSize)),
               let bloomMergeJob = PNBloomMergeJob.make(device: device,
-                                                       drawableSize: renderingSize,
                                                        unmodifiedSceneTexture: input,
                                                        brightAreasTexture: PNStaticTexture(splitBlurredTexture)) else {
             return nil

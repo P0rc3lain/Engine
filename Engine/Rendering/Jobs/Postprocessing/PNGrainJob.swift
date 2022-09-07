@@ -9,21 +9,17 @@ import simd
 struct PNGrainJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let inputTexture: PNTextureProvider
-    private let viewPort: MTLViewport
     private let plane: PNMesh
     init(pipelineState: MTLRenderPipelineState,
          inputTexture: PNTextureProvider,
-         plane: PNMesh,
-         canvasSize: CGSize) {
+         plane: PNMesh) {
         self.inputTexture = inputTexture
         self.pipelineState = pipelineState
         self.plane = plane
-        self.viewPort = .porcelain(size: canvasSize)
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         encoder.setFragmentTexture(inputTexture,
                                    index: kAttributeGrainFragmentShaderTexture)
-        encoder.setViewport(viewPort)
         let time = Float(Date().timeIntervalSince1970.truncatingRemainder(dividingBy: 20))
         encoder.setVertexBytes(value: time,
                                index: kAttributeGrainVertexShaderBufferTime)
@@ -33,8 +29,7 @@ struct PNGrainJob: PNRenderJob {
         encoder.drawIndexedPrimitives(submesh: plane.pieceDescriptions[0].drawDescription)
     }
     static func make(device: MTLDevice,
-                     inputTexture: PNTextureProvider,
-                     canvasSize: CGSize) -> PNGrainJob? {
+                     inputTexture: PNTextureProvider) -> PNGrainJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSGrain(library: library),
               let plane = PNMesh.plane(device: device) else {
@@ -42,7 +37,6 @@ struct PNGrainJob: PNRenderJob {
         }
         return PNGrainJob(pipelineState: pipelineState,
                           inputTexture: inputTexture,
-                          plane: plane,
-                          canvasSize: canvasSize)
+                          plane: plane)
     }
 }

@@ -93,7 +93,6 @@
 		561667562719E2CD000063B1 /* PNIRenderingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666F12719E2CD000063B1 /* PNIRenderingCoordinator.swift */; };
 		561667572719E2CD000063B1 /* PNIBufferStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666F32719E2CD000063B1 /* PNIBufferStore.swift */; };
 		561667582719E2CD000063B1 /* Engine.h in Headers */ = {isa = PBXBuildFile; fileRef = 561666F52719E2CD000063B1 /* Engine.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		561DF41727246F1800D95ACC /* MTLViewport+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561DF41627246F1800D95ACC /* MTLViewport+Extension.swift */; };
 		5620C8112754E8740098D6FA /* PNSSAOHemisphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C8102754E8740098D6FA /* PNSSAOHemisphere.swift */; };
 		5620C8132754F3AE0098D6FA /* PNOmniLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C8122754F3AE0098D6FA /* PNOmniLight.swift */; };
 		5620C8152754F3B60098D6FA /* PNSpotLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C8142754F3B60098D6FA /* PNSpotLight.swift */; };
@@ -428,7 +427,6 @@
 		561666F32719E2CD000063B1 /* PNIBufferStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNIBufferStore.swift; sourceTree = "<group>"; };
 		561666F52719E2CD000063B1 /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
 		561666F62719E2CD000063B1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		561DF41627246F1800D95ACC /* MTLViewport+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLViewport+Extension.swift"; sourceTree = "<group>"; };
 		5620C8102754E8740098D6FA /* PNSSAOHemisphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSSAOHemisphere.swift; sourceTree = "<group>"; };
 		5620C8122754F3AE0098D6FA /* PNOmniLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNOmniLight.swift; sourceTree = "<group>"; };
 		5620C8142754F3B60098D6FA /* PNSpotLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSpotLight.swift; sourceTree = "<group>"; };
@@ -1866,7 +1864,6 @@
 				561666942719E2CC000063B1 /* MTLDevice+Extension.swift */,
 				561666802719E2CC000063B1 /* MTLVertexDescriptor+Extension.swift */,
 				561666852719E2CC000063B1 /* MTLTextureDescriptor+Extension.swift */,
-				561DF41627246F1800D95ACC /* MTLViewport+Extension.swift */,
 				562B8F42272599FF00363CE8 /* MTLRenderCommandEncoder+Extension.swift */,
 				56A3728D273862300079A93D /* MTLOrigin+Extension.swift */,
 				564DE04628427595005C2029 /* MTLLibrary+Extension.swift */,
@@ -2217,7 +2214,6 @@
 				56484BA8284616F6004DFF36 /* Translucent.metal in Sources */,
 				56C47BAA27516C800075C61B /* PNIRenderMaskGenerator.swift in Sources */,
 				5635177528AD6A2900807BDA /* PNIRefreshController.swift in Sources */,
-				561DF41727246F1800D95ACC /* MTLViewport+Extension.swift in Sources */,
 				56270167272B54EB00071620 /* PNAnimatedTransform.swift in Sources */,
 				56B6AFAE28A259D300266421 /* PNIPaletteGenerator.swift in Sources */,
 				56C4CD53273800E4000A994E /* Spot.metal in Sources */,

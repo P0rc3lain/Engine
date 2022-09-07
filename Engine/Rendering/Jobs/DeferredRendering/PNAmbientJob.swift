@@ -8,7 +8,6 @@ import MetalBinding
 struct PNAmbientJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
-    private let viewPort: MTLViewport
     private let inputTextures: [PNTextureProvider]
     private let ssaoTexture: PNTextureProvider
     private let plane: PNMesh
@@ -16,8 +15,7 @@ struct PNAmbientJob: PNRenderJob {
           inputTextures: [PNTextureProvider],
           ssaoTexture: PNTextureProvider,
           device: MTLDevice,
-          depthStencilState: MTLDepthStencilState,
-          drawableSize: CGSize) {
+          depthStencilState: MTLDepthStencilState) {
         guard let plane = PNMesh.plane(device: device) else {
             return nil
         }
@@ -26,7 +24,6 @@ struct PNAmbientJob: PNRenderJob {
         self.inputTextures = inputTextures
         self.ssaoTexture = ssaoTexture
         self.plane = plane
-        self.viewPort = .porcelain(size: drawableSize)
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         let scene = supply.scene
@@ -34,7 +31,6 @@ struct PNAmbientJob: PNRenderJob {
         guard !scene.ambientLights.isEmpty else {
             return
         }
-        encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
@@ -55,8 +51,7 @@ struct PNAmbientJob: PNRenderJob {
     }
     static func make(device: MTLDevice,
                      inputTextures: [PNTextureProvider],
-                     ssaoTexture: PNTextureProvider,
-                     drawableSize: CGSize) -> PNAmbientJob? {
+                     ssaoTexture: PNTextureProvider) -> PNAmbientJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSAmbient(library: library),
               let depthStencilState = device.makeDSSAmbient() else {
@@ -66,7 +61,6 @@ struct PNAmbientJob: PNRenderJob {
                             inputTextures: inputTextures,
                             ssaoTexture: ssaoTexture,
                             device: device,
-                            depthStencilState: depthStencilState,
-                            drawableSize: drawableSize)
+                            depthStencilState: depthStencilState)
     }
 }

@@ -11,7 +11,7 @@ struct PNGBufferStage: PNStage {
     private let gBufferJob: PNRenderJob
     init?(device: MTLDevice, renderingSize: CGSize) {
         gBufferRenderPassDescriptor = .gBuffer(device: device, size: renderingSize)
-        guard let gBufferJob = PNGBufferJob.make(device: device, drawableSize: renderingSize),
+        guard let gBufferJob = PNGBufferJob.make(device: device),
               let arTexture = gBufferRenderPassDescriptor.colorAttachments[0].texture,
               let nmTexture = gBufferRenderPassDescriptor.colorAttachments[1].texture,
               let prTexture = gBufferRenderPassDescriptor.colorAttachments[2].texture,

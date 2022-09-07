@@ -9,23 +9,19 @@ import simd
 
 struct PNBloomSplitJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
-    private let viewPort: MTLViewport
     private let inputTexture: PNTextureProvider
     private let plane: PNMesh
     init?(pipelineState: MTLRenderPipelineState,
           inputTexture: PNTextureProvider,
-          device: MTLDevice,
-          drawableSize: CGSize) {
+          device: MTLDevice) {
         guard let plane = PNMesh.plane(device: device) else {
             return nil
         }
         self.pipelineState = pipelineState
         self.inputTexture = inputTexture
         self.plane = plane
-        self.viewPort = .porcelain(size: drawableSize)
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
-        encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
                                 index: kAttributeBloomSplitVertexShaderBufferStageIn)
@@ -33,15 +29,13 @@ struct PNBloomSplitJob: PNRenderJob {
         encoder.drawIndexedPrimitives(submesh: plane.pieceDescriptions[0].drawDescription)
     }
     static func make(device: MTLDevice,
-                     inputTexture: PNTextureProvider,
-                     drawableSize: CGSize) -> PNBloomSplitJob? {
+                     inputTexture: PNTextureProvider) -> PNBloomSplitJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSBloomSplit(library: library) else {
             return nil
         }
         return PNBloomSplitJob(pipelineState: pipelineState,
                                inputTexture: inputTexture,
-                               device: device,
-                               drawableSize: drawableSize)
+                               device: device)
     }
 }

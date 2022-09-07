@@ -30,12 +30,9 @@ class PNShadowStage: PNStage {
         directionalShadowRPD = .directionalLightShadow(device: device,
                                                        texture: directionalRenderingTexture.texture)
         self.device = device
-        guard let spotLightShadowJob = PNSpotShadowJob.make(device: device,
-                                                            renderingSize: renderingSize),
-              let omniLightShadowJob = PNOmniShadowJob.make(device: device,
-                                                            renderingSize: renderingSize),
-              let directionalLightShadowJob = PNDirectionalShadowJob.make(device: device,
-                                                                          renderingSize: renderingSize) else {
+        guard let spotLightShadowJob = PNSpotShadowJob.make(device: device),
+              let omniLightShadowJob = PNOmniShadowJob.make(device: device),
+              let directionalLightShadowJob = PNDirectionalShadowJob.make(device: device) else {
             return nil
         }
         self.io = PNGPUIO(input: .empty,

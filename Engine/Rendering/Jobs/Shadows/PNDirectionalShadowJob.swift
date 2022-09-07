@@ -9,15 +9,12 @@ struct PNDirectionalShadowJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let animatedPipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
-    private let viewPort: MTLViewport
     init(pipelineState: MTLRenderPipelineState,
          animatedPipelineState: MTLRenderPipelineState,
-         depthStencilState: MTLDepthStencilState,
-         viewPort: MTLViewport) {
+         depthStencilState: MTLDepthStencilState) {
         self.pipelineState = pipelineState
         self.animatedPipelineState = animatedPipelineState
         self.depthStencilState = depthStencilState
-        self.viewPort = viewPort
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         let scene = supply.scene
@@ -28,7 +25,6 @@ struct PNDirectionalShadowJob: PNRenderJob {
         guard !shadowCasterIndices.isEmpty else {
             return
         }
-        encoder.setViewport(viewPort)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setRenderPipelineState(animatedPipelineState)
         encoder.setVertexBuffer(dataStore.directionalLights,
@@ -72,8 +68,7 @@ struct PNDirectionalShadowJob: PNRenderJob {
             encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
         }
     }
-    static func make(device: MTLDevice,
-                     renderingSize: CGSize) -> PNDirectionalShadowJob? {
+    static func make(device: MTLDevice) -> PNDirectionalShadowJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSDirectionalShadow(library: library),
               let depthStencilState = device.makeDSSDirectionalLightShadow(),
@@ -82,7 +77,6 @@ struct PNDirectionalShadowJob: PNRenderJob {
         }
         return PNDirectionalShadowJob(pipelineState: pipelineState,
                                       animatedPipelineState: animatedPipelineState,
-                                      depthStencilState: depthStencilState,
-                                      viewPort: .porcelain(size: renderingSize))
+                                      depthStencilState: depthStencilState)
     }
 }

@@ -9,19 +9,15 @@ import simd
 struct PNParticleJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
-    private let viewPort: MTLViewport
     init(pipelineState: MTLRenderPipelineState,
-         depthStencilState: MTLDepthStencilState,
-         drawableSize: CGSize) {
+         depthStencilState: MTLDepthStencilState) {
         self.pipelineState = pipelineState
         self.depthStencilState = depthStencilState
-        self.viewPort = .porcelain(size: drawableSize)
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         let scene = supply.scene
         let dataStore = supply.bufferStore
         let mask = supply.mask.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx]
-        encoder.setViewport(viewPort)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setVertexBuffer(dataStore.cameras.buffer,
                                 index: kAttributeParticleVertexShaderBufferCameraUniforms)
@@ -47,14 +43,13 @@ struct PNParticleJob: PNRenderJob {
             encoder.drawPrimitives(type: .point, vertexStart: 0, vertexCount: particleSystem.particles.count)
         }
     }
-    static func make(device: MTLDevice, drawableSize: CGSize) -> PNParticleJob? {
+    static func make(device: MTLDevice) -> PNParticleJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSParticle(library: library),
               let depthStencilState = device.makeDSSParticle() else {
             return nil
         }
         return PNParticleJob(pipelineState: pipelineState,
-                             depthStencilState: depthStencilState,
-                             drawableSize: drawableSize)
+                             depthStencilState: depthStencilState)
     }
 }

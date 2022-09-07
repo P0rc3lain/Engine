@@ -8,7 +8,6 @@ import simd
 
 struct PNSSAOJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
-    private let viewPort: MTLViewport
     private let plane: PNMesh
     private let prTexture: PNTextureProvider
     private let nmTexture: PNTextureProvider
@@ -19,7 +18,6 @@ struct PNSSAOJob: PNRenderJob {
           prTexture: PNTextureProvider,
           nmTexture: PNTextureProvider,
           device: MTLDevice,
-          drawableSize: CGSize,
           kernelBuffer: PNAnyStaticBuffer<simd_float3>,
           noiseBuffer: PNAnyStaticBuffer<simd_float3>,
           uniforms: PNAnyStaticBuffer<SSAOUniforms>,
@@ -32,7 +30,6 @@ struct PNSSAOJob: PNRenderJob {
         self.nmTexture = nmTexture
         self.prTexture = prTexture
         self.plane = plane
-        self.viewPort = .porcelain(size: drawableSize)
         self.kernelBuffer = kernelBuffer
         self.noiseBuffer = noiseBuffer
         self.uniforms = uniforms
@@ -42,7 +39,6 @@ struct PNSSAOJob: PNRenderJob {
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         let bufferStore = supply.bufferStore
-        encoder.setViewport(viewPort)
         encoder.setRenderPipelineState(pipelineState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
                                 index: kAttributeSsaoVertexShaderBufferStageIn)
@@ -64,7 +60,6 @@ struct PNSSAOJob: PNRenderJob {
     static func make(device: MTLDevice,
                      prTexture: PNTextureProvider,
                      nmTexture: PNTextureProvider,
-                     drawableSize: CGSize,
                      maxNoiseCount: Int,
                      maxSamplesCount: Int) -> PNSSAOJob? {
         guard let library = device.makePorcelainLibrary(),
@@ -79,7 +74,6 @@ struct PNSSAOJob: PNRenderJob {
                          prTexture: prTexture,
                          nmTexture: nmTexture,
                          device: device,
-                         drawableSize: drawableSize,
                          kernelBuffer: PNAnyStaticBuffer(kernelBuffer),
                          noiseBuffer: PNAnyStaticBuffer(noiseBuffer),
                          uniforms: PNAnyStaticBuffer(uniforms),

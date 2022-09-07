@@ -34,8 +34,7 @@ struct PNPipeline: PNStage {
                                             device: device,
                                             renderingSize: renderingSize),
               let postprocessStage = PNPostprocessStage(device: device,
-                                                        inputTexture: bloomStage.io.output.color[0],
-                                                        renderingSize: renderingSize) else {
+                                                        inputTexture: bloomStage.io.output.color[0]) else {
             return nil
         }
         self.gBufferStage = gBufferStage

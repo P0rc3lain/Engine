@@ -10,21 +10,17 @@ struct PNTranslucentJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let animatedPipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
-    private let viewPort: MTLViewport
     init(pipelineState: MTLRenderPipelineState,
          animatedPipelineState: MTLRenderPipelineState,
-         depthStencilState: MTLDepthStencilState,
-         drawableSize: CGSize) {
+         depthStencilState: MTLDepthStencilState) {
         self.pipelineState = pipelineState
         self.animatedPipelineState = animatedPipelineState
         self.depthStencilState = depthStencilState
-        self.viewPort = .porcelain(size: drawableSize)
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         let scene = supply.scene
         let dataStore = supply.bufferStore
         let mask = supply.mask.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx]
-        encoder.setViewport(viewPort)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setVertexBuffer(dataStore.cameras.buffer,
                                 index: kAttributeTranslucentVertexShaderBufferCameraUniforms)
@@ -72,7 +68,7 @@ struct PNTranslucentJob: PNRenderJob {
             encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
         }
     }
-    static func make(device: MTLDevice, drawableSize: CGSize) -> PNTranslucentJob? {
+    static func make(device: MTLDevice) -> PNTranslucentJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSTranslucent(library: library),
               let animatedPipelineState = device.makeRPSTranslucentAnimated(library: library),
@@ -81,7 +77,6 @@ struct PNTranslucentJob: PNRenderJob {
         }
         return PNTranslucentJob(pipelineState: pipelineState,
                                 animatedPipelineState: animatedPipelineState,
-                                depthStencilState: depthStencilState,
-                                drawableSize: drawableSize)
+                                depthStencilState: depthStencilState)
     }
 }

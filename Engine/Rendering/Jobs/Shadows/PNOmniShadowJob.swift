@@ -11,16 +11,13 @@ struct PNOmniShadowJob: PNRenderJob {
     private let animatedPipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
     private var rotationsBuffer: PNAnyStaticBuffer<simd_float4x4>
-    private let viewPort: MTLViewport
     init(pipelineState: MTLRenderPipelineState,
          animatedPipelineState: MTLRenderPipelineState,
          depthStencilState: MTLDepthStencilState,
-         rotationsBuffer: PNAnyStaticBuffer<simd_float4x4>,
-         viewPort: MTLViewport) {
+         rotationsBuffer: PNAnyStaticBuffer<simd_float4x4>) {
         self.pipelineState = pipelineState
         self.animatedPipelineState = animatedPipelineState
         self.depthStencilState = depthStencilState
-        self.viewPort = viewPort
         self.rotationsBuffer = rotationsBuffer
         self.rotationsBuffer.upload(data: PNSurroundings.rotationMatrices)
     }
@@ -31,7 +28,6 @@ struct PNOmniShadowJob: PNRenderJob {
         guard !shadowCasterIndices.isEmpty else {
             return
         }
-        encoder.setViewport(viewPort)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setRenderPipelineState(animatedPipelineState)
         encoder.setVertexBuffer(rotationsBuffer,
@@ -82,8 +78,7 @@ struct PNOmniShadowJob: PNRenderJob {
             encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
         }
     }
-    static func make(device: MTLDevice,
-                     renderingSize: CGSize) -> PNOmniShadowJob? {
+    static func make(device: MTLDevice) -> PNOmniShadowJob? {
         guard let library = device.makePorcelainLibrary(),
               let pipelineState = device.makeRPSOmniShadow(library: library),
               let depthStencilState = device.makeDSSOmniLightShadow(),
@@ -94,7 +89,6 @@ struct PNOmniShadowJob: PNRenderJob {
         return PNOmniShadowJob(pipelineState: pipelineState,
                                animatedPipelineState: animatedPipelineState,
                                depthStencilState: depthStencilState,
-                               rotationsBuffer: PNAnyStaticBuffer(rotationsBuffer),
-                               viewPort: .porcelain(size: renderingSize))
+                               rotationsBuffer: PNAnyStaticBuffer(rotationsBuffer))
     }
 }

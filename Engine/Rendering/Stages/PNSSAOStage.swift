@@ -19,7 +19,6 @@ struct PNSSAOStage: PNStage {
         guard let ssaoRenderer = PNSSAOJob.make(device: device,
                                                 prTexture: prTexture,
                                                 nmTexture: nmTexture,
-                                                drawableSize: renderingSize,
                                                 maxNoiseCount: 64,
                                                 maxSamplesCount: 64),
               let gaussTexture = device.makeTexture(descriptor: .ssaoC(size: renderingSize)) else {
