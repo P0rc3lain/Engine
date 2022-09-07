@@ -3,6 +3,7 @@
 //
 
 public final class PNIParticleNode: PNParticleNode {
+    public let name: String
     public var provider: PNRenderableParticlesProvider
     public let transform: PNSubject<PNLTransform>
     public let worldTransform: PNSubject<PNM2WTransform>
@@ -16,7 +17,9 @@ public final class PNIParticleNode: PNParticleNode {
     }
     private let refreshController = PNIRefreshController()
     public init(provider: PNRenderableParticlesProvider,
-                transform: PNLTransform) {
+                transform: PNLTransform,
+                name: String = "") {
+        self.name = name
         self.provider = provider
         self.transform = PNSubject(transform)
         self.worldTransform = PNSubject(.identity)

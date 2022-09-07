@@ -5,6 +5,7 @@
 import MetalBinding
 
 public final class PNIAmbientLightNode: PNAmbientLightNode {
+    public let name: String
     public let light: PNAmbientLight
     public let transform: PNSubject<PNLTransform>
     public let worldTransform: PNSubject<PNM2WTransform>
@@ -16,7 +17,9 @@ public final class PNIAmbientLightNode: PNAmbientLightNode {
     public let intrinsicBoundingBox: PNBoundingBox?
     private let refreshController = PNIRefreshController()
     public init(light: PNAmbientLight,
-                transform: PNLTransform) {
+                transform: PNLTransform,
+                name: String = "") {
+        self.name = name
         self.light = light
         self.transform = PNSubject(transform)
         self.worldTransform = PNSubject(.identity)

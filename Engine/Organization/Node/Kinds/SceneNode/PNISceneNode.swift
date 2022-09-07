@@ -3,6 +3,7 @@
 //
 
 public final class PNISceneNode: PNSceneNode {
+    public let name: String
     public let transform: PNSubject<PNLTransform>
     public let worldTransform: PNSubject<PNM2WTransform>
     public let enclosingNode: PNScenePieceSubject
@@ -13,7 +14,9 @@ public final class PNISceneNode: PNSceneNode {
     public let intrinsicBoundingBox: PNBoundingBox?
     private let refreshController = PNIRefreshController()
     public init(transform: PNLTransform = .identity,
-                boundingBox: PNBoundingBox? = nil) {
+                boundingBox: PNBoundingBox? = nil,
+                name: String = "") {
+        self.name = name
         self.transform = PNSubject(transform)
         self.worldTransform = PNSubject(.identity)
         self.enclosingNode = PNSubject(PNWeakRef(nil))

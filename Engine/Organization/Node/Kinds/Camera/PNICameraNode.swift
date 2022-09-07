@@ -5,6 +5,7 @@
 import MetalBinding
 
 public final class PNICameraNode: PNCameraNode {
+    public let name: String
     public var camera: PNCamera
     public let transform: PNSubject<PNLTransform>
     public let worldTransform: PNSubject<PNM2WTransform>
@@ -16,7 +17,9 @@ public final class PNICameraNode: PNCameraNode {
     public let intrinsicBoundingBox: PNBoundingBox?
     private let refreshController = PNIRefreshController()
     public init(camera: PNCamera,
-                transform: PNLTransform) {
+                transform: PNLTransform,
+                name: String = "") {
+        self.name = name
         self.camera = camera
         self.transform = PNSubject(transform)
         self.worldTransform = PNSubject(.identity)

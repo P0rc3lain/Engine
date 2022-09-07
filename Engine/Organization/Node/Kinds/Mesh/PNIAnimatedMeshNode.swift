@@ -3,6 +3,7 @@
 //
 
 public final class PNIAnimatedMeshNode: PNAnimatedMeshNode {
+    public let name: String
     public let mesh: PNMesh
     public var animator: PNAnimator
     public var animation: PNAnimatedCoordinateSpace
@@ -17,7 +18,9 @@ public final class PNIAnimatedMeshNode: PNAnimatedMeshNode {
     private let refreshController = PNIRefreshController()
     public init(mesh: PNMesh,
                 animator: PNAnimator,
-                animation: PNAnimatedCoordinateSpace) {
+                animation: PNAnimatedCoordinateSpace,
+                name: String="") {
+        self.name = name
         self.mesh = mesh
         self.animator = animator
         self.animation = animation

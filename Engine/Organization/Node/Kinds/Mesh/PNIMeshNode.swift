@@ -3,6 +3,7 @@
 //
 
 public final class PNIMeshNode: PNMeshNode {
+    public let name: String
     public let mesh: PNMesh
     public let transform: PNSubject<PNLTransform>
     public let worldTransform: PNSubject<PNM2WTransform>
@@ -14,7 +15,9 @@ public final class PNIMeshNode: PNMeshNode {
     public let intrinsicBoundingBox: PNBoundingBox?
     private let refreshController = PNIRefreshController()
     public init(mesh: PNMesh,
-                transform: PNLTransform) {
+                transform: PNLTransform,
+                name: String = "") {
+        self.name = name
         self.mesh = mesh
         self.transform = PNSubject(transform)
         self.worldTransform = PNSubject(.identity)

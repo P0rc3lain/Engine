@@ -3,6 +3,7 @@
 //
 
 public final class PNIAnimatedNode: PNAnimatedNode {
+    public let name: String
     public var animator: PNAnimator
     public var animation: PNAnimatedCoordinateSpace
     public let transform: PNSubject<PNLTransform>
@@ -15,7 +16,9 @@ public final class PNIAnimatedNode: PNAnimatedNode {
     public let intrinsicBoundingBox: PNBoundingBox?
     private let refreshController = PNIRefreshController()
     public init(animator: PNAnimator,
-                animation: PNAnimatedCoordinateSpace) {
+                animation: PNAnimatedCoordinateSpace,
+                name: String = "") {
+        self.name = name
         self.animator = animator
         self.animation = animation
         self.transform = PNSubject(animator.transform(coordinateSpace: animation))

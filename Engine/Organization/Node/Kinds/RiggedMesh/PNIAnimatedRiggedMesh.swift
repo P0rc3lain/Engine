@@ -3,6 +3,7 @@
 //
 
 public final class PNIAnimatedRiggedMesh: PNAnimatedRiggedMesh {
+    public let name: String
     public let mesh: PNMesh
     public var skeleton: PNSkeleton
     public var animator: PNAnimator
@@ -19,7 +20,9 @@ public final class PNIAnimatedRiggedMesh: PNAnimatedRiggedMesh {
     public init(mesh: PNMesh,
                 skeleton: PNSkeleton,
                 animator: PNAnimator,
-                animation: PNAnimatedCoordinateSpace) {
+                animation: PNAnimatedCoordinateSpace,
+                name: String = "") {
+        self.name = name
         self.mesh = mesh
         self.skeleton = skeleton
         self.animator = animator

@@ -5,6 +5,7 @@
 import MetalBinding
 
 public final class PNIAnimatedCameraNode: PNAnimatedCameraNode {
+    public let name: String
     public var camera: PNCamera
     public var animator: PNAnimator
     public var animation: PNAnimatedCoordinateSpace
@@ -19,7 +20,9 @@ public final class PNIAnimatedCameraNode: PNAnimatedCameraNode {
     private let refreshController = PNIRefreshController()
     public init(camera: PNCamera,
                 animator: PNAnimator,
-                animation: PNAnimatedCoordinateSpace) {
+                animation: PNAnimatedCoordinateSpace,
+                name: String = "") {
+        self.name = name
         self.camera = camera
         self.animator = animator
         self.animation = animation

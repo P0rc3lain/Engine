@@ -3,6 +3,7 @@
 //
 
 public final class PNIRiggedMesh: PNRiggedMesh {
+    public let name: String
     public let mesh: PNMesh
     public let skeleton: PNSkeleton
     public let transform: PNSubject<PNLTransform>
@@ -16,7 +17,9 @@ public final class PNIRiggedMesh: PNRiggedMesh {
     private let refreshController = PNIRefreshController()
     public init(mesh: PNMesh,
                 skeleton: PNSkeleton,
-                transform: PNLTransform) {
+                transform: PNLTransform,
+                name: String="") {
+        self.name = name
         self.mesh = mesh
         self.skeleton = skeleton
         self.transform = PNSubject(transform)

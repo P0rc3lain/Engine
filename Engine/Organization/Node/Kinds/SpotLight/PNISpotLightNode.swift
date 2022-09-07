@@ -5,6 +5,7 @@
 import MetalBinding
 
 public final class PNISpotLightNode: PNSpotLightNode {
+    public let name: String
     public let light: PNSpotLight
     public let transform: PNSubject<PNLTransform>
     public let worldTransform: PNSubject<PNM2WTransform>
@@ -16,7 +17,9 @@ public final class PNISpotLightNode: PNSpotLightNode {
     public let intrinsicBoundingBox: PNBoundingBox?
     private let refreshController = PNIRefreshController()
     public init(light: PNSpotLight,
-                transform: PNLTransform) {
+                transform: PNLTransform,
+                name: String = "") {
+        self.name = name
         self.light = light
         self.transform = PNSubject(transform)
         self.worldTransform = PNSubject(.identity)

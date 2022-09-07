@@ -3,6 +3,7 @@
 //
 
 public protocol PNSceneNode: AnyObject {
+    var name: String { get }
     var transform: PNSubject<PNLTransform> { get }
     var worldTransform: PNSubject<PNM2WTransform> { get }
     var enclosingNode: PNScenePieceSubject { get }
