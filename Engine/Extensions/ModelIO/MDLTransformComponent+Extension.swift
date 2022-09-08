@@ -28,8 +28,8 @@ extension MDLTransformComponent {
         let orientationAnimation = PNAnimatedQuatf(keyFrames: orientations,
                                                    times: times,
                                                    maximumTime: maximumTime)
-        return PNAnimatedCoordinateSpace(translation: PNAnyAnimatedValue(translationAnimation),
-                                         rotation: PNAnyAnimatedValue(orientationAnimation),
-                                         scale: PNAnyAnimatedValue(scaleAnimation))
+        return PNAnimatedCoordinateSpace(translation: translationAnimation,
+                                         rotation: orientationAnimation,
+                                         scale: scaleAnimation)
     }
 }
