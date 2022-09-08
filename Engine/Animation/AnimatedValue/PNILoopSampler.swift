@@ -10,6 +10,11 @@ public class PNILoopSampler: PNSampleProvider {
                                      upcomingKeyFrame: animation.keyFrames[0],
                                      ratio: 0.5)
         }
+        if let keyFrameIndex = animation.times.firstIndex(of: time) {
+            return PNAnimationSample(currentKeyFrame: animation.keyFrames[keyFrameIndex],
+                                     upcomingKeyFrame: animation.keyFrames[keyFrameIndex],
+                                     ratio: 0.5)
+        }
         let clipped = time.truncatingRemainder(dividingBy: animation.maximumTime)
         let nextIndex = animation.times.firstIndex { clipped < $0 } ?? 0
         let currentIndex = nextIndex > 0 ? nextIndex - 1 : animation.times.count - 1
