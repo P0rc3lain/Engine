@@ -18,7 +18,7 @@ public final class PNIRiggedMesh: PNRiggedMesh {
     public init(mesh: PNMesh,
                 skeleton: PNSkeleton,
                 transform: PNLTransform,
-                name: String="") {
+                name: String = "") {
         self.name = name
         self.mesh = mesh
         self.skeleton = skeleton

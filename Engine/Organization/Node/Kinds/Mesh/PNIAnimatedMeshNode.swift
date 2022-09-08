@@ -19,7 +19,7 @@ public final class PNIAnimatedMeshNode: PNAnimatedMeshNode {
     public init(mesh: PNMesh,
                 animator: PNAnimator,
                 animation: PNAnimatedCoordinateSpace,
-                name: String="") {
+                name: String = "") {
         self.name = name
         self.mesh = mesh
         self.animator = animator
