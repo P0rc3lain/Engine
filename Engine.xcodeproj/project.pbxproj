@@ -157,6 +157,7 @@
 		564852F428C7CBDE00BA4CC0 /* PNCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564852F328C7CBDE00BA4CC0 /* PNCamera.swift */; };
 		5648530728C7E71700BA4CC0 /* PNNodeTrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648530628C7E71700BA4CC0 /* PNNodeTrace.swift */; };
 		5648530928C7E8D200BA4CC0 /* PNINodeTrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648530828C7E8D200BA4CC0 /* PNINodeTrace.swift */; };
+		5648531A28C9EF0300BA4CC0 /* PNTransformationWinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648531928C9EF0300BA4CC0 /* PNTransformationWinding.swift */; };
 		564DE040284169B9005C2029 /* Comparable+Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE03F284169B9005C2029 /* Comparable+Global.swift */; };
 		564DE04728427595005C2029 /* MTLLibrary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE04628427595005C2029 /* MTLLibrary+Extension.swift */; };
 		564DE04928427689005C2029 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE04828427689005C2029 /* Bundle+Extension.swift */; };
@@ -497,6 +498,7 @@
 		564852F328C7CBDE00BA4CC0 /* PNCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCamera.swift; sourceTree = "<group>"; };
 		5648530628C7E71700BA4CC0 /* PNNodeTrace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNNodeTrace.swift; sourceTree = "<group>"; };
 		5648530828C7E8D200BA4CC0 /* PNINodeTrace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNINodeTrace.swift; sourceTree = "<group>"; };
+		5648531928C9EF0300BA4CC0 /* PNTransformationWinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNTransformationWinding.swift; sourceTree = "<group>"; };
 		564DE03F284169B9005C2029 /* Comparable+Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Global.swift"; sourceTree = "<group>"; };
 		564DE04628427595005C2029 /* MTLLibrary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLLibrary+Extension.swift"; sourceTree = "<group>"; };
 		564DE04828427689005C2029 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
@@ -1243,6 +1245,7 @@
 				5629FBE827492012005476AF /* Interpolation */,
 				5629FBDD27491A62005476AF /* AnimatedValue */,
 				56270166272B54EB00071620 /* PNAnimatedTransform.swift */,
+				5648531928C9EF0300BA4CC0 /* PNTransformationWinding.swift */,
 			);
 			path = Animation;
 			sourceTree = "<group>";
@@ -2488,6 +2491,7 @@
 				56270169272B556500071620 /* PNAnimatedTransform+Alias.swift in Sources */,
 				563C9C1D27387B940014CFF3 /* PNPipeline.swift in Sources */,
 				5620C81D2754F5480098D6FA /* PNIDirectionalLight.swift in Sources */,
+				5648531A28C9EF0300BA4CC0 /* PNTransformationWinding.swift in Sources */,
 				568C05B928B2D6AA007607E6 /* simd_float2+Alias.swift in Sources */,
 				5629FBDF27491A78005476AF /* PNAnimatedValue.swift in Sources */,
 				560A0BAA27540D9A005AE29D /* PNBufferStore.swift in Sources */,

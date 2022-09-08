@@ -10,9 +10,9 @@ extension PNAnimatedSkeleton {
         let rotationsPalette = interpolator.interpolated(sample: rotation.sample(at: time))
         let scalesPalette = interpolator.interpolated(sample: scale.sample(at: time))
         return translationsPalette.indices.map { index in
-            simd_float4x4.compose(translation: translationsPalette[index],
-                                  rotation: rotationsPalette[index],
-                                  scale: scalesPalette[index])
+            simd_float4x4.composeTRS(translation: translationsPalette[index],
+                                     rotation: rotationsPalette[index],
+                                     scale: scalesPalette[index])
         }
     }
 }

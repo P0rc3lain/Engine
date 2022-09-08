@@ -74,25 +74,25 @@ public final class PNISceneTranslator: PNSceneTranslator {
         guard let transfrom = transform?.decomposed else {
             return PNIRiggedMesh(mesh: mesh, skeleton: skeleton, transform: .identity)
         }
-        return PNIAnimatedRiggedMesh(mesh: mesh, skeleton: skeleton, animator: PNIAnimator.default, animation: transfrom)
+        return PNIAnimatedRiggedMesh(mesh: mesh, skeleton: skeleton, animator: PNIAnimator.`defaultTRS`, animation: transfrom)
     }
     private func meshNode(mesh: PNMesh, transform: MDLTransformComponent?) -> PNSceneNode {
         guard let transfrom = transform?.decomposed else {
             return PNIMeshNode(mesh: mesh, transform: .identity)
         }
-        return PNIAnimatedMeshNode(mesh: mesh, animator: PNIAnimator.default, animation: transfrom)
+        return PNIAnimatedMeshNode(mesh: mesh, animator: PNIAnimator.`defaultTRS`, animation: transfrom)
     }
     private func cameraNode(camera: PNCamera, transform: MDLTransformComponent?) -> PNSceneNode {
         guard let transfrom = transform?.decomposed else {
             return PNICameraNode(camera: camera, transform: .identity)
         }
-        return PNIAnimatedCameraNode(camera: camera, animator: PNIAnimator.default, animation: transfrom)
+        return PNIAnimatedCameraNode(camera: camera, animator: PNIAnimator.`defaultTRS`, animation: transfrom)
     }
     private func groupNode(transfrom: MDLTransformComponent?) -> PNSceneNode {
         guard let transfrom = transfrom?.decomposed else {
             return PNISceneNode(transform: .identity)
         }
-        return PNIAnimatedNode(animator: PNIAnimator.default, animation: transfrom)
+        return PNIAnimatedNode(animator: PNIAnimator.`defaultTRS`, animation: transfrom)
     }
     private func convert(mesh: MDLMesh) -> PNMesh? {
         assert(mesh.vertexBuffers.count == 1,
