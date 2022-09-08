@@ -3,6 +3,6 @@
 //
 
 public protocol PNSampleProvider {
-    associatedtype DataType
-    func sample(at time: TimeInterval) -> PNAnimationSample<DataType>
+    func sample<T>(animation: PNKeyframeAnimation<T>,
+                   at time: PNTimePoint) -> PNAnimationSample<T>
 }
