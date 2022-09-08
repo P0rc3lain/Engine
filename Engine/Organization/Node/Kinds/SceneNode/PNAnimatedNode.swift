@@ -4,5 +4,5 @@
 
 public protocol PNAnimatedNode: PNSceneNode {
     var animator: PNAnimator { get }
-    var animation: PNAnimatedCoordinateSpace { get }
+    var animation: PNAnimatedCoordinateSpace { get set }
 }
