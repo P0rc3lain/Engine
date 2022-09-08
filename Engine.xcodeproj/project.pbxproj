@@ -159,6 +159,7 @@
 		5648531C28C9F26300BA4CC0 /* PNKeyframeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648531B28C9F26300BA4CC0 /* PNKeyframeAnimation.swift */; };
 		5648531F28C9F2C400BA4CC0 /* NSDate+Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648531E28C9F2C400BA4CC0 /* NSDate+Aliases.swift */; };
 		5648532128C9F35900BA4CC0 /* PNILoopSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648532028C9F35900BA4CC0 /* PNILoopSampler.swift */; };
+		5648532328CA154F00BA4CC0 /* PNISinglePlaySampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648532228CA154F00BA4CC0 /* PNISinglePlaySampler.swift */; };
 		564DE040284169B9005C2029 /* Comparable+Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE03F284169B9005C2029 /* Comparable+Global.swift */; };
 		564DE04728427595005C2029 /* MTLLibrary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE04628427595005C2029 /* MTLLibrary+Extension.swift */; };
 		564DE04928427689005C2029 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE04828427689005C2029 /* Bundle+Extension.swift */; };
@@ -499,6 +500,7 @@
 		5648531B28C9F26300BA4CC0 /* PNKeyframeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNKeyframeAnimation.swift; sourceTree = "<group>"; };
 		5648531E28C9F2C400BA4CC0 /* NSDate+Aliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDate+Aliases.swift"; sourceTree = "<group>"; };
 		5648532028C9F35900BA4CC0 /* PNILoopSampler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNILoopSampler.swift; sourceTree = "<group>"; };
+		5648532228CA154F00BA4CC0 /* PNISinglePlaySampler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNISinglePlaySampler.swift; sourceTree = "<group>"; };
 		564DE03F284169B9005C2029 /* Comparable+Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Global.swift"; sourceTree = "<group>"; };
 		564DE04628427595005C2029 /* MTLLibrary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLLibrary+Extension.swift"; sourceTree = "<group>"; };
 		564DE04828427689005C2029 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
@@ -1140,6 +1142,7 @@
 				563575F32728486A00CE4988 /* PNAnimationSample.swift */,
 				5629FBE227491D03005476AF /* PNSampleProvider.swift */,
 				5648532028C9F35900BA4CC0 /* PNILoopSampler.swift */,
+				5648532228CA154F00BA4CC0 /* PNISinglePlaySampler.swift */,
 			);
 			path = AnimatedValue;
 			sourceTree = "<group>";
@@ -2396,6 +2399,7 @@
 				567F5C3D28A7AC3000AD0A6C /* NSImage+Extension.swift in Sources */,
 				5648531C28C9F26300BA4CC0 /* PNKeyframeAnimation.swift in Sources */,
 				5688076827483F4600C95F55 /* PNIMaterial.swift in Sources */,
+				5648532328CA154F00BA4CC0 /* PNISinglePlaySampler.swift in Sources */,
 				566795DA274FC561005993D7 /* PNEngine.swift in Sources */,
 				564DE040284169B9005C2029 /* Comparable+Global.swift in Sources */,
 				5620C8152754F3B60098D6FA /* PNSpotLight.swift in Sources */,
