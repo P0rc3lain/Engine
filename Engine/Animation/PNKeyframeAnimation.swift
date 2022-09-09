@@ -9,6 +9,10 @@ public struct PNKeyframeAnimation<T> {
     public init(keyFrames: [T],
                 times: [PNTimePoint],
                 maximumTime: PNTimeInterval) {
+        assertEqual(times.count, keyFrames.count)
+        assertSorted(times)
+        assertNotEmpty(times)
+        assertGreaterOrEqual(maximumTime, times[times.count - 1])
         self.keyFrames = keyFrames
         self.times = times
         self.maximumTime = maximumTime
@@ -16,6 +20,6 @@ public struct PNKeyframeAnimation<T> {
     static public func `static`(from value: T) -> PNKeyframeAnimation<T> {
         PNKeyframeAnimation<T>(keyFrames: [value],
                                times: [0],
-                               maximumTime: 1)
+                               maximumTime: 1)g
     }
 }

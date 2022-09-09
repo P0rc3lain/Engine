@@ -93,3 +93,19 @@ public func assertNotEmpty<T>(_ values: [T],
                               line: UInt = #line) {
     assert(!values.isEmpty, message, file: file, line: line)
 }
+
+public func assertGreaterOrEqual<T: Comparable>(_ v1: T,
+                                                _ v2: T,
+                                                _ message: String = "First parameter must be greater or equal to the second",
+                                                file: StaticString = #file,
+                                                line: UInt = #line) {
+    assert(v1 >= v2, message, file: file, line: line)
+}
+
+public func assertEqual<T: Comparable>(_ v1: T,
+                                       _ v2: T,
+                                       _ message: String = "First parameter must be equal to the second",
+                                       file: StaticString = #file,
+                                       line: UInt = #line) {
+    assert(v1 == v2, message, file: file, line: line)
+}
