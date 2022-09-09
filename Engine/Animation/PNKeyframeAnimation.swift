@@ -20,6 +20,6 @@ public struct PNKeyframeAnimation<T> {
     static public func `static`(from value: T) -> PNKeyframeAnimation<T> {
         PNKeyframeAnimation<T>(keyFrames: [value],
                                times: [0],
-                               maximumTime: 1)g
+                               maximumTime: 1)
     }
 }
