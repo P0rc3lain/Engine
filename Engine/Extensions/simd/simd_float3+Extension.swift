@@ -19,4 +19,7 @@ extension simd_float3 {
     public func randomPerpendicular(length: Float = 1) -> simd_float3 {
         cross(self, simd_float3.random()).normalized * length
     }
+    public init(_ x: Int, _ y: Int, _ z: Int) {
+        self.init(Float(x), Float(y), Float(z))
+    }
 }
