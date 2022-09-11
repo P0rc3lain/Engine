@@ -5,7 +5,7 @@
 import simd
 
 extension simd_quatf {
-    var rotationMatrix: simd_float4x4 {
+    public var rotationMatrix: simd_float4x4 {
         simd_float4x4(self)
     }
 }
