@@ -248,6 +248,7 @@
 		56924AE4271A181600FF3E06 /* PNIAnimatedValue+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AE3271A181600FF3E06 /* PNIAnimatedValue+Alias.swift */; };
 		56924AE8271A187400FF3E06 /* PNAnimatedFloat3+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AE7271A187400FF3E06 /* PNAnimatedFloat3+Extension.swift */; };
 		56924AEA271A188700FF3E06 /* PNAnimatedQuatf+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AE9271A188700FF3E06 /* PNAnimatedQuatf+Extension.swift */; };
+		569699C828CE49E300469E6B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569699C728CE49E300469E6B /* String+Extension.swift */; };
 		569772AD2868B18100DB9CCA /* PNTextureProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569772AC2868B18100DB9CCA /* PNTextureProvider.swift */; };
 		569772AF2868B25F00DB9CCA /* PNStaticTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569772AE2868B25F00DB9CCA /* PNStaticTexture.swift */; };
 		569D923D273DD594004FDFAC /* PNBound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D923C273DD594004FDFAC /* PNBound.swift */; };
@@ -600,6 +601,7 @@
 		56924AE3271A181600FF3E06 /* PNIAnimatedValue+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIAnimatedValue+Alias.swift"; sourceTree = "<group>"; };
 		56924AE7271A187400FF3E06 /* PNAnimatedFloat3+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNAnimatedFloat3+Extension.swift"; sourceTree = "<group>"; };
 		56924AE9271A188700FF3E06 /* PNAnimatedQuatf+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNAnimatedQuatf+Extension.swift"; sourceTree = "<group>"; };
+		569699C728CE49E300469E6B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		569772AC2868B18100DB9CCA /* PNTextureProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNTextureProvider.swift; sourceTree = "<group>"; };
 		569772AE2868B25F00DB9CCA /* PNStaticTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNStaticTexture.swift; sourceTree = "<group>"; };
 		5698B00728521B8E0045296C /* FunctionConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FunctionConstant.h; sourceTree = "<group>"; };
@@ -1925,6 +1927,7 @@
 				56E011C328413EB0007859F2 /* Int32+Extension.swift */,
 				56E011C528413F2B007859F2 /* UInt32+Extension.swift */,
 				56A88EB028C179B30060F131 /* Assert+Extension.swift */,
+				569699C728CE49E300469E6B /* String+Extension.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -2509,6 +2512,7 @@
 				561667532719E2CD000063B1 /* PNOmniJob.swift in Sources */,
 				561667042719E2CD000063B1 /* MDLTexture+Extension.swift in Sources */,
 				56F5926D2737276D008652C9 /* Directional.metal in Sources */,
+				569699C828CE49E300469E6B /* String+Extension.swift in Sources */,
 				5648530728C7E71700BA4CC0 /* PNNodeTrace.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
