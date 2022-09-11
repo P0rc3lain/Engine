@@ -41,6 +41,9 @@ extension simd_float4x4 {
     public init(repeatingColumn column: simd_float4) {
         self.init(columns: (column, column, column, column))
     }
+    public static func orientation(quaternion: simd_quatf) -> simd_float4x4 {
+        simd_float4x4(quaternion)
+    }
     public static func translation(vector: simd_float3) -> simd_float4x4 {
         simd_float4x4(columns: (simd_float4(1, 0, 0, 0),
                                 simd_float4(0, 1, 0, 0),
