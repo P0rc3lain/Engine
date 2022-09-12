@@ -277,6 +277,7 @@
 		56B6AFB428A269BC00266421 /* PNSceneValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B6AFB328A269BC00266421 /* PNSceneValidator.swift */; };
 		56BB949C28A90F8A0034D4AB /* PNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BB949B28A90F8A0034D4AB /* PNView.swift */; };
 		56BB949E28A914CE0034D4AB /* PNITranscriber+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BB949D28A914CE0034D4AB /* PNITranscriber+Tests.swift */; };
+		56C3174528CFEB0E00C04F3C /* NSRegularExpression+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C3174428CFEB0E00C04F3C /* NSRegularExpression+Extension.swift */; };
 		56C47B9E27511E9C0075C61B /* PNFrameSupply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C47B9D27511E9B0075C61B /* PNFrameSupply.swift */; };
 		56C47BA027511EDB0075C61B /* PNRenderJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C47B9F27511EDB0075C61B /* PNRenderJob.swift */; };
 		56C47BA527516BD20075C61B /* PNRenderMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C47BA427516BD20075C61B /* PNRenderMask.swift */; };
@@ -636,6 +637,7 @@
 		56B6AFB328A269BC00266421 /* PNSceneValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSceneValidator.swift; sourceTree = "<group>"; };
 		56BB949B28A90F8A0034D4AB /* PNView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNView.swift; sourceTree = "<group>"; };
 		56BB949D28A914CE0034D4AB /* PNITranscriber+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNITranscriber+Tests.swift"; sourceTree = "<group>"; };
+		56C3174428CFEB0E00C04F3C /* NSRegularExpression+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRegularExpression+Extension.swift"; sourceTree = "<group>"; };
 		56C47B9D27511E9B0075C61B /* PNFrameSupply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNFrameSupply.swift; sourceTree = "<group>"; };
 		56C47B9F27511EDB0075C61B /* PNRenderJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNRenderJob.swift; sourceTree = "<group>"; };
 		56C47BA427516BD20075C61B /* PNRenderMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNRenderMask.swift; sourceTree = "<group>"; };
@@ -1912,6 +1914,7 @@
 				561666972719E2CC000063B1 /* Data+Extension.swift */,
 				56E8208E2727FD13002D58C3 /* Date+Extensioin.swift */,
 				564DE04828427689005C2029 /* Bundle+Extension.swift */,
+				56C3174428CFEB0E00C04F3C /* NSRegularExpression+Extension.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -2252,6 +2255,7 @@
 				566795B2274DBE94005993D7 /* PNINodeInteractor.swift in Sources */,
 				5670EC142736A29100375194 /* PNGPUIO.swift in Sources */,
 				561667412719E2CD000063B1 /* PNMaterial.swift in Sources */,
+				56C3174528CFEB0E00C04F3C /* NSRegularExpression+Extension.swift in Sources */,
 				56C47BA527516BD20075C61B /* PNRenderMask.swift in Sources */,
 				566795C4274EA1FB005993D7 /* PNIMeshNode.swift in Sources */,
 				563BFC81272859630003EDB7 /* MDLObjectContainerComponent+Extension.swift in Sources */,
