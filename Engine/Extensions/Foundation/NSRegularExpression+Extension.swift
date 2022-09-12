@@ -9,4 +9,8 @@ extension NSRegularExpression {
                         options: NSRegularExpression.MatchingOptions = []) -> [NSTextCheckingResult] {
         matches(in: string, options: options, range: string.whole)
     }
+    public func firstMatch(in string: String,
+                           options: NSRegularExpression.MatchingOptions = []) -> NSTextCheckingResult? {
+        firstMatch(in: string, options: options, range: string.whole)
+    }
 }
