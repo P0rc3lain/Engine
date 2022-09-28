@@ -109,3 +109,12 @@ public func assertEqual<T: Comparable>(_ v1: T,
                                        line: UInt = #line) {
     assert(v1 == v2, message, file: file, line: line)
 }
+
+public func assertAll(_ conditions: Bool...,
+                      message: String = "Conditions not meet",
+                      file: StaticString = #file,
+                      line: UInt = #line) {
+    for condition in conditions {
+        assert(condition, message, file: file, line: line)
+    }
+}
