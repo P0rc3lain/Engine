@@ -3,7 +3,7 @@ name: Archive
 on:
   push:
     branches:
-    - master
+    - main
 
 jobs:
   tests:
