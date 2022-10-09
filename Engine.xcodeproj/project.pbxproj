@@ -243,7 +243,7 @@
 		568C4F01284F687900C6F128 /* PNIRepeatableTaskQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568C4F00284F687900C6F128 /* PNIRepeatableTaskQueue.swift */; };
 		568EBB3A273F0B88007C7D35 /* SSAOUniforms+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EBB39273F0B88007C7D35 /* SSAOUniforms+Extension.swift */; };
 		568EBB3D273F0DE1007C7D35 /* PNISSAOHemisphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EBB3C273F0DE1007C7D35 /* PNISSAOHemisphere.swift */; };
-		56924AD7271A07FD00FF3E06 /* PNIAnimatedValue+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AD6271A07FD00FF3E06 /* PNIAnimatedValue+Tests.swift */; };
+		56924AD7271A07FD00FF3E06 /* PNILoopSampler+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AD6271A07FD00FF3E06 /* PNILoopSampler+Tests.swift */; };
 		56924AD9271A07FD00FF3E06 /* Engine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5601396C255457D100FC1C45 /* Engine.framework */; };
 		56924AE4271A181600FF3E06 /* PNIAnimatedValue+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AE3271A181600FF3E06 /* PNIAnimatedValue+Alias.swift */; };
 		56924AE8271A187400FF3E06 /* PNAnimatedFloat3+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AE7271A187400FF3E06 /* PNAnimatedFloat3+Extension.swift */; };
@@ -597,7 +597,7 @@
 		568EBB3C273F0DE1007C7D35 /* PNISSAOHemisphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNISSAOHemisphere.swift; sourceTree = "<group>"; };
 		568EBB3E273F110A007C7D35 /* LightingInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LightingInput.h; sourceTree = "<group>"; };
 		56924AD4271A07FD00FF3E06 /* EngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		56924AD6271A07FD00FF3E06 /* PNIAnimatedValue+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIAnimatedValue+Tests.swift"; sourceTree = "<group>"; };
+		56924AD6271A07FD00FF3E06 /* PNILoopSampler+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNILoopSampler+Tests.swift"; sourceTree = "<group>"; };
 		56924AD8271A07FD00FF3E06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56924AE3271A181600FF3E06 /* PNIAnimatedValue+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIAnimatedValue+Alias.swift"; sourceTree = "<group>"; };
 		56924AE7271A187400FF3E06 /* PNAnimatedFloat3+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNAnimatedFloat3+Extension.swift"; sourceTree = "<group>"; };
@@ -1496,6 +1496,21 @@
 			path = Workload;
 			sourceTree = "<group>";
 		};
+		566B313628F2CCB80027FF9E /* AnimatedValue */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AnimatedValue;
+			sourceTree = "<group>";
+		};
+		566B313728F2CCC80027FF9E /* Chrono */ = {
+			isa = PBXGroup;
+			children = (
+				560253D62726CCCA00B3A13A /* PNIChronometer+Tests.swift */,
+			);
+			path = Chrono;
+			sourceTree = "<group>";
+		};
 		566CEB2A28439B5B00DA6227 /* WorkloadManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1732,8 +1747,9 @@
 		56924ADF271A081B00FF3E06 /* Animation */ = {
 			isa = PBXGroup;
 			children = (
-				56924AD6271A07FD00FF3E06 /* PNIAnimatedValue+Tests.swift */,
-				560253D62726CCCA00B3A13A /* PNIChronometer+Tests.swift */,
+				566B313728F2CCC80027FF9E /* Chrono */,
+				566B313628F2CCB80027FF9E /* AnimatedValue */,
+				56924AD6271A07FD00FF3E06 /* PNILoopSampler+Tests.swift */,
 			);
 			path = Animation;
 			sourceTree = "<group>";
@@ -2531,7 +2547,7 @@
 				56E0118B2840FE9B007859F2 /* PNIBoundEstimator+Tests.swift in Sources */,
 				56458F6128B131F400FE1823 /* PNISceneNode+Tests.swift in Sources */,
 				56A88EAE28C169F50060F131 /* PNRay+Tests.swift in Sources */,
-				56924AD7271A07FD00FF3E06 /* PNIAnimatedValue+Tests.swift in Sources */,
+				56924AD7271A07FD00FF3E06 /* PNILoopSampler+Tests.swift in Sources */,
 				561340B228C26A3600D36F89 /* simd_float3+Extension+Tests.swift in Sources */,
 				5677AD2A28C1505000BF822C /* simd_float4x4+Extension+Tests.swift in Sources */,
 				56BB949E28A914CE0034D4AB /* PNITranscriber+Tests.swift in Sources */,
