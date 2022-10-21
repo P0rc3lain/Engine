@@ -170,6 +170,7 @@
 		56532DFC28C7B37D005476F2 /* PNIColorTemperature+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56532DFB28C7B37C005476F2 /* PNIColorTemperature+Tests.swift */; };
 		565D37E928AA9234000ECCC7 /* PNRay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D37E828AA9234000ECCC7 /* PNRay.swift */; };
 		565D37EB28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D37EA28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift */; };
+		565EDB6B29031266009EB474 /* Games in Resources */ = {isa = PBXBuildFile; fileRef = 565EDB6A29031266009EB474 /* Games */; };
 		566020E02734314C000F4CA7 /* PNSSAOJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566020DF2734314C000F4CA7 /* PNSSAOJob.swift */; };
 		566020E227343280000F4CA7 /* SSAO.metal in Sources */ = {isa = PBXBuildFile; fileRef = 566020E127343280000F4CA7 /* SSAO.metal */; };
 		566795A9274D98A1005993D7 /* PNScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566795A8274D98A1005993D7 /* PNScene.swift */; };
@@ -513,6 +514,8 @@
 		56532DFB28C7B37C005476F2 /* PNIColorTemperature+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIColorTemperature+Tests.swift"; sourceTree = "<group>"; };
 		565D37E828AA9234000ECCC7 /* PNRay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNRay.swift; sourceTree = "<group>"; };
 		565D37EA28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIBoundInteractor+Tests.swift"; sourceTree = "<group>"; };
+		565EDB652902FE28009EB474 /* DEVLOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = DEVLOG.md; sourceTree = "<group>"; };
+		565EDB6A29031266009EB474 /* Games */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Games; sourceTree = "<group>"; };
 		566020DF2734314C000F4CA7 /* PNSSAOJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSSAOJob.swift; sourceTree = "<group>"; };
 		566020E127343280000F4CA7 /* SSAO.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = SSAO.metal; sourceTree = "<group>"; };
 		566795A8274D98A1005993D7 /* PNScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNScene.swift; sourceTree = "<group>"; };
@@ -718,6 +721,7 @@
 		56013962255457D100FC1C45 = {
 			isa = PBXGroup;
 			children = (
+				565EDB6A29031266009EB474 /* Games */,
 				56CDAC072900B04F0088B5DB /* Auxilary */,
 				56295A822729D7B7002FBABA /* .github */,
 				5601396E255457D100FC1C45 /* Engine */,
@@ -725,6 +729,7 @@
 				566CEB2C2843A03F00DA6227 /* Progress */,
 				569D923A273DC17E004FDFAC /* code_stats.sh */,
 				569D922B273DC03F004FDFAC /* README.md */,
+				565EDB652902FE28009EB474 /* DEVLOG.md */,
 				5601396D255457D100FC1C45 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -2236,6 +2241,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				565EDB6B29031266009EB474 /* Games in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
