@@ -2,6 +2,8 @@
 //  Copyright © 2022 Mateusz Stompór. All rights reserved.
 //
 
+#if os(macOS)
+
 import MetalKit
 
 public class PNView: NSView, MTKViewDelegate {
@@ -78,3 +80,5 @@ public class PNView: NSView, MTKViewDelegate {
         engine?.draw()
     }
 }
+
+#endif

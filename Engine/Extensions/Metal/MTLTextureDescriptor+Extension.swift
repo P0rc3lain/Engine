@@ -11,7 +11,7 @@ extension MTLTextureDescriptor {
         descriptor.width = 8
         descriptor.height = 8
         descriptor.mipmapLevelCount = 1
-        descriptor.storageMode = .managed
+        descriptor.storageMode = .shared
         descriptor.arrayLength = 1
         descriptor.sampleCount = 1
         descriptor.cpuCacheMode = .writeCombined
@@ -26,7 +26,7 @@ extension MTLTextureDescriptor {
         descriptor.width = 8
         descriptor.height = 8
         descriptor.mipmapLevelCount = 1
-        descriptor.storageMode = .managed
+        descriptor.storageMode = .shared
         descriptor.arrayLength = 1
         descriptor.sampleCount = 1
         descriptor.cpuCacheMode = .writeCombined
