@@ -2,6 +2,8 @@
 //  Copyright © 2022 Mateusz Stompór. All rights reserved.
 //
 
+#if os(macOS)
+
 import AppKit
 import MetalKit
 
@@ -18,3 +20,5 @@ public struct PNITextureLoader: PNTextureLoader {
         return try? MTKTextureLoader(device: device).newTexture(cgImage: cgImage)
     }
 }
+
+#endif
