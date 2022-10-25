@@ -1,4 +1,4 @@
-#  Porcelain
+#  Porcelain &middot; [![Archive](https://github.com/P0rc3lain/Engine/actions/workflows/archive.yml/badge.svg)](https://github.com/P0rc3lain/Engine/actions/workflows/archive.yml) [![Documentation](https://github.com/P0rc3lain/Engine/actions/workflows/docs.yml/badge.svg)](https://github.com/P0rc3lain/Engine/actions/workflows/docs.yml) [![Tests](https://github.com/P0rc3lain/Engine/actions/workflows/tests.yml/badge.svg)](https://github.com/P0rc3lain/Engine/actions/workflows/tests.yml)
 
 <p align="center">
     <img src="./Assets/waze.png" width="20%"/>
@@ -8,12 +8,6 @@
 ## About
 My attempt of creating a 3D Engine suitable for creation of a small game.
 Pleace where I can experiment, learn and fail
-
-## Project's wellbeing
-
-[![Archive](https://github.com/P0rc3lain/Engine/actions/workflows/archive.yml/badge.svg)](https://github.com/P0rc3lain/Engine/actions/workflows/archive.yml)
-[![Documentation](https://github.com/P0rc3lain/Engine/actions/workflows/docs.yml/badge.svg)](https://github.com/P0rc3lain/Engine/actions/workflows/docs.yml)
-[![Tests](https://github.com/P0rc3lain/Engine/actions/workflows/tests.yml/badge.svg)](https://github.com/P0rc3lain/Engine/actions/workflows/tests.yml)
 
 ## Preview
 Would you like to see more? Please visit my [devlog](./DEVLOG.md) 
