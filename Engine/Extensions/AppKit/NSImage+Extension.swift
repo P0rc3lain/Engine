@@ -2,8 +2,6 @@
 //  Copyright © 2022 Mateusz Stompór. All rights reserved.
 //
 
-#if os(macOS)
-
 import AppKit
 
 extension NSImage {
@@ -15,5 +13,3 @@ extension NSImage {
                        hints: nil)
     }
 }
-
-#endif

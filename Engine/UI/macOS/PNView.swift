@@ -2,8 +2,6 @@
 //  Copyright © 2022 Mateusz Stompór. All rights reserved.
 //
 
-#if os(macOS)
-
 import MetalKit
 
 public class PNView: NSView, MTKViewDelegate {
@@ -54,9 +52,6 @@ public class PNView: NSView, MTKViewDelegate {
         super.init(coder: coder)
         commonInitializer()
     }
-    public override func mouseDown(with event: NSEvent) {
-        super.mouseDown(with: event)
-    }
     private func commonInitializer() {
         addSubview(metalView)
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[v]-0-|",
@@ -80,5 +75,3 @@ public class PNView: NSView, MTKViewDelegate {
         engine?.draw()
     }
 }
-
-#endif

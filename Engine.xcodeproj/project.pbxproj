@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -168,6 +168,7 @@
 		56532DF728C7AD7B005476F2 /* PNColorTemperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56532DF628C7AD7B005476F2 /* PNColorTemperature.swift */; };
 		56532DF928C7ADD1005476F2 /* PNIColorTemperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56532DF828C7ADD1005476F2 /* PNIColorTemperature.swift */; };
 		56532DFC28C7B37D005476F2 /* PNIColorTemperature+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56532DFB28C7B37C005476F2 /* PNIColorTemperature+Tests.swift */; };
+		565B629729034B1000C0C0D1 /* PNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565B629629034B1000C0C0D1 /* PNView.swift */; platformFilter = ios; };
 		565D37E928AA9234000ECCC7 /* PNRay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D37E828AA9234000ECCC7 /* PNRay.swift */; };
 		565D37EB28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D37EA28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift */; };
 		565EDB6B29031266009EB474 /* Games in Resources */ = {isa = PBXBuildFile; fileRef = 565EDB6A29031266009EB474 /* Games */; };
@@ -206,7 +207,7 @@
 		566CEB252843940C00DA6227 /* PNBufferStoreFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566CEB242843940C00DA6227 /* PNBufferStoreFactory.swift */; };
 		566CEB272843944000DA6227 /* PNIBufferStoreFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566CEB262843944000DA6227 /* PNIBufferStoreFactory.swift */; };
 		566CEB2928439AFA00DA6227 /* PNIThreadedWorkloadManagerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566CEB2828439AFA00DA6227 /* PNIThreadedWorkloadManagerFactory.swift */; };
-		566F16C028A57F2700FDF1B5 /* NSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566F16BF28A57F2700FDF1B5 /* NSColor+Extension.swift */; };
+		566F16C028A57F2700FDF1B5 /* NSColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566F16BF28A57F2700FDF1B5 /* NSColor+Extension.swift */; platformFilters = (macos, ); };
 		566F16C428A59C5B00FDF1B5 /* PNSurroundings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566F16C328A59C5B00FDF1B5 /* PNSurroundings.swift */; };
 		5670EBDC273561FD00375194 /* Operator+Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EBDB273561FD00375194 /* Operator+Global.swift */; };
 		5670EC002735977900375194 /* PNBloomSplitJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5670EBFF2735977900375194 /* PNBloomSplitJob.swift */; };
@@ -226,7 +227,7 @@
 		5677AD2A28C1505000BF822C /* simd_float4x4+Extension+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677AD2128C1505000BF822C /* simd_float4x4+Extension+Tests.swift */; };
 		5677AD2B28C1505000BF822C /* simd_float3x3+Extension+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677AD2228C1505000BF822C /* simd_float3x3+Extension+Tests.swift */; };
 		5677AD3128C151CA00BF822C /* XCTest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677AD3028C151CA00BF822C /* XCTest+Extension.swift */; };
-		567F5C3D28A7AC3000AD0A6C /* NSImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F5C3C28A7AC3000AD0A6C /* NSImage+Extension.swift */; };
+		567F5C3D28A7AC3000AD0A6C /* NSImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F5C3C28A7AC3000AD0A6C /* NSImage+Extension.swift */; platformFilters = (macos, ); };
 		5686BD9A273C1CD300329FA0 /* PNIStaticBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5686BD99273C1CD300329FA0 /* PNIStaticBuffer.swift */; };
 		5686BD9D273D78B700329FA0 /* Animation.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5686BD9C273D78B700329FA0 /* Animation.metal */; };
 		568807462747EEC000C95F55 /* PNSkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568807452747EEC000C95F55 /* PNSkeleton.swift */; };
@@ -276,7 +277,7 @@
 		56B6AFAC28A259C800266421 /* PNPaletteGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B6AFAB28A259C800266421 /* PNPaletteGenerator.swift */; };
 		56B6AFAE28A259D300266421 /* PNIPaletteGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B6AFAD28A259D300266421 /* PNIPaletteGenerator.swift */; };
 		56B6AFB428A269BC00266421 /* PNSceneValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B6AFB328A269BC00266421 /* PNSceneValidator.swift */; };
-		56BB949C28A90F8A0034D4AB /* PNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BB949B28A90F8A0034D4AB /* PNView.swift */; };
+		56BB949C28A90F8A0034D4AB /* PNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BB949B28A90F8A0034D4AB /* PNView.swift */; platformFilters = (macos, ); };
 		56BB949E28A914CE0034D4AB /* PNITranscriber+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BB949D28A914CE0034D4AB /* PNITranscriber+Tests.swift */; };
 		56C3174528CFEB0E00C04F3C /* NSRegularExpression+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C3174428CFEB0E00C04F3C /* NSRegularExpression+Extension.swift */; };
 		56C47B9E27511E9C0075C61B /* PNFrameSupply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C47B9D27511E9B0075C61B /* PNFrameSupply.swift */; };
@@ -512,6 +513,7 @@
 		56532DF628C7AD7B005476F2 /* PNColorTemperature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNColorTemperature.swift; sourceTree = "<group>"; };
 		56532DF828C7ADD1005476F2 /* PNIColorTemperature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIColorTemperature.swift; sourceTree = "<group>"; };
 		56532DFB28C7B37C005476F2 /* PNIColorTemperature+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIColorTemperature+Tests.swift"; sourceTree = "<group>"; };
+		565B629629034B1000C0C0D1 /* PNView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNView.swift; sourceTree = "<group>"; };
 		565D37E828AA9234000ECCC7 /* PNRay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNRay.swift; sourceTree = "<group>"; };
 		565D37EA28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIBoundInteractor+Tests.swift"; sourceTree = "<group>"; };
 		565EDB652902FE28009EB474 /* DEVLOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = DEVLOG.md; sourceTree = "<group>"; };
@@ -1372,6 +1374,22 @@
 			path = Material;
 			sourceTree = "<group>";
 		};
+		565B629529034B0600C0C0D1 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				56BB949B28A90F8A0034D4AB /* PNView.swift */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		565B629829034B1400C0C0D1 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				565B629629034B1000C0C0D1 /* PNView.swift */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
 		565D37E728AA91EF000ECCC7 /* Ray */ = {
 			isa = PBXGroup;
 			children = (
@@ -1830,7 +1848,8 @@
 		56BB949A28A90F790034D4AB /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				56BB949B28A90F8A0034D4AB /* PNView.swift */,
+				565B629829034B1400C0C0D1 /* iOS */,
+				565B629529034B0600C0C0D1 /* macOS */,
 				5675C46528B2AD6500EEC58D /* PNScreenInteractor.swift */,
 				5675C46928B2B81900EEC58D /* PNIScreenInteractor.swift */,
 			);
@@ -2343,6 +2362,7 @@
 				56FA6EE128C6425200803314 /* Math+Global.swift in Sources */,
 				56C4CD512737FFDD000A994E /* PNSpotJob.swift in Sources */,
 				5616674D2719E2CD000063B1 /* PNIEngine.swift in Sources */,
+				565B629729034B1000C0C0D1 /* PNView.swift in Sources */,
 				5688075627480D2700C95F55 /* PNAnyDynamicBuffer.swift in Sources */,
 				560A0BAD27541562005AE29D /* PNAnimator.swift in Sources */,
 				56C47BB62751BF390075C61B /* PNAmbientLight.swift in Sources */,
@@ -2722,11 +2742,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -2758,11 +2779,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
