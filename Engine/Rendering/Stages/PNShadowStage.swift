@@ -80,6 +80,7 @@ class PNShadowStage: PNStage {
             encoder.endEncoding()
             commandBuffer.popDebugGroup()
         }
+        #if os(macOS)
         if !supply.scene.directionalLights.isEmpty {
             commandBuffer.pushDebugGroup("Directional Light Shadow Pass")
             guard let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: directionalShadowRPD) else {
@@ -89,5 +90,6 @@ class PNShadowStage: PNStage {
             encoder.endEncoding()
             commandBuffer.popDebugGroup()
         }
+        #endif
     }
 }
