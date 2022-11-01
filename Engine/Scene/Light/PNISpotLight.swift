@@ -8,7 +8,7 @@ public struct PNISpotLight: PNSpotLight {
     public let color: PNColorRGB
     public let intensity: Float
     public var influenceRadius: Float
-    public let coneAngle: Radians
+    public let coneAngle: PNRadians
     public let castsShadows: Bool
     public let projectionMatrix: simd_float4x4
     public let projectionMatrixInverse: simd_float4x4
@@ -16,7 +16,7 @@ public struct PNISpotLight: PNSpotLight {
     public init(color: PNColorRGB,
                 intensity: Float,
                 influenceRadius: Float,
-                coneAngle: Radians,
+                coneAngle: PNRadians,
                 castsShadows: Bool) {
         assertValid(color: color)
         self.color = color
@@ -29,7 +29,7 @@ public struct PNISpotLight: PNSpotLight {
         self.projectionMatrixInverse = projectionMatrix.inverse
         self.boundingBox = PNIBoundingBoxInteractor.default.from(inverseProjection: projectionMatrixInverse)
     }
-    static func projectionMatrix(coneAngle: Radians, influenceRadius: Float) -> simd_float4x4 {
+    static func projectionMatrix(coneAngle: PNRadians, influenceRadius: Float) -> simd_float4x4 {
         simd_float4x4.perspectiveProjectionRightHand(fovyRadians: coneAngle,
                                                      aspect: 1,
                                                      nearZ: 0.01,

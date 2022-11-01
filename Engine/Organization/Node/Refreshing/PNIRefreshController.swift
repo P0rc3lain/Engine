@@ -70,7 +70,7 @@ class PNIRefreshController {
     }
     private func setupModelUniformsSubscription(_ node: PNSceneNode) -> AnyCancellable? {
         node.worldTransform.receive(on: scheduler).sink(receiveValue: { transform in
-            node.modelUniforms.send(WModelUniforms.from(transform: transform))
+            node.modelUniforms.send(PNWModelUniforms.from(transform: transform))
         })
     }
     private func setupLocalBoundingBoxSubscription(_ node: PNSceneNode) -> AnyCancellable? {

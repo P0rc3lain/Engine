@@ -9,7 +9,7 @@ public final class PNIAnimatedNode: PNAnimatedNode {
     public let transform: PNSubject<PNLTransform>
     public let worldTransform: PNSubject<PNM2WTransform>
     public let enclosingNode: PNScenePieceSubject
-    public let modelUniforms: PNSubject<WModelUniforms>
+    public let modelUniforms: PNSubject<PNWModelUniforms>
     public let localBoundingBox: PNSubject<PNBoundingBox?>
     public let worldBoundingBox: PNSubject<PNBoundingBox?>
     public let childrenMergedBoundingBox: PNSubject<PNBoundingBox?>

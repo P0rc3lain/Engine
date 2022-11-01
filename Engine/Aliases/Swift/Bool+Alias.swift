@@ -2,5 +2,5 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-public typealias Suceeded = Bool
-public typealias ShouldContinueExecuting = Bool
+public typealias PNSuceeded = Bool
+public typealias PNShouldContinueExecuting = Bool
