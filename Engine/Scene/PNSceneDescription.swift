@@ -8,7 +8,7 @@ import MetalBinding
 public final class PNSceneDescription {
     // MARK: - Capacity A
     public var entities = PNEntityTree()
-    public var uniforms = [WModelUniforms]()
+    public var uniforms = [PNWModelUniforms]()
     public var boundingBoxes = [PNWBoundingBox?]()
     // MARK: - Capacity B
     public var models = [PNModelReference]()

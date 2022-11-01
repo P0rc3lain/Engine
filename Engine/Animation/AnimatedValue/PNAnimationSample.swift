@@ -5,5 +5,5 @@
 public struct PNAnimationSample<T> {
     public let currentKeyFrame: T
     public let upcomingKeyFrame: T
-    public let ratio: Ratio
+    public let ratio: PNRadians
 }

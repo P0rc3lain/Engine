@@ -26,7 +26,7 @@ class PNIDynamicTexture: PNDynamicTexture {
         self.device = device
         self.descriptor = descriptor
     }
-    func updateDescriptor(descriptor: MTLTextureDescriptor?) -> Suceeded {
+    func updateDescriptor(descriptor: MTLTextureDescriptor?) -> PNSuceeded {
         let before = descriptorValue
         self.descriptor = descriptor
         return before != descriptorValue

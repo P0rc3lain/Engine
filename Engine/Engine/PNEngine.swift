@@ -6,5 +6,5 @@ public protocol PNEngine {
     var scene: PNScene { get set }
     var taskQueue: PNRepeatableTaskQueue { get }
     func draw()
-    func update(drawableSize: CGSize) -> Suceeded
+    func update(drawableSize: CGSize) -> PNSuceeded
 }
