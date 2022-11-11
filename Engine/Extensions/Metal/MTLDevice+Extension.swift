@@ -105,8 +105,8 @@ extension MTLDevice {
     func makeRPSAmbient(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .ambient(library: library))
     }
-    func makeRPSSSAO(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .ssao(library: library))
+    func makeRPSSSAO(library: MTLLibrary) -> MTLComputePipelineState? {
+        try? makeComputePipelineState(function: library.makeFunction(name: "kernelSSAO")!)
     }
     func makeRPSBloomSplit(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .bloomSplit(library: library))

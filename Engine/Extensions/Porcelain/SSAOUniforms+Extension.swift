@@ -6,7 +6,7 @@ import MetalBinding
 
 extension SSAOUniforms {
     static var `default`: SSAOUniforms {
-        SSAOUniforms(sampleCount: 32,
+        SSAOUniforms(sampleCount: 8,
                      noiseCount: 64,
                      radius: 0.2,
                      bias: 0.025,

@@ -23,6 +23,8 @@ module MetalBinding {
     header "../MetalBinding/Attribute/VertexShader/VertexBufferIndex.h"
     header "../MetalBinding/Attribute/FragmentShader/FragmentBufferIndex.h"
     header "../MetalBinding/Attribute/FragmentShader/FragmentTextureIndex.h"
+    header "../MetalBinding/Attribute/ComputeShader/ComputeTextureIndex.h"
+    header "../MetalBinding/Attribute/ComputeShader/ComputeBufferIndex.h"
     
     export *
 }

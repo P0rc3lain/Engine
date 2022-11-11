@@ -320,6 +320,7 @@
 		56E011C428413EB0007859F2 /* Int32+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E011C328413EB0007859F2 /* Int32+Extension.swift */; };
 		56E011C628413F2B007859F2 /* UInt32+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E011C528413F2B007859F2 /* UInt32+Extension.swift */; };
 		56E2A22C285096DC00D64A44 /* PNTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2A22B285096DC00D64A44 /* PNTask.swift */; };
+		56E5FED2291F06F700DC7ED9 /* PNComputeJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E5FED1291F06F700DC7ED9 /* PNComputeJob.swift */; };
 		56E8208F2727FD13002D58C3 /* Date+Extensioin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8208E2727FD13002D58C3 /* Date+Extensioin.swift */; };
 		56E8209D27284664002D58C3 /* PNPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E8209C27284664002D58C3 /* PNPosition.swift */; };
 		56F0FB46284986570004D212 /* PNTextureAtlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F0FB45284986570004D212 /* PNTextureAtlas.swift */; };
@@ -685,6 +686,9 @@
 		56E011C328413EB0007859F2 /* Int32+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int32+Extension.swift"; sourceTree = "<group>"; };
 		56E011C528413F2B007859F2 /* UInt32+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt32+Extension.swift"; sourceTree = "<group>"; };
 		56E2A22B285096DC00D64A44 /* PNTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNTask.swift; sourceTree = "<group>"; };
+		56E5FED1291F06F700DC7ED9 /* PNComputeJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNComputeJob.swift; sourceTree = "<group>"; };
+		56E5FED4291F0B2900DC7ED9 /* ComputeTextureIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComputeTextureIndex.h; sourceTree = "<group>"; };
+		56E5FED5291F0D5C00DC7ED9 /* ComputeBufferIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComputeBufferIndex.h; sourceTree = "<group>"; };
 		56E8208E2727FD13002D58C3 /* Date+Extensioin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensioin.swift"; sourceTree = "<group>"; };
 		56E8209C27284664002D58C3 /* PNPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNPosition.swift; sourceTree = "<group>"; };
 		56F0D4EB2853697300FBDB33 /* Attachment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Attachment.h; sourceTree = "<group>"; };
@@ -1172,6 +1176,7 @@
 		562C738428493FBB00E51606 /* Attribute */ = {
 			isa = PBXGroup;
 			children = (
+				56E5FED3291F0B1500DC7ED9 /* ComputeShader */,
 				562C738B2849418100E51606 /* FragmentShader */,
 				562C738A2849417A00E51606 /* VertexShader */,
 				562C73882849415300E51606 /* Attribute.h */,
@@ -1611,6 +1616,7 @@
 				56A8CA7A2756D4750040DCF9 /* PNFogJob.swift */,
 				562C73B12849513000E51606 /* PNParticleJob.swift */,
 				56484BA52846162F004DFF36 /* PNTranslucentJob.swift */,
+				56E5FED1291F06F700DC7ED9 /* PNComputeJob.swift */,
 			);
 			path = Jobs;
 			sourceTree = "<group>";
@@ -2126,6 +2132,15 @@
 			path = Texture;
 			sourceTree = "<group>";
 		};
+		56E5FED3291F0B1500DC7ED9 /* ComputeShader */ = {
+			isa = PBXGroup;
+			children = (
+				56E5FED4291F0B2900DC7ED9 /* ComputeTextureIndex.h */,
+				56E5FED5291F0D5C00DC7ED9 /* ComputeBufferIndex.h */,
+			);
+			path = ComputeShader;
+			sourceTree = "<group>";
+		};
 		56F0FB442849864D0004D212 /* Types */ = {
 			isa = PBXGroup;
 			children = (
@@ -2379,6 +2394,7 @@
 				5648531F28C9F2C400BA4CC0 /* NSDate+Aliases.swift in Sources */,
 				56C47B9E27511E9C0075C61B /* PNFrameSupply.swift in Sources */,
 				561667392719E2CD000063B1 /* PNPieceDescription.swift in Sources */,
+				56E5FED2291F06F700DC7ED9 /* PNComputeJob.swift in Sources */,
 				564DE04728427595005C2029 /* MTLLibrary+Extension.swift in Sources */,
 				56FA634528AD1E8200D857A6 /* PNWeakRef.swift in Sources */,
 				56F0FB46284986570004D212 /* PNTextureAtlas.swift in Sources */,
