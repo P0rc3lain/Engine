@@ -8,24 +8,25 @@ import MetalPerformanceShaders
 struct PNSSAOStage: PNStage {
     var io: PNGPUIO
     private let gaussTexture: MTLTexture
+    private let ssaoTexture: MTLTexture
     private let gaussianBlur: MPSImageGaussianBlur
-    private var ssaoRenderPassDescriptor: MTLRenderPassDescriptor
-    private var ssaoRenderer: PNRenderJob
+    private var ssaoKernel: PNSSAOJob
     init?(device: MTLDevice,
           renderingSize: CGSize,
           prTexture: PNTextureProvider,
           nmTexture: PNTextureProvider,
           blurSigma: Float) {
-        guard let ssaoRenderer = PNSSAOJob.make(device: device,
+        ssaoTexture = device.makeTextureSSAOC(size: renderingSize)!
+        guard let ssaoKernel = PNSSAOJob.make(device: device,
                                                 prTexture: prTexture,
                                                 nmTexture: nmTexture,
+                                                outputTexture: PNStaticTexture(ssaoTexture),
                                                 maxNoiseCount: 64,
                                                 maxSamplesCount: 64),
               let gaussTexture = device.makeTexture(descriptor: .ssaoC(size: renderingSize)) else {
             return nil
         }
-        self.ssaoRenderer = ssaoRenderer
-        self.ssaoRenderPassDescriptor = .ssao(device: device, size: renderingSize)
+        self.ssaoKernel = ssaoKernel
         self.io = PNGPUIO(input: PNGPUSupply(color: [prTexture, nmTexture]),
                           output: PNGPUSupply(color: [PNStaticTexture(gaussTexture)]))
         self.gaussianBlur = MPSImageGaussianBlur(device: device,
@@ -34,16 +35,13 @@ struct PNSSAOStage: PNStage {
     }
     func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
         commandBuffer.pushDebugGroup("SSAO Renderer Pass")
-        guard let ssaoEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: ssaoRenderPassDescriptor) else {
+        guard let ssaoEncoder = commandBuffer.makeComputeCommandEncoder() else {
             return
         }
-        ssaoRenderer.draw(encoder: ssaoEncoder, supply: supply)
-        ssaoEncoder.endEncoding()
+        ssaoKernel.compute(encoder: ssaoEncoder, supply: supply)
+        ssaoEncoder.endEncoding(    )
         commandBuffer.popDebugGroup()
         commandBuffer.pushDebugGroup("SSAO Blur Filter Pass")
-        guard let ssaoTexture = ssaoRenderPassDescriptor.colorAttachments[0].texture else {
-            return
-        }
         gaussianBlur.encode(commandBuffer: commandBuffer,
                             sourceTexture: ssaoTexture,
                             destinationTexture: gaussTexture)

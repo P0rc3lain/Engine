@@ -14,3 +14,6 @@
 
 #include "FragmentShader/FragmentBufferIndex.h"
 #include "FragmentShader/FragmentTextureIndex.h"
+
+#include "ComputeShader/ComputeBufferIndex.h"
+#include "ComputeShader/ComputeTextureIndex.h"

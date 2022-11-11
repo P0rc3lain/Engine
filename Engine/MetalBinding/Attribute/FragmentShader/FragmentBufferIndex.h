@@ -10,14 +10,6 @@ enum AttributeSpotFragmentShaderBufferIndex {
     kAttributeSpotFragmentShaderBufferModelUniforms
 };
 
-enum AttributeSsaoFragmentShaderBufferIndex {
-    kAttributeSsaoFragmentShaderBufferCamera = 0,
-    kAttributeSsaoFragmentShaderBufferSamples,
-    kAttributeSsaoFragmentShaderBufferNoise,
-    kAttributeSsaoFragmentShaderBufferModelUniforms,
-    kAttributeSsaoFragmentShaderBufferRenderingUniforms
-};
-
 enum AttributeLightingFragmentShaderBufferIndex {
     kAttributeLightingFragmentShaderBufferCamera = 0,
     kAttributeLightingFragmentShaderBufferOmniLights,

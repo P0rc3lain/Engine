@@ -32,12 +32,6 @@ enum AttributeGBufferFragmentShaderTextureIndex {
     kAttributeGBufferFragmentShaderTextureMetallic
 };
 
-enum AttributeSsaoFragmentShaderTextureIndex {
-    kAttributeSsaoFragmentShaderTextureAR = 0,
-    kAttributeSsaoFragmentShaderTextureNM,
-    kAttributeSsaoFragmentShaderTexturePR
-};
-
 enum AttributeAmbientFragmentShaderTextureIndex {
     kAttributeAmbientFragmentShaderTextureAR = 0,
     kAttributeAmbientFragmentShaderTexturePR,

@@ -6,30 +6,28 @@ import Metal
 import MetalBinding
 import simd
 
-struct PNSSAOJob: PNRenderJob {
-    private let pipelineState: MTLRenderPipelineState
-    private let plane: PNMesh
+struct PNSSAOJob: PNComputeJob {
+    private let pipelineState: MTLComputePipelineState
     private let prTexture: PNTextureProvider
     private let nmTexture: PNTextureProvider
+    private let outputTexture: PNTextureProvider
     private var kernelBuffer: PNAnyStaticBuffer<simd_float3>
     private var noiseBuffer: PNAnyStaticBuffer<simd_float3>
     private var uniforms: PNAnyStaticBuffer<SSAOUniforms>
-    init?(pipelineState: MTLRenderPipelineState,
+    init?(pipelineState: MTLComputePipelineState,
           prTexture: PNTextureProvider,
           nmTexture: PNTextureProvider,
+          outputTexture: PNTextureProvider,
           device: MTLDevice,
           kernelBuffer: PNAnyStaticBuffer<simd_float3>,
           noiseBuffer: PNAnyStaticBuffer<simd_float3>,
           uniforms: PNAnyStaticBuffer<SSAOUniforms>,
           maxNoiseCount: Int,
           maxSamplesCount: Int) {
-        guard let plane = PNMesh.plane(device: device) else {
-            return nil
-        }
         self.pipelineState = pipelineState
         self.nmTexture = nmTexture
+        self.outputTexture = outputTexture
         self.prTexture = prTexture
-        self.plane = plane
         self.kernelBuffer = kernelBuffer
         self.noiseBuffer = noiseBuffer
         self.uniforms = uniforms
@@ -37,29 +35,31 @@ struct PNSSAOJob: PNRenderJob {
         self.noiseBuffer.upload(data: PNISSAOHemisphere().noise(count: maxNoiseCount))
         self.uniforms.upload(value: .default)
     }
-    func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
+    func compute(encoder: MTLComputeCommandEncoder, supply: PNFrameSupply) {
         let bufferStore = supply.bufferStore
-        encoder.setRenderPipelineState(pipelineState)
-        encoder.setVertexBuffer(plane.vertexBuffer.buffer,
-                                index: kAttributeSsaoVertexShaderBufferStageIn)
-        encoder.setFragmentBuffer(kernelBuffer.buffer,
-                                  index: kAttributeSsaoFragmentShaderBufferSamples)
-        encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems,
-                                  index: kAttributeSsaoFragmentShaderBufferModelUniforms)
-        encoder.setFragmentBuffer(noiseBuffer.buffer,
-                                  index: kAttributeSsaoFragmentShaderBufferNoise)
-        encoder.setFragmentBuffer(bufferStore.cameras,
-                                  index: kAttributeSsaoFragmentShaderBufferCamera)
-        encoder.setFragmentBuffer(uniforms.buffer,
-                                  index: kAttributeSsaoFragmentShaderBufferRenderingUniforms)
-        let range = kAttributeSsaoFragmentShaderTextureNM ... kAttributeSsaoFragmentShaderTexturePR
-        encoder.setFragmentTextures([nmTexture, prTexture],
-                                    range: range)
-        encoder.drawIndexedPrimitives(submesh: plane.pieceDescriptions[0].drawDescription)
+        encoder.setComputePipelineState(pipelineState)
+        encoder.setBuffer(kernelBuffer.buffer, offset: 0,
+                          index: kAttributeSsaoComputeShaderBufferSamples.int)
+        encoder.setBuffer(bufferStore.modelCoordinateSystems.buffer, offset: 0,
+                          index: kAttributeSsaoComputeShaderBufferModelUniforms.int)
+        encoder.setBuffer(noiseBuffer.buffer, offset: 0,
+                          index: kAttributeSsaoComputeShaderBufferNoise.int)
+        encoder.setBuffer(bufferStore.cameras.buffer, offset: 0,
+                          index: kAttributeSsaoComputeShaderBufferCamera.int)
+        encoder.setBuffer(uniforms.buffer, offset: 0,
+                          index: kAttributeSsaoComputeShaderBufferRenderingUniforms.int)
+        encoder.setTexture(nmTexture.texture, index: kAttributeSsaoComputeShaderTextureNM.int)
+        encoder.setTexture(prTexture.texture, index: kAttributeSsaoComputeShaderTexturePR.int)
+        encoder.setTexture(outputTexture.texture, index: kAttributeSsaoComputeShaderTextureOutput.int)
+        encoder.dispatchThreads(MTLSize(width: nmTexture.texture!.width,
+                                        height: nmTexture.texture!.height,
+                                        depth: 1),
+                                threadsPerThreadgroup: MTLSize(width: 10, height: 10, depth: 1))
     }
     static func make(device: MTLDevice,
                      prTexture: PNTextureProvider,
                      nmTexture: PNTextureProvider,
+                     outputTexture: PNTextureProvider,
                      maxNoiseCount: Int,
                      maxSamplesCount: Int) -> PNSSAOJob? {
         guard let library = device.makePorcelainLibrary(),
@@ -73,6 +73,7 @@ struct PNSSAOJob: PNRenderJob {
         return PNSSAOJob(pipelineState: pipelineState,
                          prTexture: prTexture,
                          nmTexture: nmTexture,
+                         outputTexture: outputTexture,
                          device: device,
                          kernelBuffer: PNAnyStaticBuffer(kernelBuffer),
                          noiseBuffer: PNAnyStaticBuffer(noiseBuffer),
