@@ -16,21 +16,21 @@ struct PNSSAOStage: PNStage {
           prTexture: PNTextureProvider,
           nmTexture: PNTextureProvider,
           blurSigma: Float) {
-        ssaoTexture = device.makeTextureSSAOC(size: renderingSize)!
-        guard let ssaoKernel = PNSSAOJob.make(device: device,
-                                                prTexture: prTexture,
-                                                nmTexture: nmTexture,
-                                                outputTexture: PNStaticTexture(ssaoTexture),
-                                                maxNoiseCount: 64,
-                                                maxSamplesCount: 64),
+        guard let ssaoTexture = device.makeTextureSSAOC(size: renderingSize),
+              let ssaoKernel = PNSSAOJob.make(device: device,
+                                              prTexture: prTexture,
+                                              nmTexture: nmTexture,
+                                              outputTexture: PNStaticTexture(ssaoTexture),
+                                              maxNoiseCount: 64,
+                                              maxSamplesCount: 64),
               let gaussTexture = device.makeTexture(descriptor: .ssaoC(size: renderingSize)) else {
             return nil
         }
+        self.ssaoTexture = ssaoTexture
         self.ssaoKernel = ssaoKernel
         self.io = PNGPUIO(input: PNGPUSupply(color: [prTexture, nmTexture]),
                           output: PNGPUSupply(color: [PNStaticTexture(gaussTexture)]))
-        self.gaussianBlur = MPSImageGaussianBlur(device: device,
-                                                 sigma: blurSigma)
+        self.gaussianBlur = MPSImageGaussianBlur(device: device, sigma: blurSigma)
         self.gaussTexture = gaussTexture
     }
     func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
@@ -39,7 +39,7 @@ struct PNSSAOStage: PNStage {
             return
         }
         ssaoKernel.compute(encoder: ssaoEncoder, supply: supply)
-        ssaoEncoder.endEncoding(    )
+        ssaoEncoder.endEncoding()
         commandBuffer.popDebugGroup()
         commandBuffer.pushDebugGroup("SSAO Blur Filter Pass")
         gaussianBlur.encode(commandBuffer: commandBuffer,

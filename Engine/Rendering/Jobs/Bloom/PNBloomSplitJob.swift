@@ -7,35 +7,42 @@ import MetalBinding
 import MetalPerformanceShaders
 import simd
 
-struct PNBloomSplitJob: PNRenderJob {
-    private let pipelineState: MTLRenderPipelineState
+struct PNBloomSplitJob: PNComputeJob {
+    private let pipelineState: MTLComputePipelineState
     private let inputTexture: PNTextureProvider
-    private let plane: PNMesh
-    init?(pipelineState: MTLRenderPipelineState,
+    private let outputTexture: PNTextureProvider
+    private let dispatchSize: MTLSize
+    private let threadGroupSize: MTLSize
+    init?(pipelineState: MTLComputePipelineState,
           inputTexture: PNTextureProvider,
-          device: MTLDevice) {
-        guard let plane = PNMesh.plane(device: device) else {
-            return nil
-        }
+          outputTexture: PNTextureProvider) {
         self.pipelineState = pipelineState
         self.inputTexture = inputTexture
-        self.plane = plane
+        self.outputTexture = outputTexture
+        guard let inputTexture = inputTexture.texture else {
+            return nil
+        }
+        dispatchSize = MTLSize(width: inputTexture.width,
+                               height: inputTexture.height,
+                               depth: 1)
+        threadGroupSize = MTLSize(width: 8, height: 8, depth: 1)
     }
-    func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
-        encoder.setRenderPipelineState(pipelineState)
-        encoder.setVertexBuffer(plane.vertexBuffer.buffer,
-                                index: kAttributeBloomSplitVertexShaderBufferStageIn)
-        encoder.setFragmentTexture(inputTexture, index: kAttributeBloomSplitFragmentShaderTextureInput)
-        encoder.drawIndexedPrimitives(submesh: plane.pieceDescriptions[0].drawDescription)
+    func compute(encoder: MTLComputeCommandEncoder, supply: PNFrameSupply) {
+        encoder.setComputePipelineState(pipelineState)
+        encoder.setTexture(inputTexture.texture,
+                           index: kAttributeBloomSplitFragmentShaderTextureInput.int)
+        encoder.setTexture(outputTexture.texture, index: 10)
+        encoder.dispatchThreads(dispatchSize, threadsPerThreadgroup: threadGroupSize)
     }
     static func make(device: MTLDevice,
-                     inputTexture: PNTextureProvider) -> PNBloomSplitJob? {
+                     inputTexture: PNTextureProvider,
+                     outputTexture: PNTextureProvider) -> PNBloomSplitJob? {
         guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRPSBloomSplit(library: library) else {
+              let pipelineState = device.makeCPSBloomSplit(library: library) else {
             return nil
         }
         return PNBloomSplitJob(pipelineState: pipelineState,
                                inputTexture: inputTexture,
-                               device: device)
+                               outputTexture: outputTexture)
     }
 }

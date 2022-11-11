@@ -10,23 +10,14 @@
 
 using namespace metal;
 
-struct RasterizedData {
-    float4 position [[position]];
-    float2 texcoord;
-};
-
-vertex RasterizedData vertexBloomSplit(Vertex in [[stage_in]]) {
-    return RasterizedData {
-        float4(in.position, 1),
-        in.textureUV
-    };
-}
-
-fragment float4 fragmentBloomSplit(RasterizedData in [[stage_in]],
-                                   texture2d<float> inputTexture [[texture(kAttributeBloomSplitFragmentShaderTextureInput)]]) {
+kernel void kernelBloomSplit(texture2d<float> inputTexture [[texture(kAttributeBloomSplitFragmentShaderTextureInput)]],
+                             texture2d<float, access::write> outputTexture [[texture(10)]],
+                             uint3 inposition [[thread_position_in_grid]],
+                             uint3 threads [[threads_per_grid]]) {
     constexpr sampler textureSampler(mag_filter::linear,
                                      min_filter::linear,
                                      mip_filter::linear);
-    float3 color = inputTexture.sample(textureSampler, in.texcoord).xyz;
-    return luminance(color) > 0.7 ? float4(color * 2, 1) : float4(0, 0, 0, 1);
+    float2 texcoord{float(inposition.x)/float(threads.x), float(inposition.y)/float(threads.y)};
+    float3 color = inputTexture.sample(textureSampler, texcoord).xyz;
+    outputTexture.write(luminance(color) > 0.7 ? float4(color * 2, 1) : float4(0, 0, 0, 1), inposition.xy);
 }

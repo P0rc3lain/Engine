@@ -53,7 +53,7 @@ public final class PNNode<T> {
         }
     }
     public func all() -> [PNNode<T>] {
-        [self] + children.map{ $0.all() }.reduce([], +)
+        [self] + children.map { $0.all() }.reduce([], +)
     }
     public func findNode(where closure: (PNNode<T>) -> Bool) -> PNNode<T>? {
         closure(self) ? self : children.compactMap { $0.findNode(where: closure) }.first

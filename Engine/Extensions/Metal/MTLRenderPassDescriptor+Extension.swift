@@ -71,14 +71,6 @@ extension MTLRenderPassDescriptor {
         descriptor.depthAttachment.loadAction = .clear
         return descriptor
     }
-    static func bloomSplit(device: MTLDevice, size: CGSize) -> MTLRenderPassDescriptor {
-        let descriptor = MTLRenderPassDescriptor()
-        descriptor.colorAttachments[0].loadAction = .clear
-        descriptor.colorAttachments[0].texture = device.makeTextureBloomSplitC(size: size)
-        descriptor.colorAttachments[0].clearColor = MTLClearColor()
-        descriptor.colorAttachments[0].storeAction = .store
-        return descriptor
-    }
     static func bloomMerge(device: MTLDevice, size: CGSize) -> MTLRenderPassDescriptor {
         let descriptor = MTLRenderPassDescriptor()
         descriptor.colorAttachments[0].loadAction = .clear
