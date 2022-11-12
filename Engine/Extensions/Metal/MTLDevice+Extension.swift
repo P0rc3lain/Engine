@@ -105,14 +105,23 @@ extension MTLDevice {
     func makeRPSAmbient(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .ambient(library: library))
     }
-    func makeRPSSSAO(library: MTLLibrary) -> MTLComputePipelineState? {
-        try? makeComputePipelineState(function: library.makeFunction(name: "kernelSSAO")!)
-    }
-    func makeRPSBloomSplit(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .bloomSplit(library: library))
-    }
     func makeRPSBloomMerge(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .bloomMerge(library: library))
+    }
+    // =======================
+    // MTLComputePipelineState
+    // =======================
+    func makeCPSBloomSplit(library: MTLLibrary) -> MTLComputePipelineState? {
+        guard let function = library.makeFunction(name: "kernelBloomSplit") else {
+            return nil
+        }
+        return try? makeComputePipelineState(function: function)
+    }
+    func makeCPSSSAO(library: MTLLibrary) -> MTLComputePipelineState? {
+        guard let function = library.makeFunction(name: "kernelSSAO") else {
+            return nil
+        }
+        return try? makeComputePipelineState(function: function)
     }
     // ==========
     // MTLTexture

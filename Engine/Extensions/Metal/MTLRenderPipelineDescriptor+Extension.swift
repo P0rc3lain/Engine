@@ -213,21 +213,6 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexDescriptor = .vertex
         return descriptor
     }
-    static func ssao(library: MTLLibrary) -> MTLComputePipelineDescriptor {
-        let descriptor = MTLComputePipelineDescriptor()
-        descriptor.label = "SSAO"
-        descriptor.computeFunction = library.makeFunction(name: "kernelSSAO")
-        return descriptor
-    }
-    static func bloomSplit(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
-        let descriptor = MTLRenderPipelineDescriptor()
-        descriptor.label = "Bloom Split"
-        descriptor.vertexFunction = library.makeFunction(name: "vertexBloomSplit")
-        descriptor.fragmentFunction = library.makeFunction(name: "fragmentBloomSplit")
-        descriptor.colorAttachments[0].pixelFormat = .bloomSplitC
-        descriptor.vertexDescriptor = .vertex
-        return descriptor
-    }
     static func bloomMerge(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.label = "Bloom Merge"
