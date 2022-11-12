@@ -10,3 +10,8 @@ enum AttributeSsaoComputeShaderTextureIndex {
     kAttributeSsaoComputeShaderTexturePR,
     kAttributeSsaoComputeShaderTextureOutput
 };
+
+enum AttributeBloomSplitComputeShaderTextureIndex {
+    kAttributeBloomSplitComputeShaderTextureInput = 0,
+    kAttributeBloomSplitComputeShaderTextureOutput
+};

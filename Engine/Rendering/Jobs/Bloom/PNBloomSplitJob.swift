@@ -30,8 +30,9 @@ struct PNBloomSplitJob: PNComputeJob {
     func compute(encoder: MTLComputeCommandEncoder, supply: PNFrameSupply) {
         encoder.setComputePipelineState(pipelineState)
         encoder.setTexture(inputTexture.texture,
-                           index: kAttributeBloomSplitFragmentShaderTextureInput.int)
-        encoder.setTexture(outputTexture.texture, index: 10)
+                           index: kAttributeBloomSplitComputeShaderTextureInput.int)
+        encoder.setTexture(outputTexture.texture,
+                           index: kAttributeBloomSplitComputeShaderTextureOutput.int)
         encoder.dispatchThreads(dispatchSize, threadsPerThreadgroup: threadGroupSize)
     }
     static func make(device: MTLDevice,

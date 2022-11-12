@@ -10,8 +10,8 @@
 
 using namespace metal;
 
-kernel void kernelBloomSplit(texture2d<float> inputTexture [[texture(kAttributeBloomSplitFragmentShaderTextureInput)]],
-                             texture2d<float, access::write> outputTexture [[texture(10)]],
+kernel void kernelBloomSplit(texture2d<float> inputTexture [[texture(kAttributeBloomSplitComputeShaderTextureInput)]],
+                             texture2d<float, access::write> outputTexture [[texture(kAttributeBloomSplitComputeShaderTextureOutput)]],
                              uint3 inposition [[thread_position_in_grid]],
                              uint3 threads [[threads_per_grid]]) {
     constexpr sampler textureSampler(mag_filter::linear,

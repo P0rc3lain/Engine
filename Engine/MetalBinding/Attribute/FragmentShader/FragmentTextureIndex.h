@@ -38,10 +38,6 @@ enum AttributeAmbientFragmentShaderTextureIndex {
     kAttributeAmbientFragmentShaderTextureSSAO
 };
 
-enum AttributeBloomSplitFragmentShaderTextureIndex {
-    kAttributeBloomSplitFragmentShaderTextureInput = 0,
-};
-
 enum AttributeBloomMergeFragmentShaderTextureIndex {
     kAttributeBloomMergeFragmentShaderTextureOriginal = 0,
     kAttributeBloomMergeFragmentShaderTextureBrightAreas
