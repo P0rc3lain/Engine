@@ -36,6 +36,7 @@ struct PNDirectionalJob: PNRenderJob {
         let nmTexture = inputTextures[1]
         let prTexture = inputTextures[2]
         encoder.setRenderPipelineState(pipelineState)
+        encoder.setStencilReferenceValue(1)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
                                 index: kAttributeDirectionalVertexShaderBufferStageIn)

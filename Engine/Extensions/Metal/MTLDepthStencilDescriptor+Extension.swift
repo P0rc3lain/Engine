@@ -18,11 +18,11 @@ extension MTLDepthStencilDescriptor {
         return descriptor
     }
     static private var lighten: MTLDepthStencilDescriptor {
-        // descriptor.label set in objects utilizing the variable
         let descriptor = MTLDepthStencilDescriptor()
-        descriptor.depthCompareFunction = .lessEqual
+        descriptor.depthCompareFunction = .always
         descriptor.isDepthWriteEnabled = false
         descriptor.frontFaceStencil = .lighten
+        descriptor.backFaceStencil = .lighten
         return descriptor
     }
     static var omni: MTLDepthStencilDescriptor {
