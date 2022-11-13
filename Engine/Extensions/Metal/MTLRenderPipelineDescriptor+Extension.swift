@@ -213,15 +213,6 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexDescriptor = .vertex
         return descriptor
     }
-    static func bloomMerge(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
-        let descriptor = MTLRenderPipelineDescriptor()
-        descriptor.label = "Bloom Merge"
-        descriptor.vertexFunction = library.makeFunction(name: "vertexBloomMerge")
-        descriptor.fragmentFunction = library.makeFunction(name: "fragmentBloomMerge")
-        descriptor.colorAttachments[0].pixelFormat = .bloomSplitC
-        descriptor.vertexDescriptor = .vertex
-        return descriptor
-    }
     static func omniShadow(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.label = "Omni Shadows"

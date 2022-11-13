@@ -12,20 +12,17 @@ struct PNBloomStage: PNStage {
     private let gaussianBlurJob: MPSImageGaussianBlur
     private let splitBlurredTexture: MTLTexture
     private let bloomSplitTexture: MTLTexture
-    private let bloomMergeRenderPassDescriptor: MTLRenderPassDescriptor
     init?(input: PNTextureProvider, device: MTLDevice, renderingSize: CGSize) {
         guard let bloomSplitTexture = device.makeTextureBloomSplitC(size: renderingSize) else {
             return nil
         }
         self.bloomSplitTexture = bloomSplitTexture
-        bloomMergeRenderPassDescriptor = .bloomMerge(device: device, size: renderingSize)
         guard let bloomSplitJob = PNBloomSplitJob.make(device: device,
                                                        inputTexture: input,
                                                        outputTexture: PNStaticTexture(bloomSplitTexture)),
-              let stageOutputTexture = bloomMergeRenderPassDescriptor.colorAttachments[0].texture,
               let splitBlurredTexture = device.makeTexture(descriptor: .bloomSplitC(size: renderingSize)),
               let bloomMergeJob = PNBloomMergeJob.make(device: device,
-                                                       unmodifiedSceneTexture: input,
+                                                       sceneTexture: input,
                                                        brightAreasTexture: PNStaticTexture(splitBlurredTexture)) else {
             return nil
         }
@@ -34,7 +31,7 @@ struct PNBloomStage: PNStage {
         self.bloomMergeJob = bloomMergeJob
         self.splitBlurredTexture = splitBlurredTexture
         self.io = PNGPUIO(input: PNGPUSupply(color: [input]),
-                          output: PNGPUSupply(color: [PNStaticTexture(stageOutputTexture)]))
+                          output: PNGPUSupply(color: [input]))
     }
     func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
         commandBuffer.pushDebugGroup("Bloom Pass")
@@ -48,10 +45,10 @@ struct PNBloomStage: PNStage {
                                destinationTexture: splitBlurredTexture)
         commandBuffer.popDebugGroup()
         commandBuffer.pushDebugGroup("Bloom Merge Pass")
-        guard let bloomMergeEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: bloomMergeRenderPassDescriptor) else {
+        guard let bloomMergeEncoder = commandBuffer.makeComputeCommandEncoder() else {
             return
         }
-        bloomMergeJob.draw(encoder: bloomMergeEncoder, supply: supply)
+        bloomMergeJob.compute(encoder: bloomMergeEncoder, supply: supply)
         bloomMergeEncoder.endEncoding()
         commandBuffer.popDebugGroup()
     }

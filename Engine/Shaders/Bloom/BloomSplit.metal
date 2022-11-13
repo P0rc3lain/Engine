@@ -6,7 +6,7 @@
 
 #include "Shaders/Common/Color.h"
 
-#include "MetalBinding/Vertex.h"
+#include "MetalBinding/Attribute/Bridge.h"
 
 using namespace metal;
 

@@ -108,7 +108,7 @@ extension MTLTextureDescriptor {
         descriptor.height = size.height.int
         descriptor.storageMode = .private
         descriptor.pixelFormat = .lightenSceneC
-        descriptor.usage = [.shaderRead, .renderTarget]
+        descriptor.usage = [.shaderRead, .renderTarget, .shaderWrite]
         return descriptor
     }
     static func ssaoC(size: CGSize) -> MTLTextureDescriptor {
@@ -128,16 +128,6 @@ extension MTLTextureDescriptor {
         descriptor.height = size.height.int
         descriptor.storageMode = .private
         descriptor.pixelFormat = .bloomSplitC
-        descriptor.usage = [.renderTarget, .shaderRead, .shaderWrite]
-        return descriptor
-    }
-    static func bloomMergeC(size: CGSize) -> MTLTextureDescriptor {
-        let descriptor = MTLTextureDescriptor()
-        descriptor.textureType = .type2D
-        descriptor.width = size.width.int
-        descriptor.height = size.height.int
-        descriptor.storageMode = .private
-        descriptor.pixelFormat = .bloomMergeC
         descriptor.usage = [.renderTarget, .shaderRead, .shaderWrite]
         return descriptor
     }
