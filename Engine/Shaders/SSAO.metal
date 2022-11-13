@@ -21,7 +21,7 @@ kernel void kernelSSAO(texture2d<float> nm [[texture(kAttributeSsaoComputeShader
                        uint3 threads [[threads_per_grid]],
                        constant ModelUniforms * modelUniforms [[buffer(kAttributeSsaoComputeShaderBufferModelUniforms)]],
                        constant SSAOUniforms & renderingUniforms [[buffer(kAttributeSsaoComputeShaderBufferRenderingUniforms)]]) {
-                                 float2 texcoord{float(inposition.x)/float(threads.x), float(inposition.y)/float(threads.y)};
+    float2 texcoord{float(inposition.x)/float(threads.x), float(inposition.y)/float(threads.y)};
     constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
     float3 worldPosition = pr.sample(textureSampler, texcoord).xyz;
     float3 normal = normalize(nm.sample(textureSampler, texcoord)).xyz;

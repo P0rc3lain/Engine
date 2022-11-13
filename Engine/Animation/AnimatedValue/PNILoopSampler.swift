@@ -3,6 +3,9 @@
 //
 
 public class PNILoopSampler: PNSampleProvider {
+    public init() {
+        // Empty
+    }
     public func sample<T>(animation: PNKeyframeAnimation<T>,
                           at time: PNTimePoint) -> PNAnimationSample<T> {
         guard animation.times.count > 1 else {
