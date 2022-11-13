@@ -28,15 +28,10 @@ struct PNBloomMergeJob: PNComputeJob {
     }
     func compute(encoder: MTLComputeCommandEncoder, supply: PNFrameSupply) {
         encoder.setComputePipelineState(pipelineState)
-        encoder.setTexture(sceneTexture.texture,
-                           index: kAttributeBloomMergeComputeShaderTextureOriginal.int)
-        var time = Float(Date().timeIntervalSince1970.truncatingRemainder(dividingBy: 20))
-        encoder.setBytes(&time,
-                         length: MemoryLayout<Float>.size,
-                         index: kAttributeBloomMergeComputeShaderBufferTime.int)
-        encoder.setTexture(brightAreasTexture.texture,
-                           index: kAttributeBloomMergeComputeShaderTextureBrightAreas.int
-        )
+        encoder.setTexture(sceneTexture, index: kAttributeBloomMergeComputeShaderTextureOriginal)
+        encoder.setBytes(Float(Date().timeIntervalSince1970.truncatingRemainder(dividingBy: 20)),
+                         index: kAttributeBloomMergeComputeShaderBufferTime)
+        encoder.setTexture(brightAreasTexture, index: kAttributeBloomMergeComputeShaderTextureBrightAreas)
         encoder.dispatchThreads(dispatchSize, threadsPerThreadgroup: threadGroupSize)
     }
     static func make(device: MTLDevice,
