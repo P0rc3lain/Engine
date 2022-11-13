@@ -37,6 +37,7 @@ struct PNSpotJob: PNRenderJob {
         let prTexture = inputTextures[2]
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStencilState)
+        encoder.setStencilReferenceValue(1)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
                                 index: kAttributeSpotVertexShaderBufferStageIn)
         encoder.setFragmentBuffer(bufferStore.spotLights,
