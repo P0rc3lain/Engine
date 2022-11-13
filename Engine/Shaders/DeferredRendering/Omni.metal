@@ -25,8 +25,8 @@ struct RasterizerData {
     uint instanceId [[flat]];
 };
 
-vertex RasterizerData vertexDeferredLight(Vertex in [[stage_in]],
-                                          uint instanceId [[instance_id]]) {
+vertex RasterizerData vertexOmniLight(Vertex in [[stage_in]],
+                                      uint instanceId [[instance_id]]) {
     return {
         float4(in.position, 1),
         in.textureUV,
@@ -34,14 +34,14 @@ vertex RasterizerData vertexDeferredLight(Vertex in [[stage_in]],
     };
 }
 
-fragment float4 fragmentDeferredLight(RasterizerData in [[stage_in]],
-                                      texture2d<float> ar [[texture(kAttributeLightingFragmentShaderTextureAR)]],
-                                      texture2d<float> nm [[texture(kAttributeLightingFragmentShaderTextureNM)]],
-                                      texture2d<float> pr [[texture(kAttributeLightingFragmentShaderTexturePR)]],
-                                      depthcube_array<float> shadows [[texture(kAttributeLightingFragmentShaderTextureShadowMaps)]],
-                                      constant CameraUniforms & camera [[buffer(kAttributeLightingFragmentShaderBufferCamera)]],
-                                      constant OmniLight * omniLights [[buffer(kAttributeLightingFragmentShaderBufferOmniLights)]],
-                                      constant ModelUniforms * lightUniforms [[buffer(kAttributeLightingFragmentShaderBufferLightUniforms)]]) {
+fragment float4 fragmentOmniLight(RasterizerData in [[stage_in]],
+                                  texture2d<float> ar [[texture(kAttributeLightingFragmentShaderTextureAR)]],
+                                  texture2d<float> nm [[texture(kAttributeLightingFragmentShaderTextureNM)]],
+                                  texture2d<float> pr [[texture(kAttributeLightingFragmentShaderTexturePR)]],
+                                  depthcube_array<float> shadows [[texture(kAttributeLightingFragmentShaderTextureShadowMaps)]],
+                                  constant CameraUniforms & camera [[buffer(kAttributeLightingFragmentShaderBufferCamera)]],
+                                  constant OmniLight * omniLights [[buffer(kAttributeLightingFragmentShaderBufferOmniLights)]],
+                                  constant ModelUniforms * lightUniforms [[buffer(kAttributeLightingFragmentShaderBufferLightUniforms)]]) {
     constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
     LightingInput input = LightingInput::fromTextures(ar, nm, pr, textureSampler, in.texcoord);
 

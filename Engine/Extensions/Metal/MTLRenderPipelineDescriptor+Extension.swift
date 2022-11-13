@@ -132,8 +132,8 @@ extension MTLRenderPipelineDescriptor {
     static func omni(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.label = "Omni Lighting"
-        descriptor.vertexFunction = library.makeFunction(name: "vertexDeferredLight")
-        descriptor.fragmentFunction = library.makeFunction(name: "fragmentDeferredLight")
+        descriptor.vertexFunction = library.makeFunction(name: "vertexOmniLight")
+        descriptor.fragmentFunction = library.makeFunction(name: "fragmentOmniLight")
         descriptor.colorAttachments[0].pixelFormat = .lightenSceneC
         descriptor.colorAttachments[0].rgbBlendOperation = .add
         descriptor.colorAttachments[0].sourceAlphaBlendFactor = .one
