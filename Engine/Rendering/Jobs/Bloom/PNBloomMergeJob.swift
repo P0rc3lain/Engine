@@ -6,43 +6,44 @@ import Metal
 import MetalBinding
 import simd
 
-struct PNBloomMergeJob: PNRenderJob {
-    private let pipelineState: MTLRenderPipelineState
-    private let plane: PNMesh
-    private let unmodifiedSceneTexture: PNTextureProvider
+struct PNBloomMergeJob: PNComputeJob {
+    private let pipelineState: MTLComputePipelineState
+    private let sceneTexture: PNTextureProvider
     private let brightAreasTexture: PNTextureProvider
-    init?(pipelineState: MTLRenderPipelineState,
-          device: MTLDevice,
-          unmodifiedSceneTexture: PNTextureProvider,
+    private let dispatchSize: MTLSize
+    private let threadGroupSize: MTLSize
+    init?(pipelineState: MTLComputePipelineState,
+          sceneTexture: PNTextureProvider,
           brightAreasTexture: PNTextureProvider) {
-        guard let plane = PNMesh.plane(device: device) else {
+        self.pipelineState = pipelineState
+        self.sceneTexture = sceneTexture
+        self.brightAreasTexture = brightAreasTexture
+        guard let inputTexture = sceneTexture.texture else {
             return nil
         }
-        self.pipelineState = pipelineState
-        self.plane = plane
-        self.unmodifiedSceneTexture = unmodifiedSceneTexture
-        self.brightAreasTexture = brightAreasTexture
+        dispatchSize = MTLSize(width: inputTexture.width,
+                               height: inputTexture.height,
+                               depth: 1)
+        threadGroupSize = MTLSize(width: 8, height: 8, depth: 1)
     }
-    func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
-        encoder.setRenderPipelineState(pipelineState)
-        encoder.setVertexBuffer(plane.vertexBuffer.buffer,
-                                index: kAttributeBloomSplitVertexShaderBufferStageIn)
-        encoder.setFragmentTexture(unmodifiedSceneTexture,
-                                   index: kAttributeBloomMergeFragmentShaderTextureOriginal)
-        encoder.setFragmentTexture(brightAreasTexture,
-                                   index: kAttributeBloomMergeFragmentShaderTextureBrightAreas)
-        encoder.drawIndexedPrimitives(submesh: plane.pieceDescriptions[0].drawDescription)
+    func compute(encoder: MTLComputeCommandEncoder, supply: PNFrameSupply) {
+        encoder.setComputePipelineState(pipelineState)
+        encoder.setTexture(sceneTexture.texture,
+                           index: kAttributeBloomMergeComputeShaderTextureOriginal.int)
+        encoder.setTexture(brightAreasTexture.texture,
+                           index: kAttributeBloomMergeComputeShaderTextureBrightAreas.int
+        )
+        encoder.dispatchThreads(dispatchSize, threadsPerThreadgroup: threadGroupSize)
     }
     static func make(device: MTLDevice,
-                     unmodifiedSceneTexture: PNTextureProvider,
+                     sceneTexture: PNTextureProvider,
                      brightAreasTexture: PNTextureProvider) -> PNBloomMergeJob? {
         guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRPSBloomMerge(library: library) else {
+              let pipelineState = device.makeCPSBloomMerge(library: library) else {
             return nil
         }
         return PNBloomMergeJob(pipelineState: pipelineState,
-                               device: device,
-                               unmodifiedSceneTexture: unmodifiedSceneTexture,
+                               sceneTexture: sceneTexture,
                                brightAreasTexture: brightAreasTexture)
     }
 }

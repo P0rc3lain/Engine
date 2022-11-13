@@ -4,28 +4,16 @@
 
 #include <metal_stdlib>
 
-#include "MetalBinding/Vertex.h"
 #include "MetalBinding/Attribute/Bridge.h"
 
 using namespace metal;
 
-struct RasterizedData {
-    float4 position [[position]];
-    float2 texcoord;
-};
 
-vertex RasterizedData  vertexBloomMerge(Vertex in [[stage_in]]) {
-    return RasterizedData {
-        float4(in.position, 1),
-        in.textureUV
-    };
-}
-
-fragment float4 fragmentBloomMerge(RasterizedData in [[stage_in]],
-                                   texture2d<float> inputTexture [[texture(kAttributeBloomMergeFragmentShaderTextureOriginal)]],
-                                   texture2d<float> brightAreasTexture [[texture(kAttributeBloomMergeFragmentShaderTextureBrightAreas)]]) {
-    constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
-    float3 originalColor = inputTexture.sample(textureSampler, in.texcoord).xyz;
-    float3 bloomColor = brightAreasTexture.sample(textureSampler, in.texcoord).xyz;
-    return float4(bloomColor + originalColor, 1);
+kernel void kernelBloomMerge(texture2d<float, access::read_write> inputTexture [[texture(kAttributeBloomMergeComputeShaderTextureOriginal)]],
+                             texture2d<float> brightAreasTexture [[texture(kAttributeBloomMergeComputeShaderTextureBrightAreas)]],
+                             uint3 inposition [[thread_position_in_grid]],
+                             uint3 threads [[threads_per_grid]]) {
+    float3 originalColor = inputTexture.read(inposition.xy).xyz;
+    float3 bloomColor = brightAreasTexture.read(inposition.xy).xyz;
+    inputTexture.write(float4(bloomColor + originalColor, 1), inposition.xy);
 }

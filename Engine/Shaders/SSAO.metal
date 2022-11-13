@@ -5,7 +5,6 @@
 #include <metal_stdlib>
 
 #include "MetalBinding/Model.h"
-#include "MetalBinding/Vertex.h"
 #include "MetalBinding/Camera.h"
 #include "MetalBinding/Rendering/SSAO.h"
 #include "MetalBinding/Attribute/Bridge.h"

@@ -105,12 +105,15 @@ extension MTLDevice {
     func makeRPSAmbient(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .ambient(library: library))
     }
-    func makeRPSBloomMerge(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .bloomMerge(library: library))
-    }
     // =======================
     // MTLComputePipelineState
     // =======================
+    func makeCPSBloomMerge(library: MTLLibrary) -> MTLComputePipelineState? {
+        guard let function = library.makeFunction(name: "kernelBloomMerge") else {
+            return nil
+        }
+        return try? makeComputePipelineState(function: function)
+    }
     func makeCPSBloomSplit(library: MTLLibrary) -> MTLComputePipelineState? {
         guard let function = library.makeFunction(name: "kernelBloomSplit") else {
             return nil
@@ -172,10 +175,6 @@ extension MTLDevice {
     func makeTextureBloomSplitC(size: CGSize) -> MTLTexture? {
         let texture = makeTexture(descriptor: .bloomSplitC(size: size))
         return texture?.labeled("Bloom Split Color")
-    }
-    func makeTextureBloomMergeC(size: CGSize) -> MTLTexture? {
-        let texture = makeTexture(descriptor: .bloomMergeC(size: size))
-        return texture?.labeled("Bloom Merge Color")
     }
     func makeTexturePostprocessC(size: CGSize) -> MTLTexture? {
         let texture = makeTexture(descriptor: .postprocessC(size: size))
