@@ -28,12 +28,16 @@ struct PNPostprocessStage: PNStage {
     }
     func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
         commandBuffer.pushDebugGroup("Post Processing Pass")
-        guard let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: postprocessRenderPassDescriptor) else {
+        guard let encoderA = commandBuffer.makeRenderCommandEncoder(descriptor: postprocessRenderPassDescriptor) else {
             return
         }
-        vignetteJob.draw(encoder: encoder, supply: supply)
-        grainJob.draw(encoder: encoder, supply: supply)
-        encoder.endEncoding()
+        vignetteJob.draw(encoder: encoderA, supply: supply)
+        encoderA.endEncoding()
+        guard let encoderB = commandBuffer.makeRenderCommandEncoder(descriptor: postprocessRenderPassDescriptor) else {
+            return
+        }
+        grainJob.draw(encoder: encoderB, supply: supply)
+        encoderB.endEncoding()
         commandBuffer.popDebugGroup()
     }
 }

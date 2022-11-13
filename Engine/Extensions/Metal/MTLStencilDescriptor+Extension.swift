@@ -25,9 +25,7 @@ extension MTLStencilDescriptor {
     }
     static var lighten: MTLStencilDescriptor {
         let stencil = MTLStencilDescriptor()
-        stencil.stencilCompareFunction = .greaterEqual
-        stencil.readMask = 0b00000000
-        stencil.writeMask = 0xFF
+        stencil.stencilCompareFunction = .equal
         stencil.stencilFailureOperation = .keep
         stencil.depthFailureOperation = .keep
         stencil.depthStencilPassOperation = .replace

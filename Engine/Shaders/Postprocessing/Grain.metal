@@ -53,4 +53,5 @@ fragment float4 fragmentGrain(RasterizerData in [[stage_in]],
     #elif BLEND_MODE == 4
     return float4(max(color, grain * INTENSITY), 1);
     #endif
+    
 }

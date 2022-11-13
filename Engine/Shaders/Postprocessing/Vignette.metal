@@ -21,14 +21,14 @@ vertex RasterizerData vertexVignette(Vertex in [[stage_in]]) {
     };
 }
 
-float4 vignette(float4 vignetteColor, float2 position, float fromRadius, float toRadius) {
+float4 vignette(float4 fragmentColor, float4 vignetteColor, float2 position, float fromRadius, float toRadius) {
     float radius = length(float2(0.5, 0.5) - position) * 2;
     float ratio = saturate(radius - fromRadius) / (toRadius - fromRadius);
-    return smoothstep(float4(1, 1, 1, 1), vignetteColor, ratio);
+    return mix(fragmentColor, vignetteColor, ratio);
 }
 
 fragment float4 fragmentVignette(RasterizerData in [[stage_in]],
                                     texture2d<float> texture [[texture(kAttributeVignetteFragmentShaderTexture)]]) {
     constexpr sampler textureSampler(min_filter::linear, mag_filter::linear, mip_filter::linear);
-    return vignette(float4(0, 0, 0, 1), in.texcoord, 0.9, 1.4) * texture.sample(textureSampler, in.texcoord);
+    return vignette(texture.sample(textureSampler, in.texcoord), float4(0, 0, 0, 1), in.texcoord, 0.8, 2);
 }
