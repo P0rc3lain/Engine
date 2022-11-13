@@ -114,12 +114,6 @@ extension MTLDevice {
         }
         return try? makeComputePipelineState(function: function)
     }
-    func makeCPSPostprocessing(library: MTLLibrary) -> MTLComputePipelineState? {
-        guard let function = library.makeFunction(name: "kernelPostprocessing") else {
-            return nil
-        }
-        return try? makeComputePipelineState(function: function)
-    }
     func makeCPSSSAO(library: MTLLibrary) -> MTLComputePipelineState? {
         guard let function = library.makeFunction(name: "kernelSSAO") else {
             return nil
