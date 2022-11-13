@@ -33,6 +33,7 @@
 		561340B428C26A4F00D36F89 /* Array+Extension+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677AD2628C1505000BF822C /* Array+Extension+Tests.swift */; };
 		561340B628C5105A00D36F89 /* Attenuation.h in Sources */ = {isa = PBXBuildFile; fileRef = 561340B528C4DA7800D36F89 /* Attenuation.h */; };
 		561628512921973000C166B2 /* MTLComputeCommandEncoder+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561628502921973000C166B2 /* MTLComputeCommandEncoder+Extension.swift */; };
+		5616285329219E1F00C166B2 /* MTLSize+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5616285229219E1F00C166B2 /* MTLSize+Extension.swift */; };
 		56165BEA27440DA90025D58B /* PNEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BE827440DA90025D58B /* PNEntity.swift */; };
 		56165BEB27440DA90025D58B /* PNEntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BE927440DA90025D58B /* PNEntityType.swift */; };
 		56165BF02744401B0025D58B /* ModelUniforms+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56165BEF2744401B0025D58B /* ModelUniforms+Extension.swift */; };
@@ -367,6 +368,7 @@
 		560C18D6273AC71100459AEF /* OmniLight+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OmniLight+Extension.swift"; sourceTree = "<group>"; };
 		561340B528C4DA7800D36F89 /* Attenuation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Attenuation.h; sourceTree = "<group>"; };
 		561628502921973000C166B2 /* MTLComputeCommandEncoder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLComputeCommandEncoder+Extension.swift"; sourceTree = "<group>"; };
+		5616285229219E1F00C166B2 /* MTLSize+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLSize+Extension.swift"; sourceTree = "<group>"; };
 		56165BE827440DA90025D58B /* PNEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNEntity.swift; sourceTree = "<group>"; };
 		56165BE927440DA90025D58B /* PNEntityType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNEntityType.swift; sourceTree = "<group>"; };
 		56165BEF2744401B0025D58B /* ModelUniforms+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelUniforms+Extension.swift"; sourceTree = "<group>"; };
@@ -1911,6 +1913,7 @@
 				564DE04628427595005C2029 /* MTLLibrary+Extension.swift */,
 				564DE04A28427A1E005C2029 /* MTLTexture+Extension.swift */,
 				561628502921973000C166B2 /* MTLComputeCommandEncoder+Extension.swift */,
+				5616285229219E1F00C166B2 /* MTLSize+Extension.swift */,
 			);
 			path = Metal;
 			sourceTree = "<group>";
@@ -2405,6 +2408,7 @@
 				5620C8252754F65B0098D6FA /* PNOmniLightNode.swift in Sources */,
 				562C739028494FE000E51606 /* Particle.metal in Sources */,
 				5629FBEA2749201F005476AF /* PNInterpolator.swift in Sources */,
+				5616285329219E1F00C166B2 /* MTLSize+Extension.swift in Sources */,
 				5675C46A28B2B81900EEC58D /* PNIScreenInteractor.swift in Sources */,
 				5616673E2719E2CD000063B1 /* PNSceneDescription.swift in Sources */,
 				56E011C428413EB0007859F2 /* Int32+Extension.swift in Sources */,

@@ -21,10 +21,8 @@ struct PNBloomMergeJob: PNComputeJob {
         guard let inputTexture = sceneTexture.texture else {
             return nil
         }
-        dispatchSize = MTLSize(width: inputTexture.width,
-                               height: inputTexture.height,
-                               depth: 1)
-        threadGroupSize = MTLSize(width: 8, height: 8, depth: 1)
+        dispatchSize = MTLSize(width: inputTexture.width, height: inputTexture.height)
+        threadGroupSize = MTLSize(width: 8, height: 8)
     }
     func compute(encoder: MTLComputeCommandEncoder, supply: PNFrameSupply) {
         encoder.setComputePipelineState(pipelineState)
