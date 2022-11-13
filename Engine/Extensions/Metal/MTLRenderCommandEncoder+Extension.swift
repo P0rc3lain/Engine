@@ -31,8 +31,8 @@ extension MTLRenderCommandEncoder {
     func setVertexBuffer<T: RawRepresentable, Z>(_ dynamicBuffer: PNAnyDynamicBuffer<Z>?, index: T) where T.RawValue == UInt32 {
         setVertexBuffer(dynamicBuffer?.buffer, offset: 0, index: index)
     }
-    func setVertexBuffer<T: RawRepresentable, Z>(_ dynamicBuffer: PNAnyStaticBuffer<Z>?, index: T) where T.RawValue == UInt32 {
-        setVertexBuffer(dynamicBuffer?.buffer, offset: 0, index: index)
+    func setVertexBuffer<T: RawRepresentable, Z>(_ staticBuffer: PNAnyStaticBuffer<Z>?, index: T) where T.RawValue == UInt32 {
+        setVertexBuffer(staticBuffer?.buffer, offset: 0, index: index)
     }
     func setVertexBuffer(_ buffer: MTLBuffer?, index: Int) {
         setVertexBuffer(buffer, offset: 0, index: index)

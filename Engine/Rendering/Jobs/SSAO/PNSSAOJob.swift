@@ -45,24 +45,14 @@ struct PNSSAOJob: PNComputeJob {
     }
     func compute(encoder: MTLComputeCommandEncoder, supply: PNFrameSupply) {
         encoder.setComputePipelineState(pipelineState)
-        encoder.setBuffer(kernelBuffer.buffer,
-                          offset: 0,
-                          index: kAttributeSsaoComputeShaderBufferSamples.int)
-        encoder.setBuffer(supply.bufferStore.modelCoordinateSystems.buffer,
-                          offset: 0,
-                          index: kAttributeSsaoComputeShaderBufferModelUniforms.int)
-        encoder.setBuffer(noiseBuffer.buffer,
-                          offset: 0,
-                          index: kAttributeSsaoComputeShaderBufferNoise.int)
-        encoder.setBuffer(supply.bufferStore.cameras.buffer,
-                          offset: 0,
-                          index: kAttributeSsaoComputeShaderBufferCamera.int)
-        encoder.setBuffer(uniforms.buffer,
-                          offset: 0,
-                          index: kAttributeSsaoComputeShaderBufferRenderingUniforms.int)
-        encoder.setTexture(nmTexture.texture, index: kAttributeSsaoComputeShaderTextureNM.int)
-        encoder.setTexture(prTexture.texture, index: kAttributeSsaoComputeShaderTexturePR.int)
-        encoder.setTexture(outputTexture.texture, index: kAttributeSsaoComputeShaderTextureOutput.int)
+        encoder.setBuffer(kernelBuffer, index: kAttributeSsaoComputeShaderBufferSamples)
+        encoder.setBuffer(supply.bufferStore.modelCoordinateSystems, index: kAttributeSsaoComputeShaderBufferModelUniforms)
+        encoder.setBuffer(noiseBuffer, index: kAttributeSsaoComputeShaderBufferNoise)
+        encoder.setBuffer(supply.bufferStore.cameras, index: kAttributeSsaoComputeShaderBufferCamera)
+        encoder.setBuffer(uniforms, index: kAttributeSsaoComputeShaderBufferRenderingUniforms)
+        encoder.setTexture(nmTexture, index: kAttributeSsaoComputeShaderTextureNM)
+        encoder.setTexture(prTexture, index: kAttributeSsaoComputeShaderTexturePR)
+        encoder.setTexture(outputTexture, index: kAttributeSsaoComputeShaderTextureOutput)
         encoder.dispatchThreads(dispatchSize, threadsPerThreadgroup: threadGroupSize)
     }
     static func make(device: MTLDevice,
