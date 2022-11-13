@@ -12,7 +12,6 @@ struct PNPipeline: PNStage {
     private var bloomStage: PNBloomStage
     private var gBufferStage: PNGBufferStage
     private var shadowStage: PNShadowStage
-    private var postprocessStage: PNPostprocessStage
     init?(device: MTLDevice, renderingSize: CGSize) {
         guard let gBufferStage = PNGBufferStage(device: device,
                                                 renderingSize: renderingSize),
@@ -32,19 +31,16 @@ struct PNPipeline: PNStage {
                                                 directionalLightsShadows: shadowStage.io.output.depth[2]),
               let bloomStage = PNBloomStage(input: combineStage.io.output.color[0],
                                             device: device,
-                                            renderingSize: renderingSize),
-              let postprocessStage = PNPostprocessStage(device: device,
-                                                        inputTexture: bloomStage.io.output.color[0]) else {
+                                            renderingSize: renderingSize) else {
             return nil
         }
         self.gBufferStage = gBufferStage
         self.combineStage = combineStage
         self.bloomStage = bloomStage
         self.ssaoStage = ssaoStage
-        self.postprocessStage = postprocessStage
         self.shadowStage = shadowStage
         self.io = PNGPUIO(input: .empty,
-                          output: PNGPUSupply(color: postprocessStage.io.output.color))
+                          output: PNGPUSupply(color: bloomStage.io.output.color))
     }
     func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
         shadowStage.draw(commandBuffer: commandBuffer,
@@ -59,7 +55,5 @@ struct PNPipeline: PNStage {
                           supply: supply)
         bloomStage.draw(commandBuffer: commandBuffer,
                         supply: supply)
-        postprocessStage.draw(commandBuffer: commandBuffer,
-                              supply: supply)
     }
 }

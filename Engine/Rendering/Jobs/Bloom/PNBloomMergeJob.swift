@@ -30,6 +30,10 @@ struct PNBloomMergeJob: PNComputeJob {
         encoder.setComputePipelineState(pipelineState)
         encoder.setTexture(sceneTexture.texture,
                            index: kAttributeBloomMergeComputeShaderTextureOriginal.int)
+        var time = Float(Date().timeIntervalSince1970.truncatingRemainder(dividingBy: 20))
+        encoder.setBytes(&time,
+                         length: MemoryLayout<Float>.size,
+                         index: kAttributeBloomMergeComputeShaderBufferTime.int)
         encoder.setTexture(brightAreasTexture.texture,
                            index: kAttributeBloomMergeComputeShaderTextureBrightAreas.int
         )
