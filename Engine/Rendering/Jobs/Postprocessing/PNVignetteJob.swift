@@ -6,34 +6,36 @@ import Metal
 import MetalBinding
 import simd
 
-struct PNVignetteJob: PNRenderJob {
-    private let pipelineState: MTLRenderPipelineState
-    private let inputTexture: PNTextureProvider
-    private let plane: PNMesh
-    init(pipelineState: MTLRenderPipelineState,
-         inputTexture: PNTextureProvider,
-         plane: PNMesh) {
-        self.inputTexture = inputTexture
+struct PNVignetteJob: PNComputeJob {
+    private let pipelineState: MTLComputePipelineState
+    private let inoutTexture: PNTextureProvider
+    private let dispatchSize: MTLSize
+    private let threadGroupSize: MTLSize
+    init?(pipelineState: MTLComputePipelineState,
+          inoutTexture: PNTextureProvider) {
+        self.inoutTexture = inoutTexture
         self.pipelineState = pipelineState
-        self.plane = plane
+        guard let inoutTexture = inoutTexture.texture else {
+            return nil
+        }
+        dispatchSize = MTLSize(width: inoutTexture.width,
+                               height: inoutTexture.height,
+                               depth: 1)
+        threadGroupSize = MTLSize(width: 8, height: 8, depth: 1)
     }
-    func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
-        encoder.setFragmentTexture(inputTexture,
-                                   index: kAttributeVignetteFragmentShaderTexture)
-        encoder.setRenderPipelineState(pipelineState)
-        encoder.setVertexBuffer(plane.vertexBuffer.buffer,
-                                index: kAttributeVignetteVertexShaderBufferStageIn)
-        encoder.drawIndexedPrimitives(submesh: plane.pieceDescriptions[0].drawDescription)
+    func compute(encoder: MTLComputeCommandEncoder, supply: PNFrameSupply) {
+        encoder.setTexture(inoutTexture.texture,
+                           index: kAttributeVignetteComputeShaderTexture.int)
+        encoder.setComputePipelineState(pipelineState)
+        encoder.dispatchThreads(dispatchSize, threadsPerThreadgroup: threadGroupSize)
     }
     static func make(device: MTLDevice,
-                     inputTexture: PNTextureProvider) -> PNVignetteJob? {
+                     inoutTexture: PNTextureProvider) -> PNVignetteJob? {
         guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRPSVignette(library: library),
-              let plane = PNMesh.plane(device: device) else {
+              let pipelineState = device.makeCPSVignette(library: library) else {
             return nil
         }
         return PNVignetteJob(pipelineState: pipelineState,
-                             inputTexture: inputTexture,
-                             plane: plane)
+                             inoutTexture: inoutTexture)
     }
 }

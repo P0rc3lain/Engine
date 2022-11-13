@@ -4,22 +4,9 @@
 
 #include <metal_stdlib>
 
-#include "MetalBinding/Vertex.h"
 #include "MetalBinding/Attribute/Bridge.h"
 
 using namespace metal;
-
-struct RasterizerData {
-    float4 position [[position]];
-    float2 texcoord;
-};
-
-vertex RasterizerData vertexVignette(Vertex in [[stage_in]]) {
-    return RasterizerData {
-        float4(in.position, 1),
-        in.textureUV
-    };
-}
 
 float4 vignette(float4 fragmentColor, float4 vignetteColor, float2 position, float fromRadius, float toRadius) {
     float radius = length(float2(0.5, 0.5) - position) * 2;
@@ -27,8 +14,11 @@ float4 vignette(float4 fragmentColor, float4 vignetteColor, float2 position, flo
     return mix(fragmentColor, vignetteColor, ratio);
 }
 
-fragment float4 fragmentVignette(RasterizerData in [[stage_in]],
-                                    texture2d<float> texture [[texture(kAttributeVignetteFragmentShaderTexture)]]) {
-    constexpr sampler textureSampler(min_filter::linear, mag_filter::linear, mip_filter::linear);
-    return vignette(texture.sample(textureSampler, in.texcoord), float4(0, 0, 0, 1), in.texcoord, 0.8, 2);
+kernel void kernelVignette(texture2d<float, access::read_write> inoutTexture [[texture(kAttributeVignetteComputeShaderTexture)]],
+                           uint3 inposition [[thread_position_in_grid]],
+                           uint3 threads [[threads_per_grid]]) {
+    float2 texcoord{float(inposition.x)/float(threads.x), float(inposition.y)/float(threads.y)};
+    auto inputColor = inoutTexture.read(inposition.xy);
+    auto vignetteColor = vignette(inputColor, float4(1, 0, 0, 1), texcoord, 0.8, 2);
+    inoutTexture.write(vignetteColor, inposition.xy);
 }

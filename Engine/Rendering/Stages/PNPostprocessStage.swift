@@ -16,7 +16,7 @@ struct PNPostprocessStage: PNStage {
         }
         self.postprocessRenderPassDescriptor = .postprocess(device: device, texture: texture)
         guard let vignetteJob = PNVignetteJob.make(device: device,
-                                                   inputTexture: inputTexture),
+                                                   inoutTexture: inputTexture),
               let grainJob = PNGrainJob.make(device: device,
                                              inputTexture: inputTexture) else {
             return nil
@@ -28,10 +28,10 @@ struct PNPostprocessStage: PNStage {
     }
     func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
         commandBuffer.pushDebugGroup("Post Processing Pass")
-        guard let encoderA = commandBuffer.makeRenderCommandEncoder(descriptor: postprocessRenderPassDescriptor) else {
+        guard let encoderA = commandBuffer.makeComputeCommandEncoder() else {
             return
         }
-        vignetteJob.draw(encoder: encoderA, supply: supply)
+        vignetteJob.compute(encoder: encoderA, supply: supply)
         encoderA.endEncoding()
         guard let encoderB = commandBuffer.makeRenderCommandEncoder(descriptor: postprocessRenderPassDescriptor) else {
             return
