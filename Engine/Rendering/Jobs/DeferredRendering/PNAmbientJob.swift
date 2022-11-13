@@ -33,6 +33,7 @@ struct PNAmbientJob: PNRenderJob {
         }
         encoder.setRenderPipelineState(pipelineState)
         encoder.setDepthStencilState(depthStencilState)
+        encoder.setStencilReferenceValue(1)
         encoder.setVertexBuffer(plane.vertexBuffer.buffer,
                                 index: kAttributeAmbientVertexShaderBufferStageIn)
         encoder.setFragmentBuffer(bufferStore.modelCoordinateSystems,

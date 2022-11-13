@@ -6,7 +6,7 @@ import Metal
 import MetalBinding
 import simd
 
-struct PNVignetteJob: PNComputeJob {
+struct PNPostprocessingJob: PNComputeJob {
     private let pipelineState: MTLComputePipelineState
     private let inoutTexture: PNTextureProvider
     private let dispatchSize: MTLSize
@@ -25,17 +25,21 @@ struct PNVignetteJob: PNComputeJob {
     }
     func compute(encoder: MTLComputeCommandEncoder, supply: PNFrameSupply) {
         encoder.setTexture(inoutTexture.texture,
-                           index: kAttributeVignetteComputeShaderTexture.int)
+                           index: kAttributePostprocessingComputeShaderTexture.int)
+        var time = Float(Date().timeIntervalSince1970.truncatingRemainder(dividingBy: 20))
+        encoder.setBytes(&time,
+                         length: MemoryLayout<Float>.size,
+                         index: kAttributePostprocessingComputeShaderBufferTime.int)
         encoder.setComputePipelineState(pipelineState)
         encoder.dispatchThreads(dispatchSize, threadsPerThreadgroup: threadGroupSize)
     }
     static func make(device: MTLDevice,
-                     inoutTexture: PNTextureProvider) -> PNVignetteJob? {
+                     inoutTexture: PNTextureProvider) -> PNPostprocessingJob? {
         guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeCPSVignette(library: library) else {
+              let pipelineState = device.makeCPSPostprocessing(library: library) else {
             return nil
         }
-        return PNVignetteJob(pipelineState: pipelineState,
-                             inoutTexture: inoutTexture)
+        return PNPostprocessingJob(pipelineState: pipelineState,
+                                   inoutTexture: inoutTexture)
     }
 }

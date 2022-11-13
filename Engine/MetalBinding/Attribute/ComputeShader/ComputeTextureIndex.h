@@ -21,6 +21,7 @@ enum AttributeBloomMergeComputeShaderTextureIndex {
     kAttributeBloomMergeComputeShaderTextureBrightAreas
 };
 
-enum AttributeVignetteComputeShaderTextureIndex {
-    kAttributeVignetteComputeShaderTexture = 0
+enum AttributePostprocessingComputeShaderTextureIndex {
+    kAttributePostprocessingComputeShaderTexture = 0,
+    kAttributePostprocessingComputeShaderBufferTime
 };

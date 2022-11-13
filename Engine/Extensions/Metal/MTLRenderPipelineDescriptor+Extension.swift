@@ -8,16 +8,6 @@ import MetalKit
 import ModelIO
 
 extension MTLRenderPipelineDescriptor {
-    static func grain(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
-        let descriptor = MTLRenderPipelineDescriptor()
-        descriptor.label = "Grain"
-        descriptor.vertexFunction = library.makeFunction(name: "vertexGrain")
-        descriptor.fragmentFunction = library.makeFunction(name: "fragmentGrain")
-        descriptor.colorAttachments[0].pixelFormat = .grainC
-        descriptor.vertexBuffers[0].mutability = .immutable
-        descriptor.vertexDescriptor = .vertex
-        return descriptor
-    }
     static func environment(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.label = "Environment"
