@@ -9,10 +9,6 @@ enum AttributeFogFragmentShaderTextureIndex {
     kAttributeFogFragmentShaderTexturePR
 };
 
-enum AttributeVignetteFragmentShaderTextureIndex {
-    kAttributeVignetteFragmentShaderTexture = 0
-};
-
 enum AttributeGrainFragmentShaderTextureIndex {
     kAttributeGrainFragmentShaderTexture = 0
 };

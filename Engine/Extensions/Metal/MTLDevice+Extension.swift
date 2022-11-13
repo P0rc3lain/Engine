@@ -51,9 +51,6 @@ extension MTLDevice {
     func makeRPSParticle(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .particle(library: library))
     }
-    func makeRPSVignette(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .vignette(library: library))
-    }
     func makeRPSGrain(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .grain(library: library))
     }
@@ -116,6 +113,12 @@ extension MTLDevice {
     }
     func makeCPSBloomSplit(library: MTLLibrary) -> MTLComputePipelineState? {
         guard let function = library.makeFunction(name: "kernelBloomSplit") else {
+            return nil
+        }
+        return try? makeComputePipelineState(function: function)
+    }
+    func makeCPSVignette(library: MTLLibrary) -> MTLComputePipelineState? {
+        guard let function = library.makeFunction(name: "kernelVignette") else {
             return nil
         }
         return try? makeComputePipelineState(function: function)
