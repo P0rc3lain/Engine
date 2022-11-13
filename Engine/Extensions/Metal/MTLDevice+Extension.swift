@@ -51,9 +51,6 @@ extension MTLDevice {
     func makeRPSParticle(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .particle(library: library))
     }
-    func makeRPSGrain(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .grain(library: library))
-    }
     func makeRPSSpotShadow(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .spotShadow(library: library))
     }
@@ -117,8 +114,8 @@ extension MTLDevice {
         }
         return try? makeComputePipelineState(function: function)
     }
-    func makeCPSVignette(library: MTLLibrary) -> MTLComputePipelineState? {
-        guard let function = library.makeFunction(name: "kernelVignette") else {
+    func makeCPSPostprocessing(library: MTLLibrary) -> MTLComputePipelineState? {
+        guard let function = library.makeFunction(name: "kernelPostprocessing") else {
             return nil
         }
         return try? makeComputePipelineState(function: function)
@@ -178,10 +175,6 @@ extension MTLDevice {
     func makeTextureBloomSplitC(size: CGSize) -> MTLTexture? {
         let texture = makeTexture(descriptor: .bloomSplitC(size: size))
         return texture?.labeled("Bloom Split Color")
-    }
-    func makeTexturePostprocessC(size: CGSize) -> MTLTexture? {
-        let texture = makeTexture(descriptor: .postprocessC(size: size))
-        return texture?.labeled("Postprocess Color")
     }
     public func makeTextureSolidCube(color: PNColor4) -> MTLTexture? {
         assertValid(color: color)

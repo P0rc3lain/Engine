@@ -71,11 +71,4 @@ extension MTLRenderPassDescriptor {
         descriptor.depthAttachment.loadAction = .clear
         return descriptor
     }
-    static func postprocess(device: MTLDevice, texture: MTLTexture) -> MTLRenderPassDescriptor {
-        let descriptor = MTLRenderPassDescriptor()
-        descriptor.colorAttachments[0].loadAction = .load
-        descriptor.colorAttachments[0].texture = texture
-        descriptor.colorAttachments[0].storeAction = .store
-        return descriptor
-    }
 }

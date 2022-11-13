@@ -86,7 +86,4 @@ extension MTLPixelFormat {
     static var postprocessorC: MTLPixelFormat {
         .rgba16Float
     }
-    static var grainC: MTLPixelFormat {
-        .postprocessorC
-    }
 }
