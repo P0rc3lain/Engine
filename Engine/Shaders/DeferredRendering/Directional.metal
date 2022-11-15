@@ -15,10 +15,8 @@
 #include "MetalBinding/Attribute/Bridge.h"
 #include "MetalBinding/Light/DirectionalLight.h"
 
-#define PCF_VERTICAL_SAMPLES 2
-#define PCF_HORIZONTAL_SAMPLES 2
-#define BIAS_MIN 0.005
-#define BIAS_MAX 0.05
+constant int2 pcfRange [[function_constant(kFunctionConstantIndexDirectionalPcfRange)]];
+constant float2 shadowBias [[function_constant(kFunctionConstantIndexDirectionalShadowBias)]];
 
 using namespace metal;
 
@@ -61,11 +59,11 @@ fragment float4 fragmentDirectionalLight(RasterizerData in [[stage_in]],
         float4 lightProjectedPosition = light.projectionMatrix * lightSpacesFragmentPosition;
         lightProjectedPosition.xy = lightProjectedPosition.xy * 0.5 + 0.5;
         lightProjectedPosition.y = 1.0 - lightProjectedPosition.y;
-        float bias = max(BIAS_MAX * (1.0 - dot(input.n, l)), BIAS_MIN);
+        float bias = max(shadowBias.y * (1.0 - dot(input.n, l)), shadowBias.x);
         shadowInfluence = pcfDepth(shadowMaps,
                                    in.instanceId,
                                    lightProjectedPosition.xy,
-                                   int2(PCF_HORIZONTAL_SAMPLES, PCF_VERTICAL_SAMPLES),
+                                   pcfRange,
                                    lightProjectedPosition.z,
                                    bias);
         if (shadowInfluence == 1)

@@ -88,10 +88,12 @@ extension MTLDevice {
         try? makeRenderPipelineState(descriptor: .gBufferAnimated(library: library))
     }
     func makeRPSOmni(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .omni(library: library))
+        try? makeRenderPipelineState(descriptor: .omni(library: library,
+                                                       settings: PNDefaults.shared.shaders.lighting.omniLighting))
     }
     func makeRPSDirectional(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .directional(library: library))
+        try? makeRenderPipelineState(descriptor: .directional(library: library,
+                                                              settings: PNDefaults.shared.shaders.lighting.directionalLighting))
     }
     func makeRPSSpot(library: MTLLibrary) -> MTLRenderPipelineState? {
         try? makeRenderPipelineState(descriptor: .spot(library: library))
@@ -225,7 +227,7 @@ extension MTLDevice {
     // MTLLibrary
     // ==========
     func makePorcelainLibrary() -> MTLLibrary? {
-        let library = try? makeDefaultLibrary(bundle: Bundle.porcelain)
+        let library = try? makeDefaultLibrary(bundle: Bundle.current)
         return library?.labeled("Default Library")
     }
     // =========

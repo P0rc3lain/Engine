@@ -23,3 +23,13 @@ enum FunctionConstantIndexGBuffer {
 enum FunctionConstantIndexTranslucent {
     kFunctionConstantTranslucentHasSkeleton = 0
 };
+
+enum FunctionConstantIndexOmni {
+    kFunctionConstantIndexOmniPcfRange = 0,
+    kFunctionConstantIndexOmniShadowBias
+};
+
+enum FunctionConstantIndexDirectional {
+    kFunctionConstantIndexDirectionalPcfRange = 0,
+    kFunctionConstantIndexDirectionalShadowBias
+};
