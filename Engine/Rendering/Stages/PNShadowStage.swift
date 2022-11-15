@@ -15,11 +15,11 @@ class PNShadowStage: PNStage {
     private var directionalRenderingTexture: PNDynamicTexture
     private var omniShadowJob: PNOmniShadowJob
     private var spotShadowJob: PNSpotShadowJob
-    private let renderingSize: CGSize
+    private let renderingSize: PNDefaults.PNShadowSize
     private var directionalShadowJob: PNDirectionalShadowJob
     init?(device: MTLDevice,
-          shadowTextureSideSize: Int) {
-        self.renderingSize = CGSize(side: CGFloat(shadowTextureSideSize))
+          shadowTextureSize: PNDefaults.PNShadowSize) {
+        self.renderingSize = shadowTextureSize
         spotRenderingTexture = PNIDynamicTexture(device: device)
         omniRenderingTexture = PNIDynamicTexture(device: device)
         directionalRenderingTexture = PNIDynamicTexture(device: device)
@@ -43,11 +43,12 @@ class PNShadowStage: PNStage {
     }
     func updateTextures(supply: PNFrameSupply) -> Bool {
         let spotCount = supply.scene.spotLights.count
-        let spotDescriptor: MTLTextureDescriptor? = spotCount > 0 ? .spotShadowDS(size: renderingSize, lightsCount: spotCount) : nil
+        let spotDescriptor: MTLTextureDescriptor? = spotCount > 0 ? .spotShadowDS(size: renderingSize.spot, lightsCount: spotCount) : nil
         let omniCount = supply.scene.omniLights.count
-        let omniDescriptor: MTLTextureDescriptor? = omniCount > 0 ? .omniShadowDS(size: renderingSize, lightsCount: omniCount) : nil
+        let omniDescriptor: MTLTextureDescriptor? = omniCount > 0 ? .omniShadowDS(size: renderingSize.omni, lightsCount: omniCount) : nil
         let directionalCount = supply.scene.directionalLights.count
-        let directionalDescriptor: MTLTextureDescriptor? = directionalCount > 0 ? .directionalShadowDS(size: renderingSize, lightsCount: directionalCount) : nil
+        let directionalDescriptor: MTLTextureDescriptor? = directionalCount > 0 ? .directionalShadowDS(size: renderingSize.directional,
+                                                                                                       lightsCount: directionalCount) : nil
         let spotUpdated = spotRenderingTexture.updateDescriptor(descriptor: spotDescriptor)
         let omniUpdated = omniRenderingTexture.updateDescriptor(descriptor: omniDescriptor)
         let directionalUpdated = directionalRenderingTexture.updateDescriptor(descriptor: directionalDescriptor)

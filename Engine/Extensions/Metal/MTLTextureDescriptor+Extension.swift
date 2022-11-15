@@ -65,36 +65,36 @@ extension MTLTextureDescriptor {
     static func gBufferDS(size: CGSize) -> MTLTextureDescriptor {
         gBufferAttachment(size: size, pixelFormat: .gBufferDS)
     }
-    static func directionalShadowDS(size: CGSize,
+    static func directionalShadowDS(size: simd_uint2,
                                     lightsCount: Int) -> MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = .type2DArray
-        descriptor.width = size.width.int
-        descriptor.height = size.height.int
+        descriptor.width = size.x.int
+        descriptor.height = size.y.int
         descriptor.arrayLength = lightsCount
         descriptor.storageMode = .private
         descriptor.pixelFormat = .directionalShadowDS
         descriptor.usage = [.shaderRead, .renderTarget]
         return descriptor
     }
-    static func spotShadowDS(size: CGSize,
+    static func spotShadowDS(size: simd_uint2,
                              lightsCount: Int) -> MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = .type2DArray
-        descriptor.width = size.width.int
-        descriptor.height = size.height.int
+        descriptor.width = size.x.int
+        descriptor.height = size.y.int
         descriptor.arrayLength = lightsCount
         descriptor.storageMode = .private
         descriptor.pixelFormat = .spotShadowDS
         descriptor.usage = [.shaderRead, .renderTarget]
         return descriptor
     }
-    static func omniShadowDS(size: CGSize,
+    static func omniShadowDS(size: simd_uint2,
                              lightsCount: Int) -> MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = .typeCubeArray
-        descriptor.width = size.width.int
-        descriptor.height = size.height.int
+        descriptor.width = size.x.int
+        descriptor.height = size.y.int
         descriptor.arrayLength = lightsCount
         descriptor.storageMode = .private
         descriptor.pixelFormat = .omniShadowDS

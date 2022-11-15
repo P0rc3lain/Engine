@@ -16,7 +16,7 @@ struct PNPipeline: PNStage {
         guard let gBufferStage = PNGBufferStage(device: device,
                                                 renderingSize: renderingSize),
               let shadowStage = PNShadowStage(device: device,
-                                              shadowTextureSideSize: 4 * 512),
+                                              shadowTextureSize: PNDefaults.shared.rendering.shadowSize),
               let ssaoStage = PNSSAOStage(device: device,
                                           renderingSize: renderingSize,
                                           prTexture: gBufferStage.io.output.color[2],

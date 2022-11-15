@@ -149,21 +149,6 @@ extension MTLDevice {
         let texture = makeTexture(descriptor: .gBufferDS(size: size))
         return texture?.labeled("GBuffer Depth Stencil")
     }
-    func makeTextureSpotShadowDS(size: CGSize, lightsCount: Int) -> MTLTexture? {
-        let texture = makeTexture(descriptor: .spotShadowDS(size: size,
-                                                            lightsCount: lightsCount))
-        return texture?.labeled("Spot Light Shadow Depth Stencil")
-    }
-    func makeTextureDirectionalShadowDS(size: CGSize, lightsCount: Int) -> MTLTexture? {
-        let texture = makeTexture(descriptor: .directionalShadowDS(size: size,
-                                                                   lightsCount: lightsCount))
-        return texture?.labeled("Directional Light Shadow Depth Stencil")
-    }
-    func makeTextureOmniShadowDS(size: CGSize, lightsCount: Int) -> MTLTexture? {
-        let texture = makeTexture(descriptor: .omniShadowDS(size: size,
-                                                            lightsCount: lightsCount))
-        return texture?.labeled("Omni Light Shadow Depth Stencil")
-    }
     func makeTextureSSAOC(size: CGSize) -> MTLTexture? {
         let texture = makeTexture(descriptor: .ssaoC(size: size))
         return texture?.labeled("SSAO Color")
