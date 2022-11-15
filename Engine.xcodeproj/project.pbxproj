@@ -171,7 +171,6 @@
 		565B629729034B1000C0C0D1 /* PNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565B629629034B1000C0C0D1 /* PNView.swift */; platformFilter = ios; };
 		565D37E928AA9234000ECCC7 /* PNRay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D37E828AA9234000ECCC7 /* PNRay.swift */; };
 		565D37EB28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D37EA28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift */; };
-		565EDB6B29031266009EB474 /* Games in Resources */ = {isa = PBXBuildFile; fileRef = 565EDB6A29031266009EB474 /* Games */; };
 		566020E02734314C000F4CA7 /* PNSSAOJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566020DF2734314C000F4CA7 /* PNSSAOJob.swift */; };
 		566020E227343280000F4CA7 /* SSAO.metal in Sources */ = {isa = PBXBuildFile; fileRef = 566020E127343280000F4CA7 /* SSAO.metal */; };
 		566795A9274D98A1005993D7 /* PNScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566795A8274D98A1005993D7 /* PNScene.swift */; };
@@ -242,6 +241,7 @@
 		568C05B928B2D6AA007607E6 /* simd_float2+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568C05B828B2D6AA007607E6 /* simd_float2+Alias.swift */; };
 		568C4EFF284F664500C6F128 /* PNRepeatableTaskQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568C4EFE284F664500C6F128 /* PNRepeatableTaskQueue.swift */; };
 		568C4F01284F687900C6F128 /* PNIRepeatableTaskQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568C4F00284F687900C6F128 /* PNIRepeatableTaskQueue.swift */; };
+		568E3473292424E500A5DF43 /* PNDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E3472292424E500A5DF43 /* PNDefaults.swift */; };
 		568EBB3A273F0B88007C7D35 /* SSAOUniforms+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EBB39273F0B88007C7D35 /* SSAOUniforms+Extension.swift */; };
 		568EBB3D273F0DE1007C7D35 /* PNISSAOHemisphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EBB3C273F0DE1007C7D35 /* PNISSAOHemisphere.swift */; };
 		56924AD7271A07FD00FF3E06 /* PNILoopSampler+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AD6271A07FD00FF3E06 /* PNILoopSampler+Tests.swift */; };
@@ -594,6 +594,7 @@
 		568C05B828B2D6AA007607E6 /* simd_float2+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd_float2+Alias.swift"; sourceTree = "<group>"; };
 		568C4EFE284F664500C6F128 /* PNRepeatableTaskQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNRepeatableTaskQueue.swift; sourceTree = "<group>"; };
 		568C4F00284F687900C6F128 /* PNIRepeatableTaskQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIRepeatableTaskQueue.swift; sourceTree = "<group>"; };
+		568E3472292424E500A5DF43 /* PNDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNDefaults.swift; sourceTree = "<group>"; };
 		568EBB38273F09BC007C7D35 /* SSAO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSAO.h; sourceTree = "<group>"; };
 		568EBB39273F0B88007C7D35 /* SSAOUniforms+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SSAOUniforms+Extension.swift"; sourceTree = "<group>"; };
 		568EBB3C273F0DE1007C7D35 /* PNISSAOHemisphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNISSAOHemisphere.swift; sourceTree = "<group>"; };
@@ -746,6 +747,7 @@
 		5601396E255457D100FC1C45 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				568E346D29241B3C00A5DF43 /* Configuration */,
 				5648530528C7E70200BA4CC0 /* Debug */,
 				56FA634328AD1E7400D857A6 /* Utilities */,
 				56BB949A28A90F790034D4AB /* UI */,
@@ -1738,6 +1740,14 @@
 			path = Task;
 			sourceTree = "<group>";
 		};
+		568E346D29241B3C00A5DF43 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				568E3472292424E500A5DF43 /* PNDefaults.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
 		568EBB37273F099B007C7D35 /* Rendering */ = {
 			isa = PBXGroup;
 			children = (
@@ -2250,7 +2260,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				565EDB6B29031266009EB474 /* Games in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2356,6 +2365,7 @@
 				560A0BAD27541562005AE29D /* PNAnimator.swift in Sources */,
 				56C47BB62751BF390075C61B /* PNAmbientLight.swift in Sources */,
 				5616674A2719E2CD000063B1 /* PBR.metal in Sources */,
+				568E3473292424E500A5DF43 /* PNDefaults.swift in Sources */,
 				5620C832275528030098D6FA /* PNDirectionalShadowJob.swift in Sources */,
 				564852F428C7CBDE00BA4CC0 /* PNCamera.swift in Sources */,
 				5616673D2719E2CD000063B1 /* PNSubmesh.swift in Sources */,

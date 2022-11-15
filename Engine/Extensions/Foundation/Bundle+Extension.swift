@@ -5,7 +5,8 @@
 import Foundation
 
 extension Bundle {
-    static var porcelain: Bundle {
-        Bundle(for: PNIEngine.self)
+    fileprivate class Unnamed { }
+    static var current: Bundle {
+        Bundle(for: Unnamed.self)
     }
 }

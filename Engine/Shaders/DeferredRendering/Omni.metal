@@ -17,6 +17,9 @@
 #include "MetalBinding/Attribute/Bridge.h"
 #include "MetalBinding/Light/Attenuation.h"
 
+constant int3 pcfRange [[function_constant(kFunctionConstantIndexOmniPcfRange)]];
+constant float2 shadowBias [[function_constant(kFunctionConstantIndexOmniShadowBias)]];
+
 using namespace metal;
 
 struct RasterizerData {
@@ -66,11 +69,11 @@ fragment float4 fragmentOmniLight(RasterizerData in [[stage_in]],
         float currentDistance = length(lightSpacesFragmentPosition.xyz)/100;
         float3 sampleVector = normalize(lightSpacesFragmentPosition.xyz);
         sampleVector = -sampleVector;
-        float bias = max(0.0001 * (1.0 - dot(input.n, l)), 0.00001);
+        float bias = max(shadowBias.y * (1.0 - dot(input.n, l)), shadowBias.x);
         float shadowInfluence = pcfDepth(shadows,
                                          in.instanceId,
                                          sampleVector,
-                                         int3{3, 3, 3},
+                                         pcfRange,
                                          currentDistance,
                                          bias,
                                          0.01);
