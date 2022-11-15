@@ -49,8 +49,12 @@ vertex RasterizerData vertexGBuffer(Vertex in [[stage_in]],
                                     constant int & index [[bIndexVertex]]) {
     Pose pose = hasSkeleton ? calculatePose(in, matrixPalettes) : Pose{float4(in.position, 1), in.normal, in.tangent};
     matrix_float3x3 rotation = extract_rotation(modelUniforms[index].modelMatrix);
+    pose.tangent.x = pose.tangent.x < 0 ? -pose.tangent.x : pose.tangent.x;
+    pose.tangent.y = pose.tangent.y < 0 ? -pose.tangent.y : pose.tangent.y;
+    pose.tangent.z = pose.tangent.z < 0 ? -pose.tangent.z : pose.tangent.z;
     float3 rotatedNormal = rotation * pose.normal;
     float3 rotatedTangent = rotation * pose.tangent;
+    float3 rotatedBitangent = cross(rotatedNormal, rotatedTangent);
     float4 worldPosition = modelUniforms[index].modelMatrix * pose.position;
     float4x4 cameraTransform = modelUniforms[cameraUniforms.index].modelMatrixInverse;
     float4 cameraSpacePosition = cameraTransform * worldPosition;
@@ -58,9 +62,9 @@ vertex RasterizerData vertexGBuffer(Vertex in [[stage_in]],
     return {
         cameraUniforms.projectionMatrix * cameraSpacePosition,
         cameraSpacePosition.xyz,
-        cameraRotation * normalize(rotatedTangent),
-        cameraRotation * normalize(cross(rotatedTangent, rotatedNormal)),
-        cameraRotation * normalize(rotatedNormal),
+        normalize(cameraRotation * rotatedTangent),
+        normalize(cameraRotation * rotatedBitangent),
+        normalize(cameraRotation * rotatedNormal),
         in.textureUV
     };
 }
