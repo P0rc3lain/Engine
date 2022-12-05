@@ -6,9 +6,9 @@
 
 #include "Shaders/Common/Animation.h"
 
-#include "MetalBinding/Model.h"
-#include "MetalBinding/Camera.h"
-#include "MetalBinding/FrozenParticle.h"
+#include "MetalBinding/PNShared/Model.h"
+#include "MetalBinding/PNShared/Camera.h"
+#include "MetalBinding/PNShared/FrozenParticle.h"
 
 using namespace metal;
 

@@ -6,9 +6,9 @@
 
 #include "Shaders/Common/Animation.h"
 
-#include "MetalBinding/Model.h"
-#include "MetalBinding/Vertex.h"
-#include "MetalBinding/Camera.h"
+#include "MetalBinding/PNShared/Model.h"
+#include "MetalBinding/PNShared/Vertex.h"
+#include "MetalBinding/PNShared/Camera.h"
 
 using namespace metal;
 

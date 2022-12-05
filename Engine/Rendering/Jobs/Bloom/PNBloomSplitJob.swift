@@ -3,8 +3,8 @@
 //
 
 import Metal
-import MetalBinding
 import MetalPerformanceShaders
+import PNAttribute
 import simd
 
 struct PNBloomSplitJob: PNComputeJob {

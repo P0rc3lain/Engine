@@ -3,7 +3,7 @@
 //
 
 import Metal
-import MetalBinding
+import PNShared
 
 public struct PNParticleSystem {
     let index: PNIndex

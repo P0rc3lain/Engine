@@ -6,11 +6,12 @@
 
 #include "Shaders/Common/Animation.h"
 
-#include "MetalBinding/Model.h"
-#include "MetalBinding/Vertex.h"
-#include "MetalBinding/Constant.h"
-#include "MetalBinding/Light/SpotLight.h"
-#include "MetalBinding/Attribute/Bridge.h"
+#include "MetalBinding/PNShared/Model.h"
+#include "MetalBinding/PNShared/Vertex.h"
+#include "MetalBinding/PNShared/Constant.h"
+#include "MetalBinding/PNShared/Light/SpotLight.h"
+
+#include "MetalBinding/PNAttribute/Bridge.h"
 
 using namespace metal;
 

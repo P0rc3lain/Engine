@@ -868,6 +868,21 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		5610B766293EAA1300A69196 /* PNShared */ = {
+			isa = PBXGroup;
+			children = (
+				568EBB37273F099B007C7D35 /* Rendering */,
+				56ADD2F22737077700107E24 /* Light */,
+				561666E62719E2CD000063B1 /* Compatibility.h */,
+				561666E72719E2CD000063B1 /* Vertex.h */,
+				563D0A2B2719F79D00F77B40 /* Camera.h */,
+				562C73912849506400E51606 /* FrozenParticle.h */,
+				563D0A2C2719F7A400F77B40 /* Model.h */,
+				560C18CE273A819100459AEF /* Constant.h */,
+			);
+			path = PNShared;
+			sourceTree = "<group>";
+		};
 		56165BE1274405010025D58B /* Bounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -1051,15 +1066,8 @@
 		561666E52719E2CD000063B1 /* MetalBinding */ = {
 			isa = PBXGroup;
 			children = (
-				562C738428493FBB00E51606 /* Attribute */,
-				568EBB37273F099B007C7D35 /* Rendering */,
-				56ADD2F22737077700107E24 /* Light */,
-				561666E62719E2CD000063B1 /* Compatibility.h */,
-				561666E72719E2CD000063B1 /* Vertex.h */,
-				563D0A2B2719F79D00F77B40 /* Camera.h */,
-				562C73912849506400E51606 /* FrozenParticle.h */,
-				563D0A2C2719F7A400F77B40 /* Model.h */,
-				560C18CE273A819100459AEF /* Constant.h */,
+				5610B766293EAA1300A69196 /* PNShared */,
+				562C738428493FBB00E51606 /* PNAttribute */,
 			);
 			path = MetalBinding;
 			sourceTree = "<group>";
@@ -1168,7 +1176,7 @@
 			path = Interpolation;
 			sourceTree = "<group>";
 		};
-		562C738428493FBB00E51606 /* Attribute */ = {
+		562C738428493FBB00E51606 /* PNAttribute */ = {
 			isa = PBXGroup;
 			children = (
 				56E5FED3291F0B1500DC7ED9 /* ComputeShader */,
@@ -1179,7 +1187,7 @@
 				5698B00728521B8E0045296C /* FunctionConstant.h */,
 				56F0D4EB2853697300FBDB33 /* Attachment.h */,
 			);
-			path = Attribute;
+			path = PNAttribute;
 			sourceTree = "<group>";
 		};
 		562C738A2849417A00E51606 /* VertexShader */ = {
@@ -2766,7 +2774,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Engine $(SRCROOT)/Types/Modules";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Engine";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2803,7 +2811,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Engine $(SRCROOT)/Types/Modules";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Engine";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

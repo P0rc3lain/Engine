@@ -7,10 +7,11 @@
 
 #include "Shaders/Common/Transformation.h"
 
-#include "MetalBinding/Model.h"
-#include "MetalBinding/Vertex.h"
-#include "MetalBinding/Camera.h"
-#include "MetalBinding/Attribute/Bridge.h"
+#include "MetalBinding/PNShared/Model.h"
+#include "MetalBinding/PNShared/Vertex.h"
+#include "MetalBinding/PNShared/Camera.h"
+
+#include "MetalBinding/PNAttribute/Bridge.h"
 
 #define DENSITY 0.01f
 #define GRADIENT 5.0f

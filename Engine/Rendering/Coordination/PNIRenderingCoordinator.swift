@@ -3,7 +3,6 @@
 //
 
 import Metal
-import MetalBinding
 import MetalKit
 import MetalPerformanceShaders
 import simd

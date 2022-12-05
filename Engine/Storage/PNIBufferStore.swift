@@ -3,7 +3,7 @@
 //
 
 import Metal
-import MetalBinding
+import PNShared
 import simd
 
 public final class PNIBufferStore: PNBufferStore {

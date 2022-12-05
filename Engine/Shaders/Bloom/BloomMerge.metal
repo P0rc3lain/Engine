@@ -7,7 +7,7 @@
 #include "Shaders/Common/Math.h"
 #include "Shaders/Common/Layer.h"
 
-#include "MetalBinding/Attribute/Bridge.h"
+#include "MetalBinding/PNAttribute/Bridge.h"
 
 using namespace metal;
 

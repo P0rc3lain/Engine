@@ -3,7 +3,7 @@
 //
 
 import Metal
-import MetalBinding
+import PNShared
 import simd
 
 struct PNEnvironmentJob: PNRenderJob {

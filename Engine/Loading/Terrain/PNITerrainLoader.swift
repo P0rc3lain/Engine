@@ -6,8 +6,8 @@
 
 import Cocoa
 import Metal
-import MetalBinding
 import ModelIO
+import PNShared
 
 public struct PNITerrainLoader: PNTerrainLoader {
     private let device: MTLDevice

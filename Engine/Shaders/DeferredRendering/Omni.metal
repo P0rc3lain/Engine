@@ -10,12 +10,13 @@
 #include "Shaders/Common/LightingInput.h"
 #include "Shaders/Common/Transformation.h"
 
-#include "MetalBinding/Model.h"
-#include "MetalBinding/Vertex.h"
-#include "MetalBinding/Camera.h"
-#include "MetalBinding/Light/OmniLight.h"
-#include "MetalBinding/Attribute/Bridge.h"
-#include "MetalBinding/Light/Attenuation.h"
+#include "MetalBinding/PNShared/Model.h"
+#include "MetalBinding/PNShared/Vertex.h"
+#include "MetalBinding/PNShared/Camera.h"
+#include "MetalBinding/PNShared/Light/OmniLight.h"
+#include "MetalBinding/PNShared/Light/Attenuation.h"
+
+#include "MetalBinding/PNAttribute/Bridge.h"
 
 constant int3 pcfRange [[function_constant(kFunctionConstantIndexOmniPcfRange)]];
 constant float2 shadowBias [[function_constant(kFunctionConstantIndexOmniShadowBias)]];

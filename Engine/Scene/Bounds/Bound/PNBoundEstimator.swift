@@ -2,7 +2,7 @@
 //  Copyright © 2022 Mateusz Stompór. All rights reserved.
 //
 
-import MetalBinding
+import PNShared
 
 public protocol PNBoundEstimator {
     func bound(vertexBuffer: UnsafeRawBufferPointer) -> PNBound

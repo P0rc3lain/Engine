@@ -4,10 +4,11 @@
 
 #include <metal_stdlib>
 
-#include "MetalBinding/Model.h"
-#include "MetalBinding/Camera.h"
-#include "MetalBinding/Rendering/SSAO.h"
-#include "MetalBinding/Attribute/Bridge.h"
+#include "MetalBinding/PNShared/Model.h"
+#include "MetalBinding/PNShared/Camera.h"
+#include "MetalBinding/PNShared/Rendering/SSAO.h"
+
+#include "MetalBinding/PNAttribute/Bridge.h"
 
 using namespace metal;
 

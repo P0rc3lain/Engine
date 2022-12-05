@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import MetalBinding
+import PNShared
 
 extension VertexP {
     init(_ x: Float, _ y: Float, _ z: Float) {

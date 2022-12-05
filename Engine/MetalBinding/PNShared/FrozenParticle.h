@@ -6,7 +6,7 @@
 
 #include <simd/simd.h>
 
-#include "Attribute/Bridge.h"
+#include "MetalBinding/PNAttribute/Bridge.h"
 
 struct FrozenParticle {
     simd_float3 position metal_only([[attribute(kFrozenParticleAttributePosition)]]);
