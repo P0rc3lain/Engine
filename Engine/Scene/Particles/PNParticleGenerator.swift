@@ -2,7 +2,6 @@
 //  Copyright © 2022 Mateusz Stompór. All rights reserved.
 //
 
-import Foundation
 import Metal
 import MetalBinding
 

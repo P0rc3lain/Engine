@@ -3,7 +3,7 @@
 //
 
 import MetalBinding
-import MetalKit
+import Metal
 import simd
 
 struct PNOmniJob: PNRenderJob {

@@ -2,7 +2,6 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import Metal
 import MetalKit
 import ModelIO
 import simd
