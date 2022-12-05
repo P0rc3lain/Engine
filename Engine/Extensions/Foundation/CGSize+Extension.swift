@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import Foundation
+import CoreGraphics
 
 extension CGSize {
     var aspectRatio: Float {

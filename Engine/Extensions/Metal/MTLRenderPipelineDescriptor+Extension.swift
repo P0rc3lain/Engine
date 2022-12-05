@@ -4,8 +4,6 @@
 
 import Metal
 import MetalBinding
-import MetalKit
-import ModelIO
 import simd
 
 extension MTLRenderPipelineDescriptor {

@@ -4,6 +4,7 @@
 
 import MetalBinding
 import MetalKit
+import ModelIO
 
 extension MTLVertexDescriptor {
     public static var vertex: MTLVertexDescriptor? {
