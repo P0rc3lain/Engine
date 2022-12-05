@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import MetalBinding
+import PNShared
 
 extension SpotLight {
     public static func make(light: PNSpotLight, index: Int) -> SpotLight {

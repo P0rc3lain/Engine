@@ -3,7 +3,7 @@
 //
 
 import Metal
-import MetalBinding
+import PNShared
 
 public protocol PNRenderableParticlesProvider {
     var provider: PNAnyDynamicBuffer<FrozenParticle> { get }

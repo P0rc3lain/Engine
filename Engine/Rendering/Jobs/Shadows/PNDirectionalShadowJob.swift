@@ -3,7 +3,7 @@
 //
 
 import Metal
-import MetalBinding
+import PNAttribute
 
 struct PNDirectionalShadowJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState

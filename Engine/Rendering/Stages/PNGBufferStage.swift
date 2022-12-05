@@ -3,7 +3,7 @@
 //
 
 import Metal
-import MetalBinding
+import PNShared
 
 struct PNGBufferStage: PNStage {
     var io: PNGPUIO

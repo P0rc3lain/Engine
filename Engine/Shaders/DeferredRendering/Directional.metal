@@ -9,11 +9,12 @@
 #include "Shaders/Common/Shadow.h"
 #include "Shaders/Common/LightingInput.h"
 
-#include "MetalBinding/Model.h"
-#include "MetalBinding/Vertex.h"
-#include "MetalBinding/Camera.h"
-#include "MetalBinding/Attribute/Bridge.h"
-#include "MetalBinding/Light/DirectionalLight.h"
+#include "MetalBinding/PNShared/Model.h"
+#include "MetalBinding/PNShared/Vertex.h"
+#include "MetalBinding/PNShared/Camera.h"
+#include "MetalBinding/PNShared/Light/DirectionalLight.h"
+
+#include "MetalBinding/PNAttribute/Bridge.h"
 
 constant int2 pcfRange [[function_constant(kFunctionConstantIndexDirectionalPcfRange)]];
 constant float2 shadowBias [[function_constant(kFunctionConstantIndexDirectionalShadowBias)]];

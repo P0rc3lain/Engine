@@ -2,8 +2,9 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import MetalBinding
 import Metal
+import PNAttribute
+import PNShared
 import simd
 
 struct PNSpotJob: PNRenderJob {

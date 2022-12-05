@@ -2,29 +2,34 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-module MetalBinding {
-    header "../MetalBinding/Model.h"
-    header "../MetalBinding/Vertex.h"
-    header "../MetalBinding/Camera.h"
-    header "../MetalBinding/Constant.h"
-    header "../MetalBinding/FrozenParticle.h"
+
+module PNAttribute {
+    header "../MetalBinding/PNAttribute/Bridge.h"
+    header "../MetalBinding/PNAttribute/Attribute.h"
+    header "../MetalBinding/PNAttribute/Attachment.h"
+    header "../MetalBinding/PNAttribute/FunctionConstant.h"
+    header "../MetalBinding/PNAttribute/VertexShader/VertexBufferIndex.h"
+    header "../MetalBinding/PNAttribute/FragmentShader/FragmentBufferIndex.h"
+    header "../MetalBinding/PNAttribute/FragmentShader/FragmentTextureIndex.h"
+    header "../MetalBinding/PNAttribute/ComputeShader/ComputeTextureIndex.h"
+    header "../MetalBinding/PNAttribute/ComputeShader/ComputeBufferIndex.h"
+    
+    export *
+}
+
+module PNShared {
+    header "../MetalBinding/PNShared/Model.h"
+    header "../MetalBinding/PNShared/Vertex.h"
+    header "../MetalBinding/PNShared/Camera.h"
+    header "../MetalBinding/PNShared/Constant.h"
+    header "../MetalBinding/PNShared/FrozenParticle.h"
         
-    header "../MetalBinding/Light/OmniLight.h"
-    header "../MetalBinding/Light/SpotLight.h"
-    header "../MetalBinding/Light/AmbientLight.h"
-    header "../MetalBinding/Light/DirectionalLight.h"
+    header "../MetalBinding/PNShared/Light/OmniLight.h"
+    header "../MetalBinding/PNShared/Light/SpotLight.h"
+    header "../MetalBinding/PNShared/Light/AmbientLight.h"
+    header "../MetalBinding/PNShared/Light/DirectionalLight.h"
     
-    header "../MetalBinding/Rendering/SSAO.h"
-    
-    header "../MetalBinding/Attribute/Bridge.h"
-    header "../MetalBinding/Attribute/Attribute.h"
-    header "../MetalBinding/Attribute/Attachment.h"
-    header "../MetalBinding/Attribute/FunctionConstant.h"
-    header "../MetalBinding/Attribute/VertexShader/VertexBufferIndex.h"
-    header "../MetalBinding/Attribute/FragmentShader/FragmentBufferIndex.h"
-    header "../MetalBinding/Attribute/FragmentShader/FragmentTextureIndex.h"
-    header "../MetalBinding/Attribute/ComputeShader/ComputeTextureIndex.h"
-    header "../MetalBinding/Attribute/ComputeShader/ComputeBufferIndex.h"
-    
+    header "../MetalBinding/PNShared/Rendering/SSAO.h"
+        
     export *
 }

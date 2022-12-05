@@ -3,7 +3,7 @@
 //
 
 import Metal
-import MetalBinding
+import PNShared
 
 public final class PNSceneDescription {
     // MARK: - Capacity A

@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import MetalBinding
+import PNShared
 
 extension ModelUniforms: Equatable {
     public static func == (lhs: Self, rhs: Self) -> Bool {

@@ -2,7 +2,7 @@
 //  Copyright © 2022 Mateusz Stompór. All rights reserved.
 //
 
-import MetalBinding
+import PNShared
 
 public struct PNIBoundEstimator: PNBoundEstimator {
     public func bound(vertexBuffer buffer: Data) -> PNBound {

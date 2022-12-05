@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import MetalBinding
+import PNShared
 
 public protocol PNBufferStore {
     var omniLights: PNAnyDynamicBuffer<OmniLight> { get }

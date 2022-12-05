@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import MetalBinding
+import PNShared
 
 struct PNICullingController: PNCullingController {
     private let interactor: PNBoundingBoxInteractor
