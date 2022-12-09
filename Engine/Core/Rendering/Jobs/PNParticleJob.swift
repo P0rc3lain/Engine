@@ -2,8 +2,8 @@
 //  Copyright © 2022 Mateusz Stompór. All rights reserved.
 //
 
-import PNShared
 import Metal
+import PNShared
 import simd
 
 struct PNParticleJob: PNRenderJob {

@@ -3,8 +3,8 @@
 //
 
 import Metal
-import PNShared
 import ModelIO
+import PNShared
 
 extension PNMesh {
     static func cube(device: MTLDevice) -> PNMesh? {

@@ -27,7 +27,7 @@ public struct PNDefaults {
     }
     public struct PNDirectionalLighting {
         public var pcfRange = simd_int2(1, 1)
-        public var shadowBias = simd_float2(0.000_01, 0.000_1)
+        public var shadowBias = simd_float2(0.00001, 0.0001)
     }
     public struct PNShadowSize {
         public var omni = simd_uint2(512, 512)
