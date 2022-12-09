@@ -27,7 +27,7 @@ class PNILoopSamplerTests: XCTestCase {
         let sample = sampler.sample(animation: animation, at: 6.55)
         XCTAssertEqual(sample.currentKeyFrame, "b")
         XCTAssertEqual(sample.upcomingKeyFrame, "c")
-        XCTAssertEqual(sample.ratio, 0.387_5)
+        XCTAssertEqual(sample.ratio, 0.3875)
     }
     func testAfterLast() throws {
         let sample = sampler.sample(animation: animation, at: 9.55)

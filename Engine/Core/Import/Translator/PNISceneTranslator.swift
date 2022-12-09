@@ -3,8 +3,8 @@
 //
 
 import Metal
-import PNShared
 import ModelIO
+import PNShared
 
 public final class PNISceneTranslator: PNSceneTranslator {
     private let device: MTLDevice

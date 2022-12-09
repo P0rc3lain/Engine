@@ -12,22 +12,22 @@ class PNIColorTemperature: PNColorTemperature {
         if temperature <= 66 {
             return 255
         }
-        let a: PNColorComponent = 329.698_727_446
-        let b: PNColorComponent = -0.133_204_759_2
+        let a: PNColorComponent = 329.698727446
+        let b: PNColorComponent = -0.1332047592
         return clamp(value: a * pow(temperature - 60, b),
                      min: 0,
                      max: 255)
     }
     private func green(_ temperature: PNColorComponent) -> PNColorComponent {
         if temperature <= 66 {
-            let a: PNColorComponent = 99.470_802_586_1
-            let b: PNColorComponent = 161.119_568_166_1
+            let a: PNColorComponent = 99.4708025861
+            let b: PNColorComponent = 161.1195681661
             return clamp(value: a * log(temperature) - b,
                          min: 0,
                          max: 255)
         }
-        let a: PNColorComponent = 288.122_169_528_3
-        let b: PNColorComponent = -0.075_514_849_2
+        let a: PNColorComponent = 288.1221695283
+        let b: PNColorComponent = -0.0755148492
         return clamp(value: a * pow(temperature - 60, b),
                      min: 0,
                      max: 255)
@@ -38,8 +38,8 @@ class PNIColorTemperature: PNColorTemperature {
         } else if temperature <= 19 {
             return 0
         }
-        let a: PNColorComponent = 138.517_731_223_1
-        let b: PNColorComponent = 305.044_792_730_7
+        let a: PNColorComponent = 138.5177312231
+        let b: PNColorComponent = 305.0447927307
         return clamp(value: a * log(temperature - 10) - b,
                      min: 0,
                      max: 255)

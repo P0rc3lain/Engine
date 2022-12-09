@@ -2,9 +2,9 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import PNShared
 import MetalKit
 import ModelIO
+import PNShared
 
 extension MTLVertexDescriptor {
     public static var vertex: MTLVertexDescriptor? {

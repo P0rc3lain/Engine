@@ -2,8 +2,8 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import PNShared
 import ModelIO
+import PNShared
 
 extension MDLVertexDescriptor {
     public static var porcelain: MDLVertexDescriptor? {
