@@ -747,28 +747,10 @@
 		5601396E255457D100FC1C45 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
-				568E346D29241B3C00A5DF43 /* Configuration */,
-				5648530528C7E70200BA4CC0 /* Debug */,
-				56FA634328AD1E7400D857A6 /* Utilities */,
-				56BB949A28A90F790034D4AB /* UI */,
-				56A0CD2928576D1400EBB890 /* Allocation */,
-				568C4EFD284F663500C6F128 /* Task */,
-				564DE04128416A73005C2029 /* Global */,
-				566795A7274D9891005993D7 /* Organization */,
-				563D0A2F2719FF5800F77B40 /* Animation */,
-				561666BE2719E2CC000063B1 /* Aliases */,
-				561666B82719E2CC000063B1 /* DataStructures */,
-				561666E02719E2CC000063B1 /* Engine */,
-				5616667F2719E2CC000063B1 /* Extensions */,
-				561666C62719E2CC000063B1 /* Mesh */,
-				561666B32719E2CC000063B1 /* Loading */,
-				561666E52719E2CD000063B1 /* MetalBinding */,
+				5617F2EB2942B0680068177C /* Core */,
 				561666E22719E2CC000063B1 /* Modules */,
-				5616669E2719E2CC000063B1 /* Position */,
-				561666EB2719E2CD000063B1 /* Rendering */,
-				561666CD2719E2CC000063B1 /* Scene */,
+				561666E52719E2CD000063B1 /* MetalBinding */,
 				561666D52719E2CC000063B1 /* Shaders */,
-				561666F22719E2CD000063B1 /* Storage */,
 				561666F42719E2CD000063B1 /* SupportingFiles */,
 			);
 			path = Engine;
@@ -926,7 +908,7 @@
 			path = Position;
 			sourceTree = "<group>";
 		};
-		561666B32719E2CC000063B1 /* Loading */ = {
+		561666B32719E2CC000063B1 /* Import */ = {
 			isa = PBXGroup;
 			children = (
 				56E011B828411C51007859F2 /* Texture */,
@@ -935,18 +917,24 @@
 				56D7ED50274C535800A6C25D /* SceneLoader */,
 				56D7ED4B274C52C600A6C25D /* AssetLoader */,
 			);
-			path = Loading;
+			path = Import;
 			sourceTree = "<group>";
 		};
-		561666B82719E2CC000063B1 /* DataStructures */ = {
+		561666B82719E2CC000063B1 /* Buffers */ = {
 			isa = PBXGroup;
 			children = (
+				5617F2EE2942B4030068177C /* Texture */,
 				56C47BAD275176E20075C61B /* BufferedValue */,
 				5688075227480D0400C95F55 /* DynamicBuffer */,
 				5688074C274801DD00C95F55 /* StaticBuffer */,
 				561666B92719E2CC000063B1 /* PNFlatTree.swift */,
+				561666F32719E2CD000063B1 /* PNIBufferStore.swift */,
+				560A0BA927540D9A005AE29D /* PNBufferStore.swift */,
+				566CEB242843940C00DA6227 /* PNBufferStoreFactory.swift */,
+				566CEB262843944000DA6227 /* PNIBufferStoreFactory.swift */,
+				561666CA2719E2CC000063B1 /* PNDataBuffer.swift */,
 			);
-			path = DataStructures;
+			path = Buffers;
 			sourceTree = "<group>";
 		};
 		561666BE2719E2CC000063B1 /* Aliases */ = {
@@ -964,13 +952,10 @@
 		561666C62719E2CC000063B1 /* Mesh */ = {
 			isa = PBXGroup;
 			children = (
+				5617F2EC2942B1B70068177C /* Submesh */,
 				56E0118C28410A42007859F2 /* PNCulling.swift */,
 				561666C72719E2CC000063B1 /* PNMesh.swift */,
 				561666C82719E2CC000063B1 /* PNPieceDescription.swift */,
-				561666C92719E2CC000063B1 /* PNPrimitiveType.swift */,
-				561666CA2719E2CC000063B1 /* PNDataBuffer.swift */,
-				561666CB2719E2CC000063B1 /* PNIndexBitDepth.swift */,
-				561666CC2719E2CC000063B1 /* PNSubmesh.swift */,
 			);
 			path = Mesh;
 			sourceTree = "<group>";
@@ -978,17 +963,16 @@
 		561666CD2719E2CC000063B1 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				563D0A2F2719FF5800F77B40 /* Animation */,
+				5616669E2719E2CC000063B1 /* Position */,
+				561666C62719E2CC000063B1 /* Mesh */,
 				564852F028C7CB4600BA4CC0 /* Camera */,
 				565D37E728AA91EF000ECCC7 /* Ray */,
 				562C739C2849510900E51606 /* Particles */,
 				560B5DC12757CEA400C98F1A /* Model */,
 				56C47BB42751BF2C0075C61B /* Light */,
-				56D7ED58274C604E00A6C25D /* Culling */,
 				5688076627483F3400C95F55 /* Material */,
-				56165BE727440DA90025D58B /* Graph */,
 				56416D872743F728003C99C2 /* Bounds */,
-				561666CE2719E2CC000063B1 /* PNSceneDescription.swift */,
-				56B6AFB328A269BC00266421 /* PNSceneValidator.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -1049,6 +1033,7 @@
 		561666E02719E2CC000063B1 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				566795E7274FEE1A005993D7 /* Workload */,
 				561666E12719E2CC000063B1 /* PNIEngine.swift */,
 				566795D9274FC561005993D7 /* PNEngine.swift */,
 			);
@@ -1075,11 +1060,8 @@
 		561666EB2719E2CD000063B1 /* Rendering */ = {
 			isa = PBXGroup;
 			children = (
-				56F0FB442849864D0004D212 /* Types */,
 				56C47BA1275124A70075C61B /* FrameSupply */,
-				566795E7274FEE1A005993D7 /* Workload */,
 				566795E4274FED58005993D7 /* Coordination */,
-				566795CB274EC06A005993D7 /* Transcriber */,
 				5670EC202736C1E400375194 /* IO */,
 				5670EC1F2736C1D500375194 /* Jobs */,
 				5670EC1E2736C1A100375194 /* Stages */,
@@ -1099,17 +1081,6 @@
 			path = DeferredRendering;
 			sourceTree = "<group>";
 		};
-		561666F22719E2CD000063B1 /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-				561666F32719E2CD000063B1 /* PNIBufferStore.swift */,
-				560A0BA927540D9A005AE29D /* PNBufferStore.swift */,
-				566CEB242843940C00DA6227 /* PNBufferStoreFactory.swift */,
-				566CEB262843944000DA6227 /* PNIBufferStoreFactory.swift */,
-			);
-			path = Storage;
-			sourceTree = "<group>";
-		};
 		561666F42719E2CD000063B1 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -1117,6 +1088,65 @@
 				561666F62719E2CD000063B1 /* Info.plist */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		5617F2EB2942B0680068177C /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				5617F2ED2942B1FE0068177C /* Translation */,
+				568E346D29241B3C00A5DF43 /* Configuration */,
+				5648530528C7E70200BA4CC0 /* Debug */,
+				56FA634328AD1E7400D857A6 /* Utilities */,
+				56BB949A28A90F790034D4AB /* UI */,
+				568C4EFD284F663500C6F128 /* Task */,
+				564DE04128416A73005C2029 /* Global */,
+				566795A7274D9891005993D7 /* Organization */,
+				561666BE2719E2CC000063B1 /* Aliases */,
+				561666B82719E2CC000063B1 /* Buffers */,
+				561666E02719E2CC000063B1 /* Engine */,
+				5616667F2719E2CC000063B1 /* Extensions */,
+				561666B32719E2CC000063B1 /* Import */,
+				561666EB2719E2CD000063B1 /* Rendering */,
+				561666CD2719E2CC000063B1 /* Scene */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		5617F2EC2942B1B70068177C /* Submesh */ = {
+			isa = PBXGroup;
+			children = (
+				561666C92719E2CC000063B1 /* PNPrimitiveType.swift */,
+				561666CB2719E2CC000063B1 /* PNIndexBitDepth.swift */,
+				561666CC2719E2CC000063B1 /* PNSubmesh.swift */,
+			);
+			path = Submesh;
+			sourceTree = "<group>";
+		};
+		5617F2ED2942B1FE0068177C /* Translation */ = {
+			isa = PBXGroup;
+			children = (
+				566795CB274EC06A005993D7 /* Transcriber */,
+				566795DD274FCB2E005993D7 /* Transform */,
+				56C47BA627516C550075C61B /* RenderMask */,
+				56165BE727440DA90025D58B /* Graph */,
+				56D7ED58274C604E00A6C25D /* Culling */,
+				56B6AFB328A269BC00266421 /* PNSceneValidator.swift */,
+				56C47BA427516BD20075C61B /* PNRenderMask.swift */,
+				561666CE2719E2CC000063B1 /* PNSceneDescription.swift */,
+			);
+			path = Translation;
+			sourceTree = "<group>";
+		};
+		5617F2EE2942B4030068177C /* Texture */ = {
+			isa = PBXGroup;
+			children = (
+				56F0FB45284986570004D212 /* PNTextureAtlas.swift */,
+				56A0CD2A28576D2600EBB890 /* PNDynamicTexture.swift */,
+				56A0CD2C28576F9D00EBB890 /* PNIDynamicTexture.swift */,
+				569772AC2868B18100DB9CCA /* PNTextureProvider.swift */,
+				569772AE2868B25F00DB9CCA /* PNStaticTexture.swift */,
+			);
+			path = Texture;
 			sourceTree = "<group>";
 		};
 		5620C81E2754F5BE0098D6FA /* AmbientLight */ = {
@@ -1409,11 +1439,8 @@
 		566795A7274D9891005993D7 /* Organization */ = {
 			isa = PBXGroup;
 			children = (
-				56C47BA627516C550075C61B /* RenderMask */,
-				566795DD274FCB2E005993D7 /* Transform */,
 				566795AC274DBDFC005993D7 /* Node */,
 				566795A8274D98A1005993D7 /* PNScene.swift */,
-				56C47BA427516BD20075C61B /* PNRenderMask.swift */,
 			);
 			path = Organization;
 			sourceTree = "<group>";
@@ -1523,8 +1550,8 @@
 		566795E7274FEE1A005993D7 /* Workload */ = {
 			isa = PBXGroup;
 			children = (
-				566CEB2B28439B6800DA6227 /* Factories */,
 				566CEB2A28439B5B00DA6227 /* WorkloadManager */,
+				566CEB2B28439B6800DA6227 /* Factories */,
 			);
 			path = Workload;
 			sourceTree = "<group>";
@@ -1627,7 +1654,6 @@
 			children = (
 				5670EC132736A29100375194 /* PNGPUIO.swift */,
 				5670EC152736A2AE00375194 /* PNGPUSupply.swift */,
-				569772AC2868B18100DB9CCA /* PNTextureProvider.swift */,
 			);
 			path = IO;
 			sourceTree = "<group>";
@@ -1792,16 +1818,6 @@
 				56924AD6271A07FD00FF3E06 /* PNILoopSampler+Tests.swift */,
 			);
 			path = Animation;
-			sourceTree = "<group>";
-		};
-		56A0CD2928576D1400EBB890 /* Allocation */ = {
-			isa = PBXGroup;
-			children = (
-				56A0CD2A28576D2600EBB890 /* PNDynamicTexture.swift */,
-				56A0CD2C28576F9D00EBB890 /* PNIDynamicTexture.swift */,
-				569772AE2868B25F00DB9CCA /* PNStaticTexture.swift */,
-			);
-			path = Allocation;
 			sourceTree = "<group>";
 		};
 		56A88EAC28C169F50060F131 /* Ray */ = {
@@ -2132,14 +2148,6 @@
 				56E5FED5291F0D5C00DC7ED9 /* ComputeBufferIndex.h */,
 			);
 			path = ComputeShader;
-			sourceTree = "<group>";
-		};
-		56F0FB442849864D0004D212 /* Types */ = {
-			isa = PBXGroup;
-			children = (
-				56F0FB45284986570004D212 /* PNTextureAtlas.swift */,
-			);
-			path = Types;
 			sourceTree = "<group>";
 		};
 		56FA634328AD1E7400D857A6 /* Utilities */ = {
