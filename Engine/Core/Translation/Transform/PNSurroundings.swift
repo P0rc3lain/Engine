@@ -4,7 +4,7 @@
 
 import simd
 
-public struct PNSurroundings {
+struct PNSurroundings {
     private init() {
         // empty, no need for instantiation
     }
@@ -28,7 +28,7 @@ public struct PNSurroundings {
     static let negativeY = negativeYq.rotationMatrix
     static let positiveZ = positiveZq.rotationMatrix
     static let negativeZ = negativeZq.rotationMatrix
-    public static subscript(index: Int) -> simd_float4x4 {
+    static subscript(index: Int) -> simd_float4x4 {
         switch index {
         case 0:
             return positiveX
@@ -46,7 +46,7 @@ public struct PNSurroundings {
             fatalError("Index out of bounds")
         }
     }
-    public static let rotationMatrices = [
+    static let rotationMatrices = [
         positiveX,
         negativeX,
         negativeY,

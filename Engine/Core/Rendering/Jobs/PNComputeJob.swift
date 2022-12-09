@@ -4,6 +4,6 @@
 
 import Metal
 
-public protocol PNComputeJob {
+protocol PNComputeJob {
     func compute(encoder: MTLComputeCommandEncoder, supply: PNFrameSupply)
 }

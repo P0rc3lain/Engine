@@ -2,8 +2,8 @@
 //  Copyright © 2022 Mateusz Stompór. All rights reserved.
 //
 
-class PNIColorTemperature: PNColorTemperature {
-    func convert(temperature: PNKelvin) -> PNColorRGB {
+public class PNIColorTemperature: PNColorTemperature {
+    public func convert(temperature: PNKelvin) -> PNColorRGB {
         assertInBound(value: temperature, min: 1_000, max: 40_000)
         let tmp = PNColorComponent(temperature / 100)
         return [red(tmp), green(tmp), blue(tmp)]

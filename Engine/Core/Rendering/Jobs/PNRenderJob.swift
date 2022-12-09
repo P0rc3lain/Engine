@@ -4,6 +4,6 @@
 
 import Metal
 
-public protocol PNRenderJob {
+protocol PNRenderJob {
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply)
 }

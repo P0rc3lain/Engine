@@ -4,7 +4,7 @@
 
 import Metal
 
-protocol PNStaticBuffer {
+public protocol PNStaticBuffer {
     associatedtype DataType
     var buffer: MTLBuffer { get }
     func upload(data: [DataType])
