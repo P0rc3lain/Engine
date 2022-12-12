@@ -6,16 +6,16 @@ import Metal
 
 final public class PNIDynamicBuffer<T>: PNDynamicBuffer {
     private let device: MTLDevice
-    private(set) var buffer: MTLBuffer
-    private(set) var count: Int
-    var pulled: [T] {
+    private(set) public var buffer: MTLBuffer
+    private(set) public var count: Int
+    public var pulled: [T] {
         let pointer = buffer.contents().bindMemory(to: T.self, capacity: count)
         return [T](UnsafeBufferPointer(start: pointer, count: count))
     }
     private var bufferName: String {
         "\(Self.self)"
     }
-    init?(device: MTLDevice, initialCapacity: Int = 0) {
+    public init?(device: MTLDevice, initialCapacity: Int = 0) {
         assert(initialCapacity >= 0, "Capacity must be a natural value")
         let length = max(initialCapacity, 1) * MemoryLayout<T>.stride
         guard let buffer = device.makeBufferShared(length: length) else {
@@ -27,7 +27,7 @@ final public class PNIDynamicBuffer<T>: PNDynamicBuffer {
         self.buffer = buffer
         self.buffer.label = bufferName
     }
-    func upload(data: [T]) {
+    public func upload(data: [T]) {
         count = data.count
         let requiredSpace = data.count * MemoryLayout<T>.stride
         if buffer.length < requiredSpace {
@@ -41,7 +41,7 @@ final public class PNIDynamicBuffer<T>: PNDynamicBuffer {
             buffer.contents().copyBuffer(from: pointer)
         }
     }
-    func upload(data: T) {
+    public func upload(data: T) {
         upload(data: [data])
     }
 }

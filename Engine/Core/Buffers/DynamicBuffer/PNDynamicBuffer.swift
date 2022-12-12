@@ -4,7 +4,7 @@
 
 import Metal
 
-protocol PNDynamicBuffer {
+public protocol PNDynamicBuffer {
     associatedtype DataType
     var buffer: MTLBuffer { get }
     var pulled: [DataType] { get }

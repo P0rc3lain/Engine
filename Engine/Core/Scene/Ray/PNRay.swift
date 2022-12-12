@@ -16,7 +16,7 @@ public struct PNRay {
     }
 }
 
-public func * (_ lhs: simd_float4x4, _ rhs: PNRay) -> PNRay {
+func * (_ lhs: simd_float4x4, _ rhs: PNRay) -> PNRay {
     let ldir = simd_float3x3(lhs.rotation) * rhs.direction
     let lori = lhs * simd_float4(rhs.origin, 1)
     return PNRay(origin: lori.xyz, direction: ldir.normalized)

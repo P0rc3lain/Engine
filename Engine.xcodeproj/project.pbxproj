@@ -202,6 +202,7 @@
 		566795EF274FF240005993D7 /* PNIRenderingCoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566795EE274FF240005993D7 /* PNIRenderingCoordinatorFactory.swift */; };
 		566795F8274FFE72005993D7 /* PNWorkloadManagerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566795F6274FFE72005993D7 /* PNWorkloadManagerFactory.swift */; };
 		566795F9274FFE72005993D7 /* PNIWorkloadManagerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566795F7274FFE72005993D7 /* PNIWorkloadManagerFactory.swift */; };
+		5669778929434DF300B37284 /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = 5669778829434DF300B37284 /* Documentation.docc */; };
 		566CEB23284383F800DA6227 /* PNIThreadedWorkloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566CEB22284383F800DA6227 /* PNIThreadedWorkloadManager.swift */; };
 		566CEB252843940C00DA6227 /* PNBufferStoreFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566CEB242843940C00DA6227 /* PNBufferStoreFactory.swift */; };
 		566CEB272843944000DA6227 /* PNIBufferStoreFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566CEB262843944000DA6227 /* PNIBufferStoreFactory.swift */; };
@@ -547,6 +548,7 @@
 		566795EE274FF240005993D7 /* PNIRenderingCoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIRenderingCoordinatorFactory.swift; sourceTree = "<group>"; };
 		566795F6274FFE72005993D7 /* PNWorkloadManagerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNWorkloadManagerFactory.swift; sourceTree = "<group>"; };
 		566795F7274FFE72005993D7 /* PNIWorkloadManagerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNIWorkloadManagerFactory.swift; sourceTree = "<group>"; };
+		5669778829434DF300B37284 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
 		566CEB22284383F800DA6227 /* PNIThreadedWorkloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIThreadedWorkloadManager.swift; sourceTree = "<group>"; };
 		566CEB242843940C00DA6227 /* PNBufferStoreFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNBufferStoreFactory.swift; sourceTree = "<group>"; };
 		566CEB262843944000DA6227 /* PNIBufferStoreFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIBufferStoreFactory.swift; sourceTree = "<group>"; };
@@ -899,15 +901,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		5616669E2719E2CC000063B1 /* Position */ = {
-			isa = PBXGroup;
-			children = (
-				568807442747EEB300C95F55 /* Skeleton */,
-				56E8209C27284664002D58C3 /* PNPosition.swift */,
-			);
-			path = Position;
-			sourceTree = "<group>";
-		};
 		561666B32719E2CC000063B1 /* Import */ = {
 			isa = PBXGroup;
 			children = (
@@ -952,6 +945,7 @@
 		561666C62719E2CC000063B1 /* Mesh */ = {
 			isa = PBXGroup;
 			children = (
+				568807442747EEB300C95F55 /* Skeleton */,
 				5617F2EC2942B1B70068177C /* Submesh */,
 				56E0118C28410A42007859F2 /* PNCulling.swift */,
 				561666C72719E2CC000063B1 /* PNMesh.swift */,
@@ -964,7 +958,6 @@
 			isa = PBXGroup;
 			children = (
 				563D0A2F2719FF5800F77B40 /* Animation */,
-				5616669E2719E2CC000063B1 /* Position */,
 				561666C62719E2CC000063B1 /* Mesh */,
 				564852F028C7CB4600BA4CC0 /* Camera */,
 				565D37E728AA91EF000ECCC7 /* Ray */,
@@ -1084,6 +1077,7 @@
 		561666F42719E2CD000063B1 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				5669778829434DF300B37284 /* Documentation.docc */,
 				561666F52719E2CD000063B1 /* Engine.h */,
 				561666F62719E2CD000063B1 /* Info.plist */,
 			);
@@ -1290,6 +1284,7 @@
 		563D0A2F2719FF5800F77B40 /* Animation */ = {
 			isa = PBXGroup;
 			children = (
+				56E8209C27284664002D58C3 /* PNPosition.swift */,
 				560A0BAB27541555005AE29D /* Animator */,
 				566795D5274EEA5D005993D7 /* Chrono */,
 				5629FBE827492012005476AF /* Interpolation */,
@@ -1758,8 +1753,6 @@
 			children = (
 				561666D12719E2CC000063B1 /* PNMaterial.swift */,
 				5688076727483F4600C95F55 /* PNIMaterial.swift */,
-				56532DF628C7AD7B005476F2 /* PNColorTemperature.swift */,
-				56532DF828C7ADD1005476F2 /* PNIColorTemperature.swift */,
 			);
 			path = Material;
 			sourceTree = "<group>";
@@ -1908,6 +1901,8 @@
 		56C47BB42751BF2C0075C61B /* Light */ = {
 			isa = PBXGroup;
 			children = (
+				56532DF628C7AD7B005476F2 /* PNColorTemperature.swift */,
+				56532DF828C7ADD1005476F2 /* PNIColorTemperature.swift */,
 				56C47BB52751BF390075C61B /* PNAmbientLight.swift */,
 				56C47BB72751BF7F0075C61B /* PNIAmbientLight.swift */,
 				5620C8122754F3AE0098D6FA /* PNOmniLight.swift */,
@@ -2320,6 +2315,7 @@
 				5609459C28B6BFA3005C8F73 /* Random.metal in Sources */,
 				566795B2274DBE94005993D7 /* PNINodeInteractor.swift in Sources */,
 				5670EC142736A29100375194 /* PNGPUIO.swift in Sources */,
+				5669778929434DF300B37284 /* Documentation.docc in Sources */,
 				561667412719E2CD000063B1 /* PNMaterial.swift in Sources */,
 				56C3174528CFEB0E00C04F3C /* NSRegularExpression+Extension.swift in Sources */,
 				56C47BA527516BD20075C61B /* PNRenderMask.swift in Sources */,
