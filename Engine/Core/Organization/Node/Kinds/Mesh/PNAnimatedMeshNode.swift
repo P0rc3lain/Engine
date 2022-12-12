@@ -2,4 +2,4 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-protocol PNAnimatedMeshNode: PNMeshNode, PNAnimatedNode { }
+public protocol PNAnimatedMeshNode: PNMeshNode, PNAnimatedNode { }
