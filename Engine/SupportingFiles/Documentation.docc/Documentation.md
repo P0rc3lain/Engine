@@ -28,13 +28,13 @@
 ### Framework
 - <doc:Utility>
 - <doc:Task>
-- <doc:Frame>
+- <doc:Main>
 - <doc:Math>
 - <doc:Config>
 
 ### Interface
 - <doc:UI>
-- <doc:ReactiveProgramming>
+- <doc:Reactive>
 
 ### Data
 - <doc:Buffer>

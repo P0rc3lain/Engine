@@ -8,23 +8,37 @@
 
 ## Topics
 
-### Placeholder
+### Color
 - ``PNColorComponent``
 - ``PNColorComponentN``
+
+### RGB
 - ``PNColor3``
-- ``PNColor4``
 - ``PNColorBGR``
 - ``PNColorRGB``
+
+### RGBA
+- ``PNColor4``
 - ``PNColorBGRA``
 - ``PNColorRGBA``
+
+### Light Temperature
 - ``PNKelvin``
 - ``PNColorTemperature``
 - ``PNIColorTemperature``
-- ``PNSpotLight``
-- ``PNOmniLight``
+
+### Ambient
 - ``PNAmbientLight``
-- ``PNDirectionalLight``
-- ``PNISpotLight``
-- ``PNIOmniLight``
 - ``PNIAmbientLight``
+
+### Omni
+- ``PNOmniLight``
+- ``PNIOmniLight``
+
+### Spot
+- ``PNSpotLight``
+- ``PNISpotLight``
+
+### Directional
+- ``PNDirectionalLight``
 - ``PNIDirectionalLight``
