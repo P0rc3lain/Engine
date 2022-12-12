@@ -32,6 +32,8 @@
 - ``PNIMeshNode``
 - ``PNAnimatedMeshNode``
 - ``PNIAnimatedMeshNode``
+- ``PNRiggedMesh``
+- ``PNIRiggedMesh``
 - ``PNAnimatedRiggedMesh``
 - ``PNIAnimatedRiggedMesh``
 

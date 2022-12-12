@@ -48,3 +48,6 @@
 ### Interpolation
 - ``PNInterpolator``
 - ``PNIInterpolator``
+
+### Winding
+- ``PNTransformationWinding``
