@@ -8,17 +8,18 @@
 
 ## Topics
 
-### Placeholder
-- ``PNWBoundingBox``
+### Main
 - ``PNMesh``
-- ``PNRiggedMesh``
-- ``PNSubmesh``
-- ``PNPieceDescription``
+
+### Skeleton
 - ``PNSkeleton``
 - ``PNAnimatedSkeleton``
+
+### Building blocks
 - ``PNCulling``
-- ``PNIRiggedMesh``
 - ``PNPrimitiveType``
 - ``PNIndexBitDepth``
-- ``PNTransformationWinding``
-- ``PNTransformationWinding``
+
+### Piece
+- ``PNSubmesh``
+- ``PNPieceDescription``

@@ -26,6 +26,7 @@
 - ``PNTranscriber``
 - ``PNModelReference``
 - ``PNAnimatedModelReference``
+- ``PNParticleSystem``
 
 ### Uniforms
 - ``PNWModelUniforms``

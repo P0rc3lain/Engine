@@ -8,14 +8,19 @@
 
 ## Topics
 
-### Placeholder
+### General
 - ``PNPosition``
 - ``PNParticle``
-- ``PNParticleSystem``
-- ``PNParticleGenerator``
+
+### Update
 - ``PNParticleController``
+
+### Rendering
+- ``PNTextureAtlas``
+- ``PNParticleGenerator``
 - ``PNRenderableParticlesProvider``
+- ``PNPositioningRules``
+
+### Emission
 - ``PNEmitter``
 - ``PNEmissionRules``
-- ``PNPositioningRules``
-- ``PNTextureAtlas``
