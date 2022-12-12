@@ -1,4 +1,4 @@
-# Reactive Programming
+# Reactive
 
 <!--summary-->
 
@@ -8,6 +8,5 @@
 
 ## Topics
 
-### Placeholder
+### General
 - ``PNSubject``
-- ``PNScenePieceSubject``
