@@ -4,9 +4,7 @@
 
 import simd
 
-/// Performs the work or sequence of actions for an activity.
 public protocol PNSpotLight {
-    /// Colordddd
     var color: PNColorRGB { get }
     var intensity: Float { get }
     var influenceRadius: Float { get }
