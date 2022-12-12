@@ -20,7 +20,7 @@
 
 ### Graph
 - <doc:Organization>
-- <doc:Translation>
+- <doc:Transcription>
 
 ### Assets
 - <doc:Import>
