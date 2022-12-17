@@ -168,7 +168,7 @@
 		56532DF728C7AD7B005476F2 /* PNColorTemperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56532DF628C7AD7B005476F2 /* PNColorTemperature.swift */; };
 		56532DF928C7ADD1005476F2 /* PNIColorTemperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56532DF828C7ADD1005476F2 /* PNIColorTemperature.swift */; };
 		56532DFC28C7B37D005476F2 /* PNIColorTemperature+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56532DFB28C7B37C005476F2 /* PNIColorTemperature+Tests.swift */; };
-		565B629729034B1000C0C0D1 /* PNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565B629629034B1000C0C0D1 /* PNView.swift */; platformFilter = ios; };
+		565B629729034B1000C0C0D1 /* PNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565B629629034B1000C0C0D1 /* PNView.swift */; platformFilters = (ios, tvos, ); };
 		565D37E928AA9234000ECCC7 /* PNRay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D37E828AA9234000ECCC7 /* PNRay.swift */; };
 		565D37EB28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565D37EA28AABD5A000ECCC7 /* PNIBoundInteractor+Tests.swift */; };
 		566020E02734314C000F4CA7 /* PNSSAOJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566020DF2734314C000F4CA7 /* PNSSAOJob.swift */; };
@@ -1415,12 +1415,12 @@
 			path = macOS;
 			sourceTree = "<group>";
 		};
-		565B629829034B1400C0C0D1 /* iOS */ = {
+		565B629829034B1400C0C0D1 /* UIKit-Compatible */ = {
 			isa = PBXGroup;
 			children = (
 				565B629629034B1000C0C0D1 /* PNView.swift */,
 			);
-			path = iOS;
+			path = "UIKit-Compatible";
 			sourceTree = "<group>";
 		};
 		565D37E728AA91EF000ECCC7 /* Ray */ = {
@@ -1863,7 +1863,7 @@
 		56BB949A28A90F790034D4AB /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				565B629829034B1400C0C0D1 /* iOS */,
+				565B629829034B1400C0C0D1 /* UIKit-Compatible */,
 				565B629529034B0600C0C0D1 /* macOS */,
 				5675C46528B2AD6500EEC58D /* PNScreenInteractor.swift */,
 				5675C46928B2B81900EEC58D /* PNIScreenInteractor.swift */,
@@ -2775,13 +2775,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUN_DOCUMENTATION_COMPILER = NO;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Engine";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,3";
 			};
 			name = Debug;
 		};
@@ -2812,12 +2812,12 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUN_DOCUMENTATION_COMPILER = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Engine";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,3";
 			};
 			name = Release;
 		};
