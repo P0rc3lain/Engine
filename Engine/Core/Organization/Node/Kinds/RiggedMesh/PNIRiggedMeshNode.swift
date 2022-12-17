@@ -2,7 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-public final class PNIRiggedMesh: PNRiggedMesh {
+public final class PNIRiggedMeshNode: PNRiggedMeshNode {
     public let name: String
     public let mesh: PNMesh
     public let skeleton: PNSkeleton

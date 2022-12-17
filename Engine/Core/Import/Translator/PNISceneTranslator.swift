@@ -16,7 +16,8 @@ public final class PNISceneTranslator: PNSceneTranslator {
         let scene = PNScene.default
         asset.walk(handler: { (object: MDLObject, passedValue: PNScenePiece?) in
             if let object = object as? MDLCamera {
-                let node = PNScenePiece.make(data: cameraNode(camera: object.porcelain, transform: object.transform),
+                let node = PNScenePiece.make(data: cameraNode(camera: object.porcelain,
+                                                              transform: object.transform),
                                              parent: passedValue)
                 passedValue?.children.append(node)
                 return node
@@ -70,23 +71,34 @@ public final class PNISceneTranslator: PNSceneTranslator {
             fatalError("Unhandled case")
         }
     }
-    private func riggedMeshNode(mesh: PNMesh, skeleton: PNSkeleton, transform: MDLTransformComponent?) -> PNSceneNode {
+    private func riggedMeshNode(mesh: PNMesh,
+                                skeleton: PNSkeleton,
+                                transform: MDLTransformComponent?) -> PNSceneNode {
         guard let transfrom = transform?.decomposed else {
-            return PNIRiggedMesh(mesh: mesh, skeleton: skeleton, transform: .identity)
+            return PNIRiggedMeshNode(mesh: mesh,
+                                     skeleton: skeleton,
+                                     transform: .identity)
         }
-        return PNIAnimatedRiggedMesh(mesh: mesh, skeleton: skeleton, animator: PNIAnimator.`defaultTRS`, animation: transfrom)
+        return PNIAnimatedRiggedMeshNode(mesh: mesh,
+                                         skeleton: skeleton,
+                                         animator: PNIAnimator.`defaultTRS`,
+                                         animation: transfrom)
     }
     private func meshNode(mesh: PNMesh, transform: MDLTransformComponent?) -> PNSceneNode {
         guard let transfrom = transform?.decomposed else {
             return PNIMeshNode(mesh: mesh, transform: .identity)
         }
-        return PNIAnimatedMeshNode(mesh: mesh, animator: PNIAnimator.`defaultTRS`, animation: transfrom)
+        return PNIAnimatedMeshNode(mesh: mesh,
+                                   animator: PNIAnimator.`defaultTRS`,
+                                   animation: transfrom)
     }
     private func cameraNode(camera: PNCamera, transform: MDLTransformComponent?) -> PNSceneNode {
         guard let transfrom = transform?.decomposed else {
             return PNICameraNode(camera: camera, transform: .identity)
         }
-        return PNIAnimatedCameraNode(camera: camera, animator: PNIAnimator.`defaultTRS`, animation: transfrom)
+        return PNIAnimatedCameraNode(camera: camera,
+                                     animator: PNIAnimator.`defaultTRS`,
+                                     animation: transfrom)
     }
     private func groupNode(transfrom: MDLTransformComponent?) -> PNSceneNode {
         guard let transfrom = transfrom?.decomposed else {

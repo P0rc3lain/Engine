@@ -2,6 +2,6 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-public protocol PNRiggedMesh: PNMeshNode {
+public protocol PNRiggedMeshNode: PNMeshNode {
     var skeleton: PNSkeleton { get }
 }
