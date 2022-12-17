@@ -2,8 +2,6 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-#if os(macOS)
-
 import Cocoa
 import Metal
 import ModelIO
@@ -115,5 +113,3 @@ public struct PNITerrainLoader: PNTerrainLoader {
                                          winding: .clockwise))
     }
 }
-
-#endif
