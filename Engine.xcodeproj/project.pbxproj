@@ -311,7 +311,7 @@
 		56E0119128410A5A007859F2 /* PNTerrainLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E0118F28410A5A007859F2 /* PNTerrainLoader.swift */; platformFilters = (macos, ); };
 		56E0119228410A5A007859F2 /* PNITerrainLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E0119028410A5A007859F2 /* PNITerrainLoader.swift */; platformFilters = (macos, ); };
 		56E0119528410A73007859F2 /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E0119428410A73007859F2 /* CGFloat+Extension.swift */; };
-		56E0119828410A8F007859F2 /* PNITerrainLoader+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E0119728410A8F007859F2 /* PNITerrainLoader+Tests.swift */; };
+		56E0119828410A8F007859F2 /* PNITerrainLoader+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E0119728410A8F007859F2 /* PNITerrainLoader+Tests.swift */; platformFilters = (macos, ); };
 		56E011BA28411C5D007859F2 /* PNITextureLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E011B928411C5D007859F2 /* PNITextureLoader.swift */; platformFilters = (macos, ); };
 		56E011BD28413218007859F2 /* PNTextureLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E011BC28413218007859F2 /* PNTextureLoader.swift */; platformFilters = (macos, ); };
 		56E011BF28413260007859F2 /* CGRect+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E011BE28413260007859F2 /* CGRect+Extension.swift */; };
@@ -2839,7 +2839,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.stompor.mateusz.porcelain.EngineTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,3";
 			};
 			name = Debug;
 		};
@@ -2859,7 +2863,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.stompor.mateusz.porcelain.EngineTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,3";
 			};
 			name = Release;
 		};
