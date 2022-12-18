@@ -19,6 +19,11 @@ jobs:
     - name: Lint files
       run: mdl .
   unittests:
+    strategy:
+      matrix:
+        platform: ["platform=macOS",
+                   "platform=iOS Simulator,name=iPhone 13",
+                   "platform=tvOS Simulator,name=Apple TV"]
     runs-on: macOS-latest
     steps:
     - name: Checkout Repository
@@ -26,6 +31,7 @@ jobs:
     - name: Test Swift Framework
       run: xcodebuild -project Engine.xcodeproj
                       -scheme EngineTests test
+                      -destination "${{ matrix.platform }}"
   swiftlint:
     runs-on: ubuntu-latest
     steps:
