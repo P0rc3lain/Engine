@@ -5,6 +5,15 @@ on:
     branches:
     - main
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   tests:
     uses: ./.github/workflows/tests.yml
@@ -24,7 +33,7 @@ jobs:
           path: "Release-appletvos"
     runs-on: macos-12
     steps:
-    - name: Check Out Sources
+    - name: Check out sources
       uses: actions/checkout@v1
     - name: Build the project
       run: xcodebuild build
@@ -33,7 +42,7 @@ jobs:
                       -derivedDataPath /tmp/engine-build
                       -configuration Release
                       -destination "${{ matrix.destination }}"
-    - name: Archive the documentation directory
+    - name: Archive the binary
       working-directory: "/tmp/engine-build/Build/Products/${{ matrix.path }}"
       run: tar -czf "${{ matrix.name }}.tar.gz" Engine.framework
     - name: Upload the framework
@@ -45,29 +54,32 @@ jobs:
     needs: binaries
     runs-on: macos-12
     steps:
-    - uses: actions/download-artifact@v2
+    - name: Download macOS binary
+      uses: actions/download-artifact@v2
       with:
         name: Engine-macOS.framework.tar.gz
-    - uses: actions/download-artifact@v2
+    - name: Download iOS binary
+      uses: actions/download-artifact@v2
       with:
         name: Engine-iOS.framework.tar.gz
-    - uses: actions/download-artifact@v2
+    - name: Download tvOS binary
+      uses: actions/download-artifact@v2
       with:
         name: Engine-tvOS.framework.tar.gz
     - name: Create dirs
       run: mkdir -p iOS tvOS macOS
-    - name: Unarchive the documentation directory
+    - name: Unarchive the macOS binary
       run: tar -xf Engine-macOS.framework.tar.gz -C macOS
-    - name: Unarchive the documentation directory
+    - name: Unarchive the iOS binary
       run: tar -xf Engine-iOS.framework.tar.gz -C iOS
-    - name: Unarchive the documentation directory
+    - name: Unarchive the tvOS binary
       run: tar -xf Engine-tvOS.framework.tar.gz -C tvOS
     - run: xcodebuild -create-xcframework
            -framework "/Users/runner/work/Engine/Engine/macOS/Engine.framework"
            -framework "/Users/runner/work/Engine/Engine/iOS/Engine.framework"
            -framework "/Users/runner/work/Engine/Engine/tvOS/Engine.framework"
            -output "/Users/runner/work/Engine/Engine/Engine.xcframework"
-    - name: Upload the framework
+    - name: Upload the universal framework
       uses: actions/upload-artifact@v3
       with:
         name: Engine.xcframework
@@ -92,3 +104,35 @@ jobs:
       with:
         name: Engine.doccarchive.tar.gz
         path: /tmp/engine-build/Build/Products/Release/Engine.doccarchive.tar.gz
+  deploy:
+    needs: documentation
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: macos-12
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Setup pages
+      uses: actions/configure-pages@v2
+    - name: Download documentation
+      uses: actions/download-artifact@v2
+      with:
+        name: Engine.doccarchive.tar.gz
+    - name: Unpack the documentation
+      run: tar -xf Engine.doccarchive.tar.gz
+    - name: Prepare documentation for hosting
+      run: $(xcodebuild -find docc) process-archive
+                                    transform-for-static-hosting
+                                    ./Engine.doccarchive
+                                    --hosting-base-path Engine
+                                    --output-path docs
+    - name: Redirect to the actual documentation
+      run: cp -f Auxilary/index.html docs/index.html
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: 'docs'
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v1
