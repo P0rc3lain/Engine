@@ -2,6 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
+import CoreGraphics
 import Foundation
 import Metal
 
