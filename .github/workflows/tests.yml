@@ -1,3 +1,4 @@
+---
 name: Tests
 
 on:
@@ -5,19 +6,28 @@ on:
   pull_request:
 
 jobs:
+  yamllint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Out Sources
+        uses: actions/checkout@v3
+      - name: Lint yml files
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          strict: true
   markdownlint:
     runs-on: ubuntu-latest
     steps:
-    - name: Check Out Sources
-      uses: actions/checkout@v2
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@359bebbc29cbe6c87da6bc9ea3bc930432750108
-      with:
-        ruby-version: '3.1'
-    - name: Install mdl
-      run: gem install mdl
-    - name: Lint files
-      run: mdl .
+      - name: Check Out Sources
+        uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@359bebbc29cbe6c87da6bc9ea3bc930432750108
+        with:
+          ruby-version: '3.1'
+      - name: Install mdl
+        run: gem install mdl
+      - name: Lint files
+        run: mdl .
   unittests:
     strategy:
       matrix:
@@ -26,18 +36,19 @@ jobs:
                    "platform=tvOS Simulator,name=Apple TV"]
     runs-on: macOS-latest
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v1
-    - name: Test Swift Framework
-      run: xcodebuild -project Engine.xcodeproj
-                      -scheme EngineTests test
-                      -destination "${{ matrix.platform }}"
+      - name: Checkout Repository
+        uses: actions/checkout@v1
+      - name: Test Swift Framework
+        run: xcodebuild -project Engine.xcodeproj
+                        -scheme EngineTests test
+                        -destination "${{ matrix.platform }}"
   swiftlint:
     runs-on: ubuntu-latest
     steps:
-    - name: Check Out Sources
-      uses: actions/checkout@v1
-    - name: Lint Files
-      uses: norio-nomura/action-swiftlint@3.2.1
-      with:
+      - name: Check Out Sources
+        uses: actions/checkout@v1
+      - name: Lint Files
+        uses: norio-nomura/action-swiftlint@3.2.1
+        with:
           args: --strict
+...
