@@ -491,6 +491,7 @@
 		56407B7A27204EEB00440CAC /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		56407B7C27206F5D00440CAC /* Vertex+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vertex+Extension.swift"; sourceTree = "<group>"; };
 		56416D7327400F66003C99C2 /* PNIDynamicBuffer+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIDynamicBuffer+Tests.swift"; sourceTree = "<group>"; };
+		564373AE2956443B00795CD4 /* .yamllint */ = {isa = PBXFileReference; lastKnownFileType = text; path = .yamllint; sourceTree = "<group>"; };
 		56458F6028B131F400FE1823 /* PNISceneNode+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNISceneNode+Tests.swift"; sourceTree = "<group>"; };
 		56458F6328B137EE00FE1823 /* Publisher+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Extension.swift"; sourceTree = "<group>"; };
 		56484BA52846162F004DFF36 /* PNTranslucentJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNTranslucentJob.swift; sourceTree = "<group>"; };
@@ -601,6 +602,9 @@
 		568EBB39273F0B88007C7D35 /* SSAOUniforms+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SSAOUniforms+Extension.swift"; sourceTree = "<group>"; };
 		568EBB3C273F0DE1007C7D35 /* PNISSAOHemisphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNISSAOHemisphere.swift; sourceTree = "<group>"; };
 		568EBB3E273F110A007C7D35 /* LightingInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LightingInput.h; sourceTree = "<group>"; };
+		56904B43295640AB001CC47F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		56904B44295640AB001CC47F /* .mdlrc */ = {isa = PBXFileReference; lastKnownFileType = text; path = .mdlrc; sourceTree = "<group>"; };
+		56904B45295640AC001CC47F /* .swiftlint.yml */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; tabWidth = 2; };
 		56924AD4271A07FD00FF3E06 /* EngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		56924AD6271A07FD00FF3E06 /* PNILoopSampler+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNILoopSampler+Tests.swift"; sourceTree = "<group>"; };
 		56924AD8271A07FD00FF3E06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -733,6 +737,10 @@
 				569D923A273DC17E004FDFAC /* code_stats.sh */,
 				569D922B273DC03F004FDFAC /* README.md */,
 				565EDB652902FE28009EB474 /* DEVLOG.md */,
+				56904B45295640AC001CC47F /* .swiftlint.yml */,
+				56904B43295640AB001CC47F /* .gitignore */,
+				56904B44295640AB001CC47F /* .mdlrc */,
+				564373AE2956443B00795CD4 /* .yamllint */,
 				5601396D255457D100FC1C45 /* Products */,
 			);
 			sourceTree = "<group>";
