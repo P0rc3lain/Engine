@@ -36,10 +36,10 @@
 - ``PNIMeshNode``
 - ``PNAnimatedMeshNode``
 - ``PNIAnimatedMeshNode``
-- ``PNRiggedMesh``
-- ``PNIRiggedMesh``
-- ``PNAnimatedRiggedMesh``
-- ``PNIAnimatedRiggedMesh``
+- ``PNRiggedMeshNode``
+- ``PNIRiggedMeshNode``
+- ``PNAnimatedRiggedMeshNode``
+- ``PNIAnimatedRiggedMeshNode``
 
 ### Camera
 
