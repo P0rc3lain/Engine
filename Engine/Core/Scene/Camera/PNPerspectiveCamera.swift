@@ -4,6 +4,8 @@
 
 import simd
 
+/// Camera that uses perspective projection.
+/// Designed to mimic the way the human eye sees.
 public struct PNPerspectiveCamera: PNCamera {
     public let projectionMatrix: matrix_float4x4
     public let projectionMatrixInverse: matrix_float4x4

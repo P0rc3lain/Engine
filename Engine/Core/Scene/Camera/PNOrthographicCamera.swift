@@ -4,6 +4,8 @@
 
 import simd
 
+/// Camera that uses orthographic projection.
+/// In this mode, an object's size in the rendered image stays constant regardless of its distance from the camera.
 public struct PNOrthographicCamera: PNCamera {
     public let projectionMatrix: matrix_float4x4
     public let projectionMatrixInverse: matrix_float4x4
