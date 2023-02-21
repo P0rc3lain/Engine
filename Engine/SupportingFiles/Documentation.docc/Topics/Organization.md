@@ -1,6 +1,6 @@
 # Organization
 
-<!--summary-->
+Components that either build scene graph or can be embedded in it.
 
 ## Overview
 

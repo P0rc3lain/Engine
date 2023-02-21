@@ -4,6 +4,7 @@
 
 import simd
 
+/// Interface encapsulating operations that can be performed on bounding boxes.
 public protocol PNBoundingBoxInteractor {
     func aabb(_ boundingBox: PNBoundingBox) -> PNBoundingBox
     func bound(_ boundingBox: PNBoundingBox) -> PNBound

@@ -2,6 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
+/// Interface encapsulating operations that can be performed on bounds.
 public protocol PNBoundInteractor {
     func overlap(_ lhs: PNBound, _ rhs: PNBound) -> Bool
     func merge(_ lhs: PNBound, rhs: PNBound) -> PNBound

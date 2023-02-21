@@ -1,6 +1,6 @@
 # Transcription
 
-<!--summary-->
+Components involved in flattening process of hierarchical scene graph into its efficient form.
 
 ## Overview
 

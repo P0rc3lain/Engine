@@ -1,6 +1,6 @@
 # Camera
 
-<!--summary-->
+Window to a 3D virtual world.
 
 ## Overview
 
