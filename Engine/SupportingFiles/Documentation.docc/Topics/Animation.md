@@ -1,6 +1,7 @@
 # Animation
 
-<!--summary-->
+In addition to rendering static scenes there is a possibility of capturing movement.
+The page lists all building blocks that can be used for that purpose.
 
 ## Overview
 
@@ -16,6 +17,10 @@
 - ``PNBLTransform``
 - ``PNLTransform``
 - ``PNTransform``
+
+### Position
+
+- ``PNPosition``
 
 ### Skeletal
 

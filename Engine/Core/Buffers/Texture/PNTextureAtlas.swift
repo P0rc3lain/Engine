@@ -5,6 +5,7 @@
 import Metal
 import simd
 
+/// A texture atlas is an image that contains data from several smaller images that have been packed together.
 public struct PNTextureAtlas {
     public let texture: MTLTexture
     public let grid: simd_uint2

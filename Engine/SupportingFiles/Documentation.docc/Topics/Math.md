@@ -1,6 +1,6 @@
 # Math
 
-<!--summary-->
+Supplementary toolset for mathematical operations.
 
 ## Overview
 

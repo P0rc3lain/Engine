@@ -4,6 +4,7 @@
 
 import simd
 
+/// A set of restruction that should be followed while creating new particles.
 public struct PNEmissionRules {
     public let lifespan: ClosedRange<Float>
     public let speed: ClosedRange<Float>

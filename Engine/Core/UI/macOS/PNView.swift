@@ -4,6 +4,7 @@
 
 import MetalKit
 
+/// A pre-configured view that can be used to show scene rendered by the engine
 public class PNView: NSView, MTKViewDelegate {
     public let engine: PNEngine?
     public let interactor: PNScreenInteractor

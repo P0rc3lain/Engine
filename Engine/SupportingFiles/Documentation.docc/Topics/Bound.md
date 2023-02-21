@@ -1,6 +1,6 @@
 # Bound
 
-<!--summary-->
+Space occupation.
 
 ## Overview
 

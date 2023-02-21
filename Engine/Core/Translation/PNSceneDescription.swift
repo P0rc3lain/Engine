@@ -5,6 +5,8 @@
 import Metal
 import PNShared
 
+/// Representation of a scene in processing-efficient layout.
+/// Supplements hierarchical counterpart ``PNScene``.
 public final class PNSceneDescription {
     // MARK: - Capacity A
     public var entities = PNEntityTree()

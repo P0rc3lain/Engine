@@ -5,6 +5,10 @@
 import simd
 
 /// Skeleton-based model transformation description.
-public typealias PNAnimatedSkeleton = PNAnimatedTransform<[simd_float3], [simd_quatf], [simd_float3]>
+public typealias PNAnimatedSkeleton = PNAnimatedTransform<[simd_float3],
+                                                          [simd_quatf],
+                                                          [simd_float3]>
 /// Rigid body transformation description.
-public typealias PNAnimatedCoordinateSpace = PNAnimatedTransform<simd_float3, simd_quatf, simd_float3>
+public typealias PNAnimatedCoordinateSpace = PNAnimatedTransform<simd_float3,
+                                                                 simd_quatf,
+                                                                 simd_float3>

@@ -1,6 +1,7 @@
 # Lights
 
-<!--summary-->
+The engine provides variety of classes that can be used to enrich scene look.
+The page describes types of lights that may appear on it and parameters utilised to characterize them.
 
 ## Overview
 
