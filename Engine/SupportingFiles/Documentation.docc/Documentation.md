@@ -6,7 +6,7 @@ Suitable for small games as well as utility applications.
 
 ## Overview
 
-In order to create an example scene a specific process needs to be followed. 
+In order to create an example scene a specific process needs to be followed.
 The user must first prepare a window suitable for showing the engine's content.
 In the next step load assets needed and finally pass them to the engine.
 It is highly encouraged to read the topics in the above order if not used as a reference.

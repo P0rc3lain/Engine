@@ -4,6 +4,8 @@
 
 import simd
 
+/// Represents opposite, extreme points of a given abstract.
+/// Shorten version of ``PNBoundingBox``.
 public struct PNBound: CustomDebugStringConvertible {
     let min: simd_float3
     let max: simd_float3
