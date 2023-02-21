@@ -5,6 +5,7 @@
 import Metal
 import ModelIO
 
+/// Describes type width of a value storing an index.
 public enum PNIndexBitDepth: UInt {
     case invalid = 0
     case uInt8 = 8

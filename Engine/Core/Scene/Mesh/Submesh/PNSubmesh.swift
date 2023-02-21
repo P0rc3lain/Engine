@@ -4,6 +4,8 @@
 
 import Metal
 
+/// Describes how to assemble a submesh by providing index buffer and assembly algorithm.
+/// Relies of using external vertex buffer to fetch actual data.
 public struct PNSubmesh {
     public let indexBuffer: PNDataBuffer
     public let indexCount: Int

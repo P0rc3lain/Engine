@@ -4,6 +4,7 @@
 
 import Metal
 
+/// Configures overall look of a model.
 public protocol PNMaterial {
     /// Material's identifier.
     var name: String { get }

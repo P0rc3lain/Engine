@@ -5,6 +5,8 @@
 import Metal
 import ModelIO
 
+/// Type of primitive.
+/// In most cases used to describe semantic content of a buffer.
 public enum PNPrimitiveType: Int {
     case triangles = 2
     public init?(modelIO: MDLGeometryType) {
