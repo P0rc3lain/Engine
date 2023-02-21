@@ -4,6 +4,8 @@
 
 import Metal
 
+/// Contains configuration of culling techinques.
+/// Used to optimize mesh surfaces rendering.
 public struct PNCulling {
     public let frontCulling: MTLCullMode
     public let backCulling: MTLCullMode
