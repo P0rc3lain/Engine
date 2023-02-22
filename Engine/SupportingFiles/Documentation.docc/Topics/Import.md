@@ -1,6 +1,6 @@
 # Import
 
-<!--summary-->
+Loading assets into the engine.
 
 ## Overview
 

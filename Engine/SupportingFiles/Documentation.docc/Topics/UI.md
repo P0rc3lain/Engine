@@ -1,6 +1,6 @@
 # UI
 
-<!--summary-->
+Graphics interface.
 
 ## Overview
 

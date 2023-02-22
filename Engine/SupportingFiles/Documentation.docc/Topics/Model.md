@@ -1,6 +1,6 @@
-# Mesh
+# Model
 
-<!--summary-->
+Mesh representation and its details configuration.
 
 ## Overview
 

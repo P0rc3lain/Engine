@@ -4,6 +4,7 @@
 
 import PNShared
 
+/// Contains data of uniforms required for scene rendering.
 public protocol PNBufferStore {
     var omniLights: PNAnyDynamicBuffer<OmniLight> { get }
     var ambientLights: PNAnyDynamicBuffer<AmbientLight> { get }

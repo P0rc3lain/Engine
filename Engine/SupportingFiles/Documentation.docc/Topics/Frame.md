@@ -1,6 +1,6 @@
 # Frame
 
-<!--summary-->
+Core components of infrastructure.
 
 ## Overview
 
