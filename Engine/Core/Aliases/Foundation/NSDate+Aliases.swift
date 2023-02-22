@@ -4,7 +4,7 @@
 
 import Foundation
 
-/// Data type representing a specific point in time
+/// Data type representing a specific point in time.
 public typealias PNTimePoint = TimeInterval
-/// Data type representing period of time
+/// Data type representing period of time.
 public typealias PNTimeInterval = TimeInterval

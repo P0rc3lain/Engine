@@ -2,6 +2,7 @@
 //  Copyright © 2022 Mateusz Stompór. All rights reserved.
 //
 
+/// Endless animation sampler.
 public class PNILoopSampler: PNSampleProvider {
     public init() {
         // Empty

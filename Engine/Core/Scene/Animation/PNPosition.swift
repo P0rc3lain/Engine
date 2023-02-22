@@ -4,6 +4,7 @@
 
 import simd
 
+/// The place where entity is located.
 public struct PNPosition {
     public let translation: simd_float3
     public let rotation: simd_quatf

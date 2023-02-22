@@ -4,6 +4,7 @@
 
 import simd
 
+/// A part of a line that has a fixed starting point but no endpoint.
 public struct PNRay {
     public let origin: simd_float3
     public let direction: simd_float3

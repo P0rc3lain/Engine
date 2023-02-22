@@ -4,6 +4,7 @@
 
 import simd
 
+/// Small, localized object that can be described by several physical properties.
 public struct PNParticle {
     public var position: simd_float3
     public var speed: Float

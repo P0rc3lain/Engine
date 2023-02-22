@@ -5,6 +5,7 @@
 import Metal
 import simd
 
+/// A component organising all entities that can be displayed on the screen.
 public class PNScene {
     public let rootNode: PNScenePiece
     public var directionalLights: [PNDirectionalLight]

@@ -10,8 +10,19 @@ Supplementary toolset for mathematical operations.
 
 ### Vector
 
+- ``PNFloat3``
+- ``PNFloat4``
 - ``PNDirection3D``
 - ``PNDirection3DN``
+
+### Orientation
+
+- ``PNQuatf``
+
+### Matrix
+
+- ``PNFloat3x3``
+- ``PNFloat4x4``
 
 ### Point
 

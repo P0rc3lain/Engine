@@ -2,6 +2,8 @@
 //  Copyright © 2022 Mateusz Stompór. All rights reserved.
 //
 
+/// Action in a digital animation sequence.
+/// Define points that later will be interpolated to estimate inbetween values.
 public struct PNKeyframeAnimation<T> {
     public var keyFrames: [T]
     public let times: [PNTimePoint]
