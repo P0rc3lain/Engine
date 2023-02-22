@@ -1,6 +1,6 @@
 # Reactive
 
-<!--summary-->
+Events listening and hooks.
 
 ## Overview
 

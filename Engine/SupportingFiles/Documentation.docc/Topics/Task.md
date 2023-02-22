@@ -1,6 +1,6 @@
 # Task
 
-<!--summary-->
+Piece of work execution planning.
 
 ## Overview
 

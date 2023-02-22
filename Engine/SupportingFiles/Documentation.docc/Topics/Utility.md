@@ -1,6 +1,6 @@
 # Utility
 
-<!--summary-->
+Language extensions.
 
 ## Overview
 

@@ -1,6 +1,6 @@
 # Config
 
-<!--summary-->
+Performance and quality tailoring.
 
 ## Overview
 

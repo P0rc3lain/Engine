@@ -4,6 +4,7 @@
 
 import Metal
 
+/// Wrapper for ``PNDynamicBuffer``.
 public struct PNAnyDynamicBuffer<T>: PNDynamicBuffer {
     public typealias DataType = T
     private let bufferRetriever: () -> MTLBuffer

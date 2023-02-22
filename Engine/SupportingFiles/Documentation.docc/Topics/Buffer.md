@@ -1,6 +1,6 @@
 # Buffer
 
-<!--summary-->
+Data temporal storage.
 
 ## Overview
 

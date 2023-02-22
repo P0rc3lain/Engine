@@ -4,6 +4,7 @@
 
 import Metal
 
+/// Fixed-size GPU buffer.
 public protocol PNStaticBuffer {
     associatedtype DataType
     var buffer: MTLBuffer { get }

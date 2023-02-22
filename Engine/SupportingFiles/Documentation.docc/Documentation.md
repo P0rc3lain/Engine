@@ -24,7 +24,7 @@ Core building blocks or content of nodes.
 - <doc:Particle>
 - <doc:Bound>
 - <doc:Camera>
-- <doc:Mesh>
+- <doc:Model>
 
 ### Graph
 
@@ -48,7 +48,7 @@ Configuration, core components and task planning.
 
 - <doc:Utility>
 - <doc:Task>
-- <doc:Main>
+- <doc:Frame>
 - <doc:Math>
 - <doc:Config>
 

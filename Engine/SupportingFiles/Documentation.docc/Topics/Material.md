@@ -1,6 +1,6 @@
 # Material
 
-<!--summary-->
+Describing look of a model.
 
 ## Overview
 

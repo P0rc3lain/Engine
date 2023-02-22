@@ -4,6 +4,7 @@
 
 import Metal
 
+/// Fixed-size GPU buffer.
 public struct PNDataBuffer {
     public let buffer: MTLBuffer?
     public let length: Int
