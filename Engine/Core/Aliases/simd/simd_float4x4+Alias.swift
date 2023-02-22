@@ -19,3 +19,6 @@ public typealias PNTransform = simd_float4x4
 public typealias PNBLTransform = simd_float4x4
 /// 4x4 matrix representing local transform in unspecified coordinate space
 public typealias PNLTransform = simd_float4x4
+
+/// 4x4 matrix
+public typealias PNFloat4x4 = simd_float4x4

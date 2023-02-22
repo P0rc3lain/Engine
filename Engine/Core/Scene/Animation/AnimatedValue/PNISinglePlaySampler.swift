@@ -2,6 +2,7 @@
 //  Copyright © 2022 Mateusz Stompór. All rights reserved.
 //
 
+/// Samples animation to provide animation cycle equal to its length.
 public class PNISinglePlaySampler: PNSampleProvider {
     private let loopSampler: PNILoopSampler
     public init() {

@@ -2,6 +2,7 @@
 //  Copyright © 2022 Mateusz Stompór. All rights reserved.
 //
 
+/// Set of restrictions that defines properties of newly-generated particles.
 public struct PNPositioningRules {
     public let x: ClosedRange<Float>
     public let y: ClosedRange<Float>

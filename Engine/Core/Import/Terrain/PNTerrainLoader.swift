@@ -4,6 +4,7 @@
 
 import AppKit
 
+/// Generation of meshes based on bitmap data.
 public protocol PNTerrainLoader {
     func loadMesh(image: NSImage, material: PNMaterial) -> PNMesh?
 }

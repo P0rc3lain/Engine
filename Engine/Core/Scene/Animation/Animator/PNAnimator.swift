@@ -2,6 +2,8 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
+/// Animation coordinator.
+/// Based on criterion used takes ``PNKeyframeAnimation`` and returns final transform for a given moment.
 public protocol PNAnimator {
     var chronometer: PNChronometer { get set }
     var interpolator: PNInterpolator { get set }

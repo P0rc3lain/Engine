@@ -304,6 +304,8 @@
 		56D7ED5C274C611C00A6C25D /* PNBoundingBox+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7ED5B274C611C00A6C25D /* PNBoundingBox+Alias.swift */; };
 		56D7ED5E274C617200A6C25D /* ModelUniforms+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D7ED5D274C617200A6C25D /* ModelUniforms+Alias.swift */; };
 		56D8C4122739D404005E58E3 /* SpotLight+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8C4112739D404005E58E3 /* SpotLight+Extension.swift */; };
+		56DF90DC29A6447C002A49E7 /* simd_float3x3+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DF90DB29A6447C002A49E7 /* simd_float3x3+Alias.swift */; };
+		56DF90DE29A644BA002A49E7 /* simd_quatf+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DF90DD29A644BA002A49E7 /* simd_quatf+Alias.swift */; };
 		56E011852840E07A007859F2 /* PNBoundEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E011842840E07A007859F2 /* PNBoundEstimator.swift */; };
 		56E011872840E179007859F2 /* PNIBoundEstimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E011862840E179007859F2 /* PNIBoundEstimator.swift */; };
 		56E0118B2840FE9B007859F2 /* PNIBoundEstimator+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E0118A2840FE9B007859F2 /* PNIBoundEstimator+Tests.swift */; };
@@ -673,6 +675,8 @@
 		56D7ED5B274C611C00A6C25D /* PNBoundingBox+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNBoundingBox+Alias.swift"; sourceTree = "<group>"; };
 		56D7ED5D274C617200A6C25D /* ModelUniforms+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelUniforms+Alias.swift"; sourceTree = "<group>"; };
 		56D8C4112739D404005E58E3 /* SpotLight+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpotLight+Extension.swift"; sourceTree = "<group>"; };
+		56DF90DB29A6447C002A49E7 /* simd_float3x3+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd_float3x3+Alias.swift"; sourceTree = "<group>"; };
+		56DF90DD29A644BA002A49E7 /* simd_quatf+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd_quatf+Alias.swift"; sourceTree = "<group>"; };
 		56E011842840E07A007859F2 /* PNBoundEstimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNBoundEstimator.swift; sourceTree = "<group>"; };
 		56E011862840E179007859F2 /* PNIBoundEstimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIBoundEstimator.swift; sourceTree = "<group>"; };
 		56E0118A2840FE9B007859F2 /* PNIBoundEstimator+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIBoundEstimator+Tests.swift"; sourceTree = "<group>"; };
@@ -1513,6 +1517,8 @@
 				569F10FD2847A6D4005046CC /* simd_float3+Alias.swift */,
 				569F10FF2847A722005046CC /* simd_float4+Alias.swift */,
 				568C05B828B2D6AA007607E6 /* simd_float2+Alias.swift */,
+				56DF90DB29A6447C002A49E7 /* simd_float3x3+Alias.swift */,
+				56DF90DD29A644BA002A49E7 /* simd_quatf+Alias.swift */,
 			);
 			path = simd;
 			sourceTree = "<group>";
@@ -2413,6 +2419,7 @@
 				56D7ED5C274C611C00A6C25D /* PNBoundingBox+Alias.swift in Sources */,
 				56D7ED43274C381400A6C25D /* PNBoundingBoxInteractor.swift in Sources */,
 				563BFC91272898F20003EDB7 /* MDLAnimatedVector3Array+Extension.swift in Sources */,
+				56DF90DE29A644BA002A49E7 /* simd_quatf+Alias.swift in Sources */,
 				5670EBDC273561FD00375194 /* Operator+Global.swift in Sources */,
 				566CEB272843944000DA6227 /* PNIBufferStoreFactory.swift in Sources */,
 				56E0119228410A5A007859F2 /* PNITerrainLoader.swift in Sources */,
@@ -2438,6 +2445,7 @@
 				5620C8252754F65B0098D6FA /* PNOmniLightNode.swift in Sources */,
 				562C739028494FE000E51606 /* Particle.metal in Sources */,
 				5629FBEA2749201F005476AF /* PNInterpolator.swift in Sources */,
+				56DF90DC29A6447C002A49E7 /* simd_float3x3+Alias.swift in Sources */,
 				5616285329219E1F00C166B2 /* MTLSize+Extension.swift in Sources */,
 				5675C46A28B2B81900EEC58D /* PNIScreenInteractor.swift in Sources */,
 				5616673E2719E2CD000063B1 /* PNSceneDescription.swift in Sources */,

@@ -5,6 +5,7 @@
 import Metal
 import PNShared
 
+/// Framework class capable of managing particle system.
 public class PNParticleGenerator: PNRenderableParticlesProvider, PNTask {
     private let emitter: PNEmitter
     private let controller: PNParticleController
