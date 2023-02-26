@@ -2,6 +2,7 @@
 //  Copyright © 2022 Mateusz Stompór. All rights reserved.
 //
 
+/// A multi-threaded rendering process coordinator.
 public class PNIThreadedWorkloadManager: PNWorkloadManager {
     private var renderingCoordinator: PNRenderingCoordinator
     private let transcriber: PNTranscriber
@@ -36,9 +37,10 @@ public class PNIThreadedWorkloadManager: PNWorkloadManager {
             inactive.bufferStore.spotLights.upload(data: scene.spotLights)
             inactive.bufferStore.cameras.upload(data: scene.cameraUniforms)
             inactive.bufferStore.modelCoordinateSystems.upload(data: scene.uniforms)
-            frameSupplies.push(PNFrameSupply(scene: scene,
-                                             bufferStore: inactive.bufferStore,
-                                             mask: renderMaskGenerator.generate(scene: scene)))
+            let supply = PNFrameSupply(scene: scene,
+                                       bufferStore: inactive.bufferStore,
+                                       mask: renderMaskGenerator.generate(scene: scene))
+            frameSupplies.push(supply)
             dispatchGroup.leave()
         }
         renderingCoordinator.draw(frameSupply: frameSupplies.pull)

@@ -5,6 +5,7 @@
 import Metal
 import PNShared
 
+/// Defines a particle system when used in ``PNEntityTree``.
 public struct PNParticleSystem {
     let index: PNIndex
     let atlas: PNTextureAtlas
