@@ -15,5 +15,5 @@ public typealias PNColorRGBA = simd_float4
 /// Stored as blue, red, green and alpha channels.
 /// Normalized, values are ranging from 0.0 to 1.0.
 public typealias PNColorBGRA = simd_float4
-/// Four-dimensional vector
+/// Four-dimensional vector.
 public typealias PNFloat4 = simd_float4

@@ -4,4 +4,5 @@
 
 import PNShared
 
+/// Uniforms defined in world-space coordinate system.
 public typealias PNWModelUniforms = ModelUniforms

@@ -4,7 +4,7 @@
 
 import PNShared
 
-/// Calculates bound for an array of vertices
+/// Calculates bound for an array of vertices.
 public protocol PNBoundEstimator {
     func bound(vertexBuffer: UnsafeRawBufferPointer) -> PNBound
     func bound(vertexBuffer: Data) -> PNBound
