@@ -4,4 +4,5 @@
 
 import Metal
 
+/// Flat representation of the scene. Counterpart of ``PNScenePiece``.
 public typealias PNEntityTree = PNFlatTree<PNEntity>

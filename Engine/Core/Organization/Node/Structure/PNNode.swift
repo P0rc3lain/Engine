@@ -4,6 +4,8 @@
 
 import Combine
 
+/// Used to create a hierarchical structure of a tree.
+/// Built with storing ``PNSceneNode`` in mind, but can be used for any data type.
 public final class PNNode<T> {
     public var dataSubject: CurrentValueSubject<T, Error>
     public var data: T {

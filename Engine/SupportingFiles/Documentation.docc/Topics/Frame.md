@@ -13,11 +13,6 @@ Core components of infrastructure.
 - ``PNEngine``
 - ``PNIEngine``
 
-### Managers
-
-- ``PNWorkloadManager``
-- ``PNWorkloadManagerFactory``
-
 ### Culling
 
 - ``PNRenderMask``
@@ -27,15 +22,18 @@ Core components of infrastructure.
 ### Coordination
 
 - ``PNRenderingCoordinator``
-- ``PNIRenderingCoordinatorFactory``
 - ``PNRenderingCoordinatorFactory``
+- ``PNIRenderingCoordinatorFactory``
 
 ### Workload
 
-- ``PNIThreadedWorkloadManager``
-- ``PNIThreadedWorkloadManagerFactory``
+- ``PNWorkloadManager``
 - ``PNIWorkloadManager``
+- ``PNIThreadedWorkloadManager``
+
+- ``PNWorkloadManagerFactory``
 - ``PNIWorkloadManagerFactory``
+- ``PNIThreadedWorkloadManagerFactory``
 
 ### Rendering
 

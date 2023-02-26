@@ -2,6 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
+/// A ``PNFlatTree`` node.
 public struct PNFlatTreeNode<T> {
     public let parentIdx: PNIndex
     public var data: T
@@ -11,6 +12,7 @@ public struct PNFlatTreeNode<T> {
     }
 }
 
+/// A structure representing a tree backed by an array.
 public struct PNFlatTree<T> {
     private var objects: [PNFlatTreeNode<T>]
     public var count: Int {

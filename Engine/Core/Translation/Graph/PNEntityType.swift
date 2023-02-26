@@ -2,6 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
+/// Type of object that is stored in ``PNEntity``.
 public enum PNEntityType {
     case group
     case omniLight
