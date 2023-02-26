@@ -4,6 +4,7 @@
 
 import CoreGraphics
 
+/// Builds a new coordinator tailored for a new configuration.
 public protocol PNRenderingCoordinatorFactory {
     func new(drawableSize: CGSize) -> PNRenderingCoordinator?
 }

@@ -2,6 +2,8 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
+/// Interface used to describe a minimal scene node.
+/// In hierarchical structure embedded in ``PNNode``, when it is used as ``PNScenePiece``.
 public protocol PNSceneNode: AnyObject {
     var name: String { get }
     var transform: PNSubject<PNLTransform> { get }
