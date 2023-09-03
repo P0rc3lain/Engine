@@ -14,6 +14,8 @@ public protocol PNSpotLight {
     var intensity: Float { get }
     var influenceRadius: Float { get }
     var coneAngle: PNRadians { get }
+    var innerConeAngle: PNRadians { get }
+    var outerConeAngle: PNRadians { get }
     var castsShadows: Bool { get }
     var projectionMatrix: simd_float4x4 { get }
     var projectionMatrixInverse: simd_float4x4 { get }

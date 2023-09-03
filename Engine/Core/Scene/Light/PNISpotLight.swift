@@ -9,6 +9,8 @@ public struct PNISpotLight: PNSpotLight {
     public let intensity: Float
     public var influenceRadius: Float
     public let coneAngle: PNRadians
+    public let innerConeAngle: PNRadians
+    public let outerConeAngle: PNRadians
     public let castsShadows: Bool
     public let projectionMatrix: simd_float4x4
     public let projectionMatrixInverse: simd_float4x4
@@ -17,12 +19,16 @@ public struct PNISpotLight: PNSpotLight {
                 intensity: Float,
                 influenceRadius: Float,
                 coneAngle: PNRadians,
+                innerConeAngle: PNRadians,
+                outerConeAngle: PNRadians,
                 castsShadows: Bool) {
         assertValid(color: color)
         self.color = color
         self.intensity = intensity
         self.influenceRadius = influenceRadius
         self.coneAngle = coneAngle
+        self.innerConeAngle = innerConeAngle
+        self.outerConeAngle = outerConeAngle
         self.castsShadows = castsShadows
         self.projectionMatrix = PNISpotLight.projectionMatrix(coneAngle: coneAngle,
                                                               influenceRadius: influenceRadius)
