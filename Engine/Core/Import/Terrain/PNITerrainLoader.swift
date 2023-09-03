@@ -2,6 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
+import AppKit
 import Cocoa
 import Metal
 import ModelIO

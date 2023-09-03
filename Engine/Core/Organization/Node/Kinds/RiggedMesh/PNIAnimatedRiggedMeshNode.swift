@@ -2,6 +2,10 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
+import Combine
+import PNShared
+import simd
+
 public final class PNIAnimatedRiggedMeshNode: PNAnimatedRiggedMeshNode {
     public let name: String
     public let mesh: PNMesh
