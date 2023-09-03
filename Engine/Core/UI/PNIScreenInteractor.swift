@@ -14,7 +14,7 @@ class PNIScreenInteractor: PNScreenInteractor {
     func pick(camera cameraNode: PNCameraNode,
               scene: PNScene,
               point: PNPoint2D) -> [PNScenePiece] {
-        let inverseProjection = cameraNode.camera.projectionMatrixInverse
+        let inverseProjection = cameraNode.camera.projection.inv
         var far = [0, 0, 1, 1] * inverseProjection
         var near = [0, 0, 0, 1] * inverseProjection
         far /= far.w

@@ -5,7 +5,7 @@
 import simd
 
 /// Matrix that provides cached inverse for fast subsequent access
-public class PNMatrix4x4FN {
+public class PNMatrix4x4FI {
     private var matrix: simd_float4x4?
     private var matrixInverse: simd_float4x4?
     public var mat: simd_float4x4 {
@@ -41,7 +41,7 @@ public class PNMatrix4x4FN {
     public init(_ matrix: simd_float4x4) {
         self.matrix = matrix
     }
-    static func from(_ matrix: simd_float4x4) -> PNMatrix4x4FN {
-        PNMatrix4x4FN(matrix)
+    static func from(_ matrix: simd_float4x4) -> PNMatrix4x4FI {
+        PNMatrix4x4FI(matrix)
     }
 }

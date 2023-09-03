@@ -41,7 +41,7 @@ public final class PNIAnimatedCameraNode: PNAnimatedCameraNode {
         scene.entities.add(parentIdx: parentIdx, data: PNEntity(type: .camera,
                                                                 referenceIdx: scene.cameras.count))
         scene.cameras.append(camera)
-        let uniform = CameraUniforms(projectionMatrix: camera.projectionMatrix,
+        let uniform = CameraUniforms(projectionMatrix: camera.projection.mat,
                                      index: Int32(scene.entities.count - 1))
         scene.cameraUniforms.append(uniform)
         scene.activeCameraIdx = scene.entities.count - 1

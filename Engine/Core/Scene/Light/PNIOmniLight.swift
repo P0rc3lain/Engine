@@ -9,8 +9,7 @@ public struct PNIOmniLight: PNOmniLight {
     public let intensity: Float
     public var influenceRadius: Float
     public let castsShadows: Bool
-    public let projectionMatrix: simd_float4x4
-    public let projectionMatrixInverse: simd_float4x4
+    public let projection: PNMatrix4x4FI
     public let boundingBox: PNBoundingBox
     public init(color: PNColorRGB,
                 intensity: Float,
@@ -21,9 +20,8 @@ public struct PNIOmniLight: PNOmniLight {
         self.intensity = intensity
         self.influenceRadius = influenceRadius
         self.castsShadows = castsShadows
-        self.projectionMatrix = PNIOmniLight.projectionMatrix(influenceRadius: influenceRadius)
-        self.projectionMatrixInverse = projectionMatrix.inverse
-        self.boundingBox = PNIOmniLight.boundingBox(projectionMatrixInverse: projectionMatrixInverse)
+        self.projection = .from(PNIOmniLight.projectionMatrix(influenceRadius: influenceRadius))
+        self.boundingBox = PNIOmniLight.boundingBox(projectionMatrixInverse: projection.inv)
     }
     private static func projectionMatrix(influenceRadius: Float) -> simd_float4x4 {
         simd_float4x4.perspectiveProjectionRightHand(fovyRadians: Float(90).radians,

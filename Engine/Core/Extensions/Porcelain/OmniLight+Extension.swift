@@ -11,8 +11,8 @@ extension OmniLight {
                   intensity: light.intensity,
                   influenceRadius: light.influenceRadius,
                   idx: Int32(index),
-                  projectionMatrix: light.projectionMatrix,
-                  projectionMatrixInverse: light.projectionMatrix.inverse,
+                  projectionMatrix: light.projection.mat,
+                  projectionMatrixInverse: light.projection.inv,
                   castsShadows: light.castsShadows ? 1 : 0)
     }
 }

@@ -17,7 +17,6 @@ public protocol PNSpotLight {
     var innerConeAngle: PNRadians { get }
     var outerConeAngle: PNRadians { get }
     var castsShadows: Bool { get }
-    var projectionMatrix: simd_float4x4 { get }
-    var projectionMatrixInverse: simd_float4x4 { get }
+    var projection: PNMatrix4x4FI { get }
     var boundingBox: PNBoundingBox { get }
 }
