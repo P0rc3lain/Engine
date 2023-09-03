@@ -10,7 +10,6 @@ extension MTLRenderCommandEncoder {
         withUnsafePointer(to: value) { ptr in
             setVertexBytes(ptr, length: MemoryLayout<P>.size, index: index)
         }
-        
     }
     func setFragmentBytes<T: RawRepresentable, P>(value: P,
                                                   index: T) where T.RawValue == UInt32 {
