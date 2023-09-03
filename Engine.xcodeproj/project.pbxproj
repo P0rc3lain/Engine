@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0501D4D02AA52C6900D443B2 /* PNMatrix4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0501D4CF2AA52C6900D443B2 /* PNMatrix4x4.swift */; };
 		560253D52726CA4800B3A13A /* PNIChronometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560253D42726CA4800B3A13A /* PNIChronometer.swift */; };
 		560253D72726CCCA00B3A13A /* PNIChronometer+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560253D62726CCCA00B3A13A /* PNIChronometer+Tests.swift */; };
 		5609459C28B6BFA3005C8F73 /* Random.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5609459B28B6BFA3005C8F73 /* Random.metal */; };
@@ -346,6 +347,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0501D4CF2AA52C6900D443B2 /* PNMatrix4x4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNMatrix4x4.swift; sourceTree = "<group>"; };
 		5601396C255457D100FC1C45 /* Engine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Engine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		560253D42726CA4800B3A13A /* PNIChronometer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIChronometer.swift; sourceTree = "<group>"; };
 		560253D62726CCCA00B3A13A /* PNIChronometer+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNIChronometer+Tests.swift"; sourceTree = "<group>"; };
@@ -729,6 +731,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		054E77362AA52C4100201ED9 /* Math */ = {
+			isa = PBXGroup;
+			children = (
+				0501D4CF2AA52C6900D443B2 /* PNMatrix4x4.swift */,
+			);
+			path = Math;
+			sourceTree = "<group>";
+		};
 		56013962255457D100FC1C45 = {
 			isa = PBXGroup;
 			children = (
@@ -1099,6 +1109,7 @@
 		5617F2EB2942B0680068177C /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				054E77362AA52C4100201ED9 /* Math */,
 				5617F2ED2942B1FE0068177C /* Translation */,
 				568E346D29241B3C00A5DF43 /* Configuration */,
 				5648530528C7E70200BA4CC0 /* Debug */,
@@ -2392,6 +2403,7 @@
 				56C47BB62751BF390075C61B /* PNAmbientLight.swift in Sources */,
 				5616674A2719E2CD000063B1 /* PBR.metal in Sources */,
 				568E3473292424E500A5DF43 /* PNDefaults.swift in Sources */,
+				0501D4D02AA52C6900D443B2 /* PNMatrix4x4.swift in Sources */,
 				5620C832275528030098D6FA /* PNDirectionalShadowJob.swift in Sources */,
 				564852F428C7CBDE00BA4CC0 /* PNCamera.swift in Sources */,
 				5616673D2719E2CD000063B1 /* PNSubmesh.swift in Sources */,
