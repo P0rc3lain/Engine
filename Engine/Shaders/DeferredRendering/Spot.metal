@@ -56,12 +56,21 @@ fragment float4 fragmentSpotLight(RasterizerData in [[stage_in]],
     float attenuationFactor = falloffAttenuation(length_squared(fragmentToLight),
                                                  light.influenceRadius);
     float3 l = normalize(fragmentToLight);
-    float theta = acos(dot(forwardDirection, l));
-    if (theta > light.coneAngle/2 || attenuationFactor == 0) {
+    auto theta = dot(forwardDirection, l);
+    auto thetaAngle = acos(theta);
+    if (thetaAngle > light.coneAngle / 2 || attenuationFactor == 0) {
         discard_fragment();
     }
+    
+    auto gamma = cos(light.outerConeAngle/2);
+    auto phi = cos(light.innerConeAngle/2);
+    float epsilon = phi - gamma;
+    float intensity = clamp((theta - gamma) / epsilon, 0.0f, 1.0f);
+    
     if (light.castsShadows) {
-        float4 lightSpacesFragmentPosition = modelUniforms[id].modelMatrixInverse * modelUniforms[camera.index].modelMatrix * float4(input.fragmentPosition, 1);
+        constant auto & invModelMatrix = modelUniforms[id].modelMatrixInverse;
+        constant auto & invCameraMatrix = modelUniforms[camera.index].modelMatrix;
+        float4 lightSpacesFragmentPosition = invModelMatrix * invCameraMatrix * float4(input.fragmentPosition, 1);
         float4 lightProjectedPosition = light.projectionMatrix * lightSpacesFragmentPosition;
         lightProjectedPosition /= lightProjectedPosition.w;
         lightProjectedPosition.xy = lightProjectedPosition.xy * 0.5 + 0.5;
@@ -70,14 +79,13 @@ fragment float4 fragmentSpotLight(RasterizerData in [[stage_in]],
         float4 reconstructedPosition = light.projectionMatrixInverse * float4(lightProjectedPosition.xy, existingDepth, 1.0);
         reconstructedPosition /= reconstructedPosition.w;
         float bias = max(0.05 * (1.0 - dot(input.n, l)), 0.005);
-
         if (lightSpacesFragmentPosition.z < reconstructedPosition.z - bias) {
             discard_fragment();
         }
     }
-    return float4(attenuationFactor * lighting(l,
-                                               eye,
-                                               input,
-                                               light.color,
-                                               light.intensity), 1);
+    return float4(attenuationFactor * intensity * lighting(l,
+                                                           eye,
+                                                           input,
+                                                           light.color,
+                                                           light.intensity), 1);
 }

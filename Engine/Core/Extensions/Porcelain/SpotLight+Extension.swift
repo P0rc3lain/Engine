@@ -12,6 +12,8 @@ extension SpotLight {
                   projectionMatrix: light.projectionMatrix,
                   projectionMatrixInverse: light.projectionMatrixInverse,
                   coneAngle: light.coneAngle,
+                  innerConeAngle: light.innerConeAngle,
+                  outerConeAngle: light.outerConeAngle,
                   idx: Int32(index),
                   castsShadows: light.castsShadows ? 1 : 0)
     }
