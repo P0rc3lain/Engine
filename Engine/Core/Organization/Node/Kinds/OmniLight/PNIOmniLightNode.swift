@@ -2,7 +2,9 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
+import Combine
 import PNShared
+import simd
 
 public final class PNIOmniLightNode: PNOmniLightNode {
     public let name: String

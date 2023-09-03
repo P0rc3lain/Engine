@@ -2,6 +2,8 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
+import simd
+
 public struct PNIAnimator: PNAnimator {
     public var chronometer: PNChronometer
     public var interpolator: PNInterpolator

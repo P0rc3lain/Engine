@@ -2,6 +2,7 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
+import Combine
 import PNShared
 
 public final class PNIAmbientLightNode: PNAmbientLightNode {

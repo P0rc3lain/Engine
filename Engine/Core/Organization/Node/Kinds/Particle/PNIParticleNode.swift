@@ -2,6 +2,10 @@
 //  Copyright © 2022 Mateusz Stompór. All rights reserved.
 //
 
+import Combine
+import PNShared
+import simd
+
 public final class PNIParticleNode: PNParticleNode {
     public let name: String
     public var provider: PNRenderableParticlesProvider

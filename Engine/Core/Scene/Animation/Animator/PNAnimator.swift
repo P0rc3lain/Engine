@@ -2,6 +2,8 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
+import simd
+
 /// Animation coordinator.
 /// Based on criterion used takes ``PNKeyframeAnimation`` and returns final transform for a given moment.
 public protocol PNAnimator {

@@ -2,6 +2,9 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
+import Combine
+import PNShared
+
 /// Interface used to describe a minimal scene node.
 /// In hierarchical structure embedded in ``PNNode``, when it is used as ``PNScenePiece``.
 public protocol PNSceneNode: AnyObject {
