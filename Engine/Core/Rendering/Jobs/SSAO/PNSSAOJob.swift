@@ -43,12 +43,14 @@ struct PNSSAOJob: PNComputeJob {
         threadGroupSize = MTLSize(width: 8, height: 8)
     }
     func compute(encoder: MTLComputeCommandEncoder, supply: PNFrameSupply) {
+        let time = Int32(Date.timeIntervalSinceReferenceDate)
         encoder.setComputePipelineState(pipelineState)
         encoder.setBuffer(kernelBuffer, index: kAttributeSsaoComputeShaderBufferSamples)
         encoder.setBuffer(supply.bufferStore.modelCoordinateSystems, index: kAttributeSsaoComputeShaderBufferModelUniforms)
         encoder.setBuffer(noiseBuffer, index: kAttributeSsaoComputeShaderBufferNoise)
         encoder.setBuffer(supply.bufferStore.cameras, index: kAttributeSsaoComputeShaderBufferCamera)
         encoder.setBuffer(uniforms, index: kAttributeSsaoComputeShaderBufferRenderingUniforms)
+        encoder.setBytes(time, index: kAttributeSsaoComputeShaderBufferTime)
         encoder.setTexture(nmTexture, index: kAttributeSsaoComputeShaderTextureNM)
         encoder.setTexture(prTexture, index: kAttributeSsaoComputeShaderTexturePR)
         encoder.setTexture(outputTexture, index: kAttributeSsaoComputeShaderTextureOutput)

@@ -4,6 +4,8 @@
 
 #include <metal_stdlib>
 
+#include "Common/Random.h"
+
 #include "MetalBinding/PNShared/Model.h"
 #include "MetalBinding/PNShared/Camera.h"
 #include "MetalBinding/PNShared/Rendering/SSAO.h"
@@ -18,16 +20,19 @@ kernel void kernelSSAO(texture2d<float> nm [[texture(kAttributeSsaoComputeShader
                        constant CameraUniforms & camera [[buffer(kAttributeSsaoComputeShaderBufferCamera)]],
                        constant simd_float3 * samples [[buffer(kAttributeSsaoComputeShaderBufferSamples)]],
                        constant simd_float3 * noise [[buffer(kAttributeSsaoComputeShaderBufferNoise)]],
+                       constant int32_t & time [[buffer(kAttributeSsaoComputeShaderBufferTime)]],
                        uint3 inposition [[thread_position_in_grid]],
                        uint3 threads [[threads_per_grid]],
                        constant ModelUniforms * modelUniforms [[buffer(kAttributeSsaoComputeShaderBufferModelUniforms)]],
                        constant SSAOUniforms & renderingUniforms [[buffer(kAttributeSsaoComputeShaderBufferRenderingUniforms)]]) {
+    auto positionContinuousBuffer = inposition.x + inposition.y * threads.x;
+    auto seed = positionContinuousBuffer + time;
+    auto random = Random(seed);
     float2 texcoord{float(inposition.x)/float(threads.x), float(inposition.y)/float(threads.y)};
     constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
     float3 worldPosition = pr.sample(textureSampler, texcoord).xyz;
     float3 normal = normalize(nm.sample(textureSampler, texcoord)).xyz;
-    float side = sqrt(float(renderingUniforms.noiseCount));
-    float3 randomVector = noise[int(side * texcoord.x + side * (side - 1) * texcoord.y)];
+    float3 randomVector = noise[int(random.random() * renderingUniforms.noiseCount)];
     float3 tangent = normalize(randomVector - normal * dot(randomVector, normal));
     float3 bitangent = normalize(cross(normal, tangent));
     float3x3 TBN = float3x3(tangent, bitangent, normal);

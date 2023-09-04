@@ -8,6 +8,7 @@ enum AttributeSsaoComputeShaderBufferIndex {
     kAttributeSsaoComputeShaderBufferCamera = 0,
     kAttributeSsaoComputeShaderBufferSamples,
     kAttributeSsaoComputeShaderBufferNoise,
+    kAttributeSsaoComputeShaderBufferTime,
     kAttributeSsaoComputeShaderBufferModelUniforms,
     kAttributeSsaoComputeShaderBufferRenderingUniforms
 };
