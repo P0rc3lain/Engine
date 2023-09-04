@@ -110,6 +110,14 @@ func assertEqual<T: Comparable>(_ v1: T,
     assert(v1 == v2, message, file: file, line: line)
 }
 
+func assertDivisible<T: FixedWidthInteger>(_ value: T,
+                                           _ divisior: T,
+                                           _ message: String = "First parameter must be divisible by the second",
+                                           file: StaticString = #file,
+                                           line: UInt = #line) {
+    assert(value % divisior == 0, message, file: file, line: line)
+}
+
 func assertAll(_ conditions: Bool...,
                message: String = "Conditions not meet",
                file: StaticString = #file,
