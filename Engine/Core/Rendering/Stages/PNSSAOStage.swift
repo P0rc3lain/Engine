@@ -20,9 +20,7 @@ struct PNSSAOStage: PNStage {
               let ssaoKernel = PNSSAOJob.make(device: device,
                                               prTexture: prTexture,
                                               nmTexture: nmTexture,
-                                              outputTexture: PNStaticTexture(ssaoTexture),
-                                              maxNoiseCount: 64,
-                                              maxSamplesCount: 64),
+                                              outputTexture: PNStaticTexture(ssaoTexture)),
               let gaussTexture = device.makeTexture(descriptor: .ssaoC(size: renderingSize)) else {
             return nil
         }
