@@ -36,6 +36,7 @@ final public class PNIDynamicBuffer<T>: PNDynamicBuffer {
                 fatalError("Cannot extend buffer size")
             }
             buffer = newBuffer
+            buffer.label = bufferName
         }
         data.withUnsafeBytes { pointer in
             buffer.contents().copyBuffer(from: pointer)
