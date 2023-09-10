@@ -122,7 +122,7 @@ extension MTLRenderPipelineDescriptor {
         return descriptor
     }
     static func directionalShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
-        let descriptor = MTLRenderPipelineDescriptor.spotShadow(library: library)
+        let descriptor = MTLRenderPipelineDescriptor.directionalShadow(library: library)
         descriptor.label = "Directional Shadows Animated"
         descriptor.vertexFunction = try? library.makeFunction(name: "vertexDirectionalLightShadow",
                                                               constantValues: .bool(true, index: kFunctionConstantDirectionalShadowHasSkeleton))
