@@ -24,17 +24,14 @@ struct PNITranscriber: PNTranscriber {
         return sceneDescription
     }
     private func write(lights: [PNDirectionalLight], scene: PNSceneDescription) {
-        guard scene.activeCameraIdx != .nil else {
-            return
-        }
-        guard let cameraBB = scene.boundingBoxes[scene.activeCameraIdx] else {
-            assertionFailure("Bounding box of camera must not be nil")
+        // Getting bounding box of root node
+        guard let sceneBB = scene.boundingBoxes[0] else {
             return
         }
         for light in lights {
             let orientation = simd_float4x4.from(directionVector: light.direction)
             let orientationInverse = orientation.inverse
-            let bound = interactor.bound(interactor.aabb(interactor.multiply(orientationInverse, cameraBB)))
+            let bound = interactor.bound(interactor.aabb(interactor.multiply(orientationInverse, sceneBB)))
             let projectionMatrix = simd_float4x4.orthographicProjection(bound: bound)
             scene.directionalLights.append(DirectionalLight(color: light.color,
                                                             intensity: light.intensity,
