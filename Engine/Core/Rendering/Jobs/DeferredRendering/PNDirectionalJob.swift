@@ -56,11 +56,9 @@ struct PNDirectionalJob: PNRenderJob {
     static func make(device: MTLDevice,
                      inputTextures: [PNTextureProvider],
                      shadowMap: PNTextureProvider) -> PNDirectionalJob? {
-        guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRPSDirectional(library: library),
-              let depthStencilState = device.makeDSSDirectional() else {
-            return nil
-        }
+        let library = device.makePorcelainLibrary()
+        let pipelineState = device.makeRPSDirectional(library: library)
+        let depthStencilState = device.makeDSSDirectional()
         return PNDirectionalJob(pipelineState: pipelineState,
                                 inputTextures: inputTextures,
                                 shadowMap: shadowMap,

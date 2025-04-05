@@ -53,11 +53,9 @@ struct PNAmbientJob: PNRenderJob {
     static func make(device: MTLDevice,
                      inputTextures: [PNTextureProvider],
                      ssaoTexture: PNTextureProvider) -> PNAmbientJob? {
-        guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRPSAmbient(library: library),
-              let depthStencilState = device.makeDSSAmbient() else {
-            return nil
-        }
+        let library = device.makePorcelainLibrary()
+        let pipelineState = device.makeRPSAmbient(library: library)
+        let depthStencilState = device.makeDSSAmbient()
         return PNAmbientJob(pipelineState: pipelineState,
                             inputTextures: inputTextures,
                             ssaoTexture: ssaoTexture,

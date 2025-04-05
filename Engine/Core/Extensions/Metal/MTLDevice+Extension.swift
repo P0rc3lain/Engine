@@ -10,118 +10,132 @@ extension MTLDevice {
     // ====================
     // MTLDepthStencilState
     // ====================
-    func makeDSSGBuffer() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .gBuffer)
+    func failOrMakeDepthStencilState(descriptor: MTLDepthStencilDescriptor) -> any MTLDepthStencilState {
+        guard let state = makeDepthStencilState(descriptor: descriptor) else {
+            fatalError("Coult not create depth stencil state")
+        }
+        return state
     }
-    func makeDSSSpotShadow() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .spotShadow)
+    func makeDSSGBuffer() -> MTLDepthStencilState {
+        failOrMakeDepthStencilState(descriptor: .gBuffer)
     }
-    func makeDSSOmniLightShadow() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .omniShadow)
+    func makeDSSSpotShadow() -> MTLDepthStencilState {
+        failOrMakeDepthStencilState(descriptor: .spotShadow)
     }
-    func makeDSSDirectionalLightShadow() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .directionalShadow)
+    func makeDSSOmniLightShadow() -> MTLDepthStencilState {
+        failOrMakeDepthStencilState(descriptor: .omniShadow)
     }
-    func makeDSSEnvironment() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .environment)
+    func makeDSSDirectionalLightShadow() -> MTLDepthStencilState {
+        failOrMakeDepthStencilState(descriptor: .directionalShadow)
     }
-    func makeDSSFog() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .fog)
+    func makeDSSEnvironment() -> MTLDepthStencilState {
+        failOrMakeDepthStencilState(descriptor: .environment)
     }
-    func makeDSSOmni() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .omni)
+    func makeDSSFog() -> MTLDepthStencilState {
+        failOrMakeDepthStencilState(descriptor: .fog)
     }
-    func makeDSSDirectional() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .directional)
+    func makeDSSOmni() -> MTLDepthStencilState {
+        failOrMakeDepthStencilState(descriptor: .omni)
     }
-    func makeDSSSpot() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .spot)
+    func makeDSSDirectional() -> MTLDepthStencilState {
+        failOrMakeDepthStencilState(descriptor: .directional)
     }
-    func makeDSSAmbient() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .ambient)
+    func makeDSSSpot() -> MTLDepthStencilState {
+        failOrMakeDepthStencilState(descriptor: .spot)
     }
-    func makeDSSTranslucent() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .translucent)
+    func makeDSSAmbient() -> MTLDepthStencilState {
+        failOrMakeDepthStencilState(descriptor: .ambient)
     }
-    func makeDSSParticle() -> MTLDepthStencilState? {
-        makeDepthStencilState(descriptor: .particle)
+    func makeDSSTranslucent() -> MTLDepthStencilState {
+        failOrMakeDepthStencilState(descriptor: .translucent)
+    }
+    func makeDSSParticle() -> MTLDepthStencilState {
+        failOrMakeDepthStencilState(descriptor: .particle)
     }
     // ======================
     // MTLRenderPipelineState
     // ======================
-    func makeRPSParticle(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .particle(library: library))
+    func failOrMakeRenderPipelineState(descriptor: MTLRenderPipelineDescriptor) -> any MTLRenderPipelineState {
+        do {
+            return try makeRenderPipelineState(descriptor: descriptor)
+        } catch let error {
+            fatalError("Coult not create render pipeline state, error \(error.localizedDescription)")
+        }
     }
-    func makeRPSSpotShadow(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .spotShadow(library: library))
+    func makeRPSParticle(library: MTLLibrary) -> MTLRenderPipelineState {
+        failOrMakeRenderPipelineState(descriptor: .particle(library: library))
     }
-    func makeRPSSpotShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .spotShadowAnimated(library: library))
+    func makeRPSSpotShadow(library: MTLLibrary) -> MTLRenderPipelineState {
+        failOrMakeRenderPipelineState(descriptor: .spotShadow(library: library))
     }
-    func makeRPSTranslucent(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .translucent(library: library))
+    func makeRPSSpotShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineState {
+        failOrMakeRenderPipelineState(descriptor: .spotShadowAnimated(library: library))
     }
-    func makeRPSTranslucentAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .translucentAnimated(library: library))
+    func makeRPSTranslucent(library: MTLLibrary) -> MTLRenderPipelineState {
+        failOrMakeRenderPipelineState(descriptor: .translucent(library: library))
     }
-    func makeRPSDirectionalShadow(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .directionalShadow(library: library))
+    func makeRPSTranslucentAnimated(library: MTLLibrary) -> MTLRenderPipelineState {
+        failOrMakeRenderPipelineState(descriptor: .translucentAnimated(library: library))
     }
-    func makeRPSDirectionalShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .directionalShadowAnimated(library: library))
+    func makeRPSDirectionalShadow(library: MTLLibrary) -> MTLRenderPipelineState {
+        failOrMakeRenderPipelineState(descriptor: .directionalShadow(library: library))
     }
-    func makeRPSOmniShadow(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .omniShadow(library: library))
+    func makeRPSDirectionalShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineState {
+        failOrMakeRenderPipelineState(descriptor: .directionalShadowAnimated(library: library))
     }
-    func makeRPSOmniShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .omniShadowAnimated(library: library))
+    func makeRPSOmniShadow(library: MTLLibrary) -> MTLRenderPipelineState {
+        failOrMakeRenderPipelineState(descriptor: .omniShadow(library: library))
     }
-    func makeRPSEnvironment(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .environment(library: library))
+    func makeRPSOmniShadowAnimated(library: MTLLibrary) -> MTLRenderPipelineState {
+        failOrMakeRenderPipelineState(descriptor: .omniShadowAnimated(library: library))
     }
-    func makeRPSFog(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .fog(library: library))
+    func makeRPSEnvironment(library: MTLLibrary) -> MTLRenderPipelineState {
+        failOrMakeRenderPipelineState(descriptor: .environment(library: library))
     }
-    func makeRPSGBuffer(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .gBuffer(library: library))
+    func makeRPSFog(library: MTLLibrary) -> MTLRenderPipelineState {
+        failOrMakeRenderPipelineState(descriptor: .fog(library: library))
     }
-    func makeRPSGBufferAnimated(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .gBufferAnimated(library: library))
+    func makeRPSGBuffer(library: MTLLibrary) -> MTLRenderPipelineState {
+        failOrMakeRenderPipelineState(descriptor: .gBuffer(library: library))
     }
-    func makeRPSOmni(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .omni(library: library,
-                                                       settings: PNDefaults.shared.shaders.lighting.omniLighting))
+    func makeRPSGBufferAnimated(library: MTLLibrary) -> MTLRenderPipelineState {
+        failOrMakeRenderPipelineState(descriptor: .gBufferAnimated(library: library))
     }
-    func makeRPSDirectional(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .directional(library: library,
-                                                              settings: PNDefaults.shared.shaders.lighting.directionalLighting))
+    func makeRPSOmni(library: MTLLibrary) -> MTLRenderPipelineState {
+        failOrMakeRenderPipelineState(descriptor: .omni(library: library,
+                                                        settings: PNDefaults.shared.shaders.lighting.omniLighting))
     }
-    func makeRPSSpot(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .spot(library: library))
+    func makeRPSDirectional(library: MTLLibrary) -> MTLRenderPipelineState {
+        failOrMakeRenderPipelineState(descriptor: .directional(library: library,
+                                                               settings: PNDefaults.shared.shaders.lighting.directionalLighting))
     }
-    func makeRPSAmbient(library: MTLLibrary) -> MTLRenderPipelineState? {
-        try? makeRenderPipelineState(descriptor: .ambient(library: library))
+    func makeRPSSpot(library: MTLLibrary) -> MTLRenderPipelineState {
+        failOrMakeRenderPipelineState(descriptor: .spot(library: library))
+    }
+    func makeRPSAmbient(library: MTLLibrary) -> MTLRenderPipelineState {
+        failOrMakeRenderPipelineState(descriptor: .ambient(library: library))
     }
     // =======================
     // MTLComputePipelineState
     // =======================
-    func makeCPSBloomMerge(library: MTLLibrary) -> MTLComputePipelineState? {
-        guard let function = library.makeFunction(name: "kernelBloomMerge") else {
-            return nil
+    func failOrMakeComputePipelineState(function computeFunction: any MTLFunction) -> any MTLComputePipelineState {
+        do {
+            return try makeComputePipelineState(function: computeFunction)
+        } catch let error {
+            fatalError("Coult not create compute pipeline state, error \(error.localizedDescription)")
         }
-        return try? makeComputePipelineState(function: function)
     }
-    func makeCPSBloomSplit(library: MTLLibrary) -> MTLComputePipelineState? {
-        guard let function = library.makeFunction(name: "kernelBloomSplit") else {
-            return nil
-        }
-        return try? makeComputePipelineState(function: function)
+    func makeCPSBloomMerge(library: MTLLibrary) -> MTLComputePipelineState {
+        let function = library.failOrMakeFunction(name: "kernelBloomMerge")
+        return failOrMakeComputePipelineState(function: function)
     }
-    func makeCPSSSAO(library: MTLLibrary) -> MTLComputePipelineState? {
-        guard let function = library.makeFunction(name: "kernelSSAO") else {
-            return nil
-        }
-        return try? makeComputePipelineState(function: function)
+    func makeCPSBloomSplit(library: MTLLibrary) -> MTLComputePipelineState {
+        let function = library.failOrMakeFunction(name: "kernelBloomSplit")
+        return failOrMakeComputePipelineState(function: function)
+    }
+    func makeCPSSSAO(library: MTLLibrary) -> MTLComputePipelineState {
+        let function = library.failOrMakeFunction(name: "kernelSSAO")
+        return failOrMakeComputePipelineState(function: function)
     }
     // ==========
     // MTLTexture
@@ -212,9 +226,16 @@ extension MTLDevice {
     // ==========
     // MTLLibrary
     // ==========
-    func makePorcelainLibrary() -> MTLLibrary? {
-        let library = try? makeDefaultLibrary(bundle: Bundle.current)
-        return library?.labeled("Default Library")
+    func failOrMakeDefaultLibrary(bundle: Bundle) -> any MTLLibrary {
+        do {
+            return try makeDefaultLibrary(bundle: bundle)
+        } catch let error {
+            fatalError("Coult not create default library, error \(error.localizedDescription)")
+        }
+    }
+    func makePorcelainLibrary() -> MTLLibrary {
+        let library = failOrMakeDefaultLibrary(bundle: .current)
+        return library.labeled("Default Library")
     }
     // =========
     // MTLBuffer

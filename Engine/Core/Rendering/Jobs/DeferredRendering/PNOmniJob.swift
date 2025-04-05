@@ -56,11 +56,9 @@ struct PNOmniJob: PNRenderJob {
     static func make(device: MTLDevice,
                      inputTextures: [PNTextureProvider],
                      shadowMaps: PNTextureProvider) -> PNOmniJob? {
-        guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRPSOmni(library: library),
-              let depthStencilState = device.makeDSSOmni() else {
-            return nil
-        }
+        let library = device.makePorcelainLibrary()
+        let pipelineState = device.makeRPSOmni(library: library)
+        let depthStencilState = device.makeDSSOmni()
         return PNOmniJob(pipelineState: pipelineState,
                          inputTextures: inputTextures,
                          shadowMaps: shadowMaps,

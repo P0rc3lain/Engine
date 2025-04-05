@@ -35,10 +35,8 @@ struct PNBloomMergeJob: PNComputeJob {
     static func make(device: MTLDevice,
                      sceneTexture: PNTextureProvider,
                      brightAreasTexture: PNTextureProvider) -> PNBloomMergeJob? {
-        guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeCPSBloomMerge(library: library) else {
-            return nil
-        }
+        let library = device.makePorcelainLibrary()
+        let pipelineState = device.makeCPSBloomMerge(library: library)
         return PNBloomMergeJob(pipelineState: pipelineState,
                                sceneTexture: sceneTexture,
                                brightAreasTexture: brightAreasTexture)

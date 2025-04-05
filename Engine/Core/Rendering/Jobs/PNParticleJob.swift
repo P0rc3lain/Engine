@@ -44,11 +44,9 @@ struct PNParticleJob: PNRenderJob {
         }
     }
     static func make(device: MTLDevice) -> PNParticleJob? {
-        guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRPSParticle(library: library),
-              let depthStencilState = device.makeDSSParticle() else {
-            return nil
-        }
+        let library = device.makePorcelainLibrary()
+        let depthStencilState = device.makeDSSParticle()
+        let pipelineState = device.makeRPSParticle(library: library)
         return PNParticleJob(pipelineState: pipelineState,
                              depthStencilState: depthStencilState)
     }

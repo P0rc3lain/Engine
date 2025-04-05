@@ -66,9 +66,9 @@ struct PNSSAOJob: PNComputeJob {
                      prTexture: PNTextureProvider,
                      nmTexture: PNTextureProvider,
                      outputTexture: PNTextureProvider) -> PNSSAOJob? {
-        guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeCPSSSAO(library: library),
-              let kernelBuffer = PNIDynamicBuffer<simd_float3>(device: device, initialCapacity: 1),
+        let library = device.makePorcelainLibrary()
+        let pipelineState = device.makeCPSSSAO(library: library)
+        guard let kernelBuffer = PNIDynamicBuffer<simd_float3>(device: device, initialCapacity: 1),
               let noiseBuffer = PNIDynamicBuffer<simd_float3>(device: device, initialCapacity: 1),
               let uniforms = PNIStaticBuffer<SSAOUniforms>(device: device, capacity: 1)
         else {
