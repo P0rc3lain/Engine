@@ -48,7 +48,7 @@ vertex RasterizerData vertexGBuffer(Vertex in [[stage_in]],
                                     constant simd_float4x4 * matrixPalettes [[bMatrixPalettesVertex]],
                                     constant int & index [[bIndexVertex]]) {
     Pose pose = hasSkeleton ? calculatePose(in, matrixPalettes) : Pose{float4(in.position, 1), in.normal, in.tangent};
-    matrix_float3x3 rotation = extract_rotation(modelUniforms[index].modelMatrix);
+    matrix_float3x3 rotation = extractRotation(modelUniforms[index].modelMatrix);
     pose.tangent.x = pose.tangent.x < 0 ? -pose.tangent.x : pose.tangent.x;
     pose.tangent.y = pose.tangent.y < 0 ? -pose.tangent.y : pose.tangent.y;
     pose.tangent.z = pose.tangent.z < 0 ? -pose.tangent.z : pose.tangent.z;
@@ -58,7 +58,7 @@ vertex RasterizerData vertexGBuffer(Vertex in [[stage_in]],
     float4 worldPosition = modelUniforms[index].modelMatrix * pose.position;
     float4x4 cameraTransform = modelUniforms[cameraUniforms.index].modelMatrixInverse;
     float4 cameraSpacePosition = cameraTransform * worldPosition;
-    float3x3 cameraRotation = extract_rotation(cameraTransform);
+    float3x3 cameraRotation = extractRotation(cameraTransform);
     return {
         cameraUniforms.projectionMatrix * cameraSpacePosition,
         cameraSpacePosition.xyz,
