@@ -157,7 +157,7 @@
 		5648530928C7E8D200BA4CC0 /* PNINodeTrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648530828C7E8D200BA4CC0 /* PNINodeTrace.swift */; };
 		5648531A28C9EF0300BA4CC0 /* PNTransformationWinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648531928C9EF0300BA4CC0 /* PNTransformationWinding.swift */; };
 		5648531C28C9F26300BA4CC0 /* PNKeyframeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648531B28C9F26300BA4CC0 /* PNKeyframeAnimation.swift */; };
-		5648531F28C9F2C400BA4CC0 /* NSDate+Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648531E28C9F2C400BA4CC0 /* NSDate+Aliases.swift */; };
+		5648531F28C9F2C400BA4CC0 /* TimeInterval+Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648531E28C9F2C400BA4CC0 /* TimeInterval+Aliases.swift */; };
 		5648532128C9F35900BA4CC0 /* PNILoopSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648532028C9F35900BA4CC0 /* PNILoopSampler.swift */; };
 		5648532328CA154F00BA4CC0 /* PNISinglePlaySampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648532228CA154F00BA4CC0 /* PNISinglePlaySampler.swift */; };
 		564DE040284169B9005C2029 /* Comparable+Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564DE03F284169B9005C2029 /* Comparable+Global.swift */; };
@@ -504,7 +504,7 @@
 		5648530828C7E8D200BA4CC0 /* PNINodeTrace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNINodeTrace.swift; sourceTree = "<group>"; };
 		5648531928C9EF0300BA4CC0 /* PNTransformationWinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNTransformationWinding.swift; sourceTree = "<group>"; };
 		5648531B28C9F26300BA4CC0 /* PNKeyframeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNKeyframeAnimation.swift; sourceTree = "<group>"; };
-		5648531E28C9F2C400BA4CC0 /* NSDate+Aliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDate+Aliases.swift"; sourceTree = "<group>"; };
+		5648531E28C9F2C400BA4CC0 /* TimeInterval+Aliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Aliases.swift"; sourceTree = "<group>"; };
 		5648532028C9F35900BA4CC0 /* PNILoopSampler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNILoopSampler.swift; sourceTree = "<group>"; };
 		5648532228CA154F00BA4CC0 /* PNISinglePlaySampler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNISinglePlaySampler.swift; sourceTree = "<group>"; };
 		564DE03F284169B9005C2029 /* Comparable+Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Global.swift"; sourceTree = "<group>"; };
@@ -1380,7 +1380,7 @@
 		5648531D28C9F2B600BA4CC0 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
-				5648531E28C9F2C400BA4CC0 /* NSDate+Aliases.swift */,
+				5648531E28C9F2C400BA4CC0 /* TimeInterval+Aliases.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -2401,7 +2401,7 @@
 				562C739B284950F300E51606 /* PNParticleNode.swift in Sources */,
 				56ADD2F6273707E200107E24 /* Ambient.metal in Sources */,
 				560253D52726CA4800B3A13A /* PNIChronometer.swift in Sources */,
-				5648531F28C9F2C400BA4CC0 /* NSDate+Aliases.swift in Sources */,
+				5648531F28C9F2C400BA4CC0 /* TimeInterval+Aliases.swift in Sources */,
 				56C47B9E27511E9C0075C61B /* PNFrameSupply.swift in Sources */,
 				561667392719E2CD000063B1 /* PNPieceDescription.swift in Sources */,
 				56E5FED2291F06F700DC7ED9 /* PNComputeJob.swift in Sources */,
