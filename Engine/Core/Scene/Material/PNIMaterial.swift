@@ -36,16 +36,16 @@ public struct PNIMaterial: PNMaterial {
                                           name: "Metallic")
         let roughness = MDLTexture.solid2D(color: simd_float4(simd_float3(repeating: roughnessValue), 1),
                                            name: "Roughness")
-        guard let uN = normals.upload(device: device),
-              let uM = metallic.upload(device: device),
-              let uR = roughness.upload(device: device),
-              let uA = albedo.upload(device: device) else {
+        guard let uploadedNormals = normals.upload(device: device),
+              let uploadedMetallic = metallic.upload(device: device),
+              let uploadedRoughness = roughness.upload(device: device),
+              let uploadedAlbedo = albedo.upload(device: device) else {
             return nil
         }
-        self.roughness = uR
-        self.albedo = uA
-        self.normals = uN
-        self.metallic = uM
+        self.roughness = uploadedRoughness
+        self.albedo = uploadedAlbedo
+        self.normals = uploadedNormals
+        self.metallic = uploadedMetallic
         self.name = name
     }
     public static func `default`(device: MTLDevice) -> PNIMaterial? {
@@ -57,16 +57,16 @@ public struct PNIMaterial: PNMaterial {
                                            name: "Default Roughness")
         let albedo = MDLTexture.solid2D(color: .defaultBaseColor,
                                         name: "Default Albedo")
-        guard let uN = normals.upload(device: device),
-              let uM = metallic.upload(device: device),
-              let uR = roughness.upload(device: device),
-              let uA = albedo.upload(device: device) else {
+        guard let uploadedNormals = normals.upload(device: device),
+              let uploadedMetallic = metallic.upload(device: device),
+              let uploadedRoughness = roughness.upload(device: device),
+              let uploadedAlbedo = albedo.upload(device: device) else {
             return nil
         }
         return PNIMaterial(name: "Default",
-                           albedo: uA,
-                           roughness: uR,
-                           normals: uN,
-                           metallic: uM)
+                           albedo: uploadedAlbedo,
+                           roughness: uploadedRoughness,
+                           normals: uploadedNormals,
+                           metallic: uploadedMetallic)
     }
 }
