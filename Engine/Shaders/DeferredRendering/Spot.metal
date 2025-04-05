@@ -50,7 +50,7 @@ fragment float4 fragmentSpotLight(RasterizerData in [[stage_in]],
     SpotLight light = spotLights[in.instanceId];
     int id = light.idx;
     float4x4 lightTransformation = modelUniforms[camera.index].modelMatrixInverse * modelUniforms[id].modelMatrix;
-    float3 lightPosition = extract_position(lightTransformation).xyz;
+    float3 lightPosition = extractPosition(lightTransformation).xyz;
     float3 forwardDirection = normalize(lightTransformation.columns[2].xyz);
     float3 fragmentToLight = lightPosition - input.fragmentPosition;
     float attenuationFactor = falloffAttenuation(length_squared(fragmentToLight),

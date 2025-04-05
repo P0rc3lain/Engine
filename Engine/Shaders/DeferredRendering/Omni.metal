@@ -53,7 +53,7 @@ fragment float4 fragmentOmniLight(RasterizerData in [[stage_in]],
     
     OmniLight light = omniLights[in.instanceId];
     float4x4 transformation = lightUniforms[camera.index].modelMatrixInverse * lightUniforms[light.idx].modelMatrix;
-    float3 lightPosition = extract_position(transformation).xyz;
+    float3 lightPosition = extractPosition(transformation).xyz;
     float3 fragmentToLight = lightPosition - input.fragmentPosition;
     float attenuationFactor = falloffAttenuation(length_squared(fragmentToLight),
                                                  light.influenceRadius);
