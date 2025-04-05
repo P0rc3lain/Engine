@@ -56,15 +56,15 @@ jobs:
     runs-on: macOS-latest
     steps:
       - name: Download macOS binary
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: Engine-macOS.framework.tar.gz
       - name: Download iOS binary
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: Engine-iOS.framework.tar.gz
       - name: Download tvOS binary
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: Engine-tvOS.framework.tar.gz
       - name: Create dirs
@@ -117,7 +117,7 @@ jobs:
       - name: Setup pages
         uses: actions/configure-pages@v2
       - name: Download documentation
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: Engine.doccarchive.tar.gz
       - name: Unpack the documentation
@@ -131,7 +131,7 @@ jobs:
       - name: Redirect to the actual documentation
         run: cp -f Auxilary/index.html docs/index.html
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: 'docs'
       - name: Deploy to GitHub Pages
