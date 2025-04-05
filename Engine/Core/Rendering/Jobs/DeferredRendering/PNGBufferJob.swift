@@ -72,12 +72,10 @@ struct PNGBufferJob: PNRenderJob {
         }
     }
     static func make(device: MTLDevice) -> PNGBufferJob? {
-        guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRPSGBuffer(library: library),
-              let animatedPipelineState = device.makeRPSGBufferAnimated(library: library),
-              let depthStencilState = device.makeDSSGBuffer() else {
-            return nil
-        }
+        let library = device.makePorcelainLibrary()
+        let pipelineState = device.makeRPSGBuffer(library: library)
+        let animatedPipelineState = device.makeRPSGBufferAnimated(library: library)
+        let depthStencilState = device.makeDSSGBuffer()
         return PNGBufferJob(pipelineState: pipelineState,
                             animatedPipelineState: animatedPipelineState,
                             depthStencilState: depthStencilState)

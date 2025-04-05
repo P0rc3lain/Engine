@@ -69,12 +69,10 @@ struct PNTranslucentJob: PNRenderJob {
         }
     }
     static func make(device: MTLDevice) -> PNTranslucentJob? {
-        guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRPSTranslucent(library: library),
-              let animatedPipelineState = device.makeRPSTranslucentAnimated(library: library),
-              let depthStencilState = device.makeDSSTranslucent() else {
-            return nil
-        }
+        let library = device.makePorcelainLibrary()
+        let pipelineState = device.makeRPSTranslucent(library: library)
+        let animatedPipelineState = device.makeRPSTranslucentAnimated(library: library)
+        let depthStencilState = device.makeDSSTranslucent()
         return PNTranslucentJob(pipelineState: pipelineState,
                                 animatedPipelineState: animatedPipelineState,
                                 depthStencilState: depthStencilState)

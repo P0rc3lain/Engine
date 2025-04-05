@@ -42,10 +42,10 @@ struct PNFogJob: PNRenderJob {
     }
     static func make(device: MTLDevice,
                      prTexture: PNTextureProvider) -> PNFogJob? {
-        guard let library = device.makePorcelainLibrary(),
-              let fogPipelineState = device.makeRPSFog(library: library),
-              let depthStencilState = device.makeDSSFog(),
-              let cube = PNMesh.cube(device: device) else {
+        let library = device.makePorcelainLibrary()
+        let fogPipelineState = device.makeRPSFog(library: library)
+        let depthStencilState = device.makeDSSFog()
+        guard let cube = PNMesh.cube(device: device) else {
             return nil
         }
         return PNFogJob(pipelineState: fogPipelineState,

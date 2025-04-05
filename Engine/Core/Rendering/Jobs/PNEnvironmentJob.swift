@@ -36,10 +36,10 @@ struct PNEnvironmentJob: PNRenderJob {
         encoder.drawIndexedPrimitives(submesh: cube.pieceDescriptions[0].drawDescription)
     }
     static func make(device: MTLDevice) -> PNEnvironmentJob? {
-        guard let library = device.makePorcelainLibrary(),
-              let environmentPipelineState = device.makeRPSEnvironment(library: library),
-              let depthStencilState = device.makeDSSEnvironment(),
-              let cube = PNMesh.cube(device: device) else {
+        let library = device.makePorcelainLibrary()
+        let environmentPipelineState = device.makeRPSEnvironment(library: library)
+        let depthStencilState = device.makeDSSEnvironment()
+        guard let cube = PNMesh.cube(device: device) else {
             return nil
         }
         return PNEnvironmentJob(pipelineState: environmentPipelineState,

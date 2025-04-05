@@ -57,11 +57,9 @@ struct PNSpotJob: PNRenderJob {
     static func make(device: MTLDevice,
                      inputTextures: [PNTextureProvider],
                      shadowMap: PNTextureProvider) -> PNSpotJob? {
-        guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeRPSSpot(library: library),
-              let depthStencilState = device.makeDSSSpot() else {
-            return nil
-        }
+        let library = device.makePorcelainLibrary()
+        let pipelineState = device.makeRPSSpot(library: library)
+        let depthStencilState = device.makeDSSSpot()
         return PNSpotJob(pipelineState: pipelineState,
                          inputTextures: inputTextures,
                          shadowMap: shadowMap,

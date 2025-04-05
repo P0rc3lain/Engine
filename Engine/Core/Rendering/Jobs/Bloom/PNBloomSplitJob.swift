@@ -35,10 +35,8 @@ struct PNBloomSplitJob: PNComputeJob {
     static func make(device: MTLDevice,
                      inputTexture: PNTextureProvider,
                      outputTexture: PNTextureProvider) -> PNBloomSplitJob? {
-        guard let library = device.makePorcelainLibrary(),
-              let pipelineState = device.makeCPSBloomSplit(library: library) else {
-            return nil
-        }
+        let library = device.makePorcelainLibrary()
+        let pipelineState = device.makeCPSBloomSplit(library: library)
         return PNBloomSplitJob(pipelineState: pipelineState,
                                inputTexture: inputTexture,
                                outputTexture: outputTexture)
