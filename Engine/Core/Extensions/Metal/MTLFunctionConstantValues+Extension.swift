@@ -49,7 +49,7 @@ extension MTLFunctionConstantValues {
     func int3<T: RawRepresentable>(_ value: simd_int3, index: T) -> MTLFunctionConstantValues where T.RawValue == UInt32 {
         var modifiableValue = value
         setConstantValue(&modifiableValue,
-                         type: .int,
+                         type: .int3,
                          index: index.int)
         return self
     }
