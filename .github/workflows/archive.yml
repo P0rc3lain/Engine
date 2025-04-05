@@ -32,7 +32,7 @@ jobs:
           - name: "Engine-tvOS.framework"
             destination: "generic/platform=tvOS"
             path: "Release-appletvos"
-    runs-on: macos-12
+    runs-on: macOS-latest
     steps:
       - name: Check out sources
         uses: actions/checkout@v1
@@ -53,7 +53,7 @@ jobs:
           path: "/tmp/engine-build/Build/Products/${{ matrix.path }}/${{ matrix.name }}.tar.gz"
   universal-binary:
     needs: binaries
-    runs-on: macos-12
+    runs-on: macOS-latest
     steps:
       - name: Download macOS binary
         uses: actions/download-artifact@v2
@@ -87,7 +87,7 @@ jobs:
           path: "Engine.xcframework"
   documentation:
     needs: tests
-    runs-on: macos-12
+    runs-on: macOS-latest
     steps:
       - name: Check Out Sources
         uses: actions/checkout@v1
@@ -110,7 +110,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: macos-12
+    runs-on: macOS-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
