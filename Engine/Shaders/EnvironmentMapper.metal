@@ -32,7 +32,7 @@ vertex RasterizedData environmentVertexShader(VertexP in [[stage_in]],
 
 fragment half4 environmentFragmentShader(RasterizedData in [[stage_in]],
                                          texturecube<half> cubeTexture [[texture(kAttributeEnvironmentFragmentShaderTextureCubeMap)]]) {
-    constexpr sampler cubeSampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
+    constexpr sampler cubeSampler(filter::linear);
     float3 coordinates = float3(in.viewPosition.xy, -in.viewPosition.z);
     return cubeTexture.sample(cubeSampler, coordinates);
 }

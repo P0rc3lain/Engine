@@ -38,10 +38,7 @@ fragment float4 fragmentParticle(RasterizerData in [[stage_in]],
                                  constant uint2 & grid [[buffer(kAttributeParticleFragmentShaderBufferGrid)]],
                                  constant uint & useableTiles [[buffer(kAttributeParticleFragmentShaderBufferUseableTiles)]],
                                  texture2d<float> atlas [[texture(kAttributeParticleFragmentShaderAtlas)]]) {
-    constexpr sampler textureSampler(mag_filter::linear,
-                                     min_filter::linear,
-                                     mip_filter::linear,
-                                     address::clamp_to_edge);
+    constexpr sampler textureSampler(filter::linear, address::clamp_to_edge);
     float ratio = clamp(in.life / in.lifespan, 0.0f, 1.0f);
     float preciseTile = useableTiles * ratio;
     float mixRatio = preciseTile - floor(preciseTile);
