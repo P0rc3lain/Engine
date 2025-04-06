@@ -37,33 +37,31 @@ struct PNOmniShadowJob: PNRenderJob {
         encoder.setVertexBuffer(supply.bufferStore.modelCoordinateSystems,
                                 index: kAttributeOmniShadowVertexShaderBufferModelUniforms)
         for lightIndex in shadowCasterIndices {
-            for faceIndex in 6.exclusiveON {
-                encoder.setVertexBytes(value: 6 * lightIndex + faceIndex,
-                                       index: kAttributeOmniShadowVertexShaderBufferInstanceId)
-                for animatedModel in supply.scene.animatedModels {
-                    if !supply.mask.omniLights[lightIndex][animatedModel.idx] {
-                        continue
-                    }
-                    encoder.setVertexBuffer(supply.bufferStore.matrixPalettes.buffer,
-                                            offset: supply.scene.paletteOffset[animatedModel.skeleton],
-                                            index: kAttributeOmniShadowVertexShaderBufferMatrixPalettes)
-                    let mesh = supply.scene.meshes[animatedModel.mesh]
-                    encoder.setFrontCulling(mesh.culling)
-                    encoder.setVertexBytes(value: animatedModel.idx,
-                                           index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
-                    encodeMeshDraw(commandEncoder: encoder, mesh: mesh)
+            encoder.setVertexBytes(value: lightIndex,
+                                   index: kAttributeOmniShadowVertexShaderBufferLightIndex)
+            for animatedModel in supply.scene.animatedModels {
+                if !supply.mask.omniLights[lightIndex][animatedModel.idx] {
+                    continue
                 }
-                encoder.setRenderPipelineState(pipelineState)
-                for model in supply.scene.models {
-                    if !supply.mask.omniLights[lightIndex][model.idx] {
-                        continue
-                    }
-                    let mesh = supply.scene.meshes[model.mesh]
-                    encoder.setFrontCulling(mesh.culling)
-                    encoder.setVertexBytes(value: model.idx,
-                                           index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
-                    encodeMeshDraw(commandEncoder: encoder, mesh: mesh)
+                encoder.setVertexBuffer(supply.bufferStore.matrixPalettes.buffer,
+                                        offset: supply.scene.paletteOffset[animatedModel.skeleton],
+                                        index: kAttributeOmniShadowVertexShaderBufferMatrixPalettes)
+                let mesh = supply.scene.meshes[animatedModel.mesh]
+                encoder.setFrontCulling(mesh.culling)
+                encoder.setVertexBytes(value: animatedModel.idx,
+                                       index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
+                encodeMeshDraw(commandEncoder: encoder, mesh: mesh)
+            }
+            encoder.setRenderPipelineState(pipelineState)
+            for model in supply.scene.models {
+                if !supply.mask.omniLights[lightIndex][model.idx] {
+                    continue
                 }
+                let mesh = supply.scene.meshes[model.mesh]
+                encoder.setFrontCulling(mesh.culling)
+                encoder.setVertexBytes(value: model.idx,
+                                       index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
+                encodeMeshDraw(commandEncoder: encoder, mesh: mesh)
             }
         }
     }
@@ -75,7 +73,7 @@ struct PNOmniShadowJob: PNRenderJob {
             if let material = pieceDescription.material, material.isTranslucent {
                 continue
             }
-            encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
+            encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription, instanceCount: 6)
         }
     }
     static func make(device: MTLDevice) -> PNOmniShadowJob? {

@@ -23,23 +23,23 @@ struct RasterizerData {
 constant bool hasSkeleton [[function_constant(kFunctionConstantOmniShadowHasSkeleton)]];
 
 vertex RasterizerData vertexOmniLightShadow(Vertex in [[stage_in]],
-                                            constant uint & instanceId [[buffer(kAttributeOmniShadowVertexShaderBufferInstanceId)]],
+                                            constant uint & lightIndex [[buffer(kAttributeOmniShadowVertexShaderBufferLightIndex)]],
                                             constant OmniLight * omniLights [[buffer(kAttributeOmniShadowVertexShaderBufferOmniLights)]],
                                             constant ModelUniforms * modelUniforms [[buffer(kAttributeOmniShadowVertexShaderBufferModelUniforms)]],
                                             constant simd_float4x4 * matrixPalettes [[buffer(kAttributeOmniShadowVertexShaderBufferMatrixPalettes)]],
                                             constant int & index [[buffer(kAttributeOmniShadowVertexShaderBufferObjectIndex)]],
-                                            constant simd_float4x4 * rotations [[buffer(kAttributeOmniShadowVertexShaderBufferRotations)]]) {
+                                            constant simd_float4x4 * rotations [[buffer(kAttributeOmniShadowVertexShaderBufferRotations)]],
+                                            unsigned int face [[instance_id]]) {
     float4 totalPosition = hasSkeleton ? totalPosition = calculatePosition(in, matrixPalettes) : float4(in.position, 1);
     float4 worldPosition = modelUniforms[index].modelMatrix * totalPosition;
-    OmniLight light = omniLights[instanceId / 6];
-    uint face = instanceId % 6;
+    OmniLight light = omniLights[lightIndex];
     float4 lightSpacePosition = modelUniforms[light.idx].modelMatrixInverse * worldPosition;
     float4 orientedPosition = rotations[face] * lightSpacePosition;
     float4 projected = light.projectionMatrix * orientedPosition;
     return RasterizerData {
         projected,
         length(lightSpacePosition.xyz),
-        instanceId
+        lightIndex * 6 + face
     };
 }
 
