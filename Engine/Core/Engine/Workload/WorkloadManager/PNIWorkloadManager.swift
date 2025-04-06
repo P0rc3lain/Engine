@@ -8,6 +8,7 @@ public class PNIWorkloadManager: PNWorkloadManager {
     private var renderingCoordinator: PNRenderingCoordinator
     private let transcriber: PNTranscriber
     private let renderMaskGenerator: PNRenderMaskGenerator
+    private var previousFrameScene: PNSceneDescription?
     public init(bufferStore: PNBufferStore,
                 renderingCoordinator: PNRenderingCoordinator,
                 renderMaskGenerator: PNRenderMaskGenerator,
@@ -27,9 +28,13 @@ public class PNIWorkloadManager: PNWorkloadManager {
         bufferStore.spotLights.upload(data: scene.spotLights)
         bufferStore.cameras.upload(data: scene.cameraUniforms)
         bufferStore.modelCoordinateSystems.upload(data: scene.uniforms)
+        let previous = previousFrameScene ?? scene
+        bufferStore.previousMatrixPalettes.upload(data: previous.palettes)
+        bufferStore.previousModelCoordinateSystems.upload(data: previous.uniforms)
         let supply = PNFrameSupply(scene: scene,
                                    bufferStore: bufferStore,
                                    mask: renderMaskGenerator.generate(scene: scene))
+        previousFrameScene = scene
         renderingCoordinator.draw(frameSupply: supply)
     }
 }

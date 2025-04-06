@@ -10,6 +10,7 @@ public class PNIThreadedWorkloadManager: PNWorkloadManager {
     private let dispatchQueue = DispatchQueue.global()
     private let dispatchGroup = DispatchGroup()
     private var frameSupplies: PNIBufferedValue<PNFrameSupply>
+    private var previousFrameScene: PNSceneDescription?
     public init(bufferStores: (PNBufferStore, PNBufferStore),
                 renderingCoordinator: PNRenderingCoordinator,
                 renderMaskGenerator: PNRenderMaskGenerator,
@@ -37,10 +38,14 @@ public class PNIThreadedWorkloadManager: PNWorkloadManager {
             inactive.bufferStore.spotLights.upload(data: scene.spotLights)
             inactive.bufferStore.cameras.upload(data: scene.cameraUniforms)
             inactive.bufferStore.modelCoordinateSystems.upload(data: scene.uniforms)
+            let previous = previousFrameScene ?? scene
+            inactive.bufferStore.previousMatrixPalettes.upload(data: previous.palettes)
+            inactive.bufferStore.previousModelCoordinateSystems.upload(data: previous.uniforms)
             let supply = PNFrameSupply(scene: scene,
                                        bufferStore: inactive.bufferStore,
                                        mask: renderMaskGenerator.generate(scene: scene))
             frameSupplies.push(supply)
+            previousFrameScene = scene
             dispatchGroup.leave()
         }
         renderingCoordinator.draw(frameSupply: frameSupplies.pull)

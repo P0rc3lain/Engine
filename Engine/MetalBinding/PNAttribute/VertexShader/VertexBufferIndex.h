@@ -27,7 +27,9 @@ enum AttributeGBufferVertexShaderBufferIndex {
     kAttributeGBufferVertexShaderBufferStageIn = 0,
     kAttributeGBufferVertexShaderBufferCameraUniforms,
     kAttributeGBufferVertexShaderBufferModelUniforms,
+    kAttributeGBufferVertexShaderBufferModelUniformsPreviousFrame,
     kAttributeGBufferVertexShaderBufferMatrixPalettes,
+    kAttributeGBufferVertexShaderBufferMatrixPalettesPreviousFrame,
     kAttributeGBufferVertexShaderBufferObjectIndex
 };
 

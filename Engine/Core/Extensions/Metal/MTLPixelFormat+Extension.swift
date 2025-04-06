@@ -14,6 +14,9 @@ extension MTLPixelFormat {
     static var gBufferPRC: MTLPixelFormat {
         .rgba32Float
     }
+    static var gBufferVelocity: MTLPixelFormat {
+        .rg32Float
+    }
     static var translucentC: MTLPixelFormat {
         .rgba16Float
     }
@@ -66,6 +69,9 @@ extension MTLPixelFormat {
         .depth32Float_stencil8
     }
     static var bloomSplitC: MTLPixelFormat {
+        .rgba16Float
+    }
+    static var bloomOutput: MTLPixelFormat {
         .rgba16Float
     }
     static var bloomMergeC: MTLPixelFormat {

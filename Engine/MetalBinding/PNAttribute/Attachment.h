@@ -7,5 +7,6 @@
 enum ColorAttachmentGBufferIndex {
     kColorAttachmentGBufferAlbedoRoughness = 0,
     kColorAttachmentGBufferNormalMetallic,
-    kColorAttachmentGBufferPositionReflectance
+    kColorAttachmentGBufferPositionReflectance,
+    kColorAttachmentGBufferVelocity
 };

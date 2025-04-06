@@ -63,6 +63,11 @@ extension MTLTextureDescriptor {
         // 3 bytes for positions and 1 for reflectance
         gBufferAttachment(size: size, pixelFormat: .gBufferPRC)
     }
+    static func gBufferVelocity(size: CGSize) -> MTLTextureDescriptor {
+        // Mean to store positions and reflectance
+        // 3 bytes for positions and 1 for reflectance
+        gBufferAttachment(size: size, pixelFormat: .gBufferVelocity)
+    }
     static func gBufferDS(size: CGSize) -> MTLTextureDescriptor {
         gBufferAttachment(size: size, pixelFormat: .gBufferDS)
     }
@@ -130,6 +135,16 @@ extension MTLTextureDescriptor {
         descriptor.storageMode = .private
         descriptor.pixelFormat = .bloomSplitC
         descriptor.usage = [.renderTarget, .shaderRead, .shaderWrite]
+        return descriptor
+    }
+    static func bloomOutput(size: CGSize) -> MTLTextureDescriptor {
+        let descriptor = MTLTextureDescriptor()
+        descriptor.textureType = .type2D
+        descriptor.width = size.width.int
+        descriptor.height = size.height.int
+        descriptor.storageMode = .private
+        descriptor.pixelFormat = .bloomOutput
+        descriptor.usage = [.renderTarget, .shaderWrite]
         return descriptor
     }
     static func lightenSceneDS(size: CGSize) -> MTLTextureDescriptor {

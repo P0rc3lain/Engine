@@ -42,16 +42,55 @@ float4 grain(float time, float2 texcoord, float3 inputColor) {
     #endif
 }
 
-kernel void kernelBloomMerge(texture2d<float, access::read_write> inputTexture [[texture(kAttributeBloomMergeComputeShaderTextureOriginal)]],
+float4 motionBlur(texture2d<float> inputTexture,
+                  texture2d<float> velocityTexture,
+                  uint2 gid,
+                  float scale,
+                  unsigned int samples) {
+    float2 textureSize = float2(inputTexture.get_width(),
+                                inputTexture.get_height());
+    float2 uv = float2(gid) / textureSize;
+
+    float2 velocity = velocityTexture.read(gid).xy * scale;
+    float4 accumulatedColor = float4(0.0);
+    float totalWeight = 0.0;
+
+    for (unsigned int i = 0; i < samples; ++i) {
+        float t = float(i) / float(samples - 1);
+        float2 offset = velocity * (t - 0.5);
+        float2 sampleUV = uv + offset;
+
+        int2 sampleCoord = int2(sampleUV * textureSize);
+        sampleCoord = clamp(sampleCoord, int2(0), int2(textureSize - 1));
+
+        float4 sampleColor = inputTexture.read(uint2(sampleCoord));
+        accumulatedColor += sampleColor;
+        totalWeight += 1.0;
+    }
+
+    return accumulatedColor / totalWeight;
+}
+
+kernel void kernelBloomMerge(texture2d<float> inputTexture [[texture(kAttributeBloomMergeComputeShaderTextureOriginal)]],
                              texture2d<float> brightAreasTexture [[texture(kAttributeBloomMergeComputeShaderTextureBrightAreas)]],
+                             texture2d<float> velocityTexture [[texture(kAttributeBloomMergeComputeShaderTextureVelocities)]],
+                             texture2d<float, access::write> outputTexture [[texture(kAttributeBloomMergeComputeShaderTextureOutput)]],
                              constant float & time [[buffer(kAttributeBloomMergeComputeShaderBufferTime)]],
                              uint3 inposition [[thread_position_in_grid]],
                              uint3 threads [[threads_per_grid]]) {
-    float2 texcoord{float(inposition.x)/float(threads.x), float(inposition.y)/float(threads.y)};
-    float3 originalColor = inputTexture.read(inposition.xy).xyz;
+    
+    float2 texcoord{float(inposition.x)/float(threads.x),
+                    float(inposition.y)/float(threads.y)};
+    
+    float3 blurredImage = motionBlur(inputTexture,
+                                     velocityTexture,
+                                     inposition.xy,
+                                     1,
+                                     10).rgb;
+    
     float3 bloomColor = brightAreasTexture.read(inposition.xy).xyz;
-    auto inputColor = float4(bloomColor + originalColor, 1);
+    auto inputColor = float4(bloomColor + blurredImage, 1);
     auto vignetteColor = vignette(inputColor, float4(0, 0, 0, 1), texcoord, 0.8, 2);
     auto grainColor = grain(time, texcoord, vignetteColor.xyz);
-    inputTexture.write(grainColor, inposition.xy);
+    outputTexture.write(grainColor, inposition.xy);
 }

@@ -19,5 +19,7 @@ enum AttributeBloomSplitComputeShaderTextureIndex {
 enum AttributeBloomMergeComputeShaderTextureIndex {
     kAttributeBloomMergeComputeShaderTextureOriginal = 0,
     kAttributeBloomMergeComputeShaderTextureBrightAreas,
+    kAttributeBloomMergeComputeShaderTextureVelocities,
+    kAttributeBloomMergeComputeShaderTextureOutput,
     kAttributeBloomMergeComputeShaderBufferTime
 };

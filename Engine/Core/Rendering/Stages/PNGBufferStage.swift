@@ -16,13 +16,14 @@ struct PNGBufferStage: PNStage {
               let arTexture = gBufferRenderPassDescriptor.colorAttachments[0].texture,
               let nmTexture = gBufferRenderPassDescriptor.colorAttachments[1].texture,
               let prTexture = gBufferRenderPassDescriptor.colorAttachments[2].texture,
+              let velocityTexture = gBufferRenderPassDescriptor.colorAttachments[3].texture,
               let stencil = gBufferRenderPassDescriptor.stencilAttachment.texture,
               let depth = gBufferRenderPassDescriptor.depthAttachment.texture else {
             return nil
         }
         self.gBufferJob = gBufferJob
         self.io = PNGPUIO(input: .empty,
-                          output: PNGPUSupply(color: [arTexture, nmTexture, prTexture],
+                          output: PNGPUSupply(color: [arTexture, nmTexture, prTexture, velocityTexture],
                                               stencil: [stencil],
                                               depth: [depth]))
     }

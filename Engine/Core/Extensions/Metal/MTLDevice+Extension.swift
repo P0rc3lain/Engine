@@ -160,6 +160,10 @@ extension MTLDevice {
         let texture = makeTexture(descriptor: .gBufferPRC(size: size))
         return texture?.labeled("GBuffer Position-Reflectance")
     }
+    func makeTextureGBufferVelocity(size: CGSize) -> MTLTexture? {
+        let texture = makeTexture(descriptor: .gBufferVelocity(size: size))
+        return texture?.labeled("GBuffer Velocity")
+    }
     func makeTextureGBufferDS(size: CGSize) -> MTLTexture? {
         let texture = makeTexture(descriptor: .gBufferDS(size: size))
         return texture?.labeled("GBuffer Depth Stencil")
@@ -171,6 +175,10 @@ extension MTLDevice {
     func makeTextureBloomSplitC(size: CGSize) -> MTLTexture? {
         let texture = makeTexture(descriptor: .bloomSplitC(size: size))
         return texture?.labeled("Bloom Split Color")
+    }
+    func makeTextureBloomOutput(size: CGSize) -> MTLTexture? {
+        let texture = makeTexture(descriptor: .bloomOutput(size: size))
+        return texture?.labeled("Bloom Output Color")
     }
     public func makeTextureSolidCube(color: PNColor4) -> MTLTexture? {
         assertValid(color: color)
