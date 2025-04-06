@@ -20,7 +20,7 @@ enum AttributeOmniShadowVertexShaderBufferIndex {
     kAttributeOmniShadowVertexShaderBufferMatrixPalettes,
     kAttributeOmniShadowVertexShaderBufferObjectIndex,
     kAttributeOmniShadowVertexShaderBufferRotations,
-    kAttributeOmniShadowVertexShaderBufferInstanceId
+    kAttributeOmniShadowVertexShaderBufferLightIndex
 };
 
 enum AttributeGBufferVertexShaderBufferIndex {
