@@ -5,14 +5,14 @@
 import Metal
 import MetalPerformanceShaders
 
-struct PNBloomStage: PNStage {
+struct PNPostprocessStage: PNStage {
     var io: PNGPUIO
     private var bloomSplitJob: PNBloomSplitJob
-    private var bloomMergeJob: PNBloomMergeJob
+    private var postprocessMergeJob: PNPostprocessMergeJob
     private let gaussianBlurJob: MPSImageGaussianBlur
     private let splitBlurredTexture: MTLTexture
     private let bloomSplitTexture: MTLTexture
-    private let bloomOutputTexture: MTLTexture
+    private let postprocessOutputTexture: MTLTexture
     init?(input: PNTextureProvider,
           velocities: PNTextureProvider,
           device: MTLDevice,
@@ -20,28 +20,28 @@ struct PNBloomStage: PNStage {
         guard let bloomSplitTexture = device.makeTextureBloomSplitC(size: renderingSize) else {
             return nil
         }
-        guard let bloomOutputTexture = device.makeTextureBloomOutput(size: renderingSize) else {
+        guard let postprocessOutputTexture = device.makeTexturePostprocessOutput(size: renderingSize) else {
             return nil
         }
         self.bloomSplitTexture = bloomSplitTexture
-        self.bloomOutputTexture = bloomOutputTexture
+        self.postprocessOutputTexture = postprocessOutputTexture
         guard let bloomSplitJob = PNBloomSplitJob.make(device: device,
                                                        inputTexture: input,
                                                        outputTexture: PNStaticTexture(bloomSplitTexture)),
               let splitBlurredTexture = device.makeTexture(descriptor: .bloomSplitC(size: renderingSize)),
-              let bloomMergeJob = PNBloomMergeJob.make(device: device,
-                                                       sceneTexture: input,
-                                                       velocities: velocities,
-                                                       output: PNStaticTexture(bloomOutputTexture),
-                                                       brightAreasTexture: PNStaticTexture(splitBlurredTexture)) else {
+              let postprocessMergeJob = PNPostprocessMergeJob.make(device: device,
+                                                                   sceneTexture: input,
+                                                                   velocities: velocities,
+                                                                   output: PNStaticTexture(postprocessOutputTexture),
+                                                                   brightAreasTexture: PNStaticTexture(splitBlurredTexture)) else {
             return nil
         }
         self.gaussianBlurJob = MPSImageGaussianBlur(device: device, sigma: 2)
         self.bloomSplitJob = bloomSplitJob
-        self.bloomMergeJob = bloomMergeJob
+        self.postprocessMergeJob = postprocessMergeJob
         self.splitBlurredTexture = splitBlurredTexture
         self.io = PNGPUIO(input: PNGPUSupply(color: [input]),
-                          output: PNGPUSupply(color: [bloomOutputTexture]))
+                          output: PNGPUSupply(color: [postprocessOutputTexture]))
     }
     func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
         commandBuffer.pushDebugGroup("Bloom Pass")
@@ -54,12 +54,12 @@ struct PNBloomStage: PNStage {
                                sourceTexture: bloomSplitTexture,
                                destinationTexture: splitBlurredTexture)
         commandBuffer.popDebugGroup()
-        commandBuffer.pushDebugGroup("Bloom Merge Pass")
-        guard let bloomMergeEncoder = commandBuffer.makeComputeCommandEncoder() else {
+        commandBuffer.pushDebugGroup("Postprocess Merge Pass")
+        guard let postprocessMergeEncoder = commandBuffer.makeComputeCommandEncoder() else {
             return
         }
-        bloomMergeJob.compute(encoder: bloomMergeEncoder, supply: supply)
-        bloomMergeEncoder.endEncoding()
+        postprocessMergeJob.compute(encoder: postprocessMergeEncoder, supply: supply)
+        postprocessMergeEncoder.endEncoding()
         commandBuffer.popDebugGroup()
     }
 }

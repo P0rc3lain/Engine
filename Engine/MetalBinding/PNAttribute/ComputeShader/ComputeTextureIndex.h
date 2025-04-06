@@ -16,10 +16,10 @@ enum AttributeBloomSplitComputeShaderTextureIndex {
     kAttributeBloomSplitComputeShaderTextureOutput
 };
 
-enum AttributeBloomMergeComputeShaderTextureIndex {
-    kAttributeBloomMergeComputeShaderTextureOriginal = 0,
-    kAttributeBloomMergeComputeShaderTextureBrightAreas,
-    kAttributeBloomMergeComputeShaderTextureVelocities,
-    kAttributeBloomMergeComputeShaderTextureOutput,
-    kAttributeBloomMergeComputeShaderBufferTime
+enum AttributePostprocessMergeComputeShaderTextureIndex {
+    kAttributePostprocessMergeComputeShaderTextureOriginal = 0,
+    kAttributePostprocessMergeComputeShaderTextureBrightAreas,
+    kAttributePostprocessMergeComputeShaderTextureVelocities,
+    kAttributePostprocessMergeComputeShaderTextureOutput,
+    kAttributePostprocessMergeComputeShaderBufferTime
 };

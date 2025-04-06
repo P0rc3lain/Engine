@@ -71,10 +71,10 @@ extension MTLPixelFormat {
     static var bloomSplitC: MTLPixelFormat {
         .rgba16Float
     }
-    static var bloomOutput: MTLPixelFormat {
+    static var postprocessOutput: MTLPixelFormat {
         .rgba16Float
     }
-    static var bloomMergeC: MTLPixelFormat {
+    static var postprocessInputC: MTLPixelFormat {
         .rgba16Float
     }
     static var environmentC: MTLPixelFormat {

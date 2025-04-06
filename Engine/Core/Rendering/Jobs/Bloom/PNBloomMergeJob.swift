@@ -6,7 +6,7 @@ import Metal
 import PNShared
 import simd
 
-struct PNBloomMergeJob: PNComputeJob {
+struct PNPostprocessMergeJob: PNComputeJob {
     private let pipelineState: MTLComputePipelineState
     private let sceneTexture: PNTextureProvider
     private let outputTexture: PNTextureProvider
@@ -32,25 +32,25 @@ struct PNBloomMergeJob: PNComputeJob {
     }
     func compute(encoder: MTLComputeCommandEncoder, supply: PNFrameSupply) {
         encoder.setComputePipelineState(pipelineState)
-        encoder.setTexture(sceneTexture, index: kAttributeBloomMergeComputeShaderTextureOriginal)
-        encoder.setTexture(velocitiesTexture, index: kAttributeBloomMergeComputeShaderTextureVelocities)
+        encoder.setTexture(sceneTexture, index: kAttributePostprocessMergeComputeShaderTextureOriginal)
+        encoder.setTexture(velocitiesTexture, index: kAttributePostprocessMergeComputeShaderTextureVelocities)
         encoder.setBytes(Float(Date().timeIntervalSince1970.truncatingRemainder(dividingBy: 20)),
-                         index: kAttributeBloomMergeComputeShaderBufferTime)
-        encoder.setTexture(brightAreasTexture, index: kAttributeBloomMergeComputeShaderTextureBrightAreas)
-        encoder.setTexture(outputTexture, index: kAttributeBloomMergeComputeShaderTextureOutput)
+                         index: kAttributePostprocessMergeComputeShaderBufferTime)
+        encoder.setTexture(brightAreasTexture, index: kAttributePostprocessMergeComputeShaderTextureBrightAreas)
+        encoder.setTexture(outputTexture, index: kAttributePostprocessMergeComputeShaderTextureOutput)
         encoder.dispatchThreads(dispatchSize, threadsPerThreadgroup: threadGroupSize)
     }
     static func make(device: MTLDevice,
                      sceneTexture: PNTextureProvider,
                      velocities: PNTextureProvider,
                      output: PNTextureProvider,
-                     brightAreasTexture: PNTextureProvider) -> PNBloomMergeJob? {
+                     brightAreasTexture: PNTextureProvider) -> PNPostprocessMergeJob? {
         let library = device.makePorcelainLibrary()
-        let pipelineState = device.makeCPSBloomMerge(library: library)
-        return PNBloomMergeJob(pipelineState: pipelineState,
-                               sceneTexture: sceneTexture,
-                               velocities: velocities,
-                               output: output,
-                               brightAreasTexture: brightAreasTexture)
+        let pipelineState = device.makeCPSPostprocessMerge(library: library)
+        return PNPostprocessMergeJob(pipelineState: pipelineState,
+                                     sceneTexture: sceneTexture,
+                                     velocities: velocities,
+                                     output: output,
+                                     brightAreasTexture: brightAreasTexture)
     }
 }
