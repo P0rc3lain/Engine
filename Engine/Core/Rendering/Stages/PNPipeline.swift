@@ -10,7 +10,7 @@ struct PNPipeline: PNStage {
     var io: PNGPUIO
     private var combineStage: PNCombineStage
     private var ssaoStage: PNSSAOStage
-    private var bloomStage: PNBloomStage
+    private var postprocessStage: PNPostprocessStage
     private var gBufferStage: PNGBufferStage
     private var shadowStage: PNShadowStage
     init?(device: MTLDevice, renderingSize: CGSize) {
@@ -30,19 +30,19 @@ struct PNPipeline: PNStage {
                                                 spotLightShadows: shadowStage.io.output.depth[0],
                                                 pointLightsShadows: shadowStage.io.output.depth[1],
                                                 directionalLightsShadows: shadowStage.io.output.depth[2]),
-              let bloomStage = PNBloomStage(input: combineStage.io.output.color[0],
-                                            velocities: gBufferStage.io.output.color[3],
-                                            device: device,
-                                            renderingSize: renderingSize) else {
+              let postprocessStage = PNPostprocessStage(input: combineStage.io.output.color[0],
+                                                        velocities: gBufferStage.io.output.color[3],
+                                                        device: device,
+                                                        renderingSize: renderingSize) else {
             return nil
         }
         self.gBufferStage = gBufferStage
         self.combineStage = combineStage
-        self.bloomStage = bloomStage
+        self.postprocessStage = postprocessStage
         self.ssaoStage = ssaoStage
         self.shadowStage = shadowStage
         self.io = PNGPUIO(input: .empty,
-                          output: PNGPUSupply(color: bloomStage.io.output.color))
+                          output: PNGPUSupply(color: postprocessStage.io.output.color))
     }
     func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
         shadowStage.draw(commandBuffer: commandBuffer,
@@ -55,7 +55,7 @@ struct PNPipeline: PNStage {
         }
         combineStage.draw(commandBuffer: commandBuffer,
                           supply: supply)
-        bloomStage.draw(commandBuffer: commandBuffer,
-                        supply: supply)
+        postprocessStage.draw(commandBuffer: commandBuffer,
+                              supply: supply)
     }
 }

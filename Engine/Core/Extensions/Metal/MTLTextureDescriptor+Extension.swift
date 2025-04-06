@@ -137,14 +137,14 @@ extension MTLTextureDescriptor {
         descriptor.usage = [.renderTarget, .shaderRead, .shaderWrite]
         return descriptor
     }
-    static func bloomOutput(size: CGSize) -> MTLTextureDescriptor {
+    static func postprocessOutput(size: CGSize) -> MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = .type2D
         descriptor.width = size.width.int
         descriptor.height = size.height.int
         descriptor.storageMode = .private
-        descriptor.pixelFormat = .bloomOutput
-        descriptor.usage = [.renderTarget, .shaderWrite]
+        descriptor.pixelFormat = .postprocessOutput
+        descriptor.usage = [.renderTarget, .shaderRead, .shaderWrite]
         return descriptor
     }
     static func lightenSceneDS(size: CGSize) -> MTLTextureDescriptor {

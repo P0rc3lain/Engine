@@ -125,8 +125,8 @@ extension MTLDevice {
             fatalError("Coult not create compute pipeline state, error \(error.localizedDescription)")
         }
     }
-    func makeCPSBloomMerge(library: MTLLibrary) -> MTLComputePipelineState {
-        let function = library.failOrMakeFunction(name: "kernelBloomMerge")
+    func makeCPSPostprocessMerge(library: MTLLibrary) -> MTLComputePipelineState {
+        let function = library.failOrMakeFunction(name: "postprocessMerge")
         return failOrMakeComputePipelineState(function: function)
     }
     func makeCPSBloomSplit(library: MTLLibrary) -> MTLComputePipelineState {
@@ -176,9 +176,9 @@ extension MTLDevice {
         let texture = makeTexture(descriptor: .bloomSplitC(size: size))
         return texture?.labeled("Bloom Split Color")
     }
-    func makeTextureBloomOutput(size: CGSize) -> MTLTexture? {
-        let texture = makeTexture(descriptor: .bloomOutput(size: size))
-        return texture?.labeled("Bloom Output Color")
+    func makeTexturePostprocessOutput(size: CGSize) -> MTLTexture? {
+        let texture = makeTexture(descriptor: .postprocessOutput(size: size))
+        return texture?.labeled("Postprocess Output Color")
     }
     public func makeTextureSolidCube(color: PNColor4) -> MTLTexture? {
         assertValid(color: color)
