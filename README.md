@@ -95,7 +95,6 @@ Documentation along with the engine framework itself can be found [here](https:/
 
 * Soft shadow ambient occlusion
 * Normal mapping
-* Bloom
 * Particle effects
 * Transparency
 * Sky maps
@@ -106,6 +105,8 @@ Documentation along with the engine framework itself can be found [here](https:/
     * Directional light (Dynamically clipped according to camera's position)
 * Post processing effects
     * Vignette
+    * Bloom
+    * Motion blur
     * Film grain
     * Distance fog
 
