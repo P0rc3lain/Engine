@@ -17,6 +17,8 @@ constant bool hasSkeleton [[function_constant(kFunctionConstantGBufferHasSkeleto
 
 struct RasterizerData {
     float4 clipSpacePosition [[position]];
+    float4 currentClipSpacePosition;
+    float4 previousClipSpacePosition;
     float3 cameraSpacePosition;
     float3 t;
     float3 b;
@@ -28,12 +30,15 @@ struct GBufferData {
     float4 albedoRoughness [[color(0)]];
     float4 normalMetallic [[color(1)]];
     float4 positionReflectance [[color(2)]];
+    float2 velocity [[color(3)]];
 };
 
 // Vertex function
 #define bCameraUniformsVertex buffer(kAttributeGBufferVertexShaderBufferCameraUniforms)
 #define bModelUniformsVertex buffer(kAttributeGBufferVertexShaderBufferModelUniforms)
+#define bPreviousModelUniformsVertex buffer(kAttributeGBufferVertexShaderBufferModelUniformsPreviousFrame)
 #define bMatrixPalettesVertex buffer(kAttributeGBufferVertexShaderBufferMatrixPalettes)
+#define bPreviousMatrixPalettesVertex buffer(kAttributeGBufferVertexShaderBufferMatrixPalettesPreviousFrame)
 #define bIndexVertex buffer(kAttributeGBufferVertexShaderBufferObjectIndex)
 
 // Fragment function
@@ -46,7 +51,15 @@ vertex RasterizerData vertexGBuffer(Vertex in [[stage_in]],
                                     constant CameraUniforms & cameraUniforms [[bCameraUniformsVertex]],
                                     constant ModelUniforms * modelUniforms [[bModelUniformsVertex]],
                                     constant simd_float4x4 * matrixPalettes [[bMatrixPalettesVertex]],
+                                    constant ModelUniforms * previousModelUniforms [[bPreviousModelUniformsVertex]],
+                                    constant simd_float4x4 * previousMatrixPalettes [[bPreviousMatrixPalettesVertex]],
                                     constant int & index [[bIndexVertex]]) {
+    // Previous
+    Pose previousPose = hasSkeleton ? calculatePose(in, previousMatrixPalettes) : Pose{float4(in.position, 1), in.normal, in.tangent};
+    float4 previousWorldPosition = previousModelUniforms[index].modelMatrix * previousPose.position;
+    float4x4 previousCameraTransform = previousModelUniforms[cameraUniforms.index].modelMatrixInverse;
+    float4 previousCameraSpacePosition = previousCameraTransform * previousWorldPosition;
+    // Current
     Pose pose = hasSkeleton ? calculatePose(in, matrixPalettes) : Pose{float4(in.position, 1), in.normal, in.tangent};
     matrix_float3x3 rotation = extractRotation(modelUniforms[index].modelMatrix);
     pose.tangent.x = pose.tangent.x < 0 ? -pose.tangent.x : pose.tangent.x;
@@ -59,8 +72,14 @@ vertex RasterizerData vertexGBuffer(Vertex in [[stage_in]],
     float4x4 cameraTransform = modelUniforms[cameraUniforms.index].modelMatrixInverse;
     float4 cameraSpacePosition = cameraTransform * worldPosition;
     float3x3 cameraRotation = extractRotation(cameraTransform);
+
+    float4 currentClipSpacePosition = cameraUniforms.projectionMatrix * cameraSpacePosition;
+    float4 previousClipSpacePosition = cameraUniforms.projectionMatrix * previousCameraSpacePosition;
+
     return {
-        cameraUniforms.projectionMatrix * cameraSpacePosition,
+        currentClipSpacePosition,
+        currentClipSpacePosition,
+        previousClipSpacePosition,
         cameraSpacePosition.xyz,
         normalize(cameraRotation * rotatedTangent),
         normalize(cameraRotation * rotatedBitangent),
@@ -87,9 +106,15 @@ fragment GBufferData fragmentGBuffer(RasterizerData in [[stage_in]],
     float4 color = albedo.sample(textureSampler, in.uv);
     if (!color.a)
         discard_fragment();
+    
+    float2 current = in.currentClipSpacePosition.xy / in.currentClipSpacePosition.w;
+    float2 previous = in.previousClipSpacePosition.xy / in.previousClipSpacePosition.w;
+    float2 velocity = current - previous;
+    
     return {
         float4(color.xyz, roughness.sample(textureSampler, in.uv).x),
         float4(normalWorldSpace, metallic.sample(textureSampler, in.uv).x),
-        float4(in.cameraSpacePosition, 0.04)
+        float4(in.cameraSpacePosition, 0.04),
+        velocity
     };
 }

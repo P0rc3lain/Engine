@@ -13,12 +13,16 @@ public final class PNIBufferStore: PNBufferStore {
     public var spotLights: PNAnyDynamicBuffer<SpotLight>
     public var cameras: PNAnyDynamicBuffer<CameraUniforms>
     public var modelCoordinateSystems: PNAnyDynamicBuffer<ModelUniforms>
+    public var previousModelCoordinateSystems: PNAnyDynamicBuffer<ModelUniforms>
     public var matrixPalettes: PNAnyDynamicBuffer<PNBLTransform>
+    public var previousMatrixPalettes: PNAnyDynamicBuffer<PNBLTransform>
     init?(device: MTLDevice) {
         guard let omniLights = PNIDynamicBuffer<OmniLight>(device: device),
               let cameras = PNIDynamicBuffer<CameraUniforms>(device: device),
               let modelCoordinateSystems = PNIDynamicBuffer<ModelUniforms>(device: device),
+              let previousModelCoordinateSystems = PNIDynamicBuffer<ModelUniforms>(device: device),
               let matrixPalettes = PNIDynamicBuffer<PNBLTransform>(device: device),
+              let previousMatrixPalettes = PNIDynamicBuffer<PNBLTransform>(device: device),
               let ambientLights = PNIDynamicBuffer<AmbientLight>(device: device),
               let directionalLights = PNIDynamicBuffer<DirectionalLight>(device: device),
               let spotLights = PNIDynamicBuffer<SpotLight>(device: device) else {
@@ -28,7 +32,9 @@ public final class PNIBufferStore: PNBufferStore {
         self.ambientLights = PNAnyDynamicBuffer(ambientLights)
         self.cameras = PNAnyDynamicBuffer(cameras)
         self.modelCoordinateSystems = PNAnyDynamicBuffer(modelCoordinateSystems)
+        self.previousModelCoordinateSystems = PNAnyDynamicBuffer(previousModelCoordinateSystems)
         self.matrixPalettes = PNAnyDynamicBuffer(matrixPalettes)
+        self.previousMatrixPalettes = PNAnyDynamicBuffer(previousMatrixPalettes)
         self.directionalLights = PNAnyDynamicBuffer(directionalLights)
         self.spotLights = PNAnyDynamicBuffer(spotLights)
     }

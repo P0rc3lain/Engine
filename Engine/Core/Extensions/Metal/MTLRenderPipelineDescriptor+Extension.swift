@@ -43,6 +43,7 @@ extension MTLRenderPipelineDescriptor {
         descriptor.colorAttachments[kColorAttachmentGBufferAlbedoRoughness.int].pixelFormat = .gBufferARC
         descriptor.colorAttachments[kColorAttachmentGBufferNormalMetallic.int].pixelFormat = .gBufferNMC
         descriptor.colorAttachments[kColorAttachmentGBufferPositionReflectance.int].pixelFormat = .gBufferPRC
+        descriptor.colorAttachments[kColorAttachmentGBufferVelocity.int].pixelFormat = .gBufferVelocity
         descriptor.depthAttachmentPixelFormat = .gBufferDS
         descriptor.stencilAttachmentPixelFormat = .gBufferDS
         descriptor.vertexDescriptor = .vertex

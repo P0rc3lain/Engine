@@ -31,6 +31,7 @@ struct PNPipeline: PNStage {
                                                 pointLightsShadows: shadowStage.io.output.depth[1],
                                                 directionalLightsShadows: shadowStage.io.output.depth[2]),
               let bloomStage = PNBloomStage(input: combineStage.io.output.color[0],
+                                            velocities: gBufferStage.io.output.color[3],
                                             device: device,
                                             renderingSize: renderingSize) else {
             return nil

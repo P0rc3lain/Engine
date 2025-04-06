@@ -12,17 +12,27 @@ struct PNBloomStage: PNStage {
     private let gaussianBlurJob: MPSImageGaussianBlur
     private let splitBlurredTexture: MTLTexture
     private let bloomSplitTexture: MTLTexture
-    init?(input: PNTextureProvider, device: MTLDevice, renderingSize: CGSize) {
+    private let bloomOutputTexture: MTLTexture
+    init?(input: PNTextureProvider,
+          velocities: PNTextureProvider,
+          device: MTLDevice,
+          renderingSize: CGSize) {
         guard let bloomSplitTexture = device.makeTextureBloomSplitC(size: renderingSize) else {
             return nil
         }
+        guard let bloomOutputTexture = device.makeTextureBloomOutput(size: renderingSize) else {
+            return nil
+        }
         self.bloomSplitTexture = bloomSplitTexture
+        self.bloomOutputTexture = bloomOutputTexture
         guard let bloomSplitJob = PNBloomSplitJob.make(device: device,
                                                        inputTexture: input,
                                                        outputTexture: PNStaticTexture(bloomSplitTexture)),
               let splitBlurredTexture = device.makeTexture(descriptor: .bloomSplitC(size: renderingSize)),
               let bloomMergeJob = PNBloomMergeJob.make(device: device,
                                                        sceneTexture: input,
+                                                       velocities: velocities,
+                                                       output: PNStaticTexture(bloomOutputTexture),
                                                        brightAreasTexture: PNStaticTexture(splitBlurredTexture)) else {
             return nil
         }
@@ -31,7 +41,7 @@ struct PNBloomStage: PNStage {
         self.bloomMergeJob = bloomMergeJob
         self.splitBlurredTexture = splitBlurredTexture
         self.io = PNGPUIO(input: PNGPUSupply(color: [input]),
-                          output: PNGPUSupply(color: [input]))
+                          output: PNGPUSupply(color: [bloomOutputTexture]))
     }
     func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
         commandBuffer.pushDebugGroup("Bloom Pass")

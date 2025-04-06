@@ -34,6 +34,10 @@ extension MTLRenderPassDescriptor {
         descriptor.colorAttachments[2].texture = device.makeTextureGBufferPRC(size: size)
         descriptor.colorAttachments[2].clearColor = MTLClearColor()
         descriptor.colorAttachments[2].storeAction = .store
+        descriptor.colorAttachments[3].loadAction = .clear
+        descriptor.colorAttachments[3].texture = device.makeTextureGBufferVelocity(size: size)
+        descriptor.colorAttachments[3].clearColor = MTLClearColor()
+        descriptor.colorAttachments[3].storeAction = .store
         let depthStencil = device.makeTextureGBufferDS(size: size)
         descriptor.depthAttachment.clearDepth = 1
         descriptor.depthAttachment.texture = depthStencil

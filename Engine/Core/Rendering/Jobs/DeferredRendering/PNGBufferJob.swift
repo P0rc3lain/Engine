@@ -30,6 +30,8 @@ struct PNGBufferJob: PNRenderJob {
         encoder.setRenderPipelineState(animatedPipelineState)
         encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
                                 index: kAttributeGBufferVertexShaderBufferModelUniforms)
+        encoder.setVertexBuffer(dataStore.previousModelCoordinateSystems,
+                                index: kAttributeGBufferVertexShaderBufferModelUniformsPreviousFrame)
         for animatedModel in scene.animatedModels {
             if !mask[animatedModel.idx] {
                 continue
@@ -37,6 +39,9 @@ struct PNGBufferJob: PNRenderJob {
             encoder.setVertexBuffer(dataStore.matrixPalettes,
                                     offset: scene.paletteOffset[animatedModel.skeleton],
                                     index: kAttributeGBufferVertexShaderBufferMatrixPalettes)
+            encoder.setVertexBuffer(dataStore.previousMatrixPalettes,
+                                    offset: scene.paletteOffset[animatedModel.skeleton],
+                                    index: kAttributeGBufferVertexShaderBufferMatrixPalettesPreviousFrame)
             draw(encoder: encoder,
                  mesh: scene.meshes[animatedModel.mesh],
                  uniformReference: animatedModel.idx)
