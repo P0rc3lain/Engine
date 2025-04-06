@@ -35,9 +35,7 @@ vertex RasterizerData vertexTranslucent(Vertex in [[stage_in]],
 
 fragment float4 fragmentTranslucent(RasterizerData in [[stage_in]],
                                     texture2d<float> albedo [[texture(kAttributeTranslucentFragmentShaderTextureAlbedo)]]) {
-    constexpr sampler textureSampler(mag_filter::linear,
-                                     min_filter::linear,
-                                     mip_filter::linear,
+    constexpr sampler textureSampler(filter::linear,
                                      address::mirrored_repeat);
     return albedo.sample(textureSampler, in.uv);
 }

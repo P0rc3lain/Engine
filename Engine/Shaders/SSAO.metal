@@ -29,7 +29,7 @@ kernel void kernelSSAO(texture2d<float> nm [[texture(kAttributeSsaoComputeShader
     auto seed = positionContinuousBuffer + time;
     auto random = Random(seed);
     float2 texcoord{float(inposition.x)/float(threads.x), float(inposition.y)/float(threads.y)};
-    constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
+    constexpr sampler textureSampler(filter::linear);
     float3 worldPosition = pr.sample(textureSampler, texcoord).xyz;
     float3 normal = normalize(nm.sample(textureSampler, texcoord)).xyz;
     float3 randomVector = noise[int(random.random() * renderingUniforms.noiseCount)];

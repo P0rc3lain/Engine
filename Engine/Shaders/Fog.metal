@@ -36,7 +36,7 @@ vertex RasterizedData fogVertexShader(VertexP in [[stage_in]],
 fragment float4 fogFragmentShader(RasterizedData in [[stage_in]],
                                  texture2d<float> pr [[texture(kAttributeFogFragmentShaderTexturePR)]],
                                  texturecube<float> cubeTexture [[texture(kAttributeFogFragmentShaderTextureCubeMap)]]) {
-    constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
+    constexpr sampler textureSampler(filter::linear);
     float3 coordinates = float3(in.viewPosition.xy, -in.viewPosition.z);
     float4 sample = cubeTexture.sample(textureSampler, coordinates);
     float2 uv = float2(in.ndcPosition.x / pr.get_width(), in.ndcPosition.y / pr.get_height());
