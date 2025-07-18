@@ -7,16 +7,12 @@ import ModelIO
 
 public struct PNIMaterial: PNMaterial {
     public var argumentBuffer: MTLBuffer
-    
     public var name: String
     public var albedo: MTLTexture
     public var roughness: MTLTexture
-    
     public var normals: MTLTexture
     public var metallic: MTLTexture
-    
     public var isTranslucent: Bool = false
-    
     public init(name: String,
                 albedo: MTLTexture,
                 roughness: MTLTexture,
@@ -27,16 +23,16 @@ public struct PNIMaterial: PNMaterial {
         self.roughness = roughness
         self.normals = normals
         self.metallic = metallic
-        
         let device = albedo.device
-        
         let bufferCreator = MaterialArgumentBuffer(device: device,
                                                    albedo: albedo,
                                                    roughness: roughness,
                                                    normals: normals,
                                                    metallic: metallic)
-        
-        self.argumentBuffer = bufferCreator.create()
+        guard let argumentBuffer = bufferCreator.create() else {
+            fatalError("Coult not create argument buffer for the material")
+        }
+        self.argumentBuffer = argumentBuffer
     }
     public init?(device: MTLDevice,
                  albedo: simd_float4,

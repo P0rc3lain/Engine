@@ -66,14 +66,12 @@ struct PNGBufferJob: PNRenderJob {
                   !material.isTranslucent else {
                 continue
             }
-            
             encoder.useResources([material.albedo,
                                   material.roughness,
                                   material.normals,
                                   material.metallic],
                                  usage: .read,
                                  stages: .fragment)
-            
             encoder.setFragmentBuffer(material.argumentBuffer,
                                       index: kAttributeGBufferFragmentShaderBufferMaterial)
             encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
