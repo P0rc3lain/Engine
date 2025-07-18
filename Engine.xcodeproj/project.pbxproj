@@ -117,6 +117,8 @@
 		56270167272B54EB00071620 /* PNAnimatedTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56270166272B54EB00071620 /* PNAnimatedTransform.swift */; };
 		56270169272B556500071620 /* PNAnimatedTransform+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56270168272B556500071620 /* PNAnimatedTransform+Alias.swift */; };
 		5627016B272B583F00071620 /* PNAnimatedSkeleton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627016A272B583F00071620 /* PNAnimatedSkeleton+Extension.swift */; };
+		5628CCEE2E299BD2006FECFC /* Material.h in Headers */ = {isa = PBXBuildFile; fileRef = 5628CCED2E299BCC006FECFC /* Material.h */; };
+		5628CCF02E2A2C42006FECFC /* MaterialArgumentBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628CCEF2E2A2C40006FECFC /* MaterialArgumentBuffer.swift */; };
 		5629FBE327491D03005476AF /* PNSampleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBE227491D03005476AF /* PNSampleProvider.swift */; };
 		5629FBEA2749201F005476AF /* PNInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBE92749201F005476AF /* PNInterpolator.swift */; };
 		5629FBEC2749209C005476AF /* PNIInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629FBEB2749209C005476AF /* PNIInterpolator.swift */; };
@@ -464,6 +466,8 @@
 		56270166272B54EB00071620 /* PNAnimatedTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnimatedTransform.swift; sourceTree = "<group>"; };
 		56270168272B556500071620 /* PNAnimatedTransform+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNAnimatedTransform+Alias.swift"; sourceTree = "<group>"; };
 		5627016A272B583F00071620 /* PNAnimatedSkeleton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNAnimatedSkeleton+Extension.swift"; sourceTree = "<group>"; };
+		5628CCED2E299BCC006FECFC /* Material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
+		5628CCEF2E2A2C40006FECFC /* MaterialArgumentBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialArgumentBuffer.swift; sourceTree = "<group>"; };
 		56295A822729D7B7002FBABA /* .github */ = {isa = PBXFileReference; lastKnownFileType = folder; path = .github; sourceTree = "<group>"; };
 		5629FBE227491D03005476AF /* PNSampleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSampleProvider.swift; sourceTree = "<group>"; };
 		5629FBE92749201F005476AF /* PNInterpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNInterpolator.swift; sourceTree = "<group>"; };
@@ -1042,6 +1046,7 @@
 		561666D92719E2CC000063B1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				5628CCED2E299BCC006FECFC /* Material.h */,
 				561666DA2719E2CC000063B1 /* PBR.h */,
 				561666DD2719E2CC000063B1 /* PBR.metal */,
 				561666DC2719E2CC000063B1 /* Transformation.h */,
@@ -1793,6 +1798,7 @@
 		5688076627483F3400C95F55 /* Material */ = {
 			isa = PBXGroup;
 			children = (
+				5628CCEF2E2A2C40006FECFC /* MaterialArgumentBuffer.swift */,
 				561666D12719E2CC000063B1 /* PNMaterial.swift */,
 				5688076727483F4600C95F55 /* PNIMaterial.swift */,
 			);
@@ -2226,6 +2232,7 @@
 				561667472719E2CD000063B1 /* PBR.h in Headers */,
 				562C73922849506400E51606 /* FrozenParticle.h in Headers */,
 				05A51DA92DA2896C00D7FA95 /* Vignette.h in Headers */,
+				5628CCEE2E299BD2006FECFC /* Material.h in Headers */,
 				563D0A2D2719F7A700F77B40 /* Camera.h in Headers */,
 				05A51DAD2DA28ED900D7FA95 /* Grain.h in Headers */,
 				05A51DA32DA288E200D7FA95 /* MotionBlur.h in Headers */,
@@ -2583,6 +2590,7 @@
 				56E0119128410A5A007859F2 /* PNTerrainLoader.swift in Sources */,
 				566795E9274FEE2B005993D7 /* PNWorkloadManager.swift in Sources */,
 				56A8CA7B2756D4750040DCF9 /* PNFogJob.swift in Sources */,
+				5628CCF02E2A2C42006FECFC /* MaterialArgumentBuffer.swift in Sources */,
 				566795D1274ECD7D005993D7 /* PNIAmbientLightNode.swift in Sources */,
 				56E011872840E179007859F2 /* PNIBoundEstimator.swift in Sources */,
 				56E011BA28411C5D007859F2 /* PNITextureLoader.swift in Sources */,

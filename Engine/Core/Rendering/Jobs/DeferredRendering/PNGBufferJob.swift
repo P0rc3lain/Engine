@@ -10,8 +10,6 @@ struct PNGBufferJob: PNRenderJob {
     private let pipelineState: MTLRenderPipelineState
     private let animatedPipelineState: MTLRenderPipelineState
     private let depthStencilState: MTLDepthStencilState
-    private let textureRange = kAttributeGBufferFragmentShaderTextureAlbedo ...
-                               kAttributeGBufferFragmentShaderTextureMetallic
     init(pipelineState: MTLRenderPipelineState,
          animatedPipelineState: MTLRenderPipelineState,
          depthStencilState: MTLDepthStencilState) {
@@ -68,11 +66,14 @@ struct PNGBufferJob: PNRenderJob {
                   !material.isTranslucent else {
                 continue
             }
-            encoder.setFragmentTextures([material.albedo,
-                                         material.roughness,
-                                         material.normals,
-                                         material.metallic],
-                                        range: textureRange)
+
+            encoder.useResource(material.albedo, usage: .read, stages: .fragment)
+            encoder.useResource(material.roughness, usage: .read, stages: .fragment)
+            encoder.useResource(material.normals, usage: .read, stages: .fragment)
+            encoder.useResource(material.metallic, usage: .read, stages: .fragment)
+            
+            encoder.setFragmentBuffer(material.argumentBuffer,
+                                      index: kAttributeGBufferFragmentShaderBufferMaterial)
             encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
         }
     }

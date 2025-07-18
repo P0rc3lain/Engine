@@ -32,3 +32,7 @@ enum AttributeParticleFragmentShaderBufferIndex {
     kAttributeParticleFragmentShaderBufferUseableTiles = 0,
     kAttributeParticleFragmentShaderBufferGrid
 };
+
+enum AttributeGBufferFragmentShaderBufferIndex {
+    kAttributeGBufferFragmentShaderBufferMaterial = 0
+};
