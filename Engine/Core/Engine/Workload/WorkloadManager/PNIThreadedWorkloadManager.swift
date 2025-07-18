@@ -28,6 +28,7 @@ public class PNIThreadedWorkloadManager: PNWorkloadManager {
     public func draw(sceneGraph: PNScene, taskQueue: PNRepeatableTaskQueue) {
         dispatchGroup.enter()
         dispatchQueue.async { [unowned self] in
+            let backgroundUpdateInterval = psignposter.beginInterval("Background update")
             taskQueue.execute()
             let scene = transcriber.transcribe(scene: sceneGraph)
             let inactive = frameSupplies.pullInactive
@@ -46,6 +47,7 @@ public class PNIThreadedWorkloadManager: PNWorkloadManager {
                                        mask: renderMaskGenerator.generate(scene: scene))
             frameSupplies.push(supply)
             previousFrameScene = scene
+            psignposter.endInterval("Background update", backgroundUpdateInterval)
             dispatchGroup.leave()
         }
         renderingCoordinator.draw(frameSupply: frameSupplies.pull)

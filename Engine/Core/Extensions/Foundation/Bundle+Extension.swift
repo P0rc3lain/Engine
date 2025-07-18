@@ -9,4 +9,10 @@ extension Bundle {
     static var current: Bundle {
         Bundle(for: Unnamed.self)
     }
+    var identifier: String {
+        guard let bundleIdentifier = bundleIdentifier else {
+            fatalError("Could not retrieve bundle identifier")
+        }
+        return bundleIdentifier
+    }
 }

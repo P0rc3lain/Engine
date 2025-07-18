@@ -67,7 +67,7 @@ fragment float4 fragmentOmniLight(RasterizerData in [[stage_in]],
         float4 lightSpacesFragmentPosition = lightUniforms[light.idx].modelMatrixInverse *
                                              lightUniforms[camera.index].modelMatrix *
                                              float4(input.fragmentPosition, 1);
-        float currentDistance = length(lightSpacesFragmentPosition.xyz)/100;
+        float currentDistance = length(lightSpacesFragmentPosition.xyz);
         float3 sampleVector = normalize(lightSpacesFragmentPosition.xyz);
         sampleVector = -sampleVector;
         float bias = max(shadowBias.y * (1.0 - dot(input.n, l)), shadowBias.x);

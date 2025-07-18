@@ -46,7 +46,3 @@ vertex RasterizerData vertexOmniLightShadow(Vertex in [[stage_in]],
 struct Output {
     float depth [[depth(any)]];
 };
-
-fragment Output fragmentOmniLightShadow(RasterizerData in [[stage_in]]) {
-    return Output{in.distanceToLight/100};
-}

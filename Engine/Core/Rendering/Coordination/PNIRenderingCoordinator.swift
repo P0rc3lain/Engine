@@ -5,20 +5,21 @@
 import Metal
 import MetalKit
 import MetalPerformanceShaders
+import os.signpost
 import simd
 
 struct PNIRenderingCoordinator: PNRenderingCoordinator {
     private let view: MTKView
     private let commandQueue: MTLCommandQueue
     private var pipeline: PNPipeline
-    private let imageConverter: MPSImageConversion
+    private let imageConverter: MPSImageBilinearScale
     init?(view metalView: MTKView, renderingSize: CGSize) {
         guard let device = metalView.device,
               let commandQueue = device.makeCommandQueue(),
               let pipeline = PNPipeline(device: device, renderingSize: renderingSize) else {
             return nil
         }
-        self.imageConverter = MPSImageConversion(device: device)
+        self.imageConverter = MPSImageBilinearScale(device: device)
         self.view = metalView
         self.pipeline = pipeline
         self.commandQueue = commandQueue
@@ -31,6 +32,8 @@ struct PNIRenderingCoordinator: PNRenderingCoordinator {
               let sourceTexture = pipeline.io.output.color[0].texture else {
             return
         }
+        commandBuffer.label = "Frame generation"
+        let encodingInterval = psignposter.beginInterval("Frame encoding")
         pipeline.draw(commandBuffer: commandBuffer, supply: frameSupply)
         commandBuffer.pushDebugGroup("Copy Pass")
         imageConverter.encode(commandBuffer: commandBuffer,
@@ -38,7 +41,15 @@ struct PNIRenderingCoordinator: PNRenderingCoordinator {
                               destinationTexture: outputTexture)
         commandBuffer.popDebugGroup()
         commandBuffer.present(drawable)
+        var renderingInterval: OSSignpostIntervalState!
+        commandBuffer.addScheduledHandler { _ in
+            renderingInterval = psignposter.beginInterval("Rendering")
+        }
+        commandBuffer.addCompletedHandler { _ in
+            psignposter.endInterval("Rendering", renderingInterval)
+        }
         commandBuffer.commit()
+        psignposter.endInterval("Frame encoding", encodingInterval)
         commandBuffer.waitUntilCompleted()
     }
 }
