@@ -435,7 +435,7 @@
 		561666DD2719E2CC000063B1 /* PBR.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = PBR.metal; sourceTree = "<group>"; };
 		561666DF2719E2CC000063B1 /* EnvironmentMapper.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = EnvironmentMapper.metal; sourceTree = "<group>"; };
 		561666E12719E2CC000063B1 /* PNIEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNIEngine.swift; sourceTree = "<group>"; };
-		561666E32719E2CC000063B1 /* module.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
+		561666E32719E2CC000063B1 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		561666E62719E2CD000063B1 /* Compatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compatibility.h; sourceTree = "<group>"; };
 		561666E72719E2CD000063B1 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
 		561666EC2719E2CD000063B1 /* PNEnvironmentJob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNEnvironmentJob.swift; sourceTree = "<group>"; };
@@ -1075,7 +1075,7 @@
 		561666E22719E2CC000063B1 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				561666E32719E2CC000063B1 /* module.map */,
+				561666E32719E2CC000063B1 /* module.modulemap */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
