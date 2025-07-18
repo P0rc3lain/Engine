@@ -20,4 +20,6 @@ public protocol PNMaterial {
     /// Indicates whether or not at least some parts of the model are translucent.
     /// Important for proper ordering and render commands.
     var isTranslucent: Bool { get }
+    /// Argument buffer for efficient binding
+    var argumentBuffer: MTLBuffer { get }
 }

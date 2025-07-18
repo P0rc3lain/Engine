@@ -6,6 +6,7 @@ import Metal
 import ModelIO
 
 public struct PNIMaterial: PNMaterial {
+    public var argumentBuffer: MTLBuffer
     public var name: String
     public var albedo: MTLTexture
     public var roughness: MTLTexture
@@ -22,6 +23,16 @@ public struct PNIMaterial: PNMaterial {
         self.roughness = roughness
         self.normals = normals
         self.metallic = metallic
+        let device = albedo.device
+        let bufferCreator = MaterialArgumentBuffer(device: device,
+                                                   albedo: albedo,
+                                                   roughness: roughness,
+                                                   normals: normals,
+                                                   metallic: metallic)
+        guard let argumentBuffer = bufferCreator.create() else {
+            fatalError("Coult not create argument buffer for the material")
+        }
+        self.argumentBuffer = argumentBuffer
     }
     public init?(device: MTLDevice,
                  albedo: simd_float4,
@@ -42,11 +53,11 @@ public struct PNIMaterial: PNMaterial {
               let uploadedAlbedo = albedo.upload(device: device) else {
             return nil
         }
-        self.roughness = uploadedRoughness
-        self.albedo = uploadedAlbedo
-        self.normals = uploadedNormals
-        self.metallic = uploadedMetallic
-        self.name = name
+        self.init(name: name,
+                  albedo: uploadedAlbedo,
+                  roughness: uploadedRoughness,
+                  normals: uploadedNormals,
+                  metallic: uploadedMetallic)
     }
     public static func `default`(device: MTLDevice) -> PNIMaterial? {
         let normals = MDLTexture.solid2D(color: .defaultNormalsColor,
