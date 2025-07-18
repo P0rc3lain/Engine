@@ -6,6 +6,7 @@
 
 #include "Shaders/Common/Animation.h"
 #include "Shaders/Common/Transformation.h"
+#include "Shaders/Common/Material.h"
 
 #include "MetalBinding/PNShared/Model.h"
 #include "MetalBinding/PNShared/Vertex.h"
@@ -40,12 +41,6 @@ struct GBufferData {
 #define bMatrixPalettesVertex buffer(kAttributeGBufferVertexShaderBufferMatrixPalettes)
 #define bPreviousMatrixPalettesVertex buffer(kAttributeGBufferVertexShaderBufferMatrixPalettesPreviousFrame)
 #define bIndexVertex buffer(kAttributeGBufferVertexShaderBufferObjectIndex)
-
-// Fragment function
-#define tAlbedoFragment texture(kAttributeGBufferFragmentShaderTextureAlbedo)
-#define tRoughnessFragment texture(kAttributeGBufferFragmentShaderTextureRoughness)
-#define tNormalsFragment texture(kAttributeGBufferFragmentShaderTextureNormals)
-#define tMetallicFragment texture(kAttributeGBufferFragmentShaderTextureMetallic)
 
 vertex RasterizerData vertexGBuffer(Vertex in [[stage_in]],
                                     constant CameraUniforms & cameraUniforms [[bCameraUniformsVertex]],
@@ -89,10 +84,7 @@ vertex RasterizerData vertexGBuffer(Vertex in [[stage_in]],
 }
 
 fragment GBufferData fragmentGBuffer(RasterizerData in [[stage_in]],
-                                     texture2d<float> albedo [[tAlbedoFragment]],
-                                     texture2d<float> roughness [[tRoughnessFragment]],
-                                     texture2d<float> normals [[tNormalsFragment]],
-                                     texture2d<float> metallic [[tMetallicFragment]]) {
+                                     constant Material& material [[buffer(0)]]) {
     constexpr sampler textureSampler(mag_filter::linear,
                                      min_filter::linear,
                                      mip_filter::linear,
@@ -100,10 +92,10 @@ fragment GBufferData fragmentGBuffer(RasterizerData in [[stage_in]],
     simd_float3x3 TBN(in.t, in.b, in.n);
     // 0.04 is reflactance for common materials
     // should be possible to configure it
-    float3 normalEncoded = normals.sample(textureSampler, in.uv).xyz;
+    float3 normalEncoded = material.normals.sample(textureSampler, in.uv).xyz;
     float3 normalDecoded = normalEncoded * 2 - 1;
     float3 normalWorldSpace = TBN * normalDecoded;
-    float4 color = albedo.sample(textureSampler, in.uv);
+    float4 color = material.albedo.sample(textureSampler, in.uv);
     if (!color.a)
         discard_fragment();
     
@@ -112,8 +104,8 @@ fragment GBufferData fragmentGBuffer(RasterizerData in [[stage_in]],
     float2 velocity = current - previous;
     
     return {
-        float4(color.xyz, roughness.sample(textureSampler, in.uv).x),
-        float4(normalWorldSpace, metallic.sample(textureSampler, in.uv).x),
+        float4(color.xyz, material.roughness.sample(textureSampler, in.uv).x),
+        float4(normalWorldSpace, material.metallic.sample(textureSampler, in.uv).x),
         float4(in.cameraSpacePosition, 0.04),
         velocity
     };

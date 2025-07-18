@@ -17,13 +17,6 @@ enum AttributeTranslucentFragmentShaderTextureIndex {
     kAttributeTranslucentFragmentShaderTextureAlbedo = 0,
 };
 
-enum AttributeGBufferFragmentShaderTextureIndex {
-    kAttributeGBufferFragmentShaderTextureAlbedo = 0,
-    kAttributeGBufferFragmentShaderTextureRoughness,
-    kAttributeGBufferFragmentShaderTextureNormals,
-    kAttributeGBufferFragmentShaderTextureMetallic
-};
-
 enum AttributeAmbientFragmentShaderTextureIndex {
     kAttributeAmbientFragmentShaderTextureAR = 0,
     kAttributeAmbientFragmentShaderTexturePR,
