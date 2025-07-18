@@ -66,11 +66,13 @@ struct PNGBufferJob: PNRenderJob {
                   !material.isTranslucent else {
                 continue
             }
-
-            encoder.useResource(material.albedo, usage: .read, stages: .fragment)
-            encoder.useResource(material.roughness, usage: .read, stages: .fragment)
-            encoder.useResource(material.normals, usage: .read, stages: .fragment)
-            encoder.useResource(material.metallic, usage: .read, stages: .fragment)
+            
+            encoder.useResources([material.albedo,
+                                  material.roughness,
+                                  material.normals,
+                                  material.metallic],
+                                 usage: .read,
+                                 stages: .fragment)
             
             encoder.setFragmentBuffer(material.argumentBuffer,
                                       index: kAttributeGBufferFragmentShaderBufferMaterial)
