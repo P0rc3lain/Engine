@@ -15,7 +15,6 @@ struct PNSSAOJob: PNComputeJob {
     private var noiseBuffer: PNAnyDynamicBuffer<simd_float3>
     private var uniforms: PNAnyStaticBuffer<SSAOUniforms>
     private let dispatchSize: MTLSize
-    private let threadGroupSize: MTLSize
     init?(pipelineState: MTLComputePipelineState,
           prTexture: PNTextureProvider,
           nmTexture: PNTextureProvider,
@@ -46,7 +45,6 @@ struct PNSSAOJob: PNComputeJob {
         let sideThreadGroup = 4
         assertDivisible(inputTexture.width, sideThreadGroup)
         assertDivisible(inputTexture.height, sideThreadGroup)
-        threadGroupSize = MTLSize(width: sideThreadGroup, height: sideThreadGroup)
     }
     func compute(encoder: MTLComputeCommandEncoder, supply: PNFrameSupply) {
         let time = Int32(Date.timeIntervalSinceReferenceDate)
@@ -60,7 +58,8 @@ struct PNSSAOJob: PNComputeJob {
         encoder.setTexture(nmTexture, index: kAttributeSsaoComputeShaderTextureNM)
         encoder.setTexture(prTexture, index: kAttributeSsaoComputeShaderTexturePR)
         encoder.setTexture(outputTexture, index: kAttributeSsaoComputeShaderTextureOutput)
-        encoder.dispatchThreads(dispatchSize, threadsPerThreadgroup: threadGroupSize)
+        encoder.dispatchThreads(dispatchSize,
+                                threadsPerThreadgroup: pipelineState.suggestedThreadGroupSize)
     }
     static func make(device: MTLDevice,
                      prTexture: PNTextureProvider,

@@ -13,7 +13,6 @@ struct PNPostprocessMergeJob: PNComputeJob {
     private let brightAreasTexture: PNTextureProvider
     private let velocitiesTexture: PNTextureProvider
     private let dispatchSize: MTLSize
-    private let threadGroupSize: MTLSize
     init?(pipelineState: MTLComputePipelineState,
           sceneTexture: PNTextureProvider,
           velocities: PNTextureProvider,
@@ -28,7 +27,6 @@ struct PNPostprocessMergeJob: PNComputeJob {
             return nil
         }
         dispatchSize = MTLSize(width: inputTexture.width, height: inputTexture.height)
-        threadGroupSize = MTLSize(width: 8, height: 8)
     }
     func compute(encoder: MTLComputeCommandEncoder, supply: PNFrameSupply) {
         encoder.setComputePipelineState(pipelineState)
@@ -38,7 +36,8 @@ struct PNPostprocessMergeJob: PNComputeJob {
                          index: kAttributePostprocessMergeComputeShaderBufferTime)
         encoder.setTexture(brightAreasTexture, index: kAttributePostprocessMergeComputeShaderTextureBrightAreas)
         encoder.setTexture(outputTexture, index: kAttributePostprocessMergeComputeShaderTextureOutput)
-        encoder.dispatchThreads(dispatchSize, threadsPerThreadgroup: threadGroupSize)
+        encoder.dispatchThreads(dispatchSize,
+                                threadsPerThreadgroup: pipelineState.suggestedThreadGroupSize)
     }
     static func make(device: MTLDevice,
                      sceneTexture: PNTextureProvider,

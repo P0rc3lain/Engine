@@ -99,6 +99,7 @@
 		561667562719E2CD000063B1 /* PNIRenderingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666F12719E2CD000063B1 /* PNIRenderingCoordinator.swift */; };
 		561667572719E2CD000063B1 /* PNIBufferStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561666F32719E2CD000063B1 /* PNIBufferStore.swift */; };
 		561667582719E2CD000063B1 /* Engine.h in Headers */ = {isa = PBXBuildFile; fileRef = 561666F52719E2CD000063B1 /* Engine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5620358A2E293A1A00422C4B /* MTLComputePipelineState+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562035892E293A1200422C4B /* MTLComputePipelineState+Extension.swift */; };
 		5620C8112754E8740098D6FA /* PNSSAOHemisphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C8102754E8740098D6FA /* PNSSAOHemisphere.swift */; };
 		5620C8132754F3AE0098D6FA /* PNOmniLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C8122754F3AE0098D6FA /* PNOmniLight.swift */; };
 		5620C8152754F3B60098D6FA /* PNSpotLight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C8142754F3B60098D6FA /* PNSpotLight.swift */; };
@@ -445,6 +446,7 @@
 		561666F32719E2CD000063B1 /* PNIBufferStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PNIBufferStore.swift; sourceTree = "<group>"; };
 		561666F52719E2CD000063B1 /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
 		561666F62719E2CD000063B1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		562035892E293A1200422C4B /* MTLComputePipelineState+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLComputePipelineState+Extension.swift"; sourceTree = "<group>"; };
 		5620C8102754E8740098D6FA /* PNSSAOHemisphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSSAOHemisphere.swift; sourceTree = "<group>"; };
 		5620C8122754F3AE0098D6FA /* PNOmniLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNOmniLight.swift; sourceTree = "<group>"; };
 		5620C8142754F3B60098D6FA /* PNSpotLight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSpotLight.swift; sourceTree = "<group>"; };
@@ -1966,6 +1968,7 @@
 		56D1ED582725F83A00D68EA7 /* Metal */ = {
 			isa = PBXGroup;
 			children = (
+				562035892E293A1200422C4B /* MTLComputePipelineState+Extension.swift */,
 				560C18CF273A832A00459AEF /* MTLFunctionConstantValues+Extension.swift */,
 				563BFC8427285F100003EDB7 /* MTLBuffer+Extension.swift */,
 				561666B12719E2CC000063B1 /* MTLRenderPassDescriptor+Extension.swift */,
@@ -2492,6 +2495,7 @@
 				56407B7B27204EEB00440CAC /* Array+Extension.swift in Sources */,
 				568899A12757AC6E00D24EB1 /* Layer.metal in Sources */,
 				56A3728E273862300079A93D /* MTLOrigin+Extension.swift in Sources */,
+				5620358A2E293A1A00422C4B /* MTLComputePipelineState+Extension.swift in Sources */,
 				566020E02734314C000F4CA7 /* PNSSAOJob.swift in Sources */,
 				566F16C028A57F2700FDF1B5 /* NSColor+Extension.swift in Sources */,
 				5616671F2719E2CD000063B1 /* MTLRenderPipelineDescriptor+Extension.swift in Sources */,
