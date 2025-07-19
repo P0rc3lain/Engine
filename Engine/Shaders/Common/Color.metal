@@ -13,3 +13,7 @@ using namespace metal;
 float luminance(float3 color) {
     return dot(color, float3(RED_VALUE_WEIGHT, GREEN_VALUE_WEIGHT, BLUE_VALUE_WEIGHT));
 }
+
+half luminance(half3 color) {
+    return dot(color, half3(RED_VALUE_WEIGHT, GREEN_VALUE_WEIGHT, BLUE_VALUE_WEIGHT));
+}
