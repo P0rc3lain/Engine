@@ -114,6 +114,7 @@
 		5620C82B275517E80098D6FA /* simd_float3x3+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C82A275517E80098D6FA /* simd_float3x3+Extension.swift */; };
 		5620C832275528030098D6FA /* PNDirectionalShadowJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5620C831275528030098D6FA /* PNDirectionalShadowJob.swift */; };
 		5620C83627552AF30098D6FA /* DirectionalShadow.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5620C83527552AF30098D6FA /* DirectionalShadow.metal */; };
+		562371C52E2ABA8E00B4BAC6 /* Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562371C42E2ABA8A00B4BAC6 /* Performance.swift */; };
 		56270167272B54EB00071620 /* PNAnimatedTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56270166272B54EB00071620 /* PNAnimatedTransform.swift */; };
 		56270169272B556500071620 /* PNAnimatedTransform+Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56270168272B556500071620 /* PNAnimatedTransform+Alias.swift */; };
 		5627016B272B583F00071620 /* PNAnimatedSkeleton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627016A272B583F00071620 /* PNAnimatedSkeleton+Extension.swift */; };
@@ -463,6 +464,7 @@
 		5620C82A275517E80098D6FA /* simd_float3x3+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd_float3x3+Extension.swift"; sourceTree = "<group>"; };
 		5620C831275528030098D6FA /* PNDirectionalShadowJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNDirectionalShadowJob.swift; sourceTree = "<group>"; };
 		5620C83527552AF30098D6FA /* DirectionalShadow.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = DirectionalShadow.metal; sourceTree = "<group>"; };
+		562371C42E2ABA8A00B4BAC6 /* Performance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Performance.swift; sourceTree = "<group>"; };
 		56270166272B54EB00071620 /* PNAnimatedTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAnimatedTransform.swift; sourceTree = "<group>"; };
 		56270168272B556500071620 /* PNAnimatedTransform+Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNAnimatedTransform+Alias.swift"; sourceTree = "<group>"; };
 		5627016A272B583F00071620 /* PNAnimatedSkeleton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PNAnimatedSkeleton+Extension.swift"; sourceTree = "<group>"; };
@@ -1133,6 +1135,7 @@
 		5617F2EB2942B0680068177C /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				562371C32E2ABA8400B4BAC6 /* Logging */,
 				5617F2ED2942B1FE0068177C /* Translation */,
 				568E346D29241B3C00A5DF43 /* Configuration */,
 				5648530528C7E70200BA4CC0 /* Debug */,
@@ -1224,6 +1227,14 @@
 				5620C831275528030098D6FA /* PNDirectionalShadowJob.swift */,
 			);
 			path = Shadows;
+			sourceTree = "<group>";
+		};
+		562371C32E2ABA8400B4BAC6 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				562371C42E2ABA8A00B4BAC6 /* Performance.swift */,
+			);
+			path = Logging;
 			sourceTree = "<group>";
 		};
 		5629FBDD27491A62005476AF /* AnimatedValue */ = {
@@ -2347,6 +2358,7 @@
 				5635177528AD6A2900807BDA /* PNIRefreshController.swift in Sources */,
 				56270167272B54EB00071620 /* PNAnimatedTransform.swift in Sources */,
 				56B6AFAE28A259D300266421 /* PNIPaletteGenerator.swift in Sources */,
+				562371C52E2ABA8E00B4BAC6 /* Performance.swift in Sources */,
 				56C4CD53273800E4000A994E /* Spot.metal in Sources */,
 				5620C8172754F3C80098D6FA /* PNDirectionalLight.swift in Sources */,
 				56D7ED54274C536700A6C25D /* PNISceneLoader.swift in Sources */,
