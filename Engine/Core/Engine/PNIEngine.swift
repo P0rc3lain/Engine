@@ -48,7 +48,9 @@ public final class PNIEngine: PNEngine {
         return true
     }
     public func draw() {
+        let frameInterval = psignposter.beginInterval("Frame generation")
         workloadManager.draw(sceneGraph: scene, taskQueue: taskQueue)
+        psignposter.endInterval("Frame generation", frameInterval)
     }
     public static func `default`(view: MTKView,
                                  scene: PNScene = .default,

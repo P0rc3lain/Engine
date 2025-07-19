@@ -5,6 +5,7 @@
 import Metal
 import MetalKit
 import MetalPerformanceShaders
+import os.signpost
 import simd
 
 struct PNIRenderingCoordinator: PNRenderingCoordinator {
@@ -31,6 +32,8 @@ struct PNIRenderingCoordinator: PNRenderingCoordinator {
               let sourceTexture = pipeline.io.output.color[0].texture else {
             return
         }
+        commandBuffer.label = "Frame generation"
+        let encodingInterval = psignposter.beginInterval("Frame encoding")
         pipeline.draw(commandBuffer: commandBuffer, supply: frameSupply)
         commandBuffer.pushDebugGroup("Copy Pass")
         imageConverter.encode(commandBuffer: commandBuffer,
@@ -38,7 +41,15 @@ struct PNIRenderingCoordinator: PNRenderingCoordinator {
                               destinationTexture: outputTexture)
         commandBuffer.popDebugGroup()
         commandBuffer.present(drawable)
+        var renderingInterval: OSSignpostIntervalState!
+        commandBuffer.addScheduledHandler { _ in
+            renderingInterval = psignposter.beginInterval("Rendering")
+        }
+        commandBuffer.addCompletedHandler { _ in
+            psignposter.endInterval("Rendering", renderingInterval)
+        }
         commandBuffer.commit()
+        psignposter.endInterval("Frame encoding", encodingInterval)
         commandBuffer.waitUntilCompleted()
     }
 }
