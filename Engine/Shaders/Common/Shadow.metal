@@ -35,13 +35,17 @@ float pcfDepth(metal::depthcube_array<float> shadowMaps,
                float offset) {
     constexpr sampler sampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
     float shadow = 0.0f;
-    for (float i = -offset; i < offset; i += offset / float(samples.x) * 0.5f) {
-        for (float j = -offset; j < offset; j += offset / float(samples.y) * 0.5f) {
-            for (float k = -offset; k < offset; k += offset / float(samples.z) * 0.5f) {
-                float depth = shadowMaps.sample(sampler, sampleCoordinate + float3(i, j, k), layer);
+    float3 stepSize = (2.0 * offset) / float3(samples);
+
+    for (int xi = 0; xi < samples.x; ++xi) {
+        for (int yi = 0; yi < samples.y; ++yi) {
+            for (int zi = 0; zi < samples.z; ++zi) {
+                float3 offsetCoord = float3(xi, yi, zi) * stepSize - offset;
+                float depth = shadowMaps.sample(sampler, sampleCoordinate + offsetCoord, layer);
                 shadow += countedDepth - bias > depth ? 1.0f : 0.0f;
             }
         }
     }
+    
     return clamp(shadow / float(samples.x * samples.y * samples.z), 0.0f, 1.0f);
 }
