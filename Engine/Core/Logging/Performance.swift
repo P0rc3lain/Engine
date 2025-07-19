@@ -4,5 +4,5 @@
 
 import os.signpost
 
-let plogger = OSLog(subsystem: Bundle.current.identifier, category: "performance")
+let plogger = OSLog(subsystem: Bundle.current.bundleIdentifier!, category: "performance")
 let psignposter = OSSignposter(logHandle: plogger)
