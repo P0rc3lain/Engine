@@ -5,6 +5,8 @@
 import simd
 
 public struct PNIOmniLight: PNOmniLight {
+    public let farPlane: Float
+    public let nearPlane: Float
     public let color: PNColorRGB
     public let intensity: Float
     public var influenceRadius: Float
@@ -17,19 +19,19 @@ public struct PNIOmniLight: PNOmniLight {
                 influenceRadius: Float,
                 castsShadows: Bool) {
         assertValid(color: color)
+        let nearPlance: Float = 0.01
         self.color = color
         self.intensity = intensity
         self.influenceRadius = influenceRadius
         self.castsShadows = castsShadows
-        self.projectionMatrix = PNIOmniLight.projectionMatrix(influenceRadius: influenceRadius)
+        self.projectionMatrix = simd_float4x4.perspectiveProjectionRightHand(fovyRadians: Float(90).radians,
+                                                                             aspect: 1,
+                                                                             nearZ: nearPlance,
+                                                                             farZ: influenceRadius)
         self.projectionMatrixInverse = projectionMatrix.inverse
         self.boundingBox = PNIOmniLight.boundingBox(projectionMatrixInverse: projectionMatrixInverse)
-    }
-    private static func projectionMatrix(influenceRadius: Float) -> simd_float4x4 {
-        simd_float4x4.perspectiveProjectionRightHand(fovyRadians: Float(90).radians,
-                                                     aspect: 1,
-                                                     nearZ: 0.01,
-                                                     farZ: influenceRadius)
+        self.nearPlane = nearPlance
+        self.farPlane = influenceRadius
     }
     private static func boundingBox(projectionMatrixInverse: simd_float4x4) -> PNBoundingBox {
         // TODO: Ensure that calling aabb(interactor.multiply(axis, projection)) is not needed

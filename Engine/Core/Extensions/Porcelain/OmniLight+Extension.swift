@@ -13,6 +13,8 @@ extension OmniLight {
                   idx: Int32(index),
                   projectionMatrix: light.projectionMatrix,
                   projectionMatrixInverse: light.projectionMatrix.inverse,
-                  castsShadows: light.castsShadows ? 1 : 0)
+                  castsShadows: light.castsShadows ? 1 : 0,
+                  nearPlane: light.nearPlane,
+                  farPlane: light.farPlane)
     }
 }

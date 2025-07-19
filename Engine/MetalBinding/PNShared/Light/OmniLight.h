@@ -12,4 +12,6 @@ struct OmniLight {
     simd_float4x4 projectionMatrix;
     simd_float4x4 projectionMatrixInverse;
     uint8_t castsShadows;
+    float nearPlane;
+    float farPlane;
 };
