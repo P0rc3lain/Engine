@@ -36,18 +36,12 @@ vertex RasterizerData vertexOmniLightShadow(Vertex in [[stage_in]],
     float4 orientedPosition = rotations[face] * lightSpacePosition;
     float4 projected = light.projectionMatrix * orientedPosition;
     
-    
-    
-    
     float4 edgePosition = light.projectionMatrixInverse * float4(0, 0, 1, 1);
     edgePosition /= edgePosition.w;
-    
     float maxDepth = -edgePosition.z;
     
-    float w = projected.w;
-    projected /= projected.w;
     projected.z = length(lightSpacePosition.xyz) / maxDepth;
-    projected *= w;
+    projected.z *= projected.w;
     
     return RasterizerData {
         projected,
