@@ -73,7 +73,6 @@ opt_in_rules:
   - trailing_comma
   - joined_default_parameter
   - trailing_newline
-  - implicitly_unwrapped_optional
   - return_arrow_whitespace
   - syntactic_sugar
   - comma
@@ -88,4 +87,5 @@ disabled_rules:
   - discouraged_optional_collection
   - let_var_whitespace
   - identifier_name
+  - implicitly_unwrapped_optional
 ...
