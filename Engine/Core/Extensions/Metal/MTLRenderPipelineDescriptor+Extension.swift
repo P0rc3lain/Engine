@@ -225,7 +225,6 @@ extension MTLRenderPipelineDescriptor {
         descriptor.label = "Omni Shadows"
         descriptor.vertexFunction = library.failOrMakeFunction(name: "vertexOmniLightShadow",
                                                                constantValues: values)
-        descriptor.fragmentFunction = library.failOrMakeFunction(name: "fragmentOmniLightShadow")
         descriptor.depthAttachmentPixelFormat = .omniShadowDS
         descriptor.vertexDescriptor = .vertex
         descriptor.rasterSampleCount = 1
