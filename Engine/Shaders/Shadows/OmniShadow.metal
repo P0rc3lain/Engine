@@ -16,7 +16,6 @@ using namespace metal;
 
 struct RasterizerData {
     float4 clipSpacePosition [[position]];
-    float distanceToLight;
     uint layer [[render_target_array_index]];
 };
 
@@ -37,22 +36,21 @@ vertex RasterizerData vertexOmniLightShadow(Vertex in [[stage_in]],
     float4 orientedPosition = rotations[face] * lightSpacePosition;
     float4 projected = light.projectionMatrix * orientedPosition;
     
+    
+    
+    
     float4 edgePosition = light.projectionMatrixInverse * float4(0, 0, 1, 1);
     edgePosition /= edgePosition.w;
     
     float maxDepth = -edgePosition.z;
     
+    float w = projected.w;
+    projected /= projected.w;
+    projected.z = length(lightSpacePosition.xyz) / maxDepth;
+    projected *= w;
+    
     return RasterizerData {
         projected,
-        length(lightSpacePosition.xyz) / maxDepth,
         lightIndex * 6 + face
     };
-}
-
-struct Output {
-    float depth [[depth(any)]];
-};
-
-fragment Output fragmentOmniLightShadow(RasterizerData in [[stage_in]]) {
-    return Output{in.distanceToLight};
 }
