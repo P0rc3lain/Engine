@@ -10,12 +10,13 @@
 
 using namespace metal;
 
-kernel void kernelBloomSplit(texture2d<float> inputTexture [[texture(kAttributeBloomSplitComputeShaderTextureInput)]],
-                             texture2d<float, access::write> outputTexture [[texture(kAttributeBloomSplitComputeShaderTextureOutput)]],
-                             uint3 inposition [[thread_position_in_grid]],
-                             uint3 threads [[threads_per_grid]]) {
-    constexpr sampler textureSampler(filter::linear);
-    float2 texcoord{float(inposition.x)/float(threads.x), float(inposition.y)/float(threads.y)};
-    float3 color = inputTexture.sample(textureSampler, texcoord).xyz;
-    outputTexture.write(luminance(color) > 0.7 ? float4(color * 2, 1) : float4(0, 0, 0, 1), inposition.xy);
+kernel void kernelBloomSplit(texture2d<half, access::read> inputTexture [[texture(kAttributeBloomSplitComputeShaderTextureInput)]],
+                             texture2d<half, access::write> outputTexture [[texture(kAttributeBloomSplitComputeShaderTextureOutput)]],
+                             uint2 inposition [[thread_position_in_grid]]) {
+    half3 color = inputTexture.read(inposition.xy).xyz;
+    if (luminance(color) > 0.7) {
+        outputTexture.write(half4(color * 2, 1), inposition.xy);
+    } else {
+        outputTexture.write(half4(0, 0, 0, 1), inposition.xy);
+    }
 }
