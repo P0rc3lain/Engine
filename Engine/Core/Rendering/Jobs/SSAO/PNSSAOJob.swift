@@ -24,9 +24,10 @@ struct PNSSAOJob: PNComputeJob {
           uniforms: PNAnyStaticBuffer<SSAOUniforms>) {
         // Default values
         let ssaoUniforms = SSAOUniforms.default
-        let sampleCount = PNDefaults.shared.shaders.ssao.sampleCount
-        let samples = PNISSAOHemisphere().samples(size: sampleCount)
-        let noise = PNISSAOHemisphere().noise(count: Int(ssaoUniforms.noiseCount))
+        let ssaoConstants = PNDefaults.shared.shaders.ssao
+        let ssaoHemisphere = PNISSAOHemisphere()
+        let samples = ssaoHemisphere.samples(size: ssaoConstants.sampleCount)
+        let noise = ssaoHemisphere.noise(count: ssaoConstants.noiseCount)
         self.pipelineState = pipelineState
         self.nmTexture = nmTexture
         self.outputTexture = outputTexture
@@ -42,10 +43,6 @@ struct PNSSAOJob: PNComputeJob {
         }
         dispatchSize = MTLSize(width: inputTexture.width,
                                height: inputTexture.height)
-        // TODO: Rescale
-        let sideThreadGroup = 4
-        assertDivisible(inputTexture.width, sideThreadGroup)
-        assertDivisible(inputTexture.height, sideThreadGroup)
     }
     func compute(encoder: MTLComputeCommandEncoder, supply: PNFrameSupply) {
         let time = Int32(Date.timeIntervalSinceReferenceDate)

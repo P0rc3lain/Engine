@@ -15,6 +15,7 @@
 using namespace metal;
 
 constant int sampleCount [[function_constant(kFunctionConstantIndexSSAOSampleCount)]];
+constant int noiseCount [[function_constant(kFunctionConstantIndexSSAONoiseCount)]];
 
 kernel void kernelSSAO(texture2d<float> nm [[texture(kAttributeSsaoComputeShaderTextureNM)]],
                        texture2d<float> pr [[texture(kAttributeSsaoComputeShaderTexturePR)]],
@@ -34,7 +35,7 @@ kernel void kernelSSAO(texture2d<float> nm [[texture(kAttributeSsaoComputeShader
     constexpr sampler textureSampler(filter::linear);
     float3 worldPosition = pr.sample(textureSampler, texcoord).xyz;
     float3 normal = normalize(nm.sample(textureSampler, texcoord)).xyz;
-    float3 randomVector = noise[int(random.random() * renderingUniforms.noiseCount)];
+    float3 randomVector = noise[int(random.random() * noiseCount)];
     float3 tangent = normalize(randomVector - normal * dot(randomVector, normal));
     float3 bitangent = normalize(cross(normal, tangent));
     float3x3 TBN = float3x3(tangent, bitangent, normal);

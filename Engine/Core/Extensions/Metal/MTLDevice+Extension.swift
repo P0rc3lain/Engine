@@ -142,6 +142,7 @@ extension MTLDevice {
         let ssaoSettings = PNDefaults.shared.shaders.ssao
         let values = MTLFunctionConstantValues
             .int(ssaoSettings.sampleCount, index: kFunctionConstantIndexSSAOSampleCount)
+            .int(ssaoSettings.noiseCount, index: kFunctionConstantIndexSSAONoiseCount)
         let function = library.failOrMakeFunction(name: "kernelSSAO",
                                                   constantValues: values)
         return failOrMakeComputePipelineState(function: function)

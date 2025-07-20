@@ -78,5 +78,6 @@ public struct PNDefaults {
     public struct SSAO {
         /// Number of samples used for SSAO calculation, affecting quality and performance.
         public var sampleCount: Int = 8
+        public var noiseCount: Int = 64
     }
 }
