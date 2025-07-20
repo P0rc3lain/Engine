@@ -31,13 +31,13 @@ kernel void kernelSSAO(texture2d<float> nm [[texture(kAttributeSsaoComputeShader
                        uint3 inposition [[thread_position_in_grid]],
                        uint3 threads [[threads_per_grid]],
                        constant ModelUniforms * modelUniforms [[buffer(kAttributeSsaoComputeShaderBufferModelUniforms)]]) {
-    auto positionContinuousBuffer = inposition.x + inposition.y * threads.x;
-    auto seed = positionContinuousBuffer + time;
-    auto random = Random(seed);
-    float2 texcoord{float(inposition.x)/float(threads.x), float(inposition.y)/float(threads.y)};
+    int positionContinuousBuffer = inposition.x + inposition.y * threads.x;
+    int seed = positionContinuousBuffer + time;
+    Random random = Random(seed);
+    uint2 positionXY = inposition.xy;
     constexpr sampler textureSampler(filter::linear);
-    float3 worldPosition = pr.sample(textureSampler, texcoord).xyz;
-    float3 normal = normalize(nm.sample(textureSampler, texcoord)).xyz;
+    float3 worldPosition = pr.read(positionXY).xyz;
+    float3 normal = normalize(nm.read(positionXY)).xyz;
     float3 randomVector = noise[int(random.random() * noiseCount)];
     float3 tangent = normalize(randomVector - normal * dot(randomVector, normal));
     float3 bitangent = normalize(cross(normal, tangent));
@@ -54,5 +54,5 @@ kernel void kernelSSAO(texture2d<float> nm [[texture(kAttributeSsaoComputeShader
         occlusion += (neighbourDepth >= worldPosition.z + comparisonBias ? 1.0 : 0.0) * rangeCheck;
     }
     float finalOcclusion = 1.0 - (occlusion / sampleCount);
-    out.write(pow(finalOcclusion, power), inposition.xy);
+    out.write(pow(finalOcclusion, power), positionXY);
 }
