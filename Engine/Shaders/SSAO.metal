@@ -49,7 +49,8 @@ kernel void kernelSSAO(texture2d<float> nm [[texture(kAttributeSsaoComputeShader
         neighbourClipPosition /= neighbourClipPosition.w;
         neighbourClipPosition = neighbourClipPosition * 0.5 + 0.5;
         float neighbourDepth = pr.sample(textureSampler, float2(neighbourClipPosition.x, 1.0 - neighbourClipPosition.y)).z;
-        float rangeCheck = smoothstep(0.0, 1.0, radius / abs(worldPosition.z - neighbourDepth));
+        float depthDiff = abs(worldPosition.z - neighbourDepth);
+        float rangeCheck = smoothstep(0.0, 1.0, radius / max(depthDiff, 1e-5));
         occlusion += (neighbourDepth >= worldPosition.z + comparisonBias ? 1.0 : 0.0) * rangeCheck;
     }
     float finalOcclusion = 1.0 - (occlusion / sampleCount);
