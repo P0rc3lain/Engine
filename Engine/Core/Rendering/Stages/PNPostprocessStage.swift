@@ -15,6 +15,7 @@ struct PNPostprocessStage: PNStage {
     private let postprocessOutputTexture: MTLTexture
     init?(input: PNTextureProvider,
           velocities: PNTextureProvider,
+          bloomBlurSigma: Float,
           device: MTLDevice,
           renderingSize: CGSize) {
         guard let bloomSplitTexture = device.makeTextureBloomSplitC(size: renderingSize) else {
@@ -36,7 +37,8 @@ struct PNPostprocessStage: PNStage {
                                                                    brightAreasTexture: PNStaticTexture(splitBlurredTexture)) else {
             return nil
         }
-        self.gaussianBlurJob = MPSImageGaussianBlur(device: device, sigma: 2)
+        self.gaussianBlurJob = MPSImageGaussianBlur(device: device,
+                                                    sigma: bloomBlurSigma)
         self.bloomSplitJob = bloomSplitJob
         self.postprocessMergeJob = postprocessMergeJob
         self.splitBlurredTexture = splitBlurredTexture

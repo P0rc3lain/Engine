@@ -13,7 +13,10 @@ struct PNPipeline: PNStage {
     private var postprocessStage: PNPostprocessStage
     private var gBufferStage: PNGBufferStage
     private var shadowStage: PNShadowStage
-    init?(device: MTLDevice, renderingSize: CGSize) {
+    init?(device: MTLDevice,
+          renderingSize: CGSize,
+          ssaoBlurSigma: Float,
+          bloomBlurSigma: Float) {
         guard let gBufferStage = PNGBufferStage(device: device,
                                                 renderingSize: renderingSize),
               let shadowStage = PNShadowStage(device: device,
@@ -22,7 +25,7 @@ struct PNPipeline: PNStage {
                                           renderingSize: renderingSize,
                                           prTexture: gBufferStage.io.output.color[2],
                                           nmTexture: gBufferStage.io.output.color[1],
-                                          blurSigma: 5),
+                                          blurSigma: ssaoBlurSigma),
               let combineStage = PNCombineStage(device: device,
                                                 renderingSize: renderingSize,
                                                 gBufferOutput: gBufferStage.io.output,
@@ -32,6 +35,7 @@ struct PNPipeline: PNStage {
                                                 directionalLightsShadows: shadowStage.io.output.depth[2]),
               let postprocessStage = PNPostprocessStage(input: combineStage.io.output.color[0],
                                                         velocities: gBufferStage.io.output.color[3],
+                                                        bloomBlurSigma: bloomBlurSigma,
                                                         device: device,
                                                         renderingSize: renderingSize) else {
             return nil

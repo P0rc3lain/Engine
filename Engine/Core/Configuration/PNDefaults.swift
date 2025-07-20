@@ -25,6 +25,13 @@ public struct PNDefaults {
     public struct PNShader {
         /// Lighting configuration for shaders.
         public var lighting = PNLighting()
+        /// Configuration for post-processing effects.
+        public var postprocess = PNPostProcess()
+    }
+    /// Configuration for post-processing effects.
+    public struct PNPostProcess {
+        /// Configuration for the bloom post-processing effect.
+        public var bloom = PNBloom()
     }
     /// Lighting configuration.
     public struct PNLighting {
@@ -55,5 +62,14 @@ public struct PNDefaults {
         public var directional = simd_uint2(512, 512)
         /// Resolution for spot shadows.
         public var spot = simd_uint2(512, 512)
+    }
+    /// Configuration for bloom post-processing effect.
+    public struct PNBloom {
+        /// The minimum luminance a pixel must have to be considered for the bloom effect.
+        public var luminanceThreshold: Float = 0.7
+        /// Amplifies the brightness of pixels that pass the luminance threshold for bloom.
+        public var luminanceAmplifier: Float = 1.2
+        /// The sigma value for the Gaussian blur applied to blooming areas.
+        public var blurSigma: Float = 10.0
     }
 }
