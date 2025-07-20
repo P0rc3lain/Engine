@@ -35,20 +35,23 @@ kernel void kernelSSAO(texture2d<float> nm [[texture(kAttributeSsaoComputeShader
     int seed = positionContinuousBuffer + time;
     Random random = Random(seed);
     uint2 positionXY = inposition.xy;
-    constexpr sampler textureSampler(filter::linear);
     float3 worldPosition = pr.read(positionXY).xyz;
     float3 normal = normalize(nm.read(positionXY)).xyz;
     float3 randomVector = noise[int(random.random() * noiseCount)];
     float3 tangent = normalize(randomVector - normal * dot(randomVector, normal));
     float3 bitangent = normalize(cross(normal, tangent));
     float3x3 TBN = float3x3(tangent, bitangent, normal);
+    float2 resolutionMultiplier(pr.get_width(), pr.get_height());
     float occlusion = 0.0;
     for(int i = 0; i < sampleCount; ++i) {
         float3 neighbourWorldPosition = worldPosition + (TBN * samples[i]) * radius;
         float4 neighbourClipPosition = camera.projectionMatrix * float4(neighbourWorldPosition, 1);
         neighbourClipPosition /= neighbourClipPosition.w;
         neighbourClipPosition = neighbourClipPosition * 0.5 + 0.5;
-        float neighbourDepth = pr.sample(textureSampler, float2(neighbourClipPosition.x, 1.0 - neighbourClipPosition.y)).z;
+        neighbourClipPosition.y = (1 - neighbourClipPosition.y);
+        neighbourClipPosition.xy *= resolutionMultiplier;
+        uint2 sampleXY = uint2(neighbourClipPosition.xy);
+        float neighbourDepth = pr.read(sampleXY).z;
         float depthDiff = abs(worldPosition.z - neighbourDepth);
         float rangeCheck = smoothstep(0.0, 1.0, radius / max(depthDiff, 1e-5));
         occlusion += (neighbourDepth >= worldPosition.z + comparisonBias ? 1.0 : 0.0) * rangeCheck;
