@@ -74,10 +74,18 @@ public struct PNDefaults {
         /// The sigma value for the Gaussian blur applied to blooming areas.
         public var blurSigma: Float = 10.0
     }
-    /// Configuration for Screen Space Ambient Occlusion (SSAO) effect.
+    /// Configuration for Screen Space Ambient Occlusion (SSAO) visual effect.
+    /// SSAO simulates subtle self-shadowing in creases, holes, and surfaces to enhance realism in rendered images. These parameters control the visual quality and performance of the effect.
     public struct SSAO {
-        /// Number of samples used for SSAO calculation, affecting quality and performance.
+        /// The number of hemisphere samples used per pixel for SSAO calculation. Higher values improve quality at the cost of performance.
         public var sampleCount: Int = 8
+        /// The number of randomly generated noise vectors. More noise vectors reduce visual banding.
         public var noiseCount: Int = 64
+        /// The sampling radius, determining how far to sample around each pixel. Larger radii produce broader occlusion.
+        public var radius: Float = 0.2
+        /// Bias to reduce self-shadowing and artifacts. Increasing this value can help minimize incorrect darkening.
+        public var bias: Float = 0.025
+        /// Exponent used to control the strength and contrast of the occlusion effect.
+        public var power: Float = 16
     }
 }

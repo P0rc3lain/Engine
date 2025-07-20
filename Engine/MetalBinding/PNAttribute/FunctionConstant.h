@@ -41,5 +41,8 @@ enum FunctionConstantIndexBloom {
 
 enum FunctionConstantIndexSSAO {
     kFunctionConstantIndexSSAOSampleCount = 0,
-    kFunctionConstantIndexSSAONoiseCount
+    kFunctionConstantIndexSSAONoiseCount,
+    kFunctionConstantIndexSSAORadius,
+    kFunctionConstantIndexSSAOBias,
+    kFunctionConstantIndexSSAOPower
 };

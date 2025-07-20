@@ -253,7 +253,6 @@
 		568C4EFF284F664500C6F128 /* PNRepeatableTaskQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568C4EFE284F664500C6F128 /* PNRepeatableTaskQueue.swift */; };
 		568C4F01284F687900C6F128 /* PNIRepeatableTaskQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568C4F00284F687900C6F128 /* PNIRepeatableTaskQueue.swift */; };
 		568E3473292424E500A5DF43 /* PNDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568E3472292424E500A5DF43 /* PNDefaults.swift */; };
-		568EBB3A273F0B88007C7D35 /* SSAOUniforms+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EBB39273F0B88007C7D35 /* SSAOUniforms+Extension.swift */; };
 		568EBB3D273F0DE1007C7D35 /* PNISSAOHemisphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568EBB3C273F0DE1007C7D35 /* PNISSAOHemisphere.swift */; };
 		56924AD7271A07FD00FF3E06 /* PNILoopSampler+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56924AD6271A07FD00FF3E06 /* PNILoopSampler+Tests.swift */; };
 		56924AD9271A07FD00FF3E06 /* Engine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5601396C255457D100FC1C45 /* Engine.framework */; };
@@ -621,7 +620,6 @@
 		568C4F00284F687900C6F128 /* PNIRepeatableTaskQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIRepeatableTaskQueue.swift; sourceTree = "<group>"; };
 		568E3472292424E500A5DF43 /* PNDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNDefaults.swift; sourceTree = "<group>"; };
 		568EBB38273F09BC007C7D35 /* SSAO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSAO.h; sourceTree = "<group>"; };
-		568EBB39273F0B88007C7D35 /* SSAOUniforms+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SSAOUniforms+Extension.swift"; sourceTree = "<group>"; };
 		568EBB3C273F0DE1007C7D35 /* PNISSAOHemisphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNISSAOHemisphere.swift; sourceTree = "<group>"; };
 		568EBB3E273F110A007C7D35 /* LightingInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LightingInput.h; sourceTree = "<group>"; };
 		56904B43295640AB001CC47F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -2066,7 +2064,6 @@
 				56D8C4112739D404005E58E3 /* SpotLight+Extension.swift */,
 				560C18D6273AC71100459AEF /* OmniLight+Extension.swift */,
 				569D9243273E81DD004FDFAC /* VertexP+Extension.swift */,
-				568EBB39273F0B88007C7D35 /* SSAOUniforms+Extension.swift */,
 				56165BEF2744401B0025D58B /* ModelUniforms+Extension.swift */,
 				5629FBED27492533005476AF /* PNAnimatedCoordinateSpace+Extension.swift */,
 				5635177028AD5AE200807BDA /* PNScenePiece+Extension.swift */,
@@ -2352,7 +2349,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				568EBB3A273F0B88007C7D35 /* SSAOUniforms+Extension.swift in Sources */,
 				56484BA8284616F6004DFF36 /* Translucent.metal in Sources */,
 				56C47BAA27516C800075C61B /* PNIRenderMaskGenerator.swift in Sources */,
 				5635177528AD6A2900807BDA /* PNIRefreshController.swift in Sources */,

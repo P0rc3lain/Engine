@@ -9,6 +9,5 @@ enum AttributeSsaoComputeShaderBufferIndex {
     kAttributeSsaoComputeShaderBufferSamples,
     kAttributeSsaoComputeShaderBufferNoise,
     kAttributeSsaoComputeShaderBufferTime,
-    kAttributeSsaoComputeShaderBufferModelUniforms,
-    kAttributeSsaoComputeShaderBufferRenderingUniforms
+    kAttributeSsaoComputeShaderBufferModelUniforms
 };
