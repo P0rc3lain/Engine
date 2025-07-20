@@ -13,7 +13,7 @@ struct PNISSAOHemisphere: PNSSAOHemisphere {
         }
         return samples
     }
-    func samples(size: Int) -> [simd_float3] {
+    func samples(size: Int, radius: Float) -> [simd_float3] {
         var samples = [simd_float3]()
         for index in 0 ..< size {
             var vector = normalize(simd_float3(Float.random(in: 0 ..< 1) * 2 - 1,
@@ -22,7 +22,7 @@ struct PNISSAOHemisphere: PNSSAOHemisphere {
             vector *= Float.random(in: 0 ..< 1)
             let scale = Float(index / size)
             let scaleFactor = simd_mix(0.1, 1.0, scale * scale)
-            vector *= scaleFactor
+            vector *= scaleFactor * radius
             samples.append(vector)
         }
         return samples

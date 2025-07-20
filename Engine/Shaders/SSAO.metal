@@ -43,7 +43,7 @@ kernel void kernelSSAO(texture2d<float> nm [[texture(kAttributeSsaoComputeShader
     float2 resolutionMultiplier(pr.get_width(), pr.get_height());
     float occlusion = 0.0;
     for(int i = 0; i < sampleCount; ++i) {
-        float3 neighbourWorldPosition = worldPosition + (TBN * samples[i]) * radius;
+        float3 neighbourWorldPosition = worldPosition + (TBN * samples[i]);
         float4 neighbourClipPosition = camera.projectionMatrix * float4(neighbourWorldPosition, 1);
         neighbourClipPosition /= neighbourClipPosition.w;
         neighbourClipPosition = neighbourClipPosition * 0.5 + 0.5;
