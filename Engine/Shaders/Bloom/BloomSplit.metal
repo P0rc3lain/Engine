@@ -8,8 +8,8 @@
 
 #include "MetalBinding/PNAttribute/Bridge.h"
 
-constant float luminanceThreshold [[function_constant(kFunctionConstantIndexBloomThreshold)]];
-constant float amplification [[function_constant(kFunctionConstantIndexBloomAmplification)]];
+constant half luminanceThreshold [[function_constant(kFunctionConstantIndexBloomThreshold)]];
+constant half amplification [[function_constant(kFunctionConstantIndexBloomAmplification)]];
 
 using namespace metal;
 
