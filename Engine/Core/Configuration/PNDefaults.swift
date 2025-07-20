@@ -8,7 +8,7 @@ import simd
 public struct PNDefaults {
     /// Shared instance of `PNDefaults` for accessing configuration settings.
     public static var shared = PNDefaults()
-    /// Configuration for shaders.
+    /// Configuration for shader-related effects and parameters.
     public var shaders = PNShader()
     /// Configuration for rendering settings.
     public var rendering = PNRendering()
@@ -25,6 +25,8 @@ public struct PNDefaults {
     public struct PNShader {
         /// Lighting configuration for shaders.
         public var lighting = PNLighting()
+        /// SSAO configuration.
+        public var ssao = SSAO()
         /// Configuration for post-processing effects.
         public var postprocess = PNPostProcess()
     }
@@ -71,5 +73,10 @@ public struct PNDefaults {
         public var luminanceAmplifier: Float16 = 1.2
         /// The sigma value for the Gaussian blur applied to blooming areas.
         public var blurSigma: Float = 10.0
+    }
+    /// Configuration for Screen Space Ambient Occlusion (SSAO) effect.
+    public struct SSAO {
+        /// Number of samples used for SSAO calculation, affecting quality and performance.
+        public var sampleCount: Int = 8
     }
 }

@@ -139,7 +139,11 @@ extension MTLDevice {
         return failOrMakeComputePipelineState(function: function)
     }
     func makeCPSSSAO(library: MTLLibrary) -> MTLComputePipelineState {
-        let function = library.failOrMakeFunction(name: "kernelSSAO")
+        let ssaoSettings = PNDefaults.shared.shaders.ssao
+        let values = MTLFunctionConstantValues
+            .int(ssaoSettings.sampleCount, index: kFunctionConstantIndexSSAOSampleCount)
+        let function = library.failOrMakeFunction(name: "kernelSSAO",
+                                                  constantValues: values)
         return failOrMakeComputePipelineState(function: function)
     }
     // ==========

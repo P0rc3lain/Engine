@@ -24,7 +24,8 @@ struct PNSSAOJob: PNComputeJob {
           uniforms: PNAnyStaticBuffer<SSAOUniforms>) {
         // Default values
         let ssaoUniforms = SSAOUniforms.default
-        let samples = PNISSAOHemisphere().samples(size: Int(ssaoUniforms.sampleCount))
+        let sampleCount = PNDefaults.shared.shaders.ssao.sampleCount
+        let samples = PNISSAOHemisphere().samples(size: sampleCount)
         let noise = PNISSAOHemisphere().noise(count: Int(ssaoUniforms.noiseCount))
         self.pipelineState = pipelineState
         self.nmTexture = nmTexture

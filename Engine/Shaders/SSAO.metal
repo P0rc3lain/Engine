@@ -14,6 +14,8 @@
 
 using namespace metal;
 
+constant int sampleCount [[function_constant(kFunctionConstantIndexSSAOSampleCount)]];
+
 kernel void kernelSSAO(texture2d<float> nm [[texture(kAttributeSsaoComputeShaderTextureNM)]],
                        texture2d<float> pr [[texture(kAttributeSsaoComputeShaderTexturePR)]],
                        texture2d<float, access::write> out [[texture(kAttributeSsaoComputeShaderTextureOutput)]],
@@ -37,7 +39,7 @@ kernel void kernelSSAO(texture2d<float> nm [[texture(kAttributeSsaoComputeShader
     float3 bitangent = normalize(cross(normal, tangent));
     float3x3 TBN = float3x3(tangent, bitangent, normal);
     float occlusion = 0.0;
-    for(int i = 0; i < renderingUniforms.sampleCount; ++i) {
+    for(int i = 0; i < sampleCount; ++i) {
         float3 neighbourWorldPosition = worldPosition + (TBN * samples[i]) * renderingUniforms.radius;
         float4 neighbourClipPosition = camera.projectionMatrix * float4(neighbourWorldPosition, 1);
         neighbourClipPosition /= neighbourClipPosition.w;
@@ -46,6 +48,6 @@ kernel void kernelSSAO(texture2d<float> nm [[texture(kAttributeSsaoComputeShader
         float rangeCheck = smoothstep(0.0, 1.0, renderingUniforms.radius / abs(worldPosition.z - neighbourDepth));
         occlusion += (neighbourDepth >= worldPosition.z + renderingUniforms.bias ? 1.0 : 0.0) * rangeCheck;
     }
-    float finalOcclusion = 1.0 - (occlusion / renderingUniforms.sampleCount);
+    float finalOcclusion = 1.0 - (occlusion / sampleCount);
     out.write(pow(finalOcclusion, renderingUniforms.power), inposition.xy);
 }

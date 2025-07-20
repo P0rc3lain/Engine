@@ -5,7 +5,6 @@
 #pragma once
 
 struct SSAOUniforms {
-    int sampleCount;
     int noiseCount;
     float radius;
     float bias;

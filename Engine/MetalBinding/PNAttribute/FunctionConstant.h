@@ -38,3 +38,7 @@ enum FunctionConstantIndexBloom {
     kFunctionConstantIndexBloomThreshold = 0,
     kFunctionConstantIndexBloomAmplification
 };
+
+enum FunctionConstantIndexSSAO {
+    kFunctionConstantIndexSSAOSampleCount = 0
+};
