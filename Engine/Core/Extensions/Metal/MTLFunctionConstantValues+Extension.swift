@@ -75,4 +75,15 @@ extension MTLFunctionConstantValues {
                          index: index.int)
         return self
     }
+    // half
+    static func half<T: RawRepresentable>(_ value: Float16, index: T) -> MTLFunctionConstantValues where T.RawValue == UInt32 {
+        .clean.half(value, index: index)
+    }
+    func half<T: RawRepresentable>(_ value: Float16, index: T) -> MTLFunctionConstantValues where T.RawValue == UInt32 {
+        var modifiableValue = value
+        setConstantValue(&modifiableValue,
+                         type: .half,
+                         index: index.int)
+        return self
+    }
 }

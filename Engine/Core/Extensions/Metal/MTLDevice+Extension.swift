@@ -133,8 +133,8 @@ extension MTLDevice {
     func makeCPSBloomSplit(library: MTLLibrary) -> MTLComputePipelineState {
         let bloomSettings = PNDefaults.shared.shaders.postprocess.bloom
         let values = MTLFunctionConstantValues
-            .float(bloomSettings.luminanceAmplifier, index: kFunctionConstantIndexBloomAmplification)
-            .float(bloomSettings.luminanceThreshold, index: kFunctionConstantIndexBloomThreshold)
+            .half(bloomSettings.luminanceAmplifier, index: kFunctionConstantIndexBloomAmplification)
+            .half(bloomSettings.luminanceThreshold, index: kFunctionConstantIndexBloomThreshold)
         let function = library.failOrMakeFunction(name: "kernelBloomSplit", constantValues: values)
         return failOrMakeComputePipelineState(function: function)
     }

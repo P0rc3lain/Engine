@@ -66,9 +66,9 @@ public struct PNDefaults {
     /// Configuration for bloom post-processing effect.
     public struct PNBloom {
         /// The minimum luminance a pixel must have to be considered for the bloom effect.
-        public var luminanceThreshold: Float = 0.7
+        public var luminanceThreshold: Float16 = 0.7
         /// Amplifies the brightness of pixels that pass the luminance threshold for bloom.
-        public var luminanceAmplifier: Float = 1.2
+        public var luminanceAmplifier: Float16 = 1.2
         /// The sigma value for the Gaussian blur applied to blooming areas.
         public var blurSigma: Float = 10.0
     }
