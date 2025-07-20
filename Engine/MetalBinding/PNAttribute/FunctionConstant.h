@@ -33,3 +33,8 @@ enum FunctionConstantIndexDirectional {
     kFunctionConstantIndexDirectionalPcfRange = 0,
     kFunctionConstantIndexDirectionalShadowBias
 };
+
+enum FunctionConstantIndexBloom {
+    kFunctionConstantIndexBloomThreshold = 0,
+    kFunctionConstantIndexBloomAmplification
+};

@@ -4,6 +4,7 @@
 
 import CoreGraphics
 import Metal
+import PNShared
 import simd
 
 extension MTLDevice {
@@ -130,7 +131,11 @@ extension MTLDevice {
         return failOrMakeComputePipelineState(function: function)
     }
     func makeCPSBloomSplit(library: MTLLibrary) -> MTLComputePipelineState {
-        let function = library.failOrMakeFunction(name: "kernelBloomSplit")
+        let bloomSettings = PNDefaults.shared.shaders.postprocess.bloom
+        let values = MTLFunctionConstantValues
+            .float(bloomSettings.luminanceAmplifier, index: kFunctionConstantIndexBloomAmplification)
+            .float(bloomSettings.luminanceThreshold, index: kFunctionConstantIndexBloomThreshold)
+        let function = library.failOrMakeFunction(name: "kernelBloomSplit", constantValues: values)
         return failOrMakeComputePipelineState(function: function)
     }
     func makeCPSSSAO(library: MTLLibrary) -> MTLComputePipelineState {
