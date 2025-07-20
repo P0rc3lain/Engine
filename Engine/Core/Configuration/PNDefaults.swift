@@ -73,4 +73,3 @@ public struct PNDefaults {
         public var blurSigma: Float = 10.0
     }
 }
-
