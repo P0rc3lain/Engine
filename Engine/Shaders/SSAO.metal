@@ -8,7 +8,6 @@
 
 #include "MetalBinding/PNShared/Model.h"
 #include "MetalBinding/PNShared/Camera.h"
-#include "MetalBinding/PNShared/Rendering/SSAO.h"
 
 #include "MetalBinding/PNAttribute/Bridge.h"
 

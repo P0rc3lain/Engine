@@ -28,8 +28,6 @@ module PNShared {
     header "../MetalBinding/PNShared/Light/SpotLight.h"
     header "../MetalBinding/PNShared/Light/AmbientLight.h"
     header "../MetalBinding/PNShared/Light/DirectionalLight.h"
-    
-    header "../MetalBinding/PNShared/Rendering/SSAO.h"
-        
+            
     export *
 }

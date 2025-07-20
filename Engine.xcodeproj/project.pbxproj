@@ -619,7 +619,6 @@
 		568C4EFE284F664500C6F128 /* PNRepeatableTaskQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNRepeatableTaskQueue.swift; sourceTree = "<group>"; };
 		568C4F00284F687900C6F128 /* PNIRepeatableTaskQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIRepeatableTaskQueue.swift; sourceTree = "<group>"; };
 		568E3472292424E500A5DF43 /* PNDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNDefaults.swift; sourceTree = "<group>"; };
-		568EBB38273F09BC007C7D35 /* SSAO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSAO.h; sourceTree = "<group>"; };
 		568EBB3C273F0DE1007C7D35 /* PNISSAOHemisphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNISSAOHemisphere.swift; sourceTree = "<group>"; };
 		568EBB3E273F110A007C7D35 /* LightingInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LightingInput.h; sourceTree = "<group>"; };
 		56904B43295640AB001CC47F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -899,7 +898,6 @@
 		5610B766293EAA1300A69196 /* PNShared */ = {
 			isa = PBXGroup;
 			children = (
-				568EBB37273F099B007C7D35 /* Rendering */,
 				56ADD2F22737077700107E24 /* Light */,
 				561666E62719E2CD000063B1 /* Compatibility.h */,
 				561666E72719E2CD000063B1 /* Vertex.h */,
@@ -1830,14 +1828,6 @@
 				568E3472292424E500A5DF43 /* PNDefaults.swift */,
 			);
 			path = Configuration;
-			sourceTree = "<group>";
-		};
-		568EBB37273F099B007C7D35 /* Rendering */ = {
-			isa = PBXGroup;
-			children = (
-				568EBB38273F09BC007C7D35 /* SSAO.h */,
-			);
-			path = Rendering;
 			sourceTree = "<group>";
 		};
 		568EBB3B273F0DC6007C7D35 /* SSAO */ = {
