@@ -23,7 +23,8 @@ struct PNSSAOJob: PNComputeJob {
         // Default values
         let ssaoConstants = PNDefaults.shared.shaders.ssao
         let ssaoHemisphere = PNISSAOHemisphere()
-        let samples = ssaoHemisphere.samples(size: ssaoConstants.sampleCount)
+        let samples = ssaoHemisphere.samples(size: ssaoConstants.sampleCount,
+                                             radius: ssaoConstants.radius)
         let noise = ssaoHemisphere.noise(count: ssaoConstants.noiseCount)
         self.pipelineState = pipelineState
         self.nmTexture = nmTexture

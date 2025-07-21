@@ -8,7 +8,6 @@
 
 #include "MetalBinding/PNShared/Model.h"
 #include "MetalBinding/PNShared/Camera.h"
-#include "MetalBinding/PNShared/Rendering/SSAO.h"
 
 #include "MetalBinding/PNAttribute/Bridge.h"
 
@@ -31,27 +30,31 @@ kernel void kernelSSAO(texture2d<float> nm [[texture(kAttributeSsaoComputeShader
                        uint3 inposition [[thread_position_in_grid]],
                        uint3 threads [[threads_per_grid]],
                        constant ModelUniforms * modelUniforms [[buffer(kAttributeSsaoComputeShaderBufferModelUniforms)]]) {
-    auto positionContinuousBuffer = inposition.x + inposition.y * threads.x;
-    auto seed = positionContinuousBuffer + time;
-    auto random = Random(seed);
-    float2 texcoord{float(inposition.x)/float(threads.x), float(inposition.y)/float(threads.y)};
-    constexpr sampler textureSampler(filter::linear);
-    float3 worldPosition = pr.sample(textureSampler, texcoord).xyz;
-    float3 normal = normalize(nm.sample(textureSampler, texcoord)).xyz;
+    int positionContinuousBuffer = inposition.x + inposition.y * threads.x;
+    int seed = positionContinuousBuffer + time;
+    Random random = Random(seed);
+    uint2 positionXY = inposition.xy;
+    float3 worldPosition = pr.read(positionXY).xyz;
+    float3 normal = normalize(nm.read(positionXY)).xyz;
     float3 randomVector = noise[int(random.random() * noiseCount)];
     float3 tangent = normalize(randomVector - normal * dot(randomVector, normal));
     float3 bitangent = normalize(cross(normal, tangent));
     float3x3 TBN = float3x3(tangent, bitangent, normal);
+    float2 resolutionMultiplier(pr.get_width(), pr.get_height());
     float occlusion = 0.0;
     for(int i = 0; i < sampleCount; ++i) {
-        float3 neighbourWorldPosition = worldPosition + (TBN * samples[i]) * radius;
+        float3 neighbourWorldPosition = worldPosition + (TBN * samples[i]);
         float4 neighbourClipPosition = camera.projectionMatrix * float4(neighbourWorldPosition, 1);
         neighbourClipPosition /= neighbourClipPosition.w;
         neighbourClipPosition = neighbourClipPosition * 0.5 + 0.5;
-        float neighbourDepth = pr.sample(textureSampler, float2(neighbourClipPosition.x, 1.0 - neighbourClipPosition.y)).z;
-        float rangeCheck = smoothstep(0.0, 1.0, radius / abs(worldPosition.z - neighbourDepth));
+        neighbourClipPosition.y = (1 - neighbourClipPosition.y);
+        neighbourClipPosition.xy *= resolutionMultiplier;
+        uint2 sampleXY = uint2(neighbourClipPosition.xy);
+        float neighbourDepth = pr.read(sampleXY).z;
+        float depthDiff = abs(worldPosition.z - neighbourDepth);
+        float rangeCheck = smoothstep(0.0, 1.0, radius / max(depthDiff, 1e-5));
         occlusion += (neighbourDepth >= worldPosition.z + comparisonBias ? 1.0 : 0.0) * rangeCheck;
     }
     float finalOcclusion = 1.0 - (occlusion / sampleCount);
-    out.write(pow(finalOcclusion, power), inposition.xy);
+    out.write(pow(finalOcclusion, power), positionXY);
 }
