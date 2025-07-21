@@ -26,12 +26,6 @@ jobs:
           - name: "Engine-macOS.framework"
             destination: "generic/platform=macOS"
             path: "Release"
-          - name: "Engine-iOS.framework"
-            destination: "generic/platform=iOS"
-            path: "Release-iphoneos"
-          - name: "Engine-tvOS.framework"
-            destination: "generic/platform=tvOS"
-            path: "Release-appletvos"
     runs-on: macOS-latest
     steps:
       - name: Check out sources
@@ -59,26 +53,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: Engine-macOS.framework.tar.gz
-      - name: Download iOS binary
-        uses: actions/download-artifact@v4
-        with:
-          name: Engine-iOS.framework.tar.gz
-      - name: Download tvOS binary
-        uses: actions/download-artifact@v4
-        with:
-          name: Engine-tvOS.framework.tar.gz
       - name: Create dirs
-        run: mkdir -p iOS tvOS macOS
+        run: mkdir -p macOS
       - name: Unarchive the macOS binary
         run: tar -xf Engine-macOS.framework.tar.gz -C macOS
-      - name: Unarchive the iOS binary
-        run: tar -xf Engine-iOS.framework.tar.gz -C iOS
-      - name: Unarchive the tvOS binary
-        run: tar -xf Engine-tvOS.framework.tar.gz -C tvOS
       - run: xcodebuild -create-xcframework
              -framework "/Users/runner/work/Engine/Engine/macOS/Engine.framework"
-             -framework "/Users/runner/work/Engine/Engine/iOS/Engine.framework"
-             -framework "/Users/runner/work/Engine/Engine/tvOS/Engine.framework"
              -output "/Users/runner/work/Engine/Engine/Engine.xcframework"
       - name: Upload the universal framework
         uses: actions/upload-artifact@v4
