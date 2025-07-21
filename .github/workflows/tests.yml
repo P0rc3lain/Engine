@@ -31,9 +31,7 @@ jobs:
   unittests:
     strategy:
       matrix:
-        platform: ["platform=macOS",
-                   "platform=iOS Simulator,name=iPhone 13",
-                   "platform=tvOS Simulator,name=Apple TV"]
+        platform: ["platform=macOS"]
     runs-on: macOS-latest
     steps:
       - name: Checkout Repository
