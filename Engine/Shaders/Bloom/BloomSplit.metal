@@ -18,8 +18,8 @@ kernel void kernelBloomSplit(texture2d<half, access::read> inputTexture [[textur
                              uint2 inposition [[thread_position_in_grid]]) {
     half3 color = inputTexture.read(inposition.xy).xyz;
     if (luminance(color) > luminanceThreshold) {
-        outputTexture.write(half4(color * amplification, 1), inposition.xy);
+        outputTexture.write(half4(color * amplification, 1.0h), inposition.xy);
     } else {
-        outputTexture.write(half4(0, 0, 0, 1), inposition.xy);
+        outputTexture.write(half4(0.0h, 0.0h, 0.0h, 1.0h), inposition.xy);
     }
 }
