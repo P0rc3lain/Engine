@@ -7,6 +7,9 @@ import ModelIO
 import PNShared
 
 extension PNMesh {
+    func hasTranslucentSubmesh() -> Bool {
+        pieceDescriptions.contains(where: { $0.material?.isTranslucent ?? false })
+    }
     static func cube(device: MTLDevice) -> PNMesh? {
         guard let vertices = device.makeBuffer(array: cubeVertices),
               let indices = device.makeBuffer(array: cubeIndices) else {
