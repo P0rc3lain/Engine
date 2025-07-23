@@ -8,9 +8,9 @@ import simd
 /// A shortened version of ``PNBoundingBox`` for simpler cases.
 public struct PNBound: CustomDebugStringConvertible {
     /// The minimum (lowest) corner point of the bound in 3D space.
-    private let min: simd_float3
+    public let min: simd_float3
     /// The maximum (highest) corner point of the bound in 3D space.
-    private let max: simd_float3
+    public let max: simd_float3
     /// Creates a new bound given minimum and maximum 3D points.
     /// - Parameters:
     ///   - min: The minimum (lowest) corner point.
