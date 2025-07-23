@@ -25,6 +25,10 @@ struct PNCombineStage: PNStage {
           spotLightShadows: PNTextureProvider,
           pointLightsShadows: PNTextureProvider,
           directionalLightsShadows: PNTextureProvider) {
+        guard gBufferOutput.color.allSatisfy( { element in element.texture!.width == Int(renderingSize.width) } ),
+              gBufferOutput.depth.allSatisfy( { element in element.texture!.width == Int(renderingSize.width) } ) else {
+            fatalError("Assumptions not met")
+        }
         guard let environmentJob = PNEnvironmentJob.make(device: device),
               let omniJob = PNOmniJob.make(device: device,
                                            inputTextures: gBufferOutput.color,
