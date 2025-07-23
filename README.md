@@ -1,4 +1,4 @@
-#  Porcelain &middot; [![Archive](https://github.com/P0rc3lain/Engine/actions/workflows/archive.yml/badge.svg?branch=main)](https://github.com/P0rc3lain/Engine/actions/workflows/archive.yml)
+#  Porcelain &middot; [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) &middot; [![Archive](https://github.com/P0rc3lain/Engine/actions/workflows/archive.yml/badge.svg?branch=main)](https://github.com/P0rc3lain/Engine/actions/workflows/archive.yml)
 
 <p align="center">
     <img src="./Assets/waze.png" width="20%">
@@ -118,3 +118,7 @@ Documentation along with the engine framework itself can be found [here](https:/
 ### Lightning model
 
 * PBR
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request. For major changes, please open an issue first to discuss what you would like to change.
