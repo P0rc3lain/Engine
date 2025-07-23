@@ -22,6 +22,8 @@ struct PNGBufferJob: PNRenderJob {
         let dataStore = supply.bufferStore
         let mask = supply.mask.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx]
         encoder.setDepthStencilState(depthStencilState)
+        encoder.setCullMode(.back)
+        encoder.setFrontFacing(.counterClockwise)
         encoder.setVertexBuffer(dataStore.cameras.buffer,
                                 index: kAttributeGBufferVertexShaderBufferCameraUniforms)
         encoder.setStencilReferenceValue(1)
@@ -55,7 +57,6 @@ struct PNGBufferJob: PNRenderJob {
         }
     }
     private func draw(encoder: MTLRenderCommandEncoder, mesh: PNMesh, uniformReference: PNIndex) {
-        encoder.setBackCulling(mesh.culling)
         encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                 offset: mesh.vertexBuffer.offset,
                                 index: kAttributeGBufferVertexShaderBufferStageIn)

@@ -19,8 +19,29 @@ struct PNTranslucentJob: PNRenderJob {
     }
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         let scene = supply.scene
-        let dataStore = supply.bufferStore
         let mask = supply.mask.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx]
+
+        let animatedModels = scene.animatedModels.filter { animatedModel in
+            if !mask[animatedModel.idx] {
+                return false
+            }
+            return scene.meshes[animatedModel.mesh].hasTranslucentSubmesh()
+        }
+
+        let models = scene.models.filter { model in
+            if !mask[model.idx] {
+                return false
+            }
+            return scene.meshes[model.mesh].hasTranslucentSubmesh()
+        }
+
+        guard !models.isEmpty || !animatedModels.isEmpty else {
+            return
+        }
+
+        let dataStore = supply.bufferStore
+        encoder.setCullMode(.none)
+        encoder.setFrontFacing(.counterClockwise)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setVertexBuffer(dataStore.cameras.buffer,
                                 index: kAttributeTranslucentVertexShaderBufferCameraUniforms)
@@ -28,10 +49,7 @@ struct PNTranslucentJob: PNRenderJob {
         encoder.setRenderPipelineState(animatedPipelineState)
         encoder.setVertexBuffer(dataStore.modelCoordinateSystems,
                                 index: kAttributeTranslucentVertexShaderBufferModelUniforms)
-        for animatedModel in scene.animatedModels {
-            if !mask[animatedModel.idx] {
-                continue
-            }
+        for animatedModel in animatedModels {
             encoder.setVertexBuffer(dataStore.matrixPalettes,
                                     offset: scene.paletteOffset[animatedModel.skeleton],
                                     index: kAttributeTranslucentVertexShaderBufferMatrixPalettes)
@@ -40,10 +58,7 @@ struct PNTranslucentJob: PNRenderJob {
                  uniformReference: animatedModel.idx)
         }
         encoder.setRenderPipelineState(pipelineState)
-        for model in scene.models {
-            if !mask[model.idx] {
-                continue
-            }
+        for model in models {
             draw(encoder: encoder,
                  mesh: scene.meshes[model.mesh],
                  uniformReference: model.idx)
@@ -62,9 +77,7 @@ struct PNTranslucentJob: PNRenderJob {
             }
             encoder.setFragmentTexture(material.albedo,
                                        index: kAttributeTranslucentFragmentShaderTextureAlbedo)
-            encoder.setFrontCulling(mesh.culling)
-            encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
-            encoder.setBackCulling(mesh.culling)
+
             encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
         }
     }

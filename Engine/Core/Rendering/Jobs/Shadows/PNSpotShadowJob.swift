@@ -25,6 +25,8 @@ struct PNSpotShadowJob: PNRenderJob {
         guard !shadowCasterIndices.isEmpty else {
             return
         }
+        encoder.setCullMode(.front)
+        encoder.setFrontFacing(.counterClockwise)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setRenderPipelineState(animatedPipelineState)
         encoder.setVertexBuffer(dataStore.spotLights,
@@ -40,7 +42,6 @@ struct PNSpotShadowJob: PNRenderJob {
                     continue
                 }
                 let mesh = scene.meshes[animatedModel.mesh]
-                encoder.setFrontCulling(mesh.culling)
                 encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                         offset: mesh.vertexBuffer.offset,
                                         index: kAttributeSpotShadowVertexShaderBufferStageIn)
@@ -59,7 +60,6 @@ struct PNSpotShadowJob: PNRenderJob {
                     continue
                 }
                 let mesh = scene.meshes[model.mesh]
-                encoder.setFrontCulling(mesh.culling)
                 encoder.setVertexBuffer(mesh.vertexBuffer.buffer,
                                         offset: mesh.vertexBuffer.offset,
                                         index: kAttributeSpotShadowVertexShaderBufferStageIn)

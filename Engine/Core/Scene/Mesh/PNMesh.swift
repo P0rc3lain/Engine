@@ -10,16 +10,12 @@ public final class PNMesh {
     public let vertexBuffer: PNDataBuffer
     /// Descriptions of the individual segments of the mesh.
     public var pieceDescriptions: [PNPieceDescription]
-    /// The culling strategy applied to the mesh for rendering optimization.
-    public let culling: PNCulling
     /// Initializes a mesh with a bounding box, vertex buffer, piece descriptions, and culling strategy.
     public init(boundingBox: PNBoundingBox,
                 vertexBuffer: PNDataBuffer,
-                pieceDescriptions: [PNPieceDescription],
-                culling: PNCulling) {
+                pieceDescriptions: [PNPieceDescription]) {
         self.boundingBox = boundingBox
         self.vertexBuffer = vertexBuffer
         self.pieceDescriptions = pieceDescriptions
-        self.culling = culling
     }
 }
