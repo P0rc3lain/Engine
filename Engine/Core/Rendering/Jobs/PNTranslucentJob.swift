@@ -20,25 +20,25 @@ struct PNTranslucentJob: PNRenderJob {
     func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
         let scene = supply.scene
         let mask = supply.mask.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx]
-        
+
         let animatedModels = scene.animatedModels.filter { animatedModel in
             if !mask[animatedModel.idx] {
                 return false
             }
             return scene.meshes[animatedModel.mesh].hasTranslucentSubmesh()
         }
-        
+
         let models = scene.models.filter { model in
             if !mask[model.idx] {
                 return false
             }
             return scene.meshes[model.mesh].hasTranslucentSubmesh()
         }
-        
-        guard models.count > 0 || animatedModels.count > 0 else {
+
+        guard !models.isEmpty || !animatedModels.isEmpty else {
             return
         }
-        
+
         let dataStore = supply.bufferStore
         encoder.setCullMode(.none)
         encoder.setFrontFacing(.counterClockwise)
@@ -77,7 +77,7 @@ struct PNTranslucentJob: PNRenderJob {
             }
             encoder.setFragmentTexture(material.albedo,
                                        index: kAttributeTranslucentFragmentShaderTextureAlbedo)
-            
+
             encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
         }
     }
