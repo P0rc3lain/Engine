@@ -142,10 +142,7 @@ public final class PNISceneTranslator: PNSceneTranslator {
         let interactor = PNIBoundingBoxInteractor.default
         return PNMesh(boundingBox: interactor.from(bound: bounds),
                       vertexBuffer: dataBuffer,
-                      pieceDescriptions: pieceDescriptions,
-                      culling: PNCulling(frontCulling: .front,
-                                         backCulling: .back,
-                                         winding: .counterClockwise))
+                      pieceDescriptions: pieceDescriptions)
     }
     private func parentIndex(jointPaths: [String], jointPath: String) -> Int {
         let components = jointPath.components(separatedBy: "/")

@@ -21,6 +21,7 @@ struct PNTranslucentJob: PNRenderJob {
         let scene = supply.scene
         let dataStore = supply.bufferStore
         let mask = supply.mask.cameras[scene.entities[scene.activeCameraIdx].data.referenceIdx]
+        encoder.setFrontFacing(.counterClockwise)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setVertexBuffer(dataStore.cameras.buffer,
                                 index: kAttributeTranslucentVertexShaderBufferCameraUniforms)
@@ -62,9 +63,9 @@ struct PNTranslucentJob: PNRenderJob {
             }
             encoder.setFragmentTexture(material.albedo,
                                        index: kAttributeTranslucentFragmentShaderTextureAlbedo)
-            encoder.setFrontCulling(mesh.culling)
+            encoder.setCullMode(.front)
             encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
-            encoder.setBackCulling(mesh.culling)
+            encoder.setCullMode(.back)
             encoder.drawIndexedPrimitives(submesh: pieceDescription.drawDescription)
         }
     }

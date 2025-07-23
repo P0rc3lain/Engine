@@ -28,6 +28,8 @@ struct PNOmniShadowJob: PNRenderJob {
         guard !shadowCasterIndices.isEmpty else {
             return
         }
+        encoder.setFrontFacing(.counterClockwise)
+        encoder.setCullMode(.front)
         encoder.setDepthStencilState(depthStencilState)
         encoder.setRenderPipelineState(animatedPipelineState)
         encoder.setVertexBuffer(rotationsBuffer,
@@ -47,7 +49,6 @@ struct PNOmniShadowJob: PNRenderJob {
                                         offset: supply.scene.paletteOffset[animatedModel.skeleton],
                                         index: kAttributeOmniShadowVertexShaderBufferMatrixPalettes)
                 let mesh = supply.scene.meshes[animatedModel.mesh]
-                encoder.setFrontCulling(mesh.culling)
                 encoder.setVertexBytes(value: animatedModel.idx,
                                        index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
                 encodeMeshDraw(commandEncoder: encoder, mesh: mesh)
@@ -58,7 +59,6 @@ struct PNOmniShadowJob: PNRenderJob {
                     continue
                 }
                 let mesh = supply.scene.meshes[model.mesh]
-                encoder.setFrontCulling(mesh.culling)
                 encoder.setVertexBytes(value: model.idx,
                                        index: kAttributeOmniShadowVertexShaderBufferObjectIndex)
                 encodeMeshDraw(commandEncoder: encoder, mesh: mesh)

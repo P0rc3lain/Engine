@@ -24,10 +24,7 @@ extension PNMesh {
                                                                                max: [0.5, 0.5, 0.5]))
         return PNMesh(boundingBox: boundingBox,
                       vertexBuffer: verticesBuffer,
-                      pieceDescriptions: [pieceDescription],
-                      culling: PNCulling(frontCulling: .front,
-                                         backCulling: .back,
-                                         winding: .counterClockwise))
+                      pieceDescriptions: [pieceDescription])
     }
     private static var cubeIndices: [UInt16] = [
         0, 3, 2, 2, 1, 0,
@@ -87,10 +84,7 @@ extension PNMesh {
         return PNMesh(boundingBox: interactor.from(bound: PNBound(min: [-1, -1, 0],
                                                                   max: [1, 1, 0])),
                       vertexBuffer: verticesBuffer,
-                      pieceDescriptions: [pieceDescription],
-                      culling: PNCulling(frontCulling: .front,
-                                         backCulling: .back,
-                                         winding: .counterClockwise))
+                      pieceDescriptions: [pieceDescription])
     }
     private static var planeVertices: [Vertex] = [
         Vertex(position: simd_float3(-1, -1, 0),

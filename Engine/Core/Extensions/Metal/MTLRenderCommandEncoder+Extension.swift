@@ -93,14 +93,6 @@ extension MTLRenderCommandEncoder {
                                                  index: T) where T.RawValue == UInt32 {
         setFragmentTexture(textureProvider.texture, index: index.rawValue.int)
     }
-    func setBackCulling(_ culling: PNCulling) {
-        setCullMode(culling.backCulling)
-        setFrontFacing(culling.winding)
-    }
-    func setFrontCulling(_ culling: PNCulling) {
-        setCullMode(culling.frontCulling)
-        setFrontFacing(culling.winding)
-    }
     func drawIndexedPrimitives(submesh indexDraw: PNSubmesh, instanceCount: Int = 1) {
         guard let buffer = indexDraw.indexBuffer.buffer else {
             fatalError("Buffer not set")

@@ -19,7 +19,6 @@ Mesh representation and its details configuration.
 
 ### Building blocks
 
-- ``PNCulling``
 - ``PNPrimitiveType``
 - ``PNIndexBitDepth``
 
