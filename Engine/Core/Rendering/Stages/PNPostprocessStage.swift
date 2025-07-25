@@ -45,23 +45,30 @@ struct PNPostprocessStage: PNStage {
         self.io = PNGPUIO(input: PNGPUSupply(color: [input]),
                           output: PNGPUSupply(color: [postprocessOutputTexture]))
     }
-    func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
-        commandBuffer.pushDebugGroup("Bloom Pass")
-        guard let bloomSplitEncoder = commandBuffer.makeComputeCommandEncoder() else {
+    func draw(commandQueue: MTLCommandQueue, supply: PNFrameSupply) {
+        guard let commandBuffer = commandQueue.makeCommandBuffer(),
+              let bloomSplitEncoder = commandBuffer.makeComputeCommandEncoder() else {
             return
         }
+        commandBuffer.label = "Bloom"
+        commandBuffer.pushDebugGroup("Bloom Pass")
         bloomSplitJob.compute(encoder: bloomSplitEncoder, supply: supply)
         bloomSplitEncoder.endEncoding()
         gaussianBlurJob.encode(commandBuffer: commandBuffer,
                                sourceTexture: bloomSplitTexture,
                                destinationTexture: splitBlurredTexture)
         commandBuffer.popDebugGroup()
-        commandBuffer.pushDebugGroup("Postprocess Merge Pass")
-        guard let postprocessMergeEncoder = commandBuffer.makeComputeCommandEncoder() else {
+        commandBuffer.commit()
+        
+        guard let commandBuffer = commandQueue.makeCommandBuffer(),
+              let postprocessMergeEncoder = commandBuffer.makeComputeCommandEncoder() else {
             return
         }
+        commandBuffer.label = "Final Merge"
+        commandBuffer.pushDebugGroup("Postprocess Merge Pass")
         postprocessMergeJob.compute(encoder: postprocessMergeEncoder, supply: supply)
         postprocessMergeEncoder.endEncoding()
         commandBuffer.popDebugGroup()
+        commandBuffer.commit()
     }
 }

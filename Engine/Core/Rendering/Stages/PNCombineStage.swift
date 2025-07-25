@@ -66,11 +66,13 @@ struct PNCombineStage: PNStage {
                                              stencil: gBufferOutput.stencil),
                           output: PNGPUSupply(color: [PNStaticTexture(outputTexture)]))
     }
-    func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
-        commandBuffer.pushDebugGroup("Light Pass")
-        guard let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else {
+    func draw(commandQueue: MTLCommandQueue, supply: PNFrameSupply) {
+        guard let commandBuffer = commandQueue.makeCommandBuffer(),
+              let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else {
             return
         }
+        commandBuffer.label = "Combine"
+        commandBuffer.pushDebugGroup("Light Pass")
         omniJob.draw(encoder: encoder, supply: supply)
         ambientJob.draw(encoder: encoder, supply: supply)
         spotJob.draw(encoder: encoder, supply: supply)
@@ -81,5 +83,6 @@ struct PNCombineStage: PNStage {
         fogJob.draw(encoder: encoder, supply: supply)
         encoder.endEncoding()
         commandBuffer.popDebugGroup()
+        commandBuffer.commit()
     }
 }
