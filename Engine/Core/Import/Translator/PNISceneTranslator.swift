@@ -114,7 +114,7 @@ public final class PNISceneTranslator: PNSceneTranslator {
         guard let deviceBuffer = device.makeBufferShared(data: buffer) else {
             return nil
         }
-        let dataBuffer = PNDataBuffer(buffer: deviceBuffer, length: buffer.count)
+        let dataBuffer = PNDataBuffer(buffer: deviceBuffer, length: buffer.count, label: "Vertices")
         var pieceDescriptions = [PNPieceDescription]()
         guard let submeshes = mesh.submeshes as? [MDLSubmesh] else {
             fatalError("Malformed object")
@@ -125,7 +125,8 @@ public final class PNISceneTranslator: PNSceneTranslator {
                let indexType = PNIndexBitDepth(modelIO: $0.indexType)?.metal,
                let geometryType = PNPrimitiveType(modelIO: $0.geometryType)?.metal {
                 let submesh = PNSubmesh(indexBuffer: PNDataBuffer(buffer: submeshBuffer,
-                                                                  length: $0.indexBuffer.length),
+                                                                  length: $0.indexBuffer.length,
+                                                                  label: "Indices"),
                                         indexCount: $0.indexCount,
                                         indexType: indexType,
                                         primitiveType: geometryType)
