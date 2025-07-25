@@ -29,28 +29,22 @@ struct PNIRenderingCoordinator: PNRenderingCoordinator {
     }
     mutating func draw(frameSupply: PNFrameSupply) {
         guard frameSupply.scene.activeCameraIdx != .nil,
-              let commandBuffer = commandQueue.makeCommandBuffer(),
               let drawable = view.currentDrawable,
               let outputTexture = view.currentRenderPassDescriptor?.colorAttachments[0].texture,
               let sourceTexture = pipeline.io.output.color[0].texture else {
             return
         }
-        commandBuffer.label = "Frame generation"
         let encodingInterval = psignposter.beginInterval("Frame encoding")
-        pipeline.draw(commandBuffer: commandBuffer, supply: frameSupply)
+        pipeline.draw(commandQueue: commandQueue, supply: frameSupply)
+        guard let commandBuffer = commandQueue.makeCommandBuffer() else {
+            fatalError("Could create command buffer for frame copying")
+        }
         commandBuffer.pushDebugGroup("Copy Pass")
         imageConverter.encode(commandBuffer: commandBuffer,
                               sourceTexture: sourceTexture,
                               destinationTexture: outputTexture)
         commandBuffer.popDebugGroup()
         commandBuffer.present(drawable)
-        var renderingInterval: OSSignpostIntervalState!
-        commandBuffer.addScheduledHandler { _ in
-            renderingInterval = psignposter.beginInterval("Rendering")
-        }
-        commandBuffer.addCompletedHandler { _ in
-            psignposter.endInterval("Rendering", renderingInterval)
-        }
         commandBuffer.commit()
         psignposter.endInterval("Frame encoding", encodingInterval)
         commandBuffer.waitUntilCompleted()

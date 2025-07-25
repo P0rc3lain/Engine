@@ -48,18 +48,18 @@ struct PNPipeline: PNStage {
         self.io = PNGPUIO(input: .empty,
                           output: PNGPUSupply(color: postprocessStage.io.output.color))
     }
-    func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
-        shadowStage.draw(commandBuffer: commandBuffer,
+    func draw(commandQueue: MTLCommandQueue, supply: PNFrameSupply) {
+        shadowStage.draw(commandQueue: commandQueue,
                          supply: supply)
-        gBufferStage.draw(commandBuffer: commandBuffer,
+        gBufferStage.draw(commandQueue: commandQueue,
                           supply: supply)
         if !supply.scene.ambientLights.isEmpty {
-            ssaoStage.draw(commandBuffer: commandBuffer,
+            ssaoStage.draw(commandQueue: commandQueue,
                            supply: supply)
         }
-        combineStage.draw(commandBuffer: commandBuffer,
+        combineStage.draw(commandQueue: commandQueue,
                           supply: supply)
-        postprocessStage.draw(commandBuffer: commandBuffer,
+        postprocessStage.draw(commandQueue: commandQueue,
                               supply: supply)
     }
 }

@@ -54,7 +54,7 @@ class PNShadowStage: PNStage {
         let directionalUpdated = directionalRenderingTexture.updateDescriptor(descriptor: directionalDescriptor)
         return spotUpdated || omniUpdated || directionalUpdated
     }
-    func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
+    func draw(commandQueue: MTLCommandQueue, supply: PNFrameSupply) {
         if updateTextures(supply: supply) {
             spotShadowRPD = .spotLightShadow(device: device,
                                              texture: spotRenderingTexture.texture)
@@ -63,34 +63,35 @@ class PNShadowStage: PNStage {
             directionalShadowRPD = .directionalLightShadow(device: device,
                                                            texture: directionalRenderingTexture.texture)
         }
-        if !supply.scene.spotLights.isEmpty {
-            commandBuffer.pushDebugGroup("Spot Light Shadow Pass")
+        if !supply.scene.spotLights.isEmpty,
+           let commandBuffer = commandQueue.makeCommandBuffer() {
+            commandBuffer.label = "Spot Light Shadow Pass"
             guard let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: spotShadowRPD) else {
                 return
             }
             spotShadowJob.draw(encoder: encoder, supply: supply)
             encoder.endEncoding()
-            commandBuffer.popDebugGroup()
+            commandBuffer.commit()
         }
-        if !supply.scene.omniLights.isEmpty {
-            commandBuffer.pushDebugGroup("Omni Light Shadow Pass")
+        if !supply.scene.omniLights.isEmpty,
+           let commandBuffer = commandQueue.makeCommandBuffer() {
+            commandBuffer.label = "Omni Light Shadow Pass"
             guard let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: omniShadowRPD) else {
                 return
             }
             omniShadowJob.draw(encoder: encoder, supply: supply)
             encoder.endEncoding()
-            commandBuffer.popDebugGroup()
+            commandBuffer.commit()
         }
-        #if os(macOS)
-        if !supply.scene.directionalLights.isEmpty {
-            commandBuffer.pushDebugGroup("Directional Light Shadow Pass")
+        if !supply.scene.directionalLights.isEmpty,
+           let commandBuffer = commandQueue.makeCommandBuffer() {
+            commandBuffer.label = "Directional Light Shadow Pass"
             guard let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: directionalShadowRPD) else {
                 return
             }
             directionalShadowJob.draw(encoder: encoder, supply: supply)
             encoder.endEncoding()
-            commandBuffer.popDebugGroup()
+            commandBuffer.commit()
         }
-        #endif
     }
 }
