@@ -15,10 +15,10 @@ public struct PNDataBuffer {
     public let offset: Int
     /// A descriptive label for identifying this buffer in debugging tools. Setting this will update the Metal buffer's label.
     public var label: String? {
-        set {
-            buffer?.label = newValue
-        } get {
+        get {
             buffer?.label
+        } set {
+            buffer?.label = newValue
         }
     }
     /// Creates a PNDataBuffer using a given Metal buffer, byte length, offset, and optional label.
@@ -44,4 +44,3 @@ public struct PNDataBuffer {
                   label: label)
     }
 }
-
