@@ -59,7 +59,6 @@ struct PNPostprocessStage: PNStage {
                                destinationTexture: splitBlurredTexture)
         commandBuffer.popDebugGroup()
         commandBuffer.commit()
-        
         guard let commandBuffer = commandQueue.makeCommandBuffer(),
               let postprocessMergeEncoder = commandBuffer.makeComputeCommandEncoder() else {
             return

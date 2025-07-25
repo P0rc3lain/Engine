@@ -32,7 +32,6 @@ struct PNSSAOStage: PNStage {
         self.gaussTexture = gaussTexture
     }
     func draw(commandQueue: MTLCommandQueue, supply: PNFrameSupply) {
-        
         guard let commandBuffer = commandQueue.makeCommandBuffer(),
               let ssaoEncoder = commandBuffer.makeComputeCommandEncoder() else {
             return

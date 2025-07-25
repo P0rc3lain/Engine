@@ -36,7 +36,9 @@ struct PNIRenderingCoordinator: PNRenderingCoordinator {
         }
         let encodingInterval = psignposter.beginInterval("Frame encoding")
         pipeline.draw(commandQueue: commandQueue, supply: frameSupply)
-        let commandBuffer = commandQueue.makeCommandBuffer()!
+        guard let commandBuffer = commandQueue.makeCommandBuffer() else {
+            fatalError("Could create command buffer for frame copying")
+        }
         commandBuffer.pushDebugGroup("Copy Pass")
         imageConverter.encode(commandBuffer: commandBuffer,
                               sourceTexture: sourceTexture,
