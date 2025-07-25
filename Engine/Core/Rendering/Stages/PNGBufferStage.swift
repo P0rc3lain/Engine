@@ -27,13 +27,14 @@ struct PNGBufferStage: PNStage {
                                               stencil: [stencil],
                                               depth: [depth]))
     }
-    func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
-        commandBuffer.pushDebugGroup("G-Buffer Renderer Pass")
-        guard let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: gBufferRenderPassDescriptor) else {
+    func draw(commandQueue: MTLCommandQueue, supply: PNFrameSupply) {
+        guard let commandBuffer = commandQueue.makeCommandBuffer(),
+              let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: gBufferRenderPassDescriptor) else {
             return
         }
+        commandBuffer.label = "G-Buffer Renderer Pass"
         gBufferJob.draw(encoder: encoder, supply: supply)
         encoder.endEncoding()
-        commandBuffer.popDebugGroup()
+        commandBuffer.commit()
     }
 }

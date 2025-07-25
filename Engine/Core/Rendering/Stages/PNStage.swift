@@ -6,5 +6,5 @@ import Metal
 
 protocol PNStage {
     var io: PNGPUIO { get }
-    func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply)
+    func draw(commandQueue: MTLCommandQueue, supply: PNFrameSupply)
 }
