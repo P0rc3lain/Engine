@@ -99,7 +99,8 @@ public struct PNITerrainLoader: PNTerrainLoader {
                 return nil
             }
             let submesh = PNSubmesh(indexBuffer: PNDataBuffer(buffer: indexBuffer,
-                                                              length: chunk.count),
+                                                              length: chunk.count,
+                                                              label: "Indices"),
                                     indexCount: chunksCount,
                                     indexType: .uint32,
                                     primitiveType: .triangleStrip)
@@ -107,7 +108,7 @@ public struct PNITerrainLoader: PNTerrainLoader {
         }
         let bound = PNIBoundEstimator().bound(vertexBuffer: verts)
         return PNMesh(boundingBox: PNIBoundingBoxInteractor.default.from(bound: bound),
-                      vertexBuffer: PNDataBuffer(buffer: buffer, length: verts.count),
+                      vertexBuffer: PNDataBuffer(buffer: buffer, length: verts.count, label: "Vertices"),
                       pieceDescriptions: pieces)
     }
 }

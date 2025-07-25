@@ -16,8 +16,8 @@ extension PNMesh {
             assertionFailure("Could not create buffers for the mesh")
             return nil
         }
-        let verticesBuffer = PNDataBuffer(wholeBuffer: vertices)
-        let indicesBuffer = PNDataBuffer(wholeBuffer: indices)
+        let verticesBuffer = PNDataBuffer(wholeBuffer: vertices, label: "Vertices")
+        let indicesBuffer = PNDataBuffer(wholeBuffer: indices, label: "Indices")
         let drawDescription = PNSubmesh(indexBuffer: indicesBuffer,
                                         indexCount: indices.length / MemoryLayout<UInt16>.stride,
                                         indexType: .uint16,
@@ -75,8 +75,8 @@ extension PNMesh {
             assertionFailure("Could not create buffers for the mesh")
             return nil
         }
-        let indicesBuffer = PNDataBuffer(wholeBuffer: indices)
-        let verticesBuffer = PNDataBuffer(wholeBuffer: vertices)
+        let indicesBuffer = PNDataBuffer(wholeBuffer: indices, label: "Indices")
+        let verticesBuffer = PNDataBuffer(wholeBuffer: vertices, label: "Vertices")
         let drawDescription = PNSubmesh(indexBuffer: indicesBuffer,
                                         indexCount: indicesBuffer.length / MemoryLayout<UInt16>.stride,
                                         indexType: .uint16,
