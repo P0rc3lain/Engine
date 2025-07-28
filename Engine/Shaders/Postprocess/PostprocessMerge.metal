@@ -27,7 +27,7 @@ kernel void postprocessMerge(texture2d<float> inputTexture [[texture(kAttributeP
                                      velocityTexture,
                                      inposition.xy,
                                      1,
-                                     5).rgb;
+                                     10).rgb;
     
     float3 bloomColor = brightAreasTexture.read(inposition.xy).xyz;
     auto inputColor = float4(bloomColor + blurredImage, 1);

@@ -6,5 +6,5 @@
 
 #include <simd/simd.h>
 
-metal::float3x3 extractRotation(metal::float4x4 transformation);
-metal::float4 extractPosition(metal::float4x4 transformation);
+metal::float3x3 extractRotation(thread const metal::float4x4 transformation);
+metal::float4 extractPosition(thread const metal::float4x4 transformation);
