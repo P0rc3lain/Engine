@@ -44,7 +44,7 @@ fragment float4 fragmentDirectionalLight(RasterizerData in [[stage_in]],
                                          constant CameraUniforms & camera [[buffer(kAttributeDirectionalFragmentShaderBufferCamera)]],
                                          constant DirectionalLight * directionalLights [[buffer(kAttributeDirectionalFragmentShaderBufferDirectionalLights)]],
                                          constant ModelUniforms * modelUniforms [[buffer(kAttributeDirectionalFragmentShaderBufferLightUniforms)]]) {
-    constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
+    constexpr sampler textureSampler(mag_filter::nearest, min_filter::nearest, mip_filter::none);
     DirectionalLight light = directionalLights[in.instanceId];
     float3 lightDirection = light.rotationMatrix.columns[2].xyz;
     LightingInput input = LightingInput::fromTextures(ar, nm, pr, textureSampler, in.texcoord);

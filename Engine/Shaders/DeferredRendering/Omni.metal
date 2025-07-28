@@ -46,12 +46,12 @@ fragment float4 fragmentOmniLight(RasterizerData in [[stage_in]],
                                   constant CameraUniforms & camera [[buffer(kAttributeLightingFragmentShaderBufferCamera)]],
                                   constant OmniLight * omniLights [[buffer(kAttributeLightingFragmentShaderBufferOmniLights)]],
                                   constant ModelUniforms * lightUniforms [[buffer(kAttributeLightingFragmentShaderBufferLightUniforms)]]) {
-    constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
+    constexpr sampler textureSampler(filter::nearest, min_filter::nearest, mip_filter::none);
     LightingInput input = LightingInput::fromTextures(ar, nm, pr, textureSampler, in.texcoord);
 
     float3 eye = normalize(-input.fragmentPosition);
     
-    OmniLight light = omniLights[in.instanceId];
+    OmniLight constant & light = omniLights[in.instanceId];
     float4x4 transformation = lightUniforms[camera.index].modelMatrixInverse * lightUniforms[light.idx].modelMatrix;
     float3 lightPosition = extractPosition(transformation).xyz;
     float3 fragmentToLight = lightPosition - input.fragmentPosition;

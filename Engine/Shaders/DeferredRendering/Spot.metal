@@ -42,7 +42,7 @@ fragment float4 fragmentSpotLight(RasterizerData in [[stage_in]],
                                   constant CameraUniforms & camera [[buffer(kAttributeDirectionalFragmentShaderBufferCamera)]],
                                   constant SpotLight * spotLights [[buffer(kAttributeDirectionalFragmentShaderBufferDirectionalLights)]],
                                   constant ModelUniforms * modelUniforms [[buffer(kAttributeDirectionalFragmentShaderBufferLightUniforms)]]) {
-    constexpr sampler textureSampler(mag_filter::linear, min_filter::linear, mip_filter::linear);
+    constexpr sampler textureSampler(mag_filter::nearest, min_filter::nearest, mip_filter::none);
     LightingInput input = LightingInput::fromTextures(ar, nm, pr, textureSampler, in.texcoord);
     
     float3 cameraPosition = float3(0);
@@ -68,6 +68,7 @@ fragment float4 fragmentSpotLight(RasterizerData in [[stage_in]],
     float intensity = clamp((theta - gamma) / epsilon, 0.0f, 1.0f);
     
     if (light.castsShadows) {
+        constexpr sampler shadowSampler(mag_filter::linear, min_filter::linear, mip_filter::none);
         constant auto & invModelMatrix = modelUniforms[id].modelMatrixInverse;
         constant auto & invCameraMatrix = modelUniforms[camera.index].modelMatrix;
         float4 lightSpacesFragmentPosition = invModelMatrix * invCameraMatrix * float4(input.fragmentPosition, 1);
@@ -75,7 +76,7 @@ fragment float4 fragmentSpotLight(RasterizerData in [[stage_in]],
         lightProjectedPosition /= lightProjectedPosition.w;
         lightProjectedPosition.xy = lightProjectedPosition.xy * 0.5 + 0.5;
         lightProjectedPosition.y = 1.0 - lightProjectedPosition.y;
-        float existingDepth = shadowMaps.sample(textureSampler, lightProjectedPosition.xy, in.instanceId);
+        float existingDepth = shadowMaps.sample(shadowSampler, lightProjectedPosition.xy, in.instanceId);
         float4 reconstructedPosition = light.projectionMatrixInverse * float4(lightProjectedPosition.xy, existingDepth, 1.0);
         reconstructedPosition /= reconstructedPosition.w;
         float bias = max(0.05 * (1.0 - dot(input.n, l)), 0.005);

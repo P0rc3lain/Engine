@@ -52,7 +52,7 @@ vertex RasterizerData vertexGBuffer(Vertex in [[stage_in]],
     // Previous
     Pose previousPose = hasSkeleton ? calculatePose(in, previousMatrixPalettes) : Pose{float4(in.position, 1), in.normal, in.tangent};
     float4 previousWorldPosition = previousModelUniforms[index].modelMatrix * previousPose.position;
-    float4x4 previousCameraTransform = previousModelUniforms[cameraUniforms.index].modelMatrixInverse;
+    float4x4 constant & previousCameraTransform = previousModelUniforms[cameraUniforms.index].modelMatrixInverse;
     float4 previousCameraSpacePosition = previousCameraTransform * previousWorldPosition;
     // Current
     Pose pose = hasSkeleton ? calculatePose(in, matrixPalettes) : Pose{float4(in.position, 1), in.normal, in.tangent};

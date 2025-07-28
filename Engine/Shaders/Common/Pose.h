@@ -4,10 +4,10 @@
 
 #pragma once
 
-#include <simd/simd.h>
+#include <metal_stdlib>
 
 struct Pose {
-    float4 position;
-    float3 normal;
-    float3 tangent;
+    metal::float4 position;
+    metal::float3 normal;
+    metal::float3 tangent;
 };

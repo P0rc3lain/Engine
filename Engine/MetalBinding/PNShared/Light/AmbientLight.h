@@ -4,9 +4,11 @@
 
 #pragma once
 
+#include <simd/simd.h>
+
 struct AmbientLight {
-    float diameter;
     simd_float3 color;
+    float diameter;
     float intensity;
     int idx;
 };

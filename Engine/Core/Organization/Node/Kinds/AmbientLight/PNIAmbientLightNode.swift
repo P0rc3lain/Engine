@@ -36,8 +36,8 @@ public final class PNIAmbientLightNode: PNAmbientLightNode {
         let entity = PNEntity(type: .ambientLight,
                               referenceIdx: scene.ambientLights.count)
         scene.entities.add(parentIdx: parentIdx, data: entity)
-        let underlyinglight = AmbientLight(diameter: light.diameter,
-                                           color: light.color,
+        let underlyinglight = AmbientLight(color: light.color,
+                                           diameter: light.diameter,
                                            intensity: light.intensity,
                                            idx: Int32(scene.entities.count - 1))
         scene.ambientLights.append(underlyinglight)

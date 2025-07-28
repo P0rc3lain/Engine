@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include <simd/simd.h>
+
 struct DirectionalLight {
     simd_float3 color;
     float intensity;
