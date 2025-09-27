@@ -4,10 +4,12 @@
 
 import CoreGraphics
 import Metal
+import MetalKit
+import MetalPerformanceShaders
 internal import PNDependencyGraph
 import PNShared
 
-struct PNPipeline: PNStage {
+class PNPipeline: PNStage {
     var io: PNGPUIO
     private var combineStage: PNCombineStage
     private var ssaoStage: PNSSAOStage
@@ -19,9 +21,11 @@ struct PNPipeline: PNStage {
     private let graph = PNGraph()
     private let singlethreadVisitor: PNSingleThreadVisitor
     private let multithreadVisitor: PNMultithreadVisitor
-    private let render: [String: ((MTLCommandBuffer, PNFrameSupply) -> Void)]
+    private var render = [String: ((MTLCommandBuffer, PNFrameSupply) -> Void)]()
+    private let imageConverter: MPSImageConversion
     init?(device: MTLDevice,
-          renderingSize: CGSize) {
+          renderingSize: CGSize,
+          view: MTKView) {
         guard let gBufferStage = PNGBufferStage(device: device,
                                                 renderingSize: renderingSize),
               let spotShadowStage = PNSpotShadowStage(device: device,
@@ -58,7 +62,7 @@ struct PNPipeline: PNStage {
         self.spotShadowStage = spotShadowStage
         self.io = PNGPUIO(input: .empty,
                           output: PNGPUSupply(color: postprocessStage.io.output.color))
-
+        self.imageConverter = MPSImageConversion(device: device)
         let directionalShadows = graph.add(identifier: "DirectionalShadows")
         let omniShadows = graph.add(identifier: "OmniShadows")
         let spotShadow = graph.add(identifier: "SpotShadow")
@@ -66,6 +70,7 @@ struct PNPipeline: PNStage {
         let ssao = graph.add(identifier: "SSAO")
         let combine = graph.add(identifier: "Combine")
         let postprocess = graph.add(identifier: "Postprocess")
+        let finalConversion = graph.add(identifier: "FinalConversion")
 
         ssao.addDependency(node: gBuffer)
         combine.addDependency(node: ssao)
@@ -73,6 +78,7 @@ struct PNPipeline: PNStage {
         combine.addDependency(node: omniShadows)
         combine.addDependency(node: directionalShadows)
         postprocess.addDependency(node: combine)
+        finalConversion.addDependency(node: postprocess)
 
         guard let compiled = try? graph.compile() else {
             fatalError("Could not compile the graph")
@@ -81,37 +87,48 @@ struct PNPipeline: PNStage {
         singlethreadVisitor = PNSingleThreadVisitor(graph: compiled)
         multithreadVisitor = PNMultithreadVisitor(graph: compiled)
 
-        var renderTasks = [String: ((MTLCommandBuffer, PNFrameSupply) -> Void)]()
-        renderTasks["GBuffer"] = { commandBuffer, supply in
+        render["GBuffer"] = { commandBuffer, supply in
             gBufferStage.draw(commandBuffer: commandBuffer,
                               supply: supply)
         }
-        renderTasks["SpotShadow"] = { commandBuffer, supply in
-            spotShadowStage.draw(commandBuffer: commandBuffer, supply: supply)
+        render["SpotShadow"] = { commandBuffer, supply in
+            spotShadowStage.draw(commandBuffer: commandBuffer,
+                                 supply: supply)
         }
-        renderTasks["DirectionalShadows"] = { commandBuffer, supply in
+        render["DirectionalShadows"] = { commandBuffer, supply in
             directionalShadowStage.draw(commandBuffer: commandBuffer,
                                         supply: supply)
         }
-        renderTasks["OmniShadows"] = { commandBuffer, supply in
+        render["OmniShadows"] = { commandBuffer, supply in
             omniShadowStage.draw(commandBuffer: commandBuffer,
                                  supply: supply)
         }
-        renderTasks["Combine"] = { commandBuffer, supply in
+        render["Combine"] = { commandBuffer, supply in
             combineStage.draw(commandBuffer: commandBuffer,
                               supply: supply)
         }
-        renderTasks["SSAO"] = { commandBuffer, supply in
-            if !supply.scene.ambientLights.isEmpty {
-                ssaoStage.draw(commandBuffer: commandBuffer,
-                               supply: supply)
+        render["SSAO"] = { commandBuffer, supply in
+            guard !supply.scene.ambientLights.isEmpty else {
+                return
             }
+            ssaoStage.draw(commandBuffer: commandBuffer,
+                           supply: supply)
         }
-        renderTasks["Postprocess"] = { commandBuffer, supply in
+        render["Postprocess"] = { commandBuffer, supply in
             postprocessStage.draw(commandBuffer: commandBuffer,
                                   supply: supply)
         }
-        render = renderTasks
+        render["FinalConversion"] = { [weak self] commandBuffer, _ in
+            guard let self,
+                  let drawable = view.currentDrawable,
+                  let sourceTexture = postprocessStage.io.output.color.first?.texture else {
+                fatalError("Cannot retrieve required input data")
+            }
+            imageConverter.encode(commandBuffer: commandBuffer,
+                                  sourceTexture: sourceTexture,
+                                  destinationTexture: drawable.texture)
+            commandBuffer.present(drawable)
+        }
     }
     func draw(commandQueue: MTLCommandQueue, supply: PNFrameSupply) {
         let wholeEncoding = psignposter.beginInterval("Whole encoding")
@@ -124,7 +141,8 @@ struct PNPipeline: PNStage {
             commandBuffer.enqueue()
         }
         let immuteBuffers = commandBuffers
-        multithreadVisitor.visit { node in
+        multithreadVisitor.visit { [weak self] node in
+            guard let self else { return }
             let encodingInterval = psignposter.beginInterval("Encoding", "\(node.identifier)")
             guard let commandBuffer = immuteBuffers[node.identifier] else {
                 fatalError("Cannot create command buffer")
@@ -133,6 +151,11 @@ struct PNPipeline: PNStage {
             psignposter.endInterval("Encoding", encodingInterval)
             commandBuffer.commit()
         }
+        guard let commandBuffer = commandQueue.makeCommandBuffer() else {
+            fatalError("Could not prepare command buffer for synchronization")
+        }
+        commandBuffer.commit()
+        commandBuffer.waitUntilCompleted()
         psignposter.endInterval("Whole encoding", wholeEncoding)
     }
 }
