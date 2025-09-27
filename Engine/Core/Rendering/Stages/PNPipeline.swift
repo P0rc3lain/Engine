@@ -70,7 +70,7 @@ class PNPipeline: PNStage {
         let ssao = graph.add(identifier: "SSAO")
         let combine = graph.add(identifier: "Combine")
         let postprocess = graph.add(identifier: "Postprocess")
-        let final = graph.add(identifier: "Present")
+        let finalConversion = graph.add(identifier: "FinalConversion")
 
         ssao.addDependency(node: gBuffer)
         combine.addDependency(node: ssao)
@@ -78,7 +78,7 @@ class PNPipeline: PNStage {
         combine.addDependency(node: omniShadows)
         combine.addDependency(node: directionalShadows)
         postprocess.addDependency(node: combine)
-        final.addDependency(node: postprocess)
+        finalConversion.addDependency(node: postprocess)
 
         guard let compiled = try? graph.compile() else {
             fatalError("Could not compile the graph")
@@ -108,16 +108,17 @@ class PNPipeline: PNStage {
                               supply: supply)
         }
         render["SSAO"] = { commandBuffer, supply in
-            if !supply.scene.ambientLights.isEmpty {
-                ssaoStage.draw(commandBuffer: commandBuffer,
-                               supply: supply)
+            guard !supply.scene.ambientLights.isEmpty else {
+                return
             }
+            ssaoStage.draw(commandBuffer: commandBuffer,
+                           supply: supply)
         }
         render["Postprocess"] = { commandBuffer, supply in
             postprocessStage.draw(commandBuffer: commandBuffer,
                                   supply: supply)
         }
-        render["Present"] = { [weak self] commandBuffer, _ in
+        render["FinalConversion"] = { [weak self] commandBuffer, _ in
             guard let self,
                   let drawable = view.currentDrawable,
                   let sourceTexture = postprocessStage.io.output.color.first?.texture else {
