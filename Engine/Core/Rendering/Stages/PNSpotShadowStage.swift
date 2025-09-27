@@ -27,7 +27,7 @@ class PNSpotShadowStage: PNStage {
     }
     func updateTextures(supply: PNFrameSupply) -> Bool {
         let spotCount = supply.scene.spotLights.count
-        let spotDescriptor: MTLTextureDescriptor? = spotCount > 0 ? .spotShadowDS(size: renderingSize.spot, lightsCount: spotCount) : nil                                              
+        let spotDescriptor: MTLTextureDescriptor? = spotCount > 0 ? .spotShadowDS(size: renderingSize.spot, lightsCount: spotCount) : nil
         let spotUpdated = spotRenderingTexture.updateDescriptor(descriptor: spotDescriptor)
         return spotUpdated
     }
