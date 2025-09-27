@@ -17,9 +17,7 @@ struct PNIRenderingCoordinator: PNRenderingCoordinator {
         guard let device = metalView.device,
               let commandQueue = device.makeCommandQueue(),
               let pipeline = PNPipeline(device: device,
-                                        renderingSize: renderingSize,
-                                        ssaoBlurSigma: 5,
-                                        bloomBlurSigma: PNDefaults.shared.shaders.postprocess.bloom.blurSigma) else {
+                                        renderingSize: renderingSize) else {
             return nil
         }
         self.imageConverter = MPSImageConversion(device: device)
