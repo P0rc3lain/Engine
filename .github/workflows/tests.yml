@@ -10,7 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check Out Sources
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
+        with:
+          submodules: true
       - name: Lint yml files
         uses: ibiqlik/action-yamllint@v3
         with:
@@ -20,6 +22,8 @@ jobs:
     steps:
       - name: Check Out Sources
         uses: actions/checkout@v2
+        with:
+          submodules: true
       - name: Set up Ruby
         uses: ruby/setup-ruby@359bebbc29cbe6c87da6bc9ea3bc930432750108
         with:

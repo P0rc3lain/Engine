@@ -29,7 +29,9 @@ jobs:
     runs-on: macOS-latest
     steps:
       - name: Check out sources
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+        with:
+          submodules: true
       - name: Build the project
         run: xcodebuild build
                         -project Engine.xcodeproj
@@ -70,7 +72,9 @@ jobs:
     runs-on: macOS-latest
     steps:
       - name: Check Out Sources
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+        with:
+          submodules: true
       - name: Build the project
         run: xcodebuild docbuild
                         -project Engine.xcodeproj
@@ -93,7 +97,9 @@ jobs:
     runs-on: macOS-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
+        with:
+          submodules: true
       - name: Setup pages
         uses: actions/configure-pages@v2
       - name: Download documentation
