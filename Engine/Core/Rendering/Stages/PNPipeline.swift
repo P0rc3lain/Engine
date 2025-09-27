@@ -12,13 +12,19 @@ struct PNPipeline: PNStage {
     private var ssaoStage: PNSSAOStage
     private var postprocessStage: PNPostprocessStage
     private var gBufferStage: PNGBufferStage
-    private var shadowStage: PNShadowStage
+    private var spotShadowStage: PNSpotShadowStage
+    private var omniShadowStage: PNOmniShadowStage
+    private var directionalShadowStage: PNDirectionalShadowStage
     init?(device: MTLDevice,
           renderingSize: CGSize) {
         guard let gBufferStage = PNGBufferStage(device: device,
                                                 renderingSize: renderingSize),
-              let shadowStage = PNShadowStage(device: device,
-                                              shadowTextureSize: PNDefaults.shared.rendering.shadowSize),
+              let spotShadowStage = PNSpotShadowStage(device: device,
+                                                      shadowTextureSize: PNDefaults.shared.rendering.shadowSize),
+              let directionalShadowStage = PNDirectionalShadowStage(device: device,
+                                                                    shadowTextureSize: PNDefaults.shared.rendering.shadowSize),
+              let omniShadowStage = PNOmniShadowStage(device: device,
+                                                      shadowTextureSize: PNDefaults.shared.rendering.shadowSize),
               let ssaoStage = PNSSAOStage(device: device,
                                           renderingSize: renderingSize,
                                           prTexture: gBufferStage.io.output.color[2],
@@ -28,9 +34,9 @@ struct PNPipeline: PNStage {
                                                 renderingSize: renderingSize,
                                                 gBufferOutput: gBufferStage.io.output,
                                                 ssaoTexture: ssaoStage.io.output.color[0],
-                                                spotLightShadows: shadowStage.io.output.depth[0],
-                                                pointLightsShadows: shadowStage.io.output.depth[1],
-                                                directionalLightsShadows: shadowStage.io.output.depth[2]),
+                                                spotLightShadows: spotShadowStage.io.output.depth[0],
+                                                pointLightsShadows: omniShadowStage.io.output.depth[0],
+                                                directionalLightsShadows: directionalShadowStage.io.output.depth[0]),
               let postprocessStage = PNPostprocessStage(input: combineStage.io.output.color[0],
                                                         velocities: gBufferStage.io.output.color[3],
                                                         bloomBlurSigma: PNDefaults.shared.shaders.postprocess.bloom.blurSigma,
@@ -42,13 +48,31 @@ struct PNPipeline: PNStage {
         self.combineStage = combineStage
         self.postprocessStage = postprocessStage
         self.ssaoStage = ssaoStage
-        self.shadowStage = shadowStage
+        self.omniShadowStage = omniShadowStage
+        self.directionalShadowStage = directionalShadowStage
+        self.spotShadowStage = spotShadowStage
         self.io = PNGPUIO(input: .empty,
                           output: PNGPUSupply(color: postprocessStage.io.output.color))
     }
     func draw(commandQueue: MTLCommandQueue, supply: PNFrameSupply) {
-        shadowStage.draw(commandQueue: commandQueue,
-                         supply: supply)
+        guard let commandBuffer = commandQueue.makeCommandBuffer() else {
+            fatalError("Could not create command buffer for spot shadow stage")
+        }
+        spotShadowStage.draw(commandBuffer: commandBuffer,
+                             supply: supply)
+        commandBuffer.commit()
+        guard let commandBuffer = commandQueue.makeCommandBuffer() else {
+            fatalError("Could not create command buffer for omni shadow stage")
+        }
+        omniShadowStage.draw(commandBuffer: commandBuffer,
+                             supply: supply)
+        commandBuffer.commit()
+        guard let commandBuffer = commandQueue.makeCommandBuffer() else {
+            fatalError("Could not create command buffer for directional shadow stage")
+        }
+        directionalShadowStage.draw(commandBuffer: commandBuffer,
+                                    supply: supply)
+        commandBuffer.commit()
         gBufferStage.draw(commandQueue: commandQueue,
                           supply: supply)
         if !supply.scene.ambientLights.isEmpty {
