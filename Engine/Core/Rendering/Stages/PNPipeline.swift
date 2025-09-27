@@ -4,8 +4,8 @@
 
 import CoreGraphics
 import Metal
-import PNShared
 internal import PNDependencyGraph
+import PNShared
 
 struct PNPipeline: PNStage {
     var io: PNGPUIO
@@ -58,7 +58,7 @@ struct PNPipeline: PNStage {
         self.spotShadowStage = spotShadowStage
         self.io = PNGPUIO(input: .empty,
                           output: PNGPUSupply(color: postprocessStage.io.output.color))
-        
+
         let directionalShadows = graph.add(identifier: "DirectionalShadows")
         let omniShadows = graph.add(identifier: "OmniShadows")
         let spotShadow = graph.add(identifier: "SpotShadow")
@@ -66,46 +66,48 @@ struct PNPipeline: PNStage {
         let ssao = graph.add(identifier: "SSAO")
         let combine = graph.add(identifier: "Combine")
         let postprocess = graph.add(identifier: "Postprocess")
-        
+
         ssao.addDependency(node: gBuffer)
         combine.addDependency(node: ssao)
         combine.addDependency(node: spotShadow)
         combine.addDependency(node: omniShadows)
         combine.addDependency(node: directionalShadows)
         postprocess.addDependency(node: combine)
-        
-        let compiled = try! graph.compile()
+
+        guard let compiled = try? graph.compile() else {
+            fatalError("Could not compile the graph")
+        }
 
         singlethreadVisitor = PNSingleThreadVisitor(graph: compiled)
         multithreadVisitor = PNMultithreadVisitor(graph: compiled)
-        
+
         var renderTasks = [String: ((MTLCommandBuffer, PNFrameSupply) -> Void)]()
-        renderTasks["GBuffer"] = { (commandBuffer, supply) in
+        renderTasks["GBuffer"] = { commandBuffer, supply in
             gBufferStage.draw(commandBuffer: commandBuffer,
                               supply: supply)
         }
-        renderTasks["SpotShadow"] = { (commandBuffer, supply) in
+        renderTasks["SpotShadow"] = { commandBuffer, supply in
             spotShadowStage.draw(commandBuffer: commandBuffer, supply: supply)
         }
-        renderTasks["DirectionalShadows"] = { (commandBuffer, supply) in
+        renderTasks["DirectionalShadows"] = { commandBuffer, supply in
             directionalShadowStage.draw(commandBuffer: commandBuffer,
                                         supply: supply)
         }
-        renderTasks["OmniShadows"] = { (commandBuffer, supply) in
+        renderTasks["OmniShadows"] = { commandBuffer, supply in
             omniShadowStage.draw(commandBuffer: commandBuffer,
                                  supply: supply)
         }
-        renderTasks["Combine"] = { (commandBuffer, supply) in
+        renderTasks["Combine"] = { commandBuffer, supply in
             combineStage.draw(commandBuffer: commandBuffer,
                               supply: supply)
         }
-        renderTasks["SSAO"] = { (commandBuffer, supply) in
+        renderTasks["SSAO"] = { commandBuffer, supply in
             if !supply.scene.ambientLights.isEmpty {
                 ssaoStage.draw(commandBuffer: commandBuffer,
                                supply: supply)
             }
         }
-        renderTasks["Postprocess"] = { (commandBuffer, supply) in
+        renderTasks["Postprocess"] = { commandBuffer, supply in
             postprocessStage.draw(commandBuffer: commandBuffer,
                                   supply: supply)
         }
@@ -134,4 +136,3 @@ struct PNPipeline: PNStage {
         psignposter.endInterval("Whole encoding", wholeEncoding)
     }
 }
-
