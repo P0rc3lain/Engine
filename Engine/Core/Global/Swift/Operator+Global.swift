@@ -8,7 +8,7 @@ func ... <T: RawRepresentable>(lhs: T, rhs: T) -> ClosedRange<T.RawValue> where 
     lhs.rawValue ... rhs.rawValue
 }
 
-func cmp <T: Equatable> (_ values: T...) -> Bool {
+func cmp<T: Equatable>(_ values: T...) -> Bool {
     guard let first = values.first else {
         return true
     }
