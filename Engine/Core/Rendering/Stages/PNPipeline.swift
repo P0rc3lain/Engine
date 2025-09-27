@@ -5,6 +5,7 @@
 import CoreGraphics
 import Metal
 import PNShared
+internal import PNDependencyGraph
 
 struct PNPipeline: PNStage {
     var io: PNGPUIO
@@ -15,6 +16,10 @@ struct PNPipeline: PNStage {
     private var spotShadowStage: PNSpotShadowStage
     private var omniShadowStage: PNOmniShadowStage
     private var directionalShadowStage: PNDirectionalShadowStage
+    private let graph = PNGraph()
+    private let singlethreadVisitor: PNSingleThreadVisitor
+    private let multithreadVisitor: PNMultithreadVisitor
+    private let render: [String: ((MTLCommandBuffer, PNFrameSupply) -> Void)]
     init?(device: MTLDevice,
           renderingSize: CGSize) {
         guard let gBufferStage = PNGBufferStage(device: device,
@@ -53,35 +58,80 @@ struct PNPipeline: PNStage {
         self.spotShadowStage = spotShadowStage
         self.io = PNGPUIO(input: .empty,
                           output: PNGPUSupply(color: postprocessStage.io.output.color))
+        
+        let directionalShadows = graph.add(identifier: "DirectionalShadows")
+        let omniShadows = graph.add(identifier: "OmniShadows")
+        let spotShadow = graph.add(identifier: "SpotShadow")
+        let gBuffer = graph.add(identifier: "GBuffer")
+        let ssao = graph.add(identifier: "SSAO")
+        let combine = graph.add(identifier: "Combine")
+        let postprocess = graph.add(identifier: "Postprocess")
+        
+        ssao.addDependency(node: gBuffer)
+        combine.addDependency(node: ssao)
+        combine.addDependency(node: spotShadow)
+        combine.addDependency(node: omniShadows)
+        combine.addDependency(node: directionalShadows)
+        postprocess.addDependency(node: combine)
+        
+        let compiled = try! graph.compile()
+
+        singlethreadVisitor = PNSingleThreadVisitor(graph: compiled)
+        multithreadVisitor = PNMultithreadVisitor(graph: compiled)
+        
+        var renderTasks = [String: ((MTLCommandBuffer, PNFrameSupply) -> Void)]()
+        renderTasks["GBuffer"] = { (commandBuffer, supply) in
+            gBufferStage.draw(commandBuffer: commandBuffer,
+                              supply: supply)
+        }
+        renderTasks["SpotShadow"] = { (commandBuffer, supply) in
+            spotShadowStage.draw(commandBuffer: commandBuffer, supply: supply)
+        }
+        renderTasks["DirectionalShadows"] = { (commandBuffer, supply) in
+            directionalShadowStage.draw(commandBuffer: commandBuffer,
+                                        supply: supply)
+        }
+        renderTasks["OmniShadows"] = { (commandBuffer, supply) in
+            omniShadowStage.draw(commandBuffer: commandBuffer,
+                                 supply: supply)
+        }
+        renderTasks["Combine"] = { (commandBuffer, supply) in
+            combineStage.draw(commandBuffer: commandBuffer,
+                              supply: supply)
+        }
+        renderTasks["SSAO"] = { (commandBuffer, supply) in
+            if !supply.scene.ambientLights.isEmpty {
+                ssaoStage.draw(commandBuffer: commandBuffer,
+                               supply: supply)
+            }
+        }
+        renderTasks["Postprocess"] = { (commandBuffer, supply) in
+            postprocessStage.draw(commandBuffer: commandBuffer,
+                                  supply: supply)
+        }
+        render = renderTasks
     }
     func draw(commandQueue: MTLCommandQueue, supply: PNFrameSupply) {
-        guard let commandBuffer = commandQueue.makeCommandBuffer() else {
-            fatalError("Could not create command buffer for spot shadow stage")
+        let wholeEncoding = psignposter.beginInterval("Whole encoding")
+        var commandBuffers = [String: MTLCommandBuffer]()
+        singlethreadVisitor.visit { node in
+            guard let commandBuffer = commandQueue.makeCommandBuffer(descriptor: .noLogButRetain) else {
+                fatalError("Could not create command buffer")
+            }
+            commandBuffers[node.identifier] = commandBuffer
+            commandBuffer.enqueue()
         }
-        spotShadowStage.draw(commandBuffer: commandBuffer,
-                             supply: supply)
-        commandBuffer.commit()
-        guard let commandBuffer = commandQueue.makeCommandBuffer() else {
-            fatalError("Could not create command buffer for omni shadow stage")
+        let immuteBuffers = commandBuffers
+        multithreadVisitor.visit { node in
+            let encodingInterval = psignposter.beginInterval("Encoding", "\(node.identifier)")
+            guard let commandBuffer = immuteBuffers[node.identifier] else {
+                fatalError("Cannot create command buffer")
+            }
+            render[node.identifier]?(commandBuffer, supply)
+            psignposter.endInterval("Encoding", encodingInterval)
+            commandBuffer.commit()
         }
-        omniShadowStage.draw(commandBuffer: commandBuffer,
-                             supply: supply)
-        commandBuffer.commit()
-        guard let commandBuffer = commandQueue.makeCommandBuffer() else {
-            fatalError("Could not create command buffer for directional shadow stage")
-        }
-        directionalShadowStage.draw(commandBuffer: commandBuffer,
-                                    supply: supply)
-        commandBuffer.commit()
-        gBufferStage.draw(commandQueue: commandQueue,
-                          supply: supply)
-        if !supply.scene.ambientLights.isEmpty {
-            ssaoStage.draw(commandQueue: commandQueue,
-                           supply: supply)
-        }
-        combineStage.draw(commandQueue: commandQueue,
-                          supply: supply)
-        postprocessStage.draw(commandQueue: commandQueue,
-                              supply: supply)
+        psignposter.endInterval("Whole encoding", wholeEncoding)
     }
 }
+

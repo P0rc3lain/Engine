@@ -31,12 +31,10 @@ struct PNSSAOStage: PNStage {
         self.gaussianBlur = MPSImageGaussianBlur(device: device, sigma: blurSigma)
         self.gaussTexture = gaussTexture
     }
-    func draw(commandQueue: MTLCommandQueue, supply: PNFrameSupply) {
-        guard let commandBuffer = commandQueue.makeCommandBuffer(),
-              let ssaoEncoder = commandBuffer.makeComputeCommandEncoder() else {
+    func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
+        guard let ssaoEncoder = commandBuffer.makeComputeCommandEncoder() else {
             return
         }
-        commandBuffer.label = "SSAO"
         commandBuffer.pushDebugGroup("SSAO Kernel")
         ssaoKernel.compute(encoder: ssaoEncoder, supply: supply)
         ssaoEncoder.endEncoding()
@@ -46,6 +44,5 @@ struct PNSSAOStage: PNStage {
                             sourceTexture: ssaoTexture,
                             destinationTexture: gaussTexture)
         commandBuffer.popDebugGroup()
-        commandBuffer.commit()
     }
 }

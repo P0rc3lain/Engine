@@ -1,0 +1,3 @@
+[submodule "Dependencies/DependencyGraph"]
+	path = Dependencies/DependencyGraph
+	url = git@github.com:P0rc3lain/DependencyGraph.git
