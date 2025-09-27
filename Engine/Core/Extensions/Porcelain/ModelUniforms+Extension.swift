@@ -4,7 +4,7 @@
 
 import PNShared
 
-extension ModelUniforms: Equatable {
+extension ModelUniforms: @retroactive Equatable {
     public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.modelMatrixInverse == rhs.modelMatrixInverse &&
         lhs.modelMatrix == rhs.modelMatrix

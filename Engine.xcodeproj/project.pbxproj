@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -278,6 +278,8 @@
 		56AD3B7E2E8833A700C7FC69 /* PNSpotShadowStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AD3B7D2E8833A700C7FC69 /* PNSpotShadowStage.swift */; };
 		56AD3B7F2E8833A700C7FC69 /* PNDirectionalShadowStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AD3B7B2E8833A700C7FC69 /* PNDirectionalShadowStage.swift */; };
 		56AD3B802E8833A700C7FC69 /* PNOmniShadowStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AD3B7C2E8833A700C7FC69 /* PNOmniShadowStage.swift */; };
+		56AD3B852E8837F000C7FC69 /* PNDependencyGraph in Frameworks */ = {isa = PBXBuildFile; productRef = 56AD3B842E8837F000C7FC69 /* PNDependencyGraph */; };
+		56AD3B872E88384300C7FC69 /* MTLCommandBufferDescriptor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AD3B862E88384000C7FC69 /* MTLCommandBufferDescriptor+Extension.swift */; };
 		56ADD2F4273707C500107E24 /* PNAmbientJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F3273707C500107E24 /* PNAmbientJob.swift */; };
 		56ADD2F6273707E200107E24 /* Ambient.metal in Sources */ = {isa = PBXBuildFile; fileRef = 56ADD2F5273707E200107E24 /* Ambient.metal */; };
 		56B32FE728496D3200190D6A /* PNParticleSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B32FE628496D3200190D6A /* PNParticleSystem.swift */; };
@@ -655,6 +657,7 @@
 		56AD3B7B2E8833A700C7FC69 /* PNDirectionalShadowStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNDirectionalShadowStage.swift; sourceTree = "<group>"; };
 		56AD3B7C2E8833A700C7FC69 /* PNOmniShadowStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNOmniShadowStage.swift; sourceTree = "<group>"; };
 		56AD3B7D2E8833A700C7FC69 /* PNSpotShadowStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNSpotShadowStage.swift; sourceTree = "<group>"; };
+		56AD3B862E88384000C7FC69 /* MTLCommandBufferDescriptor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLCommandBufferDescriptor+Extension.swift"; sourceTree = "<group>"; };
 		56ADD2F1273705F800107E24 /* AmbientLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AmbientLight.h; sourceTree = "<group>"; };
 		56ADD2F3273707C500107E24 /* PNAmbientJob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNAmbientJob.swift; sourceTree = "<group>"; };
 		56ADD2F5273707E200107E24 /* Ambient.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Ambient.metal; sourceTree = "<group>"; };
@@ -734,6 +737,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56AD3B852E8837F000C7FC69 /* PNDependencyGraph in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -778,6 +782,7 @@
 				56904B43295640AB001CC47F /* .gitignore */,
 				56904B44295640AB001CC47F /* .mdlrc */,
 				564373AE2956443B00795CD4 /* .yamllint */,
+				56AD3B832E8837F000C7FC69 /* Frameworks */,
 				5601396D255457D100FC1C45 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -1871,6 +1876,13 @@
 			path = Ray;
 			sourceTree = "<group>";
 		};
+		56AD3B832E8837F000C7FC69 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		56ADD2F22737077700107E24 /* Light */ = {
 			isa = PBXGroup;
 			children = (
@@ -1976,6 +1988,7 @@
 		56D1ED582725F83A00D68EA7 /* Metal */ = {
 			isa = PBXGroup;
 			children = (
+				56AD3B862E88384000C7FC69 /* MTLCommandBufferDescriptor+Extension.swift */,
 				562035892E293A1200422C4B /* MTLComputePipelineState+Extension.swift */,
 				560C18CF273A832A00459AEF /* MTLFunctionConstantValues+Extension.swift */,
 				563BFC8427285F100003EDB7 /* MTLBuffer+Extension.swift */,
@@ -2259,6 +2272,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				56AD3B822E8837EB00C7FC69 /* PBXTargetDependency */,
 			);
 			name = Engine;
 			productName = Porcelain;
@@ -2310,6 +2324,9 @@
 				Base,
 			);
 			mainGroup = 56013962255457D100FC1C45;
+			packageReferences = (
+				56AD3B732E87D42900C7FC69 /* XCLocalSwiftPackageReference "Dependencies/DependencyGraph" */,
+			);
 			productRefGroup = 5601396D255457D100FC1C45 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2577,6 +2594,7 @@
 				5670EC0B2735D47900375194 /* PNBloomMergeJob.swift in Sources */,
 				561666F92719E2CD000063B1 /* MDLMaterialProperty+Extension.swift in Sources */,
 				56F59269273725FB008652C9 /* PNDirectionalJob.swift in Sources */,
+				56AD3B872E88384300C7FC69 /* MTLCommandBufferDescriptor+Extension.swift in Sources */,
 				56E8209D27284664002D58C3 /* PNPosition.swift in Sources */,
 				561628512921973000C166B2 /* MTLComputeCommandEncoder+Extension.swift in Sources */,
 				5629FBEC2749209C005476AF /* PNIInterpolator.swift in Sources */,
@@ -2681,6 +2699,10 @@
 			isa = PBXTargetDependency;
 			target = 5601396B255457D100FC1C45 /* Engine */;
 			targetProxy = 56924ADA271A07FD00FF3E06 /* PBXContainerItemProxy */;
+		};
+		56AD3B822E8837EB00C7FC69 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 56AD3B812E8837EB00C7FC69 /* PNDependencyGraph */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2965,6 +2987,26 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		56AD3B732E87D42900C7FC69 /* XCLocalSwiftPackageReference "Dependencies/DependencyGraph" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Dependencies/DependencyGraph;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		56AD3B812E8837EB00C7FC69 /* PNDependencyGraph */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 56AD3B732E87D42900C7FC69 /* XCLocalSwiftPackageReference "Dependencies/DependencyGraph" */;
+			productName = PNDependencyGraph;
+		};
+		56AD3B842E8837F000C7FC69 /* PNDependencyGraph */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 56AD3B732E87D42900C7FC69 /* XCLocalSwiftPackageReference "Dependencies/DependencyGraph" */;
+			productName = PNDependencyGraph;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 56013963255457D100FC1C45 /* Project object */;
 }
