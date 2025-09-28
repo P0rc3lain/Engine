@@ -15,7 +15,7 @@ extension MTLPixelFormat {
         .rgba32Float
     }
     static var gBufferVelocity: MTLPixelFormat {
-        .rg32Float
+        .rg16Float
     }
     static var translucentC: MTLPixelFormat {
         .rgba16Float
