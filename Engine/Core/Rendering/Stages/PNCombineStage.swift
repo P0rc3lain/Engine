@@ -70,7 +70,6 @@ struct PNCombineStage: PNStage {
         guard let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else {
             return
         }
-        commandBuffer.pushDebugGroup("Light Pass")
         omniJob.draw(encoder: encoder, supply: supply)
         ambientJob.draw(encoder: encoder, supply: supply)
         spotJob.draw(encoder: encoder, supply: supply)
@@ -80,6 +79,5 @@ struct PNCombineStage: PNStage {
         particleJob.draw(encoder: encoder, supply: supply)
         fogJob.draw(encoder: encoder, supply: supply)
         encoder.endEncoding()
-        commandBuffer.popDebugGroup()
     }
 }
