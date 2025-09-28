@@ -8,6 +8,6 @@
 
 metal::half4 vignette(metal::half4 fragmentColor,
                       metal::half4 vignetteColor,
-                      metal::half2 position,
+                      metal::float2 position,
                       half fromRadius,
                       half toRadius);

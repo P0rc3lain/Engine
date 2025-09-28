@@ -50,6 +50,7 @@ class PNPipeline: PNStage {
               let postprocessStage = PNPostprocessStage(input: combineStage.io.output.color[0],
                                                         velocities: gBufferStage.io.output.color[3],
                                                         bloomBlurSigma: PNDefaults.shared.shaders.postprocess.bloom.blurSigma,
+                                                        bloomRenderingScale: PNDefaults.shared.shaders.postprocess.bloom.renderingScale,
                                                         device: device,
                                                         renderingSize: renderingSize) else {
             return nil

@@ -18,11 +18,11 @@ struct PNBloomSplitJob: PNComputeJob {
         self.pipelineState = pipelineState
         self.inputTexture = inputTexture
         self.outputTexture = outputTexture
-        guard let inputTexture = inputTexture.texture else {
+        guard let outputTexture = outputTexture.texture else {
             return nil
         }
-        dispatchSize = MTLSize(width: inputTexture.width,
-                               height: inputTexture.height)
+        dispatchSize = MTLSize(width: outputTexture.width,
+                               height: outputTexture.height)
     }
     func compute(encoder: MTLComputeCommandEncoder, supply: PNFrameSupply) {
         encoder.setComputePipelineState(pipelineState)

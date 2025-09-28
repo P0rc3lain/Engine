@@ -16,12 +16,14 @@ struct PNPostprocessStage: PNStage {
     init?(input: PNTextureProvider,
           velocities: PNTextureProvider,
           bloomBlurSigma: Float,
+          bloomRenderingScale: Float,
           device: MTLDevice,
           renderingSize: CGSize) {
-        guard let bloomSplitTexture = device.makeTextureBloomSplitC(size: renderingSize) else {
-            return nil
-        }
-        guard let postprocessOutputTexture = device.makeTexturePostprocessOutput(size: renderingSize) else {
+        let bloomSplitTextureSize = CGSize(width: renderingSize.width * CGFloat(bloomRenderingScale),
+                                           height: renderingSize.height * CGFloat(bloomRenderingScale))
+
+        guard let bloomSplitTexture = device.makeTextureBloomSplitC(size: bloomSplitTextureSize),
+              let postprocessOutputTexture = device.makeTexturePostprocessOutput(size: renderingSize) else {
             return nil
         }
         self.bloomSplitTexture = bloomSplitTexture
@@ -29,7 +31,7 @@ struct PNPostprocessStage: PNStage {
         guard let bloomSplitJob = PNBloomSplitJob.make(device: device,
                                                        inputTexture: input,
                                                        outputTexture: PNStaticTexture(bloomSplitTexture)),
-              let splitBlurredTexture = device.makeTexture(descriptor: .bloomSplitC(size: renderingSize)),
+              let splitBlurredTexture = device.makeTexture(descriptor: .bloomSplitC(size: bloomSplitTextureSize)),
               let postprocessMergeJob = PNPostprocessMergeJob.make(device: device,
                                                                    sceneTexture: input,
                                                                    velocities: velocities,
@@ -47,7 +49,7 @@ struct PNPostprocessStage: PNStage {
     }
     func draw(commandBuffer: MTLCommandBuffer, supply: PNFrameSupply) {
         guard let bloomSplitEncoder = commandBuffer.makeComputeCommandEncoder() else {
-            return
+            fatalError("Failed to create an encoder for bloom split")
         }
         bloomSplitJob.compute(encoder: bloomSplitEncoder, supply: supply)
         bloomSplitEncoder.endEncoding()
@@ -55,7 +57,7 @@ struct PNPostprocessStage: PNStage {
                                sourceTexture: bloomSplitTexture,
                                destinationTexture: splitBlurredTexture)
         guard let postprocessMergeEncoder = commandBuffer.makeComputeCommandEncoder() else {
-            return
+            fatalError("Failed to create an encoder for postprocess merge")
         }
         postprocessMergeJob.compute(encoder: postprocessMergeEncoder, supply: supply)
         postprocessMergeEncoder.endEncoding()
