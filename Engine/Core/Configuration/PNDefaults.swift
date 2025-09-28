@@ -86,7 +86,7 @@ public struct PNDefaults {
         /// Bias to reduce self-shadowing and artifacts. Increasing this value can help minimize incorrect darkening.
         public var bias: Float = 0.025
         /// Exponent used to control the strength and contrast of the occlusion effect.
-        public var power: Float = 16
+        public var power: Float16 = 16
         /// Blur sigma
         public var blurSigma: Float = 5.0
     }

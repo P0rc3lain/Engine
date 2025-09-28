@@ -18,30 +18,30 @@ constant int noiseCount [[function_constant(kFunctionConstantIndexSSAONoiseCount
 
 constant float radius [[function_constant(kFunctionConstantIndexSSAORadius)]];
 constant float comparisonBias [[function_constant(kFunctionConstantIndexSSAOBias)]];
-constant float power [[function_constant(kFunctionConstantIndexSSAOPower)]];
+constant half power [[function_constant(kFunctionConstantIndexSSAOPower)]];
 
-kernel void kernelSSAO(texture2d<float> nm [[texture(kAttributeSsaoComputeShaderTextureNM)]],
-                       texture2d<float> pr [[texture(kAttributeSsaoComputeShaderTexturePR)]],
-                       texture2d<float, access::write> out [[texture(kAttributeSsaoComputeShaderTextureOutput)]],
+kernel void kernelSSAO(texture2d<half, access::read> nm [[texture(kAttributeSsaoComputeShaderTextureNM)]],
+                       texture2d<float, access::read> pr [[texture(kAttributeSsaoComputeShaderTexturePR)]],
+                       texture2d<half, access::write> out [[texture(kAttributeSsaoComputeShaderTextureOutput)]],
                        constant CameraUniforms & camera [[buffer(kAttributeSsaoComputeShaderBufferCamera)]],
                        constant simd_float3 * samples [[buffer(kAttributeSsaoComputeShaderBufferSamples)]],
                        constant simd_float3 * noise [[buffer(kAttributeSsaoComputeShaderBufferNoise)]],
                        constant int32_t & time [[buffer(kAttributeSsaoComputeShaderBufferTime)]],
-                       uint3 inposition [[thread_position_in_grid]],
-                       uint3 threads [[threads_per_grid]],
+                       uint2 inposition [[thread_position_in_grid]],
                        constant ModelUniforms * modelUniforms [[buffer(kAttributeSsaoComputeShaderBufferModelUniforms)]]) {
-    int positionContinuousBuffer = inposition.x + inposition.y * threads.x;
+    int positionContinuousBuffer = inposition.x +
+                                   inposition.y * out.get_width();
     int seed = positionContinuousBuffer + time;
     Random random = Random(seed);
     uint2 positionXY = inposition.xy;
     float3 worldPosition = pr.read(positionXY).xyz;
-    float3 normal = normalize(nm.read(positionXY)).xyz;
+    float3 normal = normalize(float3(nm.read(positionXY).xyz));
     float3 randomVector = noise[int(random.random() * noiseCount)];
     float3 tangent = normalize(randomVector - normal * dot(randomVector, normal));
     float3 bitangent = normalize(cross(normal, tangent));
     float3x3 TBN = float3x3(tangent, bitangent, normal);
     float2 resolutionMultiplier(pr.get_width(), pr.get_height());
-    float occlusion = 0.0;
+    half occlusion = 0.0;
     for(int i = 0; i < sampleCount; ++i) {
         float3 neighbourWorldPosition = worldPosition + (TBN * samples[i]);
         float4 neighbourClipPosition = camera.projectionMatrix * float4(neighbourWorldPosition, 1);
@@ -55,6 +55,6 @@ kernel void kernelSSAO(texture2d<float> nm [[texture(kAttributeSsaoComputeShader
         float rangeCheck = smoothstep(0.0, 1.0, radius / max(depthDiff, 1e-5));
         occlusion += (neighbourDepth >= worldPosition.z + comparisonBias ? 1.0 : 0.0) * rangeCheck;
     }
-    float finalOcclusion = 1.0 - (occlusion / sampleCount);
+    half finalOcclusion = 1.0 - (occlusion / sampleCount);
     out.write(pow(finalOcclusion, power), positionXY);
 }
