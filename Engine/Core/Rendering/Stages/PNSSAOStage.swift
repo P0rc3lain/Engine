@@ -13,15 +13,19 @@ struct PNSSAOStage: PNStage {
     private var ssaoKernel: PNSSAOJob
     init?(device: MTLDevice,
           renderingSize: CGSize,
+          scaleSize: Float,
           prTexture: PNTextureProvider,
           nmTexture: PNTextureProvider,
           blurSigma: Float) {
-        guard let ssaoTexture = device.makeTextureSSAOC(size: renderingSize),
+
+        let ssaoTexturesSize = CGSize(width: renderingSize.width * CGFloat(scaleSize),
+                                      height: renderingSize.height * CGFloat(scaleSize))
+        guard let ssaoTexture = device.makeTextureSSAOC(size: ssaoTexturesSize),
               let ssaoKernel = PNSSAOJob.make(device: device,
                                               prTexture: prTexture,
                                               nmTexture: nmTexture,
                                               outputTexture: PNStaticTexture(ssaoTexture)),
-              let gaussTexture = device.makeTexture(descriptor: .ssaoC(size: renderingSize)) else {
+              let gaussTexture = device.makeTexture(descriptor: .ssaoC(size: ssaoTexturesSize)) else {
             return nil
         }
         self.ssaoTexture = ssaoTexture

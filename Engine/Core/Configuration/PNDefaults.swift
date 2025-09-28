@@ -88,6 +88,8 @@ public struct PNDefaults {
         /// Exponent used to control the strength and contrast of the occlusion effect.
         public var power: Float16 = 16
         /// Blur sigma
-        public var blurSigma: Float = 5.0
+        public var blurSigma: Float = 2.0
+        /// Rendering scale - scale of the image in relation to frame resolution
+        public var renderingScale: Float = 0.33
     }
 }

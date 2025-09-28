@@ -36,6 +36,7 @@ class PNPipeline: PNStage {
                                                       shadowTextureSize: PNDefaults.shared.rendering.shadowSize),
               let ssaoStage = PNSSAOStage(device: device,
                                           renderingSize: renderingSize,
+                                          scaleSize: PNDefaults.shared.shaders.ssao.renderingScale,
                                           prTexture: gBufferStage.io.output.color[2],
                                           nmTexture: gBufferStage.io.output.color[1],
                                           blurSigma: PNDefaults.shared.shaders.ssao.blurSigma),
