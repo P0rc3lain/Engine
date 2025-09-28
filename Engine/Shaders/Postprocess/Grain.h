@@ -7,5 +7,5 @@
 #include <simd/simd.h>
 
 simd::half3 grain(float time,
-                  simd::half2 texcoord,
+                  simd::float2 texcoord,
                   simd::half3 inputColor);

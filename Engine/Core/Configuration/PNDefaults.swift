@@ -72,7 +72,9 @@ public struct PNDefaults {
         /// Amplifies the brightness of pixels that pass the luminance threshold for bloom.
         public var luminanceAmplifier: Float16 = 1.2
         /// The sigma value for the Gaussian blur applied to blooming areas.
-        public var blurSigma: Float = 10.0
+        public var blurSigma: Float = 1.0
+        /// Rendering scale - scale of the image in relation to frame resolution
+        public var renderingScale: Float = 0.33
     }
     /// Configuration for Screen Space Ambient Occlusion (SSAO) visual effect.
     /// SSAO simulates subtle self-shadowing in creases, holes, and surfaces to enhance realism in rendered images. These parameters control the visual quality and performance of the effect.
