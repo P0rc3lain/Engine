@@ -49,7 +49,6 @@ struct PNPostprocessStage: PNStage {
         guard let bloomSplitEncoder = commandBuffer.makeComputeCommandEncoder() else {
             return
         }
-        commandBuffer.label = "Bloom"
         commandBuffer.pushDebugGroup("Bloom Pass")
         bloomSplitJob.compute(encoder: bloomSplitEncoder, supply: supply)
         bloomSplitEncoder.endEncoding()

@@ -138,6 +138,7 @@ class PNPipeline: PNStage {
                 fatalError("Could not create command buffer")
             }
             commandBuffers[node.identifier] = commandBuffer
+            commandBuffer.label = "Stage \(node.identifier)"
             commandBuffer.enqueue()
         }
         let immuteBuffers = commandBuffers
