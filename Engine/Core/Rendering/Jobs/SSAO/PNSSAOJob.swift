@@ -34,11 +34,11 @@ struct PNSSAOJob: PNComputeJob {
         self.noiseBuffer = noiseBuffer
         self.kernelBuffer.upload(data: samples)
         self.noiseBuffer.upload(data: noise)
-        guard let inputTexture = prTexture.texture else {
+        guard let outputTexture = outputTexture.texture else {
             return nil
         }
-        dispatchSize = MTLSize(width: inputTexture.width,
-                               height: inputTexture.height)
+        dispatchSize = MTLSize(width: outputTexture.width,
+                               height: outputTexture.height)
     }
     func compute(encoder: MTLComputeCommandEncoder, supply: PNFrameSupply) {
         let time = Int32(Date.timeIntervalSinceReferenceDate)
