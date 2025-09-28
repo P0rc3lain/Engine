@@ -28,10 +28,10 @@ struct RasterizerData {
 };
 
 struct GBufferData {
-    float4 albedoRoughness [[color(0)]];
-    float4 normalMetallic [[color(1)]];
+    half4 albedoRoughness [[color(0)]];
+    half4 normalMetallic [[color(1)]];
     float4 positionReflectance [[color(2)]];
-    float2 velocity [[color(3)]];
+    half2 velocity [[color(3)]];
 };
 
 // Vertex function
@@ -89,23 +89,22 @@ fragment GBufferData fragmentGBuffer(RasterizerData in [[stage_in]],
                                      min_filter::linear,
                                      mip_filter::linear,
                                      address::mirrored_repeat);
-    simd_float3x3 TBN(in.t, in.b, in.n);
+    simd::float3x3 TBN(in.t, in.b, in.n);
     // 0.04 is reflactance for common materials
     // should be possible to configure it
     float3 normalEncoded = material.normals.sample(textureSampler, in.uv).xyz;
     float3 normalDecoded = normalEncoded * 2 - 1;
-    float3 normalWorldSpace = TBN * normalDecoded;
-    float4 color = material.albedo.sample(textureSampler, in.uv);
-    if (!color.a)
-        discard_fragment();
-    
-    float2 current = in.currentClipSpacePosition.xy / in.currentClipSpacePosition.w;
-    float2 previous = in.previousClipSpacePosition.xy / in.previousClipSpacePosition.w;
-    float2 velocity = current - previous;
+    half3 normalWorldSpace = half3(TBN * normalDecoded);
+    half3 color = material.albedo.sample(textureSampler, in.uv).rgb;
+    half2 current = half2(in.currentClipSpacePosition.xy / in.currentClipSpacePosition.w);
+    half2 previous = half2(in.previousClipSpacePosition.xy / in.previousClipSpacePosition.w);
+    half2 velocity = current - previous;
+    half roughness = material.roughness.sample(textureSampler, in.uv).r;
+    half metallic = material.metallic.sample(textureSampler, in.uv).r;
     
     return {
-        float4(color.xyz, material.roughness.sample(textureSampler, in.uv).x),
-        float4(normalWorldSpace, material.metallic.sample(textureSampler, in.uv).x),
+        half4(color, roughness),
+        half4(normalWorldSpace, metallic),
         float4(in.cameraSpacePosition, 0.04),
         velocity
     };
