@@ -49,19 +49,15 @@ struct PNPostprocessStage: PNStage {
         guard let bloomSplitEncoder = commandBuffer.makeComputeCommandEncoder() else {
             return
         }
-        commandBuffer.pushDebugGroup("Bloom Pass")
         bloomSplitJob.compute(encoder: bloomSplitEncoder, supply: supply)
         bloomSplitEncoder.endEncoding()
         gaussianBlurJob.encode(commandBuffer: commandBuffer,
                                sourceTexture: bloomSplitTexture,
                                destinationTexture: splitBlurredTexture)
-        commandBuffer.popDebugGroup()
         guard let postprocessMergeEncoder = commandBuffer.makeComputeCommandEncoder() else {
             return
         }
-        commandBuffer.pushDebugGroup("Postprocess Merge Pass")
         postprocessMergeJob.compute(encoder: postprocessMergeEncoder, supply: supply)
         postprocessMergeEncoder.endEncoding()
-        commandBuffer.popDebugGroup()
     }
 }

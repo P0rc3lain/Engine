@@ -35,14 +35,10 @@ struct PNSSAOStage: PNStage {
         guard let ssaoEncoder = commandBuffer.makeComputeCommandEncoder() else {
             return
         }
-        commandBuffer.pushDebugGroup("SSAO Kernel")
         ssaoKernel.compute(encoder: ssaoEncoder, supply: supply)
         ssaoEncoder.endEncoding()
-        commandBuffer.popDebugGroup()
-        commandBuffer.pushDebugGroup("SSAO Blur Filter")
         gaussianBlur.encode(commandBuffer: commandBuffer,
                             sourceTexture: ssaoTexture,
                             destinationTexture: gaussTexture)
-        commandBuffer.popDebugGroup()
     }
 }
