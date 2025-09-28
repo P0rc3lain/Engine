@@ -6,28 +6,28 @@
 
 using namespace metal;
 
-float4 motionBlur(texture2d<float> inputTexture,
-                  texture2d<float> velocityTexture,
+half4 motionBlur(texture2d<half> inputTexture,
+                  texture2d<half> velocityTexture,
                   uint2 gid,
-                  float scale,
+                  half scale,
                   unsigned int samples) {
-    float2 textureSize = float2(inputTexture.get_width(),
+    half2 textureSize = half2(inputTexture.get_width(),
                                 inputTexture.get_height());
-    float2 uv = float2(gid) / textureSize;
+    half2 uv = half2(gid) / textureSize;
 
-    float2 velocity = velocityTexture.read(gid).xy * scale;
-    float4 accumulatedColor = float4(0.0);
+    half2 velocity = velocityTexture.read(gid).xy * scale;
+    half4 accumulatedColor = half4(0.0);
     float totalWeight = 0.0;
 
     for (unsigned int i = 0; i < samples; ++i) {
-        float t = float(i) / float(samples - 1);
-        float2 offset = velocity * (t - 0.5);
-        float2 sampleUV = uv + offset;
+        half t = half(i) / half(samples - 1);
+        half2 offset = velocity * (t - 0.5);
+        half2 sampleUV = uv + offset;
 
-        int2 sampleCoord = int2(sampleUV * textureSize);
-        sampleCoord = clamp(sampleCoord, int2(0), int2(textureSize - 1));
+        uint2 sampleCoord = uint2(sampleUV * textureSize);
+        sampleCoord = clamp(sampleCoord, uint2(0), uint2(textureSize - 1));
 
-        float4 sampleColor = inputTexture.read(uint2(sampleCoord));
+        half4 sampleColor = inputTexture.read(sampleCoord);
         accumulatedColor += sampleColor;
         totalWeight += 1.0;
     }

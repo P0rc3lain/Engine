@@ -6,8 +6,8 @@
 
 #include <metal_stdlib>
 
-metal::float4 motionBlur(metal::texture2d<float> inputTexture,
-                         metal::texture2d<float> velocityTexture,
-                         metal::uint2 gid,
-                         float scale,
-                         unsigned int samples);
+metal::half4 motionBlur(metal::texture2d<half> inputTexture,
+                        metal::texture2d<half> velocityTexture,
+                        metal::uint2 gid,
+                        half scale,
+                        unsigned int samples);

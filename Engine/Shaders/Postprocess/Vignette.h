@@ -6,8 +6,8 @@
 
 #include <metal_stdlib>
 
-metal::float4 vignette(metal::float4 fragmentColor,
-                       metal::float4 vignetteColor,
-                       metal::float2 position,
-                       float fromRadius,
-                       float toRadius);
+metal::half4 vignette(metal::half4 fragmentColor,
+                      metal::half4 vignetteColor,
+                      metal::half2 position,
+                      half fromRadius,
+                      half toRadius);
