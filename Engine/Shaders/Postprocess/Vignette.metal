@@ -6,8 +6,12 @@
 
 using namespace metal;
 
-float4 vignette(float4 fragmentColor, float4 vignetteColor, float2 position, float fromRadius, float toRadius) {
-    float radius = length(float2(0.5, 0.5) - position) * 2;
-    float ratio = saturate(radius - fromRadius) / (toRadius - fromRadius);
+half4 vignette(half4 fragmentColor,
+               half4 vignetteColor,
+               half2 position,
+               half fromRadius,
+               half toRadius) {
+    half radius = length(half2(0.5h, 0.5h) - position) * 2.0h;
+    half ratio = saturate(radius - fromRadius) / (toRadius - fromRadius);
     return mix(fragmentColor, vignetteColor, ratio);
 }

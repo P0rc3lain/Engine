@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include <metal_stdlib>
+#include <simd/simd.h>
 
-metal::float4 grain(float time,
-                    metal::float2 texcoord,
-                    metal::float3 inputColor);
+simd::half3 grain(float time,
+                  simd::half2 texcoord,
+                  simd::half3 inputColor);

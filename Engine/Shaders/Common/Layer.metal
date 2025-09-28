@@ -3,25 +3,32 @@
 //
 
 #include <metal_stdlib>
-
 using namespace metal;
 
-float3 channel_mix(float3 a, float3 b, float3 w) {
-    return float3(mix(a.r, b.r, w.r), mix(a.g, b.g, w.g), mix(a.b, b.b, w.b));
+half3 channel_mix(half3 a, half3 b, half3 w) {
+    return half3(mix(a.r, b.r, w.r),
+                 mix(a.g, b.g, w.g),
+                 mix(a.b, b.b, w.b));
 }
 
-float3 add(float3 a, float3 b, float w) {
+half3 add(half3 a, half3 b, half w) {
     return a + a * b * w;
 }
 
-float3 screen(float3 a, float3 b, float w) {
-    return mix(a, float3(1.0) - (float3(1.0) - a) * (float3(1.0) - b), w);
+half3 screen(half3 a, half3 b, half w) {
+    return mix(a, half3(1.0h) - (half3(1.0h) - a) * (half3(1.0h) - b), w);
 }
 
-float3 overlay(float3 a, float3 b, float w) {
-    return mix(a, channel_mix(2.0 * a * b, float3(1.0) - 2.0 * (float3(1.0) - a) * (float3(1.0) - b), step(float3(0.5), a)), w);
+half3 overlay(half3 a, half3 b, half w) {
+    return mix(a,
+               channel_mix(half3(2.0h) * a * b,
+                           half3(1.0h) - half3(2.0h) * (half3(1.0h) - a) * (half3(1.0h) - b),
+                           step(half3(0.5h), a)),
+               w);
 }
 
-float3 softLight(float3 a, float3 b, float w) {
-    return mix(a, pow(a, pow(float3(2.0), 2.0 * (float3(0.5) - b))), w);
+half3 softLight(half3 a, half3 b, half w) {
+    return mix(a,
+               pow(a, pow(half3(2.0h), half3(2.0h) * (half3(0.5h) - b))),
+               w);
 }
