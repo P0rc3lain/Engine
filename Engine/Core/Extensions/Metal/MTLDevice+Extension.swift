@@ -144,7 +144,7 @@ extension MTLDevice {
             .int(ssaoSettings.sampleCount, index: kFunctionConstantIndexSSAOSampleCount)
             .int(ssaoSettings.noiseCount, index: kFunctionConstantIndexSSAONoiseCount)
             .float(ssaoSettings.bias, index: kFunctionConstantIndexSSAOBias)
-            .float(ssaoSettings.power, index: kFunctionConstantIndexSSAOPower)
+            .half(ssaoSettings.power, index: kFunctionConstantIndexSSAOPower)
             .float(ssaoSettings.radius, index: kFunctionConstantIndexSSAORadius)
         let function = library.failOrMakeFunction(name: "kernelSSAO",
                                                   constantValues: values)
