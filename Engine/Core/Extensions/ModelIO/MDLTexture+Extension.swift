@@ -17,11 +17,21 @@ extension MDLTexture {
                    channelEncoding: .uInt8,
                    isCube: false)
     }
-    func upload(device: MTLDevice) -> MTLTexture? {
+    func upload(device: MTLDevice,
+                usage: MTLTextureUsage = .shaderRead,
+                storageMode: MTLStorageMode = .shared,
+                generateMipMaps: Bool = true) -> MTLTexture? {
         let loader = MTKTextureLoader(device: device)
-        let texture = try? loader.newTexture(texture: self,
-                                             options: [.generateMipmaps: true])
-        texture?.label = name
+        let options: [MTKTextureLoader.Option : Any] = [
+            .generateMipmaps: true,
+            .textureUsage: NSNumber(value: usage.rawValue),
+            .textureStorageMode: NSNumber(value: storageMode.rawValue)
+        ]
+        
+        guard let texture = try? loader.newTexture(texture: self, options: options) else {
+            return nil
+        }
+        texture.label = name
         return texture
     }
 }
