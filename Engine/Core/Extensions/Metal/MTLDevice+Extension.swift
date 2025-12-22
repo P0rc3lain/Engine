@@ -13,7 +13,7 @@ extension MTLDevice {
     // ====================
     func failOrMakeDepthStencilState(descriptor: MTLDepthStencilDescriptor) -> any MTLDepthStencilState {
         guard let state = makeDepthStencilState(descriptor: descriptor) else {
-            fatalError("Coult not create depth stencil state")
+            fatalError("Could not create depth stencil state")
         }
         return state
     }
@@ -60,7 +60,7 @@ extension MTLDevice {
         do {
             return try makeRenderPipelineState(descriptor: descriptor)
         } catch let error {
-            fatalError("Coult not create render pipeline state, error \(error.localizedDescription)")
+            fatalError("Could not create render pipeline state, error \(error.localizedDescription)")
         }
     }
     func makeRPSParticle(library: MTLLibrary) -> MTLRenderPipelineState {
@@ -123,7 +123,7 @@ extension MTLDevice {
         do {
             return try makeComputePipelineState(function: computeFunction)
         } catch let error {
-            fatalError("Coult not create compute pipeline state, error \(error.localizedDescription)")
+            fatalError("Could not create compute pipeline state, error \(error.localizedDescription)")
         }
     }
     func makeCPSPostprocessMerge(library: MTLLibrary) -> MTLComputePipelineState {
@@ -251,7 +251,7 @@ extension MTLDevice {
         do {
             return try makeDefaultLibrary(bundle: bundle)
         } catch let error {
-            fatalError("Coult not create default library, error \(error.localizedDescription)")
+            fatalError("Could not create default library, error \(error.localizedDescription)")
         }
     }
     func makePorcelainLibrary() -> MTLLibrary {

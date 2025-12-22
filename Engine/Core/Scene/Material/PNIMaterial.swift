@@ -30,7 +30,7 @@ public struct PNIMaterial: PNMaterial {
                                                    normals: normals,
                                                    metallic: metallic)
         guard let argumentBuffer = bufferCreator.create() else {
-            fatalError("Coult not create argument buffer for the material")
+            fatalError("Could not create argument buffer for the material")
         }
         self.argumentBuffer = argumentBuffer
     }
