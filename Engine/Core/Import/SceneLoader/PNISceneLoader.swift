@@ -21,10 +21,15 @@ public final class PNISceneLoader: PNSceneLoader {
         return translator.process(asset: asset)
     }
     public func resource(name: String, extension: String, bundle: Bundle) -> PNScene? {
+        let resourceRetrieval = psignposter.beginInterval("Resource retrieval")
         guard let asset = assetLoader.resource(name: name, extension: `extension`, bundle: bundle) else {
             return nil
         }
-        return translator.process(asset: asset)
+        psignposter.endInterval("Resource retrieval", resourceRetrieval)
+        let sceneTranslation = psignposter.beginInterval("Scene translation")
+        let processedScene = translator.process(asset: asset)
+        psignposter.endInterval("Scene translation", sceneTranslation)
+        return processedScene
     }
     public static func `default`(device: MTLDevice) -> PNISceneLoader {
         PNISceneLoader(device: device,

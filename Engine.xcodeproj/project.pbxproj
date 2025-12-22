@@ -236,6 +236,7 @@
 		5677AD2B28C1505000BF822C /* simd_float3x3+Extension+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677AD2228C1505000BF822C /* simd_float3x3+Extension+Tests.swift */; };
 		5677AD3128C151CA00BF822C /* XCTest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5677AD3028C151CA00BF822C /* XCTest+Extension.swift */; };
 		567F5C3D28A7AC3000AD0A6C /* NSImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F5C3C28A7AC3000AD0A6C /* NSImage+Extension.swift */; platformFilters = (macos, ); };
+		56865D8C2EF955B50024896F /* MDLAxisAlignedBoundingBox+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56865D8B2EF955B20024896F /* MDLAxisAlignedBoundingBox+Extension.swift */; };
 		5686BD9A273C1CD300329FA0 /* PNIStaticBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5686BD99273C1CD300329FA0 /* PNIStaticBuffer.swift */; };
 		5686BD9D273D78B700329FA0 /* Animation.metal in Sources */ = {isa = PBXBuildFile; fileRef = 5686BD9C273D78B700329FA0 /* Animation.metal */; };
 		568807462747EEC000C95F55 /* PNSkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568807452747EEC000C95F55 /* PNSkeleton.swift */; };
@@ -601,6 +602,7 @@
 		5677AD2628C1505000BF822C /* Array+Extension+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension+Tests.swift"; sourceTree = "<group>"; };
 		5677AD3028C151CA00BF822C /* XCTest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+Extension.swift"; sourceTree = "<group>"; };
 		567F5C3C28A7AC3000AD0A6C /* NSImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extension.swift"; sourceTree = "<group>"; };
+		56865D8B2EF955B20024896F /* MDLAxisAlignedBoundingBox+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MDLAxisAlignedBoundingBox+Extension.swift"; sourceTree = "<group>"; };
 		5686BD99273C1CD300329FA0 /* PNIStaticBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNIStaticBuffer.swift; sourceTree = "<group>"; };
 		5686BD9B273D78A900329FA0 /* Animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		5686BD9C273D78B700329FA0 /* Animation.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Animation.metal; sourceTree = "<group>"; };
@@ -2014,6 +2016,7 @@
 		56D1ED592725F84C00D68EA7 /* ModelIO */ = {
 			isa = PBXGroup;
 			children = (
+				56865D8B2EF955B20024896F /* MDLAxisAlignedBoundingBox+Extension.swift */,
 				561666812719E2CC000063B1 /* MDLMaterialProperty+Extension.swift */,
 				561666832719E2CC000063B1 /* MDLTransformComponent+Extension.swift */,
 				561666862719E2CC000063B1 /* MDLMaterial+Extension.swift */,
@@ -2550,6 +2553,7 @@
 				5648531C28C9F26300BA4CC0 /* PNKeyframeAnimation.swift in Sources */,
 				5688076827483F4600C95F55 /* PNIMaterial.swift in Sources */,
 				5648532328CA154F00BA4CC0 /* PNISinglePlaySampler.swift in Sources */,
+				56865D8C2EF955B50024896F /* MDLAxisAlignedBoundingBox+Extension.swift in Sources */,
 				566795DA274FC561005993D7 /* PNEngine.swift in Sources */,
 				564DE040284169B9005C2029 /* Comparable+Global.swift in Sources */,
 				5620C8152754F3B60098D6FA /* PNSpotLight.swift in Sources */,
