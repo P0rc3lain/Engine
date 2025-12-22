@@ -8,6 +8,7 @@ import PNShared
 
 public final class PNISceneTranslator: PNSceneTranslator {
     private let device: MTLDevice
+    private let interactor = PNIBoundingBoxInteractor.default
     private var materialCache = [String: PNMaterial]()
     public init(device: MTLDevice) {
         self.device = device
@@ -21,9 +22,7 @@ public final class PNISceneTranslator: PNSceneTranslator {
                                              parent: passedValue)
                 passedValue?.children.append(node)
                 return node
-            } /* else if let object = object as? MDLLight {
-                fatalError("Not implemented")
-            } */ else if let object = object as? MDLMesh {
+            } else if let object = object as? MDLMesh {
                 guard let mesh = convert(mesh: object) else {
                     fatalError("Could not convert mesh")
                 }
@@ -110,7 +109,6 @@ public final class PNISceneTranslator: PNSceneTranslator {
         assert(mesh.vertexBuffers.count == 1,
                "Only object that have a single buffer assigned are supported")
         let buffer = mesh.vertexBuffers[0].rawData
-        let bounds = PNIBoundEstimator().bound(vertexBuffer: buffer)
         guard let deviceBuffer = device.makeBufferShared(data: buffer) else {
             return nil
         }
@@ -138,10 +136,9 @@ public final class PNISceneTranslator: PNSceneTranslator {
                                                      material: loadedMaterial)
                 pieceDescriptions.append(description)
             }
-
         }
-        let interactor = PNIBoundingBoxInteractor.default
-        return PNMesh(boundingBox: interactor.from(bound: bounds),
+        
+        return PNMesh(boundingBox: interactor.from(bound: mesh.boundingBox.pnBound),
                       vertexBuffer: dataBuffer,
                       pieceDescriptions: pieceDescriptions)
     }
