@@ -137,7 +137,7 @@ public final class PNISceneTranslator: PNSceneTranslator {
                 pieceDescriptions.append(description)
             }
         }
-        
+
         return PNMesh(boundingBox: interactor.from(bound: mesh.boundingBox.pnBound),
                       vertexBuffer: dataBuffer,
                       pieceDescriptions: pieceDescriptions)
