@@ -22,12 +22,12 @@ extension MDLTexture {
                 storageMode: MTLStorageMode = .shared,
                 generateMipMaps: Bool = true) -> MTLTexture? {
         let loader = MTKTextureLoader(device: device)
-        let options: [MTKTextureLoader.Option : Any] = [
+        let options: [MTKTextureLoader.Option: Any] = [
             .generateMipmaps: true,
             .textureUsage: NSNumber(value: usage.rawValue),
             .textureStorageMode: NSNumber(value: storageMode.rawValue)
         ]
-        
+
         guard let texture = try? loader.newTexture(texture: self, options: options) else {
             return nil
         }
