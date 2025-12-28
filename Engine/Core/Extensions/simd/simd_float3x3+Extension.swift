@@ -10,9 +10,12 @@ extension simd_float3x3 {
     }
     public static func from(directionVector binormal: simd_float3) -> simd_float3x3 {
         assertEqual(length(binormal), 1)
-        var normal = simd_float3.random().normalized
-        normal = (normal - dot(binormal, normal) * binormal).normalized
-        let tangent = cross(normal, binormal).normalized
+        var normal = simd_float3.random()
+        normal.normalize()
+        normal = (normal - dot(binormal, normal) * binormal)
+        normal.normalize()
+        var tangent = cross(normal, binormal)
+        tangent.normalize()
         assert(dot(normal, binormal) == 0)
         assert(dot(tangent, binormal) == 0)
         return simd_float3x3(tangent, normal, -binormal)
