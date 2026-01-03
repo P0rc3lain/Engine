@@ -1,3 +1,6 @@
 [submodule "Dependencies/DependencyGraph"]
 	path = Dependencies/DependencyGraph
 	url = git@github.com:P0rc3lain/DependencyGraph.git
+[submodule "Dependencies/ZPack"]
+	path = Dependencies/ZPack
+	url = git@github.com:P0rc3lain/ZPack.git
