@@ -9,7 +9,7 @@ extension MTLPixelFormat {
         .rgba16Float
     }
     static var gBufferNMC: MTLPixelFormat {
-        .rgba16Float
+        .rgba32Float
     }
     static var gBufferPRC: MTLPixelFormat {
         .rgba32Float
