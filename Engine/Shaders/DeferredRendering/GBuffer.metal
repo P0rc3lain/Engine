@@ -29,7 +29,7 @@ struct RasterizerData {
 
 struct GBufferData {
     half4 albedoRoughness [[color(0)]];
-    half4 normalMetallic [[color(1)]];
+    float4 normalMetallic [[color(1)]];
     float4 positionReflectance [[color(2)]];
     half2 velocity [[color(3)]];
 };
@@ -94,7 +94,7 @@ fragment GBufferData fragmentGBuffer(RasterizerData in [[stage_in]],
     // should be possible to configure it
     float3 normalEncoded = material.normals.sample(textureSampler, in.uv).xyz;
     float3 normalDecoded = normalEncoded * 2 - 1;
-    half3 normalWorldSpace = half3(TBN * normalDecoded);
+    float3 normalWorldSpace = float3(TBN * normalDecoded);
     half3 color = material.albedo.sample(textureSampler, in.uv).rgb;
     half2 current = half2(in.currentClipSpacePosition.xy / in.currentClipSpacePosition.w);
     half2 previous = half2(in.previousClipSpacePosition.xy / in.previousClipSpacePosition.w);
@@ -104,7 +104,7 @@ fragment GBufferData fragmentGBuffer(RasterizerData in [[stage_in]],
     
     return {
         half4(color, roughness),
-        half4(normalWorldSpace, metallic),
+        float4(normalWorldSpace, metallic),
         float4(in.cameraSpacePosition, 0.04),
         velocity
     };
