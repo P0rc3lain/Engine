@@ -15,7 +15,7 @@ float normalDistributionGGX(float3 n, float3 h, float roughness) {
     float nh = dot(n, h);
     float influence = nh * nh * (alphaSquared - 1) + 1;
     float denominator = M_PI_F * influence * influence;
-    return numerator / denominator;
+    return numerator / max(denominator, 1e-3f);
 }
 
 float geometricAttenuationSmith(float3 n, float3 v, float k) {
