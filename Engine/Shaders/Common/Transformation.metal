@@ -12,29 +12,23 @@ float3x3 extractRotation(float4x4 transformation) {
                     transformation.columns[2].xyz);
 }
 
-metal::float3x3 normalizeEachColumn(metal::float3x3 transformation) {
-    return float3x3(normalize(transformation.columns[0]),
-                    normalize(transformation.columns[1]),
-                    normalize(transformation.columns[2]));
-}
-
 float4 extractPosition(float4x4 transformation) {
     return transformation.columns[3];
 }
 
-float4x4 scaleMatrix(float sx, float sy, float sz) {
-    return simd_float4x4(
-        simd_float4(sx,  0,  0, 0),
-        simd_float4( 0, sy,  0, 0),
-        simd_float4( 0,  0, sz, 0),
-        simd_float4( 0,  0,  0, 1)
-    );
-}
-
-float3x3 scaleMatrix3x3(float sx, float sy, float sz) {
-    return simd_float3x3(
-        simd_float3(sx,  0,  0),
-        simd_float3( 0, sy,  0),
-        simd_float3( 0,  0, sz)
-    );
+simd::float4x4 perspectiveProjection(float fovYRadians,
+                                     float aspect,
+                                     float nearZ,
+                                     float farZ)
+{
+    float ys = 1.0f / tan(fovYRadians * 0.5f);
+    float xs = ys / aspect;
+    float zs = farZ / (farZ - nearZ);
+    
+    return simd::float4x4{
+        simd::float4(xs,  0,   0,   0),
+        simd::float4( 0, ys,   0,   0),
+        simd::float4( 0,  0,  zs,   1),
+        simd::float4( 0,  0, -zs * nearZ, 0)
+    };
 }
