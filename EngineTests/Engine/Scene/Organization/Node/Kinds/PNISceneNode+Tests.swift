@@ -8,15 +8,18 @@ import XCTest
 
 class PNISceneNodeTests: XCTestCase {
     private let interactor = PNIBoundingBoxInteractor.default
+    private let nodeUpdate = PNNodeUpdater()
     func testSingleNode() throws {
         let node = PNScenePiece.make(data: PNISceneNode(transform: .translation(vector: [2, 0, 0])))
-        XCTAssertEqual(node.data.transform.value, .translation(vector: [2, 0, 0]))
+        nodeUpdate.update(rootNode: node)
+        
+        XCTAssertEqual(node.data.transform, .translation(vector: [2, 0, 0]))
         XCTAssertNil(node.data.intrinsicBoundingBox)
-        XCTAssertNil(node.data.localBoundingBox.value)
-        XCTAssertNil(node.data.worldBoundingBox.value)
-        XCTAssertEqual(node.data.modelUniforms.value.modelMatrix.translation, [2, 0, 0])
-        XCTAssertNil(node.data.childrenMergedBoundingBox.value)
-        XCTAssertIdentical(node, node.data.enclosingNode.value.reference)
+        XCTAssertNil(node.data.localBoundingBox)
+        XCTAssertNil(node.data.worldBoundingBox)
+        XCTAssertEqual(node.data.modelUniforms.modelMatrix.translation, [2, 0, 0])
+        XCTAssertNil(node.data.childrenMergedBoundingBox)
+        XCTAssertIdentical(node, node.data.enclosingNode)
     }
     func testNestedNodes() throws {
         let node = PNScenePiece.make(data: PNISceneNode(transform: .translation(vector: [1, 2, 3])))
@@ -24,15 +27,17 @@ class PNISceneNodeTests: XCTestCase {
         let grandParent = PNScenePiece.make(data: PNISceneNode(transform: .translation(vector: [7, 8, 9])))
         parent.add(child: node)
         grandParent.add(child: parent)
-        XCTAssertEqual(node.data.transform.value.translation, [1, 2, 3])
-        XCTAssertEqual(node.data.worldTransform.value.translation, [12, 15, 18])
-        XCTAssertEqual(node.data.modelUniforms.value.modelMatrix.translation, [12, 15, 18])
-        XCTAssertEqual(parent.data.transform.value.translation, [4, 5, 6])
-        XCTAssertEqual(parent.data.worldTransform.value.translation, [11, 13, 15])
-        XCTAssertEqual(parent.data.modelUniforms.value.modelMatrix.translation, [11, 13, 15])
-        XCTAssertEqual(grandParent.data.transform.value.translation, [7, 8, 9])
-        XCTAssertEqual(grandParent.data.worldTransform.value.translation, [7, 8, 9])
-        XCTAssertEqual(grandParent.data.modelUniforms.value.modelMatrix.translation, [7, 8, 9])
+        nodeUpdate.update(rootNode: grandParent)
+        
+        XCTAssertEqual(node.data.transform.translation, [1, 2, 3])
+        XCTAssertEqual(node.data.worldTransform.translation, [12, 15, 18])
+        XCTAssertEqual(node.data.modelUniforms.modelMatrix.translation, [12, 15, 18])
+        XCTAssertEqual(parent.data.transform.translation, [4, 5, 6])
+        XCTAssertEqual(parent.data.worldTransform.translation, [11, 13, 15])
+        XCTAssertEqual(parent.data.modelUniforms.modelMatrix.translation, [11, 13, 15])
+        XCTAssertEqual(grandParent.data.transform.translation, [7, 8, 9])
+        XCTAssertEqual(grandParent.data.worldTransform.translation, [7, 8, 9])
+        XCTAssertEqual(grandParent.data.modelUniforms.modelMatrix.translation, [7, 8, 9])
     }
     func testNestedNodesMovingNoChange() throws {
         let node = PNScenePiece.make(data: PNISceneNode(transform: .translation(vector: [1, 2, 3])))
@@ -41,37 +46,45 @@ class PNISceneNodeTests: XCTestCase {
         parent.add(child: node)
         grandParent.add(child: parent)
         func assertion() {
-            XCTAssertEqual(node.data.transform.value.translation, [1, 2, 3])
-            XCTAssertEqual(node.data.worldTransform.value.translation, [12, 15, 18])
-            XCTAssertEqual(node.data.modelUniforms.value.modelMatrix.translation, [12, 15, 18])
-            XCTAssertEqual(parent.data.transform.value.translation, [4, 5, 6])
-            XCTAssertEqual(parent.data.worldTransform.value.translation, [11, 13, 15])
-            XCTAssertEqual(parent.data.modelUniforms.value.modelMatrix.translation, [11, 13, 15])
-            XCTAssertEqual(grandParent.data.transform.value.translation, [7, 8, 9])
-            XCTAssertEqual(grandParent.data.worldTransform.value.translation, [7, 8, 9])
-            XCTAssertEqual(grandParent.data.modelUniforms.value.modelMatrix.translation, [7, 8, 9])
+            XCTAssertEqual(node.data.transform.translation, [1, 2, 3])
+            XCTAssertEqual(node.data.worldTransform.translation, [12, 15, 18])
+            XCTAssertEqual(node.data.modelUniforms.modelMatrix.translation, [12, 15, 18])
+            XCTAssertEqual(parent.data.transform.translation, [4, 5, 6])
+            XCTAssertEqual(parent.data.worldTransform.translation, [11, 13, 15])
+            XCTAssertEqual(parent.data.modelUniforms.modelMatrix.translation, [11, 13, 15])
+            XCTAssertEqual(grandParent.data.transform.translation, [7, 8, 9])
+            XCTAssertEqual(grandParent.data.worldTransform.translation, [7, 8, 9])
+            XCTAssertEqual(grandParent.data.modelUniforms.modelMatrix.translation, [7, 8, 9])
         }
+        nodeUpdate.update(rootNode: grandParent)
         assertion()
-        node.data.transform.send(.translation(vector: [1, 2, 3]))
-        parent.data.transform.send(.translation(vector: [4, 5, 6]))
-        grandParent.data.transform.send(.translation(vector: [7, 8, 9]))
+        
+        node.data.transform = .translation(vector: [1, 2, 3])
+        parent.data.transform = .translation(vector: [4, 5, 6])
+        grandParent.data.transform = .translation(vector: [7, 8, 9])
+        
+        nodeUpdate.update(rootNode: grandParent)
         assertion()
-        node.data.transform.send(.translation(vector: [-1, -2, -3]))
-        node.data.transform.send(.translation(vector: [1, 2, 3]))
+        
+        node.data.transform = .translation(vector: [-1, -2, -3])
+        node.data.transform = .translation(vector: [1, 2, 3])
+        
+        nodeUpdate.update(rootNode: grandParent)
         assertion()
     }
     func testBoundingBox() throws {
         let bb = interactor.from(bound: PNBound(min: [-1, -1, -1], max: [1, 1, 1]))
         let node = PNScenePiece.make(data: PNISceneNode(transform: .translation(vector: [1, 2, 3]),
                                                         boundingBox: bb))
-        XCTAssertEqual(node.data.worldTransform.value.translation, [1, 2, 3])
-        XCTAssertEqual(node.data.worldTransform.value.translation,
-                       node.data.transform.value.translation)
-        XCTAssertEqual(interactor.safeBound(node.data.worldBoundingBox.value)?.min,
-                       interactor.safeBound(node.data.localBoundingBox.value)?.min)
-        XCTAssertEqual(interactor.safeBound(node.data.worldBoundingBox.value)?.max,
-                       interactor.safeBound(node.data.localBoundingBox.value)?.max)
-        let wbb = node.data.worldBoundingBox.value
+        nodeUpdate.update(rootNode: node)
+        XCTAssertEqual(node.data.worldTransform.translation, [1, 2, 3])
+        XCTAssertEqual(node.data.worldTransform.translation,
+                       node.data.transform.translation)
+        XCTAssertEqual(interactor.safeBound(node.data.worldBoundingBox)?.min,
+                       interactor.safeBound(node.data.localBoundingBox)?.min)
+        XCTAssertEqual(interactor.safeBound(node.data.worldBoundingBox)?.max,
+                       interactor.safeBound(node.data.localBoundingBox)?.max)
+        let wbb = node.data.worldBoundingBox
         XCTAssertEqual(interactor.safeBound(wbb)?.min, [0, 1, 2])
         XCTAssertEqual(interactor.safeBound(wbb)?.max, [2, 3, 4])
     }
@@ -83,12 +96,13 @@ class PNISceneNodeTests: XCTestCase {
         let parentNode = PNScenePiece.make(data: PNISceneNode(transform: .translation(vector: [4, 5, 6]),
                                                               boundingBox: parentBb))
         parentNode.add(child: node)
-        XCTAssertEqual(parentNode.data.worldTransform.value.translation, [4, 5, 6])
-        XCTAssertEqual(node.data.worldTransform.value.translation, [5, 7, 9])
-        if let bbParent = parentNode.data.worldBoundingBox.value,
-           let bbChild = node.data.worldBoundingBox.value,
-           let bbChildLocal = node.data.localBoundingBox.value,
-           let childrenMerged = parentNode.data.childrenMergedBoundingBox.value {
+        nodeUpdate.update(rootNode: parentNode)
+        XCTAssertEqual(parentNode.data.worldTransform.translation, [4, 5, 6])
+        XCTAssertEqual(node.data.worldTransform.translation, [5, 7, 9])
+        if let bbParent = parentNode.data.worldBoundingBox,
+           let bbChild = node.data.worldBoundingBox,
+           let bbChildLocal = node.data.localBoundingBox,
+           let childrenMerged = parentNode.data.childrenMergedBoundingBox {
             XCTAssertEqual(interactor.bound(bbChild).min, [4, 6, 8])
             XCTAssertEqual(interactor.bound(bbChild).max, [6, 8, 10])
             XCTAssertEqual(interactor.bound(bbParent).min, [4, 6, 8])
@@ -115,10 +129,11 @@ class PNISceneNodeTests: XCTestCase {
                                                               boundingBox: parentBb))
         parentNode.add(child: firstNode)
         parentNode.add(child: secondNode)
-        let firstNodeWBB = interactor.safeBound(firstNode.data.worldBoundingBox.value)
-        let secondNodeWBB = interactor.safeBound(secondNode.data.worldBoundingBox.value)
-        let mergedChildrenWBB = interactor.safeBound(parentNode.data.childrenMergedBoundingBox.value)
-        let parentNodeWBB = interactor.safeBound(parentNode.data.worldBoundingBox.value)
+        nodeUpdate.update(rootNode: parentNode)
+        let firstNodeWBB = interactor.safeBound(firstNode.data.worldBoundingBox)
+        let secondNodeWBB = interactor.safeBound(secondNode.data.worldBoundingBox)
+        let mergedChildrenWBB = interactor.safeBound(parentNode.data.childrenMergedBoundingBox)
+        let parentNodeWBB = interactor.safeBound(parentNode.data.worldBoundingBox)
         XCTAssertEqual(firstNodeWBB?.min, [-1, -1, -1])
         XCTAssertEqual(firstNodeWBB?.max, [5, 5, 5])
         XCTAssertEqual(secondNodeWBB?.min, [-4, -4, -4])
@@ -131,24 +146,29 @@ class PNISceneNodeTests: XCTestCase {
     func testBoundingBoxReloading() throws {
         let bb = interactor.from(bound: PNBound(min: [-1, -1, -1], max: [1, 1, 1]))
         let node = PNScenePiece.make(data: PNISceneNode(transform: .identity, boundingBox: bb))
-        node.data.transform.send(.scale(factor: 2))
-        XCTAssertEqual(node.data.transform.value, .scale(factor: 2))
-        XCTAssertEqual(node.data.worldTransform.value, .scale(factor: 2))
+        node.data.transform = .scale(factor: 2)
+        
+        nodeUpdate.update(rootNode: node)
+        
+        XCTAssertEqual(node.data.transform, .scale(factor: 2))
+        XCTAssertEqual(node.data.worldTransform, .scale(factor: 2))
         XCTAssertEqual(interactor.safeBound(node.data.intrinsicBoundingBox)?.min, [-1, -1, -1])
         XCTAssertEqual(interactor.safeBound(node.data.intrinsicBoundingBox)?.max, [1, 1, 1])
-        XCTAssertNil(node.data.childrenMergedBoundingBox.value)
-        XCTAssertEqual(interactor.safeBound(node.data.localBoundingBox.value)?.min, [-2, -2, -2])
-        XCTAssertEqual(interactor.safeBound(node.data.localBoundingBox.value)?.max, [2, 2, 2])
-        XCTAssertEqual(interactor.safeBound(node.data.worldBoundingBox.value)?.max, [2, 2, 2])
+        XCTAssertNil(node.data.childrenMergedBoundingBox)
+        XCTAssertEqual(interactor.safeBound(node.data.localBoundingBox)?.min, [-2, -2, -2])
+        XCTAssertEqual(interactor.safeBound(node.data.localBoundingBox)?.max, [2, 2, 2])
+        XCTAssertEqual(interactor.safeBound(node.data.worldBoundingBox)?.max, [2, 2, 2])
     }
     func testInitialNodeState() throws {
         let node = PNScenePiece.make(data: PNISceneNode())
+        nodeUpdate.update(rootNode: node)
+        
         XCTAssertNil(node.data.intrinsicBoundingBox)
-        XCTAssertNil(node.data.worldBoundingBox.value)
-        XCTAssertNil(node.data.localBoundingBox.value)
-        XCTAssertNil(node.data.childrenMergedBoundingBox.value)
-        XCTAssertEqual(node.data.worldTransform.value, .identity)
-        XCTAssertEqual(node.data.transform.value, .identity)
+        XCTAssertNil(node.data.worldBoundingBox)
+        XCTAssertNil(node.data.localBoundingBox)
+        XCTAssertNil(node.data.childrenMergedBoundingBox)
+        XCTAssertEqual(node.data.worldTransform, .identity)
+        XCTAssertEqual(node.data.transform, .identity)
     }
     func testMinimalBoard() throws {
         let boardBound = PNBound(min: [-30, -2, -30], max: [30, -1, 30])
@@ -156,24 +176,25 @@ class PNISceneNodeTests: XCTestCase {
         let boardNode = PNScenePiece.make(data: PNISceneNode(boundingBox: boardBB))
         let transformNode = PNScenePiece.make(data: PNISceneNode(transform: PNTransform.scale(factor: 0.5)))
         transformNode.add(child: boardNode)
+        nodeUpdate.update(rootNode: transformNode)
         XCTAssertNotNil(boardNode.data.intrinsicBoundingBox)
-        XCTAssertEqual(interactor.safeBound(boardNode.data.localBoundingBox.value)?.min, boardBound.min)
-        XCTAssertEqual(interactor.safeBound(boardNode.data.localBoundingBox.value)?.max, boardBound.max)
-        XCTAssertEqual(interactor.safeBound(boardNode.data.worldBoundingBox.value)?.min, [-15, -1, -15])
-        XCTAssertEqual(interactor.safeBound(boardNode.data.worldBoundingBox.value)?.max, [15, -0.5, 15])
-        XCTAssertNil(boardNode.data.childrenMergedBoundingBox.value)
+        XCTAssertEqual(interactor.safeBound(boardNode.data.localBoundingBox)?.min, boardBound.min)
+        XCTAssertEqual(interactor.safeBound(boardNode.data.localBoundingBox)?.max, boardBound.max)
+        XCTAssertEqual(interactor.safeBound(boardNode.data.worldBoundingBox)?.min, [-15, -1, -15])
+        XCTAssertEqual(interactor.safeBound(boardNode.data.worldBoundingBox)?.max, [15, -0.5, 15])
+        XCTAssertNil(boardNode.data.childrenMergedBoundingBox)
         XCTAssertNil(transformNode.data.intrinsicBoundingBox)
-        XCTAssertEqual(interactor.safeBound(transformNode.data.worldBoundingBox.value)?.min, [-15, -1, -15])
-        XCTAssertEqual(interactor.safeBound(transformNode.data.worldBoundingBox.value)?.max, [15, -0.5, 15])
-        XCTAssertEqual(interactor.safeBound(transformNode.data.localBoundingBox.value)?.min, [-15, -1, -15])
-        XCTAssertEqual(interactor.safeBound(transformNode.data.localBoundingBox.value)?.max, [15, -0.5, 15])
-        XCTAssertEqual(interactor.safeBound(transformNode.data.worldBoundingBox.value)?.min,
-                       interactor.safeBound(boardNode.data.worldBoundingBox.value)?.min)
-        XCTAssertEqual(interactor.safeBound(transformNode.data.worldBoundingBox.value)?.max,
-                       interactor.safeBound(boardNode.data.worldBoundingBox.value)?.max)
-        XCTAssertEqual(interactor.safeBound(transformNode.data.childrenMergedBoundingBox.value)?.min,
+        XCTAssertEqual(interactor.safeBound(transformNode.data.worldBoundingBox)?.min, [-15, -1, -15])
+        XCTAssertEqual(interactor.safeBound(transformNode.data.worldBoundingBox)?.max, [15, -0.5, 15])
+        XCTAssertEqual(interactor.safeBound(transformNode.data.localBoundingBox)?.min, [-15, -1, -15])
+        XCTAssertEqual(interactor.safeBound(transformNode.data.localBoundingBox)?.max, [15, -0.5, 15])
+        XCTAssertEqual(interactor.safeBound(transformNode.data.worldBoundingBox)?.min,
+                       interactor.safeBound(boardNode.data.worldBoundingBox)?.min)
+        XCTAssertEqual(interactor.safeBound(transformNode.data.worldBoundingBox)?.max,
+                       interactor.safeBound(boardNode.data.worldBoundingBox)?.max)
+        XCTAssertEqual(interactor.safeBound(transformNode.data.childrenMergedBoundingBox)?.min,
                        [-30, -2, -30])
-        XCTAssertEqual(interactor.safeBound(transformNode.data.childrenMergedBoundingBox.value)?.max,
+        XCTAssertEqual(interactor.safeBound(transformNode.data.childrenMergedBoundingBox)?.max,
                        [30, -1, 30])
     }
     func testBoundingBoxNestedBoard() throws {
@@ -181,8 +202,9 @@ class PNISceneNodeTests: XCTestCase {
         let boardNode = PNScenePiece.make(data: PNISceneNode(transform: .identity, boundingBox: boardBB))
         let transformNode = PNScenePiece.make(data: PNISceneNode(transform: PNTransform.scale(factor: 0.5)))
         transformNode.add(child: boardNode)
-        let mainBB = transformNode.data.worldBoundingBox.value
-        let boardWorldBB = boardNode.data.worldBoundingBox.value
+        nodeUpdate.update(rootNode: transformNode)
+        let mainBB = transformNode.data.worldBoundingBox
+        let boardWorldBB = boardNode.data.worldBoundingBox
         XCTAssertEqual(interactor.safeBound(mainBB)?.min, interactor.safeBound(boardWorldBB)?.min)
         XCTAssertEqual(interactor.safeBound(mainBB)?.max, interactor.safeBound(boardWorldBB)?.max)
         let passthroughNode = PNScenePiece.make(data: PNISceneNode(transform: .translation(vector: [1, 0, 0])))
@@ -200,11 +222,13 @@ class PNISceneNodeTests: XCTestCase {
                                                               boundingBox: parentBb))
         parentNode.add(child: firstNode)
         parentNode.add(child: secondNode)
-        secondNode.data.transform.send(.translation(vector: [20, 20, 20]))
-        let firstNodeWBB = interactor.safeBound(firstNode.data.worldBoundingBox.value)
-        let secondNodeWBB = interactor.safeBound(secondNode.data.worldBoundingBox.value)
-        let mergedChildrenWBB = interactor.safeBound(parentNode.data.childrenMergedBoundingBox.value)
-        let parentNodeWBB = interactor.safeBound(parentNode.data.worldBoundingBox.value)
+        secondNode.data.transform = .translation(vector: [20, 20, 20])
+        
+        nodeUpdate.update(rootNode: parentNode)
+        let firstNodeWBB = interactor.safeBound(firstNode.data.worldBoundingBox)
+        let secondNodeWBB = interactor.safeBound(secondNode.data.worldBoundingBox)
+        let mergedChildrenWBB = interactor.safeBound(parentNode.data.childrenMergedBoundingBox)
+        let parentNodeWBB = interactor.safeBound(parentNode.data.worldBoundingBox)
         XCTAssertEqual(firstNodeWBB?.min, [-1, -1, -1])
         XCTAssertEqual(firstNodeWBB?.max, [5, 5, 5])
         XCTAssertEqual(secondNodeWBB?.min, [16, 16, 16])

@@ -33,7 +33,7 @@ public final class PNISceneTranslator: PNSceneTranslator {
                                                                       skeleton: skeleton,
                                                                       transform: object.transform),
                                                  parent: passedValue)
-                    node.data.enclosingNode.send(PNWeakRef(node))
+                    node.data.enclosingNode = node
                     passedValue?.children.append(node)
                     return node
                 } else {

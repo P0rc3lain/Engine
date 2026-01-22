@@ -9,6 +9,7 @@ public class PNIWorkloadManager: PNWorkloadManager {
     private let transcriber: PNTranscriber
     private let renderMaskGenerator: PNRenderMaskGenerator
     private var previousFrameScene: PNSceneDescription?
+    private let nodeUpdate = PNNodeUpdater()
     public init(bufferStore: PNBufferStore,
                 renderingCoordinator: PNRenderingCoordinator,
                 renderMaskGenerator: PNRenderMaskGenerator,
@@ -20,6 +21,7 @@ public class PNIWorkloadManager: PNWorkloadManager {
     }
     public func draw(sceneGraph: PNScene, taskQueue: PNRepeatableTaskQueue) {
         taskQueue.execute()
+        nodeUpdate.update(rootNode: sceneGraph.rootNode)
         let scene = transcriber.transcribe(scene: sceneGraph)
         bufferStore.matrixPalettes.upload(data: scene.palettes)
         bufferStore.ambientLights.upload(data: scene.ambientLights)
