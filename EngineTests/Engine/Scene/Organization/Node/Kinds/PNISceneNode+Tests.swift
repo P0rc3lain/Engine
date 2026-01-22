@@ -12,7 +12,7 @@ class PNISceneNodeTests: XCTestCase {
     func testSingleNode() throws {
         let node = PNScenePiece.make(data: PNISceneNode(transform: .translation(vector: [2, 0, 0])))
         nodeUpdate.update(rootNode: node)
-        
+
         XCTAssertEqual(node.data.transform, .translation(vector: [2, 0, 0]))
         XCTAssertNil(node.data.intrinsicBoundingBox)
         XCTAssertNil(node.data.localBoundingBox)
@@ -28,7 +28,7 @@ class PNISceneNodeTests: XCTestCase {
         parent.add(child: node)
         grandParent.add(child: parent)
         nodeUpdate.update(rootNode: grandParent)
-        
+
         XCTAssertEqual(node.data.transform.translation, [1, 2, 3])
         XCTAssertEqual(node.data.worldTransform.translation, [12, 15, 18])
         XCTAssertEqual(node.data.modelUniforms.modelMatrix.translation, [12, 15, 18])
@@ -58,17 +58,17 @@ class PNISceneNodeTests: XCTestCase {
         }
         nodeUpdate.update(rootNode: grandParent)
         assertion()
-        
+
         node.data.transform = .translation(vector: [1, 2, 3])
         parent.data.transform = .translation(vector: [4, 5, 6])
         grandParent.data.transform = .translation(vector: [7, 8, 9])
-        
+
         nodeUpdate.update(rootNode: grandParent)
         assertion()
-        
+
         node.data.transform = .translation(vector: [-1, -2, -3])
         node.data.transform = .translation(vector: [1, 2, 3])
-        
+
         nodeUpdate.update(rootNode: grandParent)
         assertion()
     }
@@ -147,9 +147,9 @@ class PNISceneNodeTests: XCTestCase {
         let bb = interactor.from(bound: PNBound(min: [-1, -1, -1], max: [1, 1, 1]))
         let node = PNScenePiece.make(data: PNISceneNode(transform: .identity, boundingBox: bb))
         node.data.transform = .scale(factor: 2)
-        
+
         nodeUpdate.update(rootNode: node)
-        
+
         XCTAssertEqual(node.data.transform, .scale(factor: 2))
         XCTAssertEqual(node.data.worldTransform, .scale(factor: 2))
         XCTAssertEqual(interactor.safeBound(node.data.intrinsicBoundingBox)?.min, [-1, -1, -1])
@@ -162,7 +162,7 @@ class PNISceneNodeTests: XCTestCase {
     func testInitialNodeState() throws {
         let node = PNScenePiece.make(data: PNISceneNode())
         nodeUpdate.update(rootNode: node)
-        
+
         XCTAssertNil(node.data.intrinsicBoundingBox)
         XCTAssertNil(node.data.worldBoundingBox)
         XCTAssertNil(node.data.localBoundingBox)
@@ -223,7 +223,7 @@ class PNISceneNodeTests: XCTestCase {
         parentNode.add(child: firstNode)
         parentNode.add(child: secondNode)
         secondNode.data.transform = .translation(vector: [20, 20, 20])
-        
+
         nodeUpdate.update(rootNode: parentNode)
         let firstNodeWBB = interactor.safeBound(firstNode.data.worldBoundingBox)
         let secondNodeWBB = interactor.safeBound(secondNode.data.worldBoundingBox)

@@ -16,11 +16,11 @@ class PNNodeUpdater {
     }
     private func update(from node: PNScenePiece, worldTransform: simd_float4x4) {
         let concatenatedTransform = worldTransform * node.data.transform
-        
+
         node.data.worldTransform = concatenatedTransform
         node.data.modelUniforms = PNWModelUniforms(modelMatrix: concatenatedTransform,
                                                    modelMatrixInverse: concatenatedTransform.inverse)
-        
+
         if node.children.isEmpty {
             if let bb = node.data.intrinsicBoundingBox {
                 let aabb = interactor.aabb(interactor.multiply(node.data.transform, bb))
@@ -36,7 +36,7 @@ class PNNodeUpdater {
             let localBoundingBoxes = node.children.compactMap { $0.data.localBoundingBox }
             let mergedLocalBoundingBoxes = localBoundingBoxes.reduce(interactor.merge(_:_:))
             node.data.childrenMergedBoundingBox = mergedLocalBoundingBoxes
-            
+
             if let bb = node.data.intrinsicBoundingBox {
                 if let childrenBB = mergedLocalBoundingBoxes {
                     let merged = interactor.merge(bb, childrenBB)

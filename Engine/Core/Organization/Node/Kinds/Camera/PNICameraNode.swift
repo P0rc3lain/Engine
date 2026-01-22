@@ -15,7 +15,7 @@ public final class PNICameraNode: PNCameraNode {
     public var worldBoundingBox: PNBoundingBox?
     public var childrenMergedBoundingBox: PNBoundingBox?
     public let intrinsicBoundingBox: PNBoundingBox?
-    
+
     public init(camera: PNCamera,
                 transform: PNLTransform,
                 name: String = "") {
@@ -30,7 +30,7 @@ public final class PNICameraNode: PNCameraNode {
         self.intrinsicBoundingBox = camera.boundingBox
         self.childrenMergedBoundingBox = nil
     }
-    
+
     public func write(scene: PNSceneDescription, parentIdx: PNParentIndex) -> PNNewlyWrittenIndex {
         scene.entities.add(parentIdx: parentIdx, data: PNEntity(type: .camera,
                                                                 referenceIdx: scene.cameras.count))
@@ -41,7 +41,7 @@ public final class PNICameraNode: PNCameraNode {
         scene.activeCameraIdx = scene.entities.count - 1
         return scene.entities.count - 1
     }
-    
+
     public func update() {
         // Empty
     }
