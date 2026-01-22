@@ -9,6 +9,7 @@ public class PNIThreadedWorkloadManager: PNWorkloadManager {
     private let renderMaskGenerator: PNRenderMaskGenerator
     private let dispatchQueue = DispatchQueue.global()
     private let dispatchGroup = DispatchGroup()
+    private let nodeUpdate = PNNodeUpdater()
     private var frameSupplies: PNIBufferedValue<PNFrameSupply>
     private var previousFrameScene: PNSceneDescription?
     public init(bufferStores: (PNBufferStore, PNBufferStore),
@@ -30,6 +31,7 @@ public class PNIThreadedWorkloadManager: PNWorkloadManager {
         dispatchQueue.async { [unowned self] in
             let backgroundUpdateInterval = psignposter.beginInterval("Background update")
             taskQueue.execute()
+            nodeUpdate.update(rootNode: sceneGraph.rootNode)
             let scene = transcriber.transcribe(scene: sceneGraph)
             let inactive = frameSupplies.pullInactive
             inactive.bufferStore.matrixPalettes.upload(data: scene.palettes)

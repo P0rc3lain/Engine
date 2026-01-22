@@ -2,39 +2,16 @@
 //  Copyright © 2021 Mateusz Stompór. All rights reserved.
 //
 
-import Combine
-
 /// Used to create a hierarchical structure of a tree.
 /// Built with storing ``PNSceneNode`` in mind, but can be used for any data type.
 public final class PNNode<T> {
-    public var dataSubject: CurrentValueSubject<T, Error>
-    public var data: T {
-        get {
-            dataSubject.value
-        } set {
-            dataSubject.send(newValue)
-        }
-    }
-    public var parentSubject: CurrentValueSubject<PNWeakRef<PNNode>, Error>
-    public weak var parent: PNNode? {
-        get {
-            parentSubject.value.reference
-        } set {
-            parentSubject.send(PNWeakRef(newValue))
-        }
-    }
-    public var childrenSubject: CurrentValueSubject<[PNNode], Error>
-    public var children: [PNNode] {
-        get {
-            childrenSubject.value
-        } set {
-            childrenSubject.send(newValue)
-        }
-    }
+    public var data: T
+    public weak var parent: PNNode?
+    public var children: [PNNode]
     init(data: T, parent: PNNode? = nil, children: [PNNode] = []) {
-        parentSubject = CurrentValueSubject<PNWeakRef<PNNode>, Error>(PNWeakRef(parent))
-        dataSubject = CurrentValueSubject<T, Error>(data)
-        childrenSubject = CurrentValueSubject<[PNNode], Error>(children)
+        self.parent = parent
+        self.data = data
+        self.children = children
     }
     public func add(child: PNNode<T>) {
         assert(!contains(node: child), "Nodes must be unique")
@@ -78,7 +55,6 @@ public final class PNNode<T> {
             return self
         }
         parent.children.removeAll(where: { $0 === self })
-        self.parentSubject.send(PNWeakRef(nil))
         return self
     }
 }

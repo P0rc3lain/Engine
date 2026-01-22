@@ -7,7 +7,7 @@ extension PNScenePiece {
                             parent: PNScenePiece? = nil,
                             children: [PNScenePiece] = []) -> PNScenePiece {
         let node = PNScenePiece(data: data, parent: parent, children: children)
-        node.data.enclosingNode.send(PNWeakRef(node))
+        node.data.enclosingNode = node
         return node
     }
 }
