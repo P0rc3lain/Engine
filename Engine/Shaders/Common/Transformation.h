@@ -12,3 +12,4 @@ simd::float4x4 perspectiveProjection(float fovYRadians,
                                      float aspect,
                                      float nearZ,
                                      float farZ);
+float3 orthogonal(float3 n);
