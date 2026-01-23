@@ -6,6 +6,38 @@ import CoreGraphics
 import Foundation
 import Metal
 
+struct PNBBJob: PNRenderJob {
+    private let pipelineState: MTLRenderPipelineState
+    private let depthStencilState: MTLDepthStencilState
+    init(pipelineState: MTLRenderPipelineState,
+         depthStencilState: MTLDepthStencilState) {
+        self.pipelineState = pipelineState
+        self.depthStencilState = depthStencilState
+    }
+    func draw(encoder: MTLRenderCommandEncoder, supply: PNFrameSupply) {
+        let dataStore = supply.bufferStore
+        encoder.setCullMode(.none)
+        encoder.setFrontFacing(.counterClockwise)
+        encoder.setDepthStencilState(depthStencilState)
+        encoder.setVertexBuffer(dataStore.boundingBoxes.buffer, index: 0)
+        encoder.setStencilReferenceValue(1)
+        encoder.setVertexBuffer(dataStore.cameras.buffer,
+                                index: 1)
+        encoder.setVertexBuffer(dataStore.modelCoordinateSystems.buffer,
+                                index: 2)
+        encoder.setRenderPipelineState(pipelineState)
+        encoder.drawPrimitives(type: .line, vertexStart: 0, vertexCount: dataStore.boundingBoxes.count)
+    }
+    static func make(device: MTLDevice) -> PNBBJob? {
+        let library = device.makePorcelainLibrary()
+        let pipelineState = device.makeRPSBoundingBox(library: library)
+        let depthStencilState = device.makeDSSBoundingBox()
+        return PNBBJob(pipelineState: pipelineState,
+                       depthStencilState: depthStencilState)
+    }
+}
+
+
 struct PNCombineStage: PNStage {
     var io: PNGPUIO
     private var environmentJob: PNRenderJob
@@ -18,6 +50,7 @@ struct PNCombineStage: PNStage {
     private var translucentJob: PNTranslucentJob
     private var renderPassDescriptor: MTLRenderPassDescriptor
     private var ssaoTexture: PNTextureProvider
+    private var boundingBoxJob: PNRenderJob
     init?(device: MTLDevice,
           renderingSize: CGSize,
           gBufferOutput: PNGPUSupply,
@@ -60,6 +93,7 @@ struct PNCombineStage: PNStage {
         self.spotJob = spotJob
         self.fogJob = fogJob
         self.translucentJob = translucentJob
+        self.boundingBoxJob = PNBBJob.make(device: device)!
         self.particleJob = particleJob
         self.directionalJob = directionalJob
         self.io = PNGPUIO(input: PNGPUSupply(color: gBufferOutput.color + [ssaoTexture],
@@ -78,6 +112,7 @@ struct PNCombineStage: PNStage {
         translucentJob.draw(encoder: encoder, supply: supply)
         particleJob.draw(encoder: encoder, supply: supply)
         fogJob.draw(encoder: encoder, supply: supply)
+        boundingBoxJob.draw(encoder: encoder, supply: supply)
         encoder.endEncoding()
     }
 }

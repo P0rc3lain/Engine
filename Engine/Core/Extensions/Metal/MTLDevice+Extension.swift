@@ -50,6 +50,9 @@ extension MTLDevice {
     func makeDSSTranslucent() -> MTLDepthStencilState {
         failOrMakeDepthStencilState(descriptor: .translucent)
     }
+    func makeDSSBoundingBox() -> MTLDepthStencilState {
+        failOrMakeDepthStencilState(descriptor: .boundingBox)
+    }
     func makeDSSParticle() -> MTLDepthStencilState {
         failOrMakeDepthStencilState(descriptor: .particle)
     }
@@ -74,6 +77,9 @@ extension MTLDevice {
     }
     func makeRPSTranslucent(library: MTLLibrary) -> MTLRenderPipelineState {
         failOrMakeRenderPipelineState(descriptor: .translucent(library: library))
+    }
+    func makeRPSBoundingBox(library: MTLLibrary) -> MTLRenderPipelineState {
+        failOrMakeRenderPipelineState(descriptor: .boundingBox(library: library))
     }
     func makeRPSTranslucentAnimated(library: MTLLibrary) -> MTLRenderPipelineState {
         failOrMakeRenderPipelineState(descriptor: .translucentAnimated(library: library))

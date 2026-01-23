@@ -2,6 +2,8 @@
 //  Copyright © 2022 Mateusz Stompór. All rights reserved.
 //
 
+import PNShared
+
 /// A multi-threaded rendering process coordinator.
 public class PNIThreadedWorkloadManager: PNWorkloadManager {
     private var renderingCoordinator: PNRenderingCoordinator
@@ -33,7 +35,14 @@ public class PNIThreadedWorkloadManager: PNWorkloadManager {
             taskQueue.execute()
             nodeUpdate.update(rootNode: sceneGraph.rootNode)
             let scene = transcriber.transcribe(scene: sceneGraph)
+            let bbs = (0 ..< scene.boundingBoxes.count).compactMap {
+                if scene.entities[$0].data.type == .mesh {
+                    return scene.boundingBoxes[$0]
+                }
+                return nil
+            } .map { asVertices(bb: $0) }.reduce(+)!
             let inactive = frameSupplies.pullInactive
+            inactive.bufferStore.boundingBoxes.upload(data: bbs)
             inactive.bufferStore.matrixPalettes.upload(data: scene.palettes)
             inactive.bufferStore.ambientLights.upload(data: scene.ambientLights)
             inactive.bufferStore.omniLights.upload(data: scene.omniLights)
@@ -55,5 +64,31 @@ public class PNIThreadedWorkloadManager: PNWorkloadManager {
         renderingCoordinator.draw(frameSupply: frameSupplies.pull)
         dispatchGroup.wait()
         frameSupplies.swap()
+    }
+    private func asVertices(bb: PNBoundingBox) -> [VertexP] {
+        [VertexP(position: bb.cornersLower.columns.0.xyz),
+         VertexP(position: bb.cornersLower.columns.1.xyz),
+         
+         VertexP(position: bb.cornersLower.columns.1.xyz),
+         VertexP(position: bb.cornersLower.columns.2.xyz),
+         
+         VertexP(position: bb.cornersLower.columns.2.xyz),
+         VertexP(position: bb.cornersLower.columns.3.xyz),
+         
+         VertexP(position: bb.cornersLower.columns.3.xyz),
+         VertexP(position: bb.cornersLower.columns.0.xyz),
+         
+         
+         VertexP(position: bb.cornersUpper.columns.0.xyz),
+         VertexP(position: bb.cornersUpper.columns.1.xyz),
+          
+         VertexP(position: bb.cornersUpper.columns.1.xyz),
+         VertexP(position: bb.cornersUpper.columns.2.xyz),
+          
+         VertexP(position: bb.cornersUpper.columns.2.xyz),
+         VertexP(position: bb.cornersUpper.columns.3.xyz),
+          
+         VertexP(position: bb.cornersUpper.columns.3.xyz),
+         VertexP(position: bb.cornersUpper.columns.0.xyz)]
     }
 }
