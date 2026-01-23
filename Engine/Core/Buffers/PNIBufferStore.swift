@@ -7,6 +7,7 @@ import PNShared
 import simd
 
 public final class PNIBufferStore: PNBufferStore {
+    public var boundingBoxes: PNAnyDynamicBuffer<VertexP>
     public var omniLights: PNAnyDynamicBuffer<OmniLight>
     public var ambientLights: PNAnyDynamicBuffer<AmbientLight>
     public var directionalLights: PNAnyDynamicBuffer<DirectionalLight>
@@ -25,7 +26,8 @@ public final class PNIBufferStore: PNBufferStore {
               let previousMatrixPalettes = PNIDynamicBuffer<PNBLTransform>(device: device),
               let ambientLights = PNIDynamicBuffer<AmbientLight>(device: device),
               let directionalLights = PNIDynamicBuffer<DirectionalLight>(device: device),
-              let spotLights = PNIDynamicBuffer<SpotLight>(device: device) else {
+              let spotLights = PNIDynamicBuffer<SpotLight>(device: device),
+              let boundingBoxes = PNIDynamicBuffer<VertexP>(device: device) else {
                   return nil
         }
         self.omniLights = PNAnyDynamicBuffer(omniLights)
@@ -37,5 +39,6 @@ public final class PNIBufferStore: PNBufferStore {
         self.previousMatrixPalettes = PNAnyDynamicBuffer(previousMatrixPalettes)
         self.directionalLights = PNAnyDynamicBuffer(directionalLights)
         self.spotLights = PNAnyDynamicBuffer(spotLights)
+        self.boundingBoxes = PNAnyDynamicBuffer(boundingBoxes)
     }
 }

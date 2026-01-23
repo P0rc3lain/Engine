@@ -11,6 +11,7 @@ public protocol PNBufferStore {
     var directionalLights: PNAnyDynamicBuffer<DirectionalLight> { get }
     var spotLights: PNAnyDynamicBuffer<SpotLight> { get }
     var cameras: PNAnyDynamicBuffer<CameraUniforms> { get }
+    var boundingBoxes: PNAnyDynamicBuffer<VertexP> { get }
     var modelCoordinateSystems: PNAnyDynamicBuffer<ModelUniforms> { get }
     var previousModelCoordinateSystems: PNAnyDynamicBuffer<ModelUniforms> { get }
     var matrixPalettes: PNAnyDynamicBuffer<PNBLTransform> { get }

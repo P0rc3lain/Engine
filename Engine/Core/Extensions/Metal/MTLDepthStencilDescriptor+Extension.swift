@@ -76,6 +76,14 @@ extension MTLDepthStencilDescriptor {
         descriptor.frontFaceStencil = .translucent
         return descriptor
     }
+    static var boundingBox: MTLDepthStencilDescriptor {
+        let descriptor = MTLDepthStencilDescriptor()
+        descriptor.label = "BoundingBox Depth Stencil"
+        descriptor.depthCompareFunction = .lessEqual
+        descriptor.isDepthWriteEnabled = true
+        descriptor.frontFaceStencil = .boundingBox
+        return descriptor
+    }
     static var particle: MTLDepthStencilDescriptor {
         let descriptor = MTLDepthStencilDescriptor()
         descriptor.label = "Particle Depth Stencil"

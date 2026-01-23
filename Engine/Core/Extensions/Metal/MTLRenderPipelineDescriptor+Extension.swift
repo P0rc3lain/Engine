@@ -76,6 +76,17 @@ extension MTLRenderPipelineDescriptor {
         descriptor.vertexDescriptor = .vertex
         return descriptor
     }
+    static func boundingBox(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
+        let descriptor = MTLRenderPipelineDescriptor()
+        descriptor.label = "BoundingBox"
+        descriptor.vertexFunction = library.failOrMakeFunction(name: "vertexBoundingBox")
+        descriptor.fragmentFunction = library.failOrMakeFunction(name: "fragmentBoundingBox")
+        descriptor.colorAttachments[0].pixelFormat = .boundingBoxC
+        descriptor.depthAttachmentPixelFormat = .boundingBoxDS
+        descriptor.stencilAttachmentPixelFormat = .boundingBoxDS
+        descriptor.vertexDescriptor = .vertexP
+        return descriptor
+    }
     static func particle(library: MTLLibrary) -> MTLRenderPipelineDescriptor {
         let descriptor = MTLRenderPipelineDescriptor()
         descriptor.label = "Particle"

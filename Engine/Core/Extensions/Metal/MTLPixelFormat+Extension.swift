@@ -20,7 +20,13 @@ extension MTLPixelFormat {
     static var translucentC: MTLPixelFormat {
         .rgba16Float
     }
+    static var boundingBoxC: MTLPixelFormat {
+        .rgba16Float
+    }
     static var translucentDS: MTLPixelFormat {
+        .depth32Float_stencil8
+    }
+    static var boundingBoxDS: MTLPixelFormat {
         .depth32Float_stencil8
     }
     static var particleC: MTLPixelFormat {
