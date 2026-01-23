@@ -22,7 +22,6 @@ struct RasterizerData {
     float4 previousClipSpacePosition;
     float3 cameraSpacePosition;
     float3 t;
-    float3 b;
     float3 n;
     float2 uv;
 };
@@ -57,12 +56,8 @@ vertex RasterizerData vertexGBuffer(Vertex in [[stage_in]],
     // Current
     Pose pose = hasSkeleton ? calculatePose(in, matrixPalettes) : Pose{float4(in.position, 1), in.normal, in.tangent};
     matrix_float3x3 rotation = extractRotation(modelUniforms[index].modelMatrix);
-    pose.tangent.x = pose.tangent.x < 0 ? -pose.tangent.x : pose.tangent.x;
-    pose.tangent.y = pose.tangent.y < 0 ? -pose.tangent.y : pose.tangent.y;
-    pose.tangent.z = pose.tangent.z < 0 ? -pose.tangent.z : pose.tangent.z;
     float3 rotatedNormal = rotation * pose.normal;
     float3 rotatedTangent = rotation * pose.tangent;
-    float3 rotatedBitangent = cross(rotatedNormal, rotatedTangent);
     float4 worldPosition = modelUniforms[index].modelMatrix * pose.position;
     float4x4 cameraTransform = modelUniforms[cameraUniforms.index].modelMatrixInverse;
     float4 cameraSpacePosition = cameraTransform * worldPosition;
@@ -77,7 +72,6 @@ vertex RasterizerData vertexGBuffer(Vertex in [[stage_in]],
         previousClipSpacePosition,
         cameraSpacePosition.xyz,
         normalize(cameraRotation * rotatedTangent),
-        normalize(cameraRotation * rotatedBitangent),
         normalize(cameraRotation * rotatedNormal),
         in.textureUV
     };
@@ -89,18 +83,28 @@ fragment GBufferData fragmentGBuffer(RasterizerData in [[stage_in]],
                                      min_filter::linear,
                                      mip_filter::linear,
                                      address::mirrored_repeat);
-    simd::float3x3 TBN(in.t, in.b, in.n);
+    float3 N = normalize(in.n);
+    float3 T = normalize(in.t);
+
+    if (length(cross(N, T)) < 1e-5f) {
+        T = orthogonal(N);
+    }
+    
+    T = normalize(T - dot(T, N) * N);
+    float3 B = cross(N, T);
+    
+    simd::float3x3 TBN(T, B, N);
     // 0.04 is reflactance for common materials
     // should be possible to configure it
     float3 normalEncoded = material.normals.sample(textureSampler, in.uv).xyz;
-    float3 normalDecoded = normalEncoded * 2 - 1;
-    float3 normalWorldSpace = float3(TBN * normalDecoded);
+    float3 normalDecoded = normalize(normalEncoded * 2 - 1);
+    float3 normalWorldSpace = normalize(float3(TBN * normalDecoded));
     half3 color = material.albedo.sample(textureSampler, in.uv).rgb;
     half2 current = half2(in.currentClipSpacePosition.xy / in.currentClipSpacePosition.w);
     half2 previous = half2(in.previousClipSpacePosition.xy / in.previousClipSpacePosition.w);
     half2 velocity = current - previous;
     half roughness = material.roughness.sample(textureSampler, in.uv).r;
-    half metallic = material.metallic.sample(textureSampler, in.uv).r;
+    float metallic = material.metallic.sample(textureSampler, in.uv).r;
     
     return {
         half4(color, roughness),

@@ -32,3 +32,9 @@ simd::float4x4 perspectiveProjection(float fovYRadians,
         simd::float4( 0,  0, -zs * nearZ, 0)
     };
 }
+
+float3 orthogonal(float3 n) {
+    return normalize(abs(n.z) < 0.999f
+        ? cross(n, float3(0,0,1))
+        : cross(n, float3(0,1,0)));
+}
