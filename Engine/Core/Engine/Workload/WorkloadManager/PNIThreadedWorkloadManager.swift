@@ -35,12 +35,7 @@ public class PNIThreadedWorkloadManager: PNWorkloadManager {
             taskQueue.execute()
             nodeUpdate.update(rootNode: sceneGraph.rootNode)
             let scene = transcriber.transcribe(scene: sceneGraph)
-            let bbs = (0 ..< scene.boundingBoxes.count).compactMap {
-                if scene.entities[$0].data.type == .mesh {
-                    return scene.boundingBoxes[$0]
-                }
-                return nil
-            } .map { asVertices(bb: $0) }.reduce(+)!
+            let bbs = scene.boundingBoxes.compactMap { $0 } .map { asVertices(bb: $0) }.reduce(+)!
             let inactive = frameSupplies.pullInactive
             inactive.bufferStore.boundingBoxes.upload(data: bbs)
             inactive.bufferStore.matrixPalettes.upload(data: scene.palettes)
