@@ -1,5 +1,11 @@
 # Devlog
 
+#### 2026-01-24
+
+<p align="center">
+    <img src="./Progress/2025-01-24.jpg" width="100%"/>
+</p>
+
 #### 2025-04-06
 
 <p align="center">
