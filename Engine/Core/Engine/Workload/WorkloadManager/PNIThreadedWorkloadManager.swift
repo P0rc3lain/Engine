@@ -2,6 +2,8 @@
 //  Copyright © 2022 Mateusz Stompór. All rights reserved.
 //
 
+import PNShared
+
 /// A multi-threaded rendering process coordinator.
 public class PNIThreadedWorkloadManager: PNWorkloadManager {
     private var renderingCoordinator: PNRenderingCoordinator
@@ -34,6 +36,10 @@ public class PNIThreadedWorkloadManager: PNWorkloadManager {
             nodeUpdate.update(rootNode: sceneGraph.rootNode)
             let scene = transcriber.transcribe(scene: sceneGraph)
             let inactive = frameSupplies.pullInactive
+            if PNDefaults.shared.debug.boundingBoxes {
+                let geometry = PNBoundingBoxCreator.vertices(boundingBoxes: scene.boundingBoxes)
+                inactive.bufferStore.boundingBoxes.upload(data: geometry)
+            }
             inactive.bufferStore.matrixPalettes.upload(data: scene.palettes)
             inactive.bufferStore.ambientLights.upload(data: scene.ambientLights)
             inactive.bufferStore.omniLights.upload(data: scene.omniLights)
@@ -56,4 +62,5 @@ public class PNIThreadedWorkloadManager: PNWorkloadManager {
         dispatchGroup.wait()
         frameSupplies.swap()
     }
+
 }

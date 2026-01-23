@@ -13,8 +13,14 @@ public struct PNDefaults {
     /// Configuration for rendering settings.
     public var rendering = PNRendering()
     /// Private initializer to prevent external instantiation.
+    public var debug = PNDebug()
     fileprivate init() {
         // Empty
+    }
+    /// Debug configuration.
+    public struct PNDebug {
+        /// Render bounding boxes around meshes
+        public var boundingBoxes = false
     }
     /// Rendering configuration.
     public struct PNRendering {
