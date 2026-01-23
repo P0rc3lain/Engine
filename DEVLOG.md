@@ -1,9 +1,9 @@
 # Devlog
 
-#### 2026-01-24
+#### 2026-01-23
 
 <p align="center">
-    <img src="./Progress/2025-01-24.jpg" width="100%"/>
+    <img src="./Progress/2025-01-23.jpg" width="100%"/>
 </p>
 
 #### 2025-04-06
