@@ -58,10 +58,6 @@ Components that either build scene graph or can be embedded in it.
 - ``PNNodeInteractor``
 - ``PNINodeInteractor``
 
-### Topics
-
-- ``PNScenePieceSubject``
-
 ### Debug
 
 - ``PNNodeTrace``

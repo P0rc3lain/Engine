@@ -57,7 +57,6 @@ Configuration, core components and task planning.
 Components of interface that can be included in the application.
 
 - <doc:UI>
-- <doc:Reactive>
 
 ### Data
 
