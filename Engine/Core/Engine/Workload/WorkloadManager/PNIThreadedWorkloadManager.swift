@@ -62,5 +62,5 @@ public class PNIThreadedWorkloadManager: PNWorkloadManager {
         dispatchGroup.wait()
         frameSupplies.swap()
     }
-    
+
 }

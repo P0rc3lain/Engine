@@ -4,7 +4,7 @@
 
 import PNShared
 
-class PNBoundingBoxCreator {
+enum PNBoundingBoxCreator {
     static func vertices(boundingBoxes: [PNBoundingBox?]) -> [VertexP] {
         boundingBoxes.compactMap { $0 } .map { vertices(bb: $0) }.reduce(+) ?? []
     }
@@ -12,49 +12,49 @@ class PNBoundingBoxCreator {
         [
             VertexP(position: bb.cornersLower.columns.0.xyz),
             VertexP(position: bb.cornersLower.columns.1.xyz),
-            
+
             VertexP(position: bb.cornersLower.columns.1.xyz),
             VertexP(position: bb.cornersLower.columns.3.xyz),
-            
+
             VertexP(position: bb.cornersLower.columns.1.xyz),
             VertexP(position: bb.cornersLower.columns.2.xyz),
-            
+
             VertexP(position: bb.cornersLower.columns.2.xyz),
             VertexP(position: bb.cornersLower.columns.3.xyz),
-            
+
             VertexP(position: bb.cornersLower.columns.2.xyz),
             VertexP(position: bb.cornersLower.columns.0.xyz),
-            
+
             VertexP(position: bb.cornersLower.columns.3.xyz),
             VertexP(position: bb.cornersLower.columns.0.xyz),
-            
+
             VertexP(position: bb.cornersUpper.columns.0.xyz),
             VertexP(position: bb.cornersLower.columns.0.xyz),
-            
+
             VertexP(position: bb.cornersUpper.columns.1.xyz),
             VertexP(position: bb.cornersLower.columns.1.xyz),
-            
+
             VertexP(position: bb.cornersUpper.columns.2.xyz),
             VertexP(position: bb.cornersLower.columns.2.xyz),
-            
+
             VertexP(position: bb.cornersUpper.columns.3.xyz),
             VertexP(position: bb.cornersLower.columns.3.xyz),
-            
+
             VertexP(position: bb.cornersUpper.columns.0.xyz),
             VertexP(position: bb.cornersUpper.columns.1.xyz),
-            
+
             VertexP(position: bb.cornersUpper.columns.1.xyz),
             VertexP(position: bb.cornersUpper.columns.3.xyz),
-            
+
             VertexP(position: bb.cornersUpper.columns.1.xyz),
             VertexP(position: bb.cornersUpper.columns.2.xyz),
-            
+
             VertexP(position: bb.cornersUpper.columns.2.xyz),
             VertexP(position: bb.cornersUpper.columns.3.xyz),
-            
+
             VertexP(position: bb.cornersUpper.columns.2.xyz),
             VertexP(position: bb.cornersUpper.columns.0.xyz),
-            
+
             VertexP(position: bb.cornersUpper.columns.3.xyz),
             VertexP(position: bb.cornersUpper.columns.0.xyz)
         ]
