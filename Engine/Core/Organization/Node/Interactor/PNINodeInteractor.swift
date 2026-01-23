@@ -16,6 +16,22 @@ public struct PNINodeInteractor: PNNodeInteractor {
             forEach(node: $0, passingClosure: passingClosure, initial: value)
         }
     }
+    public func firstCasting<T, N>(from node: PNNode<T>) -> N? {
+        first(from: node) { node in
+            node.data is N
+        }?.data as? N
+    }
+    public func first<T>(from node: PNNode<T>, where closure: (PNNode<T>) -> Bool) -> PNNode<T>? {
+        if closure(node) {
+            return node
+        }
+        for child in node.children {
+            if let node = first(from: child, where: closure) {
+                return node
+            }
+        }
+        return nil
+    }
     public func deepSearch<T>(from node: PNNode<T>, closure passes: (PNNode<T>) -> Bool) -> [PNNode<T>] {
         var total = [PNNode<T>]()
         if passes(node) {
